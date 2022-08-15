@@ -1,0 +1,39 @@
+CRITICAL - 2022-07-18 20:38:08 --> Class "App\Models\Auth\SignUpModel" not found
+in APPPATH/Controllers/Auth.php on line 37.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserSLA()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-18 20:40:19 --> Array to string conversion
+in APPPATH/Views/Auth/SignUpUserSLA.html on line 41.
+ 1 APPPATH/Views/Auth/SignUpUserSLA.html(41): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserSLA.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(51): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserSLA()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-18 20:40:42 --> Array to string conversion
+in APPPATH/Views/Auth/SignUpUserSLA.html on line 41.
+ 1 APPPATH/Views/Auth/SignUpUserSLA.html(41): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserSLA.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(51): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserSLA()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-18 20:40:47 --> Array to string conversion
+in APPPATH/Views/Auth/SignUpUserSLA.html on line 41.
+ 1 APPPATH/Views/Auth/SignUpUserSLA.html(41): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserSLA.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(51): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserSLA()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()

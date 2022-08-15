@@ -1,0 +1,373 @@
+<?php
+require_once(__DIR__."/../Sidebar.html");
+?>
+
+<section class="user-dashboard" id="user-resume">
+  <div class="dashboard-outer">
+    <div class="upper-title-box">
+      <h3 title="신규 채용 등록"><a>신규 채용 등록</a></h3>
+    </div>
+
+    <form name="form-create-resume" class="default-form" method="POST" enctype="multipart/form-data" action="/<?=_CONTROLLER?>/CreateSubmit">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <!-- Ls widget -->
+        <div class="ls-widget">
+          <div class="tabs-box">
+            <div class="widget-title">
+              <h3>모집요강</h3>
+            </div>
+            <div class="widget-content pb-4">
+            <!-- {{{ -->
+              <div class="row">
+                <div class="form-group col-md-12">
+                  <label><a>채용 제목</a></label>
+                  <input type="text" name="title" title="이력서 제목" tabindex=100 required>
+                </div>
+                <div class="form-group col-md-12">
+                  <label><a>상세 모집요강</a></label>
+                  <p class="text-muted" style="font-size:0.7em"><a>(이미지 삽입시 파일을 드래그&드롭하여 추가하세요.)</a></p>
+                  <textarea class="editor" name="application_detail" tabindex=100></textarea>
+                </div>
+                <div class="form-group col-md-12">
+                  <label><a>고용 형태</a></label>
+                  <select class="w-50" name="employment_type" tabindex=100 required>
+                    <option value="" disabled selected>고용 형태 선택</option>
+                    <?php
+                    if(@is_array($job_category["EmploymentType"]) && @count($job_category["EmploymentType"])){
+                      foreach($job_category["EmploymentType"] as $val){
+                        echo "<option value='".$val["idx"]."'>".$val["title"]."</option>";
+                      }
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="form-group col-md-12">
+                  <label><a>필요 경력 기간</a></label>
+                  <select class="w-50" name="career" tabindex=100 required>
+                    <option value="" disabled selected>경력 기간 선택</option>
+                    <?php
+                    if(@is_array($job_category["Career"]) && @count($job_category["Career"])){
+                      foreach($job_category["Career"] as $val){
+                        if($val["title"] == "무관"){
+                          continue;
+                        }
+                        echo "<option value='".$val["idx"]."'>".$val["title"]."</option>";
+                      }
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="form-group col-md-12">
+                  <label><a>모집 인원</a></label>
+                  <div class="d-flex">
+                    <select class="w-50" name="recruitment_number" tabindex=100 required>
+                      <option value="" disabled selected>선택</option>
+                      <option value="99">상시모집</option>
+                    <?php
+                    for($i=1; $i<11; $i++){
+                      echo "<option value='".$i."'>".$i."명</option>";
+                    }
+                    ?>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group col-md-12">
+                  <label><a>직무 유형</a></label>
+                  <select class="w-50" name="profession" tabindex=100 required>
+                    <option value="" disabled selected>직무 유형 선택</option>
+                    <?php
+                    if(@is_array($job_category["Profession"]) && @count($job_category["Profession"])){
+                      foreach($job_category["Profession"] as $val){
+                        echo "<option value='".$val["idx"]."'>".$val["title"]."</option>";
+                      }
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="form-group col-md-12 mb-2">
+                  <label><a>담당 업무</a></label>
+                  <textarea title="담당 업무" name="profession_detail" placeholder="담당 업무를 구체적으로 작성해 주세요." rows=5 tabindex=100 style="min-height: 128px;"></textarea>
+                </div>
+                <div>
+                  <label class="my-2"><a title="주소">근무 예정지</a></label>
+                  <div class="row">
+                    <div class="col-8 col-lg-4 pe-0">
+                      <div class="form-group my-0">
+                        <input type="text" class="modal-search-post" id="post_code" name="post_code" placeholder="우편번호" title="우편번호 검색" tabindex=100 readonly>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <button type="button" class="btn btn-outline-primary modal-search-post" tabindex=100>우편번호 검색</button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" id="address_road" name="address" class="my-2" placeholder="주소" title="주소" tabindex=100 readonly>
+                    <input type="text" id="address_detail" name="address_detail" class="my-2" placeholder="상세주소" title="상세주소" tabindex=100>
+                    <input type="hidden" name="coordinate_x" id="coordinate_x">
+                    <input type="hidden" name="coordinate_y" id="coordinate_y">
+                  </div>
+                </div>
+              </div>
+            <!-- }}} -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Ls widget -->
+        <div class="ls-widget">
+          <div class="tabs-box">
+            <div class="widget-title">
+              <h3>근무조건</h3>
+            </div>
+            <div class="widget-content pb-4">
+            <!-- {{{ -->
+              <div class="form-group col-md-12">
+                <label><a>근무시간</a></label>
+                <select class="w-50" name="work_type" tabindex=100 required>
+                  <option value="" disabled selected>근무시간 선택</option>
+                  <?php
+                  if(@is_array($job_category["WorkType"]) && @count($job_category["WorkType"])){
+                    foreach($job_category["WorkType"] as $val){
+                      echo "<option value='".$val["idx"]."'>".$val["title"]."</option>";
+                    }
+                  }
+                  ?>
+                </select>
+                <div class="form-group mt-2">
+                  <textarea name="work_type_detail" placeholder="근무시간 등에 대한 추가설명을 입력해 주세요." tabindex=100 style="min-height:128px;"></textarea>
+                </div>
+              </div>
+              <div class="form-group col-md-12">
+                <label><a>임금</a></label>
+                <div class="d-flex">
+                  <select name="pay_type" style="width:128px;" tabindex=100 required>
+                    <option value="" disabled selected>선택</option>
+                    <option>연봉</option>
+                    <option>월급</option>
+                    <option>시간당</option>
+                  </select>
+                  <input type="text" class="ms-2 w-25 text-end mask-pay" name="pay_min" tabindex=100 required><span class="pt-3 ps-2"> 원 이상</span>
+                  <input type="text" class="ms-2 w-25 text-end mask-pay" name="pay_max" tabindex=100 required><span class="pt-3 ps-2"> 원 이하</span>
+                </div>
+                <div class="form-group mt-2 ps-2">
+                  <div class="input-group mb-2">
+                    <input type="checkbox" name="pay_negotiability" value="y" id="pay_deal" title="임금 협의 가능" tabindex=100>
+                    <label for="pay_deal"><a title="임금 협의 가능">임금 협의 가능</a></label>
+                  </div>
+                </div>
+                <div class="form-group mb-0">
+                  <textarea name="pay_detail" placeholder="상여금 등 임금 조건에 대한 추가설명을 입력해 주세요." tabindex=100 style="min-height:128px;"></textarea>
+                </div>
+              </div>
+              <div class="form-group col-md-12">
+                <label><a>사회보험</a></label>
+                <div class="row ps-2">
+                  <div class="col-6 col-md-3">
+                    <div class="form-group mt-2 mb-0">
+                      <div class="input-group mb-2">
+                        <input type="checkbox" name="social_insurance_1" value="y" id="social_insurance_1" title="국민연금" tabindex=100>
+                        <label for="social_insurance_1"><a title="국민연금">국민연금</a></label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <div class="form-group mt-2">
+                      <div class="input-group mb-2">
+                        <input type="checkbox" name="social_insurance_2" value="y" id="social_insurance_2" title="고용보험" tabindex=100>
+                        <label for="social_insurance_2"><a title="고용보험">고용보험</a></label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <div class="form-group mt-2">
+                      <div class="input-group mb-2">
+                        <input type="checkbox" name="social_insurance_3" value="y" id="social_insurance_3" title="산재보험" tabindex=100>
+                        <label for="social_insurance_3"><a title="산재보험">산재보험</a></label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <div class="form-group mt-2">
+                      <div class="input-group mb-2">
+                        <input type="checkbox" name="social_insurance_4" value="y" id="social_insurance_4" title="건강보험" tabindex=100>
+                        <label for="social_insurance_4"><a title="건강보험">건강보험</a></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group my-0">
+                  <textarea name="insurance_detail" placeholder="기타 보험 등에 대한 추가설명을 입력해 주세요." tabindex=100 style="min-height:128px;"></textarea>
+                </div>
+              </div>
+              <div class="form-group col-md-12">
+                <label><a>퇴직급여</a></label>
+                <div class="form-group mt-2 ps-2">
+                  <div class="input-group mb-2">
+                    <input type="checkbox" name="severance_pay" value="y" id="severance_pay" title="퇴직금" tabindex=100>
+                    <label for="severance_pay"><a title="퇴직금">퇴직금</a></label>
+                  </div>
+                </div>
+                <div class="form-group my-0">
+                  <textarea name="severance_pay_detail" placeholder="퇴직 급여 등에 대한 추가설명을 입력해 주세요." tabindex=100 style="min-height:128px;"></textarea>
+                </div>
+              </div>
+            <!-- }}} -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Ls widget -->
+        <div class="ls-widget">
+          <div class="tabs-box">
+            <div class="widget-title">
+              <h3>전형방법</h3>
+            </div>
+            <div class="widget-content pb-4">
+            <!-- {{{ -->
+              <div class="form-group col-md-12">
+                <label><a>접수 마감일</a></label>
+                <input type="date" class="form-control w-25" name="receipt_expire_date" title="채용 마감일" tabindex=100 required>
+              </div>
+              <div class="form-group col-md-12">
+                <label><a>전형방법</a></label>
+                <div class="row ps-2">
+                  <div class="col-6 col-md-3">
+                    <div class="form-group mt-2 mb-0">
+                      <div class="input-group mb-2">
+                        <input type="checkbox" name="receipt_method_doc" value="y" id="receipt_method_doc" title="서류" tabindex=100>
+                        <label for="receipt_method_doc"><a title="서류">서류</a></label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-md-3">
+                    <div class="form-group mt-2">
+                      <div class="input-group mb-2">
+                        <input type="checkbox" name="receipt_method_interview" value="y" id="receipt_method_interview" title="면접" tabindex=100>
+                        <label for="receipt_method_interview"><a title="면접">면접</a></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-md-12">
+                <label><a>추가 지원방법 안내</a></label>
+                <textarea name="receipt_method_detail" tabindex=100 placeholder="추가 지원방법 등에 대한 안내를 입력해 주세요."></textarea>
+              </div>
+            <!-- }}} -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Ls widget -->
+        <div class="ls-widget">
+          <div class="tabs-box">
+            <div class="widget-title">
+              <h3>작업환경</h3>
+            </div>
+            <div class="widget-content pb-4">
+            <!-- {{{ -->
+              <div class="form-group">
+                <label class="my-2" title="작업환경"><a>운동능력 조건</a></label>
+                <table class="table table-hover table-borderless">
+                <?php
+                foreach($impairments["PhysicalAbility"] as $code => $items){
+                ?>
+                  <tr>
+                    <th width=35% class="px-3 font-weight-400" title="<?=$items[0]["title"]?>"><a><?=$items[0]["title"]?></a></th>
+                    <td class="px-3">
+                      <div class="input-group mb-2">
+                        <input type="radio" name="impairment[physical_ability][<?=$code?>]" value="null" id="impairment_physical_ability_<?=$code?>_null" title="조건없음" tabindex=100 required>
+                        <label for="impairment_physical_ability_<?=$code?>_null"><a tabindex=100 title="조건없음">조건없음</a></label>
+                      </div>
+                      <?php
+                      foreach($items as $key => $val){
+                      ?>
+                      <div class="input-group mb-2">
+                        <input type="radio" name="impairment[physical_ability][<?=$code?>]" value="<?=$val["score"]?>" id="impairment_physical_ability_<?=$code."_".$key?>" title="<?=$val["item"]?>" tabindex=100 required>
+                        <label for="impairment_physical_ability_<?=$code."_".$key?>"><a tabindex=100 title="<?=$val["item"]?>"><?=$val["item"]?></a></label>
+                      </div>
+                      <?php
+                      }
+                      ?>
+                    </td>
+                  </tr>
+                <?php
+                }
+                ?>
+                </table>
+              </div>
+            <!-- }}} -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Ls widget -->
+        <div class="ls-widget">
+          <div class="tabs-box">
+            <div class="widget-title">
+              <h3>우대사항</h3>
+            </div>
+            <div class="widget-content pb-4">
+            <!-- {{{ -->
+              <div class="form-group col-md-12">
+                <label><a>우대사항</a></label>
+                <textarea name="preference_detail" tabindex=100 placeholder="우대사항을 입력해 주세요."></textarea>
+              </div>
+              <div class="form-group col-md-12">
+                <label><a>추가조건</a></label>
+                <textarea name="additional_condition_detail" tabindex=100 placeholder="추가 조건을 입력해 주세요."></textarea>
+              </div>
+            </div>
+            <!-- }}} -->
+          </div>
+        </div>
+
+        <!-- Ls widget -->
+        <div class="ls-widget">
+          <div class="tabs-box">
+            <div class="widget-title">
+              <h3>복리후생</h3>
+            </div>
+            <div class="widget-content pb-4">
+            <!-- {{{ -->
+              <div class="form-group col-md-12">
+                <label><a>복리후생</a></label>
+                <div class="row ps-2">
+                <?php
+                if(@is_array($job_category["Welfare"]) && @count($job_category["Welfare"])){
+                  foreach($job_category["Welfare"] as $val){
+                ?>
+                  <div class="col-6 col-md-3">
+                    <div class="form-group mt-2 mb-0">
+                      <div class="input-group mb-2">
+                        <input type="checkbox" name="welfare[]" value="<?=$val["idx"]?>" id="welfare_<?=$val["idx"]?>" title="<?=$val["title"]?>" tabindex=100>
+                        <label for="welfare_<?=$val["idx"]?>"><a title="<?=$val["title"]?>"><?=$val["title"]?></a></label>
+                      </div>
+                    </div>
+                  </div>
+                  <?php
+                  }
+                }
+                ?>
+                </div>
+              </div>
+              <div class="form-group mt-2">
+                <label><a>기타 복리후생</a></label>
+                <textarea name="welfare_detail" placeholder="복리후생 등에 대한 추가설명을 입력해 주세요." tabindex=100 style="min-height:128px;"></textarea>
+              </div>
+            <!-- }}} -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-primary px-4" tabindex=100>등록하기</button>
+    </div>
+    </form>
+  </div>
+</section>
+

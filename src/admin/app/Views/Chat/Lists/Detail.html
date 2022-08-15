@@ -1,0 +1,67 @@
+<section class="content-main">
+	<div class="content-header">
+    <h2 class="content-title"> <?=$page_name?> 상세보기</h2>
+	</div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+
+<?php
+if(isset($data) && is_array($data) && count($data) > 0){
+  foreach($data as $val){
+    // 인재
+    if($val["sender_type"] == "user"){
+?> 
+      <div class="chat-right p-3">
+        <div class="d-flex">
+          <div>
+            <figure class="image">
+              <img src="/Image/<?=$val["profile_img_uuid"]?>" alt="" style="width:48px;">
+            </figure>
+          </div>
+          <div class="ms-2">
+            <h6><a href="/Member/User/Detail/<?=$val["sender_uuid"]?>" target="_blank"><?=$val["name"]?></a></h6>
+            <p class="bg-light rounded p-3"><?=$val["message"]?></p>
+            <div class="small text-muted">
+              <?=substr($val["register_date"], 0, 16)?>
+            </div>
+          </div>
+        </div>
+      </div>
+<?php
+    }
+    // 기업
+    else {
+?>
+      <div class="chat-left p-3" style="max-width:80%">
+        <div class="d-flex">
+          <div>
+            <figure class="image">
+              <img src="/Image/<?=$val["profile_img_uuid"]?>" alt="" style="width:48px;">
+            </figure>
+          </div>
+          <div class="ms-2">
+            <h6><a href="/Member/Company/Detail/<?=$val["sender_uuid"]?>" target="_blank"><?=$val["name"]?></a></h6>
+            <p class="bg-light rounded p-3"><?=$val["message"]?></p>
+            <div class="small text-muted">
+              <?=substr($val["register_date"], 0, 16)?>
+            </div>
+          </div>
+        </div>
+      </div>
+<?php
+    }
+  }
+}
+?>
+
+
+    </div>
+  </div>
+
+  <div class="text-end">
+    <button class="btn btn-dark" onclick="window.close();">닫기</button>
+  </div>
+
+</section>
+

@@ -1,0 +1,47 @@
+<section class="content-main">
+	<div class="content-header">
+    <h2 class="content-title"> <?=$page_name?> 상세보기</h2>
+	</div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5>구직 내용</h5>
+      <table class="table table-hover border detail-table">
+      <!-- {{{ -->
+      <tbody>
+        <tr>
+          <td class="th">제목</td>
+          <td><?=$data["title"]?></td>
+        </tr>
+        <tr>
+          <td class="th">한줄 PR</td>
+          <td><?=nl2br($data["inline_pr"])?></td>
+        </tr>
+        <tr>
+          <td class="th">인재명</td>
+          <td><a href="/Member/User/Detail/<?=$data["user_uuid"]?>" target="_blank"><?=$data["user_name"]?></td>
+        </tr>
+        <tr>
+          <td class="th">이력서</td>
+          <td><a href="/Resume/Lists/Detail/<?=$data["resume_uuid"]?>" target="_blank"><?=$data["resume_title"]?></td>
+        </tr>
+        <tr>
+          <td class="th">조회수</td>
+          <td><?=$data["view_count"]?>건</td>
+        </tr>
+        <tr>
+          <td class="th">관심인재 등록수</td>
+          <td><?=$data["favorites"]?>건</td>
+        </tr>
+      </tbody>
+      <!-- }}} -->
+      </table>
+    </div>
+  </div>
+
+  <div class="text-end">
+    <button class="btn btn-dark" onclick="window.close();">닫기</button>
+  </div>
+
+</section>
+

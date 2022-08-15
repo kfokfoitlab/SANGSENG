@@ -1,0 +1,678 @@
+CRITICAL - 2022-07-28 01:38:30 --> Undefined array key "profile_img"
+in APPPATH/Controllers/Management/User/Profile.php on line 53.
+ 1 APPPATH/Controllers/Management/User/Profile.php(53): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 01:40:52 --> Invalid JSON text: "Invalid encoding in string." at position 321 in value for column 'user.impairment'.
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(59): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/User/ProfileModel.php(139): App\Models\dbClasses\dbQueryClass->update()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(42): App\Models\Management\User\ProfileModel->UpdateSection2()
+ 4 APPPATH/Controllers/Management/User/Profile.php(53): App\Models\Management\User\ProfileModel->Update()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 01:41:25 --> Invalid JSON text: "Invalid encoding in string." at position 321 in value for column 'user.impairment'.
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(59): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/User/ProfileModel.php(139): App\Models\dbClasses\dbQueryClass->update()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(42): App\Models\Management\User\ProfileModel->UpdateSection2()
+ 4 APPPATH/Controllers/Management/User/Profile.php(53): App\Models\Management\User\ProfileModel->Update()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 01:42:37 --> Invalid JSON text: "Invalid encoding in string." at position 321 in value for column 'user.impairment'.
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(59): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/User/ProfileModel.php(139): App\Models\dbClasses\dbQueryClass->update()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(42): App\Models\Management\User\ProfileModel->UpdateSection2()
+ 4 APPPATH/Controllers/Management/User/Profile.php(53): App\Models\Management\User\ProfileModel->Update()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 01:43:02 --> Call to undefined function App\Models\Management\User\specialchars()
+in APPPATH/Models/Management/User/ProfileModel.php on line 126.
+ 1 APPPATH/Models/Management/User/ProfileModel.php(42): App\Models\Management\User\ProfileModel->UpdateSection2()
+ 2 APPPATH/Controllers/Management/User/Profile.php(53): App\Models\Management\User\ProfileModel->Update()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 01:43:13 --> Invalid JSON text: "Invalid encoding in string." at position 321 in value for column 'user.impairment'.
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(59): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/User/ProfileModel.php(142): App\Models\dbClasses\dbQueryClass->update()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(42): App\Models\Management\User\ProfileModel->UpdateSection2()
+ 4 APPPATH/Controllers/Management/User/Profile.php(53): App\Models\Management\User\ProfileModel->Update()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 01:43:28 --> Call to undefined function App\Models\Management\User\debug()
+in APPPATH/Models/Management/User/ProfileModel.php on line 142.
+ 1 APPPATH/Models/Management/User/ProfileModel.php(42): App\Models\Management\User\ProfileModel->UpdateSection2()
+ 2 APPPATH/Controllers/Management/User/Profile.php(53): App\Models\Management\User\ProfileModel->Update()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 01:43:32 --> Invalid JSON text: "Invalid encoding in string." at position 321 in value for column 'user.impairment'.
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(59): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/User/ProfileModel.php(143): App\Models\dbClasses\dbQueryClass->update()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(42): App\Models\Management\User\ProfileModel->UpdateSection2()
+ 4 APPPATH/Controllers/Management/User/Profile.php(53): App\Models\Management\User\ProfileModel->Update()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 01:44:01 --> Invalid JSON text: "Invalid encoding in string." at position 321 in value for column 'user.impairment'.
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(59): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/User/ProfileModel.php(143): App\Models\dbClasses\dbQueryClass->update()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(42): App\Models\Management\User\ProfileModel->UpdateSection2()
+ 4 APPPATH/Controllers/Management/User/Profile.php(53): App\Models\Management\User\ProfileModel->Update()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 01:45:16 --> Invalid JSON text: "Invalid encoding in string." at position 321 in value for column 'user.impairment'.
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(59): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/User/ProfileModel.php(143): App\Models\dbClasses\dbQueryClass->update()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(42): App\Models\Management\User\ProfileModel->UpdateSection2()
+ 4 APPPATH/Controllers/Management/User/Profile.php(53): App\Models\Management\User\ProfileModel->Update()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 01:46:45 --> Invalid JSON text: "Invalid encoding in string." at position 321 in value for column 'user.impairment'.
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(59): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/User/ProfileModel.php(143): App\Models\dbClasses\dbQueryClass->update()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(42): App\Models\Management\User\ProfileModel->UpdateSection2()
+ 4 APPPATH/Controllers/Management/User/Profile.php(53): App\Models\Management\User\ProfileModel->Update()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 01:48:28 --> Invalid JSON text: "Invalid encoding in string." at position 317 in value for column 'user.impairment'.
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(59): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/User/ProfileModel.php(143): App\Models\dbClasses\dbQueryClass->update()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(42): App\Models\Management\User\ProfileModel->UpdateSection2()
+ 4 APPPATH/Controllers/Management/User/Profile.php(53): App\Models\Management\User\ProfileModel->Update()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 01:53:03 --> Invalid JSON text: "Invalid encoding in string." at position 323 in value for column 'user.impairment'.
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(59): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/User/ProfileModel.php(143): App\Models\dbClasses\dbQueryClass->update()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(42): App\Models\Management\User\ProfileModel->UpdateSection2()
+ 4 APPPATH/Controllers/Management/User/Profile.php(53): App\Models\Management\User\ProfileModel->Update()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:01:19 --> Undefined array key "sns_homepage"
+in APPPATH/Models/Management/User/ProfileModel.php on line 170.
+ 1 APPPATH/Models/Management/User/ProfileModel.php(170): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Models/Management/User/ProfileModel.php(46): App\Models\Management\User\ProfileModel->UpdateSection3()
+ 3 APPPATH/Controllers/Management/User/Profile.php(53): App\Models\Management\User\ProfileModel->Update()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:12:06 --> Call to undefined method App\Controllers\Image::initController()
+in SYSTEMPATH/CodeIgniter.php on line 861.
+ 1 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 2 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 3 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:12:19 --> Call to undefined method App\Controllers\Image::initController()
+in SYSTEMPATH/CodeIgniter.php on line 861.
+ 1 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 2 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 3 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:12:19 --> Call to undefined method App\Controllers\Image::initController()
+in SYSTEMPATH/CodeIgniter.php on line 861.
+ 1 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 2 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 3 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:12:52 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:13:02 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:13:17 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:13:32 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:17:36 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:17:47 --> Invalid utf8mb3 character string: 'sG\xE5'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/CommonModel.php(108): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(73): App\Models\CommonModel->uploadFiles()
+ 4 APPPATH/Models/Management/User/ProfileModel.php(38): App\Models\Management\User\ProfileModel->UpdateSection1()
+ 5 APPPATH/Controllers/Management/User/Profile.php(54): App\Models\Management\User\ProfileModel->Update()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:20:09 --> Invalid utf8mb3 character string: 'sG\xE5'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/CommonModel.php(108): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(73): App\Models\CommonModel->uploadFiles()
+ 4 APPPATH/Models/Management/User/ProfileModel.php(38): App\Models\Management\User\ProfileModel->UpdateSection1()
+ 5 APPPATH/Controllers/Management/User/Profile.php(54): App\Models\Management\User\ProfileModel->Update()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:21:20 --> Data too long for column 'binary_data' at row 1
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/CommonModel.php(108): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(73): App\Models\CommonModel->uploadFiles()
+ 4 APPPATH/Models/Management/User/ProfileModel.php(38): App\Models\Management\User\ProfileModel->UpdateSection1()
+ 5 APPPATH/Controllers/Management/User/Profile.php(54): App\Models\Management\User\ProfileModel->Update()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:40:55 --> Invalid utf8mb3 character string: 'sG\xE5'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/CommonModel.php(108): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(73): App\Models\CommonModel->uploadFiles()
+ 4 APPPATH/Models/Management/User/ProfileModel.php(38): App\Models\Management\User\ProfileModel->UpdateSection1()
+ 5 APPPATH/Controllers/Management/User/Profile.php(54): App\Models\Management\User\ProfileModel->Update()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:43:05 --> Invalid utf8mb3 character string: '\x89PNG'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/CommonModel.php(108): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(73): App\Models\CommonModel->uploadFiles()
+ 4 APPPATH/Models/Management/User/ProfileModel.php(38): App\Models\Management\User\ProfileModel->UpdateSection1()
+ 5 APPPATH/Controllers/Management/User/Profile.php(54): App\Models\Management\User\ProfileModel->Update()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:44:23 --> Call to undefined function App\Models\mysql_escape_string()
+in APPPATH/Models/CommonModel.php on line 105.
+ 1 APPPATH/Models/Management/User/ProfileModel.php(73): App\Models\CommonModel->uploadFiles()
+ 2 APPPATH/Models/Management/User/ProfileModel.php(38): App\Models\Management\User\ProfileModel->UpdateSection1()
+ 3 APPPATH/Controllers/Management/User/Profile.php(54): App\Models\Management\User\ProfileModel->Update()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:44:37 --> Invalid utf8mb3 character string: 'sG\xE5'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/CommonModel.php(108): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(73): App\Models\CommonModel->uploadFiles()
+ 4 APPPATH/Models/Management/User/ProfileModel.php(38): App\Models\Management\User\ProfileModel->UpdateSection1()
+ 5 APPPATH/Controllers/Management/User/Profile.php(54): App\Models\Management\User\ProfileModel->Update()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:45:47 --> Invalid utf8mb3 character string: 'sG\xE5'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/CommonModel.php(108): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(73): App\Models\CommonModel->uploadFiles()
+ 4 APPPATH/Models/Management/User/ProfileModel.php(38): App\Models\Management\User\ProfileModel->UpdateSection1()
+ 5 APPPATH/Controllers/Management/User/Profile.php(54): App\Models\Management\User\ProfileModel->Update()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:49:25 --> Invalid utf8mb3 character string: 'sG\xE5'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/CommonModel.php(108): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Models/Management/User/ProfileModel.php(73): App\Models\CommonModel->uploadFiles()
+ 4 APPPATH/Models/Management/User/ProfileModel.php(38): App\Models\Management\User\ProfileModel->UpdateSection1()
+ 5 APPPATH/Controllers/Management/User/Profile.php(54): App\Models\Management\User\ProfileModel->Update()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:51:37 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 02:51:47 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 08:45:47 --> Call to undefined method App\Models\Management\User\ResumeModel::getProfile()
+in APPPATH/Controllers/Management/User/Resume.php on line 31.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Index()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 08:46:41 --> Undefined variable $profile_img_url
+in APPPATH/Views/Management/User/Resume.html on line 24.
+ 1 APPPATH/Views/Management/User/Resume.html(24): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/Resume.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/Resume.php(35): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 09:08:11 --> Undefined variable $data
+in APPPATH/Controllers/Management/User/Resume.php on line 45.
+ 1 APPPATH/Controllers/Management/User/Resume.php(45): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Create()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 09:08:21 --> Invalid file: Management/User/ResumeCreate.html
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 33.
+ 1 SYSTEMPATH/View/View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Management/User/Resume.php(49): view()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Create()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 18:52:47 --> Undefined array key "user_info"
+in APPPATH/Controllers/Management/User/Resume.php on line 59.
+ 1 APPPATH/Controllers/Management/User/Resume.php(59): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 18:53:16 --> Undefined array key "school_month"
+in APPPATH/Models/Management/User/ResumeModel.php on line 31.
+ 1 APPPATH/Models/Management/User/ResumeModel.php(31): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/Resume.php(59): App\Models\Management\User\ResumeModel->Create()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 18:53:29 --> trim(): Argument #1 ($string) must be of type string, array given
+in APPPATH/Models/Management/User/ResumeModel.php on line 50.
+ 1 APPPATH/Models/Management/User/ResumeModel.php(50): trim()
+ 2 APPPATH/Controllers/Management/User/Resume.php(59): App\Models\Management\User\ResumeModel->Create()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 18:54:57 --> Undefined array key "skill"
+in APPPATH/Models/Management/User/ResumeModel.php on line 94.
+ 1 APPPATH/Models/Management/User/ResumeModel.php(94): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/Resume.php(59): App\Models\Management\User\ResumeModel->Create()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 18:55:13 --> Undefined variable $skill_count
+in APPPATH/Models/Management/User/ResumeModel.php on line 121.
+ 1 APPPATH/Models/Management/User/ResumeModel.php(121): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/Resume.php(59): App\Models\Management\User\ResumeModel->Create()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 19:09:41 --> Undefined variable $portfolio_lists
+in APPPATH/Models/Management/User/ResumeModel.php on line 125.
+ 1 APPPATH/Models/Management/User/ResumeModel.php(125): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/Resume.php(59): App\Models\Management\User\ResumeModel->Create()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 19:13:46 --> Undefined array key "name"
+in APPPATH/Models/Management/User/ResumeModel.php on line 118.
+ 1 APPPATH/Models/Management/User/ResumeModel.php(118): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/Resume.php(59): App\Models\Management\User\ResumeModel->Create()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 19:13:56 --> Undefined variable $file
+in APPPATH/Models/Management/User/ResumeModel.php on line 116.
+ 1 APPPATH/Models/Management/User/ResumeModel.php(116): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/Resume.php(59): App\Models\Management\User\ResumeModel->Create()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 19:14:03 --> Undefined array key "name"
+in APPPATH/Models/Management/User/ResumeModel.php on line 119.
+ 1 APPPATH/Models/Management/User/ResumeModel.php(119): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/Resume.php(59): App\Models\Management\User\ResumeModel->Create()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 19:15:22 --> Undefined array key "error_"
+in APPPATH/Models/Management/User/ResumeModel.php on line 124.
+ 1 APPPATH/Models/Management/User/ResumeModel.php(124): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/Resume.php(59): App\Models\Management\User\ResumeModel->Create()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 20:07:29 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/DatabaseModel.php(144): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Models/DatabaseModel.php(40): App\Models\DatabaseModel->getJobCareer()
+ 4 APPPATH/Controllers/Management/User/Resume.php(45): App\Models\DatabaseModel->getJobAll()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Create()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 20:10:26 --> Array to string conversion
+in APPPATH/Views/Management/User/ResumeCreate.html on line 33.
+ 1 APPPATH/Views/Management/User/ResumeCreate.html(33): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/ResumeCreate.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/Resume.php(52): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Create()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 20:40:00 --> Undefined array key "career_start_year"
+in APPPATH/Models/Management/User/ResumeModel.php on line 48.
+ 1 APPPATH/Models/Management/User/ResumeModel.php(48): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/Resume.php(62): App\Models\Management\User\ResumeModel->Create()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 20:40:26 --> Undefined array key "career_start_year"
+in APPPATH/Models/Management/User/ResumeModel.php on line 50.
+ 1 APPPATH/Models/Management/User/ResumeModel.php(50): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/Resume.php(62): App\Models\Management\User\ResumeModel->Create()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 20:43:14 --> Cannot access offset of type string on string
+in APPPATH/Models/Management/User/ResumeModel.php on line 43.
+ 1 APPPATH/Controllers/Management/User/Resume.php(62): App\Models\Management\User\ResumeModel->Create()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 20:43:34 --> Cannot access offset of type string on string
+in APPPATH/Models/Management/User/ResumeModel.php on line 75.
+ 1 APPPATH/Controllers/Management/User/Resume.php(62): App\Models\Management\User\ResumeModel->Create()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 20:43:46 --> Cannot access offset of type string on string
+in APPPATH/Models/Management/User/ResumeModel.php on line 77.
+ 1 APPPATH/Controllers/Management/User/Resume.php(62): App\Models\Management\User\ResumeModel->Create()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 20:44:22 --> Undefined array key "category_pay_type"
+in APPPATH/Models/Management/User/ResumeModel.php on line 157.
+ 1 APPPATH/Models/Management/User/ResumeModel.php(157): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/Resume.php(62): App\Models\Management\User\ResumeModel->Create()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 20:44:44 --> Undefined array key "category_pay_type"
+in APPPATH/Models/Management/User/ResumeModel.php on line 158.
+ 1 APPPATH/Models/Management/User/ResumeModel.php(158): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/Resume.php(62): App\Models\Management\User\ResumeModel->Create()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 20:50:35 --> Undefined variable $row
+in APPPATH/Models/Management/User/ResumeModel.php on line 24.
+ 1 APPPATH/Models/Management/User/ResumeModel.php(24): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/Resume.php(34): App\Models\Management\User\ResumeModel->getList()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Index()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 20:51:53 --> Unclosed '{' on line 34
+in APPPATH/Views/Management/User/Resume.html on line 66.
+ 1 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Management/User/Resume.php(41): view()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 21:07:27 --> Cannot redeclare App\Controllers\Management\User\Resume::Detail()
+in APPPATH/Controllers/Management/User/Resume.php on line 110.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2022-07-28 21:07:27 --> Cannot redeclare App\Controllers\Management\User\Resume::Detail()
+in APPPATH/Controllers/Management/User/Resume.php on line 110.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2022-07-28 21:10:45 --> require_once(/var/www/html/app/Views/Management/User/Resume/../Sidebar.html): Failed to open stream: No such file or directory
+in APPPATH/Views/Management/User/Resume/Index.html on line 2.
+ 1 APPPATH/Views/Management/User/Resume/Index.html(2): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Views/Management/User/Resume/Index.html(2): require_once()
+ 3 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/Resume/Index.html')
+ 4 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 6 APPPATH/Controllers/Management/User/Resume.php(41): view()
+ 7 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Index()
+ 8 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 21:14:22 --> require_once(/var/www/html/app/Views/Management/User/Resume/../Sidebar.html): Failed to open stream: No such file or directory
+in APPPATH/Views/Management/User/Resume/Detail.html on line 2.
+ 1 APPPATH/Views/Management/User/Resume/Detail.html(2): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Views/Management/User/Resume/Detail.html(2): require_once()
+ 3 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/Resume/Detail.html')
+ 4 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 6 APPPATH/Controllers/Management/User/Resume.php(60): view()
+ 7 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Detail()
+ 8 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 21:14:57 --> require_once(/var/www/html/app/Views/Management/User/Resume/../Sidebar.html): Failed to open stream: No such file or directory
+in APPPATH/Views/Management/User/Resume/Detail.html on line 2.
+ 1 APPPATH/Views/Management/User/Resume/Detail.html(2): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Views/Management/User/Resume/Detail.html(2): require_once()
+ 3 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/Resume/Detail.html')
+ 4 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 6 APPPATH/Controllers/Management/User/Resume.php(60): view()
+ 7 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Detail()
+ 8 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 21:15:23 --> Invalid file: Management/User/ResumeCreate.html
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 33.
+ 1 SYSTEMPATH/View/View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Management/User/Resume.php(76): view()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Create()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 21:15:32 --> require_once(/var/www/html/app/Views/Management/User/Resume/../Sidebar.html): Failed to open stream: No such file or directory
+in APPPATH/Views/Management/User/Resume/Create.html on line 2.
+ 1 APPPATH/Views/Management/User/Resume/Create.html(2): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Views/Management/User/Resume/Create.html(2): require_once()
+ 3 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/Resume/Create.html')
+ 4 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 6 APPPATH/Controllers/Management/User/Resume.php(76): view()
+ 7 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Create()
+ 8 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 21:15:41 --> require_once(/var/www/html/app/Views/Management/User/Resume/../Sidebar.html): Failed to open stream: No such file or directory
+in APPPATH/Views/Management/User/Resume/Create.html on line 2.
+ 1 APPPATH/Views/Management/User/Resume/Create.html(2): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Views/Management/User/Resume/Create.html(2): require_once()
+ 3 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/Resume/Create.html')
+ 4 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 6 APPPATH/Controllers/Management/User/Resume.php(76): view()
+ 7 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Create()
+ 8 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 21:15:43 --> require_once(/var/www/html/app/Views/Management/User/Resume/../Sidebar.html): Failed to open stream: No such file or directory
+in APPPATH/Views/Management/User/Resume/Create.html on line 2.
+ 1 APPPATH/Views/Management/User/Resume/Create.html(2): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Views/Management/User/Resume/Create.html(2): require_once()
+ 3 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/Resume/Create.html')
+ 4 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 6 APPPATH/Controllers/Management/User/Resume.php(76): view()
+ 7 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Create()
+ 8 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 22:12:27 --> json_decode(): Argument #1 ($json) must be of type string, array given
+in APPPATH/Controllers/Management/User/Resume.php on line 58.
+ 1 APPPATH/Controllers/Management/User/Resume.php(58): json_decode()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 22:12:28 --> Trying to access array offset on value of type null
+in APPPATH/Controllers/Management/User/Resume.php on line 54.
+ 1 APPPATH/Controllers/Management/User/Resume.php(54): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 22:16:35 --> Undefined variable $graduate
+in APPPATH/Views/Management/User/Resume/Detail.html on line 67.
+ 1 APPPATH/Views/Management/User/Resume/Detail.html(67): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/Resume/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/Resume.php(67): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 22:16:51 --> Undefined variable $graduate
+in APPPATH/Views/Management/User/Resume/Detail.html on line 68.
+ 1 APPPATH/Views/Management/User/Resume/Detail.html(68): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/Resume/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/Resume.php(67): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 22:19:34 --> Array to string conversion
+in APPPATH/Views/Management/User/Resume/Detail.html on line 109.
+ 1 APPPATH/Views/Management/User/Resume/Detail.html(109): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/Resume/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/Resume.php(67): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 22:22:00 --> Array to string conversion
+in APPPATH/Views/Management/User/Resume/Detail.html on line 109.
+ 1 APPPATH/Views/Management/User/Resume/Detail.html(109): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/Resume/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/Resume.php(67): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 22:27:37 --> Undefined variable $portfolio
+in APPPATH/Models/Management/User/ResumeModel.php on line 187.
+ 1 APPPATH/Models/Management/User/ResumeModel.php(187): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/Resume.php(92): App\Models\Management\User\ResumeModel->Create()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->CreateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 22:34:08 --> Undefined array key "start_year"
+in APPPATH/Views/Management/User/Resume/Detail.html on line 177.
+ 1 APPPATH/Views/Management/User/Resume/Detail.html(177): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/Resume/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/Resume.php(67): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-28 22:34:56 --> Array to string conversion
+in APPPATH/Views/Management/User/Resume/Detail.html on line 242.
+ 1 APPPATH/Views/Management/User/Resume/Detail.html(242): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/Resume/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/Resume.php(67): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()

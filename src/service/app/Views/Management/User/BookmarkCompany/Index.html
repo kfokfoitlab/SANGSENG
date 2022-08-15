@@ -1,0 +1,144 @@
+<?php
+require_once(__DIR__."/../Sidebar.html");
+?>
+
+<section class="user-dashboard">
+  <div class="dashboard-outer">
+    <div class="upper-title-box">
+      <h3 class="" title="관심 기업"><a>관심 기업</a></h3>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Ls widget -->
+        <div class="ls-widget">
+          <div class="tabs-box">
+            <div class="widget-content py-4">
+
+              <div class="row">
+              <?php
+              if(is_array($data) && count($data) > 0){
+                foreach($data as $item){
+              ?>
+                <!-- Block Block -->
+                <div class="company-block-three w-100 col-sm-12">
+                  <div class="inner-box">
+                    <div class="content">
+                      <div class="content-inner">
+                        <span class="company-logo"><img src="/Image/<?=$item["profile_img_uuid"]?>" alt="기업 로고"></span>
+                        <h4><a href="/Company/Detail/<?=$item["company_uuid"]?>" target="_blank" tabindex=1500><?=$item["company_name"]?></a></h4>
+                        <ul class="job-info mt-3">
+                          <li><span class="icon flaticon-map-locator"></span> <a><?=$item["address_short"]?></a></li>
+                          <li><span class="icon flaticon-briefcase"></span> <a><?=$item["major_business"]?></a></li>
+                        </ul>
+                      </div>
+
+                      <ul class="job-other-info d-block text-center">
+                        <li class="privacy"><a>인증</a></li>
+                        <li class="time"><a><?=$item["application_count"]?>건 채용중</a></li>
+                      </ul>
+                    </div>
+              
+                    <div class="text mt-4">
+                      <a class="line-clamp-2 text-secondary" title="기업 소개글">
+                        <?=$item["description_plain"]?>
+                      </a>
+                    </div>
+
+                    <?php
+                    if(@$_SESSION["login"] == "success" && @$_SESSION["login_info"]["type"] == "user"){
+                      if(!$item["bookmark"]){
+                    ?>
+                    <button type="button" 
+                      class="bookmark-btn action-add-bookmark" 
+                      tabindex=1500 
+                      title="북마크"
+                      data-user-uuid="<?=$_SESSION["login_info"]["uuid"]?>"
+                      data-company-uuid="<?=$item["uuid"]?>"
+                    >
+                      <!-- span class="flaticon-bookmark"></span -->
+                      <span class="far fa-2x fa-bookmark text-dark"></span>
+                    </button>
+                    <?php
+                      }
+                      else{
+                      ?>
+                    <button type="button" 
+                      class="bookmark-btn action-remove-bookmark" 
+                      tabindex=1500 
+                      title="북마크"
+                      data-user-uuid="<?=$_SESSION["login_info"]["uuid"]?>"
+                      data-company-uuid="<?=$item["uuid"]?>"
+                    >
+                      <!-- span class="flaticon-bookmark"></span -->
+                      <span class="fas fa-2x fa-bookmark text-primary"></span>
+                    </button>
+                    <?php
+                      }
+                    }
+                    ?>
+                  </div>
+                </div>
+              <?php
+                }
+              }
+              else {
+                echo "<div class='text-center my-4'><a>등록된 관심 기업이 없습니다.</a></div>";
+              ?>
+              <?php
+              }?>
+              </div>
+
+              <?php
+              if($pagination["page_count"] > 0){
+              ?>
+              <nav class="ls-pagination">
+              <!-- Pagination {{{ -->
+                <ul>
+                  <li class="prev">
+                    <a href="javascript:void(0)" 
+                      class="pagination" 
+                      data-page="<?=($pagination["now_page"] > 1)?($pagination["now_page"]-1) : 1?>" 
+                      title="이전페이지"
+                    >
+                      <i class="fa fa-arrow-left"></i>
+                    </a>
+                  </li>
+                <?php
+                for($i=0; $i<$pagination["page_count"]; $i++){
+                  if($i == ($pagination["now_page"] - 1)){
+                ?>
+                  <li><a href="javascript:void(0)" class="current-page pagination" title="<?=($i+1)?>페이지" data-page="<?=($i+1)?>"><?=($i+1)?></a></li>
+                <?php
+                  }
+                  else {
+                ?>
+                  <li><a href="javascript:void(0)" class="pagination" title="<?=($i+1)?>페이지" data-page="<?=$i+1?>"><?=$i+1?></a></li>
+                <?php
+                  }
+                ?>
+                <?php
+                }
+                ?>
+                  <li class="next">
+                    <a href="javascript:void(0)" 
+                      class="pagination" 
+                      data-page="<?=($pagination["now_page"] < $pagination["page_count"])?($pagination["now_page"]-1) : $pagination["page_count"]?>" 
+                      title="다음페이지"
+                    >
+                      <i class="fa fa-arrow-right"></i>
+                    </a>
+                  </li>
+                </ul>
+              <!-- }}} -->
+              </nav>
+              <?php
+              }?>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,632 @@
+CRITICAL - 2022-08-08 01:22:07 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'like '%ewfwe%' and employment_type like 2 and career like 1 and work_type like 1' at line 5
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/dbClasses/dbQueryClass.php(30): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Models/Management/Company/ApplicationModel.php(141): App\Models\dbClasses\dbQueryClass->simple_query()
+ 4 APPPATH/Controllers/Recruit.php(44): App\Models\Management\Company\ApplicationModel->getAllList()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Index()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 01:23:36 --> Undefined array key "data"
+in APPPATH/Controllers/Recruit.php on line 55.
+ 1 APPPATH/Controllers/Recruit.php(55): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Index()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 01:24:36 --> Unknown column '전체' in 'where clause'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/dbClasses/dbQueryClass.php(30): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Models/Management/Company/ApplicationModel.php(141): App\Models\dbClasses\dbQueryClass->simple_query()
+ 4 APPPATH/Controllers/Recruit.php(44): App\Models\Management\Company\ApplicationModel->getAllList()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Index()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 01:25:10 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 5
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/dbClasses/dbQueryClass.php(30): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Models/Management/Company/ApplicationModel.php(141): App\Models\dbClasses\dbQueryClass->simple_query()
+ 4 APPPATH/Controllers/Recruit.php(44): App\Models\Management\Company\ApplicationModel->getAllList()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Index()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 01:25:26 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 5
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/dbClasses/dbQueryClass.php(30): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Models/Management/Company/ApplicationModel.php(141): App\Models\dbClasses\dbQueryClass->simple_query()
+ 4 APPPATH/Controllers/Recruit.php(44): App\Models\Management\Company\ApplicationModel->getAllList()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Index()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 01:25:36 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 5
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/dbClasses/dbQueryClass.php(30): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Models/Management/Company/ApplicationModel.php(141): App\Models\dbClasses\dbQueryClass->simple_query()
+ 4 APPPATH/Controllers/Recruit.php(44): App\Models\Management\Company\ApplicationModel->getAllList()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Index()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 01:25:42 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 5
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/dbClasses/dbQueryClass.php(30): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Models/Management/Company/ApplicationModel.php(142): App\Models\dbClasses\dbQueryClass->simple_query()
+ 4 APPPATH/Controllers/Recruit.php(44): App\Models\Management\Company\ApplicationModel->getAllList()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Index()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 01:32:00 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'limit 0, 10' at line 51
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/Company/ApplicationModel.php(198): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Controllers/Recruit.php(44): App\Models\Management\Company\ApplicationModel->getAllList()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 01:32:22 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'limit 0, 10' at line 51
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/Company/ApplicationModel.php(199): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Controllers/Recruit.php(44): App\Models\Management\Company\ApplicationModel->getAllList()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:03:40 --> syntax error, unexpected token "else"
+in APPPATH/Models/Management/User/ManageJobModel.php on line 56.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 3 APPPATH/Controllers/Person.php(15): CodeIgniter\Autoloader\Autoloader->loadClass()
+ 4 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Person->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:04:04 --> syntax error, unexpected token "else"
+in APPPATH/Models/Management/User/ManageJobModel.php on line 56.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 3 APPPATH/Controllers/Person.php(15): CodeIgniter\Autoloader\Autoloader->loadClass()
+ 4 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Person->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:04:28 --> Undefined array key "count"
+in APPPATH/Controllers/Person.php on line 41.
+ 1 APPPATH/Controllers/Person.php(41): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Index()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:06:34 --> Cannot access offset of type string on string
+in APPPATH/Views/Person/Index.html on line 93.
+ 1 SYSTEMPATH/View/View.php(213): include()
+ 2 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 4 APPPATH/Controllers/Person.php(58): view()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Index()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:08:05 --> Unknown column 'job.category_employment_type' in 'where clause'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/User/ManageJobModel.php(145): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Controllers/Person.php(38): App\Models\Management\User\ManageJobModel->getAllList()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:08:12 --> Unknown column 'job.category_employment_type' in 'where clause'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/User/ManageJobModel.php(145): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Controllers/Person.php(38): App\Models\Management\User\ManageJobModel->getAllList()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:18:32 --> Undefined array key "count"
+in APPPATH/Controllers/Company.php on line 44.
+ 1 APPPATH/Controllers/Company.php(44): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:19:55 --> Undefined array key "address"
+in APPPATH/Models/CompanyModel.php on line 24.
+ 1 APPPATH/Models/CompanyModel.php(24): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Company.php(41): App\Models\CompanyModel->getAllList()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:20:06 --> Undefined array key "work_type"
+in APPPATH/Models/CompanyModel.php on line 36.
+ 1 APPPATH/Models/CompanyModel.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Company.php(41): App\Models\CompanyModel->getAllList()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:20:10 --> Undefined variable $paging
+in APPPATH/Models/CompanyModel.php on line 99.
+ 1 APPPATH/Models/CompanyModel.php(99): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Company.php(41): App\Models\CompanyModel->getAllList()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:21:30 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '1' at line 5
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/dbClasses/dbQueryClass.php(30): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Models/CompanyModel.php(73): App\Models\dbClasses\dbQueryClass->simple_query()
+ 4 APPPATH/Controllers/Company.php(41): App\Models\CompanyModel->getAllList()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:21:53 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '1' at line 9
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/dbClasses/dbQueryClass.php(30): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Models/CompanyModel.php(77): App\Models\dbClasses\dbQueryClass->simple_query()
+ 4 APPPATH/Controllers/Company.php(41): App\Models\CompanyModel->getAllList()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:22:45 --> Unknown column 'recommended' in 'order clause'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/CompanyModel.php(102): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Controllers/Company.php(41): App\Models\CompanyModel->getAllList()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:23:30 --> Column 'idx' in order clause is ambiguous
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/CompanyModel.php(74): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Controllers/Company.php(41): App\Models\CompanyModel->getAllList()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:40:15 --> Call to undefined method App\Models\CompanyModel::getBusinessType()
+in APPPATH/Controllers/Company.php on line 25.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:40:44 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'desc(business_type)
+            from
+                company_public
+         ...' at line 2
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/CompanyModel.php(134): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Controllers/Company.php(25): App\Models\CompanyModel->getBusinessType()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:40:54 --> Array to string conversion
+in APPPATH/Views/Company/Index.html on line 52.
+ 1 APPPATH/Views/Company/Index.html(52): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Company/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Company.php(62): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:41:17 --> Array to string conversion
+in APPPATH/Views/Company/Index.html on line 52.
+ 1 APPPATH/Views/Company/Index.html(52): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Company/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Company.php(62): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 02:41:23 --> Array to string conversion
+in APPPATH/Views/Company/Index.html on line 52.
+ 1 APPPATH/Views/Company/Index.html(52): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Company/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Company.php(62): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:24:05 --> Trying to access array offset on value of type null
+in APPPATH/Models/CompanyModel.php on line 21.
+ 1 APPPATH/Models/CompanyModel.php(21): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Home.php(25): App\Models\CompanyModel->getAllList()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Home->index()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:25:37 --> Undefined property: App\Controllers\Home::$item_per_page
+in APPPATH/Controllers/Home.php on line 29.
+ 1 APPPATH/Controllers/Home.php(29): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Home->index()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:25:57 --> Undefined array key "business_type"
+in APPPATH/Models/CompanyModel.php on line 27.
+ 1 APPPATH/Models/CompanyModel.php(27): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Home.php(42): App\Models\CompanyModel->getAllList()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Home->index()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:26:19 --> Undefined variable $recent_company
+in APPPATH/Controllers/Home.php on line 48.
+ 1 APPPATH/Controllers/Home.php(48): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Home->index()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:26:28 --> Cannot access offset of type string on string
+in APPPATH/Views/Home/Section/TopCompanies.html on line 19.
+ 1 APPPATH/Views/Home/Index.html(12): require()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Home/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Home.php(52): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:36:29 --> Cannot access offset of type string on string
+in APPPATH/Views/Home/Section/TopCompanies.html on line 19.
+ 1 APPPATH/Views/Home/Index.html(12): require()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Home/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Home.php(52): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:36:59 --> Cannot access offset of type string on string
+in APPPATH/Views/Home/Section/TopCompanies.html on line 19.
+ 1 APPPATH/Views/Home/Index.html(12): require()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Home/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Home.php(52): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:37:05 --> Cannot access offset of type string on string
+in APPPATH/Views/Home/Section/TopCompanies.html on line 19.
+ 1 APPPATH/Views/Home/Index.html(12): require()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Home/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Home.php(52): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:37:17 --> Cannot access offset of type string on string
+in APPPATH/Views/Home/Section/TopCompanies.html on line 20.
+ 1 APPPATH/Views/Home/Index.html(12): require()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Home/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Home.php(52): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:37:36 --> Call to undefined function debug()
+in APPPATH/Views/Home/Section/TopCompanies.html on line 14.
+ 1 APPPATH/Views/Home/Index.html(12): require()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Home/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Home.php(52): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:37:44 --> Cannot access offset of type string on string
+in APPPATH/Views/Home/Section/TopCompanies.html on line 20.
+ 1 APPPATH/Views/Home/Index.html(12): require()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Home/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Home.php(52): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:48:17 --> Undefined property: App\Controllers\Person::$user_uuid
+in APPPATH/Controllers/Person.php on line 67.
+ 1 APPPATH/Controllers/Person.php(67): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:48:47 --> Undefined array key "uuid"
+in APPPATH/Views/Person/Index.html on line 101.
+ 1 APPPATH/Views/Person/Index.html(101): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Person/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Person.php(60): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:50:20 --> Undefined property: App\Controllers\Person::$user_uuid
+in APPPATH/Controllers/Person.php on line 67.
+ 1 APPPATH/Controllers/Person.php(67): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:50:20 --> Undefined property: App\Controllers\Person::$user_uuid
+in APPPATH/Controllers/Person.php on line 67.
+ 1 APPPATH/Controllers/Person.php(67): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:50:32 --> Undefined property: App\Controllers\Person::$user_uuid
+in APPPATH/Controllers/Person.php on line 67.
+ 1 APPPATH/Controllers/Person.php(67): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:50:33 --> Undefined property: App\Controllers\Person::$user_uuid
+in APPPATH/Controllers/Person.php on line 67.
+ 1 APPPATH/Controllers/Person.php(67): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:51:10 --> Undefined property: App\Controllers\Person::$resume_model
+in APPPATH/Controllers/Person.php on line 68.
+ 1 APPPATH/Controllers/Person.php(68): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:51:10 --> Undefined property: App\Controllers\Person::$resume_model
+in APPPATH/Controllers/Person.php on line 68.
+ 1 APPPATH/Controllers/Person.php(68): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:51:17 --> Undefined variable $resume_list
+in APPPATH/Controllers/Person.php on line 71.
+ 1 APPPATH/Controllers/Person.php(71): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:51:18 --> Undefined variable $resume_list
+in APPPATH/Controllers/Person.php on line 71.
+ 1 APPPATH/Controllers/Person.php(71): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:52:11 --> Undefined array key "profile_img_uuid"
+in APPPATH/Views/Person/Detail.html on line 9.
+ 1 APPPATH/Views/Person/Detail.html(9): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Person/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Person.php(74): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 19:56:34 --> Unknown column 'job.employment_type' in 'where clause'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/User/ManageJobModel.php(205): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Controllers/Management/User/ManageJob.php(56): App\Models\Management\User\ManageJobModel->Detail()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->Detail()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 20:01:55 --> Unknown column 'job.category_career' in 'where clause'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/User/ManageJobModel.php(207): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Controllers/Person.php(70): App\Models\Management\User\ManageJobModel->Detail()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 20:01:56 --> Trying to access array offset on value of type null
+in APPPATH/Models/Management/User/ManageJobModel.php on line 204.
+ 1 APPPATH/Models/Management/User/ManageJobModel.php(204): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Person.php(70): App\Models\Management\User\ManageJobModel->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 20:05:01 --> Undefined array key "resister_date"
+in APPPATH/Views/Person/Detail.html on line 21.
+ 1 APPPATH/Views/Person/Detail.html(21): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Person/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Person.php(80): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 20:05:22 --> Undefined array key "resister_date"
+in APPPATH/Views/Person/Detail.html on line 21.
+ 1 APPPATH/Views/Person/Detail.html(21): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Person/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Person.php(80): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 20:16:07 --> Undefined array key "sns_facebook"
+in APPPATH/Views/Person/Detail.html on line 261.
+ 1 APPPATH/Views/Person/Detail.html(261): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Person/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Person.php(89): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 20:16:59 --> Undefined array key "sns_instagram"
+in APPPATH/Views/Person/Detail.html on line 266.
+ 1 APPPATH/Views/Person/Detail.html(266): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Person/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Person.php(89): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 23:34:26 --> script_tag(): Argument #2 ($indexPage) must be of type bool, array given, called in /var/www/html/app/Controllers/Company.php on line 62
+in SYSTEMPATH/Helpers/html_helper.php on line 195.
+ 1 APPPATH/Controllers/Company.php(62): script_tag()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 23:34:44 --> script_tag(): Argument #2 ($indexPage) must be of type bool, array given, called in /var/www/html/app/Controllers/Company.php on line 62
+in SYSTEMPATH/Helpers/html_helper.php on line 195.
+ 1 APPPATH/Controllers/Company.php(62): script_tag()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 23:34:55 --> Call to undefined function App\Controllers\script_tags()
+in APPPATH/Controllers/Company.php on line 62.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 23:35:06 --> Too few arguments to function App\Controllers\Company::Bookmark(), 0 passed in /var/www/html/vendor/codeigniter4/framework/system/CodeIgniter.php on line 898 and exactly 3 expected
+in APPPATH/Controllers/Company.php on line 84.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Bookmark()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 23:39:32 --> Table 'kfo.favorites_company' doesn't exist
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/CompanyModel.php(160): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Controllers/Company.php(91): App\Models\CompanyModel->Bookmark()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Bookmark()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 23:40:19 --> Table 'kfo.favorites_company' doesn't exist
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/CompanyModel.php(160): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Controllers/Company.php(91): App\Models\CompanyModel->Bookmark()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Bookmark()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 23:54:01 --> Undefined array key "company_uuid"
+in APPPATH/Controllers/Company.php on line 88.
+ 1 APPPATH/Controllers/Company.php(88): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 23:54:03 --> Undefined array key "company_uuid"
+in APPPATH/Controllers/Company.php on line 88.
+ 1 APPPATH/Controllers/Company.php(88): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 23:54:05 --> Undefined array key "company_uuid"
+in APPPATH/Controllers/Company.php on line 88.
+ 1 APPPATH/Controllers/Company.php(88): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 23:54:07 --> Undefined array key "company_uuid"
+in APPPATH/Controllers/Company.php on line 88.
+ 1 APPPATH/Controllers/Company.php(88): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 23:54:36 --> Undefined array key "company_uuid"
+in APPPATH/Controllers/Company.php on line 88.
+ 1 APPPATH/Controllers/Company.php(88): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 23:54:38 --> Undefined array key "company_uuid"
+in APPPATH/Controllers/Company.php on line 88.
+ 1 APPPATH/Controllers/Company.php(88): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 23:55:37 --> Undefined array key "company_uuid"
+in APPPATH/Controllers/Company.php on line 88.
+ 1 APPPATH/Controllers/Company.php(88): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 23:55:39 --> Undefined array key "company_uuid"
+in APPPATH/Controllers/Company.php on line 88.
+ 1 APPPATH/Controllers/Company.php(88): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-08 23:56:37 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'delte from
+                    favorites_company
+                where
+         ' at line 1
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/CompanyModel.php(172): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Controllers/Company.php(91): App\Models\CompanyModel->Bookmark()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Bookmark()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()

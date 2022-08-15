@@ -1,0 +1,73 @@
+
+<!-- Listing Section -->
+<section class="ls-section" style="margin-top: 76px;">
+  <div class="auto-container">
+    <div class="filters-backdrop"></div>
+
+    <div class="row">
+      <!-- Content Column -->
+      <div class="content-column col-md-12 col-sm-12">
+        <div class="ls-outer">
+          <div class="border rounded" 
+            style="height:50vh; overflow:auto"
+            id="chat-wrap"
+          >
+
+<?php
+if(isset($chat_list) && is_array($chat_list) && count($chat_list) > 0){
+  foreach($chat_list as $val){
+    // 내가 보낸것
+    if($val["sender_uuid"] == $_SESSION["login_info"]["uuid"]){
+?> 
+      <div class="chat-right p-3">
+        <div class="w-100">
+          <div class="ms-auto" style="max-width:80%">
+            <div class="float-end bg-light rounded p-3"><?=$val["message"]?></div>
+            <div class="text-end small text-muted" style="clear: both">
+              <?=substr($val["register_date"], 0, 16)?>
+            </div>
+          </div>
+        </div>
+      </div>
+<?php
+    }
+    // 상대가 보낸것
+    else {
+?>
+      <div class="chat-left p-3" style="max-width:80%">
+        <div class="d-flex">
+          <div>
+            <figure class="image">
+              <img src="/Image/<?=$val["profile_img_uuid"]?>" alt="" style="width:48px;">
+            </figure>
+          </div>
+          <div class="ms-2">
+            <h6><?=$val["name"]?></h6>
+            <p class="bg-light rounded p-3"><?=$val["message"]?></p>
+            <div class="small text-muted">
+              <?=substr($val["register_date"], 0, 16)?>
+            </div>
+          </div>
+        </div>
+      </div>
+<?php
+    }
+  }
+}
+?>
+
+
+          </div>
+          <div class="mt-4">
+            <textarea class="form-control" name="chat" placeholder="메세지를 입력하세요."></textarea>
+
+            <div class="text-end mt-3">
+              <button type="button" class="btn btn-sm btn-primary action-send-chat">전송</button>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--End Listing Page Section -->

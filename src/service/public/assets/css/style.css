@@ -1,0 +1,301 @@
+@font-face {
+    font-family: 'KoddiUDOnGothic';
+    src: url('/assets/fonts/ongothic/KoddiUDOnGothic-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'KoddiUDOnGothic';
+    src: url('/assets/fonts/ongothic/KoddiUDOnGothic-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
+html, body {
+    font-family: 'KoddiUDOnGothic';
+    font-size: 24px;
+    font-weight: 500;
+}
+
+body {
+    cursor: default!important;
+}
+
+.font-weight-400 {
+    font-weight: 400;
+}
+.font-weight-500 {
+    font-weight: 500;
+}
+.font-weight-700 {
+    font-weight: 700;
+}
+.font-weight-900 {
+    font-weight: 900;
+}
+
+.line-clamp-2 {
+    height:3em;
+    overflow: hidden;
+    white-space: normal; 
+    text-align: left; 
+    word-wrap: break-word; 
+    display: -webkit-box; 
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+}
+
+.main-header .main-box {
+    font-size: 24px;
+}
+
+.badge {
+    margin-bottom: 8px;
+}
+
+.form-check label {
+    line-height: 1.5em;
+}
+
+.fade:not(.show) {
+    opacity: 1;
+}
+
+.modal {
+    width: none;
+    max-width: none;
+}
+
+
+/**
+ * dark-mode
+ */
+body.dark-mode {
+    background-color: var(--bs-gray-700)!important;
+}
+
+body.dark-mode .main-header.sub {
+    background-color: var(--bs-gray-700)!important;
+}
+
+#top_guide {
+    font-size: 24px;
+    background-color: var(--bs-white);
+}
+
+body.dark-mode #top_guide {
+    background-color: var(--bs-gray-700);
+}
+body.dark-mode button,
+body.dark-mode a,
+body.dark-mode label {
+    color: white;
+}
+
+body.dark-mode .page-wrapper,
+body.dark-mode .inner-box {
+    background-color: var(--bs-gray-700);
+}
+body.dark-mode .inner-box li {
+    color: var(--bs-white);
+}
+body.dark-mode .inner-box li.time {
+    background-color: #b6d3ff;
+    color: var(--bs-gray-700);
+}
+
+body.dark-mode .bookmark-btn {
+    background: var(--bs-gray-700);
+}
+body.dark-mode .bookmark-btn:hover {
+    background: var(--bs-gray-700);
+}
+body.dark-mode a:hover {
+    color: #b6d3ff;
+}
+body.dark-mode h1 a, 
+body.dark-mode h2 a, 
+body.dark-mode h3 a, 
+body.dark-mode h4 a, 
+body.dark-mode h5 a, 
+body.dark-mode h6 a, 
+{
+    color: var(--bs-white)!important;
+}
+body.dark-mode a:not([href]):not([class]) {
+    color: var(--bs-white);
+}
+body.dark-mode .default-tabs .tab-buttons li {
+    background: var(--bs-gray-800);
+}
+body.dark-mode .default-tabs .tab-buttons li.active-btn {
+    background-color: transparent; 
+}
+body.dark-mode .style-two {
+    background: var(--bs-gray-800);
+}
+body.dark-mode .location  {
+    color: var(--bs-white);
+}
+body.dark-mode .btn-style-three  {
+    color: var(--bs-gray-800);
+}
+body.dark-mode .main-header.header-style-two.fixed-header {
+    background-color: var(--bs-gray-900);
+}
+
+.form-switch .form-check-input-lg {
+    width: 2.5em;
+    height: 1.5em;
+    margin-top: 0px;
+}
+.form-switch .form-check-label-lg {
+    margin-top: 0.15em;
+    margin-left: 0.2em;
+}
+
+/* focus-visible 때문에 패딩 유지해야 함. */
+a {
+    padding: 6px;
+}
+
+a:focus-visible, 
+button:focus-visible, 
+input:focus-visible,
+select:focus-visible {
+    /* remove default focus style */
+    outline: solid 5px #C2DBFE!important;
+    border-radius:0.1em;
+    /* custom focus styles */
+    transition: all 100ms ease!important;
+}
+
+* {
+    transition: none!important;
+}
+
+.btn {
+    font-size: 1em;
+    font-weight: 700;
+}
+
+.form-group input {
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.form-group input[type=checkbox] {
+    width: 1em;
+    margin-right: .5em;
+}
+.form-group input[type=radio] {
+    width: 1em;
+    margin-right: .5em;
+}
+
+#big-help-title {
+    display: none;
+    min-height:120px;
+    border: solid 5px var(--bs-primary);
+    background-color: #e2ecff;
+    opacity: .9;
+}
+#big-help-title p {
+    margin-top: 24px;
+    font-size:48px;
+    line-height: 56px;
+    font-weight: 900;
+    color: #000;
+    padding-right:156px;
+
+}
+#big-help-title #close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size:48px;
+}
+
+.main-footer.auth {
+    margin-top: 128px;
+    width: 100%;
+    /*
+    position: fixed;
+    bottom: 0px;
+    */
+}
+
+/**
+ * 회원가입
+ */
+.register {
+}
+.register>div {
+    text-align: center; 
+}
+.register a {
+    padding: 72px; 
+    border-radius:10px;
+    font-size: 1.6em;
+}
+.register .user a.btn {
+    background-color: rgba(25,135,84, .4);
+    color: var(--bs-gray-900);
+}
+.register .company a.btn {
+    background-color: rgba(255,193,7, .3);
+    color: var(--bs-gray-900);
+}
+.join-process .ok em {
+    color: #fff;
+    background-color: rgba(13,110,253, 0.3);
+    font-weight: 900;
+}
+.join-process .on em {
+    color: #fff;
+    background-color: var(--bs-primary);
+    font-weight: 900;
+}
+.join-process .on span {
+    font-weight: 700;
+    color: var(--bs-dark);
+}
+.join-process em {
+    display: inline-block;
+    float: left;
+    margin: 0 auto;
+    color: #fff;
+    background-color: var(--bs-gray-500);
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    transform: translateY(4px);
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    padding-top: .45em;
+    margin-right: 8px;
+}
+.join-process span {
+    font-size: 0.8em;
+    color: var(--bs-gray-600);
+}
+
+.terms-wrap {
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+#user-resume .default-form .form-group select,
+#user-resume .default-form .form-group textarea,
+#user-resume .default-form .form-group input {
+    font-size: 0.8em; 
+}
+#user-resume .default-form .form-group textarea.remark {
+    min-height: 40px;
+    padding: 16px;
+}
+
+.dropify-wrapper .dropify-message p {
+    font-size: 0.5em;
+    line-height: 1.2em;
+}

@@ -1,0 +1,125 @@
+CRITICAL - 2022-07-26 23:38:27 --> Undefined property: App\Controllers\Auth::$database_model
+in APPPATH/Controllers/Auth.php on line 80.
+ 1 APPPATH/Controllers/Auth.php(80): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-26 23:38:47 --> Call to undefined method App\Models\DatabaseModel::getImapairmentAssistiveDevice()
+in APPPATH/Models/DatabaseModel.php on line 20.
+ 1 APPPATH/Controllers/Auth.php(79): App\Models\DatabaseModel->getImpairmentAll()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-26 23:40:38 --> Undefined array key "AssistiveDevice"
+in APPPATH/Models/DatabaseModel.php on line 22.
+ 1 APPPATH/Models/DatabaseModel.php(22): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Auth.php(79): App\Models\DatabaseModel->getImpairmentAll()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-26 23:42:20 --> Undefined array key "AssistiveDevice"
+in APPPATH/Models/DatabaseModel.php on line 22.
+ 1 APPPATH/Models/DatabaseModel.php(22): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Auth.php(79): App\Models\DatabaseModel->getImpairmentAll()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-26 23:44:22 --> Only the first byte will be assigned to the string offset
+in APPPATH/Models/DatabaseModel.php on line 113.
+ 1 APPPATH/Models/DatabaseModel.php(113): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Models/DatabaseModel.php(21): App\Models\DatabaseModel->getImpairmentType()
+ 3 APPPATH/Controllers/Auth.php(79): App\Models\DatabaseModel->getImpairmentAll()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-26 23:47:55 --> syntax error, unexpected token "=", expecting ")"
+in APPPATH/Controllers/Auth.php on line 95.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass()
+ 4 SYSTEMPATH/CodeIgniter.php(848): class_exists()
+ 5 SYSTEMPATH/CodeIgniter.php(455): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-26 23:55:39 --> Undefined variable $lot
+in APPPATH/Views/Auth/SignUpUserStep2.html on line 52.
+ 1 APPPATH/Views/Auth/SignUpUserStep2.html(52): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserStep2.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(99): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-26 23:56:26 --> Undefined variable $lot
+in APPPATH/Views/Auth/SignUpUserStep2.html on line 52.
+ 1 APPPATH/Views/Auth/SignUpUserStep2.html(52): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserStep2.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(99): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-26 23:57:13 --> Undefined variable $lot
+in APPPATH/Views/Auth/SignUpUserStep2.html on line 52.
+ 1 APPPATH/Views/Auth/SignUpUserStep2.html(52): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserStep2.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(99): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-26 23:57:40 --> Undefined variable $lot
+in APPPATH/Views/Auth/SignUpUserStep2.html on line 52.
+ 1 APPPATH/Views/Auth/SignUpUserStep2.html(52): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserStep2.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(99): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-26 23:58:19 --> Undefined array key "level0_title"
+in APPPATH/Views/Auth/SignUpUserStep2.html on line 53.
+ 1 APPPATH/Views/Auth/SignUpUserStep2.html(53): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserStep2.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(99): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-26 23:58:24 --> Undefined array key "level0_title"
+in APPPATH/Views/Auth/SignUpUserStep2.html on line 53.
+ 1 APPPATH/Views/Auth/SignUpUserStep2.html(53): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserStep2.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(99): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-26 23:59:29 --> Undefined array key "level0_title"
+in APPPATH/Views/Auth/SignUpUserStep2.html on line 53.
+ 1 APPPATH/Views/Auth/SignUpUserStep2.html(53): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserStep2.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(99): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()

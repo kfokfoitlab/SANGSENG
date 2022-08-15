@@ -1,0 +1,87 @@
+<?php
+require_once(__DIR__."/../Sidebar.html");
+?>
+
+<section class="user-dashboard">
+  <div class="dashboard-outer">
+    <div class="upper-title-box">
+      <h3 class="" title="구직 관리"><a>구직 관리</a></h3>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Ls widget -->
+        <div class="ls-widget">
+          <div class="tabs-box">
+            <?php
+            if(!is_array($data) || count($data) == 0){
+            ?>
+            <div class="widget-title">
+              <h4>현재 구직 상태 : 
+                <span class="badge bg-dark p-1">OFF</span>
+              </h4>
+            </div>
+
+            <div class="widget-content pb-4">
+              <h4>구직 내용</h4>
+              <p class="my-4">현재 구직중 상태가 아닙니다.</p>
+              <a href="/<?=_CONTROLLER?>/Create/<?=@$item["uuid"]?>" class="theme-btn btn-style-one" tabindex=200>구직 등록 하기</a>
+            </div>
+            <?php
+            }
+            else
+            {
+            ?>
+            <div class="widget-title">
+              <h4>현재 구직 상태 : 
+                <span class="badge bg-primary p-1">ON</span>
+              </h4>
+            </div>
+
+            <div class="widget-content pb-4">
+              <h4>구직 내용</h4>
+              <div class="table-outer mt-4">
+                <table class="default-table manage-job-table">
+                  <thead>
+                    <tr>
+                      <th>구직 제목</th>
+                      <th class="text-center" width="56">조회수</th>
+                      <th class="text-center" width="56">관심등록수</th>
+                      <th class="text-center" width="72"></th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="job-block">
+                          <div class="inner-box">
+                            <div class="content ps-0">
+                              <h4><a tabindex=200><?=$data["title"]?></a></h4>
+                              <p class="small text-muted ps-2"> <?=$data["inline_pr"]?> </p>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="text-center"><?=$data["view_count"]?></td>
+                      <td class="text-center"><?=$data["favorites"]?></td>
+                      <td>
+                        <a href="/<?=_CONTROLLER?>/Detail/<?=@$item["uuid"]?>" class="theme-btn btn-style-three" tabindex=200>상세보기</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="text-center">
+                <a href="/<?=_CONTROLLER?>/DeleteSubmit/<?=@$data["idx"]?>" class="btn btn-lg btn-dark" tabindex=200 onclick="return confirm('구직 활동을 중단하시겠습니까? 현재 활동은 삭제되고 더이상 노출되지 않습니다.')">구직 종료하기</a>
+              <div>
+
+            </div>
+            <?php
+            }?>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

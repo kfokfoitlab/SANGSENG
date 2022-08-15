@@ -1,0 +1,102 @@
+<?php
+helper("html");
+echo doctype("html5");
+?>
+
+<head>
+  <title>장애인취업포털</title>
+  <meta charset='utf8' />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://kfo.ai/favicon.ico">
+
+  <link href="/assets/dist/superio/css/bootstrap.css" rel="stylesheet">
+  <link href="/assets/dist/superio/css/style.css" rel="stylesheet">
+  <link href="/assets/dist/superio/css/responsive.css" rel="stylesheet">
+  <link href="/assets/dist/dropify-0.2.2/css/dropify.min.css" rel="stylesheet">
+  <link href="/assets/css/style.css" rel="stylesheet">
+
+  <script src="/assets/dist/superio/js/jquery.js"></script>
+  <script src="/assets/dist/superio/js/popper.min.js"></script>
+  <script src="/assets/dist/superio/js/chosen.min.js"></script>
+  <script src="/assets/dist/superio/js/bootstrap.min.js"></script>
+  <script src="/assets/dist/superio/js/jquery.fancybox.js"></script>
+  <script src="/assets/dist/superio/js/jquery.modal.min.js"></script>
+  <script src="/assets/dist/dropify-0.2.2/js/dropify.min.js"></script>
+
+<script>
+  const _CONTROLLER = '<?=@_CONTROLLER?>';
+  const _METHOD = '<?=@_METHOD?>';
+</script>
+
+
+
+<body data-anm=".anm">
+  <div class="page-wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <div class="fixed-top d-none d-xl-block" id="top_guide">
+      <div class="auto-container">
+        <ul class="d-flex justify-content-center list-unstyled py-1">
+          <li class=""><button class="btn py-0 action-focus-first" tabindex=1>본문으로 이동</button></li>
+          <li class="border mx-4" style="width:1px"></li>
+          <li class=""><button class="btn py-0 action-font-size-up" tabindex=2><i class="fas fa-plus text-primary small"></i> 더크게</button></li>
+          <li class=""><button class="btn py-0 action-font-size-down" tabindex=3><i class="fas fa-minus text-primary small"></i> 더작게</button></li>
+          <li class=""><button class="btn border-primary rounded-pill py-0 action-font-size-origin" tabindex=4>원래대로</button></li>
+          <li class="border mx-4" style="width:1px"></li>
+          <li class=""><button class="btn py-0 action-change-bg-color" tabindex=5>배경색바꾸기</button></li>
+          <li class="border mx-4" style="width:1px"></li>
+          <li>
+            <div class="form-check form-switch">
+              <input class="form-check-input form-check-input-lg" type="checkbox" role="switch" id="show-big-text" value="1" tabindex=6 title="글자크게보기">
+              <label class="form-check-label form-check-label-lg" for="show-big-text">글자크게보기</label>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+    <!-- Main Header-->
+    <header class="main-header header-style-two" style="background-color: #22218c">
+      <div class="auto-container">
+        <!-- Main box -->
+        <div class="main-box">
+          <!--Nav Outer -->
+          <div class="nav-outer">
+            <div class="logo-box">
+              <!-- brand -->
+              <div class="logo"><a href="/" tabindex=10><img src="https://kfo.ai/images/top/top_06_r_17_17.png" alt="한국직업개발원로고" title="한국직업개발원로고" style="height: 56px;"></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Header -->
+      <div class="mobile-header">
+        <div class="logo"><a href="index.html"><img src="https://kfo.ai/images/top/top_06_r_17_17.png" alt="" title=""></a></div>
+
+        <!--Nav Box-->
+        <div class="nav-outer clearfix">
+
+          <!-- Login/Register -->
+          <!--div class="outer-box">
+            <div class="login-box">
+              <a href="login-popup.html" class="call-modal"><span class="icon-user"></span></a>
+            </div>
+
+            <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><span class="flaticon-menu-1"></span></a>
+          </div -->
+        </div>
+      </div>
+
+      <!-- Mobile Nav -->
+      <div id="nav-mobile"></div>
+    </header>
+    <!--End Main Header -->

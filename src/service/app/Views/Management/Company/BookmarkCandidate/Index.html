@@ -1,0 +1,93 @@
+<?php
+require_once(__DIR__."/../Sidebar.html");
+?>
+
+<section class="user-dashboard">
+  <div class="dashboard-outer">
+    <div class="upper-title-box">
+      <h3 class="" title="관심 인재"><a>관심 인재</a></h3>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Ls widget -->
+        <div class="ls-widget">
+          <div class="tabs-box">
+            <div class="widget-content py-4">
+
+              <div class="row">
+    <?php
+    if(is_array($data) && count($data) > 0){
+      foreach($data as $item){
+    ?>
+                <!-- Candidate block Four -->
+                <div class="candidate-block-four col-lg-4 col-md-6 col-sm-12">
+                  <div class="inner-box">
+                    <ul class="job-other-info">
+                      <li class="green"><a><?=$item["employment_type_title"]?></a></li>
+                    </ul>
+                    <span class="thumb"><img src="/Image/<?=$item["profile_img_uuid"]?>" alt="프로필 사진"></span>
+                    <h3 class="name"><a href="/Person/Detail/<?=$item["user_uuid"]?>" target="_blank" title="홍길동"><?=$item["title"]?></a></h3>
+                    <small class="cat mt-1"><a><?=$item["profession_title"]?></a></small>
+                    <ul class="job-info mt-3">
+                      <li><a><span class="icon flaticon-map-locator"></span> <?=$item["address_short"]?></a></li>
+                      <li><span class="icon la la-file-invoice"></span> <a><?=$item["career_title"]?></a></li>
+                    </ul>
+                    <a href="/Person/Detail/<?=$item["user_uuid"]?>" target="_blank" class="theme-btn btn-style-three" tabindex=110>프로필 확인</a>
+                  </div>
+                </div>
+    <?php
+      }
+    }
+    ?>
+
+              </div>
+
+              <nav class="ls-pagination">
+              <!-- Pagination {{{ -->
+                <ul>
+                  <li class="prev">
+                    <a href="javascript:void(0)" 
+                      class="pagination" 
+                      data-page="<?=($pagination["now_page"] > 1)?($pagination["now_page"]-1) : 1?>" 
+                      title="이전페이지"
+                    >
+                      <i class="fa fa-arrow-left"></i>
+                    </a>
+                  </li>
+                <?php
+                for($i=0; $i<$pagination["page_count"]; $i++){
+                  if($i == ($pagination["now_page"] - 1)){
+                ?>
+                  <li><a href="javascript:void(0)" class="current-page pagination" title="<?=($i+1)?>페이지" data-page="<?=($i+1)?>"><?=($i+1)?></a></li>
+                <?php
+                  }
+                  else {
+                ?>
+                  <li><a href="javascript:void(0)" class="pagination" title="<?=($i+1)?>페이지" data-page="<?=$i+1?>"><?=$i+1?></a></li>
+                <?php
+                  }
+                ?>
+                <?php
+                }
+                ?>
+                  <li class="next">
+                    <a href="javascript:void(0)" 
+                      class="pagination" 
+                      data-page="<?=($pagination["now_page"] < $pagination["page_count"])?($pagination["now_page"]-1) : $pagination["page_count"]?>" 
+                      title="다음페이지"
+                    >
+                      <i class="fa fa-arrow-right"></i>
+                    </a>
+                  </li>
+                </ul>
+              <!-- }}} -->
+              </nav>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

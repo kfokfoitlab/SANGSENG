@@ -1,0 +1,214 @@
+<?php
+helper("html");
+echo doctype("html5");
+?>
+
+<head>
+  <title>장애인취업포털</title>
+  <meta charset='utf8' />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://kfo.ai/favicon.ico">
+
+  <link href="/assets/dist/superio/css/bootstrap.css" rel="stylesheet">
+  <link href="/assets/dist/superio/css/style.css" rel="stylesheet">
+  <link href="/assets/dist/superio/css/responsive.css" rel="stylesheet">
+  <link href="/assets/dist/dropify-0.2.2/css/dropify.min.css" rel="stylesheet">
+  <link href="/assets/css/style.css" rel="stylesheet">
+
+  <script src="/assets/dist/superio/js/jquery.js"></script>
+  <script src="/assets/dist/superio/js/popper.min.js"></script>
+  <script src="/assets/dist/superio/js/chosen.min.js"></script>
+  <script src="/assets/dist/superio/js/bootstrap.min.js"></script>
+  <script src="/assets/dist/superio/js/jquery.fancybox.js"></script>
+  <script src="/assets/dist/superio/js/jquery.modal.min.js"></script>
+
+  <script src="/assets/dist/tinymce-6.1.0/tinymce.min.js"></script>
+  <script src="/assets/dist/dropify-0.2.2/js/dropify.min.js"></script>
+
+<script>
+  const _CONTROLLER = '<?=@_CONTROLLER?>';
+  const _METHOD = '<?=@_METHOD?>';
+</script>
+
+
+<body data-anm=".anm">
+  <div class="page-wrapper dashboard">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <div class="fixed-top d-none d-xl-block border-bottom" id="top_guide">
+      <div class="auto-container">
+        <ul class="d-flex justify-content-center list-unstyled py-1">
+          <li class=""><button class="btn py-0 action-focus-first" tabindex=1>본문으로 이동</button></li>
+          <li class="border mx-4" style="width:1px"></li>
+          <li class=""><button class="btn py-0 action-font-size-up" tabindex=2><i class="fas fa-plus text-primary small"></i> 더크게</button></li>
+          <li class=""><button class="btn py-0 action-font-size-down" tabindex=3><i class="fas fa-minus text-primary small"></i> 더작게</button></li>
+          <li class=""><button class="btn border-primary rounded-pill py-0 action-font-size-origin" tabindex=4>원래대로</button></li>
+          <li class="border mx-4" style="width:1px"></li>
+          <li class=""><button class="btn py-0 action-change-bg-color" tabindex=5>배경색바꾸기</button></li>
+          <li class="border mx-4" style="width:1px"></li>
+          <li>
+            <div class="form-check form-switch">
+              <input class="form-check-input form-check-input-lg" type="checkbox" role="switch" id="show-big-text" value="1" tabindex=6 title="글자크게보기">
+              <label class="form-check-label form-check-label-lg" for="show-big-text">글자크게보기</label>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+    <div class="header-span"></div>
+
+    <!-- Main Header-->
+    <header class="main-header alternate">
+      <div class="auto-container">
+        <!-- Main box -->
+        <div class="main-box">
+          <!--Nav Outer -->
+          <div class="nav-outer w-100">
+            <div class="logo-box">
+              <!-- brand -->
+              <div class="logo"><a href="/" tabindex=10><img src="https://kfo.ai/images/top/top_06_r_17_17.png" alt="한국직업개발원로고" title="한국직업개발원로고"></a></div>
+            </div>
+
+            <nav class="nav main-menu ms-auto">
+              <ul class="navigation" id="navbar">
+                <li class="">
+                  <a href="/Recruit" tabindex=11> <span>채용</span> </a>
+                </li>
+
+                <li class="">
+                  <a href="/Person" tabindex=12> <span>인재</span> </a>
+                </li>
+
+                <li class="">
+                  <a href="/Company" tabindex=13> <span>기업</span> </a>
+                </li>
+
+                <!-- Only for Mobile View -->
+                <li class="mm-add-listing">
+                  <a href="#" class="theme-btn btn-style-one">구직 등록</a>
+                  <span>
+                    <span class="contact-info">
+                      <span class="phone-num"><span>한국직업개발원</span><a href="tel:07043735030">070.4373.5030~1</a></span>
+                      <span class="address">서울특별시 성동구 상원12길 30<br>서울숲동진 IT타워 11층</span>
+                      <a href="mailto:kfosos@kfo.or.kr" class="email">kfosos@kfo.or.kr</a>
+                    </span>
+                    <span class="social-links">
+                      <a href="#"><span class="fab fa-facebook-f"></span></a>
+                      <a href="#"><span class="fab fa-twitter"></span></a>
+                      <a href="#"><span class="fab fa-instagram"></span></a>
+                      <a href="#"><span class="fab fa-linkedin-in"></span></a>
+                    </span>
+                  </span>
+                </li>
+              </ul>
+            </nav>
+            <!-- Main Menu End-->
+          </div>
+
+          <div class="outer-box">
+            <!-- Login/Register -->
+            <div class="btn-box">
+            <?php
+            if(@$_SESSION["login"] != "success"){
+            ?>
+              <a href="/Auth/SignIn" class="theme-btn btn-style-six" tabindex=15>로그인 / 회원가입</a>
+            <?php
+            } else {
+              if($_SESSION["login_info"]["type"] == "user"){
+            ?>
+              <div class="dropdown dashboard-option">
+                <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
+                <?php
+                if(@$_SESSION["login_info"]["profile_img_uuid"]){
+                ?>
+                  <img src="/Image/<?=@$_SESSION["login_info"]["profile_img_uuid"]?>" alt="avatar" class="thumb">
+                <?php
+                } else {
+                ?>
+                  <img src="/assets/images/resource/company-6.png" alt="avatar" class="thumb">
+                <?php
+                }
+                ?>
+                  <span class="name"><?=$_SESSION["login_info"]["name"]?> <span class='small'>님</span>
+                </a>
+                <ul class="dropdown-menu p-2 ps-0" style="">
+                  <li><a href="/Management/User/Profile"><i class="la la-user"></i>내 정보</a></li>
+                  <li><a href="/Management/User/Application"><i class="la la-paper-plane"></i>입사 지원 관리</a></li>
+                  <li><a href="/Management/User/ManageJob"><i class="la la-briefcase"></i>구직 관리</a></li>
+                  <li><a href="/Management/User/Resume"><i class="la la-file-invoice"></i>내 이력서</a></li>
+                  <li><a href="/Management/User/BookmarkApplication"><i class="la la-bookmark-o"></i>관심 채용</a></li>
+                  <li><a href="/Management/User/BookmarkCompany"><i class="la la-user-tie"></i>관심 기업</a></li>
+                  <li><a href="/Management/User/Chat"><i class="la la-comment-o"></i>메세지 관리</a></li>
+                  <li><a href="/Auth/SignOut"><i class="la la-sign-out"></i>로그아웃</a></li>
+                </ul>
+              </div> 
+            <?php
+              }
+              else if($_SESSION["login_info"]["type"] == "company"){
+              ?>
+              <div class="dropdown dashboard-option">
+                <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
+                <?php
+                if(@$_SESSION["login_info"]["profile_img_uuid"]){
+                ?>
+                  <img src="/Image/<?=@$_SESSION["login_info"]["profile_img_uuid"]?>" alt="avatar" class="thumb">
+                <?php
+                } else {
+                ?>
+                  <img src="/assets/images/resource/company-6.png" alt="avatar" class="thumb">
+                <?php
+                }
+                ?>
+                  <span class="name"><?=$_SESSION["login_info"]["name"]?> <span class='small'>님</span>
+                </a>
+                <ul class="dropdown-menu p-2 ps-0" style="">
+                  <li><a href="/Management/Company/Profile"><i class="la la-user-tie"></i>기업 프로필</a></li>
+                  <li><a href="/Management/Company/PublicSettings"><i class="la la-file-invoice"></i>기업 공개 관리</a></li>
+                  <li><a href="/Management/Company/Application"><i class="la la-paper-plane"></i> 채용 관리</a></li>
+                  <li><a href="/Management/Company/BookmarkCandidate"><i class="la la-bookmark-o"></i>관심 인재</a></li>
+                  <li><a href="/Management/Company/Chat"><i class="la la-comment-o"></i>메세지 관리</a></li>
+                  <li><a href="/Auth/SignOut"><i class="la la-sign-out"></i>로그아웃</a></li>
+                </ul>
+              </div> 
+              <?php
+              }
+            }
+            ?>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Header -->
+      <div class="mobile-header">
+        <div class="logo"><a href="index.html"><img src="https://kfo.ai/images/top/top_06_r_17_17.png" alt="" title=""></a></div>
+
+        <!--Nav Box-->
+        <div class="nav-outer clearfix">
+
+          <div class="outer-box">
+            <!-- Login/Register -->
+            <div class="login-box">
+              <a href="login-popup.html" class="call-modal"><span class="icon-user"></span></a>
+            </div>
+
+            <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><span class="flaticon-menu-1"></span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Nav -->
+      <div id="nav-mobile"></div>
+    </header>
+    <!--End Main Header -->
+
+    <div style="height: 64px;"></div>

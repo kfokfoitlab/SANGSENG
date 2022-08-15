@@ -1,0 +1,809 @@
+CRITICAL - 2022-08-09 00:01:53 --> Trying to access array offset on value of type null
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 32.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(32): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Models/CompanyModel.php(100): App\Models\dbClasses\dbQueryClass->simple_query()
+ 3 APPPATH/Controllers/Company.php(41): App\Models\CompanyModel->getAllList()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:02:15 --> Trying to access array offset on value of type null
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 32.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(32): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Models/CompanyModel.php(100): App\Models\dbClasses\dbQueryClass->simple_query()
+ 3 APPPATH/Controllers/Company.php(41): App\Models\CompanyModel->getAllList()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:02:31 --> Undefined property: App\Models\CompanyModel::$rodb1
+in APPPATH/Models/CompanyModel.php on line 100.
+ 1 APPPATH/Models/CompanyModel.php(100): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Company.php(41): App\Models\CompanyModel->getAllList()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:02:36 --> Trying to access array offset on value of type null
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 32.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(32): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Models/CompanyModel.php(100): App\Models\dbClasses\dbQueryClass->simple_query()
+ 3 APPPATH/Controllers/Company.php(41): App\Models\CompanyModel->getAllList()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:02:52 --> Trying to access array offset on value of type null
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 32.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(32): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Models/CompanyModel.php(100): App\Models\dbClasses\dbQueryClass->simple_query()
+ 3 APPPATH/Controllers/Company.php(41): App\Models\CompanyModel->getAllList()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:12:35 --> Undefined array key "bookmark"
+in APPPATH/Views/Recruit/Index.html on line 173.
+ 1 APPPATH/Views/Recruit/Index.html(173): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Recruit/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Recruit.php(64): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:17:26 --> Unclosed '{' on line 146
+in APPPATH/Views/Recruit/Index.html on line 259.
+ 1 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Recruit.php(64): view()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:18:03 --> Undefined array key "application_uuid"
+in APPPATH/Controllers/Recruit.php on line 160.
+ 1 APPPATH/Controllers/Recruit.php(160): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:18:30 --> Undefined array key "application_uuid"
+in APPPATH/Controllers/Recruit.php on line 160.
+ 1 APPPATH/Controllers/Recruit.php(160): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:29:54 --> Undefined variable $item
+in APPPATH/Views/Person/Detail.html on line 29.
+ 1 APPPATH/Views/Person/Detail.html(29): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Person/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Person.php(89): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:31:58 --> Undefined variable $item
+in APPPATH/Views/Person/Detail.html on line 29.
+ 1 APPPATH/Views/Person/Detail.html(29): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Person/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Person.php(89): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:32:00 --> Undefined variable $item
+in APPPATH/Views/Person/Detail.html on line 29.
+ 1 APPPATH/Views/Person/Detail.html(29): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Person/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Person.php(89): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:32:01 --> Undefined variable $item
+in APPPATH/Views/Person/Detail.html on line 29.
+ 1 APPPATH/Views/Person/Detail.html(29): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Person/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Person.php(89): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:32:13 --> Undefined array key "bookmark"
+in APPPATH/Views/Person/Detail.html on line 29.
+ 1 APPPATH/Views/Person/Detail.html(29): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Person/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Person.php(89): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:33:00 --> Trying to access array offset on value of type null
+in APPPATH/Models/Management/User/ManageJobModel.php on line 204.
+ 1 APPPATH/Models/Management/User/ManageJobModel.php(204): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Person.php(70): App\Models\Management\User\ManageJobModel->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:33:40 --> Trying to access array offset on value of type null
+in APPPATH/Models/Management/User/ManageJobModel.php on line 204.
+ 1 APPPATH/Models/Management/User/ManageJobModel.php(204): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Person.php(70): App\Models\Management\User\ManageJobModel->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:34:18 --> Undefined array key "resume_uuid"
+in APPPATH/Models/Management/User/ManageJobModel.php on line 225.
+ 1 APPPATH/Models/Management/User/ManageJobModel.php(225): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Person.php(70): App\Models\Management\User\ManageJobModel->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Detail()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:35:23 --> Undefined array key "application_uuid"
+in APPPATH/Controllers/Recruit.php on line 160.
+ 1 APPPATH/Controllers/Recruit.php(160): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:37:24 --> Undefined array key "application_uuid"
+in APPPATH/Controllers/Recruit.php on line 160.
+ 1 APPPATH/Controllers/Recruit.php(160): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:38:55 --> Undefined array key "application_uuid"
+in APPPATH/Controllers/Recruit.php on line 160.
+ 1 APPPATH/Controllers/Recruit.php(160): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:39:12 --> Undefined array key "application_uuid"
+in APPPATH/Controllers/Recruit.php on line 160.
+ 1 APPPATH/Controllers/Recruit.php(160): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 00:39:48 --> Undefined array key "person_uuid"
+in APPPATH/Controllers/Person.php on line 98.
+ 1 APPPATH/Controllers/Person.php(98): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 01:03:12 --> Undefined array key "resume_uuid"
+in APPPATH/Models/Management/User/ManageJobModel.php on line 225.
+ 1 APPPATH/Models/Management/User/ManageJobModel.php(225): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/ManageJob.php(56): App\Models\Management\User\ManageJobModel->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->Detail()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 01:03:15 --> Undefined array key "resume_uuid"
+in APPPATH/Models/Management/User/ManageJobModel.php on line 225.
+ 1 APPPATH/Models/Management/User/ManageJobModel.php(225): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/ManageJob.php(56): App\Models\Management\User\ManageJobModel->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->Detail()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 01:03:20 --> Undefined array key "resume_uuid"
+in APPPATH/Models/Management/User/ManageJobModel.php on line 225.
+ 1 APPPATH/Models/Management/User/ManageJobModel.php(225): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/ManageJob.php(56): App\Models\Management\User\ManageJobModel->Detail()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->Detail()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:28:47 --> Undefined array key "login_info"
+in APPPATH/Views/Recruit/Detail.html on line 31.
+ 1 APPPATH/Views/Recruit/Detail.html(31): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Recruit/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Recruit.php(84): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:29:38 --> Undefined variable $item
+in APPPATH/Views/Recruit/Detail.html on line 29.
+ 1 APPPATH/Views/Recruit/Detail.html(29): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Recruit/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Recruit.php(84): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:29:46 --> Undefined array key "bookmark"
+in APPPATH/Views/Recruit/Detail.html on line 29.
+ 1 APPPATH/Views/Recruit/Detail.html(29): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Recruit/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Recruit.php(84): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:31:11 --> Undefined array key "bookmark"
+in APPPATH/Views/Recruit/Detail.html on line 29.
+ 1 APPPATH/Views/Recruit/Detail.html(29): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Recruit/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Recruit.php(84): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:31:32 --> Undefined array key "bookmark"
+in APPPATH/Views/Recruit/Detail.html on line 29.
+ 1 APPPATH/Views/Recruit/Detail.html(29): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Recruit/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Recruit.php(84): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:31:44 --> Trying to access array offset on value of type null
+in APPPATH/Models/Management/Company/ApplicationModel.php on line 422.
+ 1 APPPATH/Models/Management/Company/ApplicationModel.php(422): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Recruit.php(72): App\Models\Management\Company\ApplicationModel->DetailRecruit()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Recruit->Detail()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:33:38 --> Undefined array key "bookmark"
+in APPPATH/Views/Company/Detail.html on line 27.
+ 1 APPPATH/Views/Company/Detail.html(27): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Company/Detail.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Company.php(80): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Detail()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:35:01 --> Undefined array key "company_uuid"
+in APPPATH/Controllers/Company.php on line 89.
+ 1 APPPATH/Controllers/Company.php(89): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:35:03 --> Undefined array key "company_uuid"
+in APPPATH/Controllers/Company.php on line 89.
+ 1 APPPATH/Controllers/Company.php(89): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:35:08 --> Undefined array key "company_uuid"
+in APPPATH/Controllers/Company.php on line 89.
+ 1 APPPATH/Controllers/Company.php(89): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Company->Bookmark()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:38:52 --> Invalid file: Management/User/BookmarkApplication/Index.html
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 33.
+ 1 SYSTEMPATH/View/View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Management/User/BookmarkApplication.php(49): view()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkApplication->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:43:42 --> Undefined array key "address_short"
+in APPPATH/Views/Management/User/BookmarkApplication/Index.html on line 35.
+ 1 APPPATH/Views/Management/User/BookmarkApplication/Index.html(35): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/BookmarkApplication/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/BookmarkApplication.php(49): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkApplication->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:44:45 --> Undefined array key "address_short"
+in APPPATH/Views/Management/User/BookmarkApplication/Index.html on line 36.
+ 1 APPPATH/Views/Management/User/BookmarkApplication/Index.html(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/BookmarkApplication/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/BookmarkApplication.php(49): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkApplication->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:45:35 --> Undefined variable $pagination
+in APPPATH/Views/Management/User/BookmarkApplication/Index.html on line 93.
+ 1 APPPATH/Views/Management/User/BookmarkApplication/Index.html(93): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/BookmarkApplication/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/BookmarkApplication.php(49): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkApplication->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:45:58 --> Undefined property: App\Controllers\Management\User\BookmarkApplication::$item_per_page
+in APPPATH/Controllers/Management/User/BookmarkApplication.php on line 47.
+ 1 APPPATH/Controllers/Management/User/BookmarkApplication.php(47): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkApplication->Index()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:46:11 --> Call to undefined method App\Models\Management\User\ApplicationModel::getAllList()
+in APPPATH/Controllers/Management/User/BookmarkApplication.php on line 62.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkApplication->Index()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:46:33 --> Undefined array key "count"
+in APPPATH/Controllers/Management/User/BookmarkApplication.php on line 67.
+ 1 APPPATH/Controllers/Management/User/BookmarkApplication.php(67): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkApplication->Index()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:46:52 --> Call to undefined method App\Models\Management\User\ApplicationModel::getAllList()
+in APPPATH/Controllers/Management/User/BookmarkApplication.php on line 60.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkApplication->Index()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:47:00 --> Cannot access offset of type string on string
+in APPPATH/Views/Management/User/BookmarkApplication/Index.html on line 28.
+ 1 SYSTEMPATH/View/View.php(213): include()
+ 2 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 4 APPPATH/Controllers/Management/User/BookmarkApplication.php(77): view()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkApplication->Index()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:48:45 --> Call to undefined method App\Models\Management\Company\ApplicationModel::getBookmarkAllList()
+in APPPATH/Controllers/Management/User/BookmarkApplication.php on line 60.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkApplication->Index()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:49:14 --> Required parameter $user_uuid follows optional parameter $search_query
+in APPPATH/Models/Management/Company/ApplicationModel.php on line 680.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(284): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(284): include_once()
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 4 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 5 APPPATH/Controllers/Management/User/BookmarkApplication.php(33): CodeIgniter\Autoloader\Autoloader->loadClass()
+ 6 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Management\User\BookmarkApplication->__construct()
+ 7 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:55:54 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= t2.application_uuid
+            where 1 and t2.user_uuid = 'e0c67433-9bbf-459f' at line 8
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/dbClasses/dbQueryClass.php(30): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Models/Management/Company/ApplicationModel.php(719): App\Models\dbClasses\dbQueryClass->simple_query()
+ 4 APPPATH/Controllers/Management/User/BookmarkApplication.php(54): App\Models\Management\Company\ApplicationModel->getBookmarkAllList()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkApplication->Index()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:56:10 --> Unknown column 't2.user_uuid' in 'where clause'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/dbClasses/dbQueryClass.php(30): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Models/Management/Company/ApplicationModel.php(719): App\Models\dbClasses\dbQueryClass->simple_query()
+ 4 APPPATH/Controllers/Management/User/BookmarkApplication.php(54): App\Models\Management\Company\ApplicationModel->getBookmarkAllList()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkApplication->Index()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:56:32 --> Unknown column 't2.user_uuid' in 'where clause'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/Company/ApplicationModel.php(775): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Controllers/Management/User/BookmarkApplication.php(54): App\Models\Management\Company\ApplicationModel->getBookmarkAllList()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkApplication->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:57:08 --> Unknown column 't2.user_uuid' in 'where clause'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/Company/ApplicationModel.php(776): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Controllers/Management/User/BookmarkApplication.php(54): App\Models\Management\Company\ApplicationModel->getBookmarkAllList()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkApplication->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:57:42 --> Unknown column 'application.company_uuid' in 'where clause'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/Company/ApplicationModel.php(779): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Controllers/Management/User/BookmarkApplication.php(54): App\Models\Management\Company\ApplicationModel->getBookmarkAllList()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkApplication->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 04:58:11 --> Column 'idx' in order clause is ambiguous
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/Company/ApplicationModel.php(779): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Controllers/Management/User/BookmarkApplication.php(54): App\Models\Management\Company\ApplicationModel->getBookmarkAllList()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkApplication->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 05:02:31 --> Undefined array key "title"
+in APPPATH/Models/CompanyModel.php on line 231.
+ 1 APPPATH/Models/CompanyModel.php(231): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/BookmarkCompany.php(48): App\Models\CompanyModel->getBookmarkAllList()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkCompany->Index()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 05:05:18 --> Required parameter $user_uuid follows optional parameter $search_query
+in APPPATH/Models/CompanyModel.php on line 219.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(284): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(284): include_once()
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 4 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 5 APPPATH/Controllers/Management/User/BookmarkCompany.php(28): CodeIgniter\Autoloader\Autoloader->loadClass()
+ 6 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Management\User\BookmarkCompany->__construct()
+ 7 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 05:05:40 --> Undefined array key "company_img_uuid"
+in APPPATH/Views/Management/User/BookmarkCompany/Index.html on line 28.
+ 1 APPPATH/Views/Management/User/BookmarkCompany/Index.html(28): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/BookmarkCompany/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/BookmarkCompany.php(67): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\BookmarkCompany->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 05:12:42 --> Undefined array key "title"
+in APPPATH/Models/Management/User/ManageJobModel.php on line 336.
+ 1 APPPATH/Models/Management/User/ManageJobModel.php(336): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/Company/BookmarkCandidate.php(53): App\Models\Management\User\ManageJobModel->getBookmarkAllList()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\BookmarkCandidate->Index()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 05:13:04 --> Invalid file: Management/Company/BookmarkCandidate/Index.html
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 33.
+ 1 SYSTEMPATH/View/View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Management/Company/BookmarkCandidate.php(72): view()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\BookmarkCandidate->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 05:14:10 --> Undefined array key "company_uuid"
+in APPPATH/Views/Management/Company/BookmarkCandidate/Index.html on line 29.
+ 1 APPPATH/Views/Management/Company/BookmarkCandidate/Index.html(29): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/Company/BookmarkCandidate/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/Company/BookmarkCandidate.php(72): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\BookmarkCandidate->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 05:14:48 --> Undefined array key "company_uuid"
+in APPPATH/Views/Management/Company/BookmarkCandidate/Index.html on line 29.
+ 1 APPPATH/Views/Management/Company/BookmarkCandidate/Index.html(29): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/Company/BookmarkCandidate/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/Company/BookmarkCandidate.php(72): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\BookmarkCandidate->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 20:06:05 --> Class "App\Controllers\Management\Company\Model" not found
+in APPPATH/Controllers/Management/Company/Chat.php on line 22.
+ 1 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Management\Company\Chat->__construct()
+ 2 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 20:07:11 --> Class "App\Controllers\Management\Company\Model" not found
+in APPPATH/Controllers/Management/Company/Chat.php on line 22.
+ 1 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Management\Company\Chat->__construct()
+ 2 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 20:07:33 --> Undefined variable $data
+in APPPATH/Controllers/Management/Company/Chat.php on line 28.
+ 1 APPPATH/Controllers/Management/Company/Chat.php(28): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Chat->Index()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 20:07:44 --> Undefined variable $data
+in APPPATH/Controllers/Management/Company/Chat.php on line 28.
+ 1 APPPATH/Controllers/Management/Company/Chat.php(28): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Chat->Index()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 20:08:54 --> require_once(/var/www/html/app/Views/Management/Company/Chat/Sidebar.html): Failed to open stream: No such file or directory
+in APPPATH/Views/Management/Company/Chat/Index.html on line 2.
+ 1 APPPATH/Views/Management/Company/Chat/Index.html(2): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Views/Management/Company/Chat/Index.html(2): require_once()
+ 3 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/Company/Chat/Index.html')
+ 4 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 6 APPPATH/Controllers/Management/Company/Chat.php(28): view()
+ 7 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Chat->Index()
+ 8 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 20:09:30 --> require_once(/var/www/html/app/Views/Management/Company/Chat/Sidebar.html): Failed to open stream: No such file or directory
+in APPPATH/Views/Management/Company/Chat/Index.html on line 2.
+ 1 APPPATH/Views/Management/Company/Chat/Index.html(2): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Views/Management/Company/Chat/Index.html(2): require_once()
+ 3 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/Company/Chat/Index.html')
+ 4 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 6 APPPATH/Controllers/Management/Company/Chat.php(31): view()
+ 7 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Chat->Index()
+ 8 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 20:13:41 --> syntax error, unexpected token ".", expecting "," or ";"
+in APPPATH/Controllers/Management/Company/Chat.php on line 5.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass()
+ 4 SYSTEMPATH/CodeIgniter.php(848): class_exists()
+ 5 SYSTEMPATH/CodeIgniter.php(455): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 20:13:49 --> Class "App\Models\ChatModel" not found
+in APPPATH/Controllers/Management/Company/Chat.php on line 22.
+ 1 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Management\Company\Chat->__construct()
+ 2 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 20:15:31 --> Class "App\Models\Pusher\Pusher" not found
+in APPPATH/Models/ChatModel.php on line 14.
+ 1 APPPATH/Controllers/Management/Company/Chat.php(29): App\Models\ChatModel->Test()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Chat->Index()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 20:42:00 --> Too few arguments to function App\Models\ChatModel::Send(), 0 passed in /var/www/html/app/Controllers/Management/Company/Chat.php on line 45 and exactly 2 expected
+in APPPATH/Models/ChatModel.php on line 8.
+ 1 APPPATH/Controllers/Management/Company/Chat.php(45): App\Models\ChatModel->Send()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Chat->Send()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:00:00 --> syntax error, unexpected token "(array)", expecting variable
+in APPPATH/Models/ChatModel.php on line 8.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 3 APPPATH/Controllers/Management/Company/Chat.php(22): CodeIgniter\Autoloader\Autoloader->loadClass()
+ 4 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Management\Company\Chat->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:00:06 --> Undefined constant "App\Models\keys"
+in APPPATH/Models/ChatModel.php on line 12.
+ 1 APPPATH/Controllers/Management/Company/Chat.php(22): App\Models\ChatModel->__construct()
+ 2 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Management\Company\Chat->__construct()
+ 3 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:00:17 --> Undefined constant "App\Models\keys"
+in APPPATH/Models/ChatModel.php on line 12.
+ 1 APPPATH/Controllers/Management/Company/Chat.php(22): App\Models\ChatModel->__construct()
+ 2 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Management\Company\Chat->__construct()
+ 3 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:06:24 --> Undefined array key "key"
+in APPPATH/Models/ChatModel.php on line 27.
+ 1 APPPATH/Models/ChatModel.php(27): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/Company/Chat.php(48): App\Models\ChatModel->Send()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Chat->Send()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:07:52 --> Undefined property: App\Models\ChatModel::$options
+in APPPATH/Models/ChatModel.php on line 30.
+ 1 APPPATH/Models/ChatModel.php(30): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/Company/Chat.php(48): App\Models\ChatModel->Send()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Chat->Send()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:08:28 --> Cannot redeclare App\Models\ChatModel::$pusher_options
+in APPPATH/Models/ChatModel.php on line 10.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2022-08-09 21:08:31 --> Cannot redeclare App\Models\ChatModel::$pusher_options
+in APPPATH/Models/ChatModel.php on line 10.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2022-08-09 21:29:32 --> Call to undefined method App\Models\ChatModel::CreateChannel()
+in APPPATH/Controllers/Chat.php on line 49.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Chat->CreateChannel()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:29:33 --> Call to undefined method App\Models\ChatModel::CreateChannel()
+in APPPATH/Controllers/Chat.php on line 49.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Chat->CreateChannel()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:30:23 --> Undefined variable $comapny_uuid
+in APPPATH/Models/ChatModel.php on line 51.
+ 1 APPPATH/Models/ChatModel.php(51): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Chat.php(49): App\Models\ChatModel->CreateChannel()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Chat->CreateChannel()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:30:23 --> Undefined variable $comapny_uuid
+in APPPATH/Models/ChatModel.php on line 51.
+ 1 APPPATH/Models/ChatModel.php(51): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Chat.php(49): App\Models\ChatModel->CreateChannel()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Chat->CreateChannel()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:30:33 --> Call to a member function insert() on null
+in APPPATH/Models/ChatModel.php on line 55.
+ 1 APPPATH/Controllers/Chat.php(49): App\Models\ChatModel->CreateChannel()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Chat->CreateChannel()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:30:33 --> Call to a member function insert() on null
+in APPPATH/Models/ChatModel.php on line 55.
+ 1 APPPATH/Controllers/Chat.php(49): App\Models\ChatModel->CreateChannel()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Chat->CreateChannel()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:31:02 --> Call to a member function insert() on null
+in APPPATH/Models/ChatModel.php on line 55.
+ 1 APPPATH/Controllers/Chat.php(49): App\Models\ChatModel->CreateChannel()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Chat->CreateChannel()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:31:02 --> Call to a member function insert() on null
+in APPPATH/Models/ChatModel.php on line 55.
+ 1 APPPATH/Controllers/Chat.php(49): App\Models\ChatModel->CreateChannel()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Chat->CreateChannel()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:31:32 --> Call to a member function insert() on null
+in APPPATH/Models/ChatModel.php on line 55.
+ 1 APPPATH/Controllers/Chat.php(49): App\Models\ChatModel->CreateChannel()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Chat->CreateChannel()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:31:32 --> Call to a member function insert() on null
+in APPPATH/Models/ChatModel.php on line 55.
+ 1 APPPATH/Controllers/Chat.php(49): App\Models\ChatModel->CreateChannel()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Chat->CreateChannel()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:32:26 --> Unknown column 'comapny_uuid' in 'field list'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/ChatModel.php(58): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Controllers/Chat.php(49): App\Models\ChatModel->CreateChannel()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Chat->CreateChannel()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:32:26 --> Unknown column 'comapny_uuid' in 'field list'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/ChatModel.php(58): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Controllers/Chat.php(49): App\Models\ChatModel->CreateChannel()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Chat->CreateChannel()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:32:36 --> Undefined variable $channle_uuid
+in APPPATH/Models/ChatModel.php on line 60.
+ 1 APPPATH/Models/ChatModel.php(60): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Chat.php(49): App\Models\ChatModel->CreateChannel()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Chat->CreateChannel()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:32:37 --> Undefined variable $channle_uuid
+in APPPATH/Models/ChatModel.php on line 60.
+ 1 APPPATH/Models/ChatModel.php(60): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Chat.php(49): App\Models\ChatModel->CreateChannel()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Chat->CreateChannel()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:37:00 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',company_uuid = 'ba9ec71b-53d1-42d0-a6f6-40d985343eef'
+            limit 1' at line 7
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/dbClasses/dbQueryClass.php(30): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Models/ChatModel.php(57): App\Models\dbClasses\dbQueryClass->simple_query()
+ 4 APPPATH/Controllers/Chat.php(54): App\Models\ChatModel->CreateChannel()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Chat->CreateChannel()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:37:00 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',company_uuid = 'null'
+            limit 1' at line 7
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/dbClasses/dbQueryClass.php(30): App\Models\dbClasses\dbQueryClass->query()
+ 3 APPPATH/Models/ChatModel.php(57): App\Models\dbClasses\dbQueryClass->simple_query()
+ 4 APPPATH/Controllers/Chat.php(54): App\Models\ChatModel->CreateChannel()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Chat->CreateChannel()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 21:37:17 --> Trying to access array offset on value of type null
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 32.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(32): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Models/ChatModel.php(57): App\Models\dbClasses\dbQueryClass->simple_query()
+ 3 APPPATH/Controllers/Chat.php(54): App\Models\ChatModel->CreateChannel()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Chat->CreateChannel()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 23:40:54 --> syntax error, unexpected double-quoted string ""
+in APPPATH/Models/ChatModel.php on line 37.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 3 APPPATH/Controllers/Chat.php(22): CodeIgniter\Autoloader\Autoloader->loadClass()
+ 4 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Chat->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-09 23:40:54 --> syntax error, unexpected double-quoted string ""
+in APPPATH/Models/ChatModel.php on line 37.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 3 APPPATH/Controllers/Chat.php(22): CodeIgniter\Autoloader\Autoloader->loadClass()
+ 4 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Chat->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()

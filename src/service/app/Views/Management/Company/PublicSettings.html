@@ -1,0 +1,142 @@
+<?php
+require_once(__DIR__."/Sidebar.html");
+?>
+
+<section class="user-dashboard">
+  <div class="dashboard-outer">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Ls widget -->
+        <div class="ls-widget">
+          <div class="tabs-box">
+            <div class="widget-title">
+              <h3 title="기업 공개 관리"><a>기업 공개 관리</a></h3>
+            </div>
+            <!-- {{{ -->
+
+            <form class="default-form" name="form-profile-1" method="POST" enctype="multipart/form-data" action="/<?=_CONTROLLER?>/UpdateSubmit">
+
+            <div class="widget-content pb-4">
+
+              <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-box">
+                  <div class="content">
+                    <!-- figure class="image"><img src="/assets/images/resource/candidate-1.png" alt=""></figure-->
+                    <figure class="image"><img src="<?=$profile_img_url?>" alt=""></figure>
+                    <h4><a><?=$_SESSION["login_info"]["name"]?></a></h4>
+                  </div>
+                </div>
+                <div class="form-group mt-4">
+                  <h5 class="my-3"><a>공개 상태</a></h5>
+                  <div class="input-group ms-4 mb-5">
+                    <input type="radio" name="public_status" value="5" id="public_status_y" title="공개" tabindex=100 <?=(!@$item["status"] || $item["status"] == '1' || $item["status"] == '5')?"checked":""?> required>
+                    <label class="me-5" for="public_status_y"><a title="공개">공개 <?=($item["status"] == "1")?"(현재 심사중)":""?></a></label>
+
+                    <input type="radio" name="public_status" value="3" id="public_status_n" title="비공개" tabindex=100 <?=($item["status"] == '3')?"checked":""?> required>
+                    <label for="public_status_n"><a title="비공개">비공개</a></label>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="row">
+                <div class="form-group">
+                  <label class="my-2"><a>기업 소개</a></label>
+                  <p class="text-muted mb-1" style="font-size:0.7em"><a>(이미지 삽입시 파일을 드래그&드롭하여 추가하세요.)</a></p>
+                  <textarea class="editor" name="description"><?=@$item["description"]?></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="my-2"><a>업태</a></label>
+                  <p class="text-muted mb-1" style="font-size:0.7em"><a>(사업자등록증의 업태 입력해 주세요.)</a></p>
+                  <input type="text" name="business_type" placeholder="" title="업태" tabindex=100 value="<?=@$item["business_type"]?>" required>
+                </div>
+                <div class="form-group">
+                  <label class="my-2"><a>종목</a></label>
+                  <p class="text-muted mb-1" style="font-size:0.7em"><a>(사업자등록증의 종목을 입력해 주세요.)</a></p>
+                  <input type="text" name="business_item" placeholder="" title="사업 종목" tabindex=100 value="<?=@$item["business_item"]?>" required>
+                </div>
+                <div class="form-group">
+                  <label class="my-2"><a>설립일</a></label>
+                  <input type="date" class="form-control" name="founded_date" placeholder="" title="설립일" tabindex=100 value="<?=@$item["founded_date"]?>" required>
+                </div>
+                <div class="form-group">
+                  <label class="my-2"><a>주요사업</a></label>
+                  <input type="text" name="major_business" placeholder="" title="주요사업" tabindex=100 value="<?=@$item["major_business"]?>" required>
+                </div>
+
+                <div class="form-group mt-4">
+                  <div class="resume-outer" id="school-wrap">
+                    <div class="upper-title">
+                      <h4><a>회사전경</a></h4>
+                      <p class="small">총 8장의 이미지를 업로드 할 수 있습니다. (파일당 사이즈 5MB이하)</p>
+                    </div>
+                    
+                    <div class="row images-outer">
+                    <?php
+                    for($i=0; $i<8; $i++){
+                    ?>
+                      <div class="col-lg-3 col-md-3 col-sm-6 mb-2">
+                        <input type="file" class="dropify" accept="image/*" 
+                          name="photos[]" 
+                          data-default-file="<?=(@$item["photos"][$i])? "/Image/".$item["photos"][$i]."/company_pic.png":""?>" 
+                          data-max-file-size="5M"
+                        />
+                        <input type="hidden" name="pre_file[]" value="<?=@$item["photos"][$i]?>">
+                        <input type="hidden" name="remove_file[]" value="">
+                      </div>
+                    <?php
+                    }
+                    ?>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="form-group mt-4">
+                  <label><a title="Facebook">Homepage</a></label>
+                  <input type="url" name="sns_homepage" placeholder="" value="<?=$item["sns_homepage"]?>">
+                </div>
+
+                <div class="form-group">
+                  <label><a title="Facebook">Facebook</a></label>
+                  <input type="url" name="sns_facebook" placeholder="" value="<?=$item["sns_facebook"]?>">
+                </div>
+
+                <div class="form-group">
+                  <label><a title="Twitter">Twitter</a></label>
+                  <input type="url" name="sns_twitter" placeholder="" value="<?=$item["sns_twitter"]?>">
+                </div>
+
+                <div class="form-group">
+                  <label><a title="Twitter">Instagram</a></label>
+                  <input type="url" name="sns_instagram" placeholder="" value="<?=$item["sns_instagram"]?>">
+                </div>
+
+                <div class="form-group">
+                  <label><a title="Linkedin">Linkedin</a></label>
+                  <input type="url" name="sns_linkedin" placeholder="" value="<?=$item["sns_linkedin"]?>">
+                </div>
+
+                <div class="form-group">
+                  <label><a title="Youtube">Youtube</a></label>
+                  <input type="url" name="sns_youtube" placeholder="" value="<?=$item["sns_youtube"]?>">
+                </div>
+
+              <div class="form-group mt-4">
+                <button type="submit" class="theme-btn btn-style-one" tabindex=100>저장하기</button>
+              </div>
+            </div>
+            </form>
+            <!-- }}} -->
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,59 @@
+<section class="container" style="padding-top: 172px;">
+  <div id="row">
+    <div class="col-12 col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+      <!-- Login Form -->
+      <div class="login-form default-form border rounded p-4">
+        <div class="form-inner">
+          <h2 class="mb-4 font-weight-900" title="로그인"><a tabindex=100>로그인</a></h2>
+          <!--Login Form-->
+          <form name="form-login" method="post" action="/<?=_CONTROLLER?>/SignInSubmit">
+            <div class="form-group">
+              <label class="my-2" title="아이디"><a>아이디</a></label>
+              <input type="text" name="user_id" placeholder="개인은 이메일주소, 기업은 사업자등록번호 입력" title="개인은 이메일주소, 기업은 사업자등록번호 입력" value="<?=$remember_id?>" tabindex=100 required>
+              <span class="small text-muted ps-2">(인재회원은 이메일주소, 기업회원은 사업자등록번호를 입력해 주세요.)</span>
+            </div>
+
+            <div class="form-group">
+              <label class="my-2" title="비밀번호"><a>비밀번호</a></label>
+              <input type="password" name="password" value="" title="비밀번호 입력" placeholder="비밀번호 입력" tabindex=100 required>
+            </div>
+
+            <div class="form-group">
+              <div class="field-outer">
+                <div class="input-group ">
+                  <input type="checkbox" name="remember_me" value="1" id="remember" title="아이디 저장" tabindex=100 <?=($remember_me == 1)?"checked":""?>>
+                  <label for="remember" class="remember"><a title="아이디 저장하기 선택/취소">아이디 저장</a></label>
+                </div>
+                <a href="/Auth/ForgotMyPassword" class="text-end w-25" tabindex=100>비밀번호 찾기</a>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button type="submit" class="theme-btn btn-style-one py-3" name="log-in" tabindex=100>로그인</button>
+            </div>
+          </form>
+
+          <div class="bottom-box mt-4">
+            <div>
+              <a tabindex=100>아직 회원이 아니세요?</a>
+              <a href="/Auth/SignUp" class="" tabindex=100>회원가입</a>
+            </div>
+
+            <!-- oauth
+            <div class="divider"><span>or</span></div>
+            <div class="btn-box row">
+              <div class="col-lg-6 col-md-12">
+                <a href="#" class="theme-btn social-btn-two facebook-btn"><i class="fab fa-facebook-f"></i> Log In via Facebook</a>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <a href="#" class="theme-btn social-btn-two google-btn"><i class="fab fa-google"></i> Log In via Gmail</a>
+              </div>
+            </div>
+            -->
+          </div>
+        </div>
+      </div>
+      <!--End Login Form -->
+    </div>
+  </div>
+</section>

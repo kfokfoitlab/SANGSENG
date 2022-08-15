@@ -1,0 +1,110 @@
+<?php
+require_once(__DIR__."/Sidebar.html");
+?>
+
+<section class="user-dashboard">
+  <div class="dashboard-outer">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Ls widget -->
+        <div class="ls-widget">
+          <div class="tabs-box">
+            <div class="widget-title">
+              <h3 title="기업 프로필"><a>기업 프로필</a></h3>
+            </div>
+            <!-- {{{ -->
+
+            <div class="widget-content">
+
+              <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-box">
+                  <div class="content">
+                    <!-- figure class="image"><img src="/assets/images/resource/candidate-1.png" alt=""></figure-->
+                    <figure class="image"><img src="<?=$profile_img_url?>" alt=""></figure>
+                    <h4><a><?=$_SESSION["login_info"]["name"]?></a></h4>
+                  </div>
+                </div>
+              </div>
+
+
+              <form class="default-form" name="form-profile-1" method="POST" enctype="multipart/form-data" action="/<?=_CONTROLLER?>/UpdateSubmit/section1">
+                <div class="uploading-outer">
+                  <div class="uploadButton">
+                    <input class="uploadButton-input" type="file" name="profile_img" accept="image/*" id="upload" multiple="">
+                    <label class="uploadButton-button ripple-effect" for="upload" title="프로필 사진 수정"><a>회사 로고 수정</a></label>
+                    <span class="uploadButton-file-name"></span>
+                  </div>
+                  <div class="text">이미지 용량 최대 5MB, JPG, PNG등 이미지 파일만 가능합니다.</div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group">
+                    <label class="my-2"><a title="회사명 수정불가">회사명</a><sup class="text-danger">x</sup></label>
+                    <input type="text" name="company_name" placeholder="이름을 입력해 주세요" title="회사명 입력" tabindex=100 value="<?=$profile["company_name"]?>" disabled required>
+                  </div>
+                  <div class="form-group">
+                    <label class="my-2"><a title="대표자명 수정불가">대표자명</a><sup class="text-danger">x</sup></label>
+                    <input type="text" name="ceo_name" placeholder="이름을 입력해 주세요" title="대표자명 입력" tabindex=100 value="<?=$profile["ceo_name"]?>" disabled required>
+                  </div>
+                  <div class="form-group">
+                    <label class="my-2"><a title="사업자등록번호 수정불가">사업자등록번호</a><sup class="text-danger">x</sup></label>
+                    <input type="text" name="business_number" title="사업자등록번호" tabindex=100 value="<?=$profile["business_number"]?>" disabled required>
+                  </div>
+                  <div class="form-group">
+                    <label class="my-2"><a title="대표번호">대표번호</a></label>
+                    <input type="text" class="mask-phone" name="gen_tel" placeholder="숫자, '-'만 입력" title="대표번호 숫자, '-'만 입력" value="<?=$profile["gen_tel"]?>" tabindex=100>
+                  </div>
+                  <div class="form-group">
+                    <label class="my-2"><a title="직통번호">직통번호</a></label>
+                    <input type="text" class="mask-phone" name="did_tel" placeholder="숫자, '-'만 입력" title="직통번호 숫자, '-'만 입력" value="<?=$profile["did_tel"]?>" tabindex=100>
+                  </div>
+                  <div class="form-group">
+                    <label class="my-2"><a title="팩스번호">팩스번호</a></label>
+                    <input type="text" class="mask-phone" name="fax" placeholder="숫자, '-'만 입력" title="팩스번호 숫자, '-'만 입력" value="<?=$profile["fax"]?>" tabindex=100>
+                  </div>
+                  <div class="form-group">
+                    <label class="my-2"><a title="담당자명 필수입력">담당자명</a><sup class="text-danger">*</sup></label>
+                    <input type="text" name="manager_name" placeholder="담당자명을 입력해 주세요" title="담당자명 입력" tabindex=100 value="<?=$profile["manager_name"]?>" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="my-2"><a title="이메일주소 필수입력">담당자 이메일주소</a><sup class="text-danger">*</sup></label>
+                    <input type="email" name="manager_email" placeholder="이메일주소를 입력해 주세요" title="이메일주소 입력" tabindex=100 value="<?=$profile["manager_email"]?>" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="my-2"><a title="담당자 휴대폰번호 필수입력">휴대폰번호</a><sup class="text-danger">*</sup></label>
+                    <input type="text" class="mask-phone" name="phone" placeholder="숫자, '-'만 입력" title="담당자 휴대폰번호 숫자, '-'만 입력" tabindex=100 value="<?=$profile["phone"]?>" required>
+                  </div>
+                  <label class="my-2"><a title="주소">주소</a></label>
+                  <div class="row">
+                    <div class="col-8 col-lg-4 pe-0">
+                      <div class="form-group mb-0">
+                        <input type="text" class="modal-search-post" id="post_code" name="post_code" placeholder="우편번호" title="우편번호 검색" tabindex=100 value="<?=$profile["post_code"]?>" readonly>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <button type="button" class="btn btn-primary modal-search-post" tabindex=100>우편번호 검색</button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" id="address_road" name="address" class="my-2" placeholder="주소" title="주소" tabindex=100 value="<?=$profile["address"]?>" readonly>
+                    <input type="text" id="address_detail" name="address_detail" class="my-2" placeholder="상세주소" title="상세주소" value="<?=$profile["address_detail"]?>" tabindex=100>
+                    <input type="hidden" name="coordinate_x" id="coordinate_x" value="<?=$profile["latitude"]?>">
+                    <input type="hidden" name="coordinate_y" id="coordinate_y" value="<?=$profile["logitude"]?>">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <button type="submit" class="theme-btn btn-style-one" tabindex=100>저장하기</button>
+                </div>
+              </form>
+            </div>
+            <!-- }}} -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>

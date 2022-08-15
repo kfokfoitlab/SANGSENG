@@ -1,0 +1,547 @@
+<?php
+require_once(__DIR__."/../Sidebar.html");
+?>
+
+<section class="user-dashboard" id="user-resume">
+  <div class="dashboard-outer">
+    <div class="upper-title-box">
+      <h3 title="이력서 상세보기"><a>이력서 상세보기</a></h3>
+      <div class="text-end form-group">
+        <a href="/<?=_CONTROLLER?>/Update/<?=$data["uuid"]?>" class="theme-btn btn-style-one py-3" tabindex=101 style="font-size:1.1em">수정하기</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Ls widget -->
+        <div class="ls-widget">
+          <div class="tabs-box">
+            <div class="widget-title">
+            </div>
+            <div class="widget-content">
+              <form name="form-create-resume" class="default-form" method="POST" enctype="multipart/form-data" action="/<?=_CONTROLLER?>CreateSubmit">
+                <div class="row">
+                  <!-- Input -->
+                  <div class="form-group col-lg-8 col-md-12">
+                    <label><a>이력서 제목</a></label>
+                    <h4><a><?=$data["title"]?></a></h4>
+                  </div>
+                  <div class="form-group col-lg-8 col-md-12">
+                    <label><a>직무 유형</a></label>
+                    <p><a><?=$data["profession_title"]?></a></p>
+                  </div>
+                  <div class="form-group col-lg-8 col-md-12">
+                    <label><a>희망 고용 형태</a></label>
+                    <p><a><?=$data["employment_type_title"]?></a></p>
+                  </div>
+                  <div class="form-group col-lg-8 col-md-12">
+                    <label><a>총 경력 기간</a></label>
+                    <p><a><?=$data["career_title"]?></a></p>
+                  </div>
+                  <div class="form-group col-lg-8 col-md-12">
+                    <label><a>희망 연봉(급여)</a></label>
+                    <p><a><?=$data["category_pay_type"]?> <?=number_format($data["category_pay"])?>원</a></p>
+                  </div>
+
+                  <!-- About Company -->
+                  <div class="form-group col-lg-12 col-md-12">
+                    <label><a>자기 소개</a></label>
+                    <div class="border p-2 py-0">
+                      <p><?=$data["introduce"]?></p>  
+                    </div>
+                  </div>
+
+                  <div class="form-group col-lg-12 col-md-12">
+                    <div class="resume-outer">
+                      <div class="upper-title">
+                        <h4><a>학력</a></h4>
+                      </div>
+                    <?php
+                    if(@is_array($data["school"]) && count($data["school"]) > 0){
+                      foreach($data["school"] as $item){
+                    ?>
+                      <!-- Resume BLock -->
+                      <div class="resume-block">
+                        <div class="inner">
+                          <span class="name">-</span>
+                          <div class="title-box">
+                            <div class="info-box">
+                              <h3 class="py-2"><a><?=$item["title"]?></a></h3>
+                              <a> <span><small><?=$item["grade"]?> <?=$item["class"]?> <?=$item["degree"]?> <?=$item["graduate"]?></small></span> </a>
+                            </div>
+                            <div class="edit-box small">
+                              <a>
+                                <span class="year">
+                                  <?=$item["start_year"]?> <?=$item["start_month"]?> ~
+                                  <?=$item["end_year"]?> <?=$item["end_month"]?>
+                                </span>
+                              </a>
+                            </div>
+                          </div>
+                          <div class="text"><a><?=$item["remark"]?></a></div>
+                        </div>
+                      </div>
+                    <?php
+                      }
+                    }
+                    ?>
+                    </div>
+
+                    <!-- Resume / Work & Experience -->
+                    <div class="resume-outer theme-blue" id="career-wrap">
+                      <div class="upper-title">
+                        <h4><a>경력</a></h4>
+                      </div>
+                    <?php
+                    if(@is_array($data["career"]) && count($data["career"]) > 0){
+                      foreach($data["career"] as $item){
+                    ?>
+                      <!-- Resume BLock -->
+                      <div class="resume-block">
+                        <div class="inner">
+                          <span class="name">-</span>
+                          <div class="title-box">
+                            <div class="info-box">
+                              <h3><a><?=$item["title"]?></a></h3>
+                              <a> <span><small><?=@$item["position"]?> <?=@$item["rank"]?></small></span> </a>
+                            </div>
+                            <div class="edit-box small">
+                              <a>
+                                <span class="year">
+                                  <?=$item["start_year"]?> <?=$item["start_month"]?> ~
+                                  <?=$item["end_year"]?> <?=$item["end_month"]?>
+                                </span>
+                              </a>
+                            </div>
+                          </div>
+                          <div class="text"><a><?=$item["remark"]?></a></div>
+                        </div>
+                      </div>
+                    <?php
+                      }
+                    }
+                    ?>
+
+                    </div>
+                  </div>
+
+                  <div class="form-group col-lg-12 col-md-12">
+                    <div class="resume-outer" id="school-wrap">
+                      <div class="upper-title">
+                        <h4><a>포트폴리오</a></h4>
+                      </div>
+                      
+                      <div class="row images-outer">
+                    <?php
+                    if(@is_array($data["portfolio"]) && count($data["portfolio"]) > 0){
+                      foreach($data["portfolio"] as $item){
+                        if($item){
+                    ?>
+                        <div class="col-lg-3 col-md-3 col-sm-6 mb-2">
+                          <img class="img-fluid" src="/Image/<?=$item?>">
+                        </div>
+                    <?php
+                        }
+                        else{
+                    ?>
+                        <div class="col-lg-3 col-md-3 col-sm-6 mb-2">
+                          <p class="p-4"></p>
+                        </div>
+                    <?php
+                        }
+                      }
+                    }?>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-lg-12 col-md-12">
+                    <!-- Resume / Awards -->
+                    <div class="resume-outer theme-yellow" id="award-wrap">
+                      <div class="upper-title">
+                        <h4><a>수상내역</a></h4>
+                      </div>
+                    <?php
+                    if(@is_array($data["award"]) && count($data["award"]) > 0){
+                      foreach($data["award"] as $item){
+                    ?>
+                      <!-- Resume BLock -->
+                      <div class="resume-block">
+                        <div class="inner">
+                          <span class="name">-</span>
+                          <div class="title-box">
+                            <div class="info-box">
+                              <h3><a><?=$item["title"]?></a></h3>
+                              <a> <span><small><?=@$item["organizer"]?></small></span> </a>
+                            </div>
+                            <div class="edit-box small">
+                              <a>
+                                <span class="year">
+                                  <?=$item["year"]?> <?=$item["month"]?>  <?=$item["day"]?>
+                                </span>
+                              </a>
+                            </div>
+                          </div>
+                          <div class="text"><a><?=$item["remark"]?></a></div>
+                        </div>
+                      </div>
+                    <?php
+                      }
+                    }
+                    ?>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-lg-12 col-md-12">
+                    <!-- Resume / License -->
+                    <div class="resume-outer theme-blue" id="license-wrap">
+                      <div class="upper-title">
+                        <h4><a>자격증</a></h4>
+                      </div>
+                    <?php
+                    if(@is_array($data["license"]) && count($data["license"]) > 0){
+                      foreach($data["license"] as $item){
+                    ?>
+                      <!-- Resume BLock -->
+                      <div class="resume-block">
+                        <div class="inner">
+                          <span class="name">-</span>
+                          <div class="title-box">
+                            <div class="info-box">
+                              <h3><a><?=$item["title"]?></a></h3>
+                              <a> <span><small><?=@$item["agency"]?></small></span> </a>
+                            </div>
+                            <div class="edit-box small">
+                              <a>
+                                <span class="year">
+                                  <?=$item["year"]?> <?=$item["month"]?>  <?=$item["day"]?>
+                                </span>
+                              </a>
+                            </div>
+                          </div>
+                          <div class="text"><a><?=$item["remark"]?></a></div>
+                        </div>
+                      </div>
+                    <?php
+                      }
+                    }
+                    ?>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-lg-12 col-md-12">
+                    <!-- Resume / Skill -->
+                    <div class="resume-outer theme-yellow" id="skill-wrap">
+                      <div class="upper-title">
+                        <h4><a>스킬</a></h4>
+                      </div>
+
+                      <div style="font-size: 1em;">
+                    <?php
+                    if(@is_array($data["skill"]) && count($data["skill"]) > 0){
+                      foreach($data["skill"] as $item){
+                        if(!$item){ continue; }
+                    ?>
+                        <span class="badge bg-success p-2"><a><?=$item?></a></span>
+                    <?php
+                      }
+                    }
+                    ?>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- Input -->
+        <div class="form-group">
+        <a href="/<?=_CONTROLLER?>/DeleteSubmit/<?=$data["uuid"]?>" class="theme-btn btn-style-two text-white py-3 float-end" tabindex=101 style="font-size:1.4em" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
+          <button type="button" class="theme-btn btn-style-six bg-dark text-white py-3" tabindex=101 style="font-size:1.4em" onclick="window.history.back(-1)">목록으로</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Templete -->
+<div class="d-none" id="template-school">
+<!-- 학교 {{{ -->
+  <div class="resume-block">
+    <div class="inner">
+      <span class="name">-</span>
+      <div class="d-flex">
+        <div>
+          <select name="school_grade[]" tabindex="101">
+            <option value="" disabled selected>학교 유형</option>
+            <option>고등학교</option>
+            <option>4년제 대학</option>
+            <option>2~3년제 전문대학</option>
+            <option>2년제 국립기능대학</option>
+            <option>대학원</option>
+          </select>
+        </div>
+        <div class="ms-2">
+          <input type="text" class="form-control form-control-sm" name="school_title[]" placeholder="학교명" tabindex="101">
+        </div>
+        <div class="ms-2">
+          <input type="text" class="form-control form-control-sm" name="school_class[]" placeholder="학과" tabindex="101">
+        </div>
+        <div class="ms-2">
+          <select name="school_degree[]" tabindex="101">
+            <option value="" disabled selected>학위</option>
+            <option>해당 없음</option>
+            <option>학사</option>
+            <option>석사</option>
+            <option>박사</option>
+          </select>
+        </div>
+        <div class="ms-2">
+          <select name="school_graduate[]" tabindex="101">
+            <option value="" disabled selected>졸업 여부</option>
+            <option>재학중</option>
+            <option>중퇴</option>
+            <option>졸업</option>
+          </select>
+        </div>
+      </div>
+      <div class="d-flex mt-2">
+        <div class="">
+          <select name="school_start_year[]" tabindex="101">
+            <option value="" disabled selected>입학년도</option>
+            <?php
+            for($i=0; $i<60; $i++){
+              echo "<option>".date("Y", strtotime("-".$i." year"))."년</option>";
+            }
+            ?>
+          </select>
+        </div>
+        <div class="ms-2">
+          <select name="school_start_month[]" tabindex="101">
+            <option value="" disabled selected>입학월</option>
+            <?php
+            for($i=0; $i<12; $i++){
+              echo "<option>".($i+1)."월</option>";
+            }
+            ?>
+          </select>
+        </div>
+        <div class="ms-4">
+          <select name="school_end_year[]" tabindex="101">
+            <option value="" disabled selected>졸업년도</option>
+            <?php
+            for($i=0; $i<60; $i++){
+              echo "<option>".date("Y", strtotime("-".$i." year"))."년</option>";
+            }
+            ?>
+          </select>
+        </div>
+        <div class="ms-2">
+          <select name="school_end_month[]" tabindex="101">
+            <option value="" disabled selected>졸업월</option>
+            <?php
+            for($i=0; $i<12; $i++){
+              echo "<option>".($i+1)."월</option>";
+            }
+            ?>
+          </select>
+        </div>
+      </div>
+      <div class="d-flex mt-2">
+        <textarea class="remark" name="school_remark[]" placeholder="특이사항" tabindex="101"></textarea>
+      </div>
+      <div class="text-end mt-2">
+        <button type="button" class="btn btn-outline-danger action-remove-school py-1" style="font-size:0.6em; font-weight: 500;" tabindex="101">학력 삭제</button>
+      </div>
+    </div>
+  </div>
+<!-- }}} -->
+</div>
+
+<div class="d-none" id="template-career">
+<!-- {{{ 경력 -->
+  <div class="resume-block">
+    <div class="inner">
+      <span class="name">-</span>
+      <div class="d-flex">
+        <div class="w-25">
+          <input type="text" name="career_title[]" placeholder="회사명">
+        </div>
+        <div class="ms-2">
+          <input type="text" name="career_position[]" placeholder="부서">
+        </div>
+        <div class="ms-2">
+          <input type="text" name="career_rank[]" placeholder="직급">
+        </div>
+      </div>
+      <div class="d-flex mt-2">
+        <div class="">
+          <select name="career_start_year[]" tabindex="101">
+            <option value="" disabled selected>입사년도</option>
+            <?php
+            for($i=0; $i<60; $i++){
+              echo "<option>".date("Y", strtotime("-".$i." year"))."년</option>";
+            }
+            ?>
+          </select>
+        </div>
+        <div class="ms-2">
+          <select name="career_start_month[]" tabindex="101">
+            <option value="" disabled selected>입사월</option>
+            <?php
+            for($i=0; $i<12; $i++){
+              echo "<option>".($i+1)."월</option>";
+            }
+            ?>
+          </select>
+        </div>
+        <div class="ms-4">
+          <select name="career_end_year[]" tabindex="101">
+            <option value="" disabled selected>퇴사년도</option>
+            <option value="">재직중</option>
+            <?php
+            for($i=0; $i<60; $i++){
+              echo "<option>".date("Y", strtotime("-".$i." year"))."년</option>";
+            }
+            ?>
+          </select>
+        </div>
+        <div class="ms-2">
+          <select name="career_end_month[]" tabindex="101">
+            <option value="" disabled selected>퇴사월</option>
+            <option value="">재직중</option>
+            <?php
+            for($i=0; $i<12; $i++){
+              echo "<option>".($i+1)."월</option>";
+            }
+            ?>
+          </select>
+        </div>
+      </div>
+      <div class="d-flex mt-2">
+        <textarea class="remark" name="career_remark[]" placeholder="담당업무 및 특이사항" tabindex="101"></textarea>
+      </div>
+      <div class="text-end mt-2">
+        <button type="button" class="btn btn-outline-danger action-remove-career py-1" style="font-size:0.6em; font-weight: 500;" tabindex="101">경력 삭제</button>
+      </div>
+    </div>
+  </div>
+<!-- }}} -->
+</div>
+
+<div class="d-none" id="template-award">
+<!-- {{{ 수상내역 -->
+  <div class="resume-block">
+    <div class="inner">
+      <span class="name">-</span>
+      <div class="d-flex">
+        <div class="w-25">
+          <input type="text" name="award_title[]" placeholder="수상명">
+        </div>
+        <div class="ms-2 w-25">
+          <input type="text" name="award_organizer[]" placeholder="주최">
+        </div>
+      </div>
+      <div class="d-flex mt-2">
+        <div class="">
+          <select name="award_year[]" tabindex="101">
+            <option value="" disabled selected>수상년도</option>
+            <?php
+            for($i=0; $i<60; $i++){
+              echo "<option>".date("Y", strtotime("-".$i." year"))."년</option>";
+            }
+            ?>
+          </select>
+        </div>
+        <div class="ms-2">
+          <select name="award_month[]" tabindex="101">
+            <option value="" disabled selected>수상월</option>
+            <?php
+            for($i=0; $i<12; $i++){
+              echo "<option>".($i+1)."월</option>";
+            }
+            ?>
+          </select>
+        </div>
+        <div class="ms-2">
+          <select name="award_day[]" tabindex="101">
+            <option value="" disabled selected>수상일</option>
+            <?php
+            for($i=0; $i<31; $i++){
+              echo "<option>".($i+1)."일</option>";
+            }
+            ?>
+          </select>
+        </div>
+      </div>
+      <div class="d-flex mt-2">
+        <textarea class="remark" name="award_remark[]" placeholder="수상 내역 설명 및 특이사항" tabindex="101"></textarea>
+      </div>
+      <div class="text-end mt-2">
+        <button type="button" class="btn btn-outline-danger action-remove-award py-1" style="font-size:0.6em; font-weight: 500;" tabindex="101">수상내역 삭제</button>
+      </div>
+    </div>
+  </div>
+<!-- }}} -->
+</div>
+
+<div class="d-none" id="template-license">
+<!-- {{{ 자격증 -->
+  <div class="resume-block">
+    <div class="inner">
+      <span class="name">-</span>
+      <div class="d-flex">
+        <div class="w-25">
+          <input type="text" name="license_title[]" placeholder="자격증명">
+        </div>
+        <div class="ms-2 w-25">
+          <input type="text" name="license_agency[]" placeholder="발급 기관">
+        </div>
+      </div>
+      <div class="d-flex mt-2">
+        <div class="">
+          <select name="license_year[]" tabindex="101">
+            <option value="" disabled selected>취득년도</option>
+            <?php
+            for($i=0; $i<60; $i++){
+              echo "<option>".date("Y", strtotime("-".$i." year"))."년</option>";
+            }
+            ?>
+          </select>
+        </div>
+        <div class="ms-2">
+          <select name="license_month[]" tabindex="101">
+            <option value="" disabled selected>취득월</option>
+            <?php
+            for($i=0; $i<12; $i++){
+              echo "<option>".($i+1)."월</option>";
+            }
+            ?>
+          </select>
+        </div>
+        <div class="ms-2">
+          <select name="license_day[]" tabindex="101">
+            <option value="" disabled selected>취득일</option>
+            <?php
+            for($i=0; $i<31; $i++){
+              echo "<option>".($i+1)."일</option>";
+            }
+            ?>
+          </select>
+        </div>
+      </div>
+      <div class="d-flex mt-2">
+        <textarea class="remark" name="license_remark[]" placeholder="자격증 설명 및 특이사항" tabindex="101"></textarea>
+      </div>
+      <div class="text-end mt-2">
+        <button type="button" class="btn btn-outline-danger action-remove-award py-1" style="font-size:0.6em; font-weight: 500;" tabindex="101">수상내역 삭제</button>
+      </div>
+    </div>
+  </div>
+<!-- }}} -->
+</div>
+

@@ -1,0 +1,540 @@
+CRITICAL - 2022-07-27 00:00:01 --> Undefined array key "level0_title"
+in APPPATH/Views/Auth/SignUpUserStep2.html on line 54.
+ 1 APPPATH/Views/Auth/SignUpUserStep2.html(54): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserStep2.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(99): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 00:01:40 --> Undefined array key "level0_title"
+in APPPATH/Views/Auth/SignUpUserStep2.html on line 53.
+ 1 APPPATH/Views/Auth/SignUpUserStep2.html(53): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserStep2.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(99): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 00:02:07 --> Undefined array key "level0_title"
+in APPPATH/Views/Auth/SignUpUserStep2.html on line 54.
+ 1 APPPATH/Views/Auth/SignUpUserStep2.html(54): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserStep2.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(99): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 00:02:11 --> Undefined array key "level0_title"
+in APPPATH/Views/Auth/SignUpUserStep2.html on line 54.
+ 1 APPPATH/Views/Auth/SignUpUserStep2.html(54): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserStep2.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(99): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 00:46:59 --> Undefined array key 0
+in APPPATH/Views/Auth/SignUpUserStep2.html on line 121.
+ 1 APPPATH/Views/Auth/SignUpUserStep2.html(121): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserStep2.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(99): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 00:47:22 --> Undefined array key 0
+in APPPATH/Views/Auth/SignUpUserStep2.html on line 121.
+ 1 APPPATH/Views/Auth/SignUpUserStep2.html(121): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserStep2.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(99): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 00:50:42 --> Undefined array key 0
+in APPPATH/Views/Auth/SignUpUserStep2.html on line 121.
+ 1 APPPATH/Views/Auth/SignUpUserStep2.html(121): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserStep2.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(99): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 00:51:21 --> Undefined array key 0
+in APPPATH/Views/Auth/SignUpUserStep2.html on line 121.
+ 1 APPPATH/Views/Auth/SignUpUserStep2.html(121): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpUserStep2.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(99): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserStep2()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 01:40:55 --> Call to undefined function App\Controllers\gen_uuid_v4()
+in APPPATH/Controllers/Auth.php on line 108.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserSubmit()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 05:16:05 --> Class "App\Models\Auth\SignUpUserModel" not found
+in APPPATH/Controllers/Auth.php on line 14.
+ 1 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Auth->__construct()
+ 2 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 05:25:42 --> Field 'idx' doesn't have a default value
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Auth/SignUpUserModel.php(57): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Controllers/Auth.php(116): App\Models\Auth\SignUpUserModel->Register()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 05:43:47 --> Class "App\Models\Auth\SignInModel" not found
+in APPPATH/Controllers/Auth.php on line 19.
+ 1 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Auth->__construct()
+ 2 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 06:17:42 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '37)
+                ,impairment = '{"type":{"main":"1","sub":"18"},"date":"2022-' at line 17
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Auth/SignUpUserModel.php(83): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Controllers/Auth.php(130): App\Models\Auth\SignUpUserModel->Register()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 06:17:58 --> Call to undefined function App\Models\Auth\debug()
+in APPPATH/Models/Auth/SignUpUserModel.php on line 83.
+ 1 APPPATH/Controllers/Auth.php(130): App\Models\Auth\SignUpUserModel->Register()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserSubmit()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 06:18:04 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '37)
+                ,impairment = '{"type":{"main":"1","sub":"18"},"date":"2022-' at line 17
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Auth/SignUpUserModel.php(84): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Controllers/Auth.php(130): App\Models\Auth\SignUpUserModel->Register()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 06:18:18 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '37.55629255904)
+                ,impairment = '{"type":{"main":"1","sub":"18"},"' at line 17
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Auth/SignUpUserModel.php(84): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Controllers/Auth.php(130): App\Models\Auth\SignUpUserModel->Register()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 06:19:25 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '126.85455671129)
+                ,impairment = '{"type":{"main":"1","sub":"18"},' at line 17
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Auth/SignUpUserModel.php(84): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Controllers/Auth.php(130): App\Models\Auth\SignUpUserModel->Register()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 06:39:22 --> syntax error, unexpected variable "$result"
+in APPPATH/Controllers/Auth.php on line 45.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass()
+ 4 SYSTEMPATH/CodeIgniter.php(848): class_exists()
+ 5 SYSTEMPATH/CodeIgniter.php(455): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 06:39:36 --> syntax error, unexpected variable "$result"
+in APPPATH/Controllers/Auth.php on line 45.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass()
+ 4 SYSTEMPATH/CodeIgniter.php(848): class_exists()
+ 5 SYSTEMPATH/CodeIgniter.php(455): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 06:41:51 --> Undefined variable $email
+in APPPATH/Models/Auth/SignInModel.php on line 42.
+ 1 APPPATH/Models/Auth/SignInModel.php(42): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Models/Auth/SignInModel.php(25): App\Models\Auth\SignInModel->SignInUser()
+ 3 APPPATH/Controllers/Auth.php(45): App\Models\Auth\SignInModel->SignIn()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignInSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 06:42:17 --> Undefined variable $user_password
+in APPPATH/Models/Auth/SignInModel.php on line 50.
+ 1 APPPATH/Models/Auth/SignInModel.php(50): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Models/Auth/SignInModel.php(25): App\Models\Auth\SignInModel->SignInUser()
+ 3 APPPATH/Controllers/Auth.php(45): App\Models\Auth\SignInModel->SignIn()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignInSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 06:44:50 --> Undefined array key "reuslt"
+in APPPATH/Controllers/Auth.php on line 47.
+ 1 APPPATH/Controllers/Auth.php(47): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignInSubmit()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 06:53:59 --> Invalid file: Auth/SignUpCompany.html
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 33.
+ 1 SYSTEMPATH/View/View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Auth.php(185): view()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpCompany()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 08:05:13 --> Undefined variable $sbs
+in APPPATH/Views/Auth/SignUpCompany.html on line 38.
+ 1 APPPATH/Views/Auth/SignUpCompany.html(38): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpCompany.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(185): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpCompany()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 08:06:31 --> Undefined variable $sbs
+in APPPATH/Views/Auth/SignUpCompany.html on line 38.
+ 1 APPPATH/Views/Auth/SignUpCompany.html(38): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpCompany.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(185): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpCompany()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 08:09:04 --> Call to undefined method App\Models\Auth\SignInModel::getTermsData()
+in APPPATH/Controllers/Auth.php on line 185.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpCompanySLA()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 08:09:37 --> Call to undefined method App\Models\Auth\SignInModel::getTermsData()
+in APPPATH/Controllers/Auth.php on line 78.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserSLA()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 08:11:21 --> Undefined variable $sbs
+in APPPATH/Views/Auth/SignUpCompany.html on line 38.
+ 1 APPPATH/Views/Auth/SignUpCompany.html(38): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Auth/SignUpCompany.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Auth.php(207): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpCompany()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 08:37:40 --> Undefined array key "impairment"
+in APPPATH/Models/Auth/SignUpUserModel.php on line 33.
+ 1 APPPATH/Models/Auth/SignUpUserModel.php(33): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Auth.php(147): App\Models\Auth\SignUpUserModel->Register()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpUserSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 08:47:24 --> Undefined array key "business_number"
+in APPPATH/Models/Auth/SignUpCompanyModel.php on line 52.
+ 1 APPPATH/Models/Auth/SignUpCompanyModel.php(52): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Auth.php(222): App\Models\Auth\SignUpCompanyModel->Register()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpCompanySubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 08:48:17 --> Undefined array key "tel"
+in APPPATH/Models/Auth/SignUpCompanyModel.php on line 61.
+ 1 APPPATH/Models/Auth/SignUpCompanyModel.php(61): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Auth.php(222): App\Models\Auth\SignUpCompanyModel->Register()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpCompanySubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 08:48:23 --> Field 'coordinate' doesn't have a default value
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Auth/SignUpCompanyModel.php(73): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Controllers/Auth.php(222): App\Models\Auth\SignUpCompanyModel->Register()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpCompanySubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 08:49:02 --> Field 'impairment' doesn't have a default value
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Auth/SignUpCompanyModel.php(79): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Controllers/Auth.php(222): App\Models\Auth\SignUpCompanyModel->Register()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpCompanySubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 08:49:31 --> Invalid file: Auth/SignUpCompanyComplete.html
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 33.
+ 1 SYSTEMPATH/View/View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Auth.php(247): view()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpCompanyComplete()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 08:50:47 --> Invalid file: Auth/SignUpCompanyComplete.html
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 33.
+ 1 SYSTEMPATH/View/View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Auth.php(247): view()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpCompanyComplete()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 09:01:03 --> Undefined variable $email
+in APPPATH/Models/Auth/SignInModel.php on line 16.
+ 1 APPPATH/Models/Auth/SignInModel.php(16): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Auth.php(45): App\Models\Auth\SignInModel->SignIn()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignInSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 09:25:45 --> Undefined array key "name"
+in APPPATH/Models/Auth/SignInModel.php on line 102.
+ 1 APPPATH/Models/Auth/SignInModel.php(102): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Models/Auth/SignInModel.php(20): App\Models\Auth\SignInModel->SignInCompany()
+ 3 APPPATH/Controllers/Auth.php(47): App\Models\Auth\SignInModel->SignIn()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignInSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 09:27:13 --> Undefined array key "user_id"
+in APPPATH/Controllers/Auth.php on line 44.
+ 1 APPPATH/Controllers/Auth.php(44): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignInSubmit()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 09:27:13 --> Undefined array key "user_id"
+in APPPATH/Controllers/Auth.php on line 44.
+ 1 APPPATH/Controllers/Auth.php(44): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignInSubmit()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 10:00:43 --> syntax error, unexpected token ";"
+in APPPATH/Controllers/Auth.php on line 68.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass()
+ 4 SYSTEMPATH/CodeIgniter.php(848): class_exists()
+ 5 SYSTEMPATH/CodeIgniter.php(455): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 10:05:26 --> Undefined array key "name"
+in APPPATH/Views/Common/Header.html on line 128.
+ 1 APPPATH/Views/Common/Header.html(128): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Common/Header.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Home.php(9): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 17:13:10 --> The namespace delimiter is a backslash (\), not a slash (/). Route handler: \App\Controllers\Management\User/Profile::Index
+in SYSTEMPATH/Router/Router.php on line 466.
+ 1 SYSTEMPATH/Router/Router.php(466): CodeIgniter\Router\Exceptions\RouterException::forInvalidControllerName()
+ 2 SYSTEMPATH/Router/Router.php(181): CodeIgniter\Router\Router->checkRoutes()
+ 3 SYSTEMPATH/CodeIgniter.php(773): CodeIgniter\Router\Router->handle()
+ 4 SYSTEMPATH/CodeIgniter.php(417): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 17:13:25 --> preg_match(): Compilation failed: unknown property name after \P or \p at offset 19
+in SYSTEMPATH/Router/Router.php on line 418.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Router/Router.php(418): preg_match()
+ 3 SYSTEMPATH/Router/Router.php(181): CodeIgniter\Router\Router->checkRoutes()
+ 4 SYSTEMPATH/CodeIgniter.php(773): CodeIgniter\Router\Router->handle()
+ 5 SYSTEMPATH/CodeIgniter.php(417): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 17:13:25 --> preg_match(): Compilation failed: unknown property name after \P or \p at offset 19
+in SYSTEMPATH/Router/Router.php on line 418.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Router/Router.php(418): preg_match()
+ 3 SYSTEMPATH/Router/Router.php(181): CodeIgniter\Router\Router->checkRoutes()
+ 4 SYSTEMPATH/CodeIgniter.php(773): CodeIgniter\Router\Router->handle()
+ 5 SYSTEMPATH/CodeIgniter.php(417): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 17:13:31 --> preg_match(): Compilation failed: unknown property name after \P or \p at offset 19
+in SYSTEMPATH/Router/Router.php on line 418.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Router/Router.php(418): preg_match()
+ 3 SYSTEMPATH/Router/Router.php(181): CodeIgniter\Router\Router->checkRoutes()
+ 4 SYSTEMPATH/CodeIgniter.php(773): CodeIgniter\Router\Router->handle()
+ 5 SYSTEMPATH/CodeIgniter.php(417): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 17:13:31 --> preg_match(): Compilation failed: unknown property name after \P or \p at offset 19
+in SYSTEMPATH/Router/Router.php on line 418.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Router/Router.php(418): preg_match()
+ 3 SYSTEMPATH/Router/Router.php(181): CodeIgniter\Router\Router->checkRoutes()
+ 4 SYSTEMPATH/CodeIgniter.php(773): CodeIgniter\Router\Router->handle()
+ 5 SYSTEMPATH/CodeIgniter.php(417): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 17:14:13 --> Class "App\Controllers\Management\User\BaseController" not found
+in APPPATH/Controllers/Management/User/Profile.php on line 6.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(284): include_once()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass()
+ 5 SYSTEMPATH/CodeIgniter.php(848): class_exists()
+ 6 SYSTEMPATH/CodeIgniter.php(455): CodeIgniter\CodeIgniter->startController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 17:15:05 --> Invalid file: Management/User/Profile.html
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 33.
+ 1 SYSTEMPATH/View/View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Management/User/Profile.php(12): view()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 17:15:09 --> Invalid file: Management/User/Profile.html
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 33.
+ 1 SYSTEMPATH/View/View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Management/User/Profile.php(12): view()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 18:08:59 --> Class "App\Models\Management\User\Profile" not found
+in APPPATH/Controllers/Management/User/Profile.php on line 15.
+ 1 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Management\User\Profile->__construct()
+ 2 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 18:10:20 --> Class "App\Models\Management\User\ProfileModel" not found
+in APPPATH/Controllers/Management/User/Profile.php on line 15.
+ 1 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Management\User\Profile->__construct()
+ 2 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 18:11:52 --> syntax error, unexpected single-quoted string ".html", expecting ")"
+in APPPATH/Controllers/Management/User/Profile.php on line 28.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass()
+ 4 SYSTEMPATH/CodeIgniter.php(848): class_exists()
+ 5 SYSTEMPATH/CodeIgniter.php(455): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 20:03:46 --> Call to undefined function App\Models\specialchars()
+in APPPATH/Models/CommonModel.php on line 83.
+ 1 APPPATH/Models/Management/User/ProfileModel.php(34): App\Models\CommonModel->uploadFiles()
+ 2 APPPATH/Controllers/Management/User/Profile.php(50): App\Models\Management\User\ProfileModel->Update()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 20:08:26 --> Call to undefined function App\Models\gen_uuid_v4()
+in APPPATH/Models/CommonModel.php on line 21.
+ 1 APPPATH/Models/Management/User/ProfileModel.php(34): App\Models\CommonModel->uploadFiles()
+ 2 APPPATH/Controllers/Management/User/Profile.php(50): App\Models\Management\User\ProfileModel->Update()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 20:21:40 --> syntax error, unexpected variable "$this"
+in APPPATH/Models/Management/User/ProfileModel.php on line 36.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 3 APPPATH/Controllers/Management/User/Profile.php(24): CodeIgniter\Autoloader\Autoloader->loadClass()
+ 4 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Management\User\Profile->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 20:22:08 --> syntax error, unexpected variable "$this"
+in APPPATH/Models/Management/User/ProfileModel.php on line 36.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 3 APPPATH/Controllers/Management/User/Profile.php(24): CodeIgniter\Autoloader\Autoloader->loadClass()
+ 4 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Management\User\Profile->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 20:22:10 --> syntax error, unexpected variable "$this"
+in APPPATH/Models/Management/User/ProfileModel.php on line 36.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 3 APPPATH/Controllers/Management/User/Profile.php(24): CodeIgniter\Autoloader\Autoloader->loadClass()
+ 4 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Management\User\Profile->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 20:22:12 --> syntax error, unexpected variable "$this"
+in APPPATH/Models/Management/User/ProfileModel.php on line 36.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 3 APPPATH/Controllers/Management/User/Profile.php(24): CodeIgniter\Autoloader\Autoloader->loadClass()
+ 4 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Management\User\Profile->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 20:23:30 --> Undefined variable $status
+in APPPATH/Models/Management/User/ProfileModel.php on line 66.
+ 1 APPPATH/Models/Management/User/ProfileModel.php(66): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Models/Management/User/ProfileModel.php(36): App\Models\Management\User\ProfileModel->UpdateSection1()
+ 3 APPPATH/Controllers/Management/User/Profile.php(53): App\Models\Management\User\ProfileModel->Update()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 20:23:46 --> Undefined variable $coordinate
+in APPPATH/Models/Management/User/ProfileModel.php on line 74.
+ 1 APPPATH/Models/Management/User/ProfileModel.php(74): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Models/Management/User/ProfileModel.php(36): App\Models\Management\User\ProfileModel->UpdateSection1()
+ 3 APPPATH/Controllers/Management/User/Profile.php(53): App\Models\Management\User\ProfileModel->Update()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-07-27 20:27:41 --> Undefined array key "profile_img"
+in APPPATH/Controllers/Management/User/Profile.php on line 53.
+ 1 APPPATH/Controllers/Management/User/Profile.php(53): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->UpdateSubmit()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()

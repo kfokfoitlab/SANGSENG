@@ -1,0 +1,123 @@
+<section class="content-main">
+	<div class="content-header">
+    <h2 class="content-title"> <?=$page_name?> 상세보기</h2>
+	</div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5>기본 정보</h5>
+      <div class="row">
+        <div class="col-10">
+          <table class="table table-hover border detail-table">
+          <!-- {{{ -->
+          <tbody>
+            <tr>
+              <td class="th">회사명</td>
+              <td><?=$data["company_name"]?></td>
+            </tr>
+            <tr>
+              <td class="th">사업자등록번호</td>
+              <td><?=$data["business_number"]?></td>
+            </tr>
+            <tr>
+              <td class="th">상태</td>
+              <td>
+                <?php
+                switch($data["status"]){
+                  case "0": 
+                  case "1": echo "심사중"; break;
+                  case "5": echo "등록완료"; break;
+                  case "7": echo "거절"; break;
+                  case "9": echo "탈퇴"; break;
+                }
+
+                if($data["status"] == 1){
+                ?>
+                <div class="mt-2">
+                  <a href="/<?=_CONTROLLER?>/Confirm/<?=$data["uuid"]?>/5" class="btn btn-sm btn-primary" onclick="return confirm('가입을 승인하시겠습니까?')">가입 승인</a>
+                  <a href="/<?=_CONTROLLER?>/Confirm/<?=$data["uuid"]?>/7" class="btn btn-sm btn-danger ms-4" onclick="return confirm('승인을 거절하시겠습니까?')">승인 거절</a>
+                </div>
+                <?php
+                }
+                else if($data["status"] == 5){
+                ?>
+                <div class="mt-2">
+                  <a href="/<?=_CONTROLLER?>/Confirm/<?=$data["uuid"]?>/7" class="btn btn-sm btn-danger" onclick="return confirm('승인을 거절하시겠습니까?')">승인 거절</a>
+                </div>
+                <?php
+                }
+                else if($data["status"] == 7){
+                ?>
+                <div class="mt-2">
+                  <a href="/<?=_CONTROLLER?>/Confirm/<?=$data["uuid"]?>/5" class="btn btn-sm btn-primary" onclick="return confirm('가입을 승인하시겠습니까?')">가입 승인</a>
+                </div>
+                <?php
+                }
+                ?>
+              </td>
+            </tr>
+            <tr>
+              <td class="th">대표자명</td>
+              <td><?=$data["ceo_name"]?></td>
+            </tr>
+            <tr>
+              <td class="th">대표번호</td>
+              <td><?=$data["did_tel"]?></td>
+            </tr>
+            <tr>
+              <td class="th">직통번호</td>
+              <td><?=$data["gen_tel"]?></td>
+            </tr>
+            <tr>
+              <td class="th">팩스번호</td>
+              <td><?=$data["fax"]?></td>
+            </tr>
+            <tr>
+              <td class="th">비밀번호 초기화</td>
+              <td>---</td>
+            </tr>
+            <tr>
+              <td class="th">담당자명</td>
+              <td><?=$data["manager_name"]?></td>
+            </tr>
+            <tr>
+              <td class="th">담당자 이메일</td>
+              <td><?=$data["manager_email"]?></td>
+            </tr>
+            <tr>
+              <td class="th">담당자 연락처</td>
+              <td><?=$data["phone"]?></td>
+            </tr>
+            <tr>
+              <td class="th">주소</td>
+              <td>
+                <?=$data["post_code"]?> <br>
+                <?=$data["address"]?> <br>
+                <?=$data["address_detail"]?>
+              </td>
+            </tr>
+            <tr>
+              <td class="th">가입일</td>
+              <td><?=$data["register_date"]?></td>
+            </tr>
+          </tbody>
+          <!-- }}} -->
+          </table>
+        </div>
+        <div class="col-2">
+          <div class="border">
+            <label>기업 로고</label>
+            <img class="img-fluid" src="/Image/<?=@$data["profile_img_uuid"]?>" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <button class="btn btn-dark float-end" onclick="window.close();">닫기</button>
+    <a href="/<?=_CONTROLLER?>/Update/<?=$data["uuid"]?>" class="btn btn-success">수정하기</a>
+  </div>
+
+</section>
+

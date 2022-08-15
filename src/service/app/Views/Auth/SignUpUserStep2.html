@@ -1,0 +1,195 @@
+<section class="container" style="padding-top: 172px; margin-bottom: 128px;">
+  <div id="row">
+    <div class="col-12 col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+
+      <h2 class="mb-4 font-weight-900 text-center" title="인재 회원가입"><a tabindex=100>인재 회원가입</a></h2>
+
+      <div class="row join-process">
+        <div class="col-12 col-md-6 col-lg-3 ok">
+          <a title="1단계 이용약관 동의 입력 완료">
+            <em>1</em>
+            <span>1단계 <br>약관 동의</span>
+          </a>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 ok">
+          <a title="2단계 기본정보 입력 입력 완료">
+            <em>2</em>
+            <span>2단계 <br>기본 정보</span>
+          </a>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 on">
+          <a title="3단계 상세정보 입력 진행중">
+            <em>3</em>
+            <span>3단계 <br>상세 정보</span>
+          </a>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3">
+          <a title="4단계 가입 완료">
+            <em>4</em>
+            <span>4단계 <br>가입 완료</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="default-form border rounded my-4 p-4">
+        <div class="form-inner">
+
+          <form name="form-register-submit" method="post" enctype="multipart/form-data" action="/Auth/SignUpUserSubmit">
+<?php
+// hidden field
+foreach($hidden as $key => $val){
+  echo "<input type='hidden' name='".$key."' value='".$val."'></>";
+}
+?>
+
+            <div class="form-group">
+              <label class="my-2" title="장애부위"><a>장애부위</a></label>
+              <div class="row">
+                <div class="col-5">
+                  <select class="form-control form-control-sm filter" id="search-impairment-type0" name="impairment[type][main]" data-this-level=0 title="주 장애 선택" required>
+                    <option value="" disabled selected>주 장애 선택</option>
+                  <?php
+                  if(@$impairments["Type"]["level0"] && @count($impairments["Type"]["level0"])){
+                    foreach($impairments["Type"]["level0"] as $val){
+                      echo "<option value='".$val["idx"]."' data-level='".$val["this_level"]."'>".$val["title"]."</option>";
+                    }
+
+                  }
+                  ?>
+                  </select>
+                </div>
+                <div class="col-7">
+                  <select class="form-control form-control-sm filter" id="search-impairment-type1" name="impairment[type][sub]" data-this-level=1 title="주 장애 선택 후 부 장애 선택" required>
+                    <option value="" disabled selected>주 장애 선택 후 장애부위 선택</option>
+                  <?php
+                  if(@$impairments["Type"]["level1"] && @count($impairments["Type"]["level1"])){
+                    foreach($impairments["Type"]["level1"] as $val){
+                      echo "<option value='".$val["idx"]."' data-level='".$val["this_level"]."' data-level0_idx='".$val["level0_idx"]."' style='display:none'>".$val["title"]."</option>";
+                    }
+
+                  }
+                  ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="my-2" title="장애 인증 날짜"><a>장애 인증 날짜</a></label>
+              <input type="date" class="form-control" name="impairment[date]" title="장애 인증 날짜">
+            </div>
+
+            <div class="form-group">
+              <label class="my-2" title="구체적 장애내용"><a>구체적 장애내용</a></label>
+              <input type="text" class="form-control" name="impairment[detail]" value="" title="구체적 장애내용">
+            </div>
+
+            <div class="form-group">
+              <label class="my-2" title="복지카드 업로드"><a tabindex=100>복지카드</a></label>
+              <input type="file" class="form-control" name="walfare_card_file">
+            </div>
+
+            <div class="form-group">
+              <label class="my-2" title="장애 정도"><a>장애 정도</a></label>
+              <table class="table table-hover table-borderless">
+              <?php
+              foreach($impairments["Degree"] as $code => $items){
+              ?>
+                <tr>
+                  <th width=35% class="px-3 font-weight-400" title="<?=$items[0]["title"]?>"><a><?=$items[0]["title"]?></a></th>
+                  <td class="px-3">
+                    <?php
+                    foreach($items as $key => $val){
+                    ?>
+                    <div class="input-group mb-2">
+                      <input type="radio" name="impairment[degree][<?=$code?>]" value="<?=$val["score"]?>" id="impairment_degree_<?=$code."_".$key?>" title="<?=$val["item"]?>" tabindex=100 required>
+                      <label for="impairment_degree_<?=$code."_".$key?>"><a tabindex=100 title="<?=$val["item"]?>"><?=$val["item"]?></a></label>
+                    </div>
+                    <?php
+                    }
+                    ?>
+                  </td>
+                </tr>
+              <?php
+              }
+              ?>
+              </table>
+            </div>
+
+            <div class="form-group">
+              <label class="my-2" title="보장구"><a>보장구</a></label>
+              <table class="table table-hover table-borderless">
+              <?php
+              foreach($impairments["AssistiveDevice"] as $code => $items){
+              ?>
+                <tr>
+                  <th width=35% class="px-3 font-weight-400" title="<?=$items[0]["title"]?>"><a><?=$items[0]["title"]?></a></th>
+                  <td class="px-3">
+                    <?php
+                    foreach($items as $key => $val){
+                    ?>
+                    <div class="input-group mb-2">
+                      <input type="radio" name="impairment[assistive_device][<?=$code?>]" value="<?=$val["score"]?>" id="impairment_assistive_device_<?=$code."_".$key?>" title="<?=$val["item"]?>" tabindex=100 required>
+                      <label for="impairment_assistive_device_<?=$code."_".$key?>"><a tabindex=100 title="<?=$val["item"]?>"><?=$val["item"]?></a></label>
+                    </div>
+                    <?php
+                    }
+                    ?>
+                  </td>
+                </tr>
+              <?php
+              }
+              ?>
+              </table>
+            </div>
+
+            <div class="form-group">
+              <label class="my-2" title="보장구"><a>운동 능력</a></label>
+              <table class="table table-hover table-borderless">
+              <?php
+              foreach($impairments["PhysicalAbility"] as $code => $items){
+              ?>
+                <tr>
+                  <th width=35% class="px-3 font-weight-400" title="<?=$items[0]["title"]?>"><a><?=$items[0]["title"]?></a></th>
+                  <td class="px-3">
+                    <?php
+                    foreach($items as $key => $val){
+                    ?>
+                    <div class="input-group mb-2">
+                      <input type="radio" name="impairment[physical_ability][<?=$code?>]" value="<?=$val["score"]?>" id="impairment_physical_ability_<?=$code."_".$key?>" title="<?=$val["item"]?>" tabindex=100 required>
+                      <label for="impairment_physical_ability_<?=$code."_".$key?>"><a tabindex=100 title="<?=$val["item"]?>"><?=$val["item"]?></a></label>
+                    </div>
+                    <?php
+                    }
+                    ?>
+                  </td>
+                </tr>
+              <?php
+              }
+              ?>
+              </table>
+            </div>
+
+            <div class="form-group">
+              <label class="my-2" title="특이사항"><a tabindex=100>특이사항</a></label>
+              <textarea class="form-control border" name="impairment[remark]" title="특이사항 입력" placeholder="특이사항 입력"></textarea>
+            </div>
+
+            <div class="form-group mt-5">
+              <button type="submit" class="theme-btn btn-style-one py-3 w-100" title="회원가입신청" tabindex=100>회원가입신청</a>
+            </div>
+          </form>
+
+          <div class="bottom-box mt-5">
+            <div class="text-end">
+              <a href="javascript:window.history.back(-1)" class="" tabindex=100 title="이전단계">이전단계</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>

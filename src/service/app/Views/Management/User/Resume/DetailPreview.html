@@ -1,0 +1,239 @@
+<div class="row">
+  <!-- Input -->
+  <div class="form-group col-lg-8 col-md-12">
+    <label><a>이력서 제목</a></label>
+    <h4><a><?=$data["title"]?></a></h4>
+  </div>
+  <div class="form-group col-lg-8 col-md-12">
+    <label><a>직무 유형</a></label>
+    <p><a><?=$data["profession_title"]?></a></p>
+  </div>
+  <div class="form-group col-lg-8 col-md-12">
+    <label><a>희망 고용 형태</a></label>
+    <p><a><?=$data["employment_type_title"]?></a></p>
+  </div>
+  <div class="form-group col-lg-8 col-md-12">
+    <label><a>총 경력 기간</a></label>
+    <p><a><?=$data["career_title"]?></a></p>
+  </div>
+  <div class="form-group col-lg-8 col-md-12">
+    <label><a>희망 연봉(급여)</a></label>
+    <p><a><?=$data["category_pay_type"]?> <?=number_format($data["category_pay"])?>원</a></p>
+  </div>
+
+  <!-- About Company -->
+  <div class="form-group col-lg-12 col-md-12">
+    <label><a>자기 소개</a></label>
+    <div class="border p-2 py-0">
+      <p><?=$data["introduce"]?></p>  
+    </div>
+  </div>
+
+  <div class="form-group col-lg-12 col-md-12">
+    <div class="resume-outer">
+      <div class="upper-title">
+        <h4><a>학력</a></h4>
+      </div>
+    <?php
+    if(@is_array($data["school"]) && count($data["school"]) > 0){
+      foreach($data["school"] as $item){
+    ?>
+      <!-- Resume BLock -->
+      <div class="resume-block">
+        <div class="inner">
+          <span class="name">-</span>
+          <div class="title-box">
+            <div class="info-box">
+              <h3 class="py-2"><a><?=$item["title"]?></a></h3>
+              <a> <span><small><?=$item["grade"]?> <?=$item["class"]?> <?=$item["degree"]?> <?=$item["graduate"]?></small></span> </a>
+            </div>
+            <div class="edit-box small">
+              <a>
+                <span class="year">
+                  <?=$item["start_year"]?> <?=$item["start_month"]?> ~
+                  <?=$item["end_year"]?> <?=$item["end_month"]?>
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="text"><a><?=$item["remark"]?></a></div>
+        </div>
+      </div>
+    <?php
+      }
+    }
+    ?>
+    </div>
+
+    <!-- Resume / Work & Experience -->
+    <div class="resume-outer theme-blue" id="career-wrap">
+      <div class="upper-title">
+        <h4><a>경력</a></h4>
+      </div>
+    <?php
+    if(@is_array($data["career"]) && count($data["career"]) > 0){
+      foreach($data["career"] as $item){
+    ?>
+      <!-- Resume BLock -->
+      <div class="resume-block">
+        <div class="inner">
+          <span class="name">-</span>
+          <div class="title-box">
+            <div class="info-box">
+              <h3><a><?=$item["title"]?></a></h3>
+              <a> <span><small><?=@$item["position"]?> <?=@$item["rank"]?></small></span> </a>
+            </div>
+            <div class="edit-box small">
+              <a>
+                <span class="year">
+                  <?=$item["start_year"]?> <?=$item["start_month"]?> ~
+                  <?=$item["end_year"]?> <?=$item["end_month"]?>
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="text"><a><?=$item["remark"]?></a></div>
+        </div>
+      </div>
+    <?php
+      }
+    }
+    ?>
+
+    </div>
+  </div>
+
+  <div class="form-group col-lg-12 col-md-12">
+    <div class="resume-outer" id="school-wrap">
+      <div class="upper-title">
+        <h4><a>포트폴리오</a></h4>
+      </div>
+      
+      <div class="row images-outer">
+    <?php
+    if(@is_array($data["portfolio"]) && count($data["portfolio"]) > 0){
+      foreach($data["portfolio"] as $item){
+        if($item){
+    ?>
+        <div class="col-lg-3 col-md-3 col-sm-6 mb-2">
+          <img class="img-fluid" src="/Image/<?=$item?>">
+        </div>
+    <?php
+        }
+        else {
+    ?>
+        <div class="col-lg-3 col-md-3 col-sm-6 mb-2">
+        </div>
+    <?php
+
+        }
+      }
+    }else {
+    ?>
+        <div class="col-lg-3 col-md-3 col-sm-6 mb-2">
+          <p class="p-4">등록안함</p>
+        </div>
+    <?php
+    }?>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group col-lg-12 col-md-12">
+    <!-- Resume / Awards -->
+    <div class="resume-outer theme-yellow" id="award-wrap">
+      <div class="upper-title">
+        <h4><a>수상내역</a></h4>
+      </div>
+    <?php
+    if(@is_array($data["award"]) && count($data["award"]) > 0){
+      foreach($data["award"] as $item){
+    ?>
+      <!-- Resume BLock -->
+      <div class="resume-block">
+        <div class="inner">
+          <span class="name">-</span>
+          <div class="title-box">
+            <div class="info-box">
+              <h3><a><?=$item["title"]?></a></h3>
+              <a> <span><small><?=@$item["organizer"]?></small></span> </a>
+            </div>
+            <div class="edit-box small">
+              <a>
+                <span class="year">
+                  <?=$item["year"]?> <?=$item["month"]?>  <?=$item["day"]?>
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="text"><a><?=$item["remark"]?></a></div>
+        </div>
+      </div>
+    <?php
+      }
+    }
+    ?>
+    </div>
+  </div>
+
+  <div class="form-group col-lg-12 col-md-12">
+    <!-- Resume / License -->
+    <div class="resume-outer theme-blue" id="license-wrap">
+      <div class="upper-title">
+        <h4><a>자격증</a></h4>
+      </div>
+    <?php
+    if(@is_array($data["license"]) && count($data["license"]) > 0){
+      foreach($data["license"] as $item){
+    ?>
+      <!-- Resume BLock -->
+      <div class="resume-block">
+        <div class="inner">
+          <span class="name">-</span>
+          <div class="title-box">
+            <div class="info-box">
+              <h3><a><?=$item["title"]?></a></h3>
+              <a> <span><small><?=@$item["agency"]?></small></span> </a>
+            </div>
+            <div class="edit-box small">
+              <a>
+                <span class="year">
+                  <?=$item["year"]?> <?=$item["month"]?>  <?=$item["day"]?>
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="text"><a><?=$item["remark"]?></a></div>
+        </div>
+      </div>
+    <?php
+      }
+    }
+    ?>
+    </div>
+  </div>
+
+  <div class="form-group col-lg-12 col-md-12">
+    <!-- Resume / Skill -->
+    <div class="resume-outer theme-yellow" id="skill-wrap">
+      <div class="upper-title">
+        <h4><a>스킬</a></h4>
+      </div>
+
+      <div style="font-size: 1em;">
+    <?php
+    if(@is_array($data["skill"]) && count($data["skill"]) > 0){
+      foreach($data["skill"] as $item){
+    ?>
+        <span class="badge bg-success p-2"><a><?=$item?></a></span>
+    <?php
+      }
+    }
+    ?>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

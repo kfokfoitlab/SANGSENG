@@ -1,0 +1,336 @@
+<!-- Candidate Detail Section -->
+<section class="candidate-detail-section style-three" style="margin-top: 76px;">
+  <!-- Upper Box -->
+  <div class="upper-box">
+    <div class="auto-container">
+      <!-- Candidate block Six -->
+      <div class="candidate-block-six">
+        <div class="inner-box">
+          <figure class="image"><img src="/Image/<?=$profile["profile_img_uuid"]?>" alt="프로필 사진"></figure>
+          <h4 class="name"><a><?=$profile["name"]?></a></h4>
+          <span class="designation"><a><?=$data["inline_pr"]?></a></span>
+          <div class="content">
+            <ul class="post-tags">
+              <li><a><?=$resume["profession_title"]?></a></li>
+            </ul>
+          </div>
+          <div class="content my-3">
+            <ul class="candidate-info">
+              <li><span class="icon flaticon-map-locator"></span> <a>지역: <?=$profile["address_short"]?></a></li>
+              <li><span class="icon la la-file-invoice"></span> <a>경력: <?=$resume["career_title"]?></a></li>
+              <li><span class="icon flaticon-clock"></span> <a>등록: <?=substr($data["register_date"], 0, 10)?></a></li>
+            </ul>
+          </div>
+          <div class="text-center">
+          <?php
+          if(@$_SESSION["login"] == "success" && @$_SESSION["login_info"]["type"] == "company"){
+          ?>
+            <a href="/Chat/CreateChannel/<?=$data["user_uuid"]?>/<?=$_SESSION["login_info"]["uuid"]?>" target="_blank" class="theme-btn btn-style-two text-white" tabindex=100>메세지 보내기</a>
+          <?php
+          } else {
+          ?>
+            <a href="javascript:void(0)" onclick="alert('기업회원만 가능합니다.'); return false;" class="theme-btn btn-style-two text-white" tabindex=100>메세지 보내기</a>
+          <?php
+          } ?>
+
+            <?php
+            if(@$_SESSION["login"] == "success" && @$_SESSION["login_info"]["type"] == "company"){
+              if(!$data["bookmark"]){
+            ?>
+            <button type="button" 
+              class="bookmark-btn action-add-bookmark" 
+              tabindex=1500 
+              title="북마크"
+              data-user-uuid="<?=$data["user_uuid"]?>"
+              data-company-uuid="<?=$_SESSION["login_info"]["uuid"]?>"
+            >
+              <!-- span class="flaticon-bookmark"></span -->
+              <span class="far fa-2x fa-bookmark text-dark"></span>
+            </button>
+            <?php
+              }
+              else{
+              ?>
+            <button type="button" 
+              class="bookmark-btn action-remove-bookmark" 
+              tabindex=1500 
+              title="북마크"
+              data-user-uuid="<?=$data["user_uuid"]?>"
+              data-company-uuid="<?=$_SESSION["login_info"]["uuid"]?>"
+            >
+              <!-- span class="flaticon-bookmark"></span -->
+              <span class="fas fa-2x fa-bookmark text-primary"></span>
+            </button>
+            <?php
+              }
+            }
+            ?>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="candidate-detail-outer">
+    <div class="auto-container">
+      <div class="row">
+        <div class="content-column col-lg-8 col-md-12 col-sm-12">
+          <div class="job-detail">
+            <h4><a>자기소개</a></h4>
+            <p><?=$resume["introduce"]?></p>
+
+            <h4 class="mt-4"><a>이력사항</a></h4>
+            <!-- Resume / Education -->
+            <div class="resume-outer">
+              <div class="upper-title">
+                <h4><a>학력</a></h4>
+              </div>
+              <?php
+              if(@is_array($resume["school"]) && count($resume["school"]) > 0){
+                foreach($resume["school"] as $item){
+              ?>
+                <!-- Resume BLock -->
+                <div class="resume-block">
+                  <div class="inner">
+                    <span class="name">-</span>
+                    <div class="title-box">
+                      <div class="info-box">
+                        <h3 class="py-2"><a><?=$item["title"]?></a></h3>
+                        <a> <span><small><?=$item["grade"]?> <?=$item["class"]?> <?=$item["degree"]?> <?=$item["graduate"]?></small></span> </a>
+                      </div>
+                      <div class="edit-box small">
+                        <a>
+                          <span class="year">
+                            <?=$item["start_year"]?> <?=$item["start_month"]?> ~
+                            <?=$item["end_year"]?> <?=$item["end_month"]?>
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="text"><a><?=$item["remark"]?></a></div>
+                  </div>
+                </div>
+              <?php
+                }
+              }
+              ?>
+            </div>
+
+            <!-- Resume / Work & Experience -->
+            <div class="resume-outer theme-blue">
+              <div class="upper-title">
+                <h4><a>경력</a></h4>
+              </div>
+
+              <?php
+              if(@is_array($resume["career"]) && count($resume["career"]) > 0){
+                foreach($resume["career"] as $item){
+              ?>
+                <!-- Resume BLock -->
+                <div class="resume-block">
+                  <div class="inner">
+                    <span class="name">-</span>
+                    <div class="title-box">
+                      <div class="info-box">
+                        <h3><a><?=$item["title"]?></a></h3>
+                        <a> <span><small><?=@$item["position"]?> <?=@$item["rank"]?></small></span> </a>
+                      </div>
+                      <div class="edit-box small">
+                        <a>
+                          <span class="year">
+                            <?=$item["start_year"]?> <?=$item["start_month"]?> ~
+                            <?=$item["end_year"]?> <?=$item["end_month"]?>
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="text"><a><?=$item["remark"]?></a></div>
+                  </div>
+                </div>
+              <?php
+                }
+              }
+              ?>
+            </div>
+
+            <h5 class="mb-3"><a>포트폴리오</a></h5>
+            <div class="row images-outer">
+            <?php
+            if(@is_array($resume["portfolio"]) && count($resume["portfolio"]) > 0){
+              foreach($resume["portfolio"] as $item){
+            ?>
+                <div class="col-lg-3 col-md-3 col-sm-6 mb-2">
+                  <img class="img-fluid" src="/Image/<?=$item?>">
+                </div>
+            <?php
+              }
+            }else {
+            ?>
+                <div class="col-lg-3 col-md-3 col-sm-6 mb-2">
+                  <p class="p-4">등록안함</p>
+                </div>
+            <?php
+            }?>
+            </div>
+
+            <div class="form-group col-lg-12 col-md-12 mt-4">
+              <!-- Resume / Awards -->
+              <div class="resume-outer theme-yellow">
+                <div class="upper-title">
+                  <h4><a>수상내역</a></h4>
+                </div>
+                <?php
+                if(@is_array($resume["award"]) && count($resume["award"]) > 0){
+                  foreach($resume["award"] as $item){
+                ?>
+                  <!-- Resume BLock -->
+                  <div class="resume-block">
+                    <div class="inner">
+                      <span class="name">-</span>
+                      <div class="title-box">
+                        <div class="info-box">
+                          <h3><a><?=$item["title"]?></a></h3>
+                          <a> <span><small><?=@$item["organizer"]?></small></span> </a>
+                        </div>
+                        <div class="edit-box small">
+                          <a>
+                            <span class="year">
+                              <?=$item["year"]?> <?=$item["month"]?>  <?=$item["day"]?>
+                            </span>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="text"><a><?=$item["remark"]?></a></div>
+                    </div>
+                  </div>
+                <?php
+                  }
+                }
+                ?>
+              </div>
+            </div>
+
+            <div class="form-group col-lg-12 col-md-12">
+              <!-- Resume / License -->
+              <div class="resume-outer theme-blue" id="license-wrap">
+                <div class="upper-title">
+                  <h4><a>자격증</a></h4>
+                </div>
+              <?php
+              if(@is_array($resume["license"]) && count($resume["license"]) > 0){
+                foreach($resume["license"] as $item){
+              ?>
+                <!-- Resume BLock -->
+                <div class="resume-block">
+                  <div class="inner">
+                    <span class="name">-</span>
+                    <div class="title-box">
+                      <div class="info-box">
+                        <h3><a><?=$item["title"]?></a></h3>
+                        <a> <span><small><?=@$item["agency"]?></small></span> </a>
+                      </div>
+                      <div class="edit-box small">
+                        <a>
+                          <span class="year">
+                            <?=$item["year"]?> <?=$item["month"]?>  <?=$item["day"]?>
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="text"><a><?=$item["remark"]?></a></div>
+                  </div>
+                </div>
+              <?php
+                }
+              }
+              ?>
+              </div>
+            </div>
+
+            <div class="form-group col-lg-12 col-md-12">
+              <!-- Resume / Awards -->
+              <div class="resume-outer theme-yellow">
+                <div class="upper-title">
+                  <h4><a>스킬</a></h4>
+                </div>
+                
+                <div style="font-size: 1em;">
+                <?php
+                if(@is_array($resume["skill"]) && count($resume["skill"]) > 0){
+                  foreach($resume["skill"] as $item){
+                ?>
+                    <span class="badge bg-success p-2"><a><?=$item?></a></span>
+                <?php
+                  }
+                }
+                ?>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="sidebar-column col-lg-4 col-md-12 col-sm-12">
+          <aside class="sidebar">
+            <div class="sidebar-widget">
+              <div class="widget-content">
+                <ul class="job-overview">
+                  <li>
+                    <i class="icon icon-calendar"></i>
+                    <h5><a>경력:</a></h5>
+                    <span><a><?=$resume["career_title"]?></a></span>
+                  </li>
+
+                  <li>
+                    <i class="icon icon-salary"></i>
+                    <h5><a>희망 급여:</a></h5>
+                    <span><a><?=$resume["category_pay_type"]?> <?=number_format($resume["category_pay"])?>원</a></span>
+                  </li>
+
+                </ul>
+              </div>
+
+            </div>
+
+            <div class="sidebar-widget social-media-widget">
+              <h4 class="widget-title"><a>소셜 미디어</a></h4>
+              <div class="widget-content">
+                <div class="social-links">
+                <?php
+                if($profile["sns_facebook"]){
+                  echo '<a href="'.$profile["sns_facebook"].'" target="_blank" title="페이스북" tabindex=100><i class="fab fa-facebook-f"></i></a>';
+                } 
+                if($profile["sns_twitter"]){
+                  echo '<a href="'.$profile["sns_twitter"].'" target="_blank" title="트위터" tabindex=100><i class="fab fa-twitter"></i></a>';
+                } 
+                if($profile["sns_linkedin"]){
+                  echo '<a href="'.$profile["sns_linkedin"].'" target="_blank" title="링크드인" tabindex=100><i class="fab fa-linkedin-in"></i></a>';
+                } 
+                if($profile["sns_youtube"]){
+                  echo '<a href="'.$profile["sns_linkedin"].'" target="_blank" title="유튜브" tabindex=100><i class="fab fa-youtube"></i></a>';
+                } 
+                ?>
+                </div>
+              </div>
+            </div>
+
+            <?php
+            if(@$_SESSION["login"] == "success" && @$_SESSION["login_info"]["type"] == "company"){
+            ?>
+              <a href="/Chat/CreateChannel/<?=$data["user_uuid"]?>/<?=$_SESSION["login_info"]["uuid"]?>" target="_blank" class="theme-btn btn-style-two text-white w-100" tabindex=100>메세지 보내기</a>
+            <?php
+            } else {
+            ?>
+              <a href="javascript:void(0)" onclick="alert('기업회원만 가능합니다.'); return false;" class="theme-btn btn-style-two text-white w-100" tabindex=100>메세지 보내기</a>
+            <?php
+            } ?>
+
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End candidate Detail Section -->
+

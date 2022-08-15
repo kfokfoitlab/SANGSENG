@@ -1,0 +1,104 @@
+<section class="content-main">
+	<div class="content-header">
+    <h2 class="content-title"> <?=$page_name?> </h2>
+	</div>
+
+  <div class="card border rounded-lg">
+    <div class="card-header" style="background-color:#f4f4f4; border:solid 1px #eee;">
+      <div class="border-start border-4 border-warning ps-2 py-1">
+        <h6 class="h6">
+          <i class="text-warning icon material-icons md-report_problem" style=""></i>
+          안내
+        </h6>
+        <ul class="small">
+          <li>페이지 진입시 표출된 정보가 저장된 데이터 입니다.</li>
+          <li>초기 상태로 되돌리려면 페이지 새로고침을 해 주세요.</li>
+          <li>하단의 [저장하기] 버튼을 클릭하기 전까지 정보는 저장되지 않습니다.</li>
+          <li>[저장하기] 버튼 클릭시 현재 설정하신 데이터로 저장합니다.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card-body">
+      <form name="form-item" method="POST" action="/<?=_CONTROLLER?>/UpdateSubmit">
+      <table class="table table-hover" id="data-table">
+        <thead>
+        <tr>
+          <th width=48>순서</th>
+          <th width=15%>타이틀</th>
+          <th>설명</th>
+          <th width=10%>삭제</th>
+        </tr>
+        </thead>
+        <tbody class="sortable">
+        <?php
+        if(@is_array($data) && count($data) > 0){
+          foreach($data as $code => $items){
+        ?>
+        <tr class="lists" valign=top>
+          <td class="handle" align=center valign=top><span class="material-icons-outlined"> more_vert </span></td>
+          <td class="title" valign=top>
+            <input type="hidden" name="idx[]" value="<?=$items["idx"]?>">
+            <input type="text" class="form-control form-control-sm" name="title[]" placeholder="타이틀" value="<?=$items["title"]?>" required>
+          </td>
+          <td valign=top>
+            <input type="text" class="form-control form-control-sm" name="description[]" placeholder="설명" value="<?=$items["description"]?>">
+          </td>
+          <td>
+            <button type="button" class="btn btn-sm btn-outline-danger action-remove-title">삭제</button>
+          </td>
+        </tr>
+        <?php
+          }
+        }?>
+        </tbody>
+      </table>
+      </form>
+
+      <form name="add-title">
+      <table class="table table-sm table-borderless mt-4">
+        <tbody>
+        <tr class="new">
+          <td width=48 align=center valign=top></td>
+          <td width=15% valign=top>
+            <input type="text" class="form-control form-control-sm" name="new_title" placeholder="추가할 신규 타이틀 입력" required>
+          </td>
+          <td valign=top>
+            <input type="text" class="form-control form-control-sm" name="new_description" placeholder="설명 (관리용 메모 입니다. 서비스페이지에 노출되지 않습니다.)" value="">
+          </td>
+          <td width=10% valign=top>
+            <button type="submit" class="btn btn-sm btn-success text-white action-add-new-title">추가</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      </form>
+    </div>
+
+    <div class="card-footer border-top">
+      <button type="button" class="btn btn-primary action-save-submit">저장하기</button>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- template -->
+<div class="d-none" id="template-title">
+  <table><tbody>
+    <tr class="lists" valign=top>
+      <td class="handle" align=center valign=top><span class="material-icons-outlined"> more_vert </span></td>
+      <td class="title" valign=top>
+        <input type="hidden" name="idx[]" value="">
+        <input type="text" class="form-control form-control-sm" name="title[]" placeholder="제목" value="" required>
+      </td>
+      <td valign=top>
+        <input type="text" class="form-control form-control-sm" name="description[]" placeholder="설명" value="">
+      </td>
+      <td>
+        <button type="button" class="btn btn-sm btn-outline-danger action-remove-title">삭제</button>
+      </td>
+    </tr>
+  </tbody></table>
+</div>
+
+

@@ -1,0 +1,32 @@
+<section class="job-categories">
+  <div class="auto-container">
+    <div class="sec-title text-center">
+      <h2><a tabindex=4000>직무 유형별 구직 정보</a></h2>
+    </div>
+
+    <div class="row wow fadeInUp">
+      <!-- Category Block -->
+    <?php
+    if(isset($job_category["Profession"]) && is_array($job_category["Profession"]) && count($job_category["Profession"]) > 0){
+      foreach($job_category["Profession"] as $val){
+      ?>
+      <div class="category-block col-lg-4 col-md-6 col-sm-12">
+        <div class="inner-box">
+          <div class="content">
+            <?=$val["icon_html"]?>
+            <h4><a href="/Recruit?pf=<?=$val["idx"]?>" tabindex=4000><?=$val["title"]?></a></h4>
+            <!--
+            <p><a tabindex=4000>(2 open positions)</a></p>
+            -->
+          </div>
+        </div>
+      </div>
+      <?php
+      }
+    }
+    ?>
+
+    </div>
+  </div>
+</section>
+

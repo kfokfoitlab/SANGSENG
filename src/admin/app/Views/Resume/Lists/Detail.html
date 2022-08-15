@@ -1,0 +1,227 @@
+<section class="content-main">
+	<div class="content-header">
+    <h2 class="content-title"> <?=$page_name?> 상세보기</h2>
+	</div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5>이력서 내용</h5>
+      <table class="table table-hover border detail-table">
+      <!-- {{{ -->
+      <tbody>
+        <tr>
+          <td class="th">제목</td>
+          <td><?=$data["title"]?></td>
+        </tr>
+        <tr>
+          <td class="th">직무 유형</td>
+          <td><?=$data["profession_title"]?></td>
+        </tr>
+        <tr>
+          <td class="th">희망 고용 형태</td>
+          <td><?=$data["employment_type_title"]?></td>
+        </tr>
+        <tr>
+          <td class="th">총 경력 기간</td>
+          <td><?=$data["career_title"]?></td>
+        </tr>
+        <tr>
+          <td class="th">희망 연봉(급여)</td>
+          <td><?=$data["category_pay_type"]?> <?=$data["category_pay"]?>원</td>
+        </tr>
+        <tr>
+          <td class="th">자기 소개</td>
+          <td><?=$data["introduce"]?></td>
+        </tr>
+      </tbody>
+      <!-- }}} -->
+      </table>
+    </div>
+
+    <div class="card-body">
+      <h5>학력</h5>
+      <table class="table table-hover border detail-table">
+      <!-- {{{ -->
+      <thead>
+        <tr class='bg-light'>
+          <td>학교유형</td>
+          <td>학교명</td>
+          <td>학과</td>
+          <td>학위</td>
+          <td>졸업여부</td>
+          <td>입학년도</td>
+          <td>입학월</td>
+          <td>졸업년도</td>
+          <td>졸업월</td>
+          <td>특이사항</td>
+        </tr>
+      </thead>
+      <tbody>
+      <?php
+      $school = json_decode($data["school"], true);
+      if(@is_array($school) && count($school) > 0){
+        foreach($school as $val){
+      ?>
+        <tr>
+          <td><?=$val["class"]?></td>
+          <td><?=$val["grade"]?></td>
+          <td><?=$val["title"]?></td>
+          <td><?=$val["degree"]?></td>
+          <td><?=$val["graduate"]?></td>
+          <td><?=$val["start_year"]?></td>
+          <td><?=$val["start_month"]?></td>
+          <td><?=$val["end_year"]?></td>
+          <td><?=$val["end_month"]?></td>
+          <td><?=nl2br($val["remark"])?></td>
+        </tr>
+      <?php
+        }
+      }
+      ?>
+      </tbody>
+      <!-- }}} -->
+      </table>
+    </div>
+
+    <div class="card-body">
+      <h5>경력</h5>
+      <table class="table table-hover border detail-table">
+      <!-- {{{ -->
+      <thead>
+        <tr class='bg-light'>
+          <td>회사명</td>
+          <td>부서</td>
+          <td>직급</td>
+          <td>입사년도</td>
+          <td>입사월</td>
+          <td>퇴사년도</td>
+          <td>퇴사월</td>
+          <td>설명</td>
+        </tr>
+      </thead>
+      <tbody>
+      <?php
+      $career = json_decode($data["career"], true);
+      if(@is_array($career) && count($career) > 0){
+        foreach($career as $val){
+      ?>
+        <tr>
+          <td><?=$val["title"]?></td>
+          <td><?=$val["position"]?></td>
+          <td><?=$val["rank"]?></td>
+          <td><?=$val["start_year"]?></td>
+          <td><?=$val["start_month"]?></td>
+          <td><?=$val["end_year"]?></td>
+          <td><?=$val["end_month"]?></td>
+          <td><?=nl2br($val["remark"])?></td>
+        </tr>
+      <?php
+        }
+      }
+      ?>
+      </tbody>
+      <!-- }}} -->
+      </table>
+    </div>
+
+    <div class="card-body">
+      <h5>수상</h5>
+      <table class="table table-hover border detail-table">
+      <!-- {{{ -->
+      <thead>
+        <tr class='bg-light'>
+          <td>수상명</td>
+          <td>주최</td>
+          <td>수상년도</td>
+          <td>수상월</td>
+          <td>수상일</td>
+          <td>설명</td>
+        </tr>
+      </thead>
+      <tbody>
+      <?php
+      $award = json_decode($data["award"], true);
+      if(@is_array($award) && count($award) > 0){
+        foreach($award as $val){
+      ?>
+        <tr>
+          <td><?=$val["title"]?></td>
+          <td><?=$val["organizer"]?></td>
+          <td><?=$val["year"]?></td>
+          <td><?=$val["month"]?></td>
+          <td><?=$val["day"]?></td>
+          <td><?=nl2br($val["remark"])?></td>
+        </tr>
+      <?php
+        }
+      }
+      ?>
+      </tbody>
+      <!-- }}} -->
+      </table>
+    </div>
+
+    <div class="card-body">
+      <h5>자격증</h5>
+      <table class="table table-hover border detail-table">
+      <!-- {{{ -->
+      <thead>
+        <tr class='bg-light'>
+          <td>자격증명</td>
+          <td>발급 기관</td>
+          <td>취득년도</td>
+          <td>취득월</td>
+          <td>취득일</td>
+          <td>설명</td>
+        </tr>
+      </thead>
+      <tbody>
+      <?php
+      $license = json_decode($data["license"], true);
+      if(@is_array($license) && count($license) > 0){
+        foreach($license as $val){
+      ?>
+        <tr>
+          <td><?=$val["title"]?></td>
+          <td><?=$val["agency"]?></td>
+          <td><?=$val["year"]?></td>
+          <td><?=$val["month"]?></td>
+          <td><?=$val["day"]?></td>
+          <td><?=nl2br($val["remark"])?></td>
+        </tr>
+      <?php
+        }
+      }
+      ?>
+      </tbody>
+      <!-- }}} -->
+      </table>
+    </div>
+
+    <div class="card-body">
+      <h5>스킬</h5>
+      <table class="table table-hover border detail-table">
+      <!-- {{{ -->
+      <tbody>
+        <tr>
+          <td class="th">스킬 목록</td>
+          <td>
+          <?php
+          $skill = json_decode($data["skill"], true);
+          echo join("<br />", $skill);
+          ?>
+          </td>
+        </tr>
+      </tbody>
+      <!-- }}} -->
+      </table>
+    </div>
+
+  </div>
+
+  <div class="text-end">
+    <button class="btn btn-dark" onclick="window.close();">닫기</button>
+  </div>
+
+</section>
+

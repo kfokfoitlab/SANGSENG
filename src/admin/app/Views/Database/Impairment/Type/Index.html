@@ -1,0 +1,156 @@
+<section class="content-main">
+	<div class="content-header">
+    <h2 class="content-title"> <?=$page_name?> </h2>
+	</div>
+
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card border rounded-lg">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-4 impairment-box" id="impairment-level0" data-level=0>
+              <h6 class="h6"># 장애 종류</h6>
+              <div class="card border">
+              <!-- {{{ -->
+                <div class="card-body">
+                  <div class="impairment-list" style="display:none">
+                    <div class="input-group text-right">
+                      <input 
+                        type="text"
+                        class="form-control"
+                        name="title"
+                        placeholder="신규 등록시 타이틀 입력"
+                      >
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-info text-white px-3 py-2 m-0 action-add-impairment"
+                      >
+                        추가
+                      </button>
+                    </div>
+                    <hr class="mb-4"/>
+
+                    <ul class="list-group">
+                    </ul>
+                  </div>
+
+                  <p class="alert">
+                    데이터를 불러오는 중입니다...
+                  </p>
+
+                </div>
+
+                <div class="card-footer">
+                <!-- {{{ -->
+                  <label class="text-muted">
+                    선택한 데이터
+                  </label>
+
+                  <button
+                    type="button"
+                    class="btn m-0 p-0 deep-orange-text waves-effect float-right disabled action-delete-impairment"
+                  >
+                    <span class="material-icons-outlined" style="font-size: 1.3em; vertical-align: top; margin-top: 2px">delete</span>
+                  </button>
+                  <div class="input-group text-right">
+                    <input 
+                      type="text"
+                      class="form-control"
+                      name="title"
+                      disabled
+                    >
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-primary px-3 py-1 m-0 disabled action-update-impairment"
+                    >
+                      수정
+                    </button>
+                  </div>
+                <!-- }}} -->
+                </div>
+              <!-- }}} -->
+              </div>
+            </div>
+
+            <div class="col-4 impairment-box" id="impairment-level1" data-level=1>
+              <h6 class="h6"># 장애 부위</h6>
+              <div class="card border">
+              <!-- {{{ -->
+                <div class="card-body">
+                  <div class="impairment-list" style="display:none">
+                    <div class="input-group text-right">
+                      <input 
+                        type="text"
+                        class="form-control"
+                        name="title"
+                        placeholder="신규 등록시 타이틀 입력"
+                      >
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-info text-white px-3 py-2 m-0 action-add-impairment"
+                      >
+                        추가
+                      </button>
+                    </div>
+                    <hr class="mb-4"/>
+
+                    <ul class="list-group">
+                    </ul>
+                  </div>
+
+                  <p class="alert">
+                    <i class="fas fa-angle-double-left mr-2 text-muted"></i>상위 데이터를 선택하세요.
+                  </p>
+
+                </div>
+
+                <div class="card-footer">
+                <!-- {{{ -->
+                  <label class="text-muted">
+                    선택한 데이터
+                  </label>
+
+                  <button
+                    type="button"
+                    class="btn m-0 p-0 deep-orange-text waves-effect float-right disabled action-delete-impairment"
+                  >
+                    <span class="material-icons-outlined" style="font-size: 1.3em; vertical-align: top; margin-top: 2px">delete</span>
+                  </button>
+                  <div class="input-group text-right">
+                    <input 
+                      type="text"
+                      class="form-control"
+                      name="title"
+                      disabled
+                    >
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-primary px-3 py-1 m-0 disabled action-update-impairment"
+                    >
+                      수정
+                    </button>
+                  </div>
+                <!-- }}} -->
+                </div>
+              <!-- }}} -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- Template -->
+<div class="d-none" id="template">
+  <li class="list-group-item border p-2" data-idx=0 data-this-level=0 data-level0-idx=0 data-level1-idx=0>
+    <i class="fas fa-ellipsis-v text-black-50 float-left mt-1 mr-3"></i>
+    <i class="fas fa-chevron-right float-right mt-1 small text-muted"></i>
+    <div class="title">title</div>
+  </li>
+</div>
+

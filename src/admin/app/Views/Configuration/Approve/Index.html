@@ -1,0 +1,91 @@
+<section class="content-main">
+	<div class="content-header">
+    <h2 class="content-title"> <?=$page_name?> </h2>
+	</div>
+
+  <form name="form-submit" method="POST" target="_self" action="/<?=_CONTROLLER?>/UpdateSubmit">
+
+
+  <div class="card border rounded-lg">
+    <div class="card-body">
+      <table class="table table-bordered table-hover" id="data-table">
+        <tbody class="sortable">
+        <tr>
+          <th width=20% class="bg-light">인재 가입시 심사처리</th>
+          <td>
+            <div class="form-check form-check-inline me-4">
+              <input class="form-check-input" type="radio" name="approve_signup_user" id="approve_signup_user_0" value="0" <?=(@(int)$data["approve_signup_user"])?"":"checked"?>>
+              <label class="form-check-label" for="approve_signup_user_0">자동 승인</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="approve_signup_user" id="approve_signup_user_1" value="1" <?=(@(int)$data["approve_signup_user"])?"checked":""?> disabled>
+              <label class="form-check-label" for="approve_signup_user_1">심사 등록</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th width=20% class="bg-light">기업 가입시 심사처리</th>
+          <td>
+            <div class="form-check form-check-inline me-4">
+              <input class="form-check-input" type="radio" name="approve_signup_company" id="approve_signup_company_0" value="0" <?=(@(int)$data["approve_signup_company"])?"":"checked"?>>
+              <label class="form-check-label" for="approve_signup_company_0">자동 승인</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="approve_signup_company" id="approve_signup_company_1" value="1" <?=(@(int)$data["approve_signup_company"])?"checked":""?>>
+              <label class="form-check-label" for="approve_signup_company_1">심사 등록</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th width=20% class="bg-light">구직 등록시 심사처리</th>
+          <td>
+            <div class="form-check form-check-inline me-4">
+              <input class="form-check-input" type="radio" name="approve_register_job" id="approve_register_job_0" value="0" <?=(@(int)$data["approve_register_job"])?"":"checked"?>>
+              <label class="form-check-label" for="approve_register_job_0">자동 승인</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="approve_register_job" id="approve_register_job_1" value="1" <?=(@(int)$data["approve_register_job"])?"checked":""?>>
+              <label class="form-check-label" for="approve_register_job_1">심사 등록</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th width=20% class="bg-light">기업 공개시 심사처리</th>
+          <td>
+            <div class="form-check form-check-inline me-4">
+              <input class="form-check-input" type="radio" name="approve_register_public_company" id="approve_register_public_company_0" value="0" <?=(@(int)$data["approve_register_public_company"])?"":"checked"?>>
+              <label class="form-check-label" for="approve_register_public_company_0">자동 승인</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="approve_register_public_company" id="approve_register_public_company_1" value="1" <?=(@(int)$data["approve_register_public_company"])?"checked":""?>>
+              <label class="form-check-label" for="approve_register_public_company_1">심사 등록</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th width=20% class="bg-light">채용 등록시 심사처리</th>
+          <td>
+            <div class="form-check form-check-inline me-4">
+              <input class="form-check-input" type="radio" name="approve_register_application" id="approve_register_application_0" value="0" <?=(@(int)$data["approve_register_application"])?"":"checked"?>>
+              <label class="form-check-label" for="approve_register_application_0">자동 승인</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="approve_register_application" id="approve_register_application_1" value="1" <?=(@(int)$data["approve_register_application"])?"checked":""?>>
+              <label class="form-check-label" for="approve_register_application_1">심사 등록</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+        </tbody>
+      </table>
+      </form>
+    </div>
+
+    <div class="card-footer border-top">
+      <button type="submit" class="btn btn-primary action-save-submit">저장하기</button>
+    </div>
+  </div>
+
+  </form>
+
+</section>

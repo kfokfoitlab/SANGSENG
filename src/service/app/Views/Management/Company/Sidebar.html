@@ -1,0 +1,25 @@
+<div class="sidebar-backdrop"></div>
+<div class="user-sidebar">
+  <div class="sidebar-inner">
+    <ul class="navigation">
+      <li class="<?=(strpos(_CONTROLLER, "Profile") !== false )?"active":""?>">
+        <a href="/Management/Company/Profile"><i class="la la-user"></i>기업 프로필</a>
+      </li>
+      <li class="<?=(strpos(_CONTROLLER, "PublicSettings") !== false )?"active":""?>">
+        <a href="/Management/Company/PublicSettings"><i class="la la-file-invoice"></i>기업 공개 관리</a>
+      </li>
+      <li class="<?=(strpos(_CONTROLLER, "Application") !== false )?"active":""?>">
+        <a href="/Management/Company/Application"><i class="la la-paper-plane"></i>채용 관리</a>
+      </li>
+      <li class="<?=(strpos(_CONTROLLER, "BookmarkCandidate") !== false )?"active":""?>">
+        <a href="/Management/Company/BookmarkCandidate"><i class="la la-briefcase"></i>관심 인재</a>
+      </li>
+      <li class="<?=(strpos(_CONTROLLER, "Chat") !== false )?"active":""?>">
+        <a href="/Management/Company/Chat"><i class="la la-comment-o"></i>메세지 관리</a>
+      </li>
+      <li class="<?=(strpos(_CONTROLLER, "SignOut") !== false )?"active":""?>">
+        <a href="/Management/Auth/SignOut"><i class="la la-sign-out"></i>로그아웃</a>
+      </li>
+    </ul>
+  </div>
+</div>

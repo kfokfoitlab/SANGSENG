@@ -1,0 +1,394 @@
+<section class="content-main">
+	<div class="content-header">
+    <h2 class="content-title"> <?=$page_name?> 상세보기</h2>
+	</div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5>모집 요강</h5>
+      <table class="table table-hover border detail-table">
+      <!-- {{{ -->
+      <tbody>
+        <tr>
+          <td class="th">채용 제목</td>
+          <td><?=$data["title"]?></td>
+        </tr>
+        <tr>
+          <td class="th">상세 모집요강</td>
+          <td><?=nl2br($data["application_detail"])?></td>
+        </tr>
+        <tr>
+          <td class="th">고용 형태</td>
+          <td>
+            <?php
+            if(@is_array($job_category["EmploymentType"]) && @count($job_category["EmploymentType"])){
+              foreach($job_category["EmploymentType"] as $val){
+                if($val["idx"] == $data["employment_type"]){
+                  echo $val["title"];
+                }
+              }
+            }
+            ?>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">필요 경력 기간</td>
+          <td>
+            <?php
+            if(@is_array($job_category["Career"]) && @count($job_category["Career"])){
+              foreach($job_category["Career"] as $val){
+                if($val["idx"] == $data["career"]){
+                  echo $val["title"];
+                }
+              }
+            }
+            ?>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">모집 인원</td>
+          <td>
+            <?=$data["recruitment_number"]?> 명
+          </td>
+        </tr>
+        <tr>
+          <td class="th">직무 유형</td>
+          <td>
+            <?php
+            if(@is_array($job_category["Profession"]) && @count($job_category["Profession"])){
+              foreach($job_category["Profession"] as $val){
+                if($val["idx"] == $data["profession"]){
+                  echo $val["title"];
+                }
+              }
+            }
+            ?>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">담당 업무</td>
+          <td> <?=nl2br($data["profession_detail"])?> </td>
+        </tr>
+        <tr>
+          <td class="th">근무 예정지</td>
+          <td>
+            우편번호: <?=$data["post_code"]?><br />
+            <?=$data["address"]?><br />
+            <?=$data["address_detail"]?>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">등록일</td>
+          <td><?=$data["register_date"]?></td>
+        </tr>
+      </tbody>
+      <!-- }}} -->
+      </table>
+
+      <h5 class="mt-4">근무 조건</h5>
+      <table class="table table-hover border detail-table">
+      <!-- {{{ -->
+      <tbody>
+        <tr>
+          <td class="th">근무 시간</td>
+          <td>
+            <?php
+            if(@is_array($job_category["WorkType"]) && @count($job_category["WorkType"])){
+              foreach($job_category["WorkType"] as $val){
+                if($val["idx"] == $data["work_type"]){
+                  echo $val["title"];
+                }
+              }
+            }
+            ?>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">기타 근무 시간 설명</td>
+          <td> <?=nl2br($data["work_type_detail"])?> </td>
+        </tr>
+        <tr>
+          <td class="th">임금</td>
+          <td>
+            <?=$data["pay_type"]?> <?=number_format($data["pay_min"])?>원 ~ <?=number_format($data["pay_max"])?>원
+          </td>
+        </tr>
+        <tr>
+          <td class="th">임금 협의 가능 여부</td>
+          <td>
+            <div class="form-group mt-2 ps-2">
+              <div class="input-group mb-2">
+              <input type="checkbox" name="pay_negotiability" value="y" id="pay_deal" title="임금 협의 가능" <?=($data["pay_negotiability"] == 1)?"checked":""?> onclick="return false;">
+                <label class="ms-2" for="pay_deal"><a title="임금 협의 가능">임금 협의 가능</a></label>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">기타 임금 설명</td>
+          <td>
+            <?=nl2br($data["pay_detail"])?>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">사회보험</td>
+          <td>
+            <div class="row ps-2">
+              <div class="col-6 col-md-3">
+                <div class="form-group mt-2 mb-0">
+                  <div class="input-group mb-2">
+                    <input type="checkbox" name="social_insurance_1" value="y" id="social_insurance_1" title="국민연금" <?=($data["social_insurance_1"] == 1)?"checked":""?> onclick="return false;">
+                    <label class="ms-2" for="social_insurance_1"><a title="국민연금">국민연금</a></label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="form-group mt-2">
+                  <div class="input-group mb-2">
+                    <input type="checkbox" name="social_insurance_2" value="y" id="social_insurance_2" title="고용보험" <?=($data["social_insurance_2"] == 1)?"checked":""?> onclick="return false;">
+                    <label class="ms-2" for="social_insurance_2"><a title="고용보험">고용보험</a></label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="form-group mt-2">
+                  <div class="input-group mb-2">
+                    <input type="checkbox" name="social_insurance_3" value="y" id="social_insurance_3" title="산재보험" <?=($data["social_insurance_3"] == 1)?"checked":""?> onclick="return false;">
+                    <label class="ms-2" for="social_insurance_3"><a title="산재보험">산재보험</a></label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="form-group mt-2">
+                  <div class="input-group mb-2">
+                    <input type="checkbox" name="social_insurance_4" value="y" id="social_insurance_4" title="건강보험" <?=($data["social_insurance_4"] == 1)?"checked":""?> onclick="return false;">
+                    <label class="ms-2" for="social_insurance_4"><a title="건강보험">건강보험</a></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">기타 보험</td>
+          <td> <?=nl2br($data["insurance_detail"])?> </td>
+        </tr>
+        <tr>
+          <td class="th">퇴직 급여</td>
+          <td>
+            <div class="form-group mt-2 ps-2">
+              <div class="input-group mb-2">
+                <input type="checkbox" name="severance_pay" value="y" id="severance_pay" title="퇴직금" <?=($data["severance_pay"] == 1)?"checked":""?> onclick="return false;">
+                <label class="ms-2" for="severance_pay"><a title="퇴직금">퇴직금</a></label>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">기타 퇴직 급여</td>
+          <td> <?=nl2br($data["severance_pay_detail"])?> </td>
+        </tr>
+      </tbody>
+      <!-- }}} -->
+      </table>
+
+      <h5 class="mt-4">전형 방법</h5>
+      <table class="table table-hover border detail-table">
+      <!-- {{{ -->
+      <tbody>
+        <tr>
+          <td class="th">접수 마감일</td>
+          <td>
+            <?=$data["receipt_expire_date"]?>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">전형 방법</td>
+          <td>
+            <div class="row ps-2">
+              <div class="col-6 col-md-3">
+                <div class="form-group mt-2 mb-0">
+                  <div class="input-group mb-2">
+                    <input type="checkbox" name="receipt_method_doc" value="y" id="receipt_method_doc" title="서류" <?=($data["receipt_method_doc"] == 1)?"checked":""?> onclick="return false;">
+                    <label class="ms-2" for="receipt_method_doc"><a title="서류">서류</a></label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="form-group mt-2">
+                  <div class="input-group mb-2">
+                    <input type="checkbox" name="receipt_method_interview" value="y" id="receipt_method_interview" title="면접" <?=($data["receipt_method_interview"] == 1)?"checked":""?> onclick="return false;">
+                    <label class="ms-2" for="receipt_method_interview"><a title="면접">면접</a></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">추가 지원방법 안내</td>
+          <td>
+            <?=nl2br($data["receipt_method_detail"])?>
+          </td>
+        </tr>
+      </tbody>
+      <!-- }}} -->
+      </table>
+
+      <h5 class="mt-4">작업 환경</h5>
+      <table class="table table-hover border detail-table">
+      <!-- {{{ -->
+      <tbody>
+        <tr>
+          <td class="th">운동능력 조건</td>
+          <td>
+            <div class="form-group">
+              <table class="table table-hover table-borderless mb-0">
+              <?php
+              foreach($impairments["PhysicalAbility"] as $code => $items){
+              ?>
+                <tr>
+                  <td width=15% class="px-3 font-weight-400" title="<?=$items[0]["title"]?>"><a><?=$items[0]["title"]?></a></td>
+                  <td class="px-3">
+                    <div class="input-group mb-2">
+                      <input type="radio" name="impairment[physical_ability][<?=$code?>]" value="null" id="impairment_physical_ability_<?=$code?>_null" title="조건없음" checked onclick="return false;">
+                      <label class="ms-2" for="impairment_physical_ability_<?=$code?>_null">조건없음</label>
+                    </div>
+                    <?php
+                    foreach($items as $key => $val){
+                      $checked = ($val["score"] == $impairment_data["physical_ability"][$code])?"checked":"";
+                    ?>
+                    <div class="input-group mb-2">
+                      <input type="radio" name="impairment[physical_ability][<?=$code?>]" value="<?=$val["score"]?>" id="impairment_physical_ability_<?=$code."_".$key?>" title="<?=$val["item"]?>" <?=$checked?> onclick="return false;">
+                      <label class="ms-2" for="impairment_physical_ability_<?=$code."_".$key?>"><?=$val["item"]?></label>
+                    </div>
+                    <?php
+                    }
+                    ?>
+                  </td>
+                </tr>
+              <?php
+              }
+              ?>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <!-- }}} -->
+      </table>
+
+      <h5 class="mt-4">우대 사항</h5>
+      <table class="table table-hover border detail-table">
+      <!-- {{{ -->
+      <tbody>
+        <tr>
+          <td class="th">우대사항</td>
+          <td>
+            <?=nl2br($data["preference_detail"])?>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">추가조건</td>
+          <td>
+            <?=nl2br($data["additional_condition_detail"])?>
+          </td>
+        </tr>
+      </tbody>
+      <!-- }}} -->
+      </table>
+
+      <h5 class="mt-4">복리 후생</h5>
+      <table class="table table-hover border detail-table">
+      <!-- {{{ -->
+      <tbody>
+        <tr>
+          <td class="th">복리후생</td>
+          <td>
+            <div class="form-group col-md-12">
+              <div class="row ps-2">
+              <?php
+              $welfare = json_decode($data["welfare"], true);
+              if(@is_array($job_category["Welfare"]) && @count($job_category["Welfare"])){
+                foreach($job_category["Welfare"] as $val){
+                  $checked = (array_search($val["idx"], $welfare) !== false)? "checked": "";
+              ?>
+                <div class="col-6 col-md-3">
+                  <div class="form-group mt-2 mb-0">
+                    <div class="input-group mb-2">
+                      <input type="checkbox" name="welfare[]" value="<?=$val["idx"]?>" id="welfare_<?=$val["idx"]?>" title="<?=$val["title"]?>" <?=$checked?> onclick="return false;">
+                      <label class="ms-2" for="welfare_<?=$val["idx"]?>"><a title="<?=$val["title"]?>"><?=$val["title"]?></a></label>
+                    </div>
+                  </div>
+                </div>
+                <?php
+                }
+              }
+              ?>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">기타 복리후생</td>
+          <td>
+            <?=nl2br($data["welfare_detail"])?>
+          </td>
+        </tr>
+      </tbody>
+      <!-- }}} -->
+      </table>
+
+      <h5 class="mt-4">지원자 목록</h5>
+      <table class="table table-hover border detail-table">
+      <!-- {{{ -->
+      <thead>
+        <tr>
+          <td class="th">지원자명</td>
+          <td class="th">상태</td>
+          <td class="th">이력서</td>
+          <td class="th">지원 메세지</td>
+          <td class="th">지원 날짜</td>
+        </tr>
+      </thead>
+      <tbody>
+      <?php
+      if(isset($receipt) && is_array($receipt) && count($receipt) > 0){
+        foreach($receipt as $val){
+        ?>
+        <tr>
+          <td>
+            <a href="/Member/User/Detail/<?=$val["user_uuid"]?>" target="_blank"><?=$val["user_name"]?></a>
+          </td>
+          <td>
+            <?php
+            switch($val["status"]){
+              case "1": echo "지원중"; break;
+              case "5": echo "채용됨"; break;
+              case "9": echo "탈락됨"; break;
+            }
+            ?>
+          </td>
+          <td>
+            <a href="/Resume/Lists/Detail/<?=$val["resume_uuid"]?>" target="_blank"><?=$val["resume_title"]?></a>
+          </td>
+          <td><?=$val["remark"]?></td>
+          <td><?=$val["register_date"]?></td>
+        </tr>
+        <?php
+        }
+      }
+      ?>
+      </tbody>
+      <!-- }}} -->
+      </table>
+
+    </div>
+  </div>
+
+  <div class="text-end">
+    <button class="btn btn-dark" onclick="window.close();">닫기</button>
+  </div>
+
+</section>
+

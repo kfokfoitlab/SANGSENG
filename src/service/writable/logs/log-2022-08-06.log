@@ -1,0 +1,33 @@
+CRITICAL - 2022-08-06 20:46:17 --> Undefined variable $files_lists
+in APPPATH/Models/Management/Company/PublicSettingsModel.php on line 71.
+ 1 APPPATH/Models/Management/Company/PublicSettingsModel.php(71): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/Company/PublicSettings.php(51): App\Models\Management\Company\PublicSettingsModel->Update()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\PublicSettings->UpdateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-06 20:47:16 --> Undefined variable $photos_query
+in APPPATH/Models/Management/Company/PublicSettingsModel.php on line 100.
+ 1 APPPATH/Models/Management/Company/PublicSettingsModel.php(100): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/Company/PublicSettings.php(51): App\Models\Management\Company\PublicSettingsModel->Update()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\PublicSettings->UpdateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-06 21:08:21 --> Undefined variable $files
+in APPPATH/Models/CommonModel.php on line 189.
+ 1 APPPATH/Models/CommonModel.php(189): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Models/Management/Company/PublicSettingsModel.php(50): App\Models\CommonModel->fileHandle()
+ 3 APPPATH/Controllers/Management/Company/PublicSettings.php(51): App\Models\Management\Company\PublicSettingsModel->Update()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\PublicSettings->UpdateSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-06 21:08:39 --> Undefined variable $files_query
+in APPPATH/Models/Management/Company/PublicSettingsModel.php on line 101.
+ 1 APPPATH/Models/Management/Company/PublicSettingsModel.php(101): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/Company/PublicSettings.php(51): App\Models\Management\Company\PublicSettingsModel->Update()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\PublicSettings->UpdateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()

@@ -1,0 +1,392 @@
+CRITICAL - 2022-08-03 06:13:02 --> Undefined variable $uuid
+in APPPATH/Views/Management/User/ManageJob/Create.html on line 35.
+ 1 APPPATH/Views/Management/User/ManageJob/Create.html(35): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/ManageJob/Create.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/ManageJob.php(84): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->Create()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 06:20:55 --> Array to string conversion
+in APPPATH/Views/Management/User/Resume/DetailPreview.html on line 89.
+ 1 APPPATH/Views/Management/User/Resume/DetailPreview.html(89): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/Resume/DetailPreview.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/Resume.php(91): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->DetailPreview()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 06:21:53 --> Undefined array key "introduce"
+in APPPATH/Models/Management/User/ResumeModel.php on line 59.
+ 1 APPPATH/Models/Management/User/ResumeModel.php(59): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Management/User/ManageJob.php(93): App\Models\Management\User\ResumeModel->Create()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->CreateSubmit()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 06:34:09 --> Required parameter $uuid follows optional parameter $user_uuid
+in APPPATH/Models/Management/User/ManageJobModel.php on line 31.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(284): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(284): include_once()
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 4 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 5 APPPATH/Controllers/Management/User/ManageJob.php(27): CodeIgniter\Autoloader\Autoloader->loadClass()
+ 6 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Management\User\ManageJob->__construct()
+ 7 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 06:35:15 --> Required parameter $data follows optional parameter $user_uuid
+in APPPATH/Models/Management/User/ManageJobModel.php on line 31.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(284): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(284): include_once()
+ 3 SYSTEMPATH/Autoloader/Autoloader.php(261): CodeIgniter\Autoloader\Autoloader->includeFile()
+ 4 SYSTEMPATH/Autoloader/Autoloader.php(239): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+ 5 APPPATH/Controllers/Management/User/ManageJob.php(27): CodeIgniter\Autoloader\Autoloader->loadClass()
+ 6 SYSTEMPATH/CodeIgniter.php(860): App\Controllers\Management\User\ManageJob->__construct()
+ 7 SYSTEMPATH/CodeIgniter.php(459): CodeIgniter\CodeIgniter->createController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 06:36:18 --> Field 'user_uuid' doesn't have a default value
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/User/ManageJobModel.php(64): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Controllers/Management/User/ManageJob.php(98): App\Models\Management\User\ManageJobModel->Create()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->CreateSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 06:37:08 --> Field 'user_uuid' doesn't have a default value
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/User/ManageJobModel.php(64): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Controllers/Management/User/ManageJob.php(98): App\Models\Management\User\ManageJobModel->Create()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->CreateSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 06:37:09 --> Field 'user_uuid' doesn't have a default value
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/User/ManageJobModel.php(64): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Controllers/Management/User/ManageJob.php(98): App\Models\Management\User\ManageJobModel->Create()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->CreateSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 06:47:36 --> Undefined array key "favorites"
+in APPPATH/Views/Management/User/ManageJob/Index.html on line 65.
+ 1 APPPATH/Views/Management/User/ManageJob/Index.html(65): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/ManageJob/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/ManageJob.php(44): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 06:56:51 --> Too few arguments to function App\Controllers\Management\User\ManageJob::Detail(), 0 passed in /var/www/html/vendor/codeigniter4/framework/system/CodeIgniter.php on line 898 and exactly 1 expected
+in APPPATH/Controllers/Management/User/ManageJob.php on line 51.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->Detail()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 07:04:11 --> Class "App\Controllers\Management\User\App\Controllers\Management\User\Resume" not found
+in APPPATH/Controllers/Management/User/ManageJob.php on line 56.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->Detail()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 07:04:31 --> Call to undefined method App\Controllers\Management\User\Resume::DetailPreivew()
+in APPPATH/Controllers/Management/User/ManageJob.php on line 57.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->Detail()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 07:04:41 --> Class "App\Controllers\Management\User\App\Controllers\Management\User\Resume" not found
+in APPPATH/Controllers/Management/User/ManageJob.php on line 56.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->Detail()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 07:04:46 --> Call to undefined method App\Controllers\Management\User\Resume::DetailPreivew()
+in APPPATH/Controllers/Management/User/ManageJob.php on line 57.
+ 1 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->Detail()
+ 2 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 07:05:00 --> Invalid file: Management/User/ManageJob/DetailPreview.html
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 33.
+ 1 SYSTEMPATH/View/View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Management/User/Resume.php(91): view()
+ 4 APPPATH/Controllers/Management/User/ManageJob.php(57): App\Controllers\Management\User\Resume->DetailPreview()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->Detail()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 07:08:15 --> Undefined array key "start_year"
+in APPPATH/Views/Management/User/Resume/DetailPreview.html on line 89.
+ 1 APPPATH/Views/Management/User/Resume/DetailPreview.html(89): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/Resume/DetailPreview.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/Resume.php(91): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Resume->DetailPreview()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 07:14:35 --> Duplicate entry '1234567890' for key 'company.business_number'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(52): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Auth/SignUpCompanyModel.php(82): App\Models\dbClasses\dbQueryClass->insert()
+ 3 APPPATH/Controllers/Auth.php(274): App\Models\Auth\SignUpCompanyModel->Register()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpCompanySubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 07:17:26 --> Undefined array key "sbs"
+in APPPATH/Controllers/Auth.php on line 259.
+ 1 APPPATH/Controllers/Auth.php(259): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignUpCompany()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 17:59:34 --> Undefined array key "profile_img_uuid"
+in APPPATH/Controllers/Management/Company/Profile.php on line 36.
+ 1 APPPATH/Controllers/Management/Company/Profile.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Profile->Index()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:00:44 --> Undefined array key "impairment"
+in APPPATH/Controllers/Management/Company/Profile.php on line 37.
+ 1 APPPATH/Controllers/Management/Company/Profile.php(37): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Profile->Index()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:04:26 --> Undefined array key "impairment"
+in APPPATH/Controllers/Management/Company/Profile.php on line 37.
+ 1 APPPATH/Controllers/Management/Company/Profile.php(37): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Profile->Index()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:04:43 --> Invalid file: Management/Company/Profile.html
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 33.
+ 1 SYSTEMPATH/View/View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Management/Company/Profile.php(40): view()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Profile->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:04:57 --> Undefined array key "name"
+in APPPATH/Views/Management/Company/Profile.html on line 44.
+ 1 APPPATH/Views/Management/Company/Profile.html(44): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/Company/Profile.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/Company/Profile.php(40): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Profile->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:05:53 --> Undefined array key "did_phone"
+in APPPATH/Views/Management/Company/Profile.html on line 52.
+ 1 APPPATH/Views/Management/Company/Profile.html(52): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/Company/Profile.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/Company/Profile.php(40): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Profile->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:06:11 --> Undefined array key "sns_homepage"
+in APPPATH/Views/Management/Company/Profile.html on line 103.
+ 1 APPPATH/Views/Management/Company/Profile.html(103): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/Company/Profile.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/Company/Profile.php(40): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Profile->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:14:41 --> Trying to access array offset on value of type null
+in APPPATH/Controllers/Management/User/Profile.php on line 36.
+ 1 APPPATH/Controllers/Management/User/Profile.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->Index()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:15:53 --> require_once(/var/www/html/app/Views/Management/Sidebar.html): Failed to open stream: No such file or directory
+in APPPATH/Views/Management/User/Profile.html on line 2.
+ 1 APPPATH/Views/Management/User/Profile.html(2): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Views/Management/User/Profile.html(2): require_once()
+ 3 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/Profile.html')
+ 4 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 6 APPPATH/Controllers/Management/User/Profile.php(42): view()
+ 7 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\Profile->Index()
+ 8 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:16:38 --> require_once(/var/www/html/app/Views/Management/User/ManageJob/../../Sidebar.html): Failed to open stream: No such file or directory
+in APPPATH/Views/Management/User/ManageJob/Index.html on line 2.
+ 1 APPPATH/Views/Management/User/ManageJob/Index.html(2): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Views/Management/User/ManageJob/Index.html(2): require_once()
+ 3 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/ManageJob/Index.html')
+ 4 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 6 APPPATH/Controllers/Management/User/ManageJob.php(44): view()
+ 7 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->Index()
+ 8 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:18:29 --> require_once(/var/www/html/app/Views/Management/Company/../Sidebar.html): Failed to open stream: No such file or directory
+in APPPATH/Views/Management/Company/Profile.html on line 2.
+ 1 APPPATH/Views/Management/Company/Profile.html(2): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Views/Management/Company/Profile.html(2): require_once()
+ 3 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/Company/Profile.html')
+ 4 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 6 APPPATH/Controllers/Management/Company/Profile.php(40): view()
+ 7 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Profile->Index()
+ 8 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:19:07 --> require_once(/var/www/html/app/Views/Management/Company/../Sidebar.html): Failed to open stream: No such file or directory
+in APPPATH/Views/Management/Company/Profile.html on line 2.
+ 1 APPPATH/Views/Management/Company/Profile.html(2): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Views/Management/Company/Profile.html(2): require_once()
+ 3 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/Company/Profile.html')
+ 4 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 6 APPPATH/Controllers/Management/Company/Profile.php(40): view()
+ 7 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Profile->Index()
+ 8 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:26:52 --> Unknown column 'update_date' in 'field list'
+in APPPATH/Models/dbClasses/dbQueryClass.php on line 64.
+ 1 APPPATH/Models/dbClasses/dbQueryClass.php(59): App\Models\dbClasses\dbQueryClass->trace_error()
+ 2 APPPATH/Models/Management/Company/ProfileModel.php(106): App\Models\dbClasses\dbQueryClass->update()
+ 3 APPPATH/Models/Management/Company/ProfileModel.php(38): App\Models\Management\Company\ProfileModel->UpdateSection1()
+ 4 APPPATH/Controllers/Management/Company/Profile.php(52): App\Models\Management\Company\ProfileModel->Update()
+ 5 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Profile->UpdateSubmit()
+ 6 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 8 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:29:50 --> Undefined array key "namager_name"
+in APPPATH/Models/Management/Company/ProfileModel.php on line 91.
+ 1 APPPATH/Models/Management/Company/ProfileModel.php(91): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Models/Management/Company/ProfileModel.php(38): App\Models\Management\Company\ProfileModel->UpdateSection1()
+ 3 APPPATH/Controllers/Management/Company/Profile.php(52): App\Models\Management\Company\ProfileModel->Update()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Profile->UpdateSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:36:23 --> Undefined array key "company_name"
+in APPPATH/Models/Management/Company/ProfileModel.php on line 88.
+ 1 APPPATH/Models/Management/Company/ProfileModel.php(88): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Models/Management/Company/ProfileModel.php(38): App\Models\Management\Company\ProfileModel->UpdateSection1()
+ 3 APPPATH/Controllers/Management/Company/Profile.php(52): App\Models\Management\Company\ProfileModel->Update()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Profile->UpdateSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:36:40 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:36:45 --> Undefined array key "company_name"
+in APPPATH/Models/Management/Company/ProfileModel.php on line 88.
+ 1 APPPATH/Models/Management/Company/ProfileModel.php(88): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Models/Management/Company/ProfileModel.php(38): App\Models\Management\Company\ProfileModel->UpdateSection1()
+ 3 APPPATH/Controllers/Management/Company/Profile.php(52): App\Models\Management\Company\ProfileModel->Update()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Profile->UpdateSubmit()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:36:59 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:37:01 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:37:04 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:37:11 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:38:13 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 18:40:30 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 19:46:05 --> require_once(/var/www/html/app/Views/Management/Company/Application/../../Sidebar.html): Failed to open stream: No such file or directory
+in APPPATH/Views/Management/Company/Application/Index.html on line 2.
+ 1 APPPATH/Views/Management/Company/Application/Index.html(2): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Views/Management/Company/Application/Index.html(2): require_once()
+ 3 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/Company/Application/Index.html')
+ 4 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 6 APPPATH/Controllers/Management/Company/Application.php(41): view()
+ 7 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Application->Index()
+ 8 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-03 19:49:34 --> require_once(/var/www/html/app/Views/Management/Company/Application/../../Sidebar.html): Failed to open stream: No such file or directory
+in APPPATH/Views/Management/Company/Application/Create.html on line 2.
+ 1 APPPATH/Views/Management/Company/Application/Create.html(2): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Views/Management/Company/Application/Create.html(2): require_once()
+ 3 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/Company/Application/Create.html')
+ 4 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 6 APPPATH/Controllers/Management/Company/Application.php(107): view()
+ 7 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\Company\Application->Create()
+ 8 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 9 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+10 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()

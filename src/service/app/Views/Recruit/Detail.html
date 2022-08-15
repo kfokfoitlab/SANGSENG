@@ -1,0 +1,350 @@
+<!-- Job Detail Section -->
+<section class="job-detail-section style-three" style="margin-top: 76px;">
+  <!-- Upper Box -->
+  <div class="upper-box">
+    <div class="auto-container">
+      <!-- Job Block -->
+      <div class="job-block-seven style-three">
+        <div class="inner-box">
+          <div class="content">
+          <div class="company-logo text-center"><img class="img-fluid" src="/Image/<?=$data["company_img_uuid"]?>" alt="기업로고"></div>
+            <h4><a tabindex=100><?=$data["title"]?></a></h4>
+            <p class="text-center mb-2"><?=$data["company_name"]?></p>
+            <ul class="job-info">
+              <li><span class="icon flaticon-briefcase"></span> <a><?=$data["profession_title"]?></a></li>
+              <li class="mx-4"><span class="icon flaticon-map-locator"></span> <a><?=$data["address_short"]?></a></li>
+              <li><span class="icon flaticon-clock-3"></span> <a><?=$data["work_type_title"]?></a></li>
+            </ul>
+            <ul class="job-other-info">
+              <li class="time"><a><?=$data["employment_type_title"]?></a></li>
+              <li class="privacy"><a><?=$data["career_title"]?></a></li>
+            </ul>
+          </div>
+
+          <div class="btn-box">
+            <a href="/Recruit/Application/<?=$data["uuid"]?>" class="theme-btn btn-style-one" tabindex=100>지원하기</a>
+
+            <?php
+            if(@$_SESSION["login"] == "success" && @$_SESSION["login_info"]["type"] == "user"){
+              if(!$data["bookmark"]){
+            ?>
+            <button type="button" 
+              class="bookmark-btn action-add-bookmark" 
+              tabindex=1500 
+              title="북마크"
+              data-user-uuid="<?=$_SESSION["login_info"]["uuid"]?>"
+              data-application-uuid="<?=$data["uuid"]?>"
+            >
+              <!-- span class="flaticon-bookmark"></span -->
+              <span class="far fa-2x fa-bookmark text-dark"></span>
+            </button>
+            <?php
+              }
+              else{
+              ?>
+            <button type="button" 
+              class="bookmark-btn action-remove-bookmark" 
+              tabindex=1500 
+              title="북마크"
+              data-user-uuid="<?=$_SESSION["login_info"]["uuid"]?>"
+              data-application-uuid="<?=$data["uuid"]?>"
+            >
+              <!-- span class="flaticon-bookmark"></span -->
+              <span class="fas fa-2x fa-bookmark text-primary"></span>
+            </button>
+            <?php
+              }
+            }
+            ?>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="job-detail-outer">
+    <div class="auto-container">
+      <div class="row">
+        <div class="content-column col-lg-12 col-md-12 col-sm-12">
+          <div class="job-overview-two">
+            <h4><a>채용 정보</a></h4>
+            <ul>
+              <li>
+                <i class="icon icon-calendar"></i>
+                <h5><a>시작일:</a></h5>
+                <span><a><?=substr($data["register_date"], 0, 10)?></a></span>
+              </li>
+              <li>
+                <i class="icon icon-expiry"></i>
+                <h5><a>마감일:</a></h5>
+                <span><a><?=$data["receipt_expire_date"]?></a></span>
+              </li>
+              <li>
+                <i class="icon icon-location"></i>
+                <h5><a>근무지역:</a></h5>
+                <span><a><?=$data["address_short"]?></a></span>
+              </li>
+              <li>
+                <i class="icon icon-user-2"></i>
+                <h5><a>모집분야:</a></h5>
+                <span><a><?=$data["profession_title"]?></a></span>
+              </li>
+              <li>
+                <i class="icon icon-clock"></i>
+                <h5><a>근무시간:</a></h5>
+                <span><a><?=$data["work_type_title"]?></a></span>
+              </li>
+              <li>
+                <i class="icon icon-rate"></i>
+                <h5><a>급여:</a></h5>
+                <span><a><?=$data["pay_type"]?> <?=number_format($data["pay_min"])?>~<?=number_format($data["pay_max"])?>원</a></span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="job-detail">
+            <h2 class="mb-4"><a>상세요강</a></h2>
+            <p><?=$data["application_detail"]?></p>
+          </div>
+
+          <div class="job-detail">
+            <h2 class="mb-4"><a>모집요강</a></h2>
+            <table class="table table-borderless table-hover" style="font-size: 1.2em">
+            <tr>
+              <td width=20%>고용 형태</td>
+              <td><?=$data["employment_type_title"]?></td>
+            </tr>
+            <tr>
+              <td>필요 경력</td>
+              <td><?=$data["career_title"]?></td>
+            </tr>
+            <tr>
+              <td>모집 인원</td>
+              <td><?=$data["recruitment_number"]?> 명</td>
+            </tr>
+            <tr>
+              <td>직무 유형</td>
+              <td><?=$data["profession"]?></td>
+            </tr>
+            <tr>
+              <td>담당 업무</td>
+              <td><?=nl2br($data["profession_detail"])?></td>
+            </tr>
+            <tr>
+              <td>근무 예정지</td>
+              <td>
+                <p class="mb-1"><?=$data["address"]?> </p>
+                <p class="mb-0"><?=$data["address_detail"]?></p>
+              </td>
+            </tr>
+            </table>
+          </div>
+
+          <div class="job-detail mt-4">
+            <h2 class="mb-4"><a>근무조건</a></h2>
+            <table class="table table-borderless table-hover" style="font-size: 1.2em">
+            <tr>
+              <td width=20%>근무시간</td>
+              <td><?=$data["work_type_title"]?></td>
+            </tr>
+            <tr>
+              <td width=20%>임금</td>
+              <td><?=$data["pay_type"]?> <?=number_format($data["pay_min"])?>원 ~ <?=number_format($data["pay_max"])?>원 <?=($data["pay_negotiability"] == 1)?"(임금 협의 가능)":""?></td>
+
+            </tr>
+            <tr>
+              <td width=20%>기타 임금 정보</td>
+              <td><?=nl2br($data["pay_detail"])?></td>
+            </tr>
+            <tr>
+              <td width=20%>사회 보험</td>
+              <td>
+                <div class="form-group mt-2 mb-0">
+                  <div class="input-group mb-2">
+                    <input type="checkbox" name="social_insurance_1" value="y" id="social_insurance_1" title="국민연금" <?=($data["social_insurance_1"] == 1)?"checked":""?> onclick="return false;">
+                    <label for="social_insurance_1"><a title="국민연금">국민연금</a></label>
+                  </div>
+                  <div class="input-group mb-2">
+                    <input type="checkbox" name="social_insurance_2" value="y" id="social_insurance_2" title="국민연금" <?=($data["social_insurance_1"] == 1)?"checked":""?> onclick="return false;">
+                    <label for="social_insurance_1"><a title="고용보험">고용보험</a></label>
+                  </div>
+                  <div class="input-group mb-2">
+                    <input type="checkbox" name="social_insurance_3" value="y" id="social_insurance_3" title="국민연금" <?=($data["social_insurance_1"] == 1)?"checked":""?> onclick="return false;">
+                    <label for="social_insurance_1"><a title="산재보험">산재보험</a></label>
+                  </div>
+                  <div class="input-group mb-2">
+                    <input type="checkbox" name="social_insurance_4" value="y" id="social_insurance_4" title="국민연금" <?=($data["social_insurance_1"] == 1)?"checked":""?> onclick="return false;">
+                    <label for="social_insurance_1"><a title="건강보험">건강보험</a></label>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td width=20%>퇴직급여</td>
+              <td>
+                <div class="form-group">
+                  <div class="input-group">
+                    <input type="checkbox" name="severance_pay" value="y" id="severance_pay" title="퇴직금" <?=($data["severance_pay"] == 1)?"checked":""?> onclick="return false;">
+                    <label for="severance_pay"><a title="퇴직금">퇴직금</a></label>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td width=20%>기타 퇴직 정보</td>
+              <td><?=nl2br($data["insurance_detail"])?></td>
+            </tr>
+            </table>
+          </div>
+
+          <div class="job-detail mt-4">
+            <h2 class="mb-4"><a>작업환경</a></h2>
+            <div class="form-group">
+            <table class="table table-hover table-borderless">
+            <?php
+            foreach($impairments["PhysicalAbility"] as $code => $items){
+            ?>
+              <tr>
+                <th width=20% class="px-3 font-weight-400" title="<?=$items[0]["title"]?>"><a><?=$items[0]["title"]?></a></th>
+                <td class="px-3">
+                  <div class="input-group mb-2">
+                    <input type="radio" name="impairment[physical_ability][<?=$code?>]" value="null" id="impairment_physical_ability_<?=$code?>_null" title="조건없음" checked disabled onclick="return false;">
+                    <label for="impairment_physical_ability_<?=$code?>_null"><a tabindex=100 title="조건없음">조건없음</a></label>
+                  </div>
+                  <?php
+                  foreach($items as $key => $val){
+                    $checked = ($val["score"] == $impairment_data["physical_ability"][$code])?"checked":"disabled";
+                  ?>
+                  <div class="input-group mb-2">
+                    <input type="radio" name="impairment[physical_ability][<?=$code?>]" value="<?=$val["score"]?>" id="impairment_physical_ability_<?=$code."_".$key?>" title="<?=$val["item"]?>" <?=$checked?> onclick="return false;">
+                    <label for="impairment_physical_ability_<?=$code."_".$key?>"><a tabindex=100 title="<?=$val["item"]?>"><?=$val["item"]?></a></label>
+                  </div>
+                  <?php
+                  }
+                  ?>
+                </td>
+              </tr>
+            <?php
+            }
+            ?>
+            </table>
+            </div>
+          </div>
+
+          <div class="job-detail mt-4">
+            <h2 class="mb-4"><a>우대사항</a></h2>
+            <table class="table table-borderless table-hover" style="font-size: 1.2em">
+            <tr>
+              <td width=20%>우대사항</td>
+              <td><?=nl2br($data["preference_detail"])?></td>
+            </tr>
+            <tr>
+              <td width=20%>추가조건</td>
+              <td><?=nl2br($data["additional_condition_detail"])?></td>
+            </tr>
+            </table>
+          </div>
+
+          <div class="job-detail mt-4">
+            <h2 class="mb-4"><a>복리후생</a></h2>
+            <table class="table table-borderless table-hover" style="font-size: 1.2em">
+            <tr>
+              <td width=20%>복리후생</td>
+              <td>
+                <div class="form-group">
+                <?php
+                $welfare = json_decode($data["welfare"], true);
+                if(@is_array($job_category["Welfare"]) && @count($job_category["Welfare"])){
+                  foreach($job_category["Welfare"] as $val){
+                    $checked = (array_search($val["idx"], $welfare) !== false)? "checked": "disabled";
+                ?>
+                  <div class="input-group mb-2">
+                    <input type="checkbox" name="welfare[]" value="<?=$val["idx"]?>" id="welfare_<?=$val["idx"]?>" title="<?=$val["title"]?>" <?=$checked?> onclick="return false;">
+                    <label for="welfare_<?=$val["idx"]?>"><a title="<?=$val["title"]?>"><?=$val["title"]?></a></label>
+                  </div>
+                <?php
+                  }
+                }?>
+                </div>
+              </td>
+            </tr>
+            </table>
+          </div>
+
+          <div class="job-detail mt-5">
+            <h2 class="mb-4"><a>지원방법</a></h2>
+            <div class="sidebar-widget company-widget">
+              <div class="row">
+                <div class="col-12 col-md-4">
+                  <div class="widget-content">
+                    <ul class="company-info mt-0">
+                      <li class="mb-0"><a>시작일: <a><?=substr($data["register_date"], 0, 10)?></a></li>
+                      <li><a>마감일: <a><?=$data["receipt_expire_date"]?></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-12 col-md-8 pt-1 ps-md-5">
+                  <a href="/Recruit/Application/<?=$data["uuid"]?>" class="btn btn-primary btn-lg">즉시 지원하기</a>
+                  <button class="btn btn-outline-success btn-lg">담당자와 채팅하기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 
+          <div class="related-jobs mt-5">
+            <div class="title-box">
+              <h2><a>유사한 채용공고</a></h2>
+            </div>
+<?php
+for($i=0; $i<2; $i++){
+?>
+            <div class="job-block col-sm-12">
+              <div class="inner-box">
+                <div class="content">
+                  <span class="company-logo"><img src="/assets/images/resource/company-logo/2-1.png" style="width:126px;" alt="기업로고"></span>
+                  <h4><a href="/Recruit/Detail" tabindex=1500>소프트웨어 엔지니어 채용 (안드로이드, iOS)</a></h4>
+                  <ul class="job-info">
+                    <li><span class="icon flaticon-briefcase"></span> <a>정규직</a></li>
+                    <li><span class="icon flaticon-map-locator"></span> <a>서울 강동구</a></li>
+                    <li><span class="icon flaticon-clock-3"></span> <a>11시간전 등록</a></li>
+                    <li><span class="icon flaticon-money"></span> <a>급여 협의</a></li>
+                  </ul>
+                  <ul class="job-other-info">
+                    <li class="time"><a>풀타임</a></li>
+                    <li class="required"><a>급구</a></li>
+                  </ul>
+                  <button class="btn bookmark-btn" tabindex=1500 title="북마크"><span class="flaticon-bookmark"></span></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="job-block col-sm-12">
+              <div class="inner-box">
+                <div class="content">
+                  <span class="company-logo"><img src="/assets/images/resource/company-logo/2-1.png" style="width:126px;" alt="기업로고"></span>
+                  <h4><a href="/Recruit/Detail" tabindex=1500>마케팅 사무보조 구합니다.</a></h4>
+                  <ul class="job-info">
+                    <li><span class="icon flaticon-briefcase"></span> <a>파트타임</a></li>
+                    <li><span class="icon flaticon-map-locator"></span> <a>서울 구로구</a></li>
+                    <li><span class="icon flaticon-clock-3"></span> <a>11시간 30분 전 등록</a></li>
+                    <li><span class="icon flaticon-money"></span> <a>급여 협의</a></li>
+                  </ul>
+                  <ul class="job-other-info">
+                    <li class="privacy"><a>4시간근무</a></li>
+                    <li class="required"><a>급구</a></li>
+                  </ul>
+                  <button class="btn bookmark-btn" tabindex=1500 title="북마크"><span class="flaticon-bookmark"></span></button>
+                </div>
+              </div>
+            </div>
+<?php
+}?>
+          </div>
+          -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Job Detail Section -->

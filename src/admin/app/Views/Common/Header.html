@@ -1,0 +1,180 @@
+<?php
+helper("html");
+echo doctype("html5");
+
+?>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>KFO 장애인취업포털 관리자페이지</title>
+
+  <!-- link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" -->
+<?php
+echo link_tag("assets/dist/bootstrap5/css/bootstrap.css?v=1.1", "stylesheet", "text/css");
+echo link_tag("assets/dist/bootstrap5/css/ui.css?v=1.1", "stylesheet", "text/css");
+echo link_tag("assets/dist/bootstrap5/css/responsive.css?v=1.1", "stylesheet", "text/css");
+echo link_tag("https://fonts.googleapis.com/css2?family=Material+Icons", "stylesheet", "text/css");
+echo link_tag("assets/dist/bootstrap5/fonts/material-icon/css/round.css", "stylesheet", "text/css");
+echo link_tag("assets/dist/fontawesome-5.15.1/css/all.min.css");
+echo link_tag("assets/dist/datatables-1.10.22/datatables.min.css", "stylesheet", "text/css");
+echo link_tag("https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css", "stylesheet", "text/css");
+echo link_tag("assets/css/style.css", "stylesheet", "text/css");
+
+echo script_tag("assets/dist/bootstrap5/js/jquery-3.5.0.min.js");
+echo script_tag("assets/dist/bootstrap5/js/bootstrap.bundle.min.js");
+echo script_tag("assets/dist/moment-2.29.1/moment.min.js");
+echo script_tag("assets/dist/jquery-number/jquery.number.min.js");
+echo script_tag("assets/dist/jquery-ui-1.13.1.custom/jquery-ui.min.js");
+
+echo script_tag("assets/dist/datatables-1.10.22/datatables.min.js");
+echo script_tag('assets/dist/datatables-1.10.22/Buttons-1.6.5/js/dataTables.buttons.min.js');
+echo script_tag('assets/dist/datatables-1.10.22/JSZip-2.5.0/jszip.min.js');
+echo script_tag('assets/dist/datatables-1.10.22/pdfmake-0.1.36/pdfmake.min.js');
+echo script_tag('assets/dist/datatables-1.10.22/pdfmake-0.1.36/vfs_fonts.js');
+echo script_tag('assets/dist/datatables-1.10.22/Buttons-1.6.5/js/buttons.html5.min.js');
+echo script_tag('assets/dist/datatables-1.10.22/Buttons-1.6.5/js/buttons.print.min.js');
+echo script_tag("assets/dist/datatables-1.10.22/RowReorder-1.2.7/js/dataTables.rowReorder.min.js");
+
+echo script_tag("https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js");
+
+echo script_tag("assets/dist/tinymce-6.1.0/tinymce.min.js");
+
+echo script_tag("assets/js/Common.js");
+
+?>
+
+<script>
+  const _CONTROLLER = "<?=_CONTROLLER?>";
+  const _METHOD = "<?=_METHOD?>";
+</script>
+
+</head>
+<body>
+
+<b class="screen-overlay"></b>
+
+<aside class="navbar-aside" id="offcanvas_aside">
+<div class="aside-top">
+  <a href="/" class="brand-wrap mx-auto" style="text-decoration: none;">
+    <!-- img src="/design/images/logo.svg" height="46" class="logo" alt="Ecommerce dashboard template" -->
+    <h5 class="text-center">장애인취업포털<br/>ADMIN</h5>
+  </a>
+  <div>
+    <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+  </div>
+</div> <!-- aside-top.// -->
+
+<nav>
+  <ul class="menu-aside">
+    <li class="menu-item <?=(_CONTROLLER == "Home")?"active":""?>"> 
+      <a class="menu-link" href="/"> <i class="icon material-icons md-dashboard"></i> 
+        <span class="text">Dashboard</span> 
+      </a> 
+    </li>
+    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Member") !== false)?"active":""?>"> 
+      <a class="menu-link" href="#">
+        <i class="icon material-icons md-person"></i>  
+        <span class="text">회원관리</span> 
+      </a> 
+      <div class="submenu">
+        <a href="/Member/User">인재회원</a>
+        <a href="/Member/Company">기업회원</a>
+      </div>
+    </li>
+    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Application") !== false)?"active":""?>"> 
+      <a class="menu-link" href="#">
+        <i class="icon material-icons md-send"></i>  
+        <span class="text">채용관리</span> 
+      </a> 
+      <div class="submenu">
+        <a href="/Application/Lists">전체 목록</a>
+      </div>
+    </li>
+    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Job") !== false)?"active":""?>"> 
+      <a class="menu-link" href="#">
+        <i class="icon material-icons md-task_alt"></i>  
+        <span class="text">구직관리</span> 
+      </a> 
+      <div class="submenu">
+        <a href="/Job/Lists">전체 목록</a>
+      </div>
+    </li>
+    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Resume") !== false)?"active":""?>"> 
+      <a class="menu-link" href="#">
+        <i class="icon material-icons md-face"></i>  
+        <span class="text">이력서관리</span> 
+      </a> 
+      <div class="submenu">
+        <a href="/Resume/Lists">전체 목록</a>
+      </div>
+    </li>
+    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Chat") !== false)?"active":""?>"> 
+      <a class="menu-link" href="#">
+        <i class="icon material-icons md-forum"></i>  
+        <span class="text">채팅</span> 
+      </a> 
+      <div class="submenu">
+        <a href="/Chat/Lists">전체 목록</a>
+      </div>
+    </li>
+  </ul>
+  <hr>
+  <ul class="menu-aside">
+    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Database") !== false)?"active":""?>"> 
+      <a class="menu-link" href="#">
+        <i class="icon material-icons md-storage"></i> 
+        <span class="text">데이터베이스</span> 
+      </a>
+      <div class="submenu">
+        <a href="/Database/Impairment/Type/">장애 유형</a>
+        <a href="/Database/Impairment/Degree/">장애 정도</a>
+        <a href="/Database/Impairment/AssistiveDevice/">보장구</a>
+        <a href="/Database/Impairment/PhysicalAbility/">운동 능력</a>
+        <a href="/Database/Job/Profession">직무 유형</a>
+        <a href="/Database/Job/EmploymentType">고용 형태</a>
+        <a href="/Database/Job/WorkType">근무 형태</a>
+        <a href="/Database/Job/Career">경력 사항</a>
+        <a href="/Database/Job/Welfare">복리 후생</a>
+      </div>
+    </li>
+    <!-- 
+    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Configuration") !== false)?"active":""?>"> 
+      <a class="menu-link" href="#">
+        <i class="icon material-icons md-settings"></i> 
+        <span class="text">환경설정</span> 
+      </a>
+      <div class="submenu">
+        <a href="/Configuration/Approve">심사 설정</a>
+      </div>
+    </li>
+    -->
+    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Terms") !== false)?"active":""?>"> 
+      <a class="menu-link" href="#">
+        <i class="icon material-icons md-description"></i> 
+        <span class="text">약관 관리</span> 
+      </a>
+      <div class="submenu">
+        <a href="/Terms/ServiceLevelAgreement">서비스 이용약관</a>
+        <a href="/Terms/TermsOfService">사이트 이용약관</a>
+        <a href="/Terms/PrivacyPolicy">개인정보 수집 및 이용</a>
+        <a href="/Terms/Subscribe">광고성 정보 수신</a>
+        <a href="/Terms/AdditionalService">부가서비스 및 혜택 안내</a>
+      </div>
+    </li>
+  </ul>
+
+  <br>
+  <br>
+</nav>
+</aside>
+
+<main class="main-wrap">
+	<header class="main-header navbar">
+		<div class="col-search"> </div>
+		<div class="col-nav">
+     <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i class="md-28 material-icons md-menu"></i> </button>
+     <ul class="nav"> </ul> 
+  </div>
+	</header>

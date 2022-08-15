@@ -1,0 +1,31 @@
+<div class="sidebar-backdrop"></div>
+<div class="user-sidebar">
+  <div class="sidebar-inner">
+    <ul class="navigation">
+      <li class="<?=(strpos(_CONTROLLER, "Profile") !== false )?"active":""?>">
+        <a href="/Management/User/Profile"><i class="la la-user"></i>내 정보</a>
+      </li>
+      <li class="<?=(strpos(_CONTROLLER, "/Application") !== false )?"active":""?>">
+        <a href="/Management/User/Application"><i class="la la-paper-plane"></i>입사 지원 관리</a>
+      </li>
+      <li class="<?=(strpos(_CONTROLLER, "ManageJob") !== false )?"active":""?>">
+        <a href="/Management/User/ManageJob"><i class="la la-briefcase"></i>구직 관리</a>
+      </li>
+      <li class="<?=(strpos(_CONTROLLER, "Resume") !== false )?"active":""?>">
+        <a href="/Management/User/Resume"><i class="la la-file-invoice"></i>내 이력서</a>
+      </li>
+      <li class="<?=(strpos(_CONTROLLER, "BookmarkApplication") !== false )?"active":""?>">
+        <a href="/Management/User/BookmarkApplication"><i class="la la-bookmark-o"></i>관심 채용</a>
+      </li>
+      <li class="<?=(strpos(_CONTROLLER, "BookmarkCompany") !== false )?"active":""?>">
+        <a href="/Management/User/BookmarkCompany"><i class="la la-user-tie"></i>관심 기업</a>
+      </li>
+      <li class="<?=(strpos(_CONTROLLER, "Chat") !== false )?"active":""?>">
+        <a href="/Management/User/Chat"><i class="la la-comment-o"></i>메세지 관리</a>
+      </li>
+      <li class="<?=(strpos(_CONTROLLER, "SignOut") !== false )?"active":""?>">
+        <a href="/Management/Auth/SignOut"><i class="la la-sign-out"></i>로그아웃</a>
+      </li>
+    </ul>
+  </div>
+</div>

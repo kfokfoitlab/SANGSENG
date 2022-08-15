@@ -1,0 +1,98 @@
+<!-- Job Detail Section -->
+<section class="job-detail-section style-three" style="margin-top: 76px;">
+  <!-- Upper Box -->
+  <div class="upper-box">
+    <div class="auto-container">
+      <!-- Job Block -->
+      <div class="job-block-seven style-three">
+        <div class="inner-box">
+          <h2 class="mb-2"><a>입사 지원 합니다.</a></h2>
+          <h5><a>지원 내용을 확인해 주세요</a></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="job-detail-outer">
+    <div class="auto-container">
+      <div class="row">
+        <div class="content-column col-lg-8 col-md-12 col-sm-12">
+          <div class="tabs-box">
+            <div class="widget-title">
+              <h4><a>내 지원서</a></h4>
+            </div>
+
+            <div class="widget-content mt-4">
+            <form name="form-application" class="default-form" method="POST" target="_self" action="/Recruit/ApplicationSubmit">
+              <input type="hidden" name="application_uuid" value="<?=$data["uuid"]?>">
+
+              <div class="row">
+                <!-- Input -->
+                <div class="form-group col-lg-6 col-md-12">
+                  <label><a>이력서를 선택해 주세요.</a></label>
+                  <select name="resume_uuid" tabindex=100 required>
+                    <option value="">이력서 선택</option>
+                    <?php
+                    if(isset($resume_list) && is_array($resume_list) && count($resume_list) > 0){
+                      foreach($resume_list as $key => $val){
+                        echo "<option value='".$val["uuid"]."'>".$val["title"]."</option>";
+                      }
+                    }
+                    ?>
+                  </select>
+                </div>
+
+                <!-- About Company -->
+                <div class="form-group col-lg-12 col-md-12">
+                  <label><a>입사 지원 메세지</a></label>
+                  <textarea title="입사 지원 메세지" name="remark" tabindex=101 placeholder="" required></textarea>
+                </div>
+
+                <h5 class="mb-2">이력서 미리보기</h5>
+                <div class="ls-widget">
+                  <div class="tabs-box">
+                    <div class="widget-content py-4" id="preview-resume">
+                      <p class="small">이력서를 선택해 주세요.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Input -->
+                <div class="form-group col-lg-12 col-md-12 mt-4">
+                  <button type="submit" class="theme-btn btn-style-one py-3" tabindex=101 style="font-size:1.4em">이 내용대로 지원하기</a>
+                </div>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-column col-lg-4 col-md-12 col-sm-12">
+          <aside class="sidebar">
+            <div class="sidebar-widget company-widget">
+              <div class="widget-content">
+                <div class="company-title">
+                <div class="company-logo"><img src="/Image/<?=$data["company_img_uuid"]?>" alt=""></div>
+                  <h5 class="company-name"><a><?=$data["title"]?></a></h5>
+                </div>
+
+                <ul class="company-info">
+                  <li><a>회사명: <span><?=$data["company_name"]?></span></a></li>
+                  <li><a>근무지역: <span><?=$data["address_short"]?></span></a></li>
+                  <li><a>모집분야: <span><?=$data["profession_title"]?></span></a></li>
+                  <li><a>근무시간: <span><?=$data["work_type_title"]?></span></a></li>
+                  <li><a>임금:<br/><span><?=$data["pay_type"]?> <?=number_format($data["pay_min"])?>원 ~ <?=number_format($data["pay_max"])?>원 <?=($data["pay_negotiability"] == 1)?"<br/>(임금 협의 가능)":""?></span></a></li>
+                </ul>
+
+                <div class="btn-box"><a href="/Recruit/Detail/<?=$data["uuid"]?>" class="theme-btn btn-style-three" tabindex=102 title="모집공고 확인">모집공고 확인</a></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</section>
+<!-- End Job Detail Section -->

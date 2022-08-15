@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ssh -i ./key/KFO-WEB02.pem centos@133.186.210.160

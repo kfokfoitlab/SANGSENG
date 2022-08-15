@@ -1,0 +1,35 @@
+<section class="top-companies style-two">
+  <div class="auto-container">
+    <div class="sec-title">
+      <h2><a tabindex=3000>최근 등록된 기업회원</a></h2>
+      <div class="text"><a tabindex=3000>심사를 통해 엄선된 기업만 등록 가능합니다.</a></div>
+    </div>
+
+    <div class="">
+
+      <div class="row">
+      <?php
+      if(isset($recent_company) && is_array($recent_company) && count($recent_company) > 0){
+        foreach($recent_company as $val){
+        ?>
+        <div class="col-lg-3">
+          <!-- Company Block -->
+          <div class="company-block">
+            <div class="inner-box">
+              <figure class="image"><img src="/Image/<?=$val["profile_img_uuid"]?>" alt=""></figure>
+              <h4 class="name"><a tabindex=3000><?=$val["company_name"]?></a></h4>
+              <div class="location"><i class="flaticon-map-locator"></i> <?=$val["address_short"]?></div>
+              <a href="#" class="theme-btn btn-style-three" tabindex=3000><?=$val["application_count"]?>건 채용중</a>
+            </div>
+          </div>
+        </div>
+        <?php
+        }
+      }
+      ?>
+
+      </div>
+    </div>
+  </div>
+</section>
+

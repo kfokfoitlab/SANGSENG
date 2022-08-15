@@ -1,0 +1,38 @@
+<section class="container" style="padding-top: 172px; margin-bottom: 500px;">
+  <div id="row">
+    <div class="col-12 col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+
+      <h2 class="mb-4 font-weight-900 text-center" title="기업 회원 상태"><a tabindex=100>기업 회원 상태</a></h2>
+
+      <div class="my-5">
+<?php
+if($type == "review"){
+?>
+        <div class="text-center pt-4 my-4">
+          <i class="fa fa-3x text-primary fa-check-double"></i>
+        </div>
+
+        <h3 class="font-weight-900 text-center"><a>심사 진행중</a></h3>
+        <h5 class="font-weight-900 text-center mt-4"><a>심사가 진행중이며, 승인 완료 후 로그인이 가능합니다.</a></h5>
+<?php
+}
+else if($type == "reject"){
+?>
+        <div class="text-center pt-4 my-4">
+          <i class="fa fa-3x text-black-50 fa-times"></i>
+        </div>
+
+        <h3 class="font-weight-900 text-center"><a>승인 거절</a></h3>
+        <h5 class="font-weight-900 text-center mt-4"><a>승인이 거절되었습니다.</a></h5>
+<?php
+}
+?>
+      </div>
+
+      <div class="my-5 text-center">
+        <a href="/" class="btn btn-lg btn-primary w-50">메인페이지로</a>
+      </div>
+
+    </div>
+  </div>
+</section>

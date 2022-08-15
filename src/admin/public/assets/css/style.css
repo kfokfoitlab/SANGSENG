@@ -1,0 +1,60 @@
+body {
+    cursor: default!important;
+}
+
+a {
+    text-decoration: none;
+}
+
+.material-icons-outlined {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 1em;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1em;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    vertical-align: middle;
+    position: relative;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+.dropify-wrapper .dropify-message span.file-icon p {
+    font-size: 16px;
+}
+
+.hide-delete-btn {
+    display: none;
+}
+
+.ui-state-highlight {
+    list-style: none;
+    height: 42px;
+    background-color: var(--bs-light);
+    border: dashed 2px silver;
+}
+
+.btn.btn-success {
+    color: var(--bs-white);
+}
+
+.detail-table .th {
+    width: 20%;
+    background-color: var(--bs-light);
+    vertical-align: top;
+}

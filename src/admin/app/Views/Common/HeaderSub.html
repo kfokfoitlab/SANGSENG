@@ -1,0 +1,97 @@
+<?php
+helper("html");
+echo doctype("html5");
+
+?>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>KFO 장애인취업포털 관리자페이지</title>
+
+  <!-- link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" -->
+<?php
+echo link_tag("assets/dist/bootstrap5/css/bootstrap.css?v=1.1", "stylesheet", "text/css");
+echo link_tag("assets/dist/bootstrap5/css/ui.css?v=1.1", "stylesheet", "text/css");
+echo link_tag("assets/dist/bootstrap5/css/responsive.css?v=1.1", "stylesheet", "text/css");
+echo link_tag("https://fonts.googleapis.com/css2?family=Material+Icons", "stylesheet", "text/css");
+echo link_tag("assets/dist/bootstrap5/fonts/material-icon/css/round.css", "stylesheet", "text/css");
+echo link_tag("assets/dist/fontawesome-5.15.1/css/all.min.css");
+echo link_tag("assets/dist/datatables-1.10.22/datatables.min.css", "stylesheet", "text/css");
+echo link_tag("https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css", "stylesheet", "text/css");
+echo link_tag("assets/css/style.css", "stylesheet", "text/css");
+
+echo script_tag("assets/dist/bootstrap5/js/jquery-3.5.0.min.js");
+echo script_tag("assets/dist/bootstrap5/js/bootstrap.bundle.min.js");
+echo script_tag("assets/dist/moment-2.29.1/moment.min.js");
+echo script_tag("assets/dist/datatables-1.10.22/datatables.min.js");
+echo script_tag("assets/dist/jquery-number/jquery.number.min.js");
+echo script_tag("assets/dist/jquery-ui-1.13.1.custom/jquery-ui.min.js");
+
+echo script_tag("assets/dist/datatables-1.10.22/datatables.min.js");
+echo script_tag('assets/dist/datatables-1.10.22/Buttons-1.6.5/js/dataTables.buttons.min.js');
+echo script_tag('assets/dist/datatables-1.10.22/JSZip-2.5.0/jszip.min.js');
+echo script_tag('assets/dist/datatables-1.10.22/pdfmake-0.1.36/pdfmake.min.js');
+echo script_tag('assets/dist/datatables-1.10.22/pdfmake-0.1.36/vfs_fonts.js');
+echo script_tag('assets/dist/datatables-1.10.22/Buttons-1.6.5/js/buttons.html5.min.js');
+echo script_tag('assets/dist/datatables-1.10.22/Buttons-1.6.5/js/buttons.print.min.js');
+echo script_tag("assets/dist/datatables-1.10.22/RowReorder-1.2.7/js/dataTables.rowReorder.min.js");
+
+echo script_tag("https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js");
+echo script_tag("assets/dist/tinymce-6.1.0/tinymce.min.js");
+
+echo script_tag("assets/js/Common.js");
+
+?>
+
+<script>
+  const _CONTROLLER = "<?=_CONTROLLER?>";
+  const _METHOD = "<?=_METHOD?>";
+</script>
+
+</head>
+<body>
+
+<b class="screen-overlay"></b>
+
+<main class="main-wrap ms-0">
+	<header class="main-header navbar">
+    <h5 class="text-center">장애인취업포털<br/>ADMIN</h5>
+		<div class="col-search">
+			<!-- form class="searchform">
+				<div class="input-group">
+				  <input list="search_terms" type="text" class="form-control" placeholder="Search term">
+				  <button class="btn btn-light bg" type="button"> <i class="material-icons md-search"></i> </button>
+				</div>
+				<datalist id="search_terms">
+				  <option value="Products">
+				  <option value="New orders">
+				  <option value="Apple iphone">
+				  <option value="Ahmed Hassan">
+				</datalist>
+			</form -->
+		</div>
+		<div class="col-nav">
+     <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i class="md-28 material-icons md-menu"></i> </button>
+     <ul class="nav">
+      <!-- li class="nav-item">
+          <a class="nav-link btn-icon" onclick="darkmode(this)" title="Dark mode" href="#"> <i class="material-icons md-nights_stay"></i> </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link btn-icon" href="#"> <i class="material-icons md-notifications_active"></i> </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"> English </a>
+      </li>
+      <li class="dropdown nav-item">
+        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#"> <img class="img-xs rounded-circle" src="/design/images/people/avatar1.jpg" alt="User"></a>
+        <div class="dropdown-menu dropdown-menu-end">
+          <a class="dropdown-item" href="#">My profile</a>
+          <a class="dropdown-item" href="#">Settings</a>
+          <a class="dropdown-item text-danger" href="#">Exit</a>
+        </div>
+      </li -->
+    </ul> 
+  </div>
+	</header>

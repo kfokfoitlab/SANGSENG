@@ -1,0 +1,9 @@
+CRITICAL - 2022-06-30 18:30:17 --> syntax error, unexpected token ")", expecting ";"
+in APPPATH/Views/Person/Index.html on line 91.
+ 1 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Person.php(10): view()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Person->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(55): CodeIgniter\CodeIgniter->run()

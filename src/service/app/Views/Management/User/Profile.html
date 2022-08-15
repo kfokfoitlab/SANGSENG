@@ -1,0 +1,310 @@
+<?php
+require_once(__DIR__."/Sidebar.html");
+?>
+
+<section class="user-dashboard">
+  <div class="dashboard-outer">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Ls widget -->
+        <div class="ls-widget">
+          <div class="tabs-box">
+            <div class="widget-title">
+              <h3 title="내 정보"><a>프로필</a></h3>
+            </div>
+            <!-- {{{ -->
+
+            <div class="widget-content">
+
+              <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
+                <div class="inner-box">
+                  <div class="content">
+                    <!-- figure class="image"><img src="/assets/images/resource/candidate-1.png" alt=""></figure-->
+                    <figure class="image"><img src="<?=$profile_img_url?>" alt=""></figure>
+                    <h4><a><?=$_SESSION["login_info"]["name"]?></a></h4>
+                  </div>
+                </div>
+              </div>
+
+
+              <form class="default-form" name="form-profile-1" method="POST" enctype="multipart/form-data" action="/<?=_CONTROLLER?>/UpdateSubmit/section1">
+                <div class="uploading-outer">
+                  <div class="uploadButton">
+                    <input class="uploadButton-input" type="file" name="profile_img" accept="image/*" id="upload" multiple="">
+                    <label class="uploadButton-button ripple-effect" for="upload" title="프로필 사진 수정"><a>프로필 사진 수정</a></label>
+                    <span class="uploadButton-file-name"></span>
+                  </div>
+                  <div class="text">이미지 용량 최대 5MB, JPG, PNG등 이미지 파일만 가능합니다.</div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group">
+                    <label class="my-2"><a title="이름 필수입력">이름</a><sup class="text-danger">*</sup></label>
+                    <input type="text" name="name" placeholder="이름을 입력해 주세요" title="이름 입력" tabindex=100 value="<?=$profile["name"]?>" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="my-2"><a title="이메일주소 필수입력">이메일주소</a><sup class="text-danger">*</sup></label>
+                    <input type="email" name="email" placeholder="이메일주소를 입력해 주세요" title="이메일주소 입력" tabindex=100 value="<?=$profile["email"]?>" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="my-2"><a title="휴대폰번호 필수입력">휴대폰번호</a><sup class="text-danger">*</sup></label>
+                    <input type="text" class="mask-phone" name="phone" placeholder="숫자, '-'만 입력" title="휴대폰번호 숫자, '-'만 입력" tabindex=100 value="<?=$profile["phone"]?>" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="my-2"><a title="대표번호">대표번호</a></label>
+                    <input type="text" class="mask-phone" name="tel" placeholder="숫자, '-'만 입력" title="대표번호 숫자, '-'만 입력" value="<?=$profile["tel"]?>" tabindex=100>
+                  </div>
+                  <div class="form-group">
+                    <label class="my-2"><a title="팩스번호">팩스번호</a></label>
+                    <input type="text" class="mask-phone" name="fax" placeholder="숫자, '-'만 입력" title="팩스번호 숫자, '-'만 입력" value="<?=$profile["fax"]?>" tabindex=100>
+                  </div>
+                  <label class="my-2"><a title="주소">주소</a></label>
+                  <div class="row">
+                    <div class="col-8 col-lg-4 pe-0">
+                      <div class="form-group mb-0">
+                        <input type="text" class="modal-search-post" id="post_code" name="post_code" placeholder="우편번호" title="우편번호 검색" tabindex=100 value="<?=$profile["post_code"]?>" readonly>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <button type="button" class="btn btn-primary modal-search-post" tabindex=100>우편번호 검색</button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" id="address_road" name="address" class="my-2" placeholder="주소" title="주소" tabindex=100 value="<?=$profile["address"]?>" readonly>
+                    <input type="text" id="address_detail" name="address_detail" class="my-2" placeholder="상세주소" title="상세주소" value="<?=$profile["address_detail"]?>" tabindex=100>
+                    <input type="hidden" name="coordinate_x" id="coordinate_x" value="<?=$profile["latitude"]?>">
+                    <input type="hidden" name="coordinate_y" id="coordinate_y" value="<?=$profile["logitude"]?>">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <button type="submit" class="theme-btn btn-style-one" tabindex=100>저장하기</button>
+                </div>
+              </form>
+            </div>
+            <!-- }}} -->
+          </div>
+        </div>
+
+        <!-- Ls widget -->
+        <div class="ls-widget">
+          <div class="tabs-box">
+            <div class="widget-title">
+              <h3 title="장애 정보"><a>장애 정보</a></h3>
+            </div>
+            <!-- {{{ -->
+
+            <div class="widget-content">
+              <form class="default-form" name="form-profile-2" method="POST" enctype="multipart/form-data" action="/<?=_CONTROLLER?>/UpdateSubmit/section2">
+                <div class="form-group">
+                  <label class="my-2" title="장애부위"><a>장애부위</a></label>
+                  <div class="row">
+                    <div class="col-5">
+                      <select class="form-control form-control-sm filter" id="search-impairment-type0" name="impairment[type][main]" data-this-level=0 title="주 장애 선택" required>
+                        <option value="" disabled selected>주 장애 선택</option>
+                      <?php
+                      if(@$impairments["Type"]["level0"] && @count($impairments["Type"]["level0"])){
+                        foreach($impairments["Type"]["level0"] as $val){
+                          $selected = ($val["idx"] == $impairment_data["type"]["main"])?"selected":"";
+                          echo "<option value='".$val["idx"]."' data-level='".$val["this_level"]."' ".$selected.">".$val["title"]."</option>";
+                        }
+
+                      }
+                      ?>
+                      </select>
+                    </div>
+                    <div class="col-7">
+                      <select class="form-control form-control-sm filter" id="search-impairment-type1" name="impairment[type][sub]" data-this-level=1 title="주 장애 선택 후 부 장애 선택" required>
+                        <option value="" disabled selected>주 장애 선택 후 장애부위 선택</option>
+                      <?php
+                      if(@$impairments["Type"]["level1"] && @count($impairments["Type"]["level1"])){
+                        foreach($impairments["Type"]["level1"] as $val){
+                          $selected = ($val["idx"] == $impairment_data["type"]["sub"])?"selected":"";
+                          $display = ($val["level0_idx"] == $impairment_data["type"]["main"])?"":"none";
+                          echo "<option value='".$val["idx"]."' data-level='".$val["this_level"]."' data-level0_idx='".$val["level0_idx"]."' style='display:".$display."' ".$selected.">".$val["title"]."</option>";
+                        }
+
+                      }
+                      ?>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="my-2" title="장애 인증 날짜"><a>장애 인증 날짜</a></label>
+                  <input type="date" class="form-control" name="impairment[date]" title="장애 인증 날짜" value="<?=$impairment_data["date"]?>">
+                </div>
+
+                <div class="form-group my-4">
+                  <div>
+                    <img class="img-fluid" src="/Image/<?=$profile["welfare_card_uuid"]?>" style="width:480px;">
+                  </div>
+                  <div class="uploadButton mt-2">
+                    <input class="uploadButton-input" type="file" name="welfare_img" id="upload_welfare" required>
+                    <label class="uploadButton-button ripple-effect" for="upload_welfare" title="복지카드 재업로드"><a>복지카드 재업로드</a></label>
+                    <span class="uploadButton-file-name"></span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="my-2" title="구체적 장애내용"><a>구체적 장애내용</a></label>
+                  <input type="text" class="form-control" name="impairment[detail]" value="" title="구체적 장애내용" value="<?=$impairment_data["detail"]?>">
+                </div>
+
+                <div class="form-group">
+                  <label class="my-2" title="장애 정도"><a>장애 정도</a></label>
+                  <table class="table table-hover table-borderless">
+                  <?php
+                  foreach($impairments["Degree"] as $code => $items){
+                  ?>
+                    <tr>
+                      <th width=35% class="px-3 font-weight-400" title="<?=$items[0]["title"]?>"><a><?=$items[0]["title"]?></a></th>
+                      <td class="px-3">
+                        <?php
+                        foreach($items as $key => $val){
+                          $checked = ($val["score"] == $impairment_data["degree"][$code])?"checked":"";
+                        ?>
+                        <div class="input-group mb-2">
+                        <input type="radio" name="impairment[degree][<?=$code?>]" value="<?=$val["score"]?>" id="impairment_degree_<?=$code."_".$key?>" title="<?=$val["item"]?>" tabindex=100 required <?=$checked?>>
+                          <label for="impairment_degree_<?=$code."_".$key?>"><a tabindex=100 title="<?=$val["item"]?>"><?=$val["item"]?></a></label>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                      </td>
+                    </tr>
+                  <?php
+                  }
+                  ?>
+                  </table>
+                </div>
+
+                <div class="form-group">
+                  <label class="my-2" title="보장구"><a>보장구</a></label>
+                  <table class="table table-hover table-borderless">
+                  <?php
+                  foreach($impairments["AssistiveDevice"] as $code => $items){
+                  ?>
+                    <tr>
+                      <th width=35% class="px-3 font-weight-400" title="<?=$items[0]["title"]?>"><a><?=$items[0]["title"]?></a></th>
+                      <td class="px-3">
+                        <?php
+                        foreach($items as $key => $val){
+                          $checked = ($val["score"] == $impairment_data["assistive_device"][$code])?"checked":"";
+                        ?>
+                        <div class="input-group mb-2">
+                          <input type="radio" name="impairment[assistive_device][<?=$code?>]" value="<?=$val["score"]?>" id="impairment_assistive_device_<?=$code."_".$key?>" title="<?=$val["item"]?>" tabindex=100 required <?=$checked?>>
+                          <label for="impairment_assistive_device_<?=$code."_".$key?>"><a tabindex=100 title="<?=$val["item"]?>"><?=$val["item"]?></a></label>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                      </td>
+                    </tr>
+                  <?php
+                  }
+                  ?>
+                  </table>
+                </div>
+
+                <div class="form-group">
+                  <label class="my-2" title="보장구"><a>운동 능력</a></label>
+                  <table class="table table-hover table-borderless">
+                  <?php
+                  foreach($impairments["PhysicalAbility"] as $code => $items){
+                  ?>
+                    <tr>
+                      <th width=35% class="px-3 font-weight-400" title="<?=$items[0]["title"]?>"><a><?=$items[0]["title"]?></a></th>
+                      <td class="px-3">
+                        <?php
+                        foreach($items as $key => $val){
+                          $checked = ($val["score"] == $impairment_data["physical_ability"][$code])?"checked":"";
+                        ?>
+                        <div class="input-group mb-2">
+                          <input type="radio" name="impairment[physical_ability][<?=$code?>]" value="<?=$val["score"]?>" id="impairment_physical_ability_<?=$code."_".$key?>" title="<?=$val["item"]?>" tabindex=100 required <?=$checked?>>
+                          <label for="impairment_physical_ability_<?=$code."_".$key?>"><a tabindex=100 title="<?=$val["item"]?>"><?=$val["item"]?></a></label>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                      </td>
+                    </tr>
+                  <?php
+                  }
+                  ?>
+                  </table>
+                </div>
+
+                <div class="form-group">
+                  <label class="my-2" title="특이사항"><a tabindex=100>특이사항</a></label>
+                  <textarea class="form-control border" name="impairment[remark]" title="특이사항 입력" placeholder="특이사항 입력"><?=$impairment_data["remark"]?></textarea>
+                </div>
+
+                <div class="form-group">
+                  <button type="submit" class="theme-btn btn-style-one" tabindex=100>저장하기</button>
+                </div>
+              </form>
+            </div>
+            <!-- }}} -->
+          </div>
+        </div>
+
+        <!-- Ls widget -->
+        <div class="ls-widget">
+          <div class="tabs-box">
+            <div class="widget-title">
+              <h3 title="소셜 네트워크"><a>소셜 네트워크</a></h3>
+            </div>
+            <!-- {{{ -->
+
+            <div class="widget-content">
+              <form class="default-form" name="form-profile-3" method="POST" action="/<?=_CONTROLLER?>/UpdateSubmit/section3">
+                <div class="row">
+                  <div class="form-group col-lg-6 col-md-12">
+                    <label><a title="Facebook">Homepage</a></label>
+                    <input type="url" name="homepage" placeholder="" value="<?=$profile["sns_homepage"]?>">
+                  </div>
+
+                  <div class="form-group col-lg-6 col-md-12">
+                    <label><a title="Facebook">Blog</a></label>
+                    <input type="url" name="blog" placeholder="" value="<?=$profile["sns_blog"]?>">
+                  </div>
+
+                  <div class="form-group col-lg-6 col-md-12">
+                    <label><a title="Facebook">Facebook</a></label>
+                    <input type="url" name="facebook" placeholder="" value="<?=$profile["sns_facebook"]?>">
+                  </div>
+
+                  <div class="form-group col-lg-6 col-md-12">
+                    <label><a title="Twitter">Twitter</a></label>
+                    <input type="url" name="twitter" placeholder="" value="<?=$profile["sns_twitter"]?>">
+                  </div>
+
+                  <div class="form-group col-lg-6 col-md-12">
+                    <label><a title="Linkedin">Linkedin</a></label>
+                    <input type="url" name="linkedin" placeholder="" value="<?=$profile["sns_linkedin"]?>">
+                  </div>
+
+                  <div class="form-group col-lg-6 col-md-12">
+                    <label><a title="Youtube">Youtube</a></label>
+                    <input type="url" name="youtube" placeholder="" value="<?=$profile["sns_youtube"]?>">
+                  </div>
+
+                  <div class="form-group col-lg-6 col-md-12">
+                    <button class="theme-btn btn-style-one">저장하기</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!-- }}} -->
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</section>

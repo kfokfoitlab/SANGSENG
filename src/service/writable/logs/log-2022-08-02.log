@@ -1,0 +1,111 @@
+CRITICAL - 2022-08-02 20:30:49 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-02 20:31:15 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-02 20:31:15 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-02 20:31:50 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-02 20:31:50 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-02 20:32:11 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 137.
+ 1 APPPATH/Models/CommonModel.php(137): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-02 20:32:11 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 137.
+ 1 APPPATH/Models/CommonModel.php(137): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-02 20:32:28 --> Trying to access array offset on value of type null
+in APPPATH/Models/CommonModel.php on line 136.
+ 1 APPPATH/Models/CommonModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 APPPATH/Controllers/Image.php(15): App\Models\CommonModel->getImage()
+ 3 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Image->getImage()
+ 4 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 5 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-02 20:38:43 --> Undefined variable $data
+in APPPATH/Controllers/Auth.php on line 70.
+ 1 APPPATH/Controllers/Auth.php(70): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Auth->SignInSubmit()
+ 3 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-02 21:07:31 --> Invalid file: Management/User/ManageJob/Index.html
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 33.
+ 1 SYSTEMPATH/View/View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Management/User/ManageJob.php(41): view()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-02 21:07:46 --> Invalid file: Management/User/ManageJob/Index.html
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 33.
+ 1 SYSTEMPATH/View/View.php(201): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Management/User/ManageJob.php(41): view()
+ 4 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->Index()
+ 5 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 7 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-02 21:20:20 --> Undefined variable $item
+in APPPATH/Views/Management/User/ManageJob/Index.html on line 46.
+ 1 APPPATH/Views/Management/User/ManageJob/Index.html(46): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/ManageJob/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/ManageJob.php(41): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-08-02 21:20:41 --> Undefined variable $item
+in APPPATH/Views/Management/User/ManageJob/Index.html on line 46.
+ 1 APPPATH/Views/Management/User/ManageJob/Index.html(46): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(213): include('APPPATH/Views/Management/User/ManageJob/Index.html')
+ 3 SYSTEMPATH/View/View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1135): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Management/User/ManageJob.php(41): view()
+ 6 SYSTEMPATH/CodeIgniter.php(898): App\Controllers\Management\User\ManageJob->Index()
+ 7 SYSTEMPATH/CodeIgniter.php(468): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(351): CodeIgniter\CodeIgniter->handleRequest()
+ 9 FCPATH/index.php(56): CodeIgniter\CodeIgniter->run()
