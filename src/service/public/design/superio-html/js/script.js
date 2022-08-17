@@ -163,6 +163,7 @@
 
 	// Mobile Navigation
 	if($('#nav-mobile').length){
+		console.log($('#nav-mobile').length)
 		jQuery(function ($) {
 		  var $navbar = $('#navbar');
 		  var $mobileNav = $('#nav-mobile');

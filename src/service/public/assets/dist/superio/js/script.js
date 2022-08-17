@@ -84,12 +84,15 @@
 			var siteHeader = $('.main-header');
 			var scrollLink = $('.scroll-to-top');
 			var sticky_header = $('.main-header');
+			var leftFixedBox = $('.left-fixed-box');
 			if (windowpos > 1) {
 				siteHeader.addClass('fixed-header animated slideInDown');
 				scrollLink.fadeIn(300);
+				leftFixedBox.addClass('scrolled');
 			} else{
 				siteHeader.removeClass('fixed-header animated slideInDown');
 				scrollLink.fadeOut(300);
+				leftFixedBox.removeClass('scrolled');
 			}
 		}
 	}
@@ -1091,11 +1094,26 @@
       });
     }
 
+	// Count Up Numbers
+	function countUp(numberElement) {
+		let current = 0;
+		const total = parseInt(numberElement.textContent);
+		const increment = Math.ceil(total / 100);
+
+		function step() {
+			current += increment;
+			if (current > total) current = total;
+			numberElement.textContent = current.toLocaleString();
+			(current !== total) && requestAnimationFrame(step);
+		}
+		step();
+	}
 
 
-/* ==========================================================================
-   When document is Scrollig, do
-   ========================================================================== */
+
+	/* ==========================================================================
+       When document is Scrollig, do
+       ========================================================================== */
 	
 	$(window).on('scroll', function() {
 		headerStyle();
@@ -1107,7 +1125,10 @@
 	
 	$(window).on('load', function() {
 		handlePreloader();
-	});	
+		// updateCount();
+		const numb = document.querySelector('.main-banner-counter');
+		countUp(numb)
+	});
 
 })(window.jQuery);
 

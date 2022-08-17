@@ -6,73 +6,73 @@ let bg_color = 1;
 $(document).ready(function(){
 
     // 글자크게보기 쿠키 처리
-    let $cookie = document.cookie;
-    $cookie = $cookie.split("; ");
-    $.each($cookie, function(key, val){
-        console.log(val);
-        let c = val.split("=");    
-        if(c[0] == "show_big_text" && c[1] == "1"){
-            $("#show-big-text").prop("checked", true);
-            $("#big-help-title").show();
-            big_help_title = 1;
-        }
-        else {
-            $("#show-big-text").prop("checked", false);
-            $("#big-help-title").hide();
-            big_help_title = 0;
-        }
-    });
+    // let $cookie = document.cookie;
+    // $cookie = $cookie.split("; ");
+    // $.each($cookie, function(key, val){
+    //     console.log(val);
+    //     let c = val.split("=");
+    //     if(c[0] == "show_big_text" && c[1] == "1"){
+    //         $("#show-big-text").prop("checked", true);
+    //         $("#big-help-title").show();
+    //         big_help_title = 1;
+    //     }
+    //     else {
+    //         $("#show-big-text").prop("checked", false);
+    //         $("#big-help-title").hide();
+    //         big_help_title = 0;
+    //     }
+    // });
 
-    $("button.action-focus-first").click(function(){
-        //console.log($("header").next().find("input, select, textarea, a").eq(0));
-        //$("section").eq(1).find(":visible:enabled:first").focus();
-        console.log($("[tabindex=100]").eq(0));
-        $("[tabindex=100]").eq(0).focus();
-    });
+    // $("button.action-focus-first").click(function(){
+    //     //console.log($("header").next().find("input, select, textarea, a").eq(0));
+    //     //$("section").eq(1).find(":visible:enabled:first").focus();
+    //     console.log($("[tabindex=100]").eq(0));
+    //     $("[tabindex=100]").eq(0).focus();
+    // });
 
-    $("button.action-font-size-up").click(function(){
-        const size = parseInt($("body").css("font-size").replace("px", ""));
-        const change_size = size + 2;
-        $("body").css("font-size", change_size + "px");
-    });
+    // $("button.action-font-size-up").click(function(){
+    //     const size = parseInt($("body").css("font-size").replace("px", ""));
+    //     const change_size = size + 2;
+    //     $("body").css("font-size", change_size + "px");
+    // });
 
-    $("button.action-font-size-down").click(function(){
-        const size = parseInt($("body").css("font-size").replace("px", ""));
-        const change_size = size - 2;
-        $("body").css("font-size", change_size + "px");
-    });
+    // $("button.action-font-size-down").click(function(){
+    //     const size = parseInt($("body").css("font-size").replace("px", ""));
+    //     const change_size = size - 2;
+    //     $("body").css("font-size", change_size + "px");
+    // });
 
-    $("button.action-font-size-origin").click(function(){
-        $("body").css("font-size", origin_font_size + "px");
-    });
+    // $("button.action-font-size-origin").click(function(){
+    //     $("body").css("font-size", origin_font_size + "px");
+    // });
 
-    $("button.action-change-bg-color").click(function(){
-        $.changeBgColor();
-    });
+    // $("button.action-change-bg-color").click(function(){
+    //     $.changeBgColor();
+    // });
 
     // 글자 크게 보기
-    $("#show-big-text").change(function(){
-        const tp = $(this).prop("checked");
-        if(tp == true){
-            $("#big-help-title").show();
-            big_help_title = 1;
-        }
-        else{
-            $("#big-help-title").hide();
-            big_help_title = 0;
-        }
+    // $("#show-big-text").change(function(){
+    //     const tp = $(this).prop("checked");
+    //     if(tp == true){
+    //         $("#big-help-title").show();
+    //         big_help_title = 1;
+    //     }
+    //     else{
+    //         $("#big-help-title").hide();
+    //         big_help_title = 0;
+    //     }
+    //
+    //     // 설정값 쿠키 저장 (30일)
+    //     let date = new Date(Date.now() + (86400*30));
+    //     date = date.toUTCString();
+    //     document.cookie = "show_big_text="+big_help_title+"; path=/; expires=" + date;
+    // });
 
-        // 설정값 쿠키 저장 (30일)
-        let date = new Date(Date.now() + (86400*30));
-        date = date.toUTCString();
-        document.cookie = "show_big_text="+big_help_title+"; path=/; expires=" + date;
-    });
-
-    $("#big-help-title #close").click(function(){
-        $("#show-big-text").prop("checked", false);
-        $("#big-help-title").hide();
-        big_help_title = 0;
-    });
+    // $("#big-help-title #close").click(function(){
+    //     $("#show-big-text").prop("checked", false);
+    //     $("#big-help-title").hide();
+    //     big_help_title = 0;
+    // });
 
     // 우편번호 검색
     $(".modal-search-post").click(function(){
