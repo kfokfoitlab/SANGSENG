@@ -55,6 +55,7 @@ $routes->group('Auth', function($routes){
     $routes->get ('SignInCompanyReport/(:any)', 'Auth::SignInCompanyReport/$1');
     $routes->get ('ForgotMyId',         'Auth::ForgotMyId');
     $routes->get ('ForgotMyPass',       'Auth::ForgotMyPass');
+    $routes->post ('ForgotSubmit',      'Auth::ForgotSubmit');
 
     $routes->get ('SignUpUserSLA',      'Auth::SignUpUserSLA');
     $routes->post('SignUpUser',         'Auth::SignUpUser');
@@ -156,7 +157,11 @@ $routes->group('Management', ['namespace' => 'App\Controllers\Management'], stat
 
 });
 
-
+$routes->group('Buyer', function($routes){
+    $routes->get ('/',              'Buyer::index');
+    $routes->get ('Shop/List',      'Buyer::List');
+    $routes->get ('Shop/Detail',    'Buyer::Detail');
+});
 
 /*
  * --------------------------------------------------------------------
