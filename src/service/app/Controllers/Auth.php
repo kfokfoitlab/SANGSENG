@@ -154,7 +154,7 @@ class Auth extends BaseController
         );
 
         echo view("Common/HeaderAuth.html");
-        echo view('Auth/SignUpUser.html', $data);
+        echo view('Auth/SignUpBuyer.html', $data);
         echo script_tag("/assets/js/"._CONTROLLER."/SignUpUser.js");
         echo view("Common/FooterAuth.html");
         echo view("Modal/SearchPost.html"); 
@@ -321,5 +321,29 @@ class Auth extends BaseController
 
         die();
     } //}}}
- 
+
+    /**
+     * 아이디 찾기
+     */
+    public function ForgotMyId()
+    { // {{{
+
+        echo view("Common/HeaderAuth.html");
+        echo view('Auth/ForgotMyId.html');
+        echo view("Common/FooterAuth.html");
+
+    } // }}}
+
+    /**
+     * 비밀번호 찾기
+     */
+    public function ForgotMyPass()
+    { // {{{
+
+        echo view("Common/HeaderAuth.html");
+        echo view('Auth/ForgotMyPass.html');
+        echo view("Common/FooterAuth.html");
+
+    } // }}}
+
 }

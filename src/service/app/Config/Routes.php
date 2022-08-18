@@ -53,6 +53,8 @@ $routes->group('Auth', function($routes){
     $routes->post('SignInSubmit',       'Auth::SignInSubmit');
     $routes->get ('SignUp',             'Auth::SignUp');
     $routes->get ('SignInCompanyReport/(:any)', 'Auth::SignInCompanyReport/$1');
+    $routes->get ('ForgotMyId',         'Auth::ForgotMyId');
+    $routes->get ('ForgotMyPass',       'Auth::ForgotMyPass');
 
     $routes->get ('SignUpUserSLA',      'Auth::SignUpUserSLA');
     $routes->post('SignUpUser',         'Auth::SignUpUser');
