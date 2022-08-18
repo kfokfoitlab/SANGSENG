@@ -4,24 +4,28 @@
       <!-- Login Form -->
       <div class="login-form default-form border rounded p-4">
         <div class="form-inner">
-          <h2 class="mb-4 font-weight-900" title="로그인"><a tabindex=100>로그인</a></h2>
+          <h2 class="mb-4 font-weight-900" title="아이디 찾기"><a tabindex=100>아이디 찾기</a></h2>
           <!--Login Form-->
           <form name="form-login" method="post" action="/<?=_CONTROLLER?>/SignInSubmit">
             <div class="form-group">
-              <label class="my-2" title="아이디"><a>아이디</a></label>
-              <input type="text" name="user_id" placeholder="아이디 입력" title="아이디 입력" value="<?=$remember_id?>" tabindex=100 required>
-<!--              <span class="small text-muted ps-2">(인재회원은 이메일주소, 기업회원은 사업자등록번호를 입력해 주세요.)</span>-->
+              <label class="my-2" title="회사명"><a>회사명</a></label>
+              <input type="text" name="company_name" placeholder="회사명 입력" title="회사명 입력" value="" tabindex=100 required>
             </div>
 
             <div class="form-group">
-              <label class="my-2" title="비밀번호"><a>비밀번호</a></label>
-              <input type="password" name="password" value="" title="비밀번호 입력" placeholder="비밀번호 입력" tabindex=100 required>
+              <label class="my-2" title="담당자 이름"><a>담당자 이름</a></label>
+              <input type="text" name="password" value="" title="담당자 이름 입력" placeholder="담당자 이름 입력" tabindex=100 required>
+            </div>
+
+            <div class="form-group">
+              <label class="my-2" title="연락처"><a>연락처</a></label>
+              <input type="text" name="phone" placeholder="연락처 입력" title="연락처 입력" value="" tabindex=100 required>
             </div>
 
             <div class="form-group">
               <div class="d-flex justify-content-end">
                 <a href="/Auth/ForgotMyId" class="me-4 text-end" tabindex=100>아이디 찾기</a>
-                <a href="/Auth/ForgotMyPass" class="text-end" tabindex=100>비밀번호 찾기</a>
+                <a href="/Auth/ForgotMyPassword" class="text-end" tabindex=100>비밀번호 찾기</a>
               </div>
             </div>
 
