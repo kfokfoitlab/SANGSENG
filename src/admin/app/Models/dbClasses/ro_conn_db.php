@@ -6,7 +6,7 @@ class ro_conn_db extends dbQueryClass {
 
     public function __construct(){
 
-		$db_host = "133.186.211.10";
+		$db_host = "133.186.218.7";
 		$db_name = "kfo";	
 		$db_user = "kfoitlab";	
 		$db_pass = "Kfoitlab1!43735002";	

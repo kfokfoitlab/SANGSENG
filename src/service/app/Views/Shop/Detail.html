@@ -1,0 +1,213 @@
+<?php
+  // Left Menu
+  require(__DIR__.'/Components/Left.html');
+?>
+<div style="flex-grow: 1">
+  <div class="shop-detail">
+    <div class="auto-container">
+      <div class="pt-5">
+        <h2 class="mb-2"><span class="text-primary">(주)신성피엔텍</span> 친환경 복사용지</h2>
+        <p class="mb-3">복사용지/규격 A4/백색/80g/크기 210x297mm</p>
+      </div>
+      <div class="d-flex pt-4 pb-5 mb-4">
+        <div class="detail-left">
+          <div>
+            <div class="p-3 border">
+              <img src="/assets/images/resource/products/item01.png" alt="기업로고">
+            </div>
+            <ul class="d-flex justify-content-between mt-3 list-preview">
+              <li class="border p-2">
+                <img src="/assets/images/resource/products/number_1.png" alt="기업로고">
+              </li>
+              <li class="border p-2">
+              <img src="/assets/images/resource/products/number_2.png" alt="기업로고">
+              </li>
+              <li class="border p-2">
+              <img src="/assets/images/resource/products/number_3.png" alt="기업로고">
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="detail-right">
+          <h3>상품선택</h3>
+          <div class="d-flex mb-4">
+            <div class="selecotr-item">
+              <input
+                type="radio"
+                id="item01"
+                name="items"
+                class="selector-item_radio"
+                checked
+              />
+              <label for="item01" class="selector-item_label px-2 py-1 me-2"
+              >100BOX<br/>(250,000매)</label
+              >
+            </div>
+            <div class="selecotr-item">
+              <input
+                type="radio"
+                id="item02"
+                name="items"
+                class="selector-item_radio"
+              />
+              <label for="item02" class="selector-item_label px-2 py-1 me-2"
+              >200BOX<br/>(500,000매)</label
+              >
+            </div>
+            <div class="selecotr-item">
+              <input
+                type="radio"
+                id="item03"
+                name="items"
+                class="selector-item_radio"
+              />
+              <label for="item03" class="selector-item_label px-2 py-1 me-2"
+              >400BOX<br/>(1,000,000매)</label
+              >
+            </div>
+            <div class="selecotr-item">
+              <input
+                type="radio"
+                id="item04"
+                name="items"
+                class="selector-item_radio"
+              />
+              <label for="item04" class="selector-item_label px-2 py-1 me-2"
+              >1,000BOX<br/>(2,500,000매)</label
+              >
+            </div>
+            <div class="selecotr-item">
+              <input
+                type="radio"
+                id="item05"
+                name="items"
+                class="selector-item_radio"
+              />
+              <label for="item05" class="selector-item_label px-2 py-1 me-2"
+              >2,000BOX<br/>(5,000,000매)</label
+              >
+            </div>
+          </div>
+
+          <h3>배송주기</h3>
+          <div class="d-flex mb-4">
+            <div class="selecotr-item">
+              <input
+                type="radio"
+                id="delivery01"
+                name="delivery"
+                class="selector-item_radio"
+                checked
+              />
+              <label for="delivery01" class="selector-item_label px-2 py-1 me-2">1번</label>
+            </div>
+            <div class="selecotr-item">
+              <input
+                type="radio"
+                id="delivery02"
+                name="delivery"
+                class="selector-item_radio"
+              />
+              <label for="delivery02" class="selector-item_label px-2 py-1 me-2"
+              >1주일에 한번</label
+              >
+            </div>
+            <div class="selecotr-item">
+              <input
+                type="radio"
+                id="delivery03"
+                name="delivery"
+                class="selector-item_radio"
+              />
+              <label for="delivery03" class="selector-item_label px-2 py-1 me-2"
+              >1달에 한번</label
+              >
+            </div>
+            <div class="selecotr-item">
+              <input
+                type="radio"
+                id="delivery04"
+                name="delivery"
+                class="selector-item_radio"
+              />
+              <label for="delivery04" class="selector-item_label px-2 py-1 me-2"
+              >2달에 한번</label
+              >
+            </div>
+            <div class="selecotr-item">
+              <input
+                type="radio"
+                id="delivery05"
+                name="delivery"
+                class="selector-item_radio"
+              />
+              <label for="delivery05" class="selector-item_label px-2 py-1 me-2"
+              >6달에 한번</label
+              >
+            </div>
+          </div>
+
+          <div class="mt-5 text-end total-price">
+            <h2><span>계약금액</span> 25,000,000원</h2>
+            <h2><span>감면액</span> 20,000,000원</h2>
+          </div>
+
+          <div class="mt-4 text-end">
+            <button class="btn btn-success btn-lg">장바구니</button>
+            <button class="btn btn-danger btn-lg">계약하기</button>
+          </div>
+        </div>
+      </div>
+      <nav>
+        <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+          <button
+            class="nav-link active"
+            id="nav-home-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-home"
+            type="button"
+            role="tab"
+            aria-controls="nav-home"
+            aria-selected="true"
+          >
+            기업 상세정보
+          </button>
+          <button
+            class="nav-link"
+            id="nav-profile-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-profile"
+            type="button"
+            role="tab"
+            aria-controls="nav-profile"
+            aria-selected="false"
+          >
+            상품 상세정보
+          </button>
+        </div>
+      </nav>
+      <div
+        class="tab-content p-5"
+        id="nav-tabContent"
+      >
+        <div
+          class="tab-pane fade show active"
+          id="nav-home"
+          role="tabpanel"
+          aria-labelledby="nav-home-tab"
+        >
+          <img src="/assets/images/resource/products/1.png" alt="기업로고">
+        </div>
+        <div
+          class="tab-pane fade"
+          id="nav-profile"
+          role="tabpanel"
+          aria-labelledby="nav-profile-tab"
+        >
+          <img src="/assets/images/resource/products/item_detail01.jpg" alt="기업로고">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

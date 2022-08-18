@@ -64,7 +64,9 @@ Version: 1.0.0
 56. Dashboard
 57. User Sidebar
 58. Chat Widget
-59. Buyer Left Box
+59. Left Box
+60. Shop/List
+61. Shop/Detail
  */
 **********************************************/
 /*** 
@@ -205,6 +207,7 @@ p,
   margin: 0 auto;
   width: 100%;
   min-width: 300px;
+  padding-top: 135px;
   /*overflow: hidden;*/
   z-index: 1;
   background-color: #ffffff;
@@ -3122,6 +3125,7 @@ Contact Section
 
 .mm-menu_fullscreen.mm-menu_position-bottom {
   top: 80px;
+  display: none;
 }
 
 .mm-navbar_sticky {
@@ -20688,7 +20692,7 @@ Work Section
 /***
 
 ====================================================================
-Buyer Left Box
+Left Box
 ====================================================================
 
 ***/
@@ -20696,8 +20700,8 @@ Buyer Left Box
   position: -webkit-sticky;
   position: sticky;
   width: 250px;
-  height: calc(100vh - 51px);
-  top: 51px;
+  height: calc(100vh - 135px);
+  top: 135px;
   left: 0;
   transition: 0.5s;
 }
@@ -20738,4 +20742,118 @@ Buyer Left Box
 }
 .left-fixed-box .accordion-button:not(.collapsed)::after {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+/***
+
+====================================================================
+Shop/List
+====================================================================
+
+***/
+.shop-list h2 {
+  font-size: 1.5rem;
+}
+.shop-list h3 {
+  font-size: 1.2rem;
+}
+.shop-list th {
+  text-align: center;
+}
+.shop-list p {
+  font-size: 0.9rem;
+}
+.shop-list .table td {
+  padding: 1rem 0.5rem;
+}
+.shop-list .sub-info {
+  font-size: 0.8rem;
+}
+.shop-list td:nth-child(1) {
+  width: 15%;
+  padding-left: 1rem;
+}
+.shop-list td:nth-child(1) img {
+  width: 150px;
+}
+.shop-list td:nth-child(2) {
+  width: 35%;
+}
+.shop-list td:nth-child(3) {
+  width: 18%;
+}
+.shop-list td:nth-child(4) {
+  width: 16%;
+  text-align: right;
+}
+.shop-list td:nth-child(5) {
+  width: 16%;
+  padding-right: 1rem;
+  text-align: right;
+}
+.shop-list .order-items span {
+  position: relative;
+  font-size: 0.9rem;
+  color: #777;
+  text-align: right;
+}
+.shop-list .order-items span.active {
+  font-weight: 700;
+}
+.shop-list .order-items span:not(:last-child)::after {
+  content: '|';
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0px;
+  font-weight: normal;
+}
+/***
+
+====================================================================
+Shop/Detail
+====================================================================
+
+***/
+.shop-detail h2 {
+  font-size: 1.5rem;
+}
+.shop-detail h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+.shop-detail .detail-left {
+  flex-basis: 30%;
+  flex-shrink: 0;
+  flex-grow: 0;
+  margin-right: 5%;
+}
+.shop-detail .detail-right {
+  flex-basis: 60%;
+  flex-shrink: 0;
+  flex-grow: 0
+}
+.shop-detail .selector-item_radio {
+  appearance: none;
+  display: none;
+}
+.shop-detail .selector-item_label {
+  border: 1px solid #eee;
+  cursor: pointer;
+}
+.shop-detail .selector-item_radio:checked + .selector-item_label {
+  background-color: #0d6efd;
+  color: white;
+}
+.shop-detail .list-preview li {
+  flex-basis: 30%;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.shop-detail .total-price h2 {
+  font-weight: bold;
+}
+.shop-detail .total-price span {
+  font-size: 1.2rem;
+  font-weight: normal;
 }

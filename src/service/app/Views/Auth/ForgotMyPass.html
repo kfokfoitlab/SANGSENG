@@ -6,7 +6,8 @@
         <div class="form-inner">
           <h2 class="mb-4 font-weight-900" title="비밀번호 찾기"><a tabindex=100>비밀번호 찾기</a></h2>
           <!--Login Form-->
-          <form name="form-login" method="post" action="/<?=_CONTROLLER?>/SignInSubmit">
+          <form name="form-login" method="post" action="/<?=_CONTROLLER?>/ForgotSubmit">
+            <input type="hidden" name="search_type" value="2">
             <div class="form-group">
               <label class="my-2" title="아이디"><a>아이디</a></label>
               <input type="text" name="user_id" placeholder="아이디 입력" title="아이디 입력" value="<?=$remember_id?>" tabindex=100 required>
@@ -18,12 +19,12 @@
 
             <div class="form-group">
               <label class="my-2" title="담당자 이름"><a>담당자 이름</a></label>
-              <input type="text" name="charge" value="" title="담당자 이름 입력" placeholder="담당자 이름 입력" tabindex=100 required>
+              <input type="text" name="manager_name" value="" title="담당자 이름 입력" placeholder="담당자 이름 입력" tabindex=100 required>
             </div>
 
             <div class="form-group">
               <label class="my-2" title="연락처"><a>연락처</a></label>
-              <input type="text" name="phone" placeholder="연락처 입력" title="연락처 입력" value="" tabindex=100 required>
+              <input type="text" name="user_phone" placeholder="연락처 입력" title="연락처 입력" value="" tabindex=100 required>
             </div>
 
             <div class="form-group">

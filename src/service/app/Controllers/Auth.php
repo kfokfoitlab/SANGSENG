@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\Auth\SignInModel as Model;
 use App\Models\Auth\SignUpUserModel as UserModel;
 use App\Models\Auth\SignUpCompanyModel as CompanyModel;
+use App\Models\Auth\ForgotInfoModel as ForgotModel;
 use App\Models\DatabaseModel;
 
 class Auth extends BaseController
@@ -12,13 +13,15 @@ class Auth extends BaseController
     private $model;
     private $user_model;
     private $company_model;
+	private $forgotModel_model;
     private $database_model;
-
+	
     public function __construct()
     { //{{{
         $this->model = new Model;
         $this->user_model = new UserModel;
         $this->company_model = new CompanyModel;
+	    $this->forgotModel_model = new ForgotModel;
         $this->database_model = new DatabaseModel;
     } //}}}
 
@@ -333,17 +336,49 @@ class Auth extends BaseController
         echo view("Common/FooterAuth.html");
 
     } // }}}
-
-    /**
-     * 비밀번호 찾기
-     */
-    public function ForgotMyPass()
-    { // {{{
-
-        echo view("Common/HeaderAuth.html");
-        echo view('Auth/ForgotMyPass.html');
-        echo view("Common/FooterAuth.html");
-
-    } // }}}
-
+	
+	/**
+	 * 비밀번호 찾기
+	 */
+	public function ForgotMyPass()
+	{ // {{{
+		
+		echo view("Common/HeaderAuth.html");
+		echo view('Auth/ForgotMyPass.html');
+		echo view("Common/FooterAuth.html");
+		
+	} // }}}
+	
+	/**
+	 * ID/비밀번호 찾기
+	 */
+	public function ForgotSubmit()
+	{
+		$data = array(
+			"company_name" => $_POST["company_name"]
+			,"manager_name" => $_POST["manager_name"]
+			,"user_phone" => $_POST["user_phone"]
+			,"user_id" => $_POST["user_id"]
+			,"search_type" => $_POST["search_type"]
+		);
+		
+		$result = $this->forgotModel_model->Register($data);
+		
+		if($result == "1") {
+			echo "
+                <script>
+                    alert('담당자 확인 후 연락드리겠습니다.');
+					window.location.replace('/"._CONTROLLER."/SignIn');
+                </script>
+            ";
+		}else{
+			echo "
+                <script>
+                    alert('오류가 발생했습니다.다시 시도해주세요');
+					window.location.replace('/"._CONTROLLER."/SignIn');
+                </script>
+            ";
+		}
+	}
+	
 }
