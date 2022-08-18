@@ -6,7 +6,9 @@
         <div class="form-inner">
           <h2 class="mb-4 font-weight-900" title="아이디 찾기"><a tabindex=100>아이디 찾기</a></h2>
           <!--Login Form-->
-          <form name="form-login" method="post" action="/<?=_CONTROLLER?>/SignInSubmit">
+          <form name="form-login" method="post" action="/<?=_CONTROLLER?>/ForgotSubmit">
+            <input type="hidden" name="search_type" value="1">
+            <input type="hidden" name="user_id" value="">
             <div class="form-group">
               <label class="my-2" title="회사명"><a>회사명</a></label>
               <input type="text" name="company_name" placeholder="회사명 입력" title="회사명 입력" value="" tabindex=100 required>
@@ -14,12 +16,12 @@
 
             <div class="form-group">
               <label class="my-2" title="담당자 이름"><a>담당자 이름</a></label>
-              <input type="text" name="charge" value="" title="담당자 이름 입력" placeholder="담당자 이름 입력" tabindex=100 required>
+              <input type="text" name="manager_name" value="" title="담당자 이름 입력" placeholder="담당자 이름 입력" tabindex=100 required>
             </div>
 
             <div class="form-group">
               <label class="my-2" title="연락처"><a>연락처</a></label>
-              <input type="text" name="phone" placeholder="연락처 입력" title="연락처 입력" value="" tabindex=100 required>
+              <input type="text" name="user_phone" placeholder="연락처 입력" title="연락처 입력" value="" tabindex=100 required>
             </div>
 
             <div class="form-group">
