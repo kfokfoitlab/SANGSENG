@@ -22,63 +22,59 @@ class SignUpUserModel extends CommonModel
 
     } //}}}
 
-    public function Register($files, $data, $table_name = "user")
+    public function Register($files, $data, $table_name = "buyer_company")
     { //{{{
+        echo $data["email"];
+        $uploads_dir = './uploads';
+        $allowed_ext = array('jpg','jpeg','png','gif','pdf');
 
-        helper(["uuid_v4", "specialchars"]);
+// 변수 정리
+        $error = $files['buyer_documents']['error'];
+        $name = $files['buyer_documents']['name'];
+        $exploded_file = explode(".",$name);
+        $ext = array_pop($exploded_file);
+
+    echo $allowed_ext[0];
+// 오류 확인
+        if( $error != UPLOAD_ERR_OK ) {
+            switch( $error ) {
+                case UPLOAD_ERR_INI_SIZE:
+                case UPLOAD_ERR_FORM_SIZE:
+                    echo "파일이 너무 큽니다. ($error)";
+                    break;
+                case UPLOAD_ERR_NO_FILE:
+                    echo "파일이 첨부되지 않았습니다. ($error)";
+                    break;
+                default:
+                    echo "파일이 제대로 업로드되지 않았습니다. ($error)";
+            }
+            exit;
+        }
+// 확장자 확인
+        echo $files["buyer_documents"]["type"];
+        if($files["buyer_documents"]["type"] != "application/pdf" ){
+            echo "허용되지 않는 확장자입니다.";
+            exit;
+        }
+
+      /*  if( !in_array($ext, $allowed_ext) ) {
+            echo "허용되지 않는 확장자입니다.";
+            exit;
+        }*/
+// 파일 이동
+       /* move_uploaded_file($uploads_dir, $name."/".$allowed_ext);*/
+        move_uploaded_file( $files['buyer_documents']['name'], "$uploads_dir/$name");
+    // helper(["uuid_v4", "specialchars"]);
+
         $uuid = gen_uuid_v4();
-
-        // image upload
-        $file = $files["walfare_card_file"];
-        if($file["error"] == 0){
-            $new_welfare_card_uuid = $this->uploadFiles($file, null);
-            $welfare_card_uuid = ",welfare_card_uuid = '".$new_welfare_card_uuid."'";
-        }
-        else {
-            $welfare_card_uuid = ",welfare_card_uuid = null";
-        }
-
-        // calcurating impairment score
-        $impairment_score = 0;
-        foreach($data["impairment"]["assistive_device"] as $score){
-            $impairment_score += @(int)$score;
-        }
-        foreach($data["impairment"]["degree"] as $score){
-            $impairment_score += @(int)$score;
-        }
-        foreach($data["impairment"]["physical_ability"] as $score){
-            $impairment_score += @(int)$score;
-        }
-
-        $detail = specialchars($data["impairment"]["detail"]);
-        $detail0 = str_replace("\n", "\\n", $detail);
-        $detail0 = str_replace("\r", "\\r", $detail0);
-        $detail0 = str_replace("\t", "\\t", $detail0);
-
-        $remark = specialchars($data["impairment"]["remark"]);
-        $remark = str_replace("\n", "\\n", $remark);
-        $remark = str_replace("\r", "\\r", $remark);
-        $remark = str_replace("\t", "\\t", $remark);
-
-        $data["impairment"]["detail"] = $detail;
-        $data["impairment"]["remark"] = $remark;
-
-        $impairment = json_encode($data["impairment"], JSON_UNESCAPED_UNICODE);
 
         // status == 0:가입신청, 1:심사중, 5:승인,7:거절, 9: 탈퇴	
         $status = '5';
-
-        $sbs = (@$data["sbs"] == "y")? 1 : 0;
-        $ads = (@$data["ads"] == "y")? 1 : 0;
+        $receive_yn  = (@$data["receive_yn "] == "y")? 1 : 0;
 
         // encoding password
         $salt = $data["password"];
-        $password_hash = password_hash($salt, PASSWORD_BCRYPT, ["cost" => 10]);
 
-        // coordinate
-        $coor_x = @(float)$data["coordinate_x"];
-        $coor_y = @(float)$data["coordinate_y"];
-        $coordinate = "POINT(".$coor_x.", ".$coor_y.")";
 
         $query = "
             insert into
@@ -86,24 +82,29 @@ class SignUpUserModel extends CommonModel
             set
                  uuid = '".$uuid."'
                 ,status = '".$status."'
-                ,verification = 0
-                ,name = '".$data["name"]."'
+                ,buyer_name = '".$data["buyer_name"]."'
                 ,email = '".$data["email"]."'
                 ,password = SHA2('".$salt."', 256)
-                ,password_hash = '".$password_hash."'
                 ,phone = '".$data["phone"]."'
-                ,tel = '".$data["tel"]."'
                 ,fax = '".$data["fax"]."'
-                ,post_code = '".$data["post_code"]."'
-                ,address = '".$data["address"]."'
-                ,address_detail = '".$data["address_detail"]."'
-                ,coordinate = ".$coordinate."
-                ,impairment = '".$impairment."'
-                ,impairment_score = ".$impairment_score."
-                ".$welfare_card_uuid."
-                ,sbs = ".$sbs."
-                ,ads = ".$ads."
+                ,post_code = '111-111'
+                ,address = '강동'
+                ,address_detail = '강동'
+                ,company_name = '".$data["company_name"]."'
+                ,company_code = '".$data["company_code"]."'
+                ,classification = '".$data["classification"]."'
+                ,tax_rate = '".$data["tax_rate"]."'
+                ,workers = '".$data["workers"]."'
+                ,severely_disabled = '".$data["severely_disabled"]."'
+                ,mild_disabled = '".$data["mild_disabled"]."'
+                ,interest_office = '".$data["interest_office"]."'
+                ,interest_daily = '".$data["interest_daily"]."'
+                ,interest_computerized = '".$data["interest_computerized"]."'
+                ,interest_food = '".$data["interest_food"]."'            
+                ,receive_yn = ".$receive_yn ."
                 ,register_date = '".date("Y-m-d H:i:s")."'
+                ,register_id = '".$data["email"]."'
+                ,buyer_documents = '".$name."'
         ";
         $idx = $this->wrdb->insert($query);
 
