@@ -12,18 +12,18 @@
       <div class="d-flex pt-4 pb-5 mb-4">
         <div class="detail-left">
           <div>
-            <div class="p-3 border">
+            <div class="p-3 border preview-img-big">
               <img src="/assets/images/resource/products/item01.png" alt="기업로고">
             </div>
             <ul class="d-flex justify-content-between mt-3 list-preview">
               <li class="border p-2">
-                <img src="/assets/images/resource/products/number_1.png" alt="기업로고">
+                <img class="preview-img-small" src="/assets/images/resource/products/item01.png" alt="기업로고">
               </li>
               <li class="border p-2">
-              <img src="/assets/images/resource/products/number_2.png" alt="기업로고">
+                <img class="preview-img-small" src="/assets/images/resource/products/number_2.png" alt="기업로고">
               </li>
               <li class="border p-2">
-              <img src="/assets/images/resource/products/number_3.png" alt="기업로고">
+                <img class="preview-img-small" src="/assets/images/resource/products/number_3.png" alt="기업로고">
               </li>
             </ul>
           </div>
@@ -90,7 +90,10 @@
             </div>
           </div>
 
-          <h3>배송주기</h3>
+          <div class="d-flex">
+            <h3>배송주기</h3>
+            <p class="ms-2 text-danger">(계약기간은 1년 기준입니다.)</p>
+          </div>
           <div class="d-flex mb-4">
             <div class="selecotr-item">
               <input
@@ -148,66 +151,74 @@
             </div>
           </div>
 
-          <div class="mt-5 text-end total-price">
-            <h2><span>계약금액</span> 25,000,000원</h2>
+          <div class="mt-5 pt-4 text-end border-top total-price">
+            <h2 class="mb-2"><span>계약금액</span> 25,000,000원</h2>
             <h2><span>감면액</span> 20,000,000원</h2>
           </div>
 
           <div class="mt-4 text-end">
-            <button class="btn btn-success btn-lg">장바구니</button>
+            <button class="btn btn-secondary btn-lg">장바구니</button>
             <button class="btn btn-danger btn-lg">계약하기</button>
           </div>
         </div>
       </div>
-      <nav>
-        <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
-          <button
-            class="nav-link active"
-            id="nav-home-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#nav-home"
-            type="button"
-            role="tab"
-            aria-controls="nav-home"
-            aria-selected="true"
-          >
-            기업 상세정보
-          </button>
-          <button
-            class="nav-link"
-            id="nav-profile-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#nav-profile"
-            type="button"
-            role="tab"
-            aria-controls="nav-profile"
-            aria-selected="false"
-          >
-            상품 상세정보
-          </button>
-        </div>
-      </nav>
-      <div
-        class="tab-content p-5"
-        id="nav-tabContent"
-      >
+      <div class="detail-info">
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button
+              class="nav-link active"
+              id="nav-company-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#nav-company"
+              type="button"
+              role="tab"
+              aria-controls="nav-company"
+              aria-selected="true"
+            >
+              기업 상세정보
+            </button>
+            <button
+              class="nav-link"
+              id="nav-detail-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#nav-detail"
+              type="button"
+              role="tab"
+              aria-controls="nav-detail"
+              aria-selected="false"
+            >
+              상품 상세정보
+            </button>
+          </div>
+        </nav>
         <div
-          class="tab-pane fade show active"
-          id="nav-home"
-          role="tabpanel"
-          aria-labelledby="nav-home-tab"
+          class="tab-content p-5"
+          id="nav-tabContent"
         >
-          <img src="/assets/images/resource/products/1.png" alt="기업로고">
-        </div>
-        <div
-          class="tab-pane fade"
-          id="nav-profile"
-          role="tabpanel"
-          aria-labelledby="nav-profile-tab"
-        >
-          <img src="/assets/images/resource/products/item_detail01.jpg" alt="기업로고">
+          <div
+            class="tab-pane fade show active"
+            id="nav-company"
+            role="tabpanel"
+            aria-labelledby="nav-company-tab"
+          >
+            <img src="/assets/images/resource/products/1.png" alt="기업로고">
+          </div>
+          <div
+            class="tab-pane fade"
+            id="nav-detail"
+            role="tabpanel"
+            aria-labelledby="nav-detail-tab"
+          >
+            <img src="/assets/images/resource/products/item_detail01.jpg" alt="기업로고">
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<script>
+  let img = document.querySelector('.preview-img-big img');
+  $('.preview-img-small').on('click', function(e){
+    img.src = e.target.src
+  })
+</script>

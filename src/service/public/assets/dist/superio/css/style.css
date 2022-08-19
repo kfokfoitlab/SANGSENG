@@ -67,6 +67,8 @@ Version: 1.0.0
 59. Left Box
 60. Shop/List
 61. Shop/Detail
+62. MyPage/BuyerCommonNav
+63. MyPage/BuyerContract
  */
 **********************************************/
 /*** 
@@ -20856,4 +20858,109 @@ Shop/Detail
 .shop-detail .total-price span {
   font-size: 1.2rem;
   font-weight: normal;
+}
+
+.shop-detail .detail-info .nav-link {
+  color: #777;
+}
+.shop-detail .nav-tabs .nav-item.show .nav-link,
+.shop-detail .nav-tabs .nav-link.active {
+  font-weight: bold;
+}
+/***
+
+====================================================================
+MyPage/BuyerCommonNav
+====================================================================
+
+***/
+.buyer-mypage-nav li {
+  position: relative;
+  margin-right: 1rem;
+}
+.buyer-mypage-nav li:not(:last-child)::after {
+  position: absolute;
+  content: '';
+  width: 2px;
+  height: 60%;
+  top: 21%;
+  right: -0.5rem;
+  background-color: #ccc;
+}
+.buyer-mypage-nav a:hover,
+.buyer-mypage-nav a.on {
+  font-weight: bold;
+  color: #444;
+}
+/***
+
+====================================================================
+MyPage/BuyerContract
+====================================================================
+
+***/
+.buyer-contract .search-table {
+  border-top: 2px solid #ECEDF2;
+  border-bottom: 2px solid #ECEDF2;
+}
+.buyer-contract .search-table tr:not(:last-child) {
+  border-bottom: 1px solid #ECEDF2;
+}
+.buyer-contract .search-table th {
+  width: 15%;
+  padding: 1rem;
+}
+.buyer-contract .form-check-input {
+  margin-top: 0.35rem;
+}
+.buyer-contract .form-check-label {
+  margin-right: 0.5rem;
+}
+.buyer-contract .form-select {
+  width: 200px;
+  padding: 0.25rem 0.7rem;
+}
+.buyer-contract .form-control {
+  display: inline-block;
+  width: 200px;
+  padding: 0.25rem 0.7rem;
+}
+.buyer-contract .result-table {
+  table-layout: fixed;
+}
+.buyer-contract .result-table th,
+.buyer-contract .result-table td {
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+.buyer-contract .result-table th:nth-child(1) {
+  width: 55px;
+}
+.buyer-contract .result-table th:nth-child(2),
+.buyer-contract .result-table th:nth-child(3) {
+  width: 80px;
+}
+.buyer-contract .result-table th:nth-child(4) {
+  width: 140px;
+}
+.buyer-contract .result-table th:nth-child(5) {
+  width: 80px;
+}
+.buyer-contract .result-table th:nth-child(6) {
+  width: 90px;
+}
+.buyer-contract .result-table th:nth-child(7),
+.buyer-contract .result-table th:nth-child(8),
+.buyer-contract .result-table th:nth-child(9),
+.buyer-contract .result-table th:nth-child(10) {
+  width: 135px;
+}
+.buyer-contract .result-table th:nth-child(11) {
+  width: 95px;
+}
+.buyer-contract .result-table th:nth-child(12) {
+  width: 112px;
 }

@@ -68,4 +68,12 @@ class Buyer extends BaseController
         echo view('Shop/Detail.html');
         echo view("Common/Footer.html");
     } // }}}
+
+    public function Contract()
+    { // {{{
+
+        echo view("Common/Header.html");
+        echo view('MyPage/BuyerContract.html');
+        echo view("Common/Footer.html");
+    } // }}}
 }
