@@ -23,6 +23,7 @@ class Person extends BaseController
 
     public function Index()
     { // {{{
+        session_destroy();
         $job_category = $this->database_model->getJobAll();
 
         // 현재 페이지

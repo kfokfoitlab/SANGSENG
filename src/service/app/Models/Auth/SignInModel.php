@@ -4,20 +4,20 @@ use App\Models\CommonModel;
 
 class SignInModel extends CommonModel
 {
-    public function SignIn($user_id, $password)
+    public function SignIn($email, $password,$company_type)
     { // {{{
 
-        helper("specialchars");
+      /*  helper("specialchars");
         $user_id = specialchars($user_id);
 
-        $check_email=preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i", $user_id);
+        $check_email=preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i", $user_id);*/
         // 이메일 형식이면 인재회원
-        if($check_email==true) {
-            return $this->SignInUser($user_id, $password);    
+        if($company_type==1) {
+            return $this->SignInUser($email, $password);
         }
         // 아니면, 기업회원
         else {
-            return $this->SignInCompany($user_id, $password);    
+            return $this->SignInCompany($email, $password);
         }
 
     } // }}}
@@ -28,7 +28,7 @@ class SignInModel extends CommonModel
             select
                 *
             from
-                user
+                buyer_company
             where
                 status != '9' and
                 email = '".$email."' and
@@ -39,20 +39,17 @@ class SignInModel extends CommonModel
         $row = $this->rodb->next_row();
         if(isset($row["idx"])){
             // verify password
-            if(!password_verify($password, $row["password_hash"])){
+         /*   if(!password_verify($password, $row["password_hash"])){
                 return array(
                      "result" => "failed"
                     ,"type" => "Invalid"
                 );
-            }
+            }*/
 
             $_SESSION["login"] = "success";
             $_SESSION["login_info"] = array(
                  "uuid" => $row["uuid"]
-                ,"profile_img_uuid" => $row["profile_img_uuid"]
-                ,"type" => "user"
                 ,"status" => $row["status"]
-                ,"verification" => $row["verification"]
                 ,"name" => $row["name"]
                 ,"email" => $row["email"]
             );
@@ -70,16 +67,16 @@ class SignInModel extends CommonModel
 
     } //}}}
 
-    private function SignInCompany($business_number, $password)
+    private function SignInCompany($email, $password)
     { //{{{
         $query = "
             select
                 *
             from
-                company
+                seller_company
             where
                 status != '9' and
-                business_number = '".$business_number."' and
+                email = '".$email."' and
                 password = SHA2('".$password."', 256)
             limit 1
         ";

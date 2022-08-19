@@ -24,8 +24,7 @@ class SignUpUserModel extends CommonModel
 
     public function Register($files, $data, $table_name = "buyer_company")
     { //{{{
-        echo $data["email"];
-        $uploads_dir = './uploads';
+       /* $uploads_dir = './uploads';*/
         $allowed_ext = array('jpg','jpeg','png','gif','pdf');
 
 // 변수 정리
@@ -33,8 +32,12 @@ class SignUpUserModel extends CommonModel
         $name = $files['buyer_documents']['name'];
         $exploded_file = explode(".",$name);
         $ext = array_pop($exploded_file);
+        $target_dir = ROOTPATH."/public/uploads/upload_files/";
+        $file_tmp_name = $files["buyer_documents"]["tmp_name"];
+        $file_ext = pathinfo($files["buyer_documents"]["name"], PATHINFO_EXTENSION);
+        $file_new_name = uniqid().".".$file_ext;
 
-    echo $allowed_ext[0];
+        // echo $allowed_ext[0];
 // 오류 확인
         if( $error != UPLOAD_ERR_OK ) {
             switch( $error ) {
@@ -51,31 +54,21 @@ class SignUpUserModel extends CommonModel
             exit;
         }
 // 확장자 확인
-        echo $files["buyer_documents"]["type"];
-        if($files["buyer_documents"]["type"] != "application/pdf" ){
+      if( !in_array($ext, $allowed_ext) ) {
             echo "허용되지 않는 확장자입니다.";
             exit;
         }
-
-      /*  if( !in_array($ext, $allowed_ext) ) {
-            echo "허용되지 않는 확장자입니다.";
-            exit;
-        }*/
 // 파일 이동
-       /* move_uploaded_file($uploads_dir, $name."/".$allowed_ext);*/
-        move_uploaded_file( $files['buyer_documents']['name'], "$uploads_dir/$name");
-    // helper(["uuid_v4", "specialchars"]);
-
+        move_uploaded_file($file_tmp_name,$target_dir. $file_new_name);
+        helper(["uuid_v4", "specialchars"]);
         $uuid = gen_uuid_v4();
-
         // status == 0:가입신청, 1:심사중, 5:승인,7:거절, 9: 탈퇴	
         $status = '5';
-        $receive_yn  = (@$data["receive_yn "] == "y")? 1 : 0;
-
-        // encoding password
+        $receive_yn  = (@$data["ads"] == "y")? 'Y' : 'N';
+        if($data['tax_rate'] == null){
+            $data['tax_rate'] = 10;
+        }
         $salt = $data["password"];
-
-
         $query = "
             insert into
                 ".$table_name."
@@ -87,21 +80,19 @@ class SignUpUserModel extends CommonModel
                 ,password = SHA2('".$salt."', 256)
                 ,phone = '".$data["phone"]."'
                 ,fax = '".$data["fax"]."'
-                ,post_code = '111-111'
-                ,address = '강동'
-                ,address_detail = '강동'
+                ,address = '".$data["address"]."'
                 ,company_name = '".$data["company_name"]."'
                 ,company_code = '".$data["company_code"]."'
                 ,classification = '".$data["classification"]."'
-                ,tax_rate = '".$data["tax_rate"]."'
-                ,workers = '".$data["workers"]."'
-                ,severely_disabled = '".$data["severely_disabled"]."'
-                ,mild_disabled = '".$data["mild_disabled"]."'
+                ,tax_rate = '".$data['tax_rate']."'
+                ,workers = '".$data['workers']."'
+                ,severely_disabled = '".$data['severely_disabled']."'
+                ,mild_disabled = '".$data['mild_disabled']."'
                 ,interest_office = '".$data["interest_office"]."'
                 ,interest_daily = '".$data["interest_daily"]."'
                 ,interest_computerized = '".$data["interest_computerized"]."'
                 ,interest_food = '".$data["interest_food"]."'            
-                ,receive_yn = ".$receive_yn ."
+                ,receive_yn = '".$receive_yn ."'
                 ,register_date = '".date("Y-m-d H:i:s")."'
                 ,register_id = '".$data["email"]."'
                 ,buyer_documents = '".$name."'
@@ -117,7 +108,7 @@ class SignUpUserModel extends CommonModel
 
     } //}}}
 
-    public function dupCheck($email, $table_name = "user")
+    public function dupCheck($email, $table_name = "buyer_company")
     { //{{{
         $query = "
             select

@@ -7,9 +7,11 @@
           <h2 class="mb-4 font-weight-900" title="로그인"><a tabindex=100>로그인</a></h2>
           <!--Login Form-->
           <form name="form-login" method="post" action="/<?=_CONTROLLER?>/SignInSubmit">
+            <input type="radio" name="company_type" value="1" checked ="checked">구매기업
+            <input type="radio" name="company_type" value="2">판매기업
             <div class="form-group">
-              <label class="my-2" title="아이디"><a>아이디</a></label>
-              <input type="text" name="user_id" placeholder="아이디 입력" title="아이디 입력" value="<?=$remember_id?>" tabindex=100 required>
+              <label class="my-2" title="아이디"><a>이메일주소</a></label>
+              <input type="text" name="email" placeholder="이메일 입력" title="이메일 입력" tabindex=100 required>
 <!--              <span class="small text-muted ps-2">(인재회원은 이메일주소, 기업회원은 사업자등록번호를 입력해 주세요.)</span>-->
             </div>
 

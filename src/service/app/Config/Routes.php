@@ -57,18 +57,17 @@ $routes->group('Auth', function($routes){
     $routes->get ('ForgotMyPass',       'Auth::ForgotMyPass');
     $routes->post ('ForgotSubmit',      'Auth::ForgotSubmit');
 
-    $routes->get ('SignUpUserSLA',      'Auth::SignUpUserSLA');
-    $routes->post('SignUpUser',         'Auth::SignUpUser');
-    $routes->post('SignUpUserStep2',    'Auth::SignUpUserStep2');
-    $routes->post('SignUpUserSubmit',    'Auth::SignUpUserSubmit');
-    $routes->get ('SignUpUserComplete/(:any)', 'Auth::SignUpUserComplete/$1');
+    $routes->get ('SignUpBuyerSLA',      'Auth::SignUpBuyerSLA');
+    $routes->post('SignUpBuyer',         'Auth::SignUpBuyer');
+    $routes->post('SignUpBuyerStep2',    'Auth::SignUpBuyerStep2');
+    $routes->post('SignUpBuyerSubmit',    'Auth::SignUpBuyerSubmit');
+    $routes->get ('SignUpBuyerComplete/(:any)', 'Auth::SignUpBuyerComplete/$1');
 
-    $routes->get ('SignUpCompanySLA',      'Auth::SignUpCompanySLA');
-    $routes->post('SignUpCompany',         'Auth::SignUpCompany');
-    $routes->post('SignUpCompanySubmit',    'Auth::SignUpCompanySubmit');
-    $routes->get ('SignUpCompanyComplete/(:any)', 'Auth::SignUpCompanyComplete/$1');
+    $routes->get ('SignUpSellerSLA',      'Auth::SignUpSellerSLA');
+    $routes->post('SignUpSeller',         'Auth::SignUpSeller');
+    $routes->post('SignUpSellerSubmit',    'Auth::SignUpSellerSubmit');
+    $routes->get ('SignUpSellerComplete/(:any)', 'Auth::SignUpSellerComplete/$1');
 
-    $routes->get('SignUpCompany', 'Auth::SignUpCompany');
 
     $routes->get('SignOut', 'Auth::SignOut');
 });
@@ -161,8 +160,8 @@ $routes->group('Buyer', function($routes){
     $routes->get ('/',              'Buyer::index');
     $routes->get ('Shop/List',      'Buyer::List');
     $routes->get ('Shop/Detail',    'Buyer::Detail');
+    $routes->get ('MyPage/Contract',    'Buyer::Contract');
 });
-
 /*
  * --------------------------------------------------------------------
  * Additional Routing

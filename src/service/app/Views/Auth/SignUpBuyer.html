@@ -1,8 +1,9 @@
 <section class="container" style="padding-top: 172px; margin-bottom: 128px;">
+
   <div id="row">
     <div class="col-12 col-lg-10 offset-lg-1">
 
-      <h2 class="mb-4 font-weight-900 text-center" title="인재 회원가입"><a>인재 회원가입</a></h2>
+      <h2 class="mb-4 font-weight-900 text-center" title="구매기업 회원가입"><a>구매기업 회원가입</a></h2>
 
       <div class="row join-process">
         <div class="col-12 col-md-6 col-lg-3 ok">
@@ -18,15 +19,9 @@
           </a>
         </div>
         <div class="col-12 col-md-6 col-lg-3">
-          <a title="3단계 상세정보 입력">
-            <em>3</em>
-            <span>3단계 <br>상세 정보</span>
-          </a>
-        </div>
-        <div class="col-12 col-md-6 col-lg-3">
           <a title="4단계 가입 완료">
-            <em>4</em>
-            <span>4단계 <br>가입 완료</span>
+            <em>3</em>
+            <span>3단계 <br>가입 완료</span>
           </a>
         </div>
       </div>
@@ -34,7 +29,7 @@
       <div class="default-form border rounded my-4 p-4">
         <div class="form-inner">
 
-          <form name="form-submit" method="post" action="/Auth/SignUpUserSubmit" enctype="multipart/form-data">
+          <form name="form-submit" method="post" action="/Auth/SignUpBuyerSubmit" enctype="multipart/form-data">
             <input type="hidden" name="sbs" value="<?=$sbs?>">
             <input type="hidden" name="ads" value="<?=$ads?>">
 
@@ -65,7 +60,7 @@
 
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="사업자등록번호 필수입력">사업자등록번호</a></small></label>
-              <input type="text" name="business_number" class="mask-business-number" placeholder="숫자만 입력해 주세요." title="사업자등록번호 입력" tabindex=100 required>
+              <input type="text" name="company_code" class="mask-business-number" placeholder="숫자만 입력해 주세요." title="사업자등록번호 입력" tabindex=100 required>
             </div>
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="기업형태 필수입력">기업형태</a></label>
@@ -77,7 +72,11 @@
               <label class="my-2"><a title="팩스번호">팩스번호</a></label>
               <input type="text" class="mask-phone" name="fax" placeholder="숫자, '-'만 입력" title="팩스번호 숫자, '-'만 입력" tabindex=100>
             </div>
-            <label class="my-2"><sup class="text-danger">*</sup><a title="주소">주소</a></label>
+            <div class="form-group">
+              <label class="my-2"><sup class="text-danger">*</sup><a title="담당자 이름 필수입력">주소</a></label>
+              <input type="text" name="address" placeholder="주소를 입력해주세요" title="담당자 이름 입력" tabindex=100 required>
+            </div>
+           <!-- <label class="my-2"><sup class="text-danger">*</sup><a title="주소">주소</a></label>
             <div class="row">
               <div class="col-8 col-lg-4 pe-0">
                 <div class="form-group">
@@ -93,30 +92,30 @@
               <input type="text" id="address_detail" name="address_detail" class="my-2" placeholder="상세주소" title="상세주소" tabindex=100>
               <input type="hidden" name="coordinate_x" id="coordinate_x">
               <input type="hidden" name="coordinate_y" id="coordinate_y">
-            </div>
+            </div>-->
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="상시 근로자 수 필수입력">상시 근로자 수 </a></label>
-              <input type="text" name="full-time-disabled" placeholder="숫자만 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="상시 근로자 수 입력" tabindex=100 required>
+              <input type="text" name="workers" placeholder="숫자만 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="상시 근로자 수 입력" tabindex=100 required>
             </div>
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="경증 장애인 근로자 수 필수입력">경증 장애인 근로자 수</a></label>
-              <input type="text" name="mildly-disabled" placeholder="숫자만 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="경증 장애인 근로자 수 입력" tabindex=100 required>
+              <input type="text" name="mild_disabled" placeholder="숫자만 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="경증 장애인 근로자 수 입력" tabindex=100 required>
             </div>
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="중증 장애인 근로자 수 필수입력">중증 장애인 근로자 수</a></label>
-              <input type="text" name="severely-disabled" placeholder="숫자만 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="중증 장애인 근로자 수 입력" tabindex=100 required>
+              <input type="text" name="severely_disabled" placeholder="숫자만 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="중증 장애인 근로자 수 입력" tabindex=100 required>
             </div>
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="적용 법인세율">적용 법인세율</a></label>
-              <input type="text" name="tax-percentage" placeholder="숫자만 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="적용법인 세율 입력" tabindex=100 required>
+              <input type="text" name="tax_rate" placeholder="숫자만 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="적용법인 세율 입력" tabindex=100 >
             </div>
             <div class="">
               <p class="my-2"><a title="관심상품">관심상품</a></p>
-              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="1" name="interest_office"> 사무용품</label>
-              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="2" name="interest_daily"> 생활용품</label>
-              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="3" name="interest_computerized"> 전산용품</label>
-              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="4" name="interest_food"> 식음료</label>
-              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="5" name="interest_cleaning"> 청소용품</label>
+              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_office"> 사무용품</label>
+              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_daily"> 생활용품</label>
+              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_computerized"> 전산용품</label>
+              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_food"> 식음료</label>
+              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_cleaning"> 청소용품</label>
             </div>
             <br>
             <div class="form-group">

@@ -50,24 +50,23 @@ class Auth extends BaseController
 
     public function SignInSubmit()
     { //{{{
-        $user_id = $_POST["user_id"];
+        $email = $_POST["email"];
         $password = $_POST["password"];
-
-        $result = $this->model->SignIn($user_id, $password);
+        $company_type = $_POST["company_type"];
+        $result = $this->model->SignIn($email, $password,$company_type);
 
         if($result["result"] == "success"){
             // 아이디 저장 쿠키 처리 - 1개월간
-            if(@$_POST["remember_me"] == 1){
+        /*    if(@$_POST["remember_me"] == 1){
                 setcookie("remember_me", "1", strtotime("+1 month"), "/");
-                setcookie("remember_id", $user_id, strtotime("+1 month"), "/");
+                setcookie("remember_id", $email, strtotime("+1 month"), "/");
             }
             else{
                 setcookie("remember_me", null, -1, "/");
                 setcookie("remember_id", null, -1, "/");
-            }
+            }*/
 
             // 기업회원이고 승인 대기중일때.
-            if($_SESSION["login_info"]["type"] == "company"){
                 switch($_SESSION["login_info"]["status"]){
                     case "0" :
                     case "1" :
@@ -79,13 +78,7 @@ class Auth extends BaseController
                     case "7" :
                         header("Location:/Auth/SignInCompanyReport/reject");
                         break;
-
-                }
-            }
-            // 인재 회원
-            else {
-                header("Location:/");
-            }
+                    }
         }
         else {
             echo "
@@ -123,9 +116,9 @@ class Auth extends BaseController
     } // }}}
 
     /**
-     * 인재 회원가입
+     * 구매기업 회원가입
      */
-    public function SignUpUserSLA()
+    public function SignUpBuyerSLA()
     { // {{{
 
         $sla = $this->user_model->getTermsData("Terms/ServiceLevelAgreement");
@@ -143,12 +136,12 @@ class Auth extends BaseController
         );
 
         echo view("Common/HeaderAuth.html");
-        echo view('Auth/SignUpUserSLA.html', $data);
+        echo view('Auth/SignUpBuyerSLA.html', $data);
         echo view("Common/FooterAuth.html");
 
     } // }}}
 
-    public function SignUpUser()
+    public function SignUpBuyer()
     { // {{{
 
         $data = array(
@@ -207,13 +200,25 @@ class Auth extends BaseController
 
     } // }}}
 
-    public function SignUpUserSubmit()
+    public function SignUpBuyerSubmit()
     { //{{{
+
+        $dup_check = $this->user_model->dupCheck($_POST["email"]);
+        if($dup_check){
+            echo "
+                <script>
+                    alert('이미 가입된 기업입니다.');
+                    window.location.replace('/Auth/SignUp');
+                </script>
+            ";
+
+            die();
+        }
 
         $uuid = $this->user_model->Register($_FILES, $_POST);
 
         if($uuid){
-            header("Location: /"._CONTROLLER."/SignUpUserComplete/".$uuid);
+            header("Location: /"._CONTROLLER."/SignUpBuyerComplete/".$uuid);
         }
         else {
             echo "
@@ -228,23 +233,23 @@ class Auth extends BaseController
 
     } //}}}
 
-    public function SignUpUserComplete($uuid = null)
+    public function SignUpBuyerComplete($uuid = null)
     { // {{{
         
         // 가입한 회원번호 : uuid
         // 지금은 아무 처리 안함. 나중에 기능이 추가될 수도...
 
         echo view("Common/HeaderAuth.html");
-        echo view('Auth/SignUpUserComplete.html');
+        echo view('Auth/SignUpBuyerComplete.html');
         echo view("Common/FooterAuth.html");
 
     } // }}}
 
 
     /**
-     * 기업 회원가입
+     * 판매기업 회원가입
      */
-    public function SignUpCompanySLA()
+    public function SignUpSellerSLA()
     { // {{{
 
         $sla = $this->company_model->getTermsData("Terms/ServiceLevelAgreement");
@@ -262,12 +267,12 @@ class Auth extends BaseController
         );
 
         echo view("Common/HeaderAuth.html");
-        echo view('Auth/SignUpCompanySLA.html', $data);
+        echo view('Auth/SignUpSellerSLA.html', $data);
         echo view("Common/FooterAuth.html");
 
     } // }}}
 
-    public function SignUpCompany()
+    public function SignUpSeller()
     { // {{{
 
         $data = array(
@@ -276,26 +281,36 @@ class Auth extends BaseController
         );
 
         echo view("Common/HeaderAuth.html");
-        echo view('Auth/SignUpCompany.html', $data);
+        echo view('Auth/SignUpSeller.html', $data);
         echo script_tag("/assets/js/"._CONTROLLER."/SignUpCompany.js");
         echo view("Common/FooterAuth.html");
         echo view("Modal/SearchPost.html"); 
 
     } // }}}
 
-    public function SignUpCompanySubmit()
+    public function SignUpSellerSubmit()
     { //{{{
+        $dup_check = $this->user_model->dupCheck($_POST["email"]);
+        if($dup_check){
+            echo "
+                <script>
+                    alert('이미 가입된 기업입니다.');
+                    window.location.replace('/Auth/SignUp');
+                </script>
+            ";
 
-        $uuid = $this->company_model->Register($_POST);
+            die();
+        }
+        $uuid = $this->company_model->Register($_FILES,$_POST);
 
         if($uuid){
-            header("Location: /"._CONTROLLER."/SignUpCompanyComplete/".$uuid);
+            header("Location: /"._CONTROLLER."/SignUpSellerComplete/".$uuid);
         }
         else {
             echo "
                 <script>
-                    alert('이미 가입된 기업입니다.');
-                    window.location.replace('/"._CONTROLLER."/SignUp');
+                    alert('오류가 발생했습니다. (Code: 1100)');
+                    window.history.back(-1);
                 </script>
             ";
         }
@@ -304,14 +319,14 @@ class Auth extends BaseController
 
     } //}}}
 
-    public function SignUpCompanyComplete($uuid = null)
+    public function SignUpSellerComplete($uuid = null)
     { // {{{
         
         // 가입한 회원번호 : uuid
         // 지금은 아무 처리 안함. 나중에 기능이 추가될 수도...
 
         echo view("Common/HeaderAuth.html");
-        echo view('Auth/SignUpCompanyComplete.html');
+        echo view('Auth/SignUpSellerComplete.html');
         echo view("Common/FooterAuth.html");
 
     } // }}}
