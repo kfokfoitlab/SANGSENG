@@ -55,6 +55,15 @@ $routes->group('Member', ['namespace' => 'App\Controllers\Member'], static funct
     $routes->get ($group_name.'/Update/(:any)',     $group_name.'::Update/$1');
     $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
     $routes->get ($group_name.'/DeleteSubmit/(:any)', $group_name.'::DeleteSubmit/$1');
+	
+	// ID/PW 찾기
+	$group_name = "ForgotInfo";
+	$routes->get ($group_name.'/',                  $group_name.'::Index');
+	$routes->post($group_name.'/getList',           $group_name.'::getList');
+	$routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
+	$routes->get ($group_name.'/Update/(:any)',     $group_name.'::Update/$1');
+	$routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
+	$routes->get ($group_name.'/DeleteSubmit/(:any)', $group_name.'::DeleteSubmit/$1');
 
 });
 
