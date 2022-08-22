@@ -41,7 +41,7 @@ echo doctype("html5");
     <!-- Preloader -->
     <div class="preloader"></div>
 
-    <div class="fixed-top d-none d-xl-block py-2" id="top_guide">
+    <div class="fixed-top py-2 bg-white">
       <div class="auto-container">
         <div class="d-flex justify-content-between py-1">
           <button class="btn py-0" tabindex=1>장애인 연계고용 제도</button>
@@ -75,7 +75,7 @@ echo doctype("html5");
                 </li>
 
                 <li class="">
-                  <a href="/Person" tabindex=12> <span>사무용품</span> </a>
+                  <a href="/Buyer/Shop/List" tabindex=12> <span>사무용품</span> </a>
                 </li>
 
                 <li class="">
@@ -128,8 +128,8 @@ echo doctype("html5");
               if($_SESSION["login_info"]["type"] == "buyer"){
             ?>
               <div class="dropdown dashboard-option">
-                <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
-                  <span class="name text-white"><?=$_SESSION["login_info"]["buyer_name"]?> <span class='small'>님</span>
+                <a class="dropdown-toggle" role="button" type="button" data-toggle="dropdown" aria-expanded="false">
+                  <span class="name text-white"><?=$_SESSION["login_info"]["buyer_name"]?></span> <span class='small'>님</span>
                 </a>
                 <ul class="dropdown-menu p-2 ps-0" style="">
                   <li><a href="/Management/User/Profile"><i class="la la-user"></i>내 정보</a></li>

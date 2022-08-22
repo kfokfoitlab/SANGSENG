@@ -42,9 +42,9 @@ class Auth extends BaseController
             ,"remember_id" => $remember_id
         );
 
-        echo view("Common/HeaderAuth.html");
+        echo view("Common/Header.html");
         echo view('Auth/SignIn.html', $data);
-        echo view("Common/FooterAuth.html");
+        echo view("Common/Footer.html");
 
     } // }}}
 
@@ -67,18 +67,33 @@ class Auth extends BaseController
             }*/
 
             // 기업회원이고 승인 대기중일때.
-                switch($_SESSION["login_info"]["status"]){
+            if($_SESSION["login_info"]["type"] == 'buyer') {
+                switch ($_SESSION["login_info"]["status"]) {
                     case "0" :
                     case "1" :
                         header("Location:/Auth/SignInCompanyReport/review");
                         break;
                     case "5" : // OK
-                        header("Location:/");
+                        header("Location:/Buyer");
                         break;
                     case "7" :
                         header("Location:/Auth/SignInCompanyReport/reject");
                         break;
-                    }
+                }
+            }else{
+                switch ($_SESSION["login_info"]["status"]) {
+                    case "0" :
+                    case "1" :
+                        header("Location:/Auth/SignInCompanyReport/review");
+                        break;
+                    case "5" : // OK
+                        header("Location:/Seller");
+                        break;
+                    case "7" :
+                        header("Location:/Auth/SignInCompanyReport/reject");
+                        break;
+                }
+            }
         }
         else {
             echo "
@@ -109,9 +124,9 @@ class Auth extends BaseController
     public function SignUp()
     { // {{{
 
-        echo view("Common/HeaderAuth.html");
+        echo view("Common/Header.html");
         echo view('Auth/SignUp.html');
-        echo view("Common/FooterAuth.html");
+        echo view("Common/Footer.html");
 
     } // }}}
 
@@ -135,9 +150,9 @@ class Auth extends BaseController
             ,"ads" => $ads["contents"]
         );
 
-        echo view("Common/HeaderAuth.html");
+        echo view("Common/Header.html");
         echo view('Auth/SignUpBuyerSLA.html', $data);
-        echo view("Common/FooterAuth.html");
+        echo view("Common/Footer.html");
 
     } // }}}
 
@@ -149,10 +164,10 @@ class Auth extends BaseController
             ,"ads" => $_POST["ads"]
         );
 
-        echo view("Common/HeaderAuth.html");
+        echo view("Common/Header.html");
         echo view('Auth/SignUpBuyer.html', $data);
         echo script_tag("/assets/js/"._CONTROLLER."/SignUpUser.js");
-        echo view("Common/FooterAuth.html");
+        echo view("Common/Footer.html");
         echo view("Modal/SearchPost.html"); 
 
     } // }}}
@@ -239,9 +254,9 @@ class Auth extends BaseController
         // 가입한 회원번호 : uuid
         // 지금은 아무 처리 안함. 나중에 기능이 추가될 수도...
 
-        echo view("Common/HeaderAuth.html");
+        echo view("Common/Header.html");
         echo view('Auth/SignUpBuyerComplete.html');
-        echo view("Common/FooterAuth.html");
+        echo view("Common/Footer.html");
 
     } // }}}
 
@@ -266,9 +281,9 @@ class Auth extends BaseController
             ,"ads" => $ads["contents"]
         );
 
-        echo view("Common/HeaderAuth.html");
+        echo view("Common/Header.html");
         echo view('Auth/SignUpSellerSLA.html', $data);
-        echo view("Common/FooterAuth.html");
+        echo view("Common/Footer.html");
 
     } // }}}
 
@@ -280,10 +295,10 @@ class Auth extends BaseController
             ,"ads" => $_POST["ads"]
         );
 
-        echo view("Common/HeaderAuth.html");
+        echo view("Common/Header.html");
         echo view('Auth/SignUpSeller.html', $data);
         echo script_tag("/assets/js/"._CONTROLLER."/SignUpCompany.js");
-        echo view("Common/FooterAuth.html");
+        echo view("Common/Footer.html");
         echo view("Modal/SearchPost.html"); 
 
     } // }}}
@@ -325,9 +340,9 @@ class Auth extends BaseController
         // 가입한 회원번호 : uuid
         // 지금은 아무 처리 안함. 나중에 기능이 추가될 수도...
 
-        echo view("Common/HeaderAuth.html");
+        echo view("Common/Header.html");
         echo view('Auth/SignUpSellerComplete.html');
-        echo view("Common/FooterAuth.html");
+        echo view("Common/Footer.html");
 
     } // }}}
 
@@ -346,9 +361,9 @@ class Auth extends BaseController
     public function ForgotMyId()
     { // {{{
 
-        echo view("Common/HeaderAuth.html");
+        echo view("Common/Header.html");
         echo view('Auth/ForgotMyId.html');
-        echo view("Common/FooterAuth.html");
+        echo view("Common/Footer.html");
 
     } // }}}
 	
@@ -358,9 +373,9 @@ class Auth extends BaseController
 	public function ForgotMyPass()
 	{ // {{{
 		
-		echo view("Common/HeaderAuth.html");
+		echo view("Common/Header.html");
 		echo view('Auth/ForgotMyPass.html');
-		echo view("Common/FooterAuth.html");
+		echo view("Common/Footer.html");
 		
 	} // }}}
 	

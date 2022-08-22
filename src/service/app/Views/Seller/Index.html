@@ -1,10 +1,195 @@
-  <?php
+<?php
   // Left Menu
   require(__DIR__.'/Components/Left.html');
   ?>
+
+<div class="auto-container">
 <div style="flex-grow: 1">
-  <?php
-  // Banner Secction
-  //require(__DIR__.'../Common/LeftMenu.html');
-  ?>
+  <div class="d-flex flex-wrap p-3 seller-mypage">
+    <div class="card-wrapper">
+      <div class="card card-icon card-icon01">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <h3 class="card-title">계약</h3>
+          <a href="#" class="more-btn">+more</a>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between mb-3">
+            <p class="card-text">계약 진행중</p>
+            <p class="text-end"><strong>1</strong>건</p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <p class="card-text">계약 완료</p>
+            <p class="text-end"><strong>1</strong>건</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrapper">
+      <div class="card card-icon card-icon02">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <h3 class="card-title">매출</h3>
+          <a href="#" class="more-btn">+more</a>
+        </div>
+        <div class="card-body">
+          <div>
+            <p class="card-text">총 매출액</p>
+            <p class="text-end"><strong>25,000,000</strong>원</p>
+          </div>
+          <div>
+            <p class="card-text">예상 매출액</p>
+            <p class="text-end"><strong>50,000,000</strong>원</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrapper">
+      <div class="card card-icon card-icon03">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <h3 class="card-title">인재</h3>
+          <a href="#" class="more-btn">+more</a>
+        </div>
+        <div class="card-body">
+          <p class="card-text mb-2"><b>장애인 근로자 수</b></p>
+          <p class="card-text mb-1 ps-3">- 경증 장애인 수 <strong>1</strong>명</p>
+          <p class="card-text ps-3">- 중증 장애인 수 <strong>1</strong>명</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrapper">
+      <div class="card">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <h3 class="card-title">문의사항</h3>
+          <a href="#" class="more-btn">+more</a>
+        </div>
+        <div class="card-body">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link active"
+                id="home-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#home"
+                type="button"
+                role="tab"
+                aria-controls="home"
+                aria-selected="true"
+              >
+                계약문의
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="profile-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#profile"
+                type="button"
+                role="tab"
+                aria-controls="profile"
+                aria-selected="false"
+              >
+                상품문의
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="contact-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#contact"
+                type="button"
+                role="tab"
+                aria-controls="contact"
+                aria-selected="false"
+              >
+                기타문의
+              </button>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div
+              class="tab-pane fade show active"
+              id="home"
+              role="tabpanel"
+              aria-labelledby="home-tab"
+            >
+              <ul>
+                <li><a href="">문의사항10</a></li>
+                <li><a href="">문의사항20</a></li>
+                <li><a href="">문의사항30</a></li>
+                <li><a href="">문의사항40</a></li>
+              </ul>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="profile"
+              role="tabpanel"
+              aria-labelledby="profile-tab"
+            >
+              <ul>
+                <li><a href="">상품문의사항10</a></li>
+                <li><a href="">상품문의사항20</a></li>
+                <li><a href="">상품문의사항30</a></li>
+                <li><a href="">상품문의사항40</a></li>
+              </ul>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="contact"
+              role="tabpanel"
+              aria-labelledby="contact-tab"
+            >
+              <ul>
+                <li><a href="">기타문의사항10</a></li>
+                <li><a href="">기타문의사항20</a></li>
+                <li><a href="">기타문의사항30</a></li>
+                <li><a href="">기타문의사항40</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrapper">
+      <!--  card  -->
+      <div class="card card-icon">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <h3 class="card-title">인재</h3>
+          <a href="#" class="more-btn">+more</a>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><a href="">공지사항공지사항</a></li>
+            <li><a href="">공지사항공지사항</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrapper">
+      <div class="card card-icon">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <h3 class="card-title">이용TIP</h3>
+          <a href="#" class="more-btn">+more</a>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li>tip!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </div>

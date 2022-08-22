@@ -5,15 +5,10 @@
 <div style="flex-grow: 1">
   <section class="buyer-contract">
     <div class="auto-container py-5">
-      <nav class="d-flex justify-content-between align-items-center px-2 pb-3 buyer-mypage-nav">
-        <h2 class="mb-0 h4 fw-bold">마이페이지</h2>
-        <ul class="d-flex">
-          <li><a class="text-secondary on" href="">계약현황</a></li>
-          <li><a class="text-secondary" href="">나의정보수정</a></li>
-          <li><a class="text-secondary" href="">장바구니</a></li>
-          <li><a class="text-secondary" href="">통계</a></li>
-        </ul>
-      </nav>
+      <?php
+        // NAV
+        require(__DIR__.'/Components/Nav.html');
+      ?>
       <form action="">
         <table class="w-100 bg-light search-table">
           <tbody>
