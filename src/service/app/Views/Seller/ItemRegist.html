@@ -1,0 +1,292 @@
+<?php
+  // Left Menu
+  require(__DIR__.'/Components/Left.html');
+  ?>
+<style>
+  label {
+    width: auto;
+  }
+
+  .selector-item_radio {
+    appearance: none;
+    display: none;
+  }
+
+  .selector-item_radio:checked + .selector-item_label {
+    background-color: blue;
+    color: white;
+  }
+
+  .added-quantity-price li span {
+    border: 1px solid #eee;
+    margin: 0 5px;
+  }
+</style>
+<div style="flex-grow: 1">
+  <section>
+    <div class="container">
+      <h2>상품등록</h2>
+      <div class="py-4">
+        <form action="">
+        <label for="product-category">카테고리</label>
+        <select
+          class="form-select d-inline-block w-25"
+          aria-label="Default select example"
+          id="product-category"
+        >
+          <option value="1" selected>사무용품</option>
+          <option value="2">생활용품</option>
+          <option value="3">전산용품</option>
+          <option value="3">식음료</option>
+          <option value="3">청소용품</option>
+        </select>
+
+        <label for="productName">상품명</label>
+        <input type="text" id="productName"/>
+
+        <div>
+          <span>판매기간</span>
+          <label class="visually-hidden" for="productSaleStart">판매시작일</label>
+          <input type="date" id="productSaleStart" placeholder="2022.01.01"/>
+          ~
+          <label class="visually-hidden" for="productSaleEnd">판매종료일</label>
+          <input type="date" id="productSaleEnd" placeholder="2022.12.31"/>
+        </div>
+
+        <div class="d-flex">
+          <span>부가세</span>
+          <div class="d-flex">
+            <div class="selecotr-item">
+              <input
+                type="radio"
+                id="taxation"
+                name="tax"
+                class="selector-item_radio"
+                checked
+              />
+              <label for="taxation" class="selector-item_label px-2"
+              >과세상품</label
+              >
+            </div>
+            <div class="selecotr-item">
+              <input
+                type="radio"
+                id="taxFree"
+                name="tax"
+                class="selector-item_radio"
+              />
+              <label for="taxFree" class="selector-item_label px-2"
+              >면세상품</label
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex">
+          <span>배송주기</span>
+          <div class="d-flex">
+            <div class="selecotr-item">
+              <input
+                type="radio"
+                id="deliverOnce"
+                name="deliveryCycle"
+                class="selector-item_radio"
+                checked
+              />
+              <label for="deliverOnce" class="selector-item_label px-2"
+              >1번</label
+              >
+            </div>
+            <div class="selecotr-item">
+              <input
+                type="radio"
+                id="deliverAWeek"
+                name="deliveryCycle"
+                class="selector-item_radio"
+              />
+              <label for="deliverAWeek" class="selector-item_label px-2"
+              >1주일에 한 번</label
+              >
+            </div>
+            <div class="selecotr-item">
+              <input
+                type="radio"
+                id="deliver1Month"
+                name="deliveryCycle"
+                class="selector-item_radio"
+              />
+              <label for="deliver1Month" class="selector-item_label px-2"
+              >1달에 한 번</label
+              >
+            </div>
+            <div class="selecotr-item">
+              <input
+                type="radio"
+                id="deliver2Months"
+                name="deliveryCycle"
+                class="selector-item_radio"
+              />
+              <label for="deliver2Months" class="selector-item_label px-2"
+              >2달에 한 번</label
+              >
+            </div>
+            <div class="selecotr-item">
+              <input
+                type="radio"
+                id="deliver6Months"
+                name="deliveryCycle"
+                class="selector-item_radio"
+              />
+              <label for="deliver6Months" class="selector-item_label px-2"
+              >6달에 한 번</label
+              >
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span>상품상세정보</span>
+        </div>
+
+        <div>
+          <div class="add-quantity-price">
+            <span>판매수량/가격</span>
+            <input
+              class="add-quantity"
+              type="text"
+              placeholder="100Box(250,000매)"
+            />
+            <input
+              class="add-price"
+              type="text"
+              placeholder="1200000(숫자만 입력)"
+              oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')"
+            />
+            <button class="add-quantity-price-btn">추가</button>
+          </div>
+          <ul class="added-quantity-price"></ul>
+        </div>
+
+        <style>
+          .preview-product-img {
+            background-image: url(./imgs/add.png);
+            background-size: auto;
+          }
+        </style>
+        <div>
+          <div class="add-product-img">
+            <span>상품 이미지</span>
+            <div>
+              <h3>대표이미지</h3>
+              <div class="d-flex align-items-center">
+                <label for="product-img01">대표 이미지 업로드</label>
+                <input
+                  id="product-img01"
+                  class=""
+                  type="file"
+                  accept="image/*"
+                  required
+                />
+                <div
+                  class="preview-product-img border"
+                  style="
+                  width: 200px;
+                  height: 200px;
+                  background-position: center;
+                  background-repeat: no-repeat;
+                "
+                ></div>
+              </div>
+              <h3>추가이미지</h3>
+
+            </div>
+          </div>
+        </div>
+        <script>
+          /* 대표이미지 시작 */
+          const image_input = document.querySelector("#product-img01");
+          /*const image_preview = document.querySelector(".preview-product-img");*/
+          const image_preview = image_input.nextElementSibling;
+          let uploaded_image = "";
+
+          image_input.addEventListener("change", function () {
+            const reader = new FileReader();
+            console.log(reader)
+            reader.addEventListener("load", () => {
+              uploaded_image = reader.result;
+              image_preview.style.backgroundSize = `contain`;
+              image_preview.style.backgroundImage = `url(${uploaded_image})`;
+            });
+            reader.readAsDataURL(this.files[0]);
+          });
+
+          image_preview.addEventListener("click", () => image_input.click());
+          /* 대표이미지 끝 */
+
+          /* 추가이미지 시작 */
+
+          /* 추가이미지 끝 */
+
+
+          /* 판매수량/가격 추가 시작 */
+          const addPanel = document.querySelector(".add-quantity-price");
+          const addBtn = document.querySelector(".add-quantity-price-btn");
+          const addedPanel = document.querySelector(".added-quantity-price");
+          const quantity = document.querySelector(".add-quantity");
+          const price = document.querySelector(".add-price");
+
+          function addComma(num) {
+            parseInt(num);
+            var regexp = /\B(?=(\d{3})+(?!\d))/g;
+            return num.toString().replace(regexp, ",");
+          }
+
+          addBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            const quantityValue = document.querySelector(".add-quantity").value;
+            const priceValue = document.querySelector(".add-price").value;
+
+            if (quantityValue == "" || priceValue == "") {
+              alert("판매수량과 가격을 모두 입력해주세요");
+              if (quantityValue == "") {
+                quantity.focus();
+              } else if (priceValue == "") {
+                price.focus();
+              }
+            } else {
+              const priceValueComma = priceValue.toLocaleString("ko-KR");
+              const li = document.createElement("li");
+              const quantityNode = document.createElement("span");
+              const priceNode = document.createElement("span");
+              const removeBtn = document.createElement("button");
+              removeBtn.classList.add("remove-quantity-price");
+              removeBtn.setAttribute("type", "button");
+
+              quantityNode.textContent = quantityValue;
+              priceNode.textContent = addComma(priceValue) + "원";
+              removeBtn.textContent = "삭제";
+
+              addedPanel.appendChild(li);
+              li.appendChild(quantityNode);
+              li.appendChild(priceNode);
+              li.appendChild(removeBtn);
+
+              document.querySelector(".add-quantity").value = "";
+              document.querySelector(".add-price").value = "";
+
+              quantity.focus();
+            }
+          });
+
+          document.addEventListener("click", function (e) {
+            if (e.target && e.target.className == "remove-quantity-price") {
+              e.target.parentNode.remove();
+            }
+          });
+          /* 판매수량/가격 추가 끝 */
+        </script>
+      </form>
+      </div>
+      </div>
+  </section>
+</div>
