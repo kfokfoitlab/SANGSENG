@@ -69,6 +69,9 @@ Version: 1.0.0
 61. Shop/Detail
 62. MyPage/BuyerCommonNav
 63. MyPage/BuyerContract
+64. MyPage/BuyerInfo
+65. MyPage/BuyerCart
+66. Seller/Index
  */
 **********************************************/
 /*** 
@@ -192,9 +195,10 @@ p,
 .auto-container {
   position: static;
   max-width: 1310px;
+  width: 1310px;
   padding: 0px 15px;
   margin: 0 auto;
-  width: 100%;
+  /*width: 100%;*/
 }
 
 .small-container {
@@ -20759,6 +20763,9 @@ Shop/List
 .shop-list h3 {
   font-size: 1.2rem;
 }
+.shop-list h3 a {
+  color: inherit;
+}
 .shop-list th {
   text-align: center;
 }
@@ -20870,7 +20877,7 @@ Shop/Detail
 /***
 
 ====================================================================
-MyPage/BuyerCommonNav
+MyPage/Nav
 ====================================================================
 
 ***/
@@ -20963,4 +20970,124 @@ MyPage/BuyerContract
 }
 .buyer-contract .result-table th:nth-child(12) {
   width: 112px;
+}
+/***
+
+====================================================================
+MyPage/BuyerInfo
+====================================================================
+
+***/
+.read-only-group {
+  margin-bottom: 20px;
+  color: #202020;
+}
+.read-only-group p {
+  color: #202020;
+}
+.read-only-group p:last-child {
+  position: relative;
+  width: 100%;
+  display: block;
+  height: 60px;
+  line-height: 30px;
+  padding: 15px 8px;
+  font-size: 1em;
+  background: #f1f1f1;
+  border: 1px solid #f1f1f1;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+/***
+
+====================================================================
+MyPage/BuyerCart
+====================================================================
+
+***/
+.buyer-cart h4 {
+  font-size: 1.2rem;
+}
+.buyer-cart .sub-info {
+  font-size: 0.9rem;
+}
+.buyer-cart th {
+  text-align: center;
+}
+.buyer-cart td {
+  vertical-align: middle
+}
+.buyer-cart td:nth-child(1) {
+  padding: 0.5rem;
+  width: 120px;
+}
+.buyer-cart td:nth-child(2) {
+  width: 414px;
+}
+.buyer-cart td:nth-child(2) a {
+  color: inherit;
+}
+.buyer-cart td:nth-child(2) h4,
+.buyer-cart td:nth-child(2) p {
+  width: 414px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+.buyer-cart td:nth-child(3) {
+  width: 230px;
+  font-size: 0.9rem;
+}
+.buyer-cart td:nth-child(4) {
+  width: 150px;
+  text-align: right;
+  font-size: 0.9rem;
+}
+.buyer-cart td:nth-child(5) {
+  width: 150px;
+  text-align: right;
+  font-size: 0.9rem;
+}
+.buyer-cart td:nth-child(6) {
+  width: 180px;
+  text-align: center;
+}
+/***
+
+====================================================================
+Seller/Index
+====================================================================
+
+***/
+.seller-mypage .card-wrapper {
+  width: 33.3%;
+  padding: 1rem;
+}
+.seller-mypage .card {
+  height: 100%;
+}
+.seller-mypage .card strong {
+  font-size: 1.25rem;
+}
+.seller-mypage .card-icon .card-body {
+  padding-left: 30%;
+  padding-top: 1.2rem;
+}
+.seller-mypage .card-icon01 .card-body {
+  background: 25px center / 15% url("/assets/images/resource/icons/file-earmark-text.svg") no-repeat;
+}
+.seller-mypage .card-icon02 .card-body {
+  background: 25px center / 15% url("/assets/images/resource/icons/piggy-bank.svg") no-repeat;
+}
+.seller-mypage .card-icon03 .card-body {
+  background: 25px center / 15% url("/assets/images/resource/icons/person.svg") no-repeat;
+}
+.seller-mypage h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.seller-mypage .more-btn {
+  color: #777;
+  font-size: 0.9rem;
 }
