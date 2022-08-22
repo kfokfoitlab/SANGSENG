@@ -50,6 +50,7 @@ echo doctype("html5");
             <li class=""><button class="btn py-0" tabindex=3>감면액계산기</button></li>
             <li class=""><button class="btn py-0" tabindex=4>감면신청도우미</button></li>
             <li class=""><button class="btn py-0" tabindex=5>고객센터</button></li>
+            <? echo <?=$_SESSION["login_info"]["type"]?>
           </ul>
         </div>
       </div>
@@ -124,22 +125,11 @@ echo doctype("html5");
               <a href="/Auth/SignIn" class="theme-btn btn-style-six" tabindex=15>로그인 / 회원가입</a>
             <?php
             } else {
-              if($_SESSION["login_info"]["type"] == "user"){
+              if($_SESSION["login_info"]["type"] == "buyer"){
             ?>
               <div class="dropdown dashboard-option">
                 <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
-                <?php
-                if(@$_SESSION["login_info"]["profile_img_uuid"]){
-                ?>
-                  <img src="/Image/<?=@$_SESSION["login_info"]["profile_img_uuid"]?>" alt="avatar" class="thumb">
-                <?php
-                } else {
-                ?>
-                  <img src="/assets/images/resource/company-6.png" alt="avatar" class="thumb">
-                <?php
-                }
-                ?>
-                  <span class="name text-white"><?=$_SESSION["login_info"]["name"]?> <span class='small'>님</span>
+                  <span class="name text-white"><?=$_SESSION["login_info"]["buyer_name"]?> <span class='small'>님</span>
                 </a>
                 <ul class="dropdown-menu p-2 ps-0" style="">
                   <li><a href="/Management/User/Profile"><i class="la la-user"></i>내 정보</a></li>
@@ -154,22 +144,11 @@ echo doctype("html5");
               </div> 
             <?php
               }
-              else if($_SESSION["login_info"]["type"] == "company"){
+              else if($_SESSION["login_info"]["type"] == "seller"){
               ?>
               <div class="dropdown dashboard-option">
                 <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
-                <?php
-                if(@$_SESSION["login_info"]["profile_img_uuid"]){
-                ?>
-                  <img src="/Image/<?=@$_SESSION["login_info"]["profile_img_uuid"]?>" alt="avatar" class="thumb">
-                <?php
-                } else {
-                ?>
-                  <img src="/assets/images/resource/company-6.png" alt="avatar" class="thumb">
-                <?php
-                }
-                ?>
-                  <span class="name"><?=$_SESSION["login_info"]["name"]?> <span class='small'>님</span>
+                  <span class="name"><?=$_SESSION["login_info"]["seller_name"]?> <span class='small'>님</span>
                 </a>
                 <ul class="dropdown-menu p-2 ps-0" style="">
                   <li><a href="/Management/Company/Profile"><i class="la la-user-tie"></i>기업 프로필</a></li>

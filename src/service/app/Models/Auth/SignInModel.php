@@ -38,22 +38,14 @@ class SignInModel extends CommonModel
         $this->rodb->query($query);
         $row = $this->rodb->next_row();
         if(isset($row["idx"])){
-            // verify password
-         /*   if(!password_verify($password, $row["password_hash"])){
-                return array(
-                     "result" => "failed"
-                    ,"type" => "Invalid"
-                );
-            }*/
-
             $_SESSION["login"] = "success";
             $_SESSION["login_info"] = array(
                  "uuid" => $row["uuid"]
+                ,"type" => "buyer"
                 ,"status" => $row["status"]
-                ,"name" => $row["name"]
+                ,"buyer_name" => $row["buyer_name"]
                 ,"email" => $row["email"]
             );
-
             return array(
                  "result" => "success"
             );
@@ -94,13 +86,10 @@ class SignInModel extends CommonModel
             $_SESSION["login"] = "success";
             $_SESSION["login_info"] = array(
                  "uuid" => $row["uuid"]
-                ,"profile_img_uuid" => $row["profile_img_uuid"]
-                ,"type" => "company"
+                ,"type" => "seller"
                 ,"status" => $row["status"]
-                ,"verification" => $row["verification"]
-                ,"name" => $row["company_name"]
-                ,"manager_name" => $row["manager_name"]
-                ,"email" => $row["manager_email"]
+                ,"seller_name" => $row["seller_name"]
+                ,"email" => $row["email"]
             );
 
             return array(
