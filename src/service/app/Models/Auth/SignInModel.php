@@ -11,11 +11,11 @@ class SignInModel extends CommonModel
         $user_id = specialchars($user_id);
 
         $check_email=preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i", $user_id);*/
-        // 이메일 형식이면 인재회원
+        // type 1 판매기업
         if($company_type==1) {
             return $this->SignInUser($email, $password);
         }
-        // 아니면, 기업회원
+        // 아니면, 구매기업
         else {
             return $this->SignInCompany($email, $password);
         }
@@ -75,14 +75,6 @@ class SignInModel extends CommonModel
         $this->rodb->query($query);
         $row = $this->rodb->next_row();
         if(isset($row["idx"])){
-            // verify password
-            if(!password_verify($password, $row["password_hash"])){
-                return array(
-                     "result" => "failed"
-                    ,"type" => "Invalid"
-                );
-            }
-
             $_SESSION["login"] = "success";
             $_SESSION["login_info"] = array(
                  "uuid" => $row["uuid"]

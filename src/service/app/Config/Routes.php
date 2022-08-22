@@ -93,13 +93,6 @@ $routes->group('Company', function($routes){
     $routes->post('Bookmark',       'Company::Bookmark');
 });
 
-$routes->group('Product', function($routes){
-    $routes->get ('/',              'Product::index');
-    $routes->get ('Insert/',        'Product::Insert');
-    $routes->post('InsertSubmit',    'Auth::InsertSubmit');
-    $routes->get ('InsertComplete/(:any)', 'Auth::InsertComplete/$1');
-
-});
 
 $routes->group('Management', ['namespace' => 'App\Controllers\Management'], static function ($routes) {
     $group_name = "User";
@@ -174,7 +167,8 @@ $routes->group('Buyer', function($routes){
 
 $routes->group('Seller', function($routes){
     $routes->get ('/',              'Seller::index');
-    $routes->get ('Item/ItemRegist','Seller::Item');
+    $routes->get ('Item','Seller::Item');
+    $routes->post ('ItemSubmit','Seller::ItemSubmit');
 });
 /*
  * --------------------------------------------------------------------
