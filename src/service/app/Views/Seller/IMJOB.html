@@ -1,0 +1,109 @@
+<?php
+  // Left Menu
+  require(__DIR__.'/Components/Left.html');
+?>
+<div style="flex-grow: 1">
+  <section class="py-5 imjob-list">
+    <div class="auto-container">
+      <ul class="d-flex border w-100 justify-content-around mb-4 py-4 text-center bg-light employee-number">
+        <li class="px-5 position-relative">
+          <p class="h5 text-primary">장애인 근로자 수</p>
+          <p class="text-primary"><strong class="h4 fw-bold">1</strong>명</p>
+        </li>
+        <li class="px-5 position-relative">
+          <p class="h5">경증 장애인</p>
+          <p><strong class="h4 fw-bold">1</strong>명</p>
+        </li>
+        <li class="px-5">
+          <p class="h5">중증 장애인</p>
+          <p><strong class="h4 fw-bold">0</strong>명</p>
+        </li>
+      </ul>
+
+      <form action="">
+        <div class="d-flex justify-content-end align-items-center">
+          <div class="me-3">
+            <label class="form-check-label mx-2" for="flexCheck01">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheck01">
+              근로자
+            </label>
+            <label class="form-check-label mx-2" for="flexCheck02">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheck02">
+              퇴직자
+            </label>
+            <label class="form-check-label mx-2" for="flexCheck03">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheck03">
+              휴직자
+            </label>
+          </div>
+
+          <div class="input-group input-group-sm me-3">
+            <input type="text" class="form-control search-employee" aria-label="" aria-describedby="search-employee">
+            <button class="btn btn-primary" type="button" id="search-employee">검색</button>
+          </div>
+
+          <div>
+            <button class="btn btn-outline-success btn-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+              </svg>
+               엑셀다운
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <table class="table table-striped text-center mt-5 imjob-list-table">
+        <thead>
+        <tr>
+          <th>No.</th>
+          <th>이름</th>
+          <th>계약 시작일</th>
+          <th>계약 종료일</th>
+          <th>근무상태</th>
+          <th>장애유형</th>
+          <th>주민등록번호</th>
+          <th>복지카드</th>
+          <th>삭제</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td><a href="/Seller/IMJOB/Manage">홍길동</a></td>
+          <td>22-01-01</td>
+          <td>22-12-31</td>
+          <td>근무중</td>
+          <td>중증</td>
+          <td>111111-1******</td>
+          <td>없음</td>
+          <td><button type="button" class="button btn-danger btn-sm">삭제</button></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><a href="/Seller/IMJOB/Manage">홍길동</a></td>
+          <td>22-01-01</td>
+          <td>22-12-31</td>
+          <td>근무중</td>
+          <td>중증</td>
+          <td>111111-1******</td>
+          <td>없음</td>
+          <td><button type="button" class="button btn-danger btn-sm">삭제</button></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><a href="/Seller/IMJOB/Manage">홍길동</a></td>
+          <td>22-01-01</td>
+          <td>22-12-31</td>
+          <td>근무중</td>
+          <td>중증</td>
+          <td>111111-1******</td>
+          <td>없음</td>
+          <td><button type="button" class="button btn-danger btn-sm">삭제</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

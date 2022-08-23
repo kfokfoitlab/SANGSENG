@@ -72,6 +72,7 @@ Version: 1.0.0
 64. MyPage/BuyerInfo
 65. MyPage/BuyerCart
 66. Seller/Index
+67. Seller/IMJOB/List
  */
 **********************************************/
 /*** 
@@ -21061,33 +21062,145 @@ Seller/Index
 
 ***/
 .seller-mypage .card-wrapper {
-  width: 33.3%;
+  width: calc(100% / 3);
   padding: 1rem;
+  min-width: 414px;
 }
 .seller-mypage .card {
   height: 100%;
+}
+.seller-mypage h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 .seller-mypage .card strong {
   font-size: 1.25rem;
 }
 .seller-mypage .card-icon .card-body {
-  padding-left: 30%;
-  padding-top: 1.2rem;
-}
-.seller-mypage .card-icon01 .card-body {
-  background: 25px center / 15% url("/assets/images/resource/icons/file-earmark-text.svg") no-repeat;
-}
-.seller-mypage .card-icon02 .card-body {
-  background: 25px center / 15% url("/assets/images/resource/icons/piggy-bank.svg") no-repeat;
-}
-.seller-mypage .card-icon03 .card-body {
-  background: 25px center / 15% url("/assets/images/resource/icons/person.svg") no-repeat;
-}
-.seller-mypage h3 {
-  margin: 0;
-  font-size: 1.2rem;
+  min-height: 170px;
+  padding: 1.2rem 40px 1.2rem 30%;
 }
 .seller-mypage .more-btn {
   color: #777;
   font-size: 0.9rem;
+}
+.seller-mypage .more-btn:hover {
+  font-weight: bold;
+}
+.seller-mypage .card-icon01 .card-body {
+  background: 30px center / 14% url("/assets/images/resource/icons/assignment.svg") no-repeat;
+}
+.seller-mypage .card-icon02 .card-body {
+  background: 30px center / 17% url("/assets/images/resource/icons/piggy-bank.svg") no-repeat;
+}
+.seller-mypage .card-icon03 .card-body {
+  background: 30px center / 17% url("/assets/images/resource/icons/people.svg") no-repeat;
+}
+.seller-mypage .question-answer button {
+  padding-top: 60px;
+  color: #444;
+  font-weight: bold;
+}
+.seller-mypage #contract-tab {
+  background: center 10px / 40px url("/assets/images/resource/icons/assignment.svg") no-repeat;
+}
+.seller-mypage #product-tab {
+  background: center 10px / 40px url("/assets/images/resource/icons/gift.svg") no-repeat;
+}
+.seller-mypage #extra-tab {
+  background: center 10px / 42px url("/assets/images/resource/icons/bell.svg") no-repeat;
+}
+.seller-mypage .tab-content li {
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+.seller-mypage .tab-content a {
+  padding: 0 5px;
+  color: #444;
+}
+.seller-mypage .tab-content a:hover {
+  font-weight: bold;
+}
+.seller-mypage .tab-content a span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.seller-mypage .card-board .card-body li {
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.seller-mypage .card-board .card-body a {
+  color: #444;
+}
+.seller-mypage .card-board .card-body a:hover {
+  font-weight: bold;
+}
+/***
+
+====================================================================
+Seller/IMJOB/List
+====================================================================
+
+***/
+.imjob-list .employee-number li.position-relative::after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 1px;
+  height: 100%;
+  top: 0;
+  right: -100px;
+  background-color: #dee2e6;
+}
+.imjob-list .input-group {
+  width: auto;
+}
+.imjob-list .input-group > .search-employee {
+  flex: 0 0 auto;
+  width: 200px;
+}
+.imjob-list .imjob-list-table th,
+.imjob-list .imjob-list-table td {
+  vertical-align: middle;
+  font-size: 0.9rem;
+}
+.imjob-list .imjob-list-table th:nth-child(1) {
+ width: 72px;
+}
+.imjob-list .imjob-list-table th:nth-child(2) {
+  width: 108px;
+}
+.imjob-list .imjob-list-table th:nth-child(3),
+.imjob-list .imjob-list-table th:nth-child(4) {
+ width: 170px
+}
+.imjob-list .imjob-list-table th:nth-child(5),
+.imjob-list .imjob-list-table th:nth-child(6),
+.imjob-list .imjob-list-table th:nth-child(8) {
+width: 135px;
+}
+.imjob-list .imjob-list-table th:nth-child(7) {
+  width: 240px
+}
+.imjob-list .imjob-list-table th:nth-child(9) {
+  width: 115px
+}
+.imjob-list .imjob-list-table a {
+  color: inherit;
+}
+.imjob-list .imjob-list-table a:hover {
+  font-weight: bold;
+}
+.imjob-list .btn {
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+.imjob-list .imjob-list-table .btn-sm {
+  padding: 0 0.5rem;
+  font-size: 0.8rem
 }

@@ -1,0 +1,132 @@
+<?php
+  // Left Menu
+  require(__DIR__.'/Components/Left.html');
+?>
+<div style="flex-grow: 1" class="bg-light">
+  <section class="py-5 mb-5">
+    <div class="auto-container">
+      <div class="bg-white p-5">
+        <h4 class="fw-bold pb-3 border-bottom border-2">장애인 근로자 등록</h4>
+        <form action="">
+          <div class="d-flex py-5">
+            <div class="me-5">
+              <div class="border portrait-photo-preview" style="width: 150px; height: 192px; background: center / contain url('/assets/images/resource/icons/person_filled.svg') no-repeat;"></div>
+            </div>
+
+            <div class="flex-grow-1">
+              <div class="row mb-3 align-items-center">
+                <div class="col-2">
+                  <label for="employee-name" class="form-label m-0 fw-bold">이름</label>
+                </div>
+                <div class="col-6">
+                  <input type="text" class="form-control" id="employee-name">
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <span class="col-2 fw-bold">계약기간</span>
+                <div class="col-6 d-flex">
+                  <label class="visually-hidden" for="dContractStartDate">계약시작일</label>
+                  <input type="text" class="form-control" id="dContractStartDate" placeholder="2022.01.01">
+                  <span class="px-2">-</span>
+                  <label class="visually-hidden" for="dContractEndDate">계약종료일</label>
+                  <input type="text" class="form-control" id="dContractEndDate" placeholder="2022.12.31">
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <div class="col-2">
+                  <label for="dBirthDate" class="fw-bold">생년월일</label>
+                </div>
+                <div class="col-6">
+                  <input type="text" class="form-control" id="dBirthDate">
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <span class="col-2 fw-bold">근무 상태</span>
+                <div class="col-6 d-flex">
+                  <label class="form-check-label me-3" for="flexCheck01">
+                    <input class="form-check-input" type="radio" value="" id="flexCheck01" name="workStatus" checked>
+                    근무
+                  </label>
+                  <label class="form-check-label me-3" for="flexCheck02">
+                    <input class="form-check-input" type="radio" value="" id="flexCheck02" name="workStatus">
+                    퇴직
+                  </label>
+                  <label class="form-check-label me-3" for="flexCheck03">
+                    <input class="form-check-input" type="radio" value="" id="flexCheck03" name="workStatus">
+                    휴직
+                  </label>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <span class="col-2 fw-bold">장애유형</span>
+                <div class="col-6 d-flex">
+                  <label class="form-check-label me-3" for="flexCheck04">
+                    <input class="form-check-input" type="radio" value="" id="flexCheck04" name="disabledStatus" checked>
+                    중증
+                  </label>
+                  <label class="form-check-label me-3" for="flexCheck05">
+                    <input class="form-check-input" type="radio" value="" id="flexCheck05" name="disabledStatus">
+                    경증
+                  </label>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <div class="col-2">
+                  <label for="portrait-photo-input" class="form-label m-0 fw-bold">사진 업로드</label>
+                </div>
+                <div class="col-6">
+                  <input class="form-control" type="file" id="portrait-photo-input">
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <div class="col-2">
+                  <label for="formFile" class="form-label m-0 fw-bold">복지카드 업로드</label>
+                </div>
+                <div class="col-6">
+                  <input class="form-control" type="file" id="formFile">
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-outline-success" type="submit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+              </svg> 일괄등록
+            </button>
+            <button class="btn btn-primary" type="submit">등록하기</button>
+            <button class="btn btn-outline-secondary" type="reset">취소하기</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+<script>
+  /* 사진 미리보기 시작 */
+  const image_input = document.querySelector("#portrait-photo-input");
+  /*const image_preview = document.querySelector(".preview-product-img");*/
+  const image_preview = document.querySelector(".portrait-photo-preview");
+  let uploaded_image = "";
+
+  image_input.addEventListener("change", function () {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+      uploaded_image = reader.result;
+      image_preview.style.backgroundSize = `contain`;
+      image_preview.style.backgroundImage = `url(${uploaded_image})`;
+    });
+    reader.readAsDataURL(this.files[0]);
+  });
+
+  image_preview.addEventListener("click", () => image_input.click());
+  /* 사진 미리보기 끝 */
+</script>

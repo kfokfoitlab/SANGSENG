@@ -167,8 +167,10 @@ $routes->group('Buyer', function($routes){
 
 $routes->group('Seller', function($routes){
     $routes->get ('/',              'Seller::index');
-    $routes->get ('Item','Seller::Item');
-    $routes->post ('ItemSubmit','Seller::ItemSubmit');
+    $routes->get ('IMJOB/List',     'Seller::List');
+    $routes->get ('IMJOB/Manage',   'Seller::Manage');
+    $routes->get ('Item',           'Seller::Item');
+    $routes->post ('ItemSubmit',    'Seller::ItemSubmit');
 });
 /*
  * --------------------------------------------------------------------
