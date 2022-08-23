@@ -9,53 +9,37 @@
       <!--Tab-->
       <div class="tab active-tab" id="tab1">
         <div class="row">
-
             <!-- Job Block -->
+          <?php
+          if(is_array($data) && count($data) > 0){
+          foreach($data as $item){
+          ?>
             <div class="job-block col-sm-12">
               <div class="inner-box">
                 <div class="content d-flex align-items-center">
                   <div class="me-4">
                     <!-- img src="/Image/<?=$item["company_img_uuid"]?>" style="width:126px;" alt="기업로고" -->
-                    <img src="/assets/images/resource/products/item01.png" alt="기업로고">
-                  </div>
-                  <div>
-                    <h4><a href="/Recruit/Detail/<?=$item["uuid"]?>" target="_blank" tabindex=1500><span class="text-secondary">(주)신성피엔텍</span> 친환경 복사용지</a></h4>
-                    <ul class="job-info">
-                      <li><span class="icon flaticon-briefcase"></span> <a>복사용지</a></li>/
-                      <li><span class="icon flaticon-map-locator"></span> <a>규격: A4</a></li>/
-                      <li><span class="icon flaticon-clock-3"></span> <a>백색</a></li>/
-                      <li><span class="icon flaticon-money"></span> <a>80g</a></li>/
-                      <li><span class="icon flaticon-money"></span> <a>크기: 210x297mm</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="job-block col-sm-12">
-              <div class="inner-box">
-                <div class="content d-flex align-items-center">
-                  <div class="me-4">
-                    <!-- img src="/Image/<?=$item["company_img_uuid"]?>" style="width:126px;" alt="기업로고" -->
-                    <img src="/assets/images/resource/products/item01.png" alt="기업로고">
-                  </div>
-                  <div>
-                    <h4><a href="/Recruit/Detail/<?=$item["uuid"]?>" target="_blank" tabindex=1500><span class="text-secondary">(주)신성피엔텍</span> 친환경 복사용지</a></h4>
-                    <ul class="job-info">
-                      <li><span class="icon flaticon-briefcase"></span> <a>복사용지</a></li>/
-                      <li><span class="icon flaticon-map-locator"></span> <a>규격: A4</a></li>/
-                      <li><span class="icon flaticon-clock-3"></span> <a>백색</a></li>/
-                      <li><span class="icon flaticon-money"></span> <a>80g</a></li>/
-                      <li><span class="icon flaticon-money"></span> <a>크기: 210x297mm</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
 
+                    <img src="/uploads/upload_files/<?=$item['product_image2']?>" alt="기업로고">
+                  </div>
+                  <div>
+                    <ul class="job-info">
+                      <li><span class="icon flaticon-briefcase"></span><?=$item["product_name"]?></li>/
+                      <li><span class="icon flaticon-map-locator"></span><?=$item["product_price"]?></li>/
+                      <li><span class="icon flaticon-clock-3"></span><?=$item["product_start"]?></li>/
+                      <li><span class="icon flaticon-money"></span><?=$item["product_end"]?></li>/
+
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php
+                }
+              }
+            ?>
           </div>
-          
         </div>
-
       </div>
     </div>
   </div>

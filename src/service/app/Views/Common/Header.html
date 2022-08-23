@@ -63,9 +63,26 @@ echo doctype("html5");
         <div class="main-box">
           <!--Nav Outer -->
           <div class="nav-outer">
+
             <div class="logo-box">
-              <!-- brand -->
+              <!-- brand --> <?php
+            if(@$_SESSION["login"] != "success"){
+            ?>
               <div class="logo"><a href="/" tabindex=10><img src="https://kfo.ai/images/top/top_06_r_17_17.png" alt="한국직업개발원로고" title="한국직업개발원로고"></a></div>
+             <?php
+              } else {
+              if($_SESSION["login_info"]["type"] == "buyer"){
+              ?>
+              <div class="logo"><a href="/Buyer" tabindex=10><img src="https://kfo.ai/images/top/top_06_r_17_17.png" alt="한국직업개발원로고" title="한국직업개발원로고"></a></div>
+            <?php
+              }
+             else if($_SESSION["login_info"]["type"] == "seller"){
+              ?>
+              <div class="logo"><a href="/Seller" tabindex=10><img src="https://kfo.ai/images/top/top_06_r_17_17.png" alt="한국직업개발원로고" title="한국직업개발원로고"></a></div>
+            <?php
+              }
+            }
+            ?>
             </div>
 
             <nav class="nav main-menu">
@@ -131,8 +148,12 @@ echo doctype("html5");
                 <a class="dropdown-toggle" role="button" type="button" data-toggle="dropdown" aria-expanded="false">
                   <span class="name text-white"><?=$_SESSION["login_info"]["buyer_name"]?></span> <span class='small'>님</span>
                 </a>
+                <a href="/Auth/SignOut"><i class="la la-sign-out"></i>로그아웃</a>
+
                 <ul class="dropdown-menu p-2 ps-0" style="">
-                  <li><a href="/Management/User/Profile"><i class="la la-user"></i>내 정보</a></li>
+
+
+       <li><a href="/Management/User/Profile"><i class="la la-user"></i>내 정보</a></li>
                   <li><a href="/Management/User/Application"><i class="la la-paper-plane"></i>입사 지원 관리</a></li>
                   <li><a href="/Management/User/ManageJob"><i class="la la-briefcase"></i>구직 관리</a></li>
                   <li><a href="/Management/User/Resume"><i class="la la-file-invoice"></i>내 이력서</a></li>
@@ -148,8 +169,9 @@ echo doctype("html5");
               ?>
               <div class="dropdown dashboard-option">
                 <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
-                  <span class="name"><?=$_SESSION["login_info"]["seller_name"]?> <span class='small'>님</span>
+                  <span class="name"><?=$_SESSION["login_info"]["seller_name"]?></span> <span class='small'>님</span>
                 </a>
+                <a href="/Auth/SignOut"><i class="la la-sign-out"></i>로그아웃</a>
                 <ul class="dropdown-menu p-2 ps-0" style="">
                   <li><a href="/Management/Company/Profile"><i class="la la-user-tie"></i>기업 프로필</a></li>
                   <li><a href="/Management/Company/PublicSettings"><i class="la la-file-invoice"></i>기업 공개 관리</a></li>

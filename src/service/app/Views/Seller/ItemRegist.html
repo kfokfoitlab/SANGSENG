@@ -28,29 +28,36 @@
       <h2>상품등록</h2>
       <div class="py-4">
         <form name="form-submit" method="post" action="/<?=_CONTROLLER?>/ItemSubmit" enctype="multipart/form-data">
+        <input type="hidden" name="product_quantity1" id="product_quantity1" value="">
+        <input type="hidden" name="product_price1" id="product_price1" value="">
+        <input type="hidden" name="product_quantity2" id="product_quantity2" value="">
+        <input type="hidden" name="product_price2" id="product_price2" value="">
+        <input type="hidden" name="product_quantity3" id="product_quantity3" value="">
+        <input type="hidden" name="product_price3" id="product_price3" value="">
+        <input type="hidden" name="product_quantity4" id="product_quantity4" value="">
+        <input type="hidden" name="product_price4" id="product_price4" value="">
+        <input type="hidden" name="product_quantity5" id="product_quantity5" value="">
+        <input type="hidden" name="product_price5" id="product_price5" value="">
+        <input type="hidden" name="cnt" id="cnt" value="">
         <label for="product-category">카테고리</label>
-        <select
-          class="form-select d-inline-block w-25"
-          aria-label="Default select example"
-          id="product-category"
-        >
-          <option value="1" name="product_category" selected>사무용품</option>
-          <option value="2" name="product_category">생활용품</option>
-          <option value="3" name="product_category">전산용품</option>
-          <option value="4" name="product_category">식음료</option>
-          <option value="5" name="product_category">청소용품</option>
+        <select name="product_category" class="form-select d-inline-block w-25" aria-label="Default select example" id="product-category">
+          <option value="1" selected>사무용품</option>
+          <option value="2">생활용품</option>
+          <option value="3" >전산용품</option>
+          <option value="4" >식음료</option>
+          <option value="5" >청소용품</option>
         </select>
 
         <label for="productName">상품명</label>
-        <input type="text" name ="product_name" id="productName"/>
+        <input type="text" name ="product_name" id="productName" required/>
 
         <div>
           <span>판매기간</span>
           <label class="visually-hidden" for="productSaleStart">판매시작일</label>
-          <input type="date" name="product_start" id="productSaleStart" placeholder="2022.01.01"/>
+          <input type="date" name="product_start" id="productSaleStart"  placeholder="2022.01.01" required />
           ~
           <label class="visually-hidden" for="productSaleEnd">판매종료일</label>
-          <input type="date" name="product_end" id="productSaleEnd" placeholder="2022.12.31"/>
+          <input type="date" name="product_end" id="productSaleEnd" placeholder="2022.12.31" required/>
         </div>
 
         <div class="d-flex">
@@ -93,15 +100,12 @@
           </div>
         </div>
 
-        <div>
-          <span>상품상세정보</span>
-        </div>
 
         <div>
           <div class="add-quantity-price">
             <span>판매수량/가격</span>
-            <input class="add-quantity" type="text" name="quantityValue" placeholder="100Box(250,000매)"/>
-            <input class="add-price" type="text" name="priceValue" placeholder="1200000(숫자만 입력)" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')"/>
+            <input class="add-quantity" type="text" name="product_quantity" placeholder="100Box(250,000매)"/>
+            <input class="add-price" type="text" name="product_price" placeholder="1200000(숫자만 입력)" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')"/>
             <button class="add-quantity-price-btn">추가</button>
           </div>
           <ul class="added-quantity-price"></ul>
@@ -132,11 +136,17 @@
                 ></div>
               </div>
               <h3>추가이미지</h3>
-
+              <input  name ="product_image1" class="" type="file" accept="image/*" required/>
+              <input  name ="product_image2" class="" type="file" accept="image/*" required/>
             </div>
           </div>
         </div>
-        <script>
+          <div>
+            <span>상품상세정보</span>
+            <textarea name = "product_detail"></textarea>
+          </div>
+
+          <script>
           /* 대표이미지 시작 */
           const image_input = document.querySelector("#product-img01");
           /*const image_preview = document.querySelector(".preview-product-img");*/
@@ -174,30 +184,32 @@
             var regexp = /\B(?=(\d{3})+(?!\d))/g;
             return num.toString().replace(regexp, ",");
           }
-
+          var cnt = 1;
           addBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            const quantityValue = document.querySelector(".add-quantity").value;
-            const priceValue = document.querySelector(".add-price").value;
+            const product_quantity = document.querySelector(".add-quantity").value;
+            const product_price = document.querySelector(".add-price").value;
 
-            if (quantityValue == "" || priceValue == "") {
+            if (product_quantity == "" || product_price == "") {
               alert("판매수량과 가격을 모두 입력해주세요");
-              if (quantityValue == "") {
+              if (product_quantity == "") {
                 quantity.focus();
-              } else if (priceValue == "") {
+              } else if (product_price == "") {
                 price.focus();
               }
             } else {
-              const priceValueComma = priceValue.toLocaleString("ko-KR");
+              const product_priceComma = product_price.toLocaleString("ko-KR");
               const li = document.createElement("li");
               const quantityNode = document.createElement("span");
               const priceNode = document.createElement("span");
               const removeBtn = document.createElement("button");
               removeBtn.classList.add("remove-quantity-price");
               removeBtn.setAttribute("type", "button");
-
-              quantityNode.textContent = quantityValue;
-              priceNode.textContent = addComma(priceValue) + "원";
+              $("#product_quantity"+cnt).val(product_quantity);
+              $("#product_price"+cnt).val(product_price);
+              $("#cnt").val(cnt);
+              quantityNode.textContent = product_quantity;
+              priceNode.textContent = addComma(product_price) + "원";
               removeBtn.textContent = "삭제";
 
               addedPanel.appendChild(li);
@@ -209,11 +221,16 @@
               document.querySelector(".add-price").value = "";
 
               quantity.focus();
+              cnt++;
             }
           });
 
           document.addEventListener("click", function (e) {
             if (e.target && e.target.className == "remove-quantity-price") {
+              cnt--;
+              $("#product_quantity"+cnt).val('');
+              $("#product_price"+cnt).val('');
+              $("#cnt").val(cnt-1);
               e.target.parentNode.remove();
             }
           });
