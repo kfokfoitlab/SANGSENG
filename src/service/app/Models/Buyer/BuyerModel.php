@@ -1,36 +1,61 @@
 <?php
 
-namespace App\Models\Seller;
+namespace App\Models\Buyer;
 use App\Models\CommonModel;
 
-class SellerModel extends CommonModel
+class BuyerModel extends CommonModel
 {
+    public function getProductList(){
+        $data = [];
+        // total
+        $query = "
+            select
+                count(*)
+            from
+                seller_product
+        ";
+        $data["count"] = $this->rodb->simple_query($query);
+
+        $data["data"] = [];
+        $limit_query = "limit 6";
+        $orderby_query = "product_ranking desc";
+
+        $query = "
+            select
+                *
+            from
+              seller_product  
+           order by 
+               idx desc
+            limit 5
+           
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $data["data"][] = $row;
+
+        }
+        return $data;
+    }
+
+
     public function Register($files, $data, $table_name = "seller_product"){
         /* $uploads_dir = './uploads';*/
         $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG');
-
-       /* $error = $files['representative_image']['error'];
+        $error = $files['representative_image']['error'];
         $representative_image = $files['representative_image']['name'];
         $exploded_file = explode(".",$representative_image);
         $ext = array_pop($exploded_file);
         $target_dir = ROOTPATH."/public/uploads/upload_files/";
         $file_tmp_name = $files["representative_image"]["tmp_name"];
         $file_ext = pathinfo($files["representative_image"]["name"], PATHINFO_EXTENSION);
-        $file_new_name = uniqid().".".$file_ext;*/
-
-        $file_ext1 = pathinfo($files["product_image1"]["name"], PATHINFO_EXTENSION);
-        $file_new_name1 = uniqid().".".$file_ext;
-
-        $file_ext2 = pathinfo($files["product_image2"]["name"], PATHINFO_EXTENSION);
-        $file_new_name2 = uniqid().".".$file_ext;
-
-
+        $file_new_name = uniqid().".".$file_ext;
         $uuid = $_SESSION["login_info"]["uuid"];
         $product_image1 = $files['product_image1']['name'];
         $product_image2 = $files['product_image2']['name'];
         $product_ranking = 9999;
         $status = '5';
-      /*  if( $error != UPLOAD_ERR_OK ) {
+        if( $error != UPLOAD_ERR_OK ) {
             switch( $error ) {
                 case UPLOAD_ERR_INI_SIZE:
                 case UPLOAD_ERR_FORM_SIZE:
@@ -44,15 +69,14 @@ class SellerModel extends CommonModel
             }
             exit;
         }
-
         if( !in_array($ext, $allowed_ext) ) {
             echo "허용되지 않는 확장자입니다.";
             exit;
-        }*/
+        }
         for($i =1; $i<=$data["cnt"]; $i++){
-        $product_no = date("YmdHis").$i;
-        $price_num ="product_price".$i;
-        $quantity_no ="product_quantity".$i;
+            $product_no = date("YmdHis").$i;
+            $price_num ="product_price".$i;
+            $quantity_no ="product_quantity".$i;
             $query = "
           insert into
               ".$table_name."
@@ -68,9 +92,9 @@ class SellerModel extends CommonModel
               ,product_surtax = '".$data["product_surtax"]."'
               ,delivery_cycle = '".$data["delivery_cycle"]."'
               ,product_detail = '".$data["product_detail"]."'
-              ,representative_image = '".$file_new_name."'
-              ,product_image1 = '".$file_new_name1."'
-              ,product_image2 = '".$file_new_name2."'
+              ,representative_image = '".$representative_image."'
+              ,product_image1 = '".$product_image1."'
+              ,product_image2 = '".$product_image2."'
               ,register_date = '".date("Y-m-d H:i:s")."'
               ,register_id = '".$uuid."'
               ,product_ranking = '".$product_ranking."'
@@ -109,33 +133,6 @@ class SellerModel extends CommonModel
                     exit;
                 }
                 move_uploaded_file($file_tmp_name,$target_dir. $file_new_name);
-            }
-            $error = $files['representative_image']['error'];
-            $representative_image = $files['representative_image']['name'];
-            $exploded_file = explode(".",$representative_image);
-            $ext = array_pop($exploded_file);
-            $target_dir = ROOTPATH."/public/uploads/upload_files/";
-            $file_tmp_name = $files["representative_image"]["tmp_name"];
-            $file_ext = pathinfo($files["representative_image"]["name"], PATHINFO_EXTENSION);
-            $file_new_name = uniqid().".".$file_ext;
-            if( $error != UPLOAD_ERR_OK ) {
-                switch( $error ) {
-                    case UPLOAD_ERR_INI_SIZE:
-                    case UPLOAD_ERR_FORM_SIZE:
-                        echo "파일이 너무 큽니다. ($error)";
-                        break;
-                    case UPLOAD_ERR_NO_FILE:
-                        echo "파일이 첨부되지 않았습니다. ($error)";
-                        break;
-                    default:
-                        echo "파일이 제대로 업로드되지 않았습니다. ($error)";
-                }
-                exit;
-            }
-
-            if( !in_array($ext, $allowed_ext) ) {
-                echo "허용되지 않는 확장자입니다.";
-                exit;
             }
             move_uploaded_file($file_tmp_name,$target_dir. $file_new_name);
             return 1;

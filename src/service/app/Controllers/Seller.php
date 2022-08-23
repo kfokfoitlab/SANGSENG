@@ -55,6 +55,20 @@ class Seller extends BaseController
         echo view("Common/Footer.html");
     }
 
+    public function List()
+    { // {{{
+        echo view("Common/Header.html");
+        echo view('Seller/IMJOB.html');
+        echo view("Common/Footer.html");
+    } // }}}
+
+    public function Manage()
+    { // {{{
+        echo view("Common/Header.html");
+        echo view('Seller/Manage.html');
+        echo view("Common/Footer.html");
+    } // }}}
+
     public function Item()
     { // {{{
         echo view("Common/Header.html");
@@ -64,6 +78,7 @@ class Seller extends BaseController
 
     public function ItemSubmit()
     { // {{{
+        header("Content-Type:text/html;charset=UTF-8");
         $result = $this->seller_model->Register($_FILES, $_POST);
 
         if($result == "1") {
