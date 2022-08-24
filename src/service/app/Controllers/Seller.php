@@ -69,10 +69,17 @@ class Seller extends BaseController
         echo view("Common/Footer.html");
     } // }}}
 
-    public function Item()
+    public function ItemRegist()
     { // {{{
         echo view("Common/Header.html");
         echo view('Seller/ItemRegist.html');
+        echo view("Common/Footer.html");
+    } // }}}
+
+    public function ItemList()
+    { // {{{
+        echo view("Common/Header.html");
+        echo view('Seller/ItemList.html');
         echo view("Common/Footer.html");
     } // }}}
 
@@ -99,5 +106,11 @@ class Seller extends BaseController
         die();
     } // }}}
 
+    public function Contract()
+    { // {{{
+        echo view("Common/Header.html");
+        echo view('Seller/Contract.html');
+        echo view("Common/Footer.html");
+    } // }}}
 
 }

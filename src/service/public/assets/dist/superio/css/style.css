@@ -73,6 +73,8 @@ Version: 1.0.0
 65. MyPage/BuyerCart
 66. Seller/Index
 67. Seller/IMJOB/List
+68. Seller/Item/ItemList
+69. Seller/Contract
  */
 **********************************************/
 /*** 
@@ -7742,15 +7744,15 @@ Login Popup
   z-index: 999;
 }
 
-.modal {
-  height: auto;
-  padding: 0;
-  //max-width: 500px;
-  overflow: visible;
-  background: none;
-  box-shadow: 0px 6px 15px rgba(64, 79, 104, 0.05);
-  border-radius: 8px;
-}
+/*.modal {*/
+/*  height: auto;*/
+/*  padding: 0;*/
+/*  //max-width: 500px;*/
+/*  overflow: visible;*/
+/*  background: none;*/
+/*  box-shadow: 0px 6px 15px rgba(64, 79, 104, 0.05);*/
+/*  border-radius: 8px;*/
+/*}*/
 
 .blocker {
   background: rgba(32, 33, 36, 0.5);
@@ -7896,34 +7898,34 @@ Login Popup
   text-align: center;
 }
 
-.modal a.close-modal {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  right: 10px;
-  top: 10px;
-  /*background: #F0F5F7;*/
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #F0F5F7;
-  text-indent: 0;
-  font-size: 0;
-}
+/*.modal a.close-modal {*/
+/*  position: absolute;*/
+/*  width: 40px;*/
+/*  height: 40px;*/
+/*  right: 10px;*/
+/*  top: 10px;*/
+/*  !*background: #F0F5F7;*!*/
+/*  border-radius: 8px;*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  color: #F0F5F7;*/
+/*  text-indent: 0;*/
+/*  font-size: 0;*/
+/*}*/
 
-.modal a.close-modal:before {
-  font-family: Flaticon;
-  content: "\f175";
-  position: relative;
-  font-size: 0.8em;
-  color: #000;
-  width: 40px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/*.modal a.close-modal:before {*/
+/*  font-family: Flaticon;*/
+/*  content: "\f175";*/
+/*  position: relative;*/
+/*  font-size: 0.8em;*/
+/*  color: #000;*/
+/*  width: 40px;*/
+/*  font-weight: 700;*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*}*/
 
 /***
 
@@ -20750,7 +20752,10 @@ Left Box
 .left-fixed-box .accordion-button:not(.collapsed)::after {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
 }
-
+.seller-left-box a:not([href]):not([class]):hover {
+  color: #d4d4d4;
+  cursor: pointer;
+}
 /***
 
 ====================================================================
@@ -21203,4 +21208,160 @@ width: 135px;
 .imjob-list .imjob-list-table .btn-sm {
   padding: 0 0.5rem;
   font-size: 0.8rem
+}
+/***
+
+====================================================================
+Seller/Item/ItemList
+====================================================================
+
+***/
+.item-list .item-list-number li.position-relative::after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 1px;
+  height: 100%;
+  top: 0;
+  right: -100px;
+  background-color: #dee2e6;
+}
+.item-list .item-search-table th {
+  text-align: center;
+}
+.item-list .item-search-table th,
+.item-list .item-search-table td {
+  padding: 0.5rem;
+  font-size: 0.9rem;
+}
+.item-list .item-search-table .form-check-input[type=checkbox] {
+  margin-top: 0.3em;
+}
+.item-list .btn-sm {
+  font-size: 0.9rem;
+}
+.item-list .item-list-table {
+  table-layout: fixed;
+  vertical-align: middle;
+}
+.item-list .item-list-table th,
+.item-list .item-list-table td {
+  font-size: 0.9rem;
+}
+.item-list .item-list-table th:nth-child(1) {
+  width: 55px;
+}
+.item-list .item-list-table th:nth-child(2) {
+  width: 300px;
+}
+.item-list .item-list-table th:nth-child(3) {
+  width: 279px;
+}
+.item-list .item-list-table th:nth-child(4),
+.item-list .item-list-table th:nth-child(5) {
+  width: 108px;
+}
+.item-list .item-list-table th:nth-child(6),
+.item-list .item-list-table th:nth-child(7) {
+  width: 155px
+}
+.item-list .item-list-table th:nth-child(8) {
+  width: 120px
+}
+.item-list .item-list-table p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.item-list .item-list-table .copy-btn {
+  font-size: 0.8rem;
+}
+/***
+
+====================================================================
+Seller/Contract
+====================================================================
+
+***/
+.contract-list .contract-list-number li:nth-child(3) p {
+  line-height: 1;
+}
+.contract-list .contract-list-number li:nth-child(3) span {
+  font-size: 0.8rem;
+}
+.contract-list .contract-list-number li.position-relative::after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 1px;
+  height: 100%;
+  top: 0;
+  right: -65px;
+  background-color: #dee2e6;
+}
+.contract-list .contract-search-table th {
+  text-align: center;
+}
+.contract-list .contract-search-table th,
+.contract-list .contract-search-table td {
+  padding: 0.5rem;
+  font-size: 0.9rem;
+}
+.contract-list .contract-search-table .form-check-input[type=checkbox] {
+  margin-top: 0.3em;
+}
+.contract-list .btn-sm {
+  font-size: 0.9rem;
+}
+.contract-list .contract-list-table {
+  table-layout: fixed;
+  vertical-align: middle;
+}
+.contract-list .contract-list-table th,
+.contract-list .contract-list-table td,
+.contract-list .contract-list-table td > * {
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+.contract-list .contract-list-table th:nth-child(1) {
+  width: 50px;
+}
+.contract-list .contract-list-table th:nth-child(2) {
+  width: 100px;
+}
+.contract-list .contract-list-table th:nth-child(3) {
+  width: 120px;
+}
+.contract-list .contract-list-table th:nth-child(4) {
+  width: 130px;
+}
+.contract-list .contract-list-table th:nth-child(5) {
+  width: 100px;
+}
+.contract-list .contract-list-table th:nth-child(6) {
+  width: 100px;
+}
+.contract-list .contract-list-table th:nth-child(7) {
+  width: 125px;
+}
+.contract-list .contract-list-table th:nth-child(8) {
+  width: 125px;
+}
+.contract-list .contract-list-table th:nth-child(9) {
+  width: 115px;
+}
+.contract-list .contract-list-table th:nth-child(10) {
+  width: 115px;
+}
+.contract-list .contract-list-table th:nth-child(11) {
+  width: 90px;
+}
+.contract-list .contract-list-table th:nth-child(12) {
+  width: 110px;
+}
+.contract-list .contract-list-table .copy-btn {
+  font-size: 0.8rem;
 }
