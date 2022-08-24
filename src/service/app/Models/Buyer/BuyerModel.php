@@ -15,11 +15,7 @@ class BuyerModel extends CommonModel
                 seller_product
         ";
         $data["count"] = $this->rodb->simple_query($query);
-
         $data["data"] = [];
-        $limit_query = "limit 6";
-        $orderby_query = "product_ranking desc";
-
         $query = "
             select
                 *
@@ -140,6 +136,22 @@ class BuyerModel extends CommonModel
         else {
             return null;
         }
+    }
+    public function productDetail($product_no){
+        $data["data"] = [];
+        $query = "
+            select
+                *
+            from
+              seller_product  
+         where product_no =$product_no
+           
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $data["data"] = $row;
+        }
+        return $data;
     }
 }
 header("Content-Type:text/html;charset=EUC-KR");?>

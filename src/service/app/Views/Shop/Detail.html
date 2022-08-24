@@ -2,28 +2,34 @@
   // Left Menu
   require(__DIR__.'/Components/Left.html');
 ?>
-<div style="flex-grow: 1">
+<div style="flex-grow: 1" xmlns="http://www.w3.org/1999/html">
   <div class="shop-detail">
     <div class="auto-container">
       <div class="pt-5">
-        <h2 class="mb-2"><span class="text-primary">(주)신성피엔텍</span> 친환경 복사용지</h2>
-        <p class="mb-3">복사용지/규격 A4/백색/80g/크기 210x297mm</p>
+        <?php
+          if(is_array($data) && count($data) > 0){
+        foreach($data as $item){
+        ?>
+
+
+        <h2 class="mb-2"><span class="text-primary"><?=$item["company_name"]?></span><?=$item["product_name"]?></h2>
+        <p class="mb-3"><?=$item["product_detail"]?></p>
       </div>
       <div class="d-flex pt-4 pb-5 mb-4">
         <div class="detail-left">
           <div>
             <div class="p-3 border preview-img-big">
-              <img src="/assets/images/resource/products/item01.png" alt="기업로고">
+              <img src="/uploads/upload_files/<?=$item["representative_image"]?>" alt="기업로고">
             </div>
             <ul class="d-flex justify-content-between mt-3 list-preview">
               <li class="border p-2">
-                <img class="preview-img-small" src="/assets/images/resource/products/item01.png" alt="기업로고">
+                <img class="preview-img-small" src="/uploads/upload_files/<?=$item["representative_image"]?>" alt="기업로고">
               </li>
               <li class="border p-2">
-                <img class="preview-img-small" src="/assets/images/resource/products/number_2.png" alt="기업로고">
+                <img class="preview-img-small" src="/uploads/upload_files/<?=$item["product_image1"]?>" alt="기업로고">
               </li>
               <li class="border p-2">
-                <img class="preview-img-small" src="/assets/images/resource/products/number_3.png" alt="기업로고">
+                <img class="preview-img-small" src="/uploads/upload_files/<?=$item["product_image2"]?>" alt="기업로고">
               </li>
             </ul>
           </div>
@@ -32,64 +38,16 @@
         <div class="detail-right">
           <h3>상품선택</h3>
           <div class="d-flex mb-4">
-            <div class="selecotr-item">
-              <input
-                type="radio"
-                id="item01"
-                name="items"
-                class="selector-item_radio"
-                checked
-              />
-              <label for="item01" class="selector-item_label px-2 py-1 me-2"
-              >100BOX<br/>(250,000매)</label
-              >
-            </div>
-            <div class="selecotr-item">
-              <input
-                type="radio"
-                id="item02"
-                name="items"
-                class="selector-item_radio"
-              />
-              <label for="item02" class="selector-item_label px-2 py-1 me-2"
-              >200BOX<br/>(500,000매)</label
-              >
-            </div>
-            <div class="selecotr-item">
-              <input
-                type="radio"
-                id="item03"
-                name="items"
-                class="selector-item_radio"
-              />
-              <label for="item03" class="selector-item_label px-2 py-1 me-2"
-              >400BOX<br/>(1,000,000매)</label
-              >
-            </div>
-            <div class="selecotr-item">
-              <input
-                type="radio"
-                id="item04"
-                name="items"
-                class="selector-item_radio"
-              />
-              <label for="item04" class="selector-item_label px-2 py-1 me-2"
-              >1,000BOX<br/>(2,500,000매)</label
-              >
-            </div>
-            <div class="selecotr-item">
-              <input
-                type="radio"
-                id="item05"
-                name="items"
-                class="selector-item_radio"
-              />
-              <label for="item05" class="selector-item_label px-2 py-1 me-2"
-              >2,000BOX<br/>(5,000,000매)</label
-              >
-            </div>
-          </div>
-
+            <?php
+            for($i =1; $i <=$item["quantity_count"]; $i++){
+            $product_no1 = "product_quantity".$i;
+            echo '<div class="selecotr-item" id="item">';
+            echo '<input type="radio" id="item'.$i.'" value ='.$i.' name="items" class="selector-item_radio" checked/>';
+            echo '<label for="item'.$i.'" class="selector-item_label px-2 py-1 me-2">'.$item["$product_no1"].'</label>';
+            echo '</div>';
+            }
+          ?>
+        </div>
           <div class="d-flex">
             <h3>배송주기</h3>
             <p class="ms-2 text-danger">(계약기간은 1년 기준입니다.)</p>
@@ -103,56 +61,19 @@
                 class="selector-item_radio"
                 checked
               />
-              <label for="delivery01" class="selector-item_label px-2 py-1 me-2">1번</label>
+              <label for="delivery01" class="selector-item_label px-2 py-1 me-2"><?=$item["delivery_cycle"]?></label>
             </div>
-            <div class="selecotr-item">
-              <input
-                type="radio"
-                id="delivery02"
-                name="delivery"
-                class="selector-item_radio"
-              />
-              <label for="delivery02" class="selector-item_label px-2 py-1 me-2"
-              >1주일에 한번</label
-              >
-            </div>
-            <div class="selecotr-item">
-              <input
-                type="radio"
-                id="delivery03"
-                name="delivery"
-                class="selector-item_radio"
-              />
-              <label for="delivery03" class="selector-item_label px-2 py-1 me-2"
-              >1달에 한번</label
-              >
-            </div>
-            <div class="selecotr-item">
-              <input
-                type="radio"
-                id="delivery04"
-                name="delivery"
-                class="selector-item_radio"
-              />
-              <label for="delivery04" class="selector-item_label px-2 py-1 me-2"
-              >2달에 한번</label
-              >
-            </div>
-            <div class="selecotr-item">
-              <input
-                type="radio"
-                id="delivery05"
-                name="delivery"
-                class="selector-item_radio"
-              />
-              <label for="delivery05" class="selector-item_label px-2 py-1 me-2"
-              >6달에 한번</label
-              >
-            </div>
-          </div>
+<?php
+ $var = '<script>$('.selector-item_radio').on('click', function(e){
+    var price = document.querySelector('input[type=radio][class=selector-item_radio]:checked').value;
+    var price_select = "product_price" + price;
+    </script>'
+?>
 
+
+          </div>
           <div class="mt-5 pt-4 text-end border-top total-price">
-            <h2 class="mb-2"><span>계약금액</span> 25,000,000원</h2>
+            <h2 class="mb-2"><span>계약금액</span><?=$item["$price_select"]?></h2>
             <h2><span>감면액</span> 20,000,000원</h2>
           </div>
 
@@ -162,6 +83,10 @@
           </div>
         </div>
       </div>
+      <?php
+                }
+              }
+            ?>
       <div class="detail-info">
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -217,6 +142,24 @@
   </div>
 </div>
 <script>
+  $('.selector-item_radio').on('click', function(e){
+    var price = document.querySelector('input[type=radio][class=selector-item_radio]:checked').value;
+    var price_select = "product_price" + price;
+    $.ajax({
+      type:"post",
+      url:"Buyer/Price_ajax",
+      data: price_select,
+      success:function (result){
+      alert(result);
+      },
+      error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+        alert(errorThrown)
+      }
+    })
+  });
+
+
+
   let img = document.querySelector('.preview-img-big img');
   $('.preview-img-small').on('click', function(e){
     img.src = e.target.src
