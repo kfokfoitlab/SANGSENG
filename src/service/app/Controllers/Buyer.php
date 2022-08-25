@@ -24,7 +24,6 @@ class Buyer extends BaseController
         $data = array(
             "data" => $data["data"]
         );
-     echo  $data["data"];
         echo view("Common/Header.html");
         echo view('Buyer/Index.html', $data);
         echo view("Common/Footer.html");
@@ -38,11 +37,14 @@ class Buyer extends BaseController
         echo view("Common/Footer.html");
     } // }}}
 
-    public function Detail()
+    public function Detail($product_no)
     { // {{{
-
+        $data = $this->buyer_model->productDetail($product_no);
+        $data = array(
+            "data" => $data
+        );
         echo view("Common/Header.html");
-        echo view('Shop/Detail.html');
+        echo view('Shop/Detail.html',$data);
         echo view("Common/Footer.html");
     } // }}}
 
@@ -62,6 +64,13 @@ class Buyer extends BaseController
         echo view("Common/Footer.html");
     } // }}}
 
+    public function Price_ajax()
+    { // {{{
+    $price_select = $_POST['price_select'];
+        echo view("Common/Header.html");
+        echo view('Shop/Detail.html',$price_select);
+        echo view("Common/Footer.html");
+    } // }}}
     public function Cart()
     { // {{{
 

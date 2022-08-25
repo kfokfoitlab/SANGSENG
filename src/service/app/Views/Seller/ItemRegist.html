@@ -6,241 +6,271 @@
   label {
     width: auto;
   }
-
+  .form-label {font-weight: bold;}
   .selector-item_radio {
     appearance: none;
     display: none;
   }
-
+  .selector-item_label {
+    cursor: pointer;
+  }
   .selector-item_radio:checked + .selector-item_label {
-    background-color: blue;
+    background-color: #0d6efd;
     color: white;
   }
 
-  .added-quantity-price li span {
-    border: 1px solid #eee;
-    margin: 0 5px;
-  }
 </style>
 <div style="flex-grow: 1">
-  <section>
-    <div class="container">
+  <section class="pt-5 layout-pb-120 item-update">
+    <div class="auto-container">
       <h2>상품등록</h2>
       <div class="py-4">
         <form name="form-submit" method="post" action="/<?=_CONTROLLER?>/ItemSubmit" enctype="multipart/form-data">
-        <input type="hidden" name="product_quantity1" id="product_quantity1" value="">
-        <input type="hidden" name="product_price1" id="product_price1" value="">
-        <input type="hidden" name="product_quantity2" id="product_quantity2" value="">
-        <input type="hidden" name="product_price2" id="product_price2" value="">
-        <input type="hidden" name="product_quantity3" id="product_quantity3" value="">
-        <input type="hidden" name="product_price3" id="product_price3" value="">
-        <input type="hidden" name="product_quantity4" id="product_quantity4" value="">
-        <input type="hidden" name="product_price4" id="product_price4" value="">
-        <input type="hidden" name="product_quantity5" id="product_quantity5" value="">
-        <input type="hidden" name="product_price5" id="product_price5" value="">
-        <input type="hidden" name="cnt" id="cnt" value="">
-        <label for="product-category">카테고리</label>
-        <select name="product_category" class="form-select d-inline-block w-25" aria-label="Default select example" id="product-category">
-          <option value="1" selected>사무용품</option>
-          <option value="2">생활용품</option>
-          <option value="3" >전산용품</option>
-          <option value="4" >식음료</option>
-          <option value="5" >청소용품</option>
-        </select>
+          <input type="hidden" name="product_quantity1" id="product_quantity1" value="0">
+          <input type="hidden" name="product_price1" id="product_price1" value="0">
+          <input type="hidden" name="product_quantity2" id="product_quantity2" value="0">
+          <input type="hidden" name="product_price2" id="product_price2" value="0">
+          <input type="hidden" name="product_quantity3" id="product_quantity3" value="0">
+          <input type="hidden" name="product_price3" id="product_price3" value="0">
+          <input type="hidden" name="product_quantity4" id="product_quantity4" value="0">
+          <input type="hidden" name="product_price4" id="product_price4" value="0">
+          <input type="hidden" name="product_quantity5" id="product_quantity5" value="0">
+          <input type="hidden" name="product_price5" id="product_price5" value="0">
+          <input type="hidden" name="cnt" id="cnt" value="">
 
-        <label for="productName">상품명</label>
-        <input type="text" name ="product_name" id="productName" required/>
-
-        <div>
-          <span>판매기간</span>
-          <label class="visually-hidden" for="productSaleStart">판매시작일</label>
-          <input type="date" name="product_start" id="productSaleStart"  placeholder="2022.01.01" required />
-          ~
-          <label class="visually-hidden" for="productSaleEnd">판매종료일</label>
-          <input type="date" name="product_end" id="productSaleEnd" placeholder="2022.12.31" required/>
-        </div>
-
-        <div class="d-flex">
-          <span>부가세</span>
-          <div class="d-flex">
-            <div class="selecotr-item">
-              <input type="radio" id="taxation" name="product_surtax" value="1" class="selector-item_radio" checked/>
-              <label for="taxation" class="selector-item_label px-2">과세상품</label>
+          <div class="row mb-3 align-items-center">
+            <div class="col-2">
+              <label for="product-category" class="form-label">카테고리</label>
             </div>
-            <div class="selecotr-item">
-              <input type="radio" id="taxFree" name="product_surtax" value="2" class="selector-item_radio"/>
-              <label for="taxFree" class="selector-item_label px-2">면세상품</label>
+            <div class="col-6">
+              <select name="product_category" class="form-select d-inline-block w-25"
+                      aria-label="Default select example" id="product-category">
+                <option value="1" selected>사무용품</option>
+                <option value="2">생활용품</option>
+                <option value="3">전산용품</option>
+                <option value="4">식음료</option>
+                <option value="5">청소용품</option>
+              </select>
             </div>
           </div>
-        </div>
 
-        <div class="d-flex">
-          <span>배송주기</span>
-          <div class="d-flex">
-            <div class="selecotr-item">
-              <input type="radio" id="deliverOnce" name="delivery_cycle" value="1" class="selector-item_radio" checked/>
-              <label for="deliverOnce" class="selector-item_label px-2">1번</label>
+          <div class="row mb-3 align-items-center">
+            <div class="col-2">
+              <label for="productName" class="form-label">상품명</label>
             </div>
-            <div class="selecotr-item">
-              <input type="radio" id="deliverAWeek" name="delivery_cycle" value="2" class="selector-item_radio"/>
-              <label for="deliverAWeek" class="selector-item_label px-2">1주일에 한 번</label>
-            </div>
-            <div class="selecotr-item">
-              <input type="radio" id="deliver1Month" name="delivery_cycle" value="3" class="selector-item_radio"/>
-              <label for="deliver1Month" class="selector-item_label px-2">1달에 한 번</label>
-            </div>
-            <div class="selecotr-item">
-              <input type="radio" id="deliver2Months" name="delivery_cycle" value="4" class="selector-item_radio"/>
-              <label for="deliver2Months" class="selector-item_label px-2">2달에 한 번</label>
-            </div>
-            <div class="selecotr-item">
-              <input type="radio" id="deliver6Months" name="delivery_cycle" value="5" class="selector-item_radio"/>
-              <label for="deliver6Months" class="selector-item_label px-2">6달에 한 번</label>
+            <div class="col-6">
+              <input type="text" name="product_name" id="productName" class="form-control" required/>
             </div>
           </div>
-        </div>
 
-
-        <div>
-          <div class="add-quantity-price">
-            <span>판매수량/가격</span>
-            <input class="add-quantity" type="text" name="product_quantity" placeholder="100Box(250,000매)"/>
-            <input class="add-price" type="text" name="product_price" placeholder="1200000(숫자만 입력)" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')"/>
-            <button class="add-quantity-price-btn">추가</button>
-          </div>
-          <ul class="added-quantity-price"></ul>
-        </div>
-
-        <style>
-          .preview-product-img {
-            background-image: url(./imgs/add.png);
-            background-size: auto;
-          }
-        </style>
-        <div>
-          <div class="add-product-img">
-            <span>상품 이미지</span>
-            <div>
-              <h3>대표이미지</h3>
+          <div class="row mb-3 align-items-center">
+            <div class="col-2">
+              <span class="form-label">판매기간</span>
+            </div>
+            <div class="col-6">
               <div class="d-flex align-items-center">
-                <label for="product-img01">대표 이미지 업로드</label>
-                <input id="product-img01" name ="representative_image" class="" type="file" accept="image/*" required/>
-                <div
-                  class="preview-product-img border"
-                  style="
-                  width: 200px;
-                  height: 200px;
-                  background-position: center;
-                  background-repeat: no-repeat;
-                "
-                ></div>
+                <label class="visually-hidden" for="productSaleStart">판매시작일</label>
+                <input type="date" name="product_start" id="productSaleStart" class="form-control" required/>
+                 <span class="px-2">-</span>
+                <label class="visually-hidden" for="productSaleEnd">판매종료일</label>
+                <input type="date" name="product_end" id="productSaleEnd" class="form-control" required/>
               </div>
-              <h3>추가이미지</h3>
-              <input  name ="product_image1" class="" type="file" accept="image/*" required/>
-              <input  name ="product_image2" class="" type="file" accept="image/*" required/>
             </div>
           </div>
-        </div>
+
+          <div class="row mb-3 align-items-center">
+            <div class="col-2">
+              <span class="form-label">부가세</span>
+            </div>
+            <div class="col-6">
+              <div class="d-flex">
+                <div class="selecotr-item me-2">
+                  <input type="radio" id="taxation" name="product_surtax" value="1" class="selector-item_radio"
+                         checked/>
+                  <label for="taxation" class="selector-item_label px-2 border rounded">과세상품</label>
+                </div>
+                <div class="selecotr-item">
+                  <input type="radio" id="taxFree" name="product_surtax" value="2" class="selector-item_radio"/>
+                  <label for="taxFree" class="selector-item_label px-2 border rounded">면세상품</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <div class="col-2">
+              <span class="form-label">배송주기</span>
+            </div>
+            <div class="col-6">
+              <div class="d-flex">
+                <div class="selecotr-item me-2">
+                  <input type="radio" id="deliverOnce" name="delivery_cycle" value="1" class="selector-item_radio"
+                         checked/>
+                  <label for="deliverOnce" class="selector-item_label px-2 border rounded">1번</label>
+                </div>
+                <div class="selecotr-item me-2">
+                  <input type="radio" id="deliverAWeek" name="delivery_cycle" value="2" class="selector-item_radio"/>
+                  <label for="deliverAWeek" class="selector-item_label px-2 border rounded">1주일에 한 번</label>
+                </div>
+                <div class="selecotr-item me-2">
+                  <input type="radio" id="deliver1Month" name="delivery_cycle" value="3" class="selector-item_radio"/>
+                  <label for="deliver1Month" class="selector-item_label px-2 border rounded">1달에 한 번</label>
+                </div>
+                <div class="selecotr-item me-2">
+                  <input type="radio" id="deliver2Months" name="delivery_cycle" value="4" class="selector-item_radio"/>
+                  <label for="deliver2Months" class="selector-item_label px-2 border rounded">2달에 한 번</label>
+                </div>
+                <div class="selecotr-item me-2">
+                  <input type="radio" id="deliver6Months" name="delivery_cycle" value="5" class="selector-item_radio"/>
+                  <label for="deliver6Months" class="selector-item_label px-2 border rounded">6달에 한 번</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div>
-            <span>상품상세정보</span>
-            <textarea name = "product_detail"></textarea>
+            <div class="add-quantity-price row mb-3 align-items-center">
+              <div class="col-2">
+                <span class="form-label">판매수량/가격</span>
+              </div>
+              <div class="col-6">
+                <div class="row align-items-center">
+                  <div class="col-5">
+                    <input class="add-quantity form-control" type="text" name="product_quantity" placeholder="100Box(250,000매)"/>
+                  </div>
+                  <div class="col-5">
+                    <input class="add-price form-control" type="text" name="product_price" placeholder="1200000(숫자만 입력)"
+                         oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')"/>
+                  </div>
+                  <div class="col-2">
+                    <button class="add-quantity-price-btn btn btn-success">추가</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3 align-items-center">
+              <div class="col-6 offset-2">
+                <ul class="added-quantity-price"></ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <div class="col-2">
+              <label class="form-label">상품상세정보</label>
+            </div>
+            <div class="col-6">
+              <textarea name="product_detail" class="form-control" style="height: 200px"></textarea>
+            </div>
+          </div>
+
+          <style>
+            .preview-bg-img {
+              background-image: url("/assets/images/resource/icons/plus-lg.svg");
+              background-size: 30%;
+            }
+          </style>
+          <div class="mb-5">
+            <div class="add-product-img">
+              <p class="form-label mb-4 text-reset">상품 이미지</p>
+              <ul>
+                <!-- 대표이미지 -->
+                <li class="row mb-4 pb-3 border-bottom">
+                  <div class="col-2">
+                    <div
+                      class="preview-product-img preview-bg-img border"
+                      style="
+                        width: 200px;
+                        height: 200px;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                      "
+                    ></div>
+                  </div>
+                  <div class="col-5">
+                    <label for="product-img01" class="form-label">대표 이미지</label>
+                    <input id="product-img01" name="product-img01" class="form-control product-img-input" type="file" accept="image/*" required/>
+                  </div>
+                </li>
+
+                <!-- 추가이미지 -->
+                <li class="row mb-3">
+                  <div class="col-2">
+                    <div
+                      class="preview-product-img1 preview-bg-img border"
+                      style="
+                      width: 200px;
+                      height: 200px;
+                      background-position: center;
+                      background-repeat: no-repeat;
+                    "
+                    ></div>
+                  </div>
+                  <div class="col-5">
+                    <label for="product-img02" class="form-label">추가 이미지 01</label>
+                    <input id="product-img02" name="product-img02" onchange="fufddsaf(1)" class="form-control product-img-input" type="file" accept="image/*" required/>
+                  </div>
+                </li>
+                <li class="row">
+                    <div class="col-2">
+                      <div
+                        class="preview-product-img2 preview-bg-img border"
+                        style="
+                        width: 200px;
+                        height: 200px;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                      "
+                      ></div>
+                    </div>
+                    <div class="col-5">
+                      <label for="product-img03" class="form-label">추가 이미지 01</label>
+                      <input id="product-img03" name="product-img03" class="form-control product-img-input" type="file" accept="image/*" required/>
+                    </div>
+                  </li>
+              </ul>
+            </div>
           </div>
 
           <script>
-          /* 대표이미지 시작 */
-          const image_input = document.querySelector("#product-img01");
-          /*const image_preview = document.querySelector(".preview-product-img");*/
-          const image_preview = image_input.nextElementSibling;
-          let uploaded_image = "";
-
-          image_input.addEventListener("change", function () {
-            const reader = new FileReader();
-            console.log(reader)
-            reader.addEventListener("load", () => {
-              uploaded_image = reader.result;
-              image_preview.style.backgroundSize = `contain`;
-              image_preview.style.backgroundImage = `url(${uploaded_image})`;
-            });
-            reader.readAsDataURL(this.files[0]);
-          });
-
-          image_preview.addEventListener("click", () => image_input.click());
-          /* 대표이미지 끝 */
-
-          /* 추가이미지 시작 */
-
-          /* 추가이미지 끝 */
-
-
-          /* 판매수량/가격 추가 시작 */
-          const addPanel = document.querySelector(".add-quantity-price");
-          const addBtn = document.querySelector(".add-quantity-price-btn");
-          const addedPanel = document.querySelector(".added-quantity-price");
-          const quantity = document.querySelector(".add-quantity");
-          const price = document.querySelector(".add-price");
-
-          function addComma(num) {
-            parseInt(num);
-            var regexp = /\B(?=(\d{3})+(?!\d))/g;
-            return num.toString().replace(regexp, ",");
-          }
-          var cnt = 1;
-          addBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            const product_quantity = document.querySelector(".add-quantity").value;
-            const product_price = document.querySelector(".add-price").value;
-
-            if (product_quantity == "" || product_price == "") {
-              alert("판매수량과 가격을 모두 입력해주세요");
-              if (product_quantity == "") {
-                quantity.focus();
-              } else if (product_price == "") {
-                price.focus();
+            document.addEventListener("change", function (e) {
+              if (e.target && e.target.className == "product-img-input") {
+                console.log(e.target.parentElement.previousElementSibling.firstElementChild);
               }
-            } else {
-              const product_priceComma = product_price.toLocaleString("ko-KR");
-              const li = document.createElement("li");
-              const quantityNode = document.createElement("span");
-              const priceNode = document.createElement("span");
-              const removeBtn = document.createElement("button");
-              removeBtn.classList.add("remove-quantity-price");
-              removeBtn.setAttribute("type", "button");
-              $("#product_quantity"+cnt).val(product_quantity);
-              $("#product_price"+cnt).val(product_price);
-              $("#cnt").val(cnt);
-              quantityNode.textContent = product_quantity;
-              priceNode.textContent = addComma(product_price) + "원";
-              removeBtn.textContent = "삭제";
+            });
 
-              addedPanel.appendChild(li);
-              li.appendChild(quantityNode);
-              li.appendChild(priceNode);
-              li.appendChild(removeBtn);
+            /* 대표이미지 시작 */
+            const image_input = document.querySelector("#product-img01");
+            const image_preview = document.querySelector(".preview-product-img");
+            // const image_preview = image_input.nextElementSibling;
+            let uploaded_image = "";
 
-              document.querySelector(".add-quantity").value = "";
-              document.querySelector(".add-price").value = "";
+            image_input.addEventListener("change", function () {
+              const reader = new FileReader();
+              // console.log(reader)
+              reader.addEventListener("load", () => {
+                uploaded_image = reader.result;
+                image_preview.style.backgroundSize = `contain`;
+                image_preview.style.backgroundImage = `url(${uploaded_image})`;
+              });
+              reader.readAsDataURL(this.files[0]);
+            });
 
-              quantity.focus();
-              cnt++;
-            }
-          });
+            image_preview.addEventListener("click", () => image_input.click());
+            /* 대표이미지 끝 */
 
-          document.addEventListener("click", function (e) {
-            if (e.target && e.target.className == "remove-quantity-price") {
-              cnt--;
-              $("#product_quantity"+cnt).val('');
-              $("#product_price"+cnt).val('');
-              $("#cnt").val(cnt-1);
-              e.target.parentNode.remove();
-            }
-          });
-          /* 판매수량/가격 추가 끝 */
-        </script>
+            /* 추가이미지 시작 */
+
+            /* 추가이미지 끝 */
+
+
+
+          </script>
           <div class="form-group mt-5">
             <button type="submit" class="theme-btn btn-style-one py-3 w-100" tabindex=100>등록</button>
           </div>
-      </form>
+        </form>
       </div>
-      </div>
+    </div>
   </section>
 </div>

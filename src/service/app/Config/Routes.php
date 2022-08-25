@@ -157,20 +157,22 @@ $routes->group('Management', ['namespace' => 'App\Controllers\Management'], stat
 });
 
 $routes->group('Buyer', function($routes){
-    $routes->get ('/',              'Buyer::index');
-    $routes->get ('Shop/List',      'Buyer::List');
-    $routes->get ('Shop/Detail',    'Buyer::Detail');
-    $routes->get ('MyPage/Contract','Buyer::Contract');
-    $routes->get ('MyPage/Info',    'Buyer::Info');
-    $routes->get ('MyPage/Cart',    'Buyer::Cart');
+    $routes->get ('/',                      'Buyer::index');
+    $routes->get ('Shop/List',              'Buyer::List');
+    $routes->get ('Shop/Detail/(:any)',     'Buyer::Detail/$1');
+    $routes->get ('MyPage/Contract',        'Buyer::Contract');
+    $routes->get ('MyPage/Info',            'Buyer::Info');
+    $routes->get ('MyPage/Cart',            'Buyer::Cart');
 });
 
 $routes->group('Seller', function($routes){
-    $routes->get ('/',              'Seller::index');
-    $routes->get ('IMJOB/List',     'Seller::List');
-    $routes->get ('IMJOB/Manage',   'Seller::Manage');
-    $routes->get ('Item',           'Seller::Item');
-    $routes->post ('ItemSubmit',    'Seller::ItemSubmit');
+    $routes->get ('/',                      'Seller::index');
+    $routes->get ('IMJOB/List',             'Seller::List');
+    $routes->get ('IMJOB/Manage',           'Seller::Manage');
+    $routes->get ('Item/ItemRegist',        'Seller::ItemRegist');
+    $routes->get ('Item/ItemList',          'Seller::ItemList');
+    $routes->post ('ItemSubmit',            'Seller::ItemSubmit');
+    $routes->get ('Contract',               'Seller::Contract');
 });
 /*
  * --------------------------------------------------------------------
