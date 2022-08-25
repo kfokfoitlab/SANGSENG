@@ -162,7 +162,7 @@ $routes->group('Buyer', function($routes){
     $routes->get ('Shop/Detail/(:any)',     'Buyer::Detail/$1');
     $routes->get ('MyPage/Contract',        'Buyer::Contract');
     $routes->get ('MyPage/Info',            'Buyer::Info');
-    $routes->get ('MyPage/Cart',            'Buyer::Cart');
+    $routes->post ('Mypage/Cart',           'Buyer\Mypage::Cart');
 });
 
 $routes->group('Seller',  function ($routes){
@@ -170,6 +170,7 @@ $routes->group('Seller',  function ($routes){
     $routes->get ( '/',                     'Seller::index');
     $routes->get ('IMJOB/List',             'Seller::List');
     $routes->get ('IMJOB/Manage',           'Seller\IMJOB::Manage');
+    $routes->get ('Item/ItemUpdate',        'Seller::ItemUpdate');
     $routes->get ($group_name.'/ItemRegist','Seller\Item::ItemRegist');
     $routes->get ($group_name.'/ItemList',   'Seller\Item::ItemList');
     $routes->post ($group_name.'ItemSubmit', 'Seller\Item::ItemSubmit');
