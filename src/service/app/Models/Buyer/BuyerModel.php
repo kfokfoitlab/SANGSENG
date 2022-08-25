@@ -140,18 +140,28 @@ class BuyerModel extends CommonModel
     public function productDetail($product_no){
         $data["data"] = [];
         $query = "
-            select
-                *
-            from
-              seller_product  
-         where product_no =$product_no
-           
+              select
+                  *
+            from 
+                seller_product a 
+                join
+                    seller_company b 
+                        on a.register_id = b.uuid
+            where 
+                product_no =20220825101801 
+              and 
+                a.register_id = b.uuid
+
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
             $data["data"] = $row;
         }
         return $data;
+    }
+
+    public function contract(){
+
     }
 }
 header("Content-Type:text/html;charset=EUC-KR");?>

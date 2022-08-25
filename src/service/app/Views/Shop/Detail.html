@@ -9,12 +9,31 @@
         <?php
           if(is_array($data) && count($data) > 0){
         foreach($data as $item){
+        $delivery_cycle = "";
+        if($item["delivery_cycle"] == 1){
+        $delivery_cycle = "1번";
+        }else if($item["delivery_cycle"] == 2){
+        $delivery_cycle = "1주일에 한 번";
+        }else if($item["delivery_cycle"] == 3){
+        $delivery_cycle = "1달에 한 번";
+        }else if($item["delivery_cycle"] ==4){
+        $delivery_cycle = "2달에 한 번";
+        }else if($item["delivery_cycle"] == 5){
+        $delivery_cycle = "6달에 한 번";
+        }
         ?>
-
-
         <h2 class="mb-2"><span class="text-primary"><?=$item["company_name"]?></span><?=$item["product_name"]?></h2>
         <p class="mb-3"><?=$item["product_detail"]?></p>
       </div>
+
+      <input type="hidden" name="buyer_company_name" id ="buyer_company_name"  value="<?=$_SESSION["login_info"]["company_name"]?>">
+      <input type="hidden" name="buyerr_email" id ="buyer_email"  value="<?=$_SESSION["login_info"]["email"]?>">
+      <input type="hidden" name="buyer_name" id ="buyer_name" value="<?=$_SESSION["login_info"]["buyer_name"]?>">
+      <input type="hidden" name="seller_name" id ="seller_name" value= "<?=$item["seller_name"]?>">
+      <input type="hidden" name="seller_company_name" id ="seller_company_name" value= "<?=$item["company_name"]?>">
+      <input type="hidden" name="seller_email" id ="seller_email" value= "<?=$item["email"]?>">
+      <form name="myForm" method="POST" action="">
+        <input type="hidden" name="product_no" value="<?=$item["product_no"]?>">
       <div class="d-flex pt-4 pb-5 mb-4">
         <div class="detail-left">
           <div>
@@ -34,19 +53,13 @@
             </ul>
           </div>
         </div>
-
         <div class="detail-right">
           <h3>상품선택</h3>
           <div class="d-flex mb-4">
-            <?php
-            for($i =1; $i <=$item["quantity_count"]; $i++){
-            $product_no1 = "product_quantity".$i;
-            echo '<div class="selecotr-item" id="item">';
-            echo '<input type="radio" id="item'.$i.'" value ='.$i.' name="items" class="selector-item_radio" checked/>';
-            echo '<label for="item'.$i.'" class="selector-item_label px-2 py-1 me-2">'.$item["$product_no1"].'</label>';
-            echo '</div>';
-            }
-          ?>
+         <div class="selecotr-item" id="item">
+          <input type="radio" id="item01" name="items" class="selector-item_radio" checked/>
+          <label for="item01" class="selector-item_label px-2 py-1 me-2"><?=$item["product_quantity"]?></label>
+        </div>
         </div>
           <div class="d-flex">
             <h3>배송주기</h3>
@@ -57,36 +70,35 @@
               <input
                 type="radio"
                 id="delivery01"
-                name="delivery"
+                name="delivery_cycle"
                 class="selector-item_radio"
                 checked
               />
-              <label for="delivery01" class="selector-item_label px-2 py-1 me-2"><?=$item["delivery_cycle"]?></label>
+              <label for="delivery01" class="selector-item_label px-2 py-1 me-2"><?=$delivery_cycle?></label>
             </div>
-<?php
- $var = '<script>$('.selector-item_radio').on('click', function(e){
-    var price = document.querySelector('input[type=radio][class=selector-item_radio]:checked').value;
-    var price_select = "product_price" + price;
-    </script>'
-?>
-
-
           </div>
           <div class="mt-5 pt-4 text-end border-top total-price">
-            <h2 class="mb-2"><span>계약금액</span><?=$item["$price_select"]?></h2>
+            <h2 class="mb-2"><span>계약금액</span><?=$item["product_price"]?>원</h2>
             <h2><span>감면액</span> 20,000,000원</h2>
           </div>
-
-          <div class="mt-4 text-end">
-            <button class="btn btn-secondary btn-lg">장바구니</button>
-            <button class="btn btn-danger btn-lg">계약하기</button>
-          </div>
+        <?php
+        if($_SESSION["login_info"]["type"] == "buyer"){
+        ?>
+          <?php
+          }
+          ?>
         </div>
       </div>
       <?php
                 }
               }
             ?>
+      </form>
+      <div class="mt-4 text-end">
+        <button onclick='mySubmit()' class="btn btn-secondary btn-lg">장바구니</button>
+        <button onclick='contract()' class="btn btn-danger btn-lg">계약하기</button>
+      </div>
+
       <div class="detail-info">
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -142,25 +154,74 @@
   </div>
 </div>
 <script>
-  $('.selector-item_radio').on('click', function(e){
-    var price = document.querySelector('input[type=radio][class=selector-item_radio]:checked').value;
-    var price_select = "product_price" + price;
-    $.ajax({
-      type:"post",
-      url:"Buyer/Price_ajax",
-      data: price_select,
-      success:function (result){
-      alert(result);
-      },
-      error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
-        alert(errorThrown)
-      }
-    })
-  });
+
+  var buyer_email = $("#buyer_email").val();
+  var buyer_name = $("#buyer_name").val();
+  var buyer_company_name = $("#buyer_company_name").val();
+
+  var seller_email = $("#seller_email").val();
+  var seller_name = $("#seller_name").val();
+  var seller_company_name = $("#seller_company_name").val();
+  function mySubmit() {
+    document.myForm.action='/Buyer/Mypage/Cart';
+    document.myForm.submit();
+  }
+
+  function contract(){
+    var returnValue = confirm("가입하신 이메일로 계약서가 전송됩니다. 계약을 진행하시겠습니까?");
+    if(returnValue) {
+      var sign = {
+        "header": {
+          "request_code": "5005Q",
+          "version": "9.9.99",
+          "session_id": "S1001",
+        },
+        "body": {
+          "biz_id": "0",
+          "workflow_name": "연계고용 표준도급계약서_샘플(배포용)",
+          "memb_email": "socialimpactorkr@naver.com",
+          "doc_id": "6",
+          "client_id": "*6A1137EBF8BBBC7BFCE7D7425C69609F31CB8BFE",
+          "language": "ko-KR",
+          "player_list": [{
+            "field_owner": "1",
+            "email": buyer_email,
+            "name": buyer_company_name
+          }, {
+            "field_owner": "2",
+            "email":seller_email,
+            "name": seller_company_name
+          }]
+        }
+      };
+      $.ajax({
+        url: "https://docs.esignon.net/api/naver0socialimpactorkr/startsimple",
+        dataType: 'JSON',
+        type: "post",
+        data: JSON.stringify(sign),
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+          xhr.setRequestHeader("User-Agent", "esignonapi");
+          xhr.setRequestHeader("Authorization", "esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE=");
+        },
+        success: function (result) {
+          if (result) {
+            alert("가입하신 이메일로 계약서가 전송되었습니다.");
+          } else {
+            alert("전송 실패했습니다.");
+          }
+        },
+        error: function (xhr, ajaxSettings, thrownError) {
+          alert(thrownError);
+        }
+      });
+    }else{
+      return false;
+    }
+  };
 
 
-
-  let img = document.querySelector('.preview-img-big img');
+let img = document.querySelector('.preview-img-big img');
   $('.preview-img-small').on('click', function(e){
     img.src = e.target.src
   })

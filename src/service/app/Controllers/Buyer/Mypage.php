@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Buyer;
+use App\Controllers\BaseController;
 use App\Models\Management\Company\ApplicationModel;
 use App\Models\CompanyModel;
 use App\Models\DatabaseModel;
 use App\Models\Buyer\BuyerModel;
-class Buyer extends BaseController
+class Mypage extends BaseController
 {
     private $model;
     private $database_model;
@@ -66,7 +67,6 @@ class Buyer extends BaseController
 
     public function Cart()
     { // {{{
-
         echo view("Common/Header.html");
         echo view('MyPage/BuyerCart.html');
         echo view("Common/Footer.html");

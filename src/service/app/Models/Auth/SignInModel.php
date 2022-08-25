@@ -44,6 +44,7 @@ class SignInModel extends CommonModel
                 ,"type" => "buyer"
                 ,"status" => $row["status"]
                 ,"buyer_name" => $row["buyer_name"]
+                ,"company_name" => $row["company_name"]
                 ,"email" => $row["email"]
             );
             return array(

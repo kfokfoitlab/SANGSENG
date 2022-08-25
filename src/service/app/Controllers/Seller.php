@@ -44,66 +44,21 @@ class Seller extends BaseController
         );
         $recent_company = $this->company_model->getAllList(0, $search_query);
 
-        $data = array(
+      /*  $data = array(
             "job_category" => $job_category
         ,"recommended_data" => $recommended_data
         ,"recent_company" => $recent_company["data"]
-        );
+        );*/
 
         echo view("Common/Header.html");
-        echo view('Seller/Index.html', $data);
+        echo view('Seller/Index.html', /*$data*/);
         echo view("Common/Footer.html");
     }
-
-    public function List()
+    public function ItemUpdate()
     { // {{{
         echo view("Common/Header.html");
-        echo view('Seller/IMJOB.html');
+        echo view('Seller/ItemUpdate.html');
         echo view("Common/Footer.html");
-    } // }}}
-
-    public function Manage()
-    { // {{{
-        echo view("Common/Header.html");
-        echo view('Seller/Manage.html');
-        echo view("Common/Footer.html");
-    } // }}}
-
-    public function ItemRegist()
-    { // {{{
-        echo view("Common/Header.html");
-        echo view('Seller/ItemRegist.html');
-        echo view("Common/Footer.html");
-    } // }}}
-
-    public function ItemList()
-    { // {{{
-        echo view("Common/Header.html");
-        echo view('Seller/ItemList.html');
-        echo view("Common/Footer.html");
-    } // }}}
-
-    public function ItemSubmit()
-    { // {{{
-        header("Content-Type:text/html;charset=UTF-8");
-        $result = $this->seller_model->Register($_FILES, $_POST);
-
-        if($result == "1") {
-            echo "
-                <script>
-                    alert('상품이 등록되었습니다.');
-					window.location.replace('/Seller');
-                </script>
-            ";
-        }else{
-            echo "
-                <script>
-                    alert('오류가 발생했습니다.다시 시도해주세요');
-					history.back(-1);
-                </script>
-            ";
-        }
-        die();
     } // }}}
 
     public function Contract()

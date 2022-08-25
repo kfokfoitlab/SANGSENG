@@ -146,42 +146,39 @@
           </tr>
           </thead>
           <tbody>
+          <?php
+          if(is_array($data) && count($data) > 0){
+            foreach($data as $item){
+            $category = "";
+              if($item["product_category"] == 1){
+              $category = "사무용품";
+              }else if($item["product_category"] == 2){
+              $category = "생활용품";
+              }else if($item["product_category"] == 3){
+              $category = "전산용품";
+              }else if($item["product_category"] == 4){
+              $category = "식음료";
+              }else if($item["product_category"] == 5){
+              $category = "청소용품";
+              }
+          ?>
+
           <tr>
-            <td>1</td>
-            <td><a href="">20220801090000-00001</a></td>
-            <td title="친환경중질지70gA4용지"><p>친환경중질지70gA4용지</p></td>
-            <td>판매중</td>
-            <td>사무용품</td>
-            <td>2022-08-01</td>
-            <td>2022-08-10</td>
+            <td><?=$item["idx"]?></td>
+            <td><a href="/Seller/Item/ItemUpdate"><?=$item["product_no"]?></a></td>
+            <td title="친환경중질지70gA4용지"><p><?=$item["product_name"]?></p></td>
+            <td><?=$item["product_status"]?></td>
+            <td><?=$category?></td>
+            <td><?=$item["register_date"]?></td>
+            <td><?=$item["update_date"]?></td>
             <td>
               <button class="copy-btn btn btn-sm btn-secondary fw-normal">복사등록</button>
             </td>
           </tr>
-          <tr>
-            <td>2</td>
-            <td><a href="">20220801090000-00001</a></td>
-            <td title="친환경중질지70gA4용지친환경중질지70gA4용지친환경중질지70gA4용지"><p>친환경중질지70gA4용지친환경중질지70gA4용지친환경중질지70gA4용지</p></td>
-            <td>판매중</td>
-            <td>사무용품</td>
-            <td>2022-08-01</td>
-            <td>2022-08-10</td>
-            <td>
-              <button class="copy-btn btn btn-sm btn-secondary fw-normal">복사등록</button>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td><a href="">20220801090000-00001</a></td>
-            <td title="친환경중질지70gA4용지친환경중질지70gA4용지친환경중질지70gA4용지"><p>친환경중질지70gA4용지친환경중질지70gA4용지친환경중질지70gA4용지</p></td>
-            <td>판매중</td>
-            <td>사무용품</td>
-            <td>2022-08-01</td>
-            <td>2022-08-10</td>
-            <td>
-              <button class="copy-btn btn btn-sm btn-secondary fw-normal">복사등록</button>
-            </td>
-          </tr>
+          <?php
+                }
+              }
+            ?>
           </tbody>
         </table>
       </form>
