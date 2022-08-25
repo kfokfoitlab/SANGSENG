@@ -64,6 +64,7 @@ $routes->group('Member', ['namespace' => 'App\Controllers\Member'], static funct
 	$routes->get ($group_name.'/Update/(:any)',     $group_name.'::Update/$1');
 	$routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
 	$routes->get ($group_name.'/DeleteSubmit/(:any)', $group_name.'::DeleteSubmit/$1');
+	$routes->get ($group_name.'/statusUpdate', $group_name.'::statusUpdate');
 
 });
 

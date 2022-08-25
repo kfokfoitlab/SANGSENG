@@ -165,13 +165,14 @@ $routes->group('Buyer', function($routes){
     $routes->get ('MyPage/Cart',            'Buyer::Cart');
 });
 
-$routes->group('Seller', function($routes){
-    $routes->get ('/',                      'Seller::index');
+$routes->group('Seller',  function ($routes){
+    $group_name = "Item";
+    $routes->get ( '/',                     'Seller::index');
     $routes->get ('IMJOB/List',             'Seller::List');
-    $routes->get ('IMJOB/Manage',           'Seller::Manage');
-    $routes->get ('Item/ItemRegist',        'Seller::ItemRegist');
-    $routes->get ('Item/ItemList',          'Seller::ItemList');
-    $routes->post ('ItemSubmit',            'Seller::ItemSubmit');
+    $routes->get ('IMJOB/Manage',           'Seller\IMJOB::Manage');
+    $routes->get ($group_name.'/ItemRegist','Seller\Item::ItemRegist');
+    $routes->get ($group_name.'/ItemList',   'Seller\Item::ItemList');
+    $routes->post ($group_name.'ItemSubmit', 'Seller\Item::ItemSubmit');
     $routes->get ('Contract',               'Seller::Contract');
 });
 /*

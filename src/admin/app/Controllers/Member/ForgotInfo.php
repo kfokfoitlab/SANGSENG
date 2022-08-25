@@ -116,4 +116,18 @@
 			
 		} //}}}
 		
+		public function statusUpdate()
+		{
+			$data = array(
+				"idx" => $_GET["idx"]
+				,"status" => $_GET["status"]
+			);
+			$this->model->statusUpdate($data);
+			echo "
+            <script>
+                history.back();
+            </script>
+        ";
+		}
+		
 	}

@@ -19,7 +19,6 @@ class SellerModel extends CommonModel
         $product_ranking = 9999;
         $status = '5';
         $product_no = date("YmdHis");
-        $quantity_count = $data['cnt'];
 
         $query = "
           insert into
@@ -29,16 +28,8 @@ class SellerModel extends CommonModel
               ,status = '".$status."'
               ,product_category = '".$data["product_category"]."'
               ,product_name = '".$data["product_name"]."'
-              ,product_price1 = '".$data["product_price1"]."'
-              ,product_quantity1 = '".$data["product_quantity1"]."'
-              ,product_price2 = '".$data["product_price2"]."'
-              ,product_quantity2 = '".$data["product_quantity2"]."'
-              ,product_price3 = '".$data["product_price3"]."'
-              ,product_quantity3 = '".$data["product_quantity3"]."'
-              ,product_price4 = '".$data["product_price4"]."'
-              ,product_quantity4 = '".$data["product_quantity4"]."'
-              ,product_price5 = '".$data["product_price5"]."'
-              ,product_quantity5 = '".$data["product_quantity5"]."'
+              ,product_price = '".$data["product_price"]."'
+              ,product_quantity = '".$data["product_quantity"]."'          
               ,product_start = '".$data["product_start"]."'
               ,product_end = '".$data["product_end"]."'
               ,product_surtax = '".$data["product_surtax"]."'
@@ -49,7 +40,6 @@ class SellerModel extends CommonModel
               ,product_image2 = '".$file_new_name2."'
               ,register_date = '".date("Y-m-d H:i:s")."'
               ,register_id = '".$uuid."'
-              ,quantity_count = '".$quantity_count."'
               ,company_name = '".$company_name."'
               ,product_ranking = '".$product_ranking."'
       ";
@@ -92,6 +82,37 @@ class SellerModel extends CommonModel
         else {
             return null;
         }
+    }
+    public function getProductList($uuid){
+
+        $data = [];
+        // total
+        $query = "
+            select
+                count(*)
+            from
+                seller_product
+            where register_id ='".$uuid."'
+        ";
+        $data["count"] = $this->rodb->simple_query($query);
+        $data["data"] = [];
+        $query = "
+            select
+                *
+            from
+              seller_product  
+            where register_id ='".$uuid."'
+           order by 
+               product_ranking desc
+           
+           
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $data["data"][] = $row;
+
+        }
+        return $data;
     }
 }
 header("Content-Type:text/html;charset=EUC-KR");?>
