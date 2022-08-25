@@ -42,7 +42,7 @@
           <div class="accordion-body">
             <ul class="p-0 text-start">
               <li>
-                <a href="/Seller/IMJOB/List">장애인 근로자 관리</a>
+                <a class="on" href="/Seller/IMJOB/List">장애인 근로자 관리</a>
               </li>
               <li>
                 <a href="/Seller/IMJOB/Manage">장애인 근로자 등록</a>
@@ -173,7 +173,48 @@
     </div>
   </div>
 </div>
+
 <script>
+  const currentURI = window.location.href;
+  const headingOne = document.querySelector('div[aria-labelledby="headingOne"]');
+  const headingTwo = document.querySelector('div[aria-labelledby="headingTwo"]');
+  const headingThree = document.querySelector('div[aria-labelledby="headingThree"]');
+  const headingFour = document.querySelector('div[aria-labelledby="headingFour"]');
+  const allCollapse = document.querySelectorAll('.accordion-collapse');
+  const headingLinks = document.querySelectorAll('.accordion-body a');
+
+  headingLinks.forEach((nav) => {
+    if (nav.pathname === window.location.pathname) {
+      nav.classList.add('on')
+    } else {
+      nav.classList.remove('on')
+    }
+    if(window.location.pathname == '/Seller/Item/ItemUpdate') {
+      document.querySelector('a[href="/Seller/Item/ItemList"]').classList.add('on')
+    }
+  })
+
+  switch (true) {
+    case currentURI.includes('Seller/IMJOB'):
+      panelShow(headingOne);
+      break;
+    case currentURI.includes('Seller/Item'):
+      panelShow(headingTwo);
+      break;
+    case currentURI.includes('Seller/Contract'):
+      panelShow(headingThree);
+      break;
+    default:
+      break;
+  }
+
+  function panelShow (heading) {
+    allCollapse.forEach(collapse => {
+      collapse.classList.remove('show')
+      heading.classList.add('show');
+    })
+  }
+
   const pageWrapper = document.querySelector('.page-wrapper');
   function togglePosition(bodyStatus) {
     bodyStatus ? pageWrapper.style.position = 'static' : pageWrapper.style.position = 'relative'
