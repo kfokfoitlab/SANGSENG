@@ -20745,16 +20745,18 @@ Left Box
   font-size: 0.9rem;
   color: #d4d4d4;
 }
+.left-fixed-box .accordion-body a:hover,
+.left-fixed-box .accordion-body a:active,
+.left-fixed-box .accordion-body a.on {
+  color: #91b9ff;
+  cursor: pointer;
+}
 .left-fixed-box .accordion-button:focus {
   border-color: #fff;
   box-shadow: 0 0 0 0.25rem rgb(255 255 255 / 25%);
 }
 .left-fixed-box .accordion-button:not(.collapsed)::after {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-}
-.seller-left-box a:not([href]):not([class]):hover {
-  color: #d4d4d4;
-  cursor: pointer;
 }
 /***
 
@@ -21329,7 +21331,9 @@ Seller/Contract
 .contract-list .contract-list-table th:nth-child(1) {
   width: 50px;
 }
-.contract-list .contract-list-table th:nth-child(2) {
+.contract-list .contract-list-table th:nth-child(2),
+.contract-list .contract-list-table th:nth-child(5),
+.contract-list .contract-list-table th:nth-child(6) {
   width: 100px;
 }
 .contract-list .contract-list-table th:nth-child(3) {
@@ -21338,21 +21342,11 @@ Seller/Contract
 .contract-list .contract-list-table th:nth-child(4) {
   width: 130px;
 }
-.contract-list .contract-list-table th:nth-child(5) {
-  width: 100px;
-}
-.contract-list .contract-list-table th:nth-child(6) {
-  width: 100px;
-}
-.contract-list .contract-list-table th:nth-child(7) {
-  width: 125px;
-}
+.contract-list .contract-list-table th:nth-child(7),
 .contract-list .contract-list-table th:nth-child(8) {
   width: 125px;
 }
-.contract-list .contract-list-table th:nth-child(9) {
-  width: 115px;
-}
+.contract-list .contract-list-table th:nth-child(9),
 .contract-list .contract-list-table th:nth-child(10) {
   width: 115px;
 }
@@ -21364,4 +21358,50 @@ Seller/Contract
 }
 .contract-list .contract-list-table .copy-btn {
   font-size: 0.8rem;
+}
+/***
+
+====================================================================
+Seller/item-update,item-regisst
+====================================================================
+
+***/
+.item-update h2 {
+  font-size: 1.5rem;
+}
+
+.item-update label {
+  width: auto;
+}
+
+.item-update .form-label {
+  font-weight: bold;
+}
+
+.item-update .selector-item-radio {
+  appearance: none;
+  display: none;
+}
+
+.item-update .selector-item-label {
+  cursor: pointer;
+}
+
+.item-update .selector-item-radio:checked + .selector-item-label {
+  background-color: #0d6efd;
+  color: white;
+}
+.item-update .tax10 {
+  font-size: 0.8rem;
+}
+.item-update .preview-bg-img {
+  background-image: url("/assets/images/resource/icons/image.svg");
+  background-size: 30%;
+  width: 200px;
+  height: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.item-update textarea {
+  height: 200px;
 }

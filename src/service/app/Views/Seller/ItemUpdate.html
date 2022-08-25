@@ -6,8 +6,20 @@
   <section class="pt-5 layout-pb-120 item-update">
     <div class="auto-container">
       <div class="p-5 bg-white">
-        <h2 class="mb-4 px-3 pb-3 fw-bold border-bottom border-2">상품등록</h2>
+        <h2 class="mb-4 px-3 pb-3 fw-bold border-bottom border-2">상품수정</h2>
         <form name="form-submit" method="post" action="/<?=_CONTROLLER?>/ItemSubmit" enctype="multipart/form-data">
+          <input type="hidden" name="product_quantity1" id="product_quantity1" value="0">
+          <input type="hidden" name="product_price1" id="product_price1" value="0">
+          <input type="hidden" name="product_quantity2" id="product_quantity2" value="0">
+          <input type="hidden" name="product_price2" id="product_price2" value="0">
+          <input type="hidden" name="product_quantity3" id="product_quantity3" value="0">
+          <input type="hidden" name="product_price3" id="product_price3" value="0">
+          <input type="hidden" name="product_quantity4" id="product_quantity4" value="0">
+          <input type="hidden" name="product_price4" id="product_price4" value="0">
+          <input type="hidden" name="product_quantity5" id="product_quantity5" value="0">
+          <input type="hidden" name="product_price5" id="product_price5" value="0">
+          <input type="hidden" name="cnt" id="cnt" value="">
+
           <div class="px-3">
             <div class="row mb-4 align-items-center">
               <div class="col-2">
@@ -168,7 +180,7 @@
 
             <div class="form-group mt-5 d-flex justify-content-center">
               <button type="reset" class="btn btn-outline-secondary px-4 me-3" tabindex=100>취소</button>
-              <button type="submit" class="btn btn-primary px-4" tabindex=100>등록</button>
+              <button type="submit" class="btn btn-primary px-4" tabindex=100>수정</button>
             </div>
           </div>
         </form>
