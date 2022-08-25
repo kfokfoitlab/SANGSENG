@@ -63,10 +63,10 @@ $(document).ready(function(){
 										html = "<span class='badge bg-info'>대기중</span>";
 										break;
 									case "5":
-										html = "<span class='badge bg-primary'>처리완료</span>";
+										html = "<span class='badge bg-success'>완료</span>";
 										break;
 									case "7":
-										html = "<span class='badge bg-danger'>처리거절</span>";
+										html = "<span class='badge bg-danger'>반려</span>";
 										break;
 								}
 				
@@ -76,7 +76,10 @@ $(document).ready(function(){
             ,{title: "진행상황변경", data: "idx", visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){
                     let html = "";
-										html = "<input class='btn btn-secondary btn-sm' style='font-size: 12px;' type='button' onClick='#("+data+")' value='진행변경'>";
+										html = "<input class='btn btn-info btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",1)' value='대기'>";
+										html = html + "<input class='btn btn-success btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",5)' value='완료'>";
+										html = html + "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",7)' value='반려'>";
+										
                     return html;
                 }
             }
@@ -115,4 +118,6 @@ $(document).ready(function(){
     // }}}
 
 });
-
+function statusUpdate(idx,status){
+	location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
+}
