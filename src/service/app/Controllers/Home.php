@@ -42,6 +42,7 @@ class Home extends BaseController
         );
         $recent_company = $this->company_model->getAllList(0, $search_query);
 
+
         $data = array(
              "job_category" => $job_category
             ,"recommended_data" => $recommended_data

@@ -1,17 +1,16 @@
-<section class="banner-section-four" 
-  style="
+<section class="banner-section-four"
+         style="
     background: url(/assets/images/background/big-banner.jpeg) rgba(100, 100, 100, 0.6);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-blend-mode: multiply;
   "
-
 >
   <div class="auto-container">
     <div class="cotnent-box">
       <div class="title-box">
-        <h3 title="2022년 상생몰 예상 총 감면금액"><a tabindex=100>2022년 상생몰 예상 총감면금액 <span class="main-banner-counter">123567894</span>원</a></h3>
+        <h2 title="2022년 상생몰 예상 총 감면금액"><a tabindex=100>2022년 상생몰 예상 총감면금액 <span class="main-banner-counter">123567894</span>원</a></h2>
       </div>
 
       <!-- Job Search Form -->
@@ -29,13 +28,13 @@
               <span class="icon flaticon-briefcase"></span>
               <select class="" name="pf" tabindex=103 title="직무 유형">
                 <option value="">직무 유형</option>
-              <?php
+                <?php
               if(@is_array($job_category["Profession"]) && @count($job_category["Profession"])){
                 foreach($job_category["Profession"] as $val){
                   echo "<option value='".$val["idx"]."' tabindex=103>".$val["title"]."</option>";
                 }
-              }
-              ?>
+                }
+                ?>
               </select>
             </div>
 
@@ -54,16 +53,16 @@
         <?php
         if(@is_array($job_category["Profession"]) && @count($job_category["Profession"])){
           foreach($job_category["Profession"] as $key => $val){
-            if($key > 4) {
-              break;
-            }
+        if($key > 4) {
+        break;
+        }
 
-            if($key != 0){
-              echo ", ";
-            }
-            //echo "<option value='".$val["idx"]."' tabindex=103>".$val["title"]."</option>";
-            echo '<a href="/Recruit/?pf='.$val["idx"].'" tabindex=110>'.$val["title"].'</a>';
-          }
+        if($key != 0){
+        echo ", ";
+        }
+        //echo "<option value='".$val["idx"]."' tabindex=103>".$val["title"]."</option>";
+        echo '<a href="/Recruit/?pf='.$val["idx"].'" tabindex=110>'.$val["title"].'</a>';
+        }
         }
         ?>
       </div>
