@@ -1,16 +1,14 @@
 <?php
   // Left Menu
-  require(__DIR__.'/Components/Left.html');
+  require APPPATH . '/Views/Buyer/Components/Left.html';
 ?>
-
-<div style="flex-grow: 1">
+<div class="flex-grow-1">
   <section class="buyer-cart">
     <div class="auto-container py-5">
       <?php
         // NAV
         require(__DIR__.'/Components/Nav.html');
       ?>
-
       <h3 class="mt-5 h4 fw-bold text-center">장바구니</h3>
       <div class="px-3 mb-5">
         <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom ">

@@ -68,17 +68,17 @@ echo doctype("html5");
               <!-- brand --> <?php
             if(@$_SESSION["login"] != "success"){
             ?>
-              <div class="logo"><a href="/" tabindex=10><img src="https://kfo.ai/images/top/top_06_r_17_17.png" alt="한국직업개발원로고" title="한국직업개발원로고"></a></div>
+              <h1 class="logo"><a href="/" tabindex=10><img src="https://kfo.ai/images/top/top_06_r_17_17.png" alt="한국직업개발원로고" title="한국직업개발원로고"></a></h1>
              <?php
               } else {
               if($_SESSION["login_info"]["type"] == "buyer"){
               ?>
-              <div class="logo"><a href="/Buyer" tabindex=10><img src="https://kfo.ai/images/top/top_06_r_17_17.png" alt="한국직업개발원로고" title="한국직업개발원로고"></a></div>
+              <h1 class="logo"><a href="/Buyer" tabindex=10><img src="https://kfo.ai/images/top/top_06_r_17_17.png" alt="한국직업개발원로고" title="한국직업개발원로고"></a></h1>
             <?php
               }
              else if($_SESSION["login_info"]["type"] == "seller"){
               ?>
-              <div class="logo"><a href="/Seller" tabindex=10><img src="https://kfo.ai/images/top/top_06_r_17_17.png" alt="한국직업개발원로고" title="한국직업개발원로고"></a></div>
+              <h1 class="logo"><a href="/Seller" tabindex=10><img src="https://kfo.ai/images/top/top_06_r_17_17.png" alt="한국직업개발원로고" title="한국직업개발원로고"></a></h1>
             <?php
               }
             }
@@ -145,21 +145,12 @@ echo doctype("html5");
               if($_SESSION["login_info"]["type"] == "buyer"){
             ?>
               <div class="dropdown dashboard-option">
-                <a class="dropdown-toggle" role="button" type="button" data-toggle="dropdown" aria-expanded="false">
+                <a class="dropdown-toggle" role="button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <span class="name text-white"><?=$_SESSION["login_info"]["buyer_name"]?></span> <span class='small'>님</span>
                 </a>
-                <a href="/Auth/SignOut"><i class="la la-sign-out"></i>로그아웃</a>
 
                 <ul class="dropdown-menu p-2 ps-0" style="">
-
-
-       <li><a href="/Management/User/Profile"><i class="la la-user"></i>내 정보</a></li>
-                  <li><a href="/Management/User/Application"><i class="la la-paper-plane"></i>입사 지원 관리</a></li>
-                  <li><a href="/Management/User/ManageJob"><i class="la la-briefcase"></i>구직 관리</a></li>
-                  <li><a href="/Management/User/Resume"><i class="la la-file-invoice"></i>내 이력서</a></li>
-                  <li><a href="/Management/User/BookmarkApplication"><i class="la la-bookmark-o"></i>관심 채용</a></li>
-                  <li><a href="/Management/User/BookmarkCompany"><i class="la la-user-tie"></i>관심 기업</a></li>
-                  <li><a href="/Management/User/Chat"><i class="la la-comment-o"></i>메세지 관리</a></li>
+                  <li><a href="/Buyer/MyPage/Contract"><i class="la la-user"></i>마이페이지</a></li>
                   <li><a href="/Auth/SignOut"><i class="la la-sign-out"></i>로그아웃</a></li>
                 </ul>
               </div> 
