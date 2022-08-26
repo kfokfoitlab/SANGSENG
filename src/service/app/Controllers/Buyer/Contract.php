@@ -2,13 +2,10 @@
 
 namespace App\Controllers\Buyer;
 use App\Controllers\BaseController;
-use App\Models\Management\Company\ApplicationModel;
-use App\Models\CompanyModel;
 use App\Models\DatabaseModel;
 use App\Models\Buyer\BuyerModel;
 class Contract extends BaseController
 {
-    private $model;
     private $database_model;
     private $buyer_model;
     public function __construct()
@@ -32,7 +29,7 @@ class Contract extends BaseController
 
     public function List()
     { // {{{
-
+        
         echo view("Common/Header.html");
         echo view('Shop/List.html');
         echo view("Common/Footer.html");
@@ -51,26 +48,22 @@ class Contract extends BaseController
 
     public function Contract()
     { // {{{
-        $result = $this->buyer_model->contract();
-
-
-        echo view("Common/Header.html");
-        echo view('MyPage/BuyerContract.html');
-        echo view("Common/Footer.html");
-    } // }}}
-
-    public function Info()
-    { // {{{
-
-        echo view("Common/Header.html");
-        echo view('MyPage/BuyerInfo.html');
-        echo view("Common/Footer.html");
-    } // }}}
-
-    public function Cart()
-    { // {{{
-        echo view("Common/Header.html");
-        echo view('MyPage/BuyerCart.html');
-        echo view("Common/Footer.html");
+        $result = $this->buyer_model->contract($_POST);
+        if($result == "1") {
+            echo "
+                <script>
+                    alert('관리자가에게 검토요청을 했습니다.');
+					window.location.replace('/Buyer');
+                </script>
+            ";
+        }else{
+            echo "
+                <script>
+                    alert('오류가 발생했습니다.다시 시도해주세요');
+					history.back(-1);
+                </script>
+            ";
+        }
+        die();
     } // }}}
 }

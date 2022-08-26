@@ -26,14 +26,11 @@
         <p class="mb-3"><?=$item["product_detail"]?></p>
       </div>
 
-      <input type="hidden" name="buyer_company_name" id ="buyer_company_name"  value="<?=$_SESSION["login_info"]["company_name"]?>">
-      <input type="hidden" name="buyerr_email" id ="buyer_email"  value="<?=$_SESSION["login_info"]["email"]?>">
-      <input type="hidden" name="buyer_name" id ="buyer_name" value="<?=$_SESSION["login_info"]["buyer_name"]?>">
-      <input type="hidden" name="seller_name" id ="seller_name" value= "<?=$item["seller_name"]?>">
-      <input type="hidden" name="seller_company_name" id ="seller_company_name" value= "<?=$item["company_name"]?>">
-      <input type="hidden" name="seller_email" id ="seller_email" value= "<?=$item["email"]?>">
+
       <form name="myForm" method="POST" action="">
         <input type="hidden" name="product_no" value="<?=$item["product_no"]?>">
+        <input type="hidden" name="buyer_uuid" id ="buyer_uuid"  value="<?=$_SESSION["login_info"]["uuid"]?>">
+        <input type="hidden" name="seller_uuid" id ="seller_uuid" value= "<?=$item["uuid"]?>">
       <div class="d-flex pt-4 pb-5 mb-4">
         <div class="detail-left">
           <div>
@@ -97,6 +94,9 @@
       <div class="mt-4 text-end">
         <button onclick='mySubmit()' class="btn btn-secondary btn-lg">장바구니</button>
         <button onclick='contract()' class="btn btn-danger btn-lg">계약하기</button>
+        <button onclick='contractCheck()' class="btn btn-danger btn-lg">계약서조회</button>
+        <button onclick='contractSubmit()' class="btn btn-danger btn-lg">계약서전송</button>
+
       </div>
 
       <div class="detail-info">
@@ -167,10 +167,90 @@
     document.myForm.submit();
   }
 
+
+
   function contract(){
+    document.myForm.action='/Buyer/Contract';
+    document.myForm.submit();
+  }
+
+  function contractCheck(){
+
+    const options = {method: 'GET', headers: {Accept: 'application/json', Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='}};
+
+    fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=6&field_name=테스트&field_value=테스트', options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
+    /*var sign = {
+      "header": {
+        "request_code": "5008Q",
+        "api_name" : "start api",
+        "session_id" : "",
+        "version": "1.1.60",
+      },
+      "body": {
+        "comp_id": "naver0socialimpactork",
+        "field_list":[{
+          "doc_uid" :"6",
+          "field_name" :"field_name",
+          "field_value" :"field_value"
+        }]
+      }
+    };
+    $.ajax({
+      url: "https://docs.esignon.net/api/naver0socialimpactork/search",
+      dataType: 'JSON',
+      type: "post",
+      data: JSON.stringify(sign),
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        /!*xhr.setRequestHeader("User-Agent", "esignonapi");*!/
+        xhr.setRequestHeader("Authorization", "esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE=");
+      },
+      success: function (result) {
+        if (result) {
+          console.log(JSON.stringify(result));
+        } else {
+          alert("전송 실패했습니다.");
+        }
+      },
+      error: function (xhr, ajaxSettings, thrownError) {
+        alert(thrownError);
+      }
+    });*/
+  }
+
+  function contractSubmit(){
     var returnValue = confirm("가입하신 이메일로 계약서가 전송됩니다. 계약을 진행하시겠습니까?");
     if(returnValue) {
-      var sign = {
+      const options = {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+        },
+        body: JSON.stringify({
+          language: 'ko',
+          is_preview: false,
+          recipient_list: [
+            {order: 1, email: '98982398@naver.com', name: '홍진석'},
+            {order: 2, email: 'h98982398@gmail.com', name: '홍진석'}
+          ],
+          field_list: [{name: '테스트', value: '테스트'}],
+          workflow_name: '상생몰계약서',
+          template_id: 6,
+          comment: '상생몰 계약서 입니다'
+        })
+      };
+
+      fetch('https://docs.esignon.net/api/v3/workflows/start?offset=%2B09%3A00', options)
+              .then(response => response.json())
+              .then(response => console.log(response))
+              .catch(err => console.error(err));
+
+    /*  var sign = {
         "header": {
           "request_code": "5005Q",
           "version": "9.9.99",
@@ -191,7 +271,12 @@
             "field_owner": "2",
             "email":seller_email,
             "name": seller_company_name
-          }]
+          }],
+          "field_list": [{
+            "field_name": "field_name",
+            "field_value": "field_value"
+          }
+          ]
         }
       };
       $.ajax({
@@ -214,7 +299,7 @@
         error: function (xhr, ajaxSettings, thrownError) {
           alert(thrownError);
         }
-      });
+      });*/
     }else{
       return false;
     }

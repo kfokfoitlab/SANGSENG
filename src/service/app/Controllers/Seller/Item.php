@@ -11,7 +11,6 @@ class Item extends BaseController
 {
     private $model;
     private $database_model;
-    private $company_model;
     private $seller_model;
 //
     public function __construct()
@@ -19,7 +18,6 @@ class Item extends BaseController
         $this->seller_model = new SellerModel;
         $this->application_model = new ApplicationModel;
         $this->database_model = new DatabaseModel;
-        $this->company_model = new CompanyModel;
     } //}}}
 
     public function ItemList()

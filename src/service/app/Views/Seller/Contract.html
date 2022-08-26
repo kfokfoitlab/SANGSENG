@@ -150,48 +150,28 @@
           </tr>
           </thead>
           <tbody>
+          <?php
+          if(is_array($data) && count($data) > 0){
+          foreach($data as $item){
+          ?>
           <tr>
             <td>1</td>
             <td title="진행중">진행중</td>
-            <td title="20220801090000-00001"><a href="">20220801090000-00001</a></td>
-            <td title="친환경중질지70gA4용지">친환경중질지70gA4용지</td>
-            <td title="사무용품">사무용품</td>
-            <td title="100BOX">100BOX</td>
-            <td title="250,000,000">250,000,000</td>
-            <td title="25,000,000">25,000,000</td>
+            <td title="20220801090000-00001"><a href=""><?=$item["contract_no"]?></a></td>
+            <td title="친환경중질지70gA4용지"><?=$item["contract_no"]?></td>
+            <td title="사무용품"><?=$item["contract_status"]?></td>
+            <td title="100BOX"><?=$item["seller_uuid"]?></td>
+            <td title="250,000,000"><?=$item["buyer_uuid"]?></td>
+            <td title="25,000,000"><?=$item["product_no"]?></td>
             <td title="2022-08-01">2022-08-01</td>
             <td title="2022-08-10">2022-08-10</td>
             <td title="일주일에 한번">일주일에 한번</td>
             <td title="22-08-02">22-08-02</td>
           </tr>
-          <tr>
-            <td>2</td>
-            <td title="진행중">진행중</td>
-            <td title="20220801090000-00001"><a href="">20220801090000-00001</a></td>
-            <td title="친환경중질지70gA4용지">친환경중질지70gA4용지</td>
-            <td title="사무용품">사무용품</td>
-            <td title="100BOX">100BOX</td>
-            <td title="250,000,000">250,000,000</td>
-            <td title="25,000,000">25,000,000</td>
-            <td title="2022-08-01">2022-08-01</td>
-            <td title="2022-08-10">2022-08-10</td>
-            <td title="일주일에 한번">일주일에 한번</td>
-            <td title="22-08-02">22-08-02</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td title="진행중">진행중</td>
-            <td title="20220801090000-00001"><a href="">20220801090000-00001</a></td>
-            <td title="친환경중질지70gA4용지">친환경중질지70gA4용지</td>
-            <td title="사무용품">사무용품</td>
-            <td title="100BOX">100BOX</td>
-            <td title="250,000,000">250,000,000</td>
-            <td title="25,000,000">25,000,000</td>
-            <td title="2022-08-01">2022-08-01</td>
-            <td title="2022-08-10">2022-08-10</td>
-            <td title="일주일에 한번">일주일에 한번</td>
-            <td title="22-08-02">22-08-02</td>
-          </tr>
+          <?php
+          }
+          }
+          ?>
           </tbody>
         </table>
 

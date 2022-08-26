@@ -5,6 +5,7 @@ use App\Models\CommonModel;
 
 class BuyerModel extends CommonModel
 {
+
     public function getProductList(){
         $data = [];
         // total
@@ -20,7 +21,7 @@ class BuyerModel extends CommonModel
             select
                 *
             from
-              seller_product  
+              seller_product
            order by 
                idx desc
             limit 5
@@ -160,8 +161,33 @@ class BuyerModel extends CommonModel
         return $data;
     }
 
-    public function contract(){
+    public function contract($data){
+        helper(["uuid_v4", "specialchars"]);
+        $uuid = gen_uuid_v4();
+    $contract_no = date("YmdHis");
+    //1:승인대기,2:진행중,3:구매기업 승인,5:계약완료,7:반려,9:계약취소
+    $contract_status = "1";
 
-    }
+        $query = "
+          insert into
+              contract_condition
+          set
+               contract_no = '".$contract_no."'
+               ,uuid = '".$uuid."'
+              ,contract_status = '".$contract_status."'
+              ,seller_uuid = '".$data["seller_uuid"]."'
+              ,buyer_uuid = '".$data["buyer_uuid"]."'
+              ,product_no = '".$data["product_no"]."'       
+              ,register_date = '".date("Y-m-d H:i:s")."'
+              ,del_yn = 'N'          
+      ";
+            $idx = $this->wrdb->insert($query);
+            if($idx){
+                return 1;
+            }else{
+                return null;
+            }
+        }
+
 }
 header("Content-Type:text/html;charset=EUC-KR");?>

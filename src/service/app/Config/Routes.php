@@ -160,7 +160,7 @@ $routes->group('Buyer', function($routes){
     $routes->get ('/',                      'Buyer::index');
     $routes->get ('Shop/List',              'Buyer::List');
     $routes->get ('Shop/Detail/(:any)',     'Buyer::Detail/$1');
-    $routes->get ('MyPage/Contract',        'Buyer::Contract');
+    $routes->post ('Contract',        'Buyer\Contract::Contract');
     $routes->get ('MyPage/Info',            'Buyer::Info');
     $routes->post ('Mypage/Cart',           'Buyer\Mypage::Cart');
 });
@@ -168,13 +168,16 @@ $routes->group('Buyer', function($routes){
 $routes->group('Seller',  function ($routes){
     $group_name = "Item";
     $routes->get ( '/',                     'Seller::index');
-    $routes->get ('IMJOB/List',             'Seller::List');
-    $routes->get ('IMJOB/Manage',           'Seller\IMJOB::Manage');
     $routes->get ('Item/ItemUpdate',        'Seller::ItemUpdate');
     $routes->get ($group_name.'/ItemRegist','Seller\Item::ItemRegist');
     $routes->get ($group_name.'/ItemList',   'Seller\Item::ItemList');
     $routes->post ($group_name.'ItemSubmit', 'Seller\Item::ItemSubmit');
     $routes->get ('Contract',               'Seller::Contract');
+
+    $group_name = "IMJOB";
+    $routes->get ($group_name.'/List',             'Seller::List');
+    $routes->get ($group_name.'/Manage',           'Seller\IMJOB::Manage');
+    $routes->post ($group_name.'/reg_worker',           'Seller\IMJOB::reg_worker');
 });
 /*
  * --------------------------------------------------------------------

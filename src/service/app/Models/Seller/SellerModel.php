@@ -114,5 +114,36 @@ class SellerModel extends CommonModel
         }
         return $data;
     }
+    public function getContractList($uuid){
+
+        $data = [];
+        // total
+        $query = "
+            select
+                count(*)
+            from
+                contract_condition
+            where seller_uuid ='".$uuid."'
+        ";
+        $data["count"] = $this->rodb->simple_query($query);
+        $data["data"] = [];
+        $query = "
+            select
+                *
+            from
+              contract_condition  
+            where seller_uuid ='".$uuid."'
+           order by 
+               idx desc
+           
+           
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $data["data"][] = $row;
+
+        }
+        return $data;
+    }
 }
 header("Content-Type:text/html;charset=EUC-KR");?>
