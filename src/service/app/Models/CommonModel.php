@@ -304,4 +304,52 @@ class CommonModel extends dbModel
 
 
     } //}}}
+	
+	public function getSellerInfo($uuid)
+	{ //{{{
+		$data = [];
+		$query = "
+            select
+                *
+            from
+                seller_company
+            where
+                uuid = '".$uuid."'
+            limit 1
+        ";
+		$this->rodb->query($query);
+		while($row = $this->rodb->next_row()) {
+			$data = $row;
+		}
+		return $data;
+	} //}}}
+	
+	public function uploadFileNEW($files,$fileName,$allowed_ext,$fileName_ori){
+		$error = $files["$fileName_ori"]['error'];
+		$name = $files["$fileName_ori"]['name'];
+		$exploded_file = explode(".",$name);
+		$ext = array_pop($exploded_file);
+		$target_dir = ROOTPATH."/public/uploads/upload_files/";
+		$file_tmp_name = $files["$fileName_ori"]["tmp_name"];
+		
+		if( !in_array($ext, $allowed_ext) ) {
+			echo "허용되지 않는 확장자입니다.";
+			exit;
+		}
+		if( $error != UPLOAD_ERR_OK ) {
+			switch( $error ) {
+				case UPLOAD_ERR_INI_SIZE:
+				case UPLOAD_ERR_FORM_SIZE:
+					echo "파일이 너무 큽니다. ($error)";
+					break;
+				case UPLOAD_ERR_NO_FILE:
+					echo "파일이 첨부되지 않았습니다. ($error)";
+					break;
+				default:
+					echo "파일이 제대로 업로드되지 않았습니다. ($error)";
+			}
+			exit;
+		}
+		move_uploaded_file($file_tmp_name,$target_dir.$fileName);
+	}
 }
