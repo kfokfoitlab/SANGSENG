@@ -45,6 +45,13 @@
               }
             }
             ?>
+
+
+            <?php
+              foreach($result as $val){
+              echo "<script>alert($val["uuid"]);</script>;"
+            }
+            ?>
           <select>
         </div>
         <div class="col-lg-2">

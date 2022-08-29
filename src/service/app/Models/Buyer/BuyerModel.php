@@ -189,5 +189,72 @@ class BuyerModel extends CommonModel
             }
         }
 
+    public function RecommendationList(){
+        $ranking = [];
+        $query = "
+            select
+                *
+            from
+              seller_product
+           order by 
+               product_ranking desc
+            limit 4;
+           
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $ranking["data"]= $row;
+
+        }
+        return $ranking;
+
+    }
+    public function CategoryList($value){
+        $list = [];
+        $query = "
+            select
+                *
+            from
+              seller_product
+            where 
+                product_category =$value
+           order by 
+              register_date  desc
+           
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $list["data"]= $row;
+
+        }
+        return $list;
+    }
+
+    public function CartInsert(){
+        $product_no = $_POST["product_no"];
+        $buyer_id = $_POST["buyer_uuid"];
+        $seller_uuid = $_POST["seller_uuid"];
+
+        $query = "
+          insert into
+               buyer_cart
+          set
+               product_no = '".$product_no."'
+               ,buyer_id = '".$buyer_id."' 
+               ,seller_id = '".$seller_uuid."' 
+              ,register_date = '".date("Y-m-d H:i:s")."'
+              ,register_id = '".$buyer_id."' 
+              ,del_yn = 'N'          
+      ";
+        $idx = $this->wrdb->insert($query);
+        if($idx){
+            return 1;
+        }else{
+            return null;
+        }
+
+    }
+
+
 }
 header("Content-Type:text/html;charset=EUC-KR");?>

@@ -2,17 +2,18 @@
 
 namespace App\Controllers\Buyer;
 use App\Controllers\BaseController;
-
+use App\Models\Management\Company\ApplicationModel;
+use App\Models\CompanyModel;
 use App\Models\DatabaseModel;
-use App\Models\Buyer\MyPageModel;
-class MyPage extends BaseController
+use App\Models\Buyer\BuyerModel;
+class Shop extends BaseController
 {
     private $model;
     private $database_model;
-    private $mypage_model;
+    private $buyer_model;
     public function __construct()
     { //{{{
-        $this->mypage_model = new MyPageModel;
+        $this->buyer_model = new BuyerModel;
         $this->database_model = new DatabaseModel;
     } //}}}
 
@@ -28,6 +29,35 @@ class MyPage extends BaseController
         echo view('Buyer/Index.html', $data);
         echo view("Common/Footer.html");
     }
+
+    public function List()
+    { // {{{
+        $value = $_GET["value"];
+        $ranking = $this->buyer_model->RecommendationList();
+        $list = $this->buyer_model->CategoryList($value);
+
+        $data = array(
+            "ranking" => $ranking,
+            "list" => $list
+        );
+
+
+        echo view("Common/Header.html");
+        echo view('Shop/List.html',$data);
+        echo view("Common/Footer.html");
+    } // }}}
+
+    public function Detail($product_no)
+    { // {{{
+        $data = $this->buyer_model->productDetail($product_no);
+        $data = array(
+            "data" => $data
+        );
+        echo view("Common/Header.html");
+        echo view('Shop/Detail.html',$data);
+        echo view("Common/Footer.html");
+    } // }}}
+
     public function Contract()
     { // {{{
 
@@ -38,32 +68,19 @@ class MyPage extends BaseController
 
     public function Info()
     { // {{{
-        $uuid = $_SESSION["login_info"]["uuid"];
-        $data = $this->mypage_model->getMyInfo($uuid);
-        $data = array(
-            "data" => $data,
-        );
+
         echo view("Common/Header.html");
-        echo view('MyPage/BuyerInfo.html',$data);
+        echo view('MyPage/BuyerInfo.html');
         echo view("Common/Footer.html");
     } // }}}
 
     public function Cart()
     { // {{{
-        $data = $this->mypage_model->getCartList();
-        $data = array(
-            "data" => $data
-        );
-        echo view("Common/Header.html");
-        echo view('MyPage/BuyerCart.html',$data);
-        echo view("Common/Footer.html");
-    } // }}}
-    public function BuyerUpdateSubmit(){
-     $result = $this->mypage_model->updateMyInfo($_POST);
+        $result = $this->buyer_model->CartInsert($_POST);
         if($result == "1") {
             echo "
                 <script>
-                    alert('정보가 변경되었습니다.');
+                    alert('장바구니에 담았습니다.');
 					window.location.replace('/Buyer');
                 </script>
             ";
@@ -76,5 +93,5 @@ class MyPage extends BaseController
             ";
         }
         die();
-    }
+    } // }}}
 }

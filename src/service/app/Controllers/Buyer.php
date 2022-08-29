@@ -29,13 +29,13 @@ class Buyer extends BaseController
         echo view("Common/Footer.html");
     }
 
-    public function List()
+/*    public function List()
     { // {{{
 
         echo view("Common/Header.html");
         echo view('Shop/List.html');
         echo view("Common/Footer.html");
-    } // }}}
+    } // }}}*/
 
     public function Detail($product_no)
     { // {{{
@@ -56,13 +56,13 @@ class Buyer extends BaseController
         echo view("Common/Footer.html");
     } // }}}
 
-    public function Info()
+   /* public function Info()
     { // {{{
 
         echo view("Common/Header.html");
         echo view('MyPage/BuyerInfo.html');
         echo view("Common/Footer.html");
-    } // }}}
+    } // }}}*/
 
     public function Cart()
     { // {{{
