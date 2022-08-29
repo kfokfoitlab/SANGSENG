@@ -9,72 +9,25 @@
 
       <div class="row gx-3">
         <div class="col-lg-2">
-          <label>제목 검색</label> 
-          <input type="text" class="form-control form-control-sm search" id="search-title" placeholder="">
+          <label>계약번호 검색</label>
+          <input type="text" class="form-control form-control-sm search" id="search-number" placeholder="">
+        </div>
+        <div class="col-lg-2">
+          <label>사업체명 검색</label>
+          <input type="text" class="form-control form-control-sm search" id="search-company" placeholder="">
         </div>
         <div class="col-lg-1">
-          <label>추천상태</label> 
+          <label>계약상태</label>
           <select class="form-control form-control-sm filter" id="search-recommended">
             <option value="">전체</option>
-            <option value="1">추천중</option>
-            <option value="0">추천아님</option>
-          </select>
-        </div>
-        <div class="col-lg-1">
-          <label>진행여부</label> 
-          <select class="form-control form-control-sm filter" id="search-progress">
-            <option value="">전체</option>
-            <option value="1">채용중</option>
-            <option value="2">마감됨</option>
+            <option value="1">진행중</option>
+            <option value="2">계약내용변경</option>
+            <option value="3">계약완료</option>
           </select>
         </div>
         <div class="col-lg-2">
-          <label>등록기간 검색</label> 
+          <label>계약등록일 검색</label>
           <input type="text" class="form-control form-control-sm filter daterange" id="search-daterange" placeholder="기간 검색">
-        </div>
-      </div>
-      <div class="row mt-2">
-        <div class="col-lg-2">
-          <label>직무</label> 
-          <select class="form-control form-control-sm filter" id="search-profession">
-            <option value="" selected>전체</option>
-            <?php
-            if(@is_array($job_category["Profession"]) && @count($job_category["Profession"])){
-              foreach($job_category["Profession"] as $val){
-                echo "<option value='".$val["idx"]."'>".$val["title"]."</option>";
-              }
-            }
-            ?>
-          <select>
-        </div>
-        <div class="col-lg-2">
-          <label>고용 형태</label> 
-          <select class="form-control form-control-sm filter" id="search-employment-type">
-            <option value="" selected>전체</option>
-            <?php
-            if(@is_array($job_category["EmploymentType"]) && @count($job_category["EmploymentType"])){
-              foreach($job_category["EmploymentType"] as $val){
-                echo "<option value='".$val["idx"]."'>".$val["title"]."</option>";
-              }
-            }
-            ?>
-          <select>
-        </div>
-        <div class="col-lg-2">
-          <label>경력 기간</label> 
-          <select class="form-control form-control-sm filter" id="search-career">
-            <option value="" selected>전체</option>
-            <?php
-            if(@is_array($job_category["Career"]) && @count($job_category["Career"])){
-              foreach($job_category["Career"] as $val){
-                if($val["title"] == "무관"){
-                  continue;
-                }
-                echo "<option value='".$val["idx"]."'>".$val["title"]."</option>";
-              }
-            }
-            ?>
-          <select>
         </div>
       </div>
 

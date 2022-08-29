@@ -36,54 +36,35 @@ $(document).ready(function(){
         ],
         "columns": [
              {title: "idx", data: "idx", visible: false}
-            ,{title: "제목", data: "title", visible: true, className: "text-nowrap"}
-            ,{title: "추천여부", data: "recommended", orderable: false, visible: true, className: "text-center text-nowrap",
-                "render": function( data, type, row, meta ){
-                    if(data == null){
-                        return "<button class='btn btn-sm btn-outline-primary action-disable-recommended' data-uuid='"+row.uuid+"'>추천 등록</button>";
-                    }
-                    else {
-                        return "<button class='btn btn-sm btn-primary px-3 action-enable-recommended' data-uuid='"+row.uuid+"'>추천중</button>";
-                    }
-                }
-            }
-            ,{title: "공개여부", data: "status", orderable: false, visible: true, className: "text-center text-nowrap",
-                "render": function( data, type, row, meta ){
-                    switch(data){
-                        case "1": return "<span class='badge text-primary'>공개됨</span>"; break;
-                        case "3": return "<span class='badge text-dark'>비공개</span>"; break;
-                        case "7": return "<span class='badge text-danger'>공개거절</span>"; break;
-                    }
-                }
-            }
-            ,{title: "진행여부", data: "progress", orderable: false, visible: true, className: "text-center text-nowrap",
-                "render": function( data, type, row, meta ){
-                    if(data == 1){
-                        if(row.status == 1){
-                            return "<span class='badge bg-success'>채용중</span>";
-                        }
-                        else {
-                            return "<span class='badge bg-dark'>비공개</span>";
-                        }
-                    }
-                    else {
-                        return "<span class='badge bg-dark'>마감됨</span>";
-                    }
-                }
-            }
-            ,{title: "직무", data: "profession", visible: false}
-            ,{title: "고용형태", data: "employment_type", visible: false}
-            ,{title: "경력", data: "career", visible: false}
-            ,{title: "직무", data: "profession_title", orderable: false, visible: true, className: "text-nowrap"}
-            ,{title: "고용형태", data: "employment_type_title", orderable: false, visible: true, className: "text-nowrap"}
-            ,{title: "필요경력", data: "career_title", orderable: false, visible: true, className: "text-nowrap"}
-            ,{title: "접수", data: "receipt_count", visible: true, className: "text-nowrap",
-                "render": function( data, type, row, meta ){
-                    return data + "건";
-                }
-            }
-            ,{title: "등록일시", data: "register_date", visible: true, className: "text-nowrap"}
-            ,{title: "마감일", data: "receipt_expire_date", visible: true, className: "text-nowrap"}
+            ,{title: "판매자", data: "title", visible: true, className: "text-nowrap"}
+            ,{title: "구매자", data: "title", visible: true, className: "text-nowrap"}
+            ,{title: "계약상태", data: "title", visible: true, className: "text-nowrap"}
+            ,{title: "계약번호", data: "title", visible: true, className: "text-nowrap"}
+            ,{title: "상품명", data: "title", visible: true, className: "text-nowrap"}
+            ,{title: "계약금액", data: "title", visible: true, className: "text-nowrap"}
+            ,{title: "감면금액", data: "title", visible: true, className: "text-nowrap"}
+            ,{title: "계약등록일", data: "title", visible: true, className: "text-nowrap"}
+            ,{title: "계약만료일", data: "title", visible: true, className: "text-nowrap"}
+            ,{title: "최종수정일", data: "title", visible: true, className: "text-nowrap"}
+            // ,{title: "추천여부", data: "recommended", orderable: false, visible: true, className: "text-center text-nowrap",
+            //     "render": function( data, type, row, meta ){
+            //         if(data == null){
+            //             return "<button class='btn btn-sm btn-outline-primary action-disable-recommended' data-uuid='"+row.uuid+"'>추천 등록</button>";
+            //         }
+            //         else {
+            //             return "<button class='btn btn-sm btn-primary px-3 action-enable-recommended' data-uuid='"+row.uuid+"'>추천중</button>";
+            //         }
+            //     }
+            // }
+            // ,{title: "공개여부", data: "status", orderable: false, visible: true, className: "text-center text-nowrap",
+            //     "render": function( data, type, row, meta ){
+            //         switch(data){
+            //             case "1": return "<span class='badge text-primary'>공개됨</span>"; break;
+            //             case "3": return "<span class='badge text-dark'>비공개</span>"; break;
+            //             case "7": return "<span class='badge text-danger'>공개거절</span>"; break;
+            //         }
+            //     }
+            // }
             ,{title: "상세보기", data: "uuid", visible: true, orderable: false, className: "text-center noExport",
                 "render": function( data, type, row, meta ){
                     var html = "";

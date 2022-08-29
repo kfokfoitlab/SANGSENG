@@ -8,7 +8,7 @@ echo doctype("html5");
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>KFO 장애인취업포털 관리자페이지</title>
+  <title>KFO 상생몰 관리자페이지</title>
 
   <!-- link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" -->
 <?php
@@ -59,7 +59,7 @@ echo script_tag("assets/js/Common.js");
 <div class="aside-top">
   <a href="/" class="brand-wrap mx-auto" style="text-decoration: none;">
     <!-- img src="/design/images/logo.svg" height="46" class="logo" alt="Ecommerce dashboard template" -->
-    <h5 class="text-center">장애인취업포털<br/>ADMIN</h5>
+    <h5 class="text-center">상생몰<br/>ADMIN</h5>
   </a>
   <div>
     <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
@@ -79,15 +79,15 @@ echo script_tag("assets/js/Common.js");
         <span class="text">회원관리</span> 
       </a> 
       <div class="submenu">
-        <a href="/Member/User">인재회원</a>
-        <a href="/Member/Company">기업회원</a>
+        <a href="/Member/User">구매기업</a>
+        <a href="/Member/Company">판매기업</a>
         <a href="/Member/ForgotInfo">ID/PW찾기</a>
       </div>
     </li>
     <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Application") !== false)?"active":""?>"> 
       <a class="menu-link" href="#">
         <i class="icon material-icons md-send"></i>  
-        <span class="text">채용관리</span> 
+        <span class="text">계약관리</span>
       </a> 
       <div class="submenu">
         <a href="/Application/Lists">전체 목록</a>

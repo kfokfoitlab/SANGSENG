@@ -7,7 +7,7 @@ use App\Models\Database\DatabaseModel;
 
 class User extends Base
 {
-    private $page_name = "회원관리 > 인재회원";
+    private $page_name = "회원관리 > 구매기업";
     private $model;
     private $database_model;
 

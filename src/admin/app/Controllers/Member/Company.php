@@ -7,7 +7,7 @@ use App\Models\Database\DatabaseModel;
 
 class Company extends Base
 {
-    private $page_name = "회원관리 > 기업회원";
+    private $page_name = "회원관리 > 판매기업";
     private $model;
     private $database_model;
 
