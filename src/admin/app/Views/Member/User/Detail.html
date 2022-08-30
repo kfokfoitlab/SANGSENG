@@ -12,24 +12,32 @@
           <!-- {{{ -->
           <tbody>
             <tr>
-              <td class="th">인재명</td>
-              <td><?=$data["name"]?></td>
-            </tr>
-            <tr>
-              <td class="th">이메일</td>
+              <td class="th">아이디(이메일)</td>
               <td><?=$data["email"]?></td>
             </tr>
             <tr>
-              <td class="th">비밀번호 초기화</td>
-              <td>---</td>
+              <td class="th">비밀번호</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td class="th">담당자명</td>
+              <td><?=$data["buyer_name"]?></td>
             </tr>
             <tr>
               <td class="th">휴대폰번호</td>
               <td><?=$data["phone"]?></td>
             </tr>
             <tr>
-              <td class="th">전화번호</td>
-              <td><?=$data["tel"]?></td>
+              <td class="th">사업체명</td>
+              <td><?=$data["company_name"]?></td>
+            </tr>
+            <tr>
+              <td class="th">사업자등록번호</td>
+              <td><?=$data["company_code"]?></td>
+            </tr>
+            <tr>
+              <td class="th">기업형태</td>
+              <td><?=$data["classification"]?></td>
             </tr>
             <tr>
               <td class="th">팩스번호</td>
@@ -44,6 +52,63 @@
               </td>
             </tr>
             <tr>
+              <td class="th">상시 근로자 수</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td class="th">경증 장애인 근로자 수</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td class="th">중증 장애인 근로자 수</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td class="th">적용 법인세율</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td class="th">관심상품</td>
+              <td>사무용품</td>
+            </tr>
+            <tr>
+              <td class="th">상태</td>
+              <td>
+                <?php
+                switch($data["status"]){
+                  case "0":
+                  case "1": echo "심사중"; break;
+                  case "5": echo "등록완료"; break;
+                  case "7": echo "거절"; break;
+                  case "9": echo "탈퇴"; break;
+                }
+
+                if($data["status"] == 1){
+                ?>
+                <div class="mt-2">
+                  <a href="/<?=_CONTROLLER?>/Confirm/<?=$data["uuid"]?>/5" class="btn btn-sm btn-primary" onclick="return confirm('가입을 승인하시겠습니까?')">가입 승인</a>
+                  <a href="/<?=_CONTROLLER?>/Confirm/<?=$data["uuid"]?>/7" class="btn btn-sm btn-danger ms-4" onclick="return confirm('승인을 거절하시겠습니까?')">승인 거절</a>
+                </div>
+                <?php
+                }
+                else if($data["status"] == 5){
+                ?>
+                <div class="mt-2">
+                  <a href="/<?=_CONTROLLER?>/Confirm/<?=$data["uuid"]?>/7" class="btn btn-sm btn-danger" onclick="return confirm('승인을 거절하시겠습니까?')">승인 거절</a>
+                </div>
+                <?php
+                }
+                else if($data["status"] == 7){
+                ?>
+                <div class="mt-2">
+                  <a href="/<?=_CONTROLLER?>/Confirm/<?=$data["uuid"]?>/5" class="btn btn-sm btn-primary" onclick="return confirm('가입을 승인하시겠습니까?')">가입 승인</a>
+                </div>
+                <?php
+                }
+                ?>
+              </td>
+            </tr>
+            <tr>
               <td class="th">가입일</td>
               <td><?=$data["register_date"]?></td>
             </tr>
@@ -51,194 +116,194 @@
           <!-- }}} -->
           </table>
         </div>
-        <div class="col-2">
+        <div class="col-4">
           <div class="border">
-            <label>프로필사진</label>
+            <label>사업자등록증</label>
             <a href="<?=@$profile_img_url?>" target="_blank">
               <img class="img-fluid" src="<?=@$profile_img_url?>">
             </a>
           </div>
         </div>
-        <div class="col-2">
-          <div class="border">
-            <label>복지카드</label>
-            <a href="/Image/<?=@$data["welfare_card_uuid"]?>" target="_blank">
-              <img class="img-fluid" src="/Image/<?=@$data["welfare_card_uuid"]?>">
-            </a>
-          </div>
-        </div>
+<!--        <div class="col-2">-->
+<!--          <div class="border">-->
+<!--            <label>복지카드</label>-->
+<!--            <a href="/Image/<?=@$data["welfare_card_uuid"]?>" target="_blank">-->
+<!--              <img class="img-fluid" src="/Image/<?=@$data["welfare_card_uuid"]?>">-->
+<!--            </a>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
 
-      <h5 class="mt-4">장애 정보</h5>
-      <table class="table table-hover border detail-table">
-      <!-- {{{ -->
-      <tbody>
-        <tr>
-          <td class="th">주장애</td>
-          <td>
-            <?php
-            if(@$impairments["Type"]["level0"] && @count($impairments["Type"]["level0"])){
-              foreach($impairments["Type"]["level0"] as $val){
-                if($val["idx"] == $impairment_data["type"]["main"]){
-                  echo $val["title"];
-                  break;
-                }
-              }
-            }
-            ?>
-          </td>
-        </tr>
-        <tr>
-          <td class="th">부장애</td>
-          <td>
-            <?php
-            if(@$impairments["Type"]["level1"] && @count($impairments["Type"]["level1"])){
-              foreach($impairments["Type"]["level1"] as $val){
-                if($val["idx"] == $impairment_data["type"]["sub"]){
-                  echo $val["title"];
-                  break;
-                }
-              }
-            }
-            ?>
-          </td>
-        </tr>
-        <tr>
-          <td class="th">장애 인증 날짜</td>
-          <td><?=$impairment_data["date"]?></td>
-        </tr>
-        <tr>
-          <td class="th">구체적 장애내용</td>
-          <td><?=$impairment_data["detail"]?></td>
-        </tr>
-        <tr>
-          <td class="th">장애 정도</td>
-          <td>
-            <table class="table table-bordered my-0">
-            <?php
-            foreach($impairments["Degree"] as $code => $items){
-            ?>
-              <tr>
-                <td width=15% class="bg-white"><?=$items[0]["title"]?></td>
-                <td class="px-3">
-                  <?php
-                  foreach($items as $key => $val){
-                    $checked = ($val["score"] == $impairment_data["degree"][$code])?"checked":"";
-                  ?>
-                  <div class="input-group">
-                    <input type="radio" name="impairment[degree][<?=$code?>]" value="<?=$val["score"]?>" id="impairment_degree_<?=$code."_".$key?>" <?=$checked?> onclick="return false;">
-                    <label class="ms-2" for="impairment_degree_<?=$code."_".$key?>"><?=$val["item"]?></label>
-                  </div>
-                  <?php
-                  }
-                  ?>
-                </td>
-              </tr>
-            <?php
-            }
-            ?>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td class="th">보장구</td>
-          <td>
-            <table class="table table-bordered my-0">
-            <?php
-            foreach($impairments["AssistiveDevice"] as $code => $items){
-            ?>
-              <tr>
-                <td width=15% class="bg-white"><?=$items[0]["title"]?></td>
-                <td class="px-3">
-                  <?php
-                  foreach($items as $key => $val){
-                    $checked = ($val["score"] == $impairment_data["assistive_device"][$code])?"checked":"";
-                  ?>
-                  <div class="input-group mb-2">
-                    <input type="radio" name="impairment[assistive_device][<?=$code?>]" value="<?=$val["score"]?>" id="impairment_assistive_device_<?=$code."_".$key?>" <?=$checked?> onclick="return false;">
-                    <label class="ms-2" for="impairment_assistive_device_<?=$code."_".$key?>"><?=$val["item"]?></label>
-                  </div>
-                  <?php
-                  }
-                  ?>
-                </td>
-              </tr>
-            <?php
-            }
-            ?>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td class="th">운동능력</td>
-          <td>
-            <table class="table table-bordered my-0">
-            <?php
-            foreach($impairments["PhysicalAbility"] as $code => $items){
-            ?>
-              <tr>
-                <td width=15% class="bg-white"><?=$items[0]["title"]?></td>
-                <td class="px-3">
-                  <?php
-                  foreach($items as $key => $val){
-                    $checked = ($val["score"] == $impairment_data["physical_ability"][$code])?"checked":"";
-                  ?>
-                  <div class="input-group mb-2">
-                    <input type="radio" name="impairment[physical_ability][<?=$code?>]" value="<?=$val["score"]?>" id="impairment_physical_ability_<?=$code."_".$key?>" <?=$checked?> onclick="return false;">
-                    <label class="ms-2" for="impairment_physical_ability_<?=$code."_".$key?>"><?=$val["item"]?></label>
-                  </div>
-                  <?php
-                  }
-                  ?>
-                </td>
-              </tr>
-            <?php
-            }
-            ?>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td class="th">특이사항</td>
-          <td>
-            <textarea class="form-control border" name="impairment[remark]"placeholder="특이사항" rows=7 disabled><?=$impairment_data["remark"]?></textarea>
-          </td>
-        </tr>
-      </tbody>
-      <!-- }}} -->
-      </table>
+<!--      <h5 class="mt-4">장애 정보</h5>-->
+<!--      <table class="table table-hover border detail-table">-->
+<!--      &lt;!&ndash; {{{ &ndash;&gt;-->
+<!--      <tbody>-->
+<!--        <tr>-->
+<!--          <td class="th">주장애</td>-->
+<!--          <td>-->
+<!--            <?php-->
+<!--            if(@$impairments["Type"]["level0"] && @count($impairments["Type"]["level0"])){-->
+<!--              foreach($impairments["Type"]["level0"] as $val){-->
+<!--                if($val["idx"] == $impairment_data["type"]["main"]){-->
+<!--                  echo $val["title"];-->
+<!--                  break;-->
+<!--                }-->
+<!--              }-->
+<!--            }-->
+<!--            ?>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td class="th">부장애</td>-->
+<!--          <td>-->
+<!--            <?php-->
+<!--            if(@$impairments["Type"]["level1"] && @count($impairments["Type"]["level1"])){-->
+<!--              foreach($impairments["Type"]["level1"] as $val){-->
+<!--                if($val["idx"] == $impairment_data["type"]["sub"]){-->
+<!--                  echo $val["title"];-->
+<!--                  break;-->
+<!--                }-->
+<!--              }-->
+<!--            }-->
+<!--            ?>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td class="th">장애 인증 날짜</td>-->
+<!--          <td><?=$impairment_data["date"]?></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td class="th">구체적 장애내용</td>-->
+<!--          <td><?=$impairment_data["detail"]?></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td class="th">장애 정도</td>-->
+<!--          <td>-->
+<!--            <table class="table table-bordered my-0">-->
+<!--            <?php-->
+<!--            foreach($impairments["Degree"] as $code => $items){-->
+<!--            ?>-->
+<!--              <tr>-->
+<!--                <td width=15% class="bg-white"><?=$items[0]["title"]?></td>-->
+<!--                <td class="px-3">-->
+<!--                  <?php-->
+<!--                  foreach($items as $key => $val){-->
+<!--                    $checked = ($val["score"] == $impairment_data["degree"][$code])?"checked":"";-->
+<!--                  ?>-->
+<!--                  <div class="input-group">-->
+<!--                    <input type="radio" name="impairment[degree][<?=$code?>]" value="<?=$val["score"]?>" id="impairment_degree_<?=$code."_".$key?>" <?=$checked?> onclick="return false;">-->
+<!--                    <label class="ms-2" for="impairment_degree_<?=$code."_".$key?>"><?=$val["item"]?></label>-->
+<!--                  </div>-->
+<!--                  <?php-->
+<!--                  }-->
+<!--                  ?>-->
+<!--                </td>-->
+<!--              </tr>-->
+<!--            <?php-->
+<!--            }-->
+<!--            ?>-->
+<!--            </table>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td class="th">보장구</td>-->
+<!--          <td>-->
+<!--            <table class="table table-bordered my-0">-->
+<!--            <?php-->
+<!--            foreach($impairments["AssistiveDevice"] as $code => $items){-->
+<!--            ?>-->
+<!--              <tr>-->
+<!--                <td width=15% class="bg-white"><?=$items[0]["title"]?></td>-->
+<!--                <td class="px-3">-->
+<!--                  <?php-->
+<!--                  foreach($items as $key => $val){-->
+<!--                    $checked = ($val["score"] == $impairment_data["assistive_device"][$code])?"checked":"";-->
+<!--                  ?>-->
+<!--                  <div class="input-group mb-2">-->
+<!--                    <input type="radio" name="impairment[assistive_device][<?=$code?>]" value="<?=$val["score"]?>" id="impairment_assistive_device_<?=$code."_".$key?>" <?=$checked?> onclick="return false;">-->
+<!--                    <label class="ms-2" for="impairment_assistive_device_<?=$code."_".$key?>"><?=$val["item"]?></label>-->
+<!--                  </div>-->
+<!--                  <?php-->
+<!--                  }-->
+<!--                  ?>-->
+<!--                </td>-->
+<!--              </tr>-->
+<!--            <?php-->
+<!--            }-->
+<!--            ?>-->
+<!--            </table>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td class="th">운동능력</td>-->
+<!--          <td>-->
+<!--            <table class="table table-bordered my-0">-->
+<!--            <?php-->
+<!--            foreach($impairments["PhysicalAbility"] as $code => $items){-->
+<!--            ?>-->
+<!--              <tr>-->
+<!--                <td width=15% class="bg-white"><?=$items[0]["title"]?></td>-->
+<!--                <td class="px-3">-->
+<!--                  <?php-->
+<!--                  foreach($items as $key => $val){-->
+<!--                    $checked = ($val["score"] == $impairment_data["physical_ability"][$code])?"checked":"";-->
+<!--                  ?>-->
+<!--                  <div class="input-group mb-2">-->
+<!--                    <input type="radio" name="impairment[physical_ability][<?=$code?>]" value="<?=$val["score"]?>" id="impairment_physical_ability_<?=$code."_".$key?>" <?=$checked?> onclick="return false;">-->
+<!--                    <label class="ms-2" for="impairment_physical_ability_<?=$code."_".$key?>"><?=$val["item"]?></label>-->
+<!--                  </div>-->
+<!--                  <?php-->
+<!--                  }-->
+<!--                  ?>-->
+<!--                </td>-->
+<!--              </tr>-->
+<!--            <?php-->
+<!--            }-->
+<!--            ?>-->
+<!--            </table>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td class="th">특이사항</td>-->
+<!--          <td>-->
+<!--            <textarea class="form-control border" name="impairment[remark]"placeholder="특이사항" rows=7 disabled><?=$impairment_data["remark"]?></textarea>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--      </tbody>-->
+<!--      &lt;!&ndash; }}} &ndash;&gt;-->
+<!--      </table>-->
 
-      <h5 class="mt-4">SNS 정보</h5>
-      <table class="table table-hover border detail-table">
-      <!-- {{{ -->
-      <tbody>
-        <tr>
-          <td class="th">홈페이지</td>
-          <td><a href="<?=$data["sns_homepage"]?>" target="_blank"><?=$data["sns_homepage"]?></a></td>
-        </tr>
-        <tr>
-          <td class="th">블로그</td>
-          <td><a href="<?=$data["sns_blog"]?>" target="_blank"><?=$data["sns_blog"]?></a></td>
-        </tr>
-        <tr>
-          <td class="th">페이스북</td>
-          <td><a href="<?=$data["sns_facebook"]?>" target="_blank"><?=$data["sns_facebook"]?></a></td>
-        </tr>
-        <tr>
-          <td class="th">트위터</td>
-          <td><a href="<?=$data["sns_twitter"]?>" target="_blank"><?=$data["sns_twitter"]?></a></td>
-        </tr>
-        <tr>
-          <td class="th">링크드인</td>
-          <td><a href="<?=$data["sns_linkedin"]?>" target="_blank"><?=$data["sns_linkedin"]?></a></td>
-        </tr>
-        <tr>
-          <td class="th">유튜브</td>
-          <td><a href="<?=$data["sns_youtube"]?>" target="_blank"><?=$data["sns_youtube"]?></a></td>
-        </tr>
-      </tbody>
-      <!-- }}} -->
-      </table>
+<!--      <h5 class="mt-4">SNS 정보</h5>-->
+<!--      <table class="table table-hover border detail-table">-->
+<!--      &lt;!&ndash; {{{ &ndash;&gt;-->
+<!--      <tbody>-->
+<!--        <tr>-->
+<!--          <td class="th">홈페이지</td>-->
+<!--          <td><a href="<?=$data["sns_homepage"]?>" target="_blank"><?=$data["sns_homepage"]?></a></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td class="th">블로그</td>-->
+<!--          <td><a href="<?=$data["sns_blog"]?>" target="_blank"><?=$data["sns_blog"]?></a></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td class="th">페이스북</td>-->
+<!--          <td><a href="<?=$data["sns_facebook"]?>" target="_blank"><?=$data["sns_facebook"]?></a></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td class="th">트위터</td>-->
+<!--          <td><a href="<?=$data["sns_twitter"]?>" target="_blank"><?=$data["sns_twitter"]?></a></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td class="th">링크드인</td>-->
+<!--          <td><a href="<?=$data["sns_linkedin"]?>" target="_blank"><?=$data["sns_linkedin"]?></a></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td class="th">유튜브</td>-->
+<!--          <td><a href="<?=$data["sns_youtube"]?>" target="_blank"><?=$data["sns_youtube"]?></a></td>-->
+<!--        </tr>-->
+<!--      </tbody>-->
+<!--      &lt;!&ndash; }}} &ndash;&gt;-->
+<!--      </table>-->
     </div>
   </div>
 

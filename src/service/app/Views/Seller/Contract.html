@@ -153,10 +153,25 @@
           <?php
           if(is_array($data) && count($data) > 0){
           foreach($data as $item){
+          $status = "";
+          if($item["contract_status"] == 1){
+          $status = "승인대기";
+          }else if($item["contract_status"] == 2){
+          $status = "진행중";
+          }else if($item["contract_status"] == 3){
+          $status = "구매기업 승인";
+          }else if($item["contract_status"] ==5){
+          $status = "계약완료";
+          }else if($item["contract_status"] == 7){
+          $status = "반려";
+          }
+          else if($item["contract_status"] == 9){
+          $status = "계약취소";
+          }
           ?>
           <tr>
             <td>1</td>
-            <td title="진행중">진행중</td>
+            <td title="진행중"><?=$status?></td>
             <td title="20220801090000-00001"><a href=""><?=$item["contract_no"]?></a></td>
             <td title="친환경중질지70gA4용지"><?=$item["contract_no"]?></td>
             <td title="사무용품"><?=$item["contract_status"]?></td>

@@ -140,8 +140,8 @@
             <th>상품명</th>
             <th>판매상태</th>
             <th>카테고리</th>
-            <th>상품등록일</th>
-            <th>최종수정일</th>
+            <th>판매시작일</th>
+            <th>판매종료일</th>
             <th>복사</th>
           </tr>
           </thead>
@@ -161,16 +161,23 @@
               }else if($item["product_category"] == 5){
               $category = "청소용품";
               }
+          $status = "";
+          if($item["status"] == 1){
+          $status = "승인대기";
+          }else if($item["status"] == 5){
+          $status = "판매중";
+          }else if($item["status"] == 7){
+          $status = "반려";
+          }
           ?>
-
           <tr>
             <td><?=$item["idx"]?></td>
-            <td><a href="/Seller/Item/ItemUpdate"><?=$item["product_no"]?></a></td>
+            <td><a href="/Seller/Item/ItemUpdate/<?=$item['product_no']?>"><?=$item["product_no"]?></a></td>
             <td title="친환경중질지70gA4용지"><p><?=$item["product_name"]?></p></td>
-            <td><?=$item["product_status"]?></td>
+            <td><?=$status?></td>
             <td><?=$category?></td>
-            <td><?=$item["register_date"]?></td>
-            <td><?=$item["update_date"]?></td>
+            <td><?=$item["product_start"]?></td>
+            <td><?=$item["product_end"]?></td>
             <td>
               <button class="copy-btn btn btn-sm btn-secondary fw-normal">복사등록</button>
             </td>

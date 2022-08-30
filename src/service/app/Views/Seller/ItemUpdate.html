@@ -7,18 +7,19 @@
     <div class="auto-container">
       <div class="p-5 bg-white">
         <h3 class="mb-4 px-3 pb-3 fw-bold border-bottom border-2">상품수정</h3>
-        <form name="form-submit" method="post" action="/<?=_CONTROLLER?>/ItemSubmit" enctype="multipart/form-data">
-          <input type="hidden" name="product_quantity1" id="product_quantity1" value="0">
-          <input type="hidden" name="product_price1" id="product_price1" value="0">
-          <input type="hidden" name="product_quantity2" id="product_quantity2" value="0">
-          <input type="hidden" name="product_price2" id="product_price2" value="0">
-          <input type="hidden" name="product_quantity3" id="product_quantity3" value="0">
-          <input type="hidden" name="product_price3" id="product_price3" value="0">
-          <input type="hidden" name="product_quantity4" id="product_quantity4" value="0">
-          <input type="hidden" name="product_price4" id="product_price4" value="0">
-          <input type="hidden" name="product_quantity5" id="product_quantity5" value="0">
-          <input type="hidden" name="product_price5" id="product_price5" value="0">
-          <input type="hidden" name="cnt" id="cnt" value="">
+        <?php
+          if(is_array($data) && count($data) > 0){
+        foreach($data as $item){
+        $start_date = $item['product_start'];
+        $timestamp = strtotime($start_date);
+        $start_date = date("Y-m-d", $timestamp);
+
+        $end_date = $item['product_end'];
+        $timestamp = strtotime($end_date);
+        $end_date = date("Y-m-d", $timestamp);
+        ?>
+        <form name="myForm" method="post" action="" enctype="multipart/form-data">
+        <input type="hidden"  value="<?=$item['product_no']?>" name = "product_no">
 
           <div class="px-3">
             <div class="row mb-4 align-items-center">
@@ -28,11 +29,11 @@
               <div class="col-10">
                 <select name="product_category" class="form-select d-inline-block w-50"
                         aria-label="Default select example" id="product-category">
-                  <option value="1" selected>사무용품</option>
-                  <option value="2">생활용품</option>
-                  <option value="3">전산용품</option>
-                  <option value="4">식음료</option>
-                  <option value="5">청소용품</option>
+                  <option value="1" <?php if($item['product_category']==1){echo "selected";}?>>사무용품</option>
+                  <option value="2" <?php if($item['product_category']==2){echo "selected";}?>>생활용품</option>
+                  <option value="3" <?php if($item['product_category']==3){echo "selected";}?>>전산용품</option>
+                  <option value="4" <?php if($item['product_category']==4){echo "selected";}?>>식음료</option>
+                  <option value="5" <?php if($item['product_category']==5){echo "selected";}?>>청소용품</option>
                 </select>
               </div>
             </div>
@@ -42,7 +43,7 @@
                 <label for="productName" class="form-label">상품명</label>
               </div>
               <div class="col-10">
-                <input type="text" name="product_name" id="productName" class="form-control" required/>
+                <input type="text" name="product_name" id="productName" value ="<?=$item['product_name']?>" class="form-control" required/>
               </div>
             </div>
 
@@ -53,10 +54,10 @@
               <div class="col-10">
                 <div class="d-flex align-items-center">
                   <label class="visually-hidden" for="productSaleStart">판매시작일</label>
-                  <input type="date" name="product_start" id="productSaleStart" class="form-control" required/>
+                  <input type="date" value="<?=$start_date?>" name="product_start" id="productSaleStart" class="form-control" required/>
                   <span class="px-2">-</span>
                   <label class="visually-hidden" for="productSaleEnd">판매종료일</label>
-                  <input type="date" name="product_end" id="productSaleEnd" class="form-control" required/>
+                  <input type="date" value="<?=$end_date?>" name="product_end" id="productSaleEnd" class="form-control" required/>
                 </div>
               </div>
             </div>
@@ -69,11 +70,11 @@
                 <div class="d-flex">
                   <div class="selector-item me-2">
                     <input type="radio" id="taxation" name="product_surtax" value="1" class="selector-item-radio"
-                           checked/>
+                    <?php if($item['product_surtax']==1){echo "checked";}?> />
                     <label for="taxation" class="selector-item-label px-3 py-1 border rounded">과세상품 <span class="tax10">(부가세 10%)</span></label>
                   </div>
                   <div class="selector-item">
-                    <input type="radio" id="taxFree" name="product_surtax" value="2" class="selector-item-radio"/>
+                    <input type="radio" id="taxFree" name="product_surtax" value="2" class="selector-item-radio" <?php if($item['product_surtax']==2){echo "checked";}?>/>
                     <label for="taxFree" class="selector-item-label px-3 py-1 border rounded">면세상품</label>
                   </div>
                 </div>
@@ -88,25 +89,25 @@
                 <div class="d-flex">
                   <div class="selector-item me-2">
                     <input type="radio" id="deliverOnce" name="delivery_cycle" value="1" class="selector-item-radio"
-                           checked/>
-                    <label for="deliverOnce" class="selector-item-label px-3 py-1 border rounded">1번</label>
+                    <?php if($item['delivery_cycle']==1){echo "checked";}?>/>
+                    <label for="deliverOnce" class="selector-item-label px-3 py-1 border rounded" >1번</label>
                   </div>
                   <div class="selector-item me-2">
-                    <input type="radio" id="deliverAWeek" name="delivery_cycle" value="2" class="selector-item-radio"/>
+                    <input type="radio" id="deliverAWeek" name="delivery_cycle" value="2" class="selector-item-radio" <?php if($item['delivery_cycle']==2){echo "checked";}?>/>
                     <label for="deliverAWeek" class="selector-item-label px-3 py-1 border rounded">1주일에 한 번</label>
                   </div>
                   <div class="selector-item me-2">
-                    <input type="radio" id="deliver1Month" name="delivery_cycle" value="3" class="selector-item-radio"/>
+                    <input type="radio" id="deliver1Month" name="delivery_cycle" value="3" class="selector-item-radio" <?php if($item['delivery_cycle']==3){echo "checked";}?>/>
                     <label for="deliver1Month" class="selector-item-label px-3 py-1 border rounded">1달에 한 번</label>
                   </div>
                   <div class="selector-item me-2">
                     <input type="radio" id="deliver2Months" name="delivery_cycle" value="4"
-                           class="selector-item-radio"/>
+                    <?php if($item['delivery_cycle']==4){echo "checked";}?>   class="selector-item-radio"/>
                     <label for="deliver2Months" class="selector-item-label px-3 py-1 border rounded">2달에 한 번</label>
                   </div>
                   <div class="selector-item me-2">
                     <input type="radio" id="deliver6Months" name="delivery_cycle" value="5"
-                           class="selector-item-radio"/>
+                    <?php if($item['delivery_cycle']==5){echo "checked";}?>     class="selector-item-radio"/>
                     <label for="deliver6Months" class="selector-item-label px-3 py-1 border rounded">6달에 한 번</label>
                   </div>
                 </div>
@@ -121,11 +122,11 @@
                 <div class="row align-items-center">
                   <div class="col-6">
                     <input class="add-quantity form-control" type="text" name="product_quantity"
-                           placeholder="100Box(250,000매)"/>
+                           value ="<?=$item['product_quantity']?>"    placeholder="100Box(250,000매)"/>
                   </div>
                   <div class="col-6">
                     <input class="add-price form-control" type="text" name="product_price" placeholder="1200000(숫자만 입력)"
-                           oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')"/>
+                           value ="<?=$item['product_price']?>"   oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')"/>
                   </div>
                 </div>
               </div>
@@ -138,33 +139,34 @@
                   <!-- 대표이미지 -->
                   <li class="row mb-3">
                     <div class="col-2">
-                      <div class="preview-bg-img bg-light border rounded"></div>
+                      <div class="preview-bg-img bg-light border rounded" style="background-size: contain;background-image: url('/uploads/upload_files/<?=$item['representative_image']?>')">
+                        <!--<img src="/uploads/upload_files/<?=$item['representative_image']?>" alt="Product">--></div>
                     </div>
                     <div class="col-6 ms-4 px-4 py-3">
                       <label for="representative-img" class="form-label">대표 이미지</label>
                       <input id="representative-img" name="representative_image" class="form-control product-img-input"
-                             type="file" accept="image/*" required/>
+                           value ="<?=$item['representative_image']?>" type="file" accept="image/*" required/><?=$item['representative_image']?>
                     </div>
                   </li>
                   <!-- 추가이미지 -->
                   <li class="row mb-3">
                     <div class="col-2">
-                      <div class="preview-bg-img border bg-light border rounded"></div>
+                      <div class="preview-bg-img border bg-light border rounded" style="background-size: contain;background-image: url('/uploads/upload_files/<?=$item['product_image1']?>')"></div>
                     </div>
                     <div class="col-6 ms-4 px-4 py-3">
                       <label for="product-img1" class="form-label text-secondary">추가 이미지 01</label>
-                      <input id="product-img1" name="product_image1" class="form-control product-img-input" type="file"
-                             accept="image/*" required/>
+                      <input id="product-img1" value ="<?=$item['product_image1']?>" name="product_image1" class="form-control product-img-input" type="file"
+                             accept="image/*" required/><?=$item['product_image1']?>
                     </div>
                   </li>
                   <li class="row">
                     <div class="col-2">
-                      <div class="preview-bg-img border bg-light border rounded"></div>
+                      <div class="preview-bg-img border bg-light border rounded" style="background-size: contain;background-image: url('/uploads/upload_files/<?=$item['product_image2']?>')"></div>
                     </div>
                     <div class="col-6 ms-4 px-4 py-3">
                       <label for="product-img2" class="form-label text-secondary">추가 이미지 01</label>
-                      <input id="product-img2" name="product_image2" class="form-control product-img-input" type="file"
-                             accept="image/*" required/>
+                      <input id="product-img2" name="product_image2" value ="<?=$item['product_image2']?>" class="form-control product-img-input" type="file"
+                             accept="image/*" required/><?=$item['product_image2']?>
                     </div>
                   </li>
                 </ul>
@@ -174,13 +176,16 @@
             <div class="row mb-4 mt-5 align-items-center">
               <div class="col-12">
                 <label class="form-label mb-3">상품상세정보</label>
-                <textarea name="product_detail" class="form-control" placeholder="상품 상세정보를 입력해주세요."></textarea>
+                <textarea name="product_detail" class="form-control" placeholder="상품 상세정보를 입력해주세요."><?=$item['product_detail']?></textarea>
               </div>
             </div>
-
+        <?php
+        }
+        }
+        ?>
             <div class="form-group mt-5 d-flex justify-content-center">
               <button type="reset" class="btn btn-outline-secondary px-4 me-3" tabindex=100>취소</button>
-              <button type="submit" class="btn btn-primary px-4" tabindex=100>수정</button>
+              <button type="button" onclick="updateSubmit();" class="btn btn-primary px-4" tabindex=100>수정</button>
             </div>
           </div>
         </form>
@@ -212,4 +217,10 @@
       }
     })
   })
+
+  function updateSubmit(){
+    document.myForm.action='/Seller/Item/ItemUpdateSubmit';
+    document.myForm.submit();
+  }
+
 </script>

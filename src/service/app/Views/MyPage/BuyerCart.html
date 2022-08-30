@@ -12,7 +12,7 @@
       <h3 class="mt-5 h4 fw-bold text-center">장바구니</h3>
       <div class="px-3 mb-5">
         <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom ">
-          <p>상품목록 (총 <span>3</span>개)</p>
+          <p>상품목록 (총 <span><?php echo count($data)?></span>개)</p>
           <div class="d-flex">
             <select class="form-select form-select-sm me-3" aria-label="Default select example">
               <option selected>최근등록일순</option>
@@ -53,53 +53,50 @@
           </tr>
           </thead>
           <tbody>
+          <?php
+          if(is_array($data)){
+        foreach($data as $item){
+        ?>
+          <form name="myForm" method="post" action="">
+          <input type="hidden" name="product_no" value="<?=$item['product_no']?>">
+          <input type="hidden" name="buyer_uuid" value="<?=$item['buyer_id']?>">
+          <input type="hidden" name="seller_uuid" value="<?=$item['seller_id']?>">
+
           <tr>
             <td>
               <img src="/assets/images/resource/products/item01.png" alt="기업로고">
             </td>
             <td>
-              <h4><a href=""><span class="text-primary">(주)신성피엔텍</span> 친환경 복사용지</a></h4>
-              <p class="sub-info">복사용지 / 규격: A4 / 80g / 크기: 210x297mm</p>
+              <h4><a href=""><span class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h4>
+              <p class="sub-info"><?=$item['product_detail']?></p>
             </td>
             <td>
-              <p>100 Box (250,000매)</p>
+              <p><?=$item['product_quantity']?></p>
             </td>
             <td>
-              <p>1,200,000원</p>
-            </td>
-            <td>
-              <p>1,176,000원</p>
-            </td>
-            <td>
-              <button class="btn btn-sm btn-danger">삭제</button>
-              <button class="btn btn-sm btn-success">계약하기</button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img src="/assets/images/resource/products/item01.png" alt="기업로고">
-            </td>
-            <td>
-              <h4><a href=""><span class="text-primary">(주)신성피엔텍</span> 친환경 복사용지</a></h4>
-              <p class="sub-info">복사용지 / 규격: A4 / 80g / 크기: 210x297mm</p>
-            </td>
-            <td>
-              <p>2,000 Box (5,000,000매)</p>
-            </td>
-            <td>
-              <p>24,000,000원</p>
+              <p><?=$item['product_price']?>원</p>
             </td>
             <td>
               <p>23,520,000원</p>
             </td>
             <td>
               <button class="btn btn-sm btn-danger">삭제</button>
-              <button class="btn btn-sm btn-success">계약하기</button>
+              <button onclick="contract();" class="btn btn-sm btn-success">계약하기</button>
             </td>
           </tr>
+          <?php
+                }
+              }
+            ?>
           </tbody>
         </table>
       </div>
     </div>
   </section>
 </div>
+<script>
+  function contract(){
+    document.myForm.action='/Buyer/Contract';
+    document.myForm.submit();
+  }
+</script>

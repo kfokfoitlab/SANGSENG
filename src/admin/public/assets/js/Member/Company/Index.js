@@ -9,7 +9,7 @@ $(document).ready(function(){
         //"dom": 'lt<"float-left"i>p',
         //"dom": 'ltip',
         "exportFilename": "KFO_장애인취업포털_기업목록",
-        "exportTitle": "기업목록",
+        "exportTitle": "판매기업 목록",
         "ajax": {
              url: "/"+_CONTROLLER+"/getList"
             ,type: "POST"
@@ -34,12 +34,13 @@ $(document).ready(function(){
         ],
         "columns": [
              {title: "idx", data: "idx", visible: false}
+            ,{title: "아이디", data: "company_name", visible: true, className: "text-nowrap"}
             ,{title: "기업명", data: "company_name", visible: true, className: "text-nowrap"}
-            ,{title: "사업자등록번호", data: "business_number", visible: true, className: "text-nowrap"}
+            ,{title: "사업자등록번호", data: "idx", visible: true, className: "text-nowrap"}
             ,{title: "담당자명", data: "manager_name", visible: true, className: "text-nowrap"}
             ,{title: "담당자이메일주소", data: "manager_email", visible: true, className: "text-nowrap"}
             ,{title: "연락처", data: "phone", visible: true, className: "text-nowrap"}
-            ,{title: "상태", data: "status", visible: true, className: "text-nowrap",
+            ,{title: "진행상황", data: "status", visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){
                     let html = "";
 
@@ -58,6 +59,17 @@ $(document).ready(function(){
                             html = "<span class='badge bg-dark'>탈퇴</span>";
                             break;
                     }
+
+                    return html;
+                }
+            }
+            ,{title: "진행상황변경", data: "idx", visible: true, className: "text-nowrap",
+                "render": function( data, type, row, meta ){
+                    let html = "";
+                    html += "<input class='btn btn-info btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",0)' value='가입신청'>";
+                    html += "<input class='btn btn-primary btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",1)' value='심사중'>";
+                    html += "<input class='btn btn-success btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",5)' value='승인'>";
+                    html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",7)' value='거절'>";
 
                     return html;
                 }

@@ -7,7 +7,7 @@ use App\Models\Database\DatabaseModel;
 
 class Lists extends Base
 {
-    private $page_name = "구직관리 > 전체 목록";
+    private $page_name = "상품관리 > 전체 목록";
     private $model;
     private $database_model;
 

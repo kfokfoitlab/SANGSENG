@@ -88,46 +88,25 @@ echo doctype("html5");
             <nav class="nav main-menu">
               <ul class="navigation" id="navbar">
                 <li class="">
-                  <a href="/Recruit" tabindex=11> <span>홈</span> </a>
+                  <a href="/Buyer/Shop/List?value=1" tabindex=12> <span>사무용품</span> </a>
                 </li>
 
                 <li class="">
-                  <a href="/Buyer/Shop/List" tabindex=12> <span>사무용품</span> </a>
+                  <a href="/Buyer/Shop/List?value=2" tabindex=13> <span>생활용품</span> </a>
                 </li>
 
                 <li class="">
-                  <a href="/Company" tabindex=13> <span>생활용품</span> </a>
+                  <a href="/Buyer/Shop/List?value=3" tabindex=13> <span>전산용품</span> </a>
                 </li>
 
                 <li class="">
-                  <a href="/Company" tabindex=13> <span>전산용품</span> </a>
+                  <a href="/Buyer/Shop/List?value=4" tabindex=13> <span>식음료</span> </a>
                 </li>
 
                 <li class="">
-                  <a href="/Company" tabindex=13> <span>식음료</span> </a>
+                  <a href="/Buyer/Shop/List?value=5" tabindex=13> <span>청소용품</span> </a>
                 </li>
 
-                <li class="">
-                  <a href="/Company" tabindex=13> <span>청소용품</span> </a>
-                </li>
-
-                <!-- Only for Mobile View -->
-                <!--li class="mm-add-listing">
-                  <a href="#" class="theme-btn btn-style-one">구직 등록</a>
-                  <span>
-                    <span class="contact-info">
-                      <span class="phone-num"><span>한국직업개발원</span><a href="tel:07043735030">070.4373.5030~1</a></span>
-                      <span class="address">서울특별시 성동구 상원12길 30<br>서울숲동진 IT타워 11층</span>
-                      <a href="mailto:kfosos@kfo.or.kr" class="email">kfosos@kfo.or.kr</a>
-                    </span>
-                    <span class="social-links">
-                      <a href="#"><span class="fab fa-facebook-f"></span></a>
-                      <a href="#"><span class="fab fa-twitter"></span></a>
-                      <a href="#"><span class="fab fa-instagram"></span></a>
-                      <a href="#"><span class="fab fa-linkedin-in"></span></a>
-                    </span>
-                  </span>
-                </li-->
               </ul>
             </nav>
             <!-- Main Menu End-->
@@ -135,7 +114,7 @@ echo doctype("html5");
 
           <div class="outer-box">
             <!-- Login/Register -->
-            <div class="btn-box">
+            <div class="btn-box small">
             <?php
             if(@$_SESSION["login"] != "success"){
             ?>
@@ -146,12 +125,27 @@ echo doctype("html5");
             ?>
               <div class="dropdown dashboard-option">
                 <a class="dropdown-toggle" role="button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span class="name text-white"><?=$_SESSION["login_info"]["buyer_name"]?></span> <span class='small'>님</span>
+                  <span class="name text-white"><?=$_SESSION["login_info"]["buyer_name"]?></span> <span class='small text-white-50'>님</span>
                 </a>
 
                 <ul class="dropdown-menu p-2 ps-0" style="">
-                  <li><a href="/Buyer/MyPage/Contract"><i class="la la-user"></i>마이페이지</a></li>
-                  <li><a href="/Auth/SignOut"><i class="la la-sign-out"></i>로그아웃</a></li>
+                  <li>
+                    <a href="/Buyer/MyPage/Info">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill me-2" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                      </svg>
+                      마이페이지
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/Auth/SignOut">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right me-2" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                      </svg>
+                      로그아웃
+                    </a>
+                  </li>
                 </ul>
               </div> 
             <?php
@@ -159,17 +153,27 @@ echo doctype("html5");
               else if($_SESSION["login_info"]["type"] == "seller"){
               ?>
               <div class="dropdown dashboard-option">
-                <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
-                  <span class="name"><?=$_SESSION["login_info"]["seller_name"]?></span> <span class='small'>님</span>
+                <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="name text-white"><?=$_SESSION["login_info"]["seller_name"]?></span> <span class='small text-white-50'>님</span>
                 </a>
-                <a href="/Auth/SignOut"><i class="la la-sign-out"></i>로그아웃</a>
                 <ul class="dropdown-menu p-2 ps-0" style="">
-                  <li><a href="/Management/Company/Profile"><i class="la la-user-tie"></i>기업 프로필</a></li>
-                  <li><a href="/Management/Company/PublicSettings"><i class="la la-file-invoice"></i>기업 공개 관리</a></li>
-                  <li><a href="/Management/Company/Application"><i class="la la-paper-plane"></i> 채용 관리</a></li>
-                  <li><a href="/Management/Company/BookmarkCandidate"><i class="la la-bookmark-o"></i>관심 인재</a></li>
-                  <li><a href="/Management/Company/Chat"><i class="la la-comment-o"></i>메세지 관리</a></li>
-                  <li><a href="/Auth/SignOut"><i class="la la-sign-out"></i>로그아웃</a></li>
+                  <li>
+                    <a href="/Seller">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill me-2" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                      </svg>
+                      마이페이지
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/Auth/SignOut">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right me-2" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                      </svg>
+                      로그아웃
+                    </a>
+                  </li>
                 </ul>
               </div> 
               <?php

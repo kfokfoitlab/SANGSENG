@@ -7,12 +7,28 @@
     <div class="card-body">
       <h5>기본 정보</h5>
       <div class="row">
-        <div class="col-10">
+        <div class="col-8">
           <table class="table table-hover border detail-table">
           <!-- {{{ -->
           <tbody>
             <tr>
-              <td class="th">회사명</td>
+              <td class="th">아이디(이메일)</td>
+              <td><?=$data["email"]?></td>
+            </tr>
+            <tr>
+              <td class="th">비밀번호 초기화</td>
+              <td>---</td>
+            </tr>
+            <tr>
+              <td class="th">담당자명</td>
+              <td><?=$data["manager_name"]?></td>
+            </tr>
+            <tr>
+              <td class="th">휴대폰번호</td>
+              <td><?=$data["gen_tel"]?></td>
+            </tr>
+            <tr>
+              <td class="th">사업체명</td>
               <td><?=$data["company_name"]?></td>
             </tr>
             <tr>
@@ -20,11 +36,39 @@
               <td><?=$data["business_number"]?></td>
             </tr>
             <tr>
+              <td class="th">기업형태</td>
+              <td><?=$data["classification"]?></td>
+            </tr>
+            <tr>
+              <td class="th">팩스번호</td>
+              <td><?=$data["fax"]?></td>
+            </tr>
+            <tr>
+              <td class="th">주소</td>
+              <td>
+                <?=$data["post_code"]?> <br>
+                <?=$data["address"]?> <br>
+                <?=$data["address_detail"]?>
+              </td>
+            </tr>
+            <tr>
+              <td class="th">올해 예상 매출액</td>
+              <td><?=$data["ceo_name"]?></td>
+            </tr>
+            <tr>
+              <td class="th">경증 장애인 근로자 수</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td class="th">중증 장애인 근로자 수</td>
+              <td>1</td>
+            </tr>
+            <tr>
               <td class="th">상태</td>
               <td>
                 <?php
                 switch($data["status"]){
-                  case "0": 
+                  case "0":
                   case "1": echo "심사중"; break;
                   case "5": echo "등록완료"; break;
                   case "7": echo "거절"; break;
@@ -57,46 +101,6 @@
               </td>
             </tr>
             <tr>
-              <td class="th">대표자명</td>
-              <td><?=$data["ceo_name"]?></td>
-            </tr>
-            <tr>
-              <td class="th">대표번호</td>
-              <td><?=$data["did_tel"]?></td>
-            </tr>
-            <tr>
-              <td class="th">직통번호</td>
-              <td><?=$data["gen_tel"]?></td>
-            </tr>
-            <tr>
-              <td class="th">팩스번호</td>
-              <td><?=$data["fax"]?></td>
-            </tr>
-            <tr>
-              <td class="th">비밀번호 초기화</td>
-              <td>---</td>
-            </tr>
-            <tr>
-              <td class="th">담당자명</td>
-              <td><?=$data["manager_name"]?></td>
-            </tr>
-            <tr>
-              <td class="th">담당자 이메일</td>
-              <td><?=$data["manager_email"]?></td>
-            </tr>
-            <tr>
-              <td class="th">담당자 연락처</td>
-              <td><?=$data["phone"]?></td>
-            </tr>
-            <tr>
-              <td class="th">주소</td>
-              <td>
-                <?=$data["post_code"]?> <br>
-                <?=$data["address"]?> <br>
-                <?=$data["address_detail"]?>
-              </td>
-            </tr>
-            <tr>
               <td class="th">가입일</td>
               <td><?=$data["register_date"]?></td>
             </tr>
@@ -108,6 +112,14 @@
           <div class="border">
             <label>기업 로고</label>
             <img class="img-fluid" src="/Image/<?=@$data["profile_img_uuid"]?>" alt="">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="border">
+            <label>장애인표준사업장 등록증 or 장애인직업재활시설 등록증</label>
+            <a href="/Image/<?=@$data["welfare_card_uuid"]?>" target="_blank">
+              <img class="img-fluid" src="/Image/<?=@$data["welfare_card_uuid"]?>">
+            </a>
           </div>
         </div>
       </div>
