@@ -8,38 +8,42 @@
       <ul class="d-flex border w-100 justify-content-around mb-4 py-4 text-center bg-light employee-number">
         <li class="px-5 position-relative">
           <p class="h5 text-primary">장애인 근로자 수</p>
-          <p class="text-primary"><strong class="h4 fw-bold">1</strong>명</p>
+          <p class="text-primary"><strong class="h4 fw-bold"><?=$data_cnt["worker_cnt"]?></strong>명</p>
         </li>
         <li class="px-5 position-relative">
-          <p class="h5">경증 장애인</p>
-          <p><strong class="h4 fw-bold">1</strong>명</p>
+          <p class="h5">중증 장애인</p>
+          <p><strong class="h4 fw-bold"><?=$data_cnt["degree_1_cnt"]?></strong>명</p>
         </li>
         <li class="px-5">
-          <p class="h5">중증 장애인</p>
-          <p><strong class="h4 fw-bold">0</strong>명</p>
+          <p class="h5">경증 장애인</p>
+          <p><strong class="h4 fw-bold"><?=$data_cnt["degree_2_cnt"]?></strong>명</p>
         </li>
       </ul>
 
-      <form action="">
+      <form id="search_form" method="get" action="/Seller/IMJOB/List">
         <div class="d-flex justify-content-end align-items-center">
           <div class="me-3">
             <label class="form-check-label mx-2" for="flexCheck01">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheck01">
+              <input class="form-check-input" type="checkbox" value="1" id="flexCheck01" name="w_s1"
+              <?php if($_GET["w_s1"] != ""){ echo "checked";}?>>
               근로자
             </label>
             <label class="form-check-label mx-2" for="flexCheck02">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheck02">
+              <input class="form-check-input" type="checkbox" value="2" id="flexCheck02" name="w_s2"
+              <?php if($_GET["w_s2"] != ""){ echo "checked";}?>>
               퇴직자
             </label>
             <label class="form-check-label mx-2" for="flexCheck03">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheck03">
+              <input class="form-check-input" type="checkbox" value="3" id="flexCheck03" name="w_s3"
+              <?php if($_GET["w_s3"] != ""){ echo "checked";}?>>
               휴직자
             </label>
           </div>
 
           <div class="input-group input-group-sm me-3">
-            <input type="text" class="form-control search-employee" aria-label="" aria-describedby="search-employee">
-            <button class="btn btn-primary" type="button" id="search-employee">검색</button>
+            <input type="text" class="form-control search-employee" name="search_v" aria-label="" aria-describedby="search-employee"
+            <?php if($_GET["search_v"] != ""){ echo "value='".$_GET['search_v']."'";}?>>
+            <button class="btn btn-primary" type="button" id="search-employee" onclick="search()">검색</button>
           </div>
 
           <div>
@@ -63,47 +67,62 @@
           <th>계약 종료일</th>
           <th>근무상태</th>
           <th>장애유형</th>
-          <th>주민등록번호</th>
+          <th>생년월일</th>
           <th>복지카드</th>
           <th>삭제</th>
         </tr>
         </thead>
         <tbody>
+        <?php
+        $i=1;
+        foreach($data as $item){
+        $working_status="";
+        if($item["working_status"] == 1){
+          $working_status="근무";
+        }else if($item["working_status"] == 2){
+          $working_status="퇴직";
+        }else if($item["working_status"] == 3){
+          $working_status="휴직";
+        }
+        $disability_degree="";
+        if($item["disability_degree"] == 1){
+          $disability_degree="중증";
+        }else if($item["disability_degree"] == 2){
+          $disability_degree="경증";
+        }
+        $upload_card="없음";
+        if($item["upload_card"] != ""){
+          $upload_card="있음";
+        }
+        ?>
         <tr>
-          <td>1</td>
-          <td><a href="/Seller/IMJOB/Manage">홍길동</a></td>
-          <td>22-01-01</td>
-          <td>22-12-31</td>
-          <td>근무중</td>
-          <td>중증</td>
-          <td>111111-1******</td>
-          <td>없음</td>
-          <td><button type="button" class="button btn-danger btn-sm">삭제</button></td>
+          <td><?=$i?></td>
+          <td><a href="/Seller/IMJOB/IMJOBView?idx=<?=$item["idx"]?>"><?=$item["worker_name"]?></a></td>
+          <td><?=$item["worker_term_start"]?></td>
+          <td><?=$item["worker_term_end"]?></td>
+          <td><?=$working_status?></td>
+          <td><?=$disability_degree?></td>
+          <td><?=$item["worker_birth"]?></td>
+          <td><?=$upload_card?></td>
+          <td><button type="button" class="button btn-danger btn-sm" onclick='deleteWorker(<?=$item["idx"]?>)'>삭제</button></td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td><a href="/Seller/IMJOB/Manage">홍길동</a></td>
-          <td>22-01-01</td>
-          <td>22-12-31</td>
-          <td>근무중</td>
-          <td>중증</td>
-          <td>111111-1******</td>
-          <td>없음</td>
-          <td><button type="button" class="button btn-danger btn-sm">삭제</button></td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td><a href="/Seller/IMJOB/Manage">홍길동</a></td>
-          <td>22-01-01</td>
-          <td>22-12-31</td>
-          <td>근무중</td>
-          <td>중증</td>
-          <td>111111-1******</td>
-          <td>없음</td>
-          <td><button type="button" class="button btn-danger btn-sm">삭제</button></td>
-        </tr>
+        <?php
+          $i++;
+          }
+        ?>
         </tbody>
       </table>
     </div>
   </section>
 </div>
+
+<script>
+  function deleteWorker(idx){
+		location.href = '/Seller/IMJOB/deleteWorker?idx='+idx
+  }
+	function search(){
+		var form = $('#search_form');
+		form.submit();
+  }
+
+</script>

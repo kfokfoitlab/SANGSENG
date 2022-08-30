@@ -352,4 +352,5 @@ class CommonModel extends dbModel
 		}
 		move_uploaded_file($file_tmp_name,$target_dir.$fileName);
 	}
+	
 }
