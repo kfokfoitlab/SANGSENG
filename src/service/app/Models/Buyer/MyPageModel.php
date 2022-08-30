@@ -47,29 +47,52 @@ class MyPageModel extends CommonModel
      return $data;
  }
 
- public function updateMyInfo(){
-     $buyer_name =$_POST["buyer_name"];
-     $product_no = $_POST["product_no"];
+ public function pwdCheck($password){
+     $uuid = $_SESSION["login_info"]["uuid"];
+    $password_hash = hash("sha256",$password);
 
+     $query = "
+
+        select
+            password
+        from 
+            buyer_company 
+        where
+            uuid = '$uuid'
+           
+        ";
+     $this->rodb->query($query);
+     $row = $this->rodb->next_row();
+     if($row["password"] ===$password_hash){
+         return 1;
+     }else{
+         return null;
+     }
+ }
+
+
+ public function updateMyInfo($data){
+    $uuid = $_SESSION["login_info"]["uuid"];
+    $newPwd = $data["confirm_password"];
 
      $query = "
             update
                 buyer_company
             set
                  buyer_name = '".$data["buyer_name"]."'
-                ,manager_name = '".$data["manager_name"]."'
-                ,did_tel = '".$data["did_tel"]."'
-                ,gen_tel = '".$data["gen_tel"]."'
                 ,phone = '".$data["phone"]."'
-                ,fax = '".$data["fax"]."'
-                ,post_code = '".$data["post_code"]."'
+                 ,password = SHA2('".$newPwd."', 256)
+                ,fax= '".$data["fax"]."'
+                 ,classification= '".$data["classification"]."'
                 ,address = '".$data["address"]."'
-                ,address_detail = '".$data["address_detail"]."'
-                ,coordinate = ".$coordinate."
-                ".$profile_img_uuid."
+                ,workers = '".$data["workers"]."'
+                ,severely_disabled = '".$data["severely_disabled"]."'
+                ,mild_disabled = '".$data["mild_disabled"]."'
+                ,tax_rate = '".$data["tax_rate"]."'
+                ,update_id = '".$uuid."'               
                 ,update_date = '".date("Y-m-d H:i:s")."'
             where
-                uuid = '".$data["uuid"]."'
+                uuid = '".$uuid."'
             limit 1
         ";
      $this->wrdb->update($query);

@@ -12,7 +12,7 @@
       <h3 class="mt-5 h4 fw-bold text-center">나의정보 수정</h3>
       <div class="default-form border rounded my-4 p-4">
         <div class="form-inner">
-          <form name="form-submit" method="post" action="/Buyer/MyPage/BuyerUpdateSubmit" enctype="multipart/form-data">
+          <form name="myForm" method="post" action="" enctype="multipart/form-data">
             <input type="hidden" name="sbs" value="<?=$sbs?>">
             <input type="hidden" name="ads" value="<?=$ads?>">
 
@@ -26,11 +26,11 @@
             </div>
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="비밀번호 필수입력">새 비밀번호</a></label>
-              <input type="password" name="password_check" placeholder="영문+숫자+특수문자 조합 6자 이상" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,32}$" title="영문+숫자+특수문자 조합 6자 이상 비밀번호 입력" tabindex=100 required>
+              <input type="password" id ="confirm_password" name="confirm_password" placeholder="영문+숫자+특수문자 조합 6자 이상" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,32}$" title="영문+숫자+특수문자 조합 6자 이상 비밀번호 입력" tabindex=100 required>
             </div>
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="비밀번호 확인 필수입력">새 비밀번호 확인</a></label>
-              <input type="password" name="confirm_password" placeholder="영문+숫자+특수문자 조합 6자 이상" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,32}$" title="영문+숫자+특수문자 조합 6자 이상 비밀번호 확인 입력" tabindex=100 required>
+              <input type="password" id="password_check" name="password_check" placeholder="영문+숫자+특수문자 조합 6자 이상" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,32}$" title="영문+숫자+특수문자 조합 6자 이상 비밀번호 확인 입력" tabindex=100 required>
             </div>
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="담당자 이름 필수입력">담당자 이름</a></label>
@@ -51,9 +51,9 @@
             </div>
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="기업형태 필수입력">기업형태</a></label>
-              <input type="radio" name="classification" value="1" required>민간기업
-              <input type="radio" name="classification" value="2">공공기관
-              <input type="radio" name="classification" value="3">국가/자치단체
+              <input type="radio" name="classification" value="1"<?php if($data['classification']==1){echo "checked";}?> >민간기업
+              <input type="radio" name="classification" value="2" <?php if($data['classification']==2){echo "checked";}?>>공공기관
+              <input type="radio" name="classification" value="3" <?php if($data['classification']==3){echo "checked";}?>>국가/자치단체
             </div>
             <div class="form-group">
               <label class="my-2"><a title="팩스번호">팩스번호</a></label>
@@ -81,24 +81,38 @@
             </div>
             <div class="">
               <p class="my-2"><a title="관심상품">관심상품</a></p>
-              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_office"> 사무용품</label>
-              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_daily"> 생활용품</label>
-              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_computerized"> 전산용품</label>
-              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_food"> 식음료</label>
-              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_cleaning"> 청소용품</label>
+              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_office" <?php if($data['interest_office']=='Y'){echo "checked";}?>> 사무용품</label>
+              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_daily" <?php if($data['interest_daily']=='Y'){echo "checked";}?>> 생활용품</label>
+              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_computerized" <?php if($data['interest_computerized']=='Y'){echo "checked";}?>> 전산용품</label>
+              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_food" <?php if($data['interest_food']=='Y'){echo "checked";}?>> 식음료</label>
+              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_cleaning" <?php if($data['interest_cleaning']=='Y'){echo "checked";}?>> 청소용품</label>
             </div>
             <br>
+          </form>
      <!--       <div class="form-group">
               <label for="formFile" class="form-label my-2"><sup class="text-danger">*</sup><a title="사업자등록증 첨부">사업자등록증 첨부</a></label>
               <input id="formFile" type="file" class="form-control" name="buyer_documents" placeholder="사업자등록증 첨부" title="사업자등록증 첨부" tabindex=100 required>
             </div>-->
             <div class="form-group mt-5 d-flex justify-content-center">
               <button type="button" class="theme-btn btn-style-three py-3 me-3" tabindex=100>취소</button>
-              <button type="submit" class="theme-btn btn-style-one py-3" tabindex=100>수정</button>
+              <button type="button" onclick="pwdCheck()" class="theme-btn btn-style-one py-3" tabindex=100>수정</button>
             </div>
-          </form>
+
         </div>
       </div>
     </div>
   </section>
 </div>
+<script type="text/javascript">
+  function pwdCheck() {
+    var password_check = document.getElementById('password_check').value;
+    var confirm_password = document.getElementById('confirm_password').value;
+    if( confirm_password != password_check ) {
+      alert("비밀번호가 일치 하지 않습니다");
+      return false;
+    } else{
+      document.myForm.action='/Buyer/MyPage/BuyerUpdateSubmit';
+      document.myForm.submit();
+    }
+  }
+</script>

@@ -59,22 +59,33 @@ class MyPage extends BaseController
         echo view("Common/Footer.html");
     } // }}}
     public function BuyerUpdateSubmit(){
-     $result = $this->mypage_model->updateMyInfo($_POST);
-        if($result == "1") {
-            echo "
+        $password = $_POST["password"];
+        $pwdCheck =  $this->mypage_model->pwdCheck($password);
+        if($pwdCheck == 1){
+            $result = $this->mypage_model->updateMyInfo($_POST);
+            if($result == "1") {
+                echo "
                 <script>
                     alert('정보가 변경되었습니다.');
 					window.location.replace('/Buyer');
                 </script>
             ";
-        }else{
-            echo "
+            }else{
+                echo "
                 <script>
                     alert('오류가 발생했습니다.다시 시도해주세요');
 					history.back(-1);
                 </script>
             ";
+            }
+        }else{
+            echo "
+                <script>
+                    alert('비밀번호가 일치하지 않습니다.');
+					window.location.replace('/Buyer');
+                </script>
+            ";
         }
-        die();
+
     }
 }

@@ -28,6 +28,7 @@
 
 
       <form name="myForm" method="POST" action="">
+        <input type ="hidden" id="session" value="<?=$_SESSION['login']?>">
         <input type="hidden" name="product_no" value="<?=$item['product_no']?>">
         <input type="hidden" name="buyer_uuid" id ="buyer_uuid"  value="<?=$_SESSION['login_info']['uuid']?>">
         <input type="hidden" name="seller_uuid" id ="seller_uuid" value= "<?=$item['uuid']?>">
@@ -79,12 +80,6 @@
             <h2 class="mb-2"><span>계약금액</span><?=$item["product_price"]?>원</h2>
             <h2><span>감면액</span> 20,000,000원</h2>
           </div>
-        <?php
-        if($_SESSION["login_info"]["type"] == "buyer"){
-        ?>
-          <?php
-          }
-          ?>
         </div>
       </div>
       <?php
@@ -92,14 +87,18 @@
               }
             ?>
       </form>
+      <?php
+        if($_SESSION["login_info"]["type"] == "buyer" || $_SESSION["login"] != "success"){
+        ?>
       <div class="mt-4 text-end">
         <button onclick='myCart()' class="btn btn-secondary btn-lg">장바구니</button>
         <button onclick='contract()' class="btn btn-danger btn-lg">계약하기</button>
         <button onclick='contractCheck()' class="btn btn-danger btn-lg">계약서조회</button>
         <button onclick='contractSubmit()' class="btn btn-danger btn-lg">계약서전송</button>
-
       </div>
-
+      <?php
+          }
+          ?>
       <div class="detail-info">
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -164,15 +163,26 @@
   var seller_name = $("#seller_name").val();
   var seller_company_name = $("#seller_company_name").val();
   function myCart() {
-    document.myForm.action='/Buyer/Shop/Cart';
-    document.myForm.submit();
+    var session = $("#session").val();
+    if(session === "success") {
+      document.myForm.action = '/Buyer/Shop/Cart';
+      document.myForm.submit();
+    }else{
+      alert("로그인 후 이용해주세요");
+    }
   }
 
 
 
   function contract(){
-    document.myForm.action='/Buyer/Contract';
-    document.myForm.submit();
+    var session = $("#session").val();
+    if(session == "success") {
+      document.myForm.action='/Buyer/Contract';
+      document.myForm.submit();
+    }else{
+      alert("로그인 후 이용해주세요");
+    }
+
   }
 
   function contractCheck(){

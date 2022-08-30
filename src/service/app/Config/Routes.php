@@ -173,16 +173,21 @@ $routes->group('Buyer', function($routes){
 $routes->group('Seller',  function ($routes){
     $group_name = "Item";
     $routes->get ( '/',                     'Seller::index');
-    $routes->get ('Item/ItemUpdate',        'Seller::ItemUpdate');
+    $routes->get ($group_name.'/ItemUpdate/(:any)', 'Seller\Item::ItemUpdate/$1');
     $routes->get ($group_name.'/ItemRegist','Seller\Item::ItemRegist');
     $routes->get ($group_name.'/ItemList',   'Seller\Item::ItemList');
-    $routes->post ($group_name.'ItemSubmit', 'Seller\Item::ItemSubmit');
+    $routes->post ($group_name.'/ItemSubmit', 'Seller\Item::ItemSubmit');
+    $routes->post ($group_name.'/ItemUpdateSubmit', 'Seller\Item::ItemUpdateSubmit');
     $routes->get ('Contract',               'Seller::Contract');
 
     $group_name = "IMJOB";
-    $routes->get ($group_name.'/List',             'Seller::List');
+    $routes->get ($group_name.'/List',             'Seller\IMJOB::List');
     $routes->get ($group_name.'/Manage',           'Seller\IMJOB::Manage');
-    $routes->post ($group_name.'/reg_worker',      'Seller\IMJOB::reg_worker');
+    $routes->post ($group_name.'/reg_worker',           'Seller\IMJOB::reg_worker');
+    $routes->get ($group_name.'/IMJOBView',           'Seller\IMJOB::IMJOBView');
+    $routes->get ($group_name.'/downloadFileNew',           'Seller\IMJOB::downloadFileNew');
+    $routes->post ($group_name.'/updateWorker',           'Seller\IMJOB::updateWorker');
+    $routes->get ($group_name.'/deleteWorker',           'Seller\IMJOB::deleteWorker');
 });
 /*
  * --------------------------------------------------------------------
