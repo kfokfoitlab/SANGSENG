@@ -129,5 +129,17 @@
             </script>
         ";
 		}
+		public function detailView()
+		{
+			$data = array(
+				"user_phone" => $_GET["user_phone"]
+			);
+			$data = $this->model->getCompanyUuid($data);
+			echo "
+            <script>
+            	window.location.replace('/Member/User/Detail/".$data["uuid"]."');
+            </script>
+        ";
+		}
 		
 	}

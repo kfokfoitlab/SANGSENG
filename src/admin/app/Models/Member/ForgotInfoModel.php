@@ -131,6 +131,25 @@
 			
 			return 1;
 		}
+		public function getCompanyUuid($data)
+		{
+			$user_phone = substr($data["user_phone"],0,3)."-".substr($data["user_phone"],3,4)."-".substr($data["user_phone"],7,4);
+			//echo $user_phone;
+			$query = "
+			SELECT
+				uuid
+			FROM
+				seller_company
+			WHERE
+				phone = '".$user_phone."'
+			LIMIT 1
+			";
+			
+			//echo $query;
+			$this->rodb->query($query);
+			$data = $this->rodb->next_row();
+			return $data;
+		}
 	}
 
 

@@ -83,6 +83,17 @@ $(document).ready(function(){
                     return html;
                 }
             }
+					,{title: "정보보기", data: "user_phone",visible: true, className: "text-nowrap",
+							"render": function( data, type, row, meta ){
+								let html = "";
+								html += "<a";
+								html += "   class='btn btn-secondary btn-sm m-1'";
+								html += "   href='/"+_CONTROLLER+"/detailView?user_phone="+data+"' target='_self'>";
+								html += "   상세보기";
+								html += "</a>";
+								return html;
+							}
+						}
             ,{title: "등록일시", data: "register_date", visible: true}
         ],
         "initComplete": function(settings, json)
@@ -121,3 +132,8 @@ $(document).ready(function(){
 function statusUpdate(idx,status){
 	location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
 }
+function detailView(user_phone){
+	alert(user_phone + "a");
+	location.href = "/"+_CONTROLLER+"/detailView?user_phone="+user_phone;
+}
+
