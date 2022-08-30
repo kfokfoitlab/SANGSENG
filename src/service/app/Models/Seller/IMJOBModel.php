@@ -118,8 +118,10 @@
 			}if($_GET["w_s3"] != ""){
 				$where[] = "working_status=3";
 			}
-			
-			$where_query = " and (".@join(" or ", $where).")";
+			$where_query = "";
+			if($_GET["w_s1"] != "" || $_GET["w_s2"] != "" || $_GET["w_s3"] != "") {
+				$where_query = " and (" . @join(" or ", $where) . ")";
+			}
 			$query = "
             select
                 *
@@ -131,6 +133,7 @@
 				$query = $query." and worker_name like '%".$_GET["search_v"]."%'";
 			}
 			
+			echo $query;
 			$data = [];
 			$this->rodb->query($query);
 			while($row = $this->rodb->next_row()){
