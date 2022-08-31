@@ -92,4 +92,11 @@ class Lists extends Base
 
     } //}}}
 
+    public function Update()
+    { //{{{
+        echo view('Common/HeaderSub.html');
+        echo view('Job/Lists/Update.html');
+        echo view('Common/Footer.html');
+    } //}}}
+
 }

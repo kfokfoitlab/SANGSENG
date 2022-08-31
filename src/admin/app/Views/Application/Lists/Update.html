@@ -15,7 +15,16 @@
         </tr>
         <tr>
           <td class="th">계약 상태</td>
-          <td><?=nl2br($data["application_detail"])?></td>
+          <td>
+            <select name="" id="" class="form-select form-select-sm">
+              <option value="1" selected>승인대기</option>
+              <option value="2">진행중</option>
+              <option value="3">구매기업 승인</option>
+              <option value="5">계약완료</option>
+              <option value="7">반려</option>
+              <option value="9">계약취소</option>
+            </select>
+          </td>
           <td>comment: </td>
         </tr>
         <tr>
@@ -53,7 +62,8 @@
   </div>
 
   <div class="text-end">
-    <button class="btn btn-success">수정하기</button>
+    <button class="btn btn-danger">삭제</button>
+    <button class="btn btn-success">저장</button>
     <button class="btn btn-dark" onclick="window.close();">닫기</button>
   </div>
 
