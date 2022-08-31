@@ -1,4 +1,7 @@
 <!-- 구매자 메뉴-->
+<?php
+if($_SESSION["login_info"]["type"] == "buyer"){
+?>
 <div
   class="left-fixed-box buyer-left-box bg-dark py-4 px-3 text-white"
 >
@@ -76,3 +79,6 @@
     </ul>
   </div>
 </div>
+<?php
+}
+?>

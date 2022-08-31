@@ -77,6 +77,7 @@ $routes->group('Application', ['namespace' => 'App\Controllers\Application'], st
     $routes->post($group_name.'/getList',           $group_name.'::getList');
     $routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
     $routes->get ($group_name.'/RecommendSubmit/(:any)/(:any)',     $group_name.'::RecommendSubmit/$1/$2');
+    $routes->get ($group_name.'/Update',            $group_name.'::Update');
 
 });
 
@@ -87,6 +88,7 @@ $routes->group('Job', ['namespace' => 'App\Controllers\Job'], static function ($
     $routes->get ($group_name.'/',                  $group_name.'::Index');
     $routes->post($group_name.'/getList',           $group_name.'::getList');
     $routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
+    $routes->get ($group_name.'/Update',            $group_name.'::Update');
 });
 
 // 이력서
