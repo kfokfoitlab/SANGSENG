@@ -95,54 +95,60 @@
             <th>계약금액</th>
             <th>감면금액</th>
             <th>계약 등록일</th>
-            <th>계약 만료일</th>
             <th>배송주기</th>
             <th>최종수정일</th>
           </tr>
           </thead>
           <tbody>
+          <?php
+          if(is_array($data) && count($data) > 0){
+          foreach($data as $item){
+          $status = "";
+          if($item["contract_status"] == 1){
+          $status = "승인대기";
+          }else if($item["contract_status"] == 2){
+          $status = "진행중";
+          }else if($item["contract_status"] == 3){
+          $status = "구매기업 승인";
+          }else if($item["contract_status"] ==5){
+          $status = "계약완료";
+          }else if($item["contract_status"] == 7){
+          $status = "반려";
+          }
+          else if($item["contract_status"] == 9){
+          $status = "계약취소";
+          }
+
+          $delivery_cycle = "";
+          if($item["delivery_cycle"] == 1){
+          $delivery_cycle = "1번";
+          }else if($item["delivery_cycle"] == 2){
+          $delivery_cycle = "1주일에 한 번";
+          }else if($item["delivery_cycle"] == 3){
+          $delivery_cycle = "1달에 한 번";
+          }else if($item["delivery_cycle"] ==4){
+          $delivery_cycle = "2달에 한 번";
+          }else if($item["delivery_cycle"] == 5){
+          $delivery_cycle = "6달에 한 번";
+          }
+          ?>
           <tr>
-            <td>1</td>
-            <td title="진행중">진행중</td>
-            <td title="20220801090000-00001"><a href="">20220801090000-00001</a></td>
-            <td title="친환경중질지70gA4용지">친환경중질지70gA4용지</td>
-            <td title="사무용품">사무용품</td>
-            <td title="100BOX">100BOX</td>
-            <td title="200,000,000">200,000,000</td>
-            <td title="100,000,000">100,000,000</td>
-            <td title="2022-08-01">2022-08-01</td>
-            <td title="2023-08-01">2023-08-01</td>
-            <td title="한달에 1번">한달에 1번</td>
-            <td title="2022-08-01">2022-08-01</td>
+            <td><?=$item["idx"]?></td>
+            <td title="진행중"><?=$status?></td>
+            <td title="20220801090000-00001"><a href=""><?=$item["contract_no"]?></a></td>
+            <td title="친환경중질지70gA4용지"><?=$item["product_name"]?></td>
+            <td title="사무용품"><?=$item["contract_status"]?></td>
+            <td title="100BOX"><?=$item["product_quantity"]?></td>
+            <td title="250,000,000"><?=$item["product_price"]?></td>
+            <td title="25,000,000">25,000,000</td>
+            <td title="2022-08-01"><?=$item["register_date"]?></td>
+            <td title="일주일에 한번"><?=$delivery_cycle?></td>
+            <td title="22-08-02"><?=$item["update_date"]?></td>
           </tr>
-          <tr>
-            <td>1</td>
-            <td title="진행중">진행중</td>
-            <td title="20220801090000-00001"><a href="">20220801090000-00001</a></td>
-            <td title="친환경중질지70gA4용지">친환경중질지70gA4용지</td>
-            <td title="사무용품">사무용품</td>
-            <td title="100BOX">100BOX</td>
-            <td title="200,000,000">200,000,000</td>
-            <td title="100,000,000">100,000,000</td>
-            <td title="2022-08-01">2022-08-01</td>
-            <td title="2023-08-01">2023-08-01</td>
-            <td title="한달에 1번">한달에 1번</td>
-            <td title="2022-08-01">2022-08-01</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td title="진행중">진행중</td>
-            <td title="20220801090000-00001"><a href="">20220801090000-00001</a></td>
-            <td title="친환경중질지70gA4용지">친환경중질지70gA4용지</td>
-            <td title="사무용품">사무용품</td>
-            <td title="100BOX">100BOX</td>
-            <td title="200,000,000">200,000,000</td>
-            <td title="100,000,000">100,000,000</td>
-            <td title="2022-08-01">2022-08-01</td>
-            <td title="2023-08-01">2023-08-01</td>
-            <td title="한달에 1번">한달에 1번</td>
-            <td title="2022-08-01">2022-08-01</td>
-          </tr>
+          <?php
+          }
+          }
+          ?>
           </tbody>
         </table>
 

@@ -8,7 +8,7 @@
       <div class="w-100 py-5 mb-5">
         <h2 class="text-center mb-3 fw-bold">추천상품</h2>
         <?php
-          if(is_array($ranking)){
+          if(is_array($ranking) && count($ranking)){
         foreach($ranking as $item){
 
         ?>
@@ -16,7 +16,7 @@
           <tbody>
           <tr>
             <td>
-              <img src="/assets/images/resource/products/item01.png" alt="기업로고">
+           <img class="preview-img-small" src="/uploads/upload_files/<?=$item['representative_image']?>" alt="기업로고">
             </td>
             <td>
               <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>"><span class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h3>
@@ -71,13 +71,13 @@
           </tr>
           </thead>
           <?php
-          if(is_array($list)){
+          if(is_array($list)&& count($list)){
           foreach($list as $item){
           ?>
           <tbody>
           <tr>
             <td>
-              <img src="/assets/images/resource/products/item01.png" alt="기업로고">
+              <img class="preview-img-small" src="/uploads/upload_files/<?=$item['representative_image']?>" alt="기업로고">
             </td>
             <td>
               <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>"><span class="text-primary"><?=$item["company_name"]?></span> / <?=$item["product_name"]?></a></h3>

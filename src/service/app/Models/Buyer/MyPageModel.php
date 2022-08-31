@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Models\Buyer;
+use App\Models\Auth;
 use App\Models\CommonModel;
 
 class MyPageModel extends CommonModel
 {
 
- public function getCartList(){
+ public function getCartList($uuid){
      $data = [];
      $query = "
   
@@ -16,13 +17,14 @@ class MyPageModel extends CommonModel
             buyer_cart a 
                 join seller_product b on a.idx = b.idx
         where
-            a.product_no = b.product_no
-            and a.del_yn ='N'
+            a.buyer_id = '$uuid'
+            and a.del_yn != 'Y'
            
         ";
+     //echo $query;
      $this->rodb->query($query);
      while($row = $this->rodb->next_row()){
-         $data["data"]= $row;
+         $data["data"][]= $row;
 
      }
      return $data;
@@ -49,25 +51,24 @@ class MyPageModel extends CommonModel
 
  public function pwdCheck($password){
      $uuid = $_SESSION["login_info"]["uuid"];
-    $password_hash = hash("sha256",$password);
-
      $query = "
 
         select
-            password
+            *
         from 
             buyer_company 
         where
             uuid = '$uuid'
+       and  password = SHA2('".$password."', 256)
            
         ";
      $this->rodb->query($query);
      $row = $this->rodb->next_row();
-     if($row["password"] ===$password_hash){
-         return 1;
-     }else{
-         return null;
-     }
+    if(isset($row["idx"])){
+        return "1";
+    }else{
+        return null;
+    }
  }
 
 
@@ -96,6 +97,54 @@ class MyPageModel extends CommonModel
             limit 1
         ";
      $this->wrdb->update($query);
+     return "1";
  }
+
+    public function getContractList($uuid){
+
+        $data = [];
+        $query = "
+            select
+                count(*)
+            from
+                contract_condition
+            where seller_uuid ='".$uuid."'
+        ";
+        $data["count"] = $this->rodb->simple_query($query);
+        $data["data"] = [];
+        $query = "
+            select
+               *
+            from
+              contract_condition a
+            join seller_product b 
+            on a.seller_uuid = b.register_id
+            where buyer_uuid ='".$uuid."'
+           order by 
+               a.idx desc
+           
+           
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $data["data"][] = $row;
+
+        }
+        return $data;
+    }
+    public function CartDel($idx){
+        $uuid = $_SESSION["login_info"]["uuid"];
+        $query = "
+            update
+                buyer_cart
+            set
+                 del_yn = 'Y'
+            where
+            register_id = '".$uuid."'
+            and idx = $idx
+            limit 1
+        ";
+        $this->wrdb->update($query);
+        return "1";
+    }
 }
-header("Content-Type:text/html;charset=EUC-KR");?>

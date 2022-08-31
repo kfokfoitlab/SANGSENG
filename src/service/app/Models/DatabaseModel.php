@@ -26,11 +26,40 @@ class DatabaseModel extends CommonModel
 
     } //}}}
 
+    public function SearchList($data){
+        $content = $_POST["content"];
+        $category = $_POST["category"];
+        $data = [];
+        $query = "
+            select
+                *
+            from
+                seller_product
+            where 
+                product_name = '".$content."'
+            and product_category = '".$category."'
+          
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $data["data"] = $row;
+        }
+
+        return $data;
+
+
+    }
+
+
+
+
+
+
     public function getJobAll()
     { //{{{
         $data = [];  
 
-        $items = [
+     $items = [
              "Career"
             ,"EmploymentType"
             ,"WorkType"

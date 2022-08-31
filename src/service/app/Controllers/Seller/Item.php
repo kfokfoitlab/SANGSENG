@@ -33,14 +33,12 @@ class Item extends BaseController
         echo view('Seller/ItemList.html',$data);
         echo view("Common/Footer.html");
     } // }}}
-
     public function ItemRegist()
     { // {{{
         echo view("Common/Header.html");
         echo view('Seller/ItemRegist.html');
         echo view("Common/Footer.html");
     } // }}}
-
 
     public function ItemSubmit()
     { // {{{
@@ -50,14 +48,14 @@ class Item extends BaseController
         if($result == "1") {
             echo "
                 <script>
-                    alert('»óÇ°ÀÌ µî·ÏµÇ¾ú½À´Ï´Ù.');
+                    alert('ìƒí’ˆì´ ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤.');
 					window.location.replace('/Seller');
                 </script>
             ";
         }else{
             echo "
                 <script>
-                    alert('¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù.´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä');
+                    alert('ìƒí’ˆë“±ë¡ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.');
 					history.back(-1);
                 </script>
             ";
@@ -84,14 +82,14 @@ class Item extends BaseController
         if($result == "1") {
             echo "
                 <script>
-                    alert('»óÇ°ÀÌ ¼öÁ¤µÇ¾ú½À´Ï´Ù.');
+                    alert('ìƒí’ˆì´ ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤.');
 					window.location.replace('/Seller');
                 </script>
             ";
         }else{
             echo "
                 <script>
-                    alert('¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù.´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä');
+                    alert('ìƒí’ˆì´ ìˆ˜ì •ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤');
 					history.back(-1);
                 </script>
             ";

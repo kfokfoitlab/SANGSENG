@@ -29,7 +29,7 @@ class Contract extends BaseController
 
     public function List()
     { // {{{
-        
+
         echo view("Common/Header.html");
         echo view('Shop/List.html');
         echo view("Common/Footer.html");
@@ -52,14 +52,14 @@ class Contract extends BaseController
         if($result == "1") {
             echo "
                 <script>
-                    alert('°ü¸®ÀÚ°¡¿¡°Ô °ËÅä¿äÃ»À» Çß½À´Ï´Ù.');
+                    alert('ê´€ë¦¬ìì—ê²Œ ê²€í† ìš”ì²­ì„ í•˜ì˜€ìŠµë‹ˆë‹¤.');
 					window.location.replace('/Buyer');
                 </script>
             ";
         }else{
             echo "
                 <script>
-                    alert('¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù.´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä');
+                    alert('ì˜¤ë¥˜ë°œìƒ.');
 					history.back(-1);
                 </script>
             ";
