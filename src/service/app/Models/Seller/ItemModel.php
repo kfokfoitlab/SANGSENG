@@ -98,8 +98,6 @@ public function ItemUpdateSubmit($files, $data){
                 and product_no = $product_no
         ";
     $this->wrdb->update($query);
-
+    return "1";
 }
-
 }
-header("Content-Type:text/html;charset=EUC-KR");?>

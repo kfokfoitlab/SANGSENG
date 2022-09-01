@@ -52,43 +52,44 @@
             </th>
           </tr>
           </thead>
+          <form name="myForm" method="post" action="">
+            <input type="hidden" name="product_no" id ="product_no" value="">
+            <input type="hidden" name="buyer_uuid" id ="buyer_id" value="">
+            <input type="hidden" name="seller_uuid" id ="seller_id" value="">
           <tbody>
           <?php
           if(is_array($data)){
         foreach($data as $item){
         ?>
-          <form name="myForm" method="post" action="">
-          <input type="hidden" name="product_no" value="<?=$item['product_no']?>">
-          <input type="hidden" name="buyer_uuid" value="<?=$item['buyer_id']?>">
-          <input type="hidden" name="seller_uuid" value="<?=$item['seller_id']?>">
 
-          <tr>
-            <td>
-              <img src="/assets/images/resource/products/item01.png" alt="기업로고">
-            </td>
-            <td>
-              <h4><a href=""><span class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h4>
-              <p class="sub-info"><?=$item['product_detail']?></p>
-            </td>
-            <td>
-              <p><?=$item['product_quantity']?></p>
-            </td>
-            <td>
-              <p><?=$item['product_price']?>원</p>
-            </td>
-            <td>
-              <p>23,520,000원</p>
-            </td>
-            <td>
-              <button class="btn btn-sm btn-danger">삭제</button>
-              <button onclick="contract();" class="btn btn-sm btn-success">계약하기</button>
-            </td>
-          </tr>
-          <?php
+            <tr>
+              <td>
+                <img src="/assets/images/resource/products/item01.png" alt="기업로고">
+              </td>
+              <td>
+                <h4><a href=""><span class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h4>
+                <p class="sub-info"><?=$item['product_detail']?></p>
+              </td>
+              <td>
+                <p><?=$item['product_quantity']?></p>
+              </td>
+              <td>
+                <p><?=$item['product_price']?>원</p>
+              </td>
+              <td>
+                <p>23,520,000원</p>
+              </td>
+              <td>
+                <button onclick="cart_del(<?=$item['idx']?>);" class="btn btn-sm btn-danger">삭제</button>
+                <button onclick="contract();" class="btn btn-sm btn-success">계약하기</button>
+              </td>
+            </tr>
+            <?php
                 }
               }
             ?>
           </tbody>
+          </form>
         </table>
       </div>
     </div>
@@ -98,5 +99,24 @@
   function contract(){
     document.myForm.action='/Buyer/Contract';
     document.myForm.submit();
+  };
+
+  function cart_del(idx){
+    $.ajax({
+      type:"post",
+      url:"/Buyer/MyPage/CartDel",
+      data:{"idx":idx},
+      success:function(result){
+        if(result){
+          alert("제거되었습니다.");
+          location.reload();
+        }else{
+          alert("실패");
+        }
+      },error:function(e){
+        alert("전송 실패");
+      }
+    })
   }
+
 </script>

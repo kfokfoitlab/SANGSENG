@@ -37,8 +37,8 @@ class Shop extends BaseController
         $list = $this->buyer_model->CategoryList($value);
 
         $data = array(
-            "ranking" => $ranking,
-            "list" => $list
+            "ranking" => $ranking["data"],
+            "list" => $list["data"]
         );
 
 

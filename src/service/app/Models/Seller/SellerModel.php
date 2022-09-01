@@ -102,12 +102,14 @@ class SellerModel extends CommonModel
         $data["data"] = [];
         $query = "
             select
-                *
+               *
             from
-              contract_condition  
+              contract_condition a
+            join seller_product b 
+            on a.seller_uuid = b.register_id
             where seller_uuid ='".$uuid."'
            order by 
-               idx desc
+               a.idx desc
            
            
         ";
@@ -140,4 +142,3 @@ class SellerModel extends CommonModel
 
 
 }
-header("Content-Type:text/html;charset=EUC-KR");?>

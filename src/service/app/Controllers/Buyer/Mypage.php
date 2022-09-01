@@ -7,6 +7,7 @@ use App\Models\DatabaseModel;
 use App\Models\Buyer\MyPageModel;
 class MyPage extends BaseController
 {
+
     private $model;
     private $database_model;
     private $mypage_model;
@@ -30,9 +31,14 @@ class MyPage extends BaseController
     }
     public function Contract()
     { // {{{
+        $uuid = $_SESSION['login_info']['uuid'];
+        $data = $this->mypage_model->getContractList($uuid);
 
+        $data = array(
+            "data" => $data["data"]
+        );
         echo view("Common/Header.html");
-        echo view('MyPage/BuyerContract.html');
+        echo view('MyPage/BuyerContract.html',$data);
         echo view("Common/Footer.html");
     } // }}}
 
@@ -50,15 +56,17 @@ class MyPage extends BaseController
 
     public function Cart()
     { // {{{
-        $data = $this->mypage_model->getCartList();
+        $uuid = $_SESSION["login_info"]["uuid"];
+        $data = $this->mypage_model->getCartList($uuid);
         $data = array(
-            "data" => $data
+            "data" => $data["data"]
         );
         echo view("Common/Header.html");
         echo view('MyPage/BuyerCart.html',$data);
         echo view("Common/Footer.html");
     } // }}}
     public function BuyerUpdateSubmit(){
+        header("Content-Type: text/html; charset=UTF-8");
         $password = $_POST["password"];
         $pwdCheck =  $this->mypage_model->pwdCheck($password);
         if($pwdCheck == 1){
@@ -66,14 +74,14 @@ class MyPage extends BaseController
             if($result == "1") {
                 echo "
                 <script>
-                    alert('Á¤º¸°¡ º¯°æµÇ¾ú½À´Ï´Ù.');
+                    alert('íšŒì›ë‹˜ì˜ ì •ë³´ê°€ ë³€ê²½ ë˜ì—ˆìŠµë‹ˆë‹¤.');
 					window.location.replace('/Buyer');
                 </script>
             ";
             }else{
                 echo "
                 <script>
-                    alert('¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù.´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä');
+                    alert('ì •ë³´ìˆ˜ì •ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.');
 					history.back(-1);
                 </script>
             ";
@@ -81,11 +89,33 @@ class MyPage extends BaseController
         }else{
             echo "
                 <script>
-                    alert('ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.');
+                    alert('ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.');
 					window.location.replace('/Buyer');
                 </script>
             ";
         }
+
+    }
+
+    public function CartDel(){
+        $idx = $_POST["idx"];
+        $result =  $this->mypage_model->CartDel($idx);
+        if($result == "1") {
+            echo "
+                <script>
+                    alert('ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.');
+					window.location.replace('/Buyer');
+                </script>
+            ";
+        }else{
+            echo "
+                <script>
+                    alert('ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”');
+					history.back(-1);
+                </script>
+            ";
+        }
+
 
     }
 }

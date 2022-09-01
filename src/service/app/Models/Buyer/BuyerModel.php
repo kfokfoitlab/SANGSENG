@@ -24,7 +24,7 @@ class BuyerModel extends CommonModel
               seller_product
            order by 
                idx desc
-            limit 5
+            
            
         ";
         $this->rodb->query($query);
@@ -62,9 +62,9 @@ class BuyerModel extends CommonModel
     public function contract($data){
         helper(["uuid_v4", "specialchars"]);
         $uuid = gen_uuid_v4();
-    $contract_no = date("YmdHis");
-    //1:½ÂÀÎ´ë±â,2:ÁøÇàÁß,3:±¸¸Å±â¾÷ ½ÂÀÎ,5:°è¾à¿Ï·á,7:¹İ·Á,9:°è¾àÃë¼Ò
-    $contract_status = "1";
+        $contract_no = date("YmdHis");
+        //1:ï¿½ï¿½ï¿½Î´ï¿½ï¿½,2:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,3:ï¿½ï¿½ï¿½Å±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,5:ï¿½ï¿½ï¿½Ï·ï¿½,7:ï¿½İ·ï¿½,9:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        $contract_status = "1";
 
         $query = "
           insert into
@@ -79,13 +79,13 @@ class BuyerModel extends CommonModel
               ,register_date = '".date("Y-m-d H:i:s")."'
               ,del_yn = 'N'          
       ";
-            $idx = $this->wrdb->insert($query);
-            if($idx){
-                return 1;
-            }else{
-                return null;
-            }
+        $idx = $this->wrdb->insert($query);
+        if($idx){
+            return 1;
+        }else{
+            return null;
         }
+    }
 
     public function RecommendationList(){
         $ranking = [];
@@ -101,7 +101,7 @@ class BuyerModel extends CommonModel
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
-            $ranking["data"]= $row;
+            $ranking["data"][]= $row;
 
         }
         return $ranking;
@@ -114,15 +114,18 @@ class BuyerModel extends CommonModel
                 *
             from
               seller_product
-            where 
-                product_category =$value
-           order by 
-              register_date  desc
+            where 1=1
+                and product_category = $value
            
         ";
+        if($_GET["search_v"] != ""){
+            $query = $query."and (product_name like '%".$_GET["search_v"]."%'
+             or company_name like '%".$_GET["search_v"]."%')";
+        }
+        $query = $query." order by register_date  desc";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
-            $list["data"]= $row;
+            $list["data"][]= $row;
 
         }
         return $list;

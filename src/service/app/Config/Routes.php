@@ -165,7 +165,8 @@ $routes->group('Buyer', function($routes){
     $routes->post ('MyPage/BuyerUpdateSubmit', 'Buyer\MyPage::BuyerUpdateSubmit');
     $routes->post ('Shop/Cart',            'Buyer\Shop::Cart');
     $routes->get ('MyPage/Cart',           'Buyer\MyPage::Cart');
-    $routes->get ('MyPage/Contract',           'Buyer\Contract::Cart');
+    $routes->post ('MyPage/CartDel',           'Buyer\MyPage::CartDel');
+    $routes->get ('MyPage/Contract',           'Buyer\MyPage::Contract');
 
 
 });

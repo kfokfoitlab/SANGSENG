@@ -4,15 +4,17 @@ namespace App\Controllers;
 use App\Models\Management\Company\ApplicationModel;
 use App\Models\CompanyModel;
 use App\Models\DatabaseModel;
+use App\Models\Buyer\BuyerModel;
 
 class Home extends BaseController
 {
     private $model;
     private $database_model;
     private $company_model;
-
+    private $buyer_model;
     public function __construct()
     { //{{{
+        $this->buyer_model = new BuyerModel;
         $this->application_model = new ApplicationModel;
         $this->database_model = new DatabaseModel;
         $this->company_model = new CompanyModel;
@@ -20,7 +22,7 @@ class Home extends BaseController
 
     public function index()
     {
-        $job_category = $this->database_model->getJobAll();
+     /*   $job_category = $this->database_model->getJobAll();
         $recommended_data = $this->application_model->getRecommendedList(5);
 
         // 현재 페이지
@@ -28,7 +30,8 @@ class Home extends BaseController
         // 페이지당 노출 수
         $this->item_per_page = (@$_GET["length"])?$_GET["length"]:12;
         // 검색 설정
-        $search_query = array(
+        $data = $this->database_model->SearchList($_POST);
+       $search_query = array(
              "title" => @$_GET["st"]
             ,"address" => @$_GET["ad"]
             ,"profession" => @$_GET["pf"]
@@ -40,14 +43,19 @@ class Home extends BaseController
             ,"page" => $page
             ,"length" => $this->item_per_page
         );
-        $recent_company = $this->company_model->getAllList(0, $search_query);
+        $recent_company = $this->company_model->getAllList(0, $search_query);*/
+        $data = $this->buyer_model->getProductList();
 
 
         $data = array(
+            "data" => $data["data"]
+        );
+
+/*        $data = array(
              "job_category" => $job_category
             ,"recommended_data" => $recommended_data
-            ,"recent_company" => $recent_company["data"]
-        );
+            ,"data" => $data["data"]
+        );*/
         
         echo view("Common/Header.html");
         echo view('Home/Index.html', $data);

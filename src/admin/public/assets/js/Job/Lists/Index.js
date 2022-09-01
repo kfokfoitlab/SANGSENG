@@ -68,7 +68,7 @@ $(document).ready(function(){
             ,{title: "추천 순위", data: "idx", visible: true, className: "text-nowrap",
                 "render": function(data, type, row, meta) {
                     let html = "";
-                    html += "<select class='form-select form-select-sm' name='recommendation'>";
+                    html += "<select class='form-select form-select-sm' name='product_ranking'>";
                     html += "<option value='9999'>선택안함</option>";
                     html += "<option value='1'>1</option>";
                     html += "<option value='2'>2</option>";
@@ -80,6 +80,7 @@ $(document).ready(function(){
                     html += "<option value='8'>8</option>";
                     html += "<option value='9'>9</option>";
                     html += "<option value='10'>10</option>";
+                    html += "</select>";
                     return html;
                 }
             }
