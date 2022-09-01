@@ -1,0 +1,48 @@
+<section class="content-main">
+  <div class="content-header">
+    <h2 class="content-title"> <?=$page_name?> </h2>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <form name="form-searchbar">
+
+        <div class="row gx-3">
+          <div class="col-lg-2">
+            <label>근로자명 검색</label>
+            <input type="text" class="form-control form-control-sm search" id="search-number" placeholder="">
+          </div>
+          <div class="col-lg-2">
+            <label>회사명 검색</label>
+            <input type="text" class="form-control form-control-sm search" id="search-company" placeholder="">
+          </div>
+          <div class="col-lg-1">
+            <label>근무상태</label>
+            <select class="form-control form-control-sm filter" id="search-recommended">
+              <option value="">근무</option>
+              <option value="1">퇴직</option>
+              <option value="2">휴직</option>
+            </select>
+          </div>
+          <div class="col-lg-2">
+            <label>등록일 검색</label>
+            <input type="text" class="form-control form-control-sm filter daterange" id="search-daterange" placeholder="기간 검색">
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+
+    <div class="card-body">
+
+      <div class="">
+        <table class="table table-hover small" id="datatables">
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
