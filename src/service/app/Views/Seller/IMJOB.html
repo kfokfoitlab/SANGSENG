@@ -21,6 +21,7 @@
       </ul>
 
       <form id="search_form" method="get" action="/Seller/IMJOB/List">
+        <input type="hidden" name="p_n" value="1">
         <div class="d-flex justify-content-end align-items-center">
           <div class="me-3">
             <label class="form-check-label mx-2" for="flexCheck01">
@@ -41,7 +42,7 @@
           </div>
 
           <div class="input-group input-group-sm me-3">
-            <input type="text" class="form-control search-employee" name="search_v" aria-label="" aria-describedby="search-employee"
+            <input type="text" class="form-control search-employee" name="search_v" placeholder="아이디 or 생년월일" aria-label="" aria-describedby="search-employee"
             <?php if($_GET["search_v"] != ""){ echo "value='".$_GET['search_v']."'";}?>>
             <button class="btn btn-primary" type="button" id="search-employee" onclick="search()">검색</button>
           </div>
@@ -112,10 +113,25 @@
         ?>
         </tbody>
       </table>
+      <div class="float-start"><div class="dataTables_info" id="datatables_info" role="status" aria-live="polite">(총 <?=$data_page_total_cnt?> 개의 데이터)</div></div>
+      <ul style="float: right" class="pagination">
+        <li class="paginate_button page-item previous disabled" id="datatables_previous">
+          <a href="#" aria-controls="datatables" data-dt-idx="0" tabindex="0" class="page-link">이전</a></li>
+        <?php
+         $data_page_num = $data_page_total_cnt/10;
+         for($i=1;$i<=$data_page_num;$i++){
+              if($_GET["p_n"]==$i){?>
+                <li class="paginate_button page-item active">
+        <?php }else{ ?>
+                <li class="paginate_button page-item">
+        <?php } ?>
+          <a href="javascript:nextPage(<?=$i?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a></li>
+        <?php }?>
+        <li class="paginate_button page-item next disabled" id="datatables_next"><a href="#" aria-controls="datatables" data-dt-idx="2" tabindex="0" class="page-link">다음</a></li>
+      </ul>
     </div>
   </section>
 </div>
-
 <script>
   function deleteWorker(idx){
 		location.href = '/Seller/IMJOB/deleteWorker?idx='+idx
@@ -124,5 +140,8 @@
 		var form = $('#search_form');
 		form.submit();
   }
+	function nextPage(p_n){
+		location.href = '/Seller/IMJOB/List?p_n='+p_n;
+	}
 
 </script>
