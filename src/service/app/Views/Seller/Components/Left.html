@@ -1,4 +1,9 @@
 <!-- 판매자 메뉴-->
+<?php
+$total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCount"]['mild_disabled'];
+
+?>
+
 <div
   class="left-fixed-box seller-left-box bg-dark p-3"
 >
@@ -6,17 +11,16 @@
     <div class="d-flex justify-content-center align-items-center rounded-circle border mx-auto mb-3 overflow-hidden bg-white" style="width: 150px; height: 150px;">
       <img src="https://kfo.ai/images/top/top_06_r_17_17.png" alt="로고" />
     </div>
-    <h2><a class="text-white" href="/Seller">회사명</a></h2>
+    <h2><a class="text-white" href="/Seller"><?=$_SESSION["disabledCount"]['company_name']?></a></h2>
   </div>
   <div class="mb-3">
     <h3 class="text-white">매출액</h3>
-    <p class="text-end text-white">25,000,000원</p>
-    <p class="text-end">2,500만원</p>
+    <p class="text-end text-white"><?=number_format($_SESSION["totalSales"]['price'])?>원</p>
   </div>
   <div class="mb-3">
     <h3 class="text-white">장애인 근로자</h3>
-    <p class="text-end text-white">1명</p>
-    <p class="text-end">경증 0명, 중증 1명</p>
+    <p class="text-end text-white"><?=$total?>명</p>
+    <p class="text-end">경증 <?=$_SESSION["disabledCount"]['mild_disabled']?>명, 중증<?=$_SESSION["disabledCount"]['severely_disabled']?>명</p>
   </div>
   <div>
     <div class="accordion" id="accordionSellerLeft">

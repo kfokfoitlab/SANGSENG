@@ -20,20 +20,13 @@ class Buyer extends BaseController
     {
         $data = $this->buyer_model->getProductList();
         $data = array(
-            "data" => $data["data"]
+            "data" => $data["data"],
         );
         echo view("Common/Header.html");
         echo view('Buyer/Index.html', $data);
         echo view("Common/Footer.html");
     }
 
-/*    public function List()
-    { // {{{
-
-        echo view("Common/Header.html");
-        echo view('Shop/List.html');
-        echo view("Common/Footer.html");
-    } // }}}*/
 
     public function Detail($product_no)
     { // {{{

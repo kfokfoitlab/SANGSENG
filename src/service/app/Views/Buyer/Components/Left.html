@@ -1,84 +1,61 @@
 <!-- 구매자 메뉴-->
 <?php
-if($_SESSION["login_info"]["type"] == "buyer"){
+$workers = $_SESSION['buyer_info']['workers'];
+$severely_disabled = $_SESSION['buyer_info']['severely_disabled'];
+$mild_disabled = $_SESSION['buyer_info']['mild_disabled'];
+$money = 1914440 ;
+$total = ($workers*0.03 -($mild_disabled+$severely_disabled*2)) * $money * 12;
+$total_money = number_format($total);
+$Expectation =$_SESSION['Expectation']['Expectation'];
+$Expectation_money = number_format($Expectation);
+$Remainder = $total -$Expectation;
+$Remainder_money = number_format($Remainder);
 ?>
+
+
 <div
-  class="left-fixed-box buyer-left-box bg-dark py-4 px-3 text-white"
->
+  class="left-fixed-box buyer-left-box bg-dark py-4 px-3 text-white">
   <h2 class="visually-hidden">감면액 및 계약리스트</h2>
   <div class="mb-3">
     <h3 class="h6">예상 납부금액</h3>
-    <p class="text-end m-0">25,000,000원</p>
+    <p class="text-end m-0"><?=$total_money?>원</p>
   </div>
   <div class="mb-3">
     <h3 class="h6">기대 감면금액</h3>
-    <p class="text-end m-0">25,000,000원</p>
+    <p class="text-end m-0"><?=$Expectation_money?>원</p>
   </div>
   <div class="mb-3">
     <h3 class="h6">남은 감면금액</h3>
-    <p class="text-end m-0">25,000,000원</p>
+    <p class="text-end m-0"><?=$Remainder_money?>원</p>
   </div>
+
   <div class="mt-4">
+    <?php
+  foreach($_SESSION["Contract"] as $item){
+
+  $contract_regdt = $item["contract_regdt"];
+  $timestamp = strtotime($contract_regdt);
+  $contract_regdt = date("Y-m-d", $timestamp);
+  $product_price = number_format($item["product_price"]);
+  ?>
     <ul class="buyer-contract-list p-0" style="max-height: 500px; overflow-y: scroll;">
       <li class="p-2 bg-white text-dark mb-3">
-        <h3 class="text-center">계약명</h3>
+        <h3 class="text-center"><?=$item["company_name"]?></h3>
         <div class="d-flex justify-content-between">
           <div>
             <img style="width: 50px;" src="/Image/6ea0bfe8-315c-4e54-a172-4bc84f8cf9e4" alt="">
-            <h4>상품명</h4>
+            <h4><?=$item["product_name"]?></h4>
           </div>
           <div class="text-end">
-            <p class="m-0">10,000,000원</p>
-            <p class="m-0">22-08-01</p>
-            <p class="m-0">100Box</p>
+            <p class="m-0"><?=$product_price?>원</p>
+            <p class="m-0"><?=$contract_regdt?></p>
+            <p class="m-0"><?=$item["product_quantity"]?></p>
           </div>
         </div>
       </li>
-      <li class="p-2 bg-white text-dark mb-3">
-        <h3 class="text-center">계약명</h3>
-        <div class="d-flex justify-content-between">
-          <div>
-            <img style="width: 50px;" src="/Image/6ea0bfe8-315c-4e54-a172-4bc84f8cf9e4" alt="">
-            <h4>상품명</h4>
-          </div>
-          <div class="text-end">
-            <p class="m-0">계약금액</p>
-            <p class="m-0">납품일자</p>
-            <p class="m-0">납품수량</p>
-          </div>
-        </div>
-      </li>
-      <li class="p-2 bg-white text-dark mb-3">
-        <h3 class="text-center">계약명</h3>
-        <div class="d-flex justify-content-between">
-          <div>
-            <img style="width: 50px;" src="/Image/6ea0bfe8-315c-4e54-a172-4bc84f8cf9e4" alt="">
-            <h4>상품명</h4>
-          </div>
-          <div class="text-end">
-            <p class="m-0">계약금액</p>
-            <p class="m-0">납품일자</p>
-            <p class="m-0">납품수량</p>
-          </div>
-        </div>
-      </li>
-      <li class="p-2 bg-white text-dark mb-3">
-        <h3 class="text-center">계약명</h3>
-        <div class="d-flex justify-content-between">
-          <div>
-            <img style="width: 50px;" src="/Image/6ea0bfe8-315c-4e54-a172-4bc84f8cf9e4" alt="">
-            <h4>상품명</h4>
-          </div>
-          <div class="text-end">
-            <p class="m-0">계약금액</p>
-            <p class="m-0">납품일자</p>
-            <p class="m-0">납품수량</p>
-          </div>
-        </div>
-      </li>
+      <?php
+      }
+      ?>
     </ul>
   </div>
 </div>
-<?php
-}
-?>

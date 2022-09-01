@@ -24,8 +24,7 @@ class BuyerModel extends CommonModel
               seller_product
            order by 
                idx desc
-            
-           
+            limit 5  
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
@@ -47,14 +46,12 @@ class BuyerModel extends CommonModel
                     seller_company b 
                         on a.register_id = b.uuid
             where 
-                product_no = $product_no
-              and 
-                a.register_id = b.uuid
+                a.product_no = $product_no
 
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
-            $data["data"] = $row;
+            $data = $row;
         }
         return $data;
     }
@@ -131,10 +128,10 @@ class BuyerModel extends CommonModel
         return $list;
     }
 
-    public function CartInsert(){
-        $product_no = $_POST["product_no"];
-        $buyer_id = $_POST["buyer_uuid"];
-        $seller_uuid = $_POST["seller_uuid"];
+    public function CartInsert($data){
+        $product_no = $data["product_no"];
+        $buyer_id = $data["buyer_uuid"];
+        $seller_id = $data["seller_uuid"];
 
         $query = "
           insert into
@@ -142,7 +139,7 @@ class BuyerModel extends CommonModel
           set
                product_no = '".$product_no."'
                ,buyer_id = '".$buyer_id."' 
-               ,seller_id = '".$seller_uuid."' 
+               ,seller_id = '".$seller_id."' 
               ,register_date = '".date("Y-m-d H:i:s")."'
               ,register_id = '".$buyer_id."' 
               ,del_yn = 'N'          
@@ -153,9 +150,6 @@ class BuyerModel extends CommonModel
         }else{
             return null;
         }
-
     }
-
-
 }
 header("Content-Type:text/html;charset=EUC-KR");?>

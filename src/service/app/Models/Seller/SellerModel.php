@@ -140,5 +140,91 @@ class SellerModel extends CommonModel
         return $data;
     }
 
+    public function getTotalSales($uuid){
+        $sales =[];
+        $query = "
+            select
+              sum(b.product_price) as 'price'
+            from
+              contract_condition a
+            join seller_product b on a.seller_uuid = b.register_id
+            where a.seller_uuid = '$uuid'
+            and contract_status = 5
+                     
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $sales = $row;
+        }
+        return $sales;
+    }
+    public function getexpectationSales($uuid){
+        $expectationSales =[];
+        $query = "
+            select
+              sum(b.product_price) as 'price'
+            from
+              contract_condition a
+            join seller_product b on a.seller_uuid = b.register_id
+            where a.seller_uuid = '$uuid'
+              and (contract_status = 2 or contract_status = 5)
+
+                     
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+           $expectationSales = $row;
+        }
+        return $expectationSales;
+    }
+    public function getCompletionContract($uuid){
+        $completionContract =[];
+        $query = "
+            select
+             count(*) as'count'
+            from
+              contract_condition          
+            where seller_uuid = '$uuid'
+              and  contract_status = 5             
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $completionContract = $row;
+        }
+        return $completionContract;
+    }
+    public function getContract($uuid){
+        $contract =[];
+        $query = "
+            select
+             count(*) as 'count'
+            from
+              contract_condition          
+            where seller_uuid = '$uuid'
+              and  contract_status = 2             
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $contract = $row;
+        }
+        return $contract;
+    }
+
+    public function getDisabledCount($uuid){
+        $disabledCount =[];
+        $query = "
+            select
+             severely_disabled,
+             mild_disabled
+            from
+              seller_company          
+            where uuid = '$uuid'            
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $disabledCount = $row;
+        }
+        return $disabledCount;
+    }
 
 }

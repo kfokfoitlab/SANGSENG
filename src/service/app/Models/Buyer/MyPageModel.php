@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models\Buyer;
-use App\Models\Auth;
 use App\Models\CommonModel;
 
 class MyPageModel extends CommonModel
@@ -12,10 +11,10 @@ class MyPageModel extends CommonModel
      $query = "
   
         select
-            *
+           *,a.idx as 'productidx'
         from 
             buyer_cart a 
-                join seller_product b on a.idx = b.idx
+                join seller_product b on a.seller_id  = b.register_id
         where
             a.buyer_id = '$uuid'
             and a.del_yn != 'Y'
