@@ -26,9 +26,11 @@
 		{ // {{{
 			$data = $this->imjob_model->getWorkerList();
 			$data_cnt = $this->imjob_model->getWorkerCount();
+			$data_page_total_cnt = count($data);
 			$data = array(
-				"data" => $data,
-				"data_cnt" => $data_cnt
+				"data" => $data["data"],
+				"data_cnt" => $data_cnt,
+				"data_page_total_cnt" => $data["count"]
 			);
 			echo view("Common/Header.html");
 			echo view('Seller/IMJOB.html',$data);
