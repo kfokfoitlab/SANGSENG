@@ -4,7 +4,7 @@ use App\Models\CommonModel;
 
 class UserModel extends CommonModel
 {
-    private $table_name = "user";
+    private $table_name = "buyer_company";
 
     public function getListData($data)
     { // {{{

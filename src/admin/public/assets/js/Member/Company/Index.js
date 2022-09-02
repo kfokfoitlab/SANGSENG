@@ -34,11 +34,10 @@ $(document).ready(function(){
         ],
         "columns": [
              {title: "idx", data: "idx", visible: false}
-            ,{title: "아이디", data: "company_name", visible: true, className: "text-nowrap"}
+            ,{title: "아이디", data: "email", visible: true, className: "text-nowrap"}
             ,{title: "기업명", data: "company_name", visible: true, className: "text-nowrap"}
-            ,{title: "사업자등록번호", data: "idx", visible: true, className: "text-nowrap"}
-            ,{title: "담당자명", data: "manager_name", visible: true, className: "text-nowrap"}
-            ,{title: "담당자이메일주소", data: "manager_email", visible: true, className: "text-nowrap"}
+            ,{title: "사업자등록번호", data: "company_code", visible: true, className: "text-nowrap"}
+            ,{title: "담당자명", data: "seller_name", visible: true, className: "text-nowrap"}
             ,{title: "연락처", data: "phone", visible: true, className: "text-nowrap"}
             ,{title: "진행상황", data: "status", visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){
