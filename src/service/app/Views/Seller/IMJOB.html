@@ -76,6 +76,9 @@
         <tbody>
         <?php
         $i=1;
+        if($_GET["p_n"]!=""){
+          $i=($_GET["p_n"]-1)*10+1;
+        }
         foreach($data as $item){
         $working_status="";
         if($item["working_status"] == 1){
@@ -98,7 +101,7 @@
         ?>
         <tr>
           <td><?=$i?></td>
-          <td><a href="/Seller/IMJOB/IMJOBView?idx=<?=$item["idx"]?>"><?=$item["worker_name"]?></a></td>
+          <td><a href="/Seller/IMJOB/IMJOBView?idx=<?=$item['idx']?>&p_n=<?=$_GET['p_n']?>"><?=$item["worker_name"]?></a></td>
           <td><?=$item["worker_term_start"]?></td>
           <td><?=$item["worker_term_end"]?></td>
           <td><?=$working_status?></td>
@@ -113,10 +116,11 @@
         ?>
         </tbody>
       </table>
+      <?php if($data_page_total_cnt == 0){ echo"<div class='text-center'><span>등록된 근로자가 없습니다</span></div>"; }?>
+
       <div class="float-start"><div class="dataTables_info" id="datatables_info" role="status" aria-live="polite">(총 <?=$data_page_total_cnt?> 개의 데이터)</div></div>
       <ul style="float: right" class="pagination">
         <li class="paginate_button page-item previous disabled" id="datatables_previous">
-          <a href="#" aria-controls="datatables" data-dt-idx="0" tabindex="0" class="page-link">이전</a></li>
         <?php
          $data_page_num = $data_page_total_cnt/10;
          for($i=1;$i<=$data_page_num;$i++){
@@ -127,7 +131,6 @@
         <?php } ?>
           <a href="javascript:nextPage(<?=$i?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a></li>
         <?php }?>
-        <li class="paginate_button page-item next disabled" id="datatables_next"><a href="#" aria-controls="datatables" data-dt-idx="2" tabindex="0" class="page-link">다음</a></li>
       </ul>
     </div>
   </section>

@@ -83,13 +83,20 @@ $(document).ready(function(){
                     return html;
                 }
             }
-					,{title: "정보보기", data: "user_phone",visible: true, className: "text-nowrap",
-							"render": function( data, type, row, meta ){
+					,{title: "ID/PW찾기", data: {"user_phone":"user_phone","search_type":"search_type"},visible: true, className: "text-nowrap",
+							"render": function( data, type, row, meta ,data1){
 								let html = "";
 								html += "<a";
 								html += "   class='btn btn-secondary btn-sm m-1'";
-								html += "   href='/"+_CONTROLLER+"/detailView?user_phone="+data+"' target='_self'>";
-								html += "   상세보기";
+								html += "   href='/"+_CONTROLLER+"/searchId?user_phone="+data['user_phone']+"&type=buyer' target='_self'" +
+												"onclick=\"window.open(this.href, '_blank', 'width=500,height=330,toolbars=no,scrollbars=no'); return false;\">";
+								html += "구매기업";
+								html += "</a>";
+								html += "<a";
+								html += "   class='btn btn-secondary btn-sm m-1'";
+								html += "   href='/"+_CONTROLLER+"/searchId?user_phone="+data['user_phone']+"&type=seller' target='_self'" +
+										"onclick=\"window.open(this.href, '_blank', 'width=500,height=330,toolbars=no,scrollbars=no'); return false;\">";
+								html += "판매기업";
 								html += "</a>";
 								return html;
 							}

@@ -6,7 +6,7 @@
   <section class="py-5 mb-5">
     <div class="auto-container">
       <div class="bg-white p-5">
-        <h4 class="fw-bold pb-3 border-bottom border-2">장애인 근로자 등록</h4>
+        <h4 class="fw-bold pb-3 border-bottom border-2">장애인 근로자 정보</h4>
         <form id="info_form" method="post" action="/<?=_CONTROLLER?>/updateWorker" enctype="multipart/form-data">
           <input type="hidden" name="idx" value="<?=$data['idx']?>">
           <div class="d-flex py-5">
@@ -111,8 +111,8 @@
           </div>
           <div class="text-center">
             <button class="btn btn-warning" onclick="updateWorker()" type="button">수정하기</button>
-            <button class="btn btn-secondary" onclick="goList()" type="reset">목록보기</button>
-            <button class="btn btn-danger" type="reset">취소하기</button>
+            <button class="btn btn-secondary" onclick="goList('<?=$_GET['p_n']?>')" type="reset">목록보기</button>
+            <button class="btn btn-danger" type="reset">되돌리기</button>
           </div>
         </form>
       </div>
@@ -176,7 +176,7 @@
     location.href="/Seller/IMJOB/downloadFileNew?fileName="+fileName;
 	};
 
-	function goList(pageNumber){
-		location.href="/Seller/IMJOB/List?pageNumber="+pageNumber;
+	function goList(p_n){
+		location.href="/Seller/IMJOB/List?p_n="+p_n;
 	};
 </script>

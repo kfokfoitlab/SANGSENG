@@ -65,8 +65,8 @@ $routes->group('Member', ['namespace' => 'App\Controllers\Member'], static funct
 	$routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
 	$routes->get ($group_name.'/DeleteSubmit/(:any)', $group_name.'::DeleteSubmit/$1');
 	$routes->get ($group_name.'/statusUpdate', $group_name.'::statusUpdate');
-	$routes->get ($group_name.'/detailView', $group_name.'::detailView');
-
+	$routes->get ($group_name.'/searchId', $group_name.'::searchId');
+	$routes->post ($group_name.'/resetPw', $group_name.'::resetPw');
 });
 
 // 채용
@@ -89,6 +89,16 @@ $routes->group('Job', ['namespace' => 'App\Controllers\Job'], static function ($
     $routes->post($group_name.'/getList',           $group_name.'::getList');
     $routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
     $routes->get ($group_name.'/Update',            $group_name.'::Update');
+});
+
+// 인재
+$routes->group('IMJOB', ['namespace' => 'App\Controllers\IMJOB'], static function ($routes) {
+	// 전체 목록
+	$group_name = "Lists";
+	$routes->get ($group_name.'/',                  $group_name.'::Index');
+	$routes->post($group_name.'/getList',           $group_name.'::getList');
+	$routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
+	$routes->get ($group_name.'/Update',            $group_name.'::Update');
 });
 
 // 이력서

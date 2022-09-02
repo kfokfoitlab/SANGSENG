@@ -129,17 +129,32 @@
             </script>
         ";
 		}
-		public function detailView()
+		
+		public function searchId()
 		{
 			$data = array(
-				"user_phone" => $_GET["user_phone"]
+				"user_phone" => $_GET["user_phone"],
+				"type" => $_GET["type"]
 			);
-			$data = $this->model->getCompanyUuid($data);
-			echo "
-            <script>
-            	window.location.replace('/Member/User/Detail/".$data["uuid"]."');
-            </script>
-        ";
+			$data = $this->model->getCompanyEmail($data);
+			if($data['email'] != "") {
+				echo view(_CONTROLLER.'/result.html', $data);
+			}else{
+				$data['errorMsg'] = "등록된 아이디가 없습니다";
+				echo view(_CONTROLLER.'/result.html', $data);
+			}
+		}
+		
+		public function resetPw()
+		{
+			$data = array(
+				"uuid" => $_POST["uuid"],
+				"phone" => $_POST["phone"],
+				"email" => $_POST["email"],
+				"type" => $_POST["type"]
+			);
+			$resetPw = $this->model->resetPw($data);
+			echo $resetPw;
 		}
 		
 	}

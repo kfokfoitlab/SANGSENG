@@ -131,24 +131,56 @@
 			
 			return 1;
 		}
-		public function getCompanyUuid($data)
+		public function getCompanyEmail($data)
 		{
-			$user_phone = substr($data["user_phone"],0,3)."-".substr($data["user_phone"],3,4)."-".substr($data["user_phone"],7,4);
 			//echo $user_phone;
+			$table = "";
+			if($data["type"] == "seller" ) {
+				$table = "seller_company";
+			}elseif($data["type"] == "buyer" ){
+				$table = "buyer_company";
+			}
+			
 			$query = "
 			SELECT
-				uuid
+				*
 			FROM
-				seller_company
+				".$table."
 			WHERE
-				phone = '".$user_phone."'
+				phone = '".$data["user_phone"]."'
 			LIMIT 1
 			";
 			
-			//echo $query;
+//			echo $query;
 			$this->rodb->query($query);
 			$data = $this->rodb->next_row();
 			return $data;
+		}
+		
+		public function resetPw($data)
+		{
+			//echo $user_phone;
+			$table = "";
+			if($data["type"] == "seller" ) {
+				$table = "seller_company";
+			}elseif($data["type"] == "buyer" ){
+				$table = "buyer_company";
+			}
+			
+			$resetPw = str_replace('-','',$data["phone"]);
+			$query = "
+			UPDATE
+			".$table."
+			SET
+				password = SHA2('".$resetPw."', 256)
+			WHERE
+				phone = '".$data["phone"]."'
+				and email = '".$data["email"]."'
+			";
+
+//			echo $query;
+			$this->wrdb->update($query);
+			return $resetPw;
 		}
 	}
 

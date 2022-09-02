@@ -84,6 +84,15 @@ echo script_tag("assets/js/Common.js");
         <a href="/Member/ForgotInfo">ID/PW찾기</a>
       </div>
     </li>
+    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "IMJOB") !== false)?"active":""?>">
+      <a class="menu-link" href="#">
+        <i class="icon material-icons md-group_work"></i>
+        <span class="text">인재관리</span>
+      </a>
+      <div class="submenu">
+        <a href="/IMJOB/Lists">전체 목록</a>
+      </div>
+    </li>
     <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Application") !== false)?"active":""?>"> 
       <a class="menu-link" href="#">
         <i class="icon material-icons md-send"></i>  
