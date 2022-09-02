@@ -11,8 +11,9 @@ $Expectation_money = number_format($Expectation);
 $Remainder = $total -$Expectation;
 $Remainder_money = number_format($Remainder);
 ?>
-
-
+<?php
+  if($_SESSION["login_info"]["type"] == "buyer"){
+  ?>
 <div
   class="left-fixed-box buyer-left-box bg-dark py-4 px-3 text-white">
   <h2 class="visually-hidden">감면액 및 계약리스트</h2>
@@ -32,7 +33,6 @@ $Remainder_money = number_format($Remainder);
   <div class="mt-4">
     <?php
   foreach($_SESSION["Contract"] as $item){
-
   $contract_regdt = $item["contract_regdt"];
   $timestamp = strtotime($contract_regdt);
   $contract_regdt = date("Y-m-d", $timestamp);
@@ -59,3 +59,6 @@ $Remainder_money = number_format($Remainder);
     </ul>
   </div>
 </div>
+<?php
+}
+?>
