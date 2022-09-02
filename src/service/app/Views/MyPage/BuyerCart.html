@@ -12,7 +12,7 @@
       <h3 class="mt-5 h4 fw-bold text-center">장바구니</h3>
       <div class="px-3 mb-5">
         <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom ">
-          <p>상품목록 (총 <span><?php echo count($data)?></span>개)</p>
+          <p>상품목록 (총 <span><?=count($data)?></span>개)</p>
           <div class="d-flex">
             <select class="form-select form-select-sm me-3" aria-label="Default select example">
               <option selected>최근등록일순</option>
@@ -53,18 +53,18 @@
           </tr>
           </thead>
           <form name="myForm" method="post" action="">
-            <input type="hidden" name="product_no" id ="product_no" value="">
-            <input type="hidden" name="buyer_uuid" id ="buyer_id" value="">
-            <input type="hidden" name="seller_uuid" id ="seller_id" value="">
+
           <tbody>
           <?php
           if(is_array($data)){
         foreach($data as $item){
+         $product_price = number_format($item["product_price"]);
         ?>
-
+          <input type="hidden" name="product_no" id ="product_no" value="<?=$item['product_no']?>">
+          <input type="hidden" name="seller_uuid" id ="seller_id" value="<?=$item['register_id']?>">
             <tr>
               <td>
-                <img src="/assets/images/resource/products/item01.png" alt="기업로고">
+                <img src="/uploads/upload_files/<?=$item['representative_image']?>" alt="기업로고">
               </td>
               <td>
                 <h4><a href=""><span class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h4>
@@ -74,13 +74,13 @@
                 <p><?=$item['product_quantity']?></p>
               </td>
               <td>
-                <p><?=$item['product_price']?>원</p>
+                <p><?=$product_price?>원</p>
               </td>
               <td>
                 <p>23,520,000원</p>
               </td>
               <td>
-                <button onclick="cart_del(<?=$item['idx']?>);" class="btn btn-sm btn-danger">삭제</button>
+                <button onclick="cart_del(<?=$item['productidx']?>);" class="btn btn-sm btn-danger">삭제</button>
                 <button onclick="contract();" class="btn btn-sm btn-success">계약하기</button>
               </td>
             </tr>

@@ -8,12 +8,12 @@
     <div class="tabs-content">
       <!--Tab-->
       <div class="tab active-tab" id="tab1">
+        <?php
+          if(is_array($data) && count($data) > 0){
+        foreach($data as $item){
+        ?>
         <div class="row">
           <!-- Job Block -->
-          <?php
-          if(is_array($data) && count($data) > 0){
-          foreach($data as $item){
-          ?>
           <div class="job-block col-sm-12">
             <div class="inner-box">
               <div class="content d-flex align-items-center">
@@ -29,17 +29,16 @@
                     <li><span class="icon flaticon-map-locator"></span><?=$item["product_price"]?>원</li>/
                     <li><span class="icon flaticon-clock-3"></span><?=$item["product_start"]?></li>/
                     <li><span class="icon flaticon-money"></span><?=$item["product_end"]?></li>/
-
                   </ul>
                 </div>
               </div>
             </div>
           </div>
-          <?php
+        </div>
+        <?php
                 }
               }
             ?>
-        </div>
       </div>
     </div>
   </div>

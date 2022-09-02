@@ -1,10 +1,10 @@
 <?php
-namespace App\Models\Member;
+namespace App\Models\TermsHistory;
 use App\Models\CommonModel;
 
-class UserModel extends CommonModel
+class TermsHistoryModel extends CommonModel
 {
-    private $table_name = "buyer_company";
+    private $table_name = "application";
 
     public function getListData($data)
     { // {{{
@@ -37,6 +37,14 @@ class UserModel extends CommonModel
             if(!@$val["search"]["value"]){
                 continue;
             }
+            else if($val["data"] == "progress"){
+                if($val["search"]["value"] == "1"){
+                    $filtering[] = "receipt_expire_date >= '".date("Y-m-d")."'";
+                }
+                else if($val["search"]["value"] == "2"){
+                    $filtering[] = "receipt_expire_date < '".date("Y-m-d")."'";
+                }
+            }
             else if($val["data"] == "register_date"){
                 $t = explode("~", $val["search"]["value"]);
                 $filtering[] = "register_date between '".$t[0]." 00:00:00' and '".$t[1]." 23:59:59'";
@@ -49,6 +57,7 @@ class UserModel extends CommonModel
             }
         }
         $filtering_query = (count($filtering) > 0)? " and ".@join(" and ", $filtering):"";
+        //debug($filtering_query);
         // ---------------------------------------------- }}}
 
         // filtered count ------------------------------- {{{
@@ -85,6 +94,41 @@ class UserModel extends CommonModel
         $query = "
             select
                  *
+                ,(
+                    select
+                        title
+                    from
+                        db_job_employment_type
+                    where
+                        idx = ".$this->table_name.".employment_type
+                    limit 1
+                ) as employment_type_title
+                ,(
+                    select
+                        title
+                    from
+                        db_job_career
+                    where
+                        idx = ".$this->table_name.".career
+                    limit 1
+                ) as career_title
+                ,(
+                    select
+                        title
+                    from
+                        db_job_profession
+                    where
+                        idx = ".$this->table_name.".profession
+                    limit 1
+                ) as profession_title
+                ,(
+                    select
+                        count(*)
+                    from
+                        application_receipt
+                    where
+                        application_uuid = ".$this->table_name.".uuid
+                ) as receipt_count
             from
                 ".$this->table_name."
             where
@@ -102,6 +146,16 @@ class UserModel extends CommonModel
             $row["num"] = $num--;
 
             unset($row["coordinate"]);
+
+            // 진행여부
+            $exp_time = strtotime($row["receipt_expire_date"]);
+            $now_time = time();
+            if($now_time < $exp_time){
+                $row["progress"] = 1;
+            }
+            else {
+                $row["progress"] = 0;
+            }
 
             $items[] = $row;
         }
@@ -122,8 +176,6 @@ class UserModel extends CommonModel
         $query = "
             select
                 *
-                ,ST_X(coordinate) as latitude
-                ,ST_Y(coordinate) as logitude
             from
                 ".$this->table_name."
             where
@@ -133,8 +185,37 @@ class UserModel extends CommonModel
         ";
         $this->rodb->query($query);
         $row = $this->rodb->next_row();
+        $data["application"] = $row;
 
-        $data = $row;
+
+        $query = "
+            select
+                *
+                ,(
+                    select
+                        name 
+                    from
+                        user
+                    where
+                        uuid = t1.user_uuid
+                ) as user_name
+                ,(
+                    select
+                        title 
+                    from
+                        resume
+                    where
+                        uuid = t1.resume_uuid
+                ) as resume_title
+            from
+                ".$this->table_name."_receipt t1
+            where
+                application_uuid = '".$uuid."'
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $data["receipt"][] = $row;
+        }
 
         return $data;
     } //}}}
@@ -248,6 +329,26 @@ class UserModel extends CommonModel
             limit 1
         ";
         $this->wrdb->update($query);
+
+    } //}}}
+
+    public function Recommend($type, $uuid)
+    { //{{{
+
+        $type = ($type == "enable")? "recommended = 1":"recommended = null"; 
+
+        $query = "
+            update
+                ".$this->table_name."
+            set
+                ".$type."
+            where
+                uuid = '".$uuid."'
+            limit 1
+        ";
+        $this->wrdb->update($query);
+
+        return 1;
 
     } //}}}
 }

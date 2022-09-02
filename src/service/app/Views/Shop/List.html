@@ -1,20 +1,30 @@
 <?php
   // Left Menu
+  if($_SESSION['login_info']['type'] == 'buyer'){
   require APPPATH . '/Views/Buyer/Components/Left.html';
+  }elseif($_SESSION['login_info']['type'] == 'seller'){
+  require APPPATH.'/Views/Seller/Components/Left.html';
+  }
 ?>
 <div class="flex-grow-1">
   <section class="shop-list">
     <div class="auto-container">
       <div class="w-100 py-5 mb-5">
         <h2 class="text-center mb-3 fw-bold">추천상품</h2>
-        <?php
-          if(is_array($ranking) && count($ranking)){
-        foreach($ranking as $item){
 
-        ?>
         <table class="table border-top border-bottom border-2">
+          <th>상품사진</th>
+          <th>회사명/상품명</th>
+          <th>상품구분</th>
+          <th>계약금액</th>
+          <th>감면액</th>
           <tbody>
           <tr>
+            <?php
+          if(is_array($ranking) && count($ranking)){
+        foreach($ranking as $item){
+     $product_price = number_format($item["product_price"]);
+           ?>
             <td>
            <img class="preview-img-small" src="/uploads/upload_files/<?=$item['representative_image']?>" alt="기업로고">
             </td>
@@ -26,29 +36,32 @@
               <p><?=$item['product_quantity']?></p>
             </td>
             <td>
-              <p><?=$item['product_price']?></p>
+              <p><?=$product_price?>원</p>
 
             </td>
             <td>
-              <p><?=$item['product_end']?></p>
+              <p>1,000,000원</p>
             </td>
           </tr>
-          </tbody>
-        </table>
-        <?php
+          <?php
                 }
               }
             ?>
+          </tbody>
+        </table>
+
       </div>
 
       <div class="px-3 mb-5">
         <div class="order-items d-flex justify-content-end mb-4">
+<!--
           <span class="px-3 active">인기상품순</span>
           <span class="px-3">높은감면액순</span>
           <span class="px-3">낮은감면액순</span>
           <span class="px-3">높은가격순</span>
           <span class="px-3">낮은가격순</span>
         </div>
+-->
 
         <table class="table">
           <thead>
@@ -70,11 +83,12 @@
             </th>
           </tr>
           </thead>
+          <tbody>
           <?php
           if(is_array($list)&& count($list)){
           foreach($list as $item){
+           $product_price = number_format($item["product_price"]);
           ?>
-          <tbody>
           <tr>
             <td>
               <img class="preview-img-small" src="/uploads/upload_files/<?=$item['representative_image']?>" alt="기업로고">
@@ -85,22 +99,20 @@
             </td>
             <td>
               <p><?=$item["product_quantity"]?></p>
-
             </td>
             <td>
-              <p><?=$item["product_price"]?>원</p>
-
+              <p><?=$product_price?>원</p>
             </td>
             <td>
               <p>1,176,000원</p>
-
             </td>
           </tr>
-          </tbody>
           <?php
                 }
               }
             ?>
+          </tbody>
+
         </table>
 
       </div>

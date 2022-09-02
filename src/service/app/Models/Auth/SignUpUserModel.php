@@ -94,7 +94,7 @@ class SignUpUserModel extends CommonModel
                 ,interest_food = '".$data["interest_food"]."'            
                 ,receive_yn = '".$receive_yn ."'
                 ,register_date = '".date("Y-m-d H:i:s")."'
-                ,register_id = '".$data["email"]."'
+                ,register_id ='".$uuid."'
                 ,buyer_documents = '".$name."'
         ";
         $idx = $this->wrdb->insert($query);

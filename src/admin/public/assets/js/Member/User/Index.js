@@ -34,9 +34,9 @@ $(document).ready(function(){
         "columns": [
              {title: "idx", data: "idx", visible: false}
             ,{title: "아이디", data: "email", visible: true, className: "text-nowrap"}
-            ,{title: "기업명", data: "name", visible: true, className: "text-nowrap"}
-            ,{title: "사업자등록번호", data: "name", visible: true, className: "text-nowrap"}
-            ,{title: "담당자", data: "name", visible: true, className: "text-nowrap"}
+            ,{title: "기업명", data: "company_name", visible: true, className: "text-nowrap"}
+            ,{title: "사업자등록번호", data: "company_code", visible: true, className: "text-nowrap"}
+            ,{title: "담당자", data: "buyer_name", visible: true, className: "text-nowrap"}
             ,{title: "연락처", data: "phone", visible: true, className: "text-nowrap"}
             ,{title: "진행상황", data: "status", visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){

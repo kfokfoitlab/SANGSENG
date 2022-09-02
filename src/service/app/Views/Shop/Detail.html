@@ -1,53 +1,49 @@
 <?php
   // Left Menu
-  require(__DIR__.'/Components/Left.html');
+require APPPATH . '/Views/Buyer/Components/Left.html';
 ?>
 <div style="flex-grow: 1" xmlns="http://www.w3.org/1999/html">
   <div class="shop-detail">
     <div class="auto-container">
       <div class="pt-5">
         <?php
-          if(is_array($data) && count($data) > 0){
-        foreach($data as $item){
         $delivery_cycle = "";
-        if($item["delivery_cycle"] == 1){
+        if($data["delivery_cycle"] == 1){
         $delivery_cycle = "1번";
-        }else if($item["delivery_cycle"] == 2){
+        }else if($data["delivery_cycle"] == 2){
         $delivery_cycle = "1주일에 한 번";
-        }else if($item["delivery_cycle"] == 3){
+        }else if($data["delivery_cycle"] == 3){
         $delivery_cycle = "1달에 한 번";
-        }else if($item["delivery_cycle"] ==4){
+        }else if($data["delivery_cycle"] ==4){
         $delivery_cycle = "2달에 한 번";
-        }else if($item["delivery_cycle"] == 5){
+        }else if($data["delivery_cycle"] == 5){
         $delivery_cycle = "6달에 한 번";
         }
         ?>
-        <h2 class="mb-2"><span class="text-primary"><?=$item["company_name"]?></span><?=$item["product_name"]?></h2>
-        <p class="mb-3"><?=$item["product_detail"]?></p>
+        <h2 class="mb-2"><span class="text-primary"><?=$data["company_name"]?></span><?=$data["product_name"]?></h2>
+        <p class="mb-3"><?=$data["product_detail"]?></p>
       </div>
-
-
       <form name="myForm" method="POST" action="">
         <input type ="hidden" id="session" value="<?=$_SESSION['login']?>">
-        <input type="hidden" name="product_no" value="<?=$item['product_no']?>">
+        <input type="hidden" name="product_no" value="<?=$data['product_no']?>">
         <input type="hidden" name="buyer_uuid" id ="buyer_uuid"  value="<?=$_SESSION['login_info']['uuid']?>">
-        <input type="hidden" name="seller_uuid" id ="seller_uuid" value= "<?=$item['uuid']?>">
+        <input type="hidden" name="seller_uuid" id ="seller_uuid" value= "<?=$data['seller_uuid']?>">
 
         <div class="d-flex pt-4 pb-5 mb-4">
         <div class="detail-left">
           <div>
             <div class="p-3 border preview-img-big">
-              <img src="/uploads/upload_files/<?=$item["representative_image"]?>" alt="기업로고">
+              <img src="/uploads/upload_files/<?=$data['representative_image']?>" alt="기업로고">
             </div>
             <ul class="d-flex justify-content-between mt-3 list-preview">
               <li class="border p-2">
-                <img class="preview-img-small" src="/uploads/upload_files/<?=$item["representative_image"]?>" alt="기업로고">
+                <img class="preview-img-small" src="/uploads/upload_files/<?=$data['representative_image']?>" alt="기업로고">
               </li>
               <li class="border p-2">
-                <img class="preview-img-small" src="/uploads/upload_files/<?=$item["product_image1"]?>" alt="기업로고">
+                <img class="preview-img-small" src="/uploads/upload_files/<?=$data['product_image1']?>" alt="기업로고">
               </li>
               <li class="border p-2">
-                <img class="preview-img-small" src="/uploads/upload_files/<?=$item["product_image2"]?>" alt="기업로고">
+                <img class="preview-img-small" src="/uploads/upload_files/<?=$data['product_image2']?>" alt="기업로고">
               </li>
             </ul>
           </div>
@@ -57,7 +53,7 @@
           <div class="d-flex mb-4">
          <div class="selecotr-item" id="item">
           <input type="radio" id="item01" name="items" class="selector-item_radio" checked/>
-          <label for="item01" class="selector-item_label px-2 py-1 me-2"><?=$item["product_quantity"]?></label>
+          <label for="item01" class="selector-item_label px-2 py-1 me-2"><?=$data["product_quantity"]?></label>
         </div>
         </div>
           <div class="d-flex">
@@ -77,15 +73,11 @@
             </div>
           </div>
           <div class="mt-5 pt-4 text-end border-top total-price">
-            <h2 class="mb-2"><span>계약금액</span><?=$item["product_price"]?>원</h2>
+            <h2 class="mb-2"><span>계약금액</span><?=$data["product_price"]?>원</h2>
             <h2><span>감면액</span> 20,000,000원</h2>
           </div>
         </div>
       </div>
-      <?php
-                }
-              }
-            ?>
       </form>
       <?php
         if($_SESSION["login_info"]["type"] == "buyer" || $_SESSION["login"] != "success"){
@@ -154,14 +146,6 @@
   </div>
 </div>
 <script>
-
-  var buyer_email = $("#buyer_email").val();
-  var buyer_name = $("#buyer_name").val();
-  var buyer_company_name = $("#buyer_company_name").val();
-
-  var seller_email = $("#seller_email").val();
-  var seller_name = $("#seller_name").val();
-  var seller_company_name = $("#seller_company_name").val();
   function myCart() {
     var session = $("#session").val();
     if(session === "success") {

@@ -111,6 +111,15 @@ echo script_tag("assets/js/Common.js");
         <a href="/Job/Lists">전체 목록</a>
       </div>
     </li>
+    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Employees") !== false)?"active":""?>">
+    <a class="menu-link" href="#">
+      <i class="icon material-icons md-face"></i>
+      <span class="text">근로자관리</span>
+    </a>
+    <div class="submenu">
+      <a href="/Employees/Lists">전체 목록</a>
+    </div>
+    </li>
     <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Resume") !== false)?"active":""?>"> 
       <a class="menu-link" href="#">
         <i class="icon material-icons md-face"></i>  
@@ -172,6 +181,15 @@ echo script_tag("assets/js/Common.js");
         <a href="/Terms/Subscribe">광고성 정보 수신</a>
 <!--        <a href="/Terms/AdditionalService">부가서비스 및 혜택 안내</a>-->
       </div>
+    </li>
+    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Terms") !== false)?"active":""?>">
+    <a class="menu-link" href="#">
+      <i class="icon material-icons md-description"></i>
+      <span class="text">약관동의 이력</span>
+    </a>
+    <div class="submenu">
+      <a href="/TermsHistory/Lists">전체 목록</a>
+    </div>
     </li>
   </ul>
 

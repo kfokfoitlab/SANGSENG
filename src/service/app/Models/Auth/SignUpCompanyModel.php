@@ -87,7 +87,7 @@ class SignUpCompanyModel extends CommonModel
                 ,mild_disabled = '".$data['mild_disabled']."'        
                 ,receive_yn = '".$receive_yn ."'
                 ,register_date = '".date("Y-m-d H:i:s")."'
-                ,register_id = '".$data["email"]."'
+                ,register_id = '".$uuid."'
                 ,seller_documents = '".$name."'
         ";
         $idx = $this->wrdb->insert($query);

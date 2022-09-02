@@ -206,6 +206,24 @@ $routes->group('Terms', ['namespace' => 'App\Controllers\Terms'], static functio
     $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
 });
 
+// 약관히스토리
+$routes->group('TermsHistory', ['namespace' => 'App\Controllers\TermsHistory'], static function ($routes) {
+    // 전체 목록
+    $group_name = "Lists";
+    $routes->get ($group_name.'/',                  $group_name.'::Index');
+    $routes->get ($group_name.'/Detail',            $group_name.'::Detail');
+
+});
+
+// 근로자관리
+$routes->group('Employees', ['namespace' => 'App\Controllers\Employees'], static function ($routes) {
+    // 전체 목록
+    $group_name = "Lists";
+    $routes->get ($group_name.'/',                  $group_name.'::Index');
+    $routes->get ($group_name.'/Detail',            $group_name.'::Detail');
+    $routes->get ($group_name.'/Update',            $group_name.'::Update');
+
+});
 
 /*
  * --------------------------------------------------------------------

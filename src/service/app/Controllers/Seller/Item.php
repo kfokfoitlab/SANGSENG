@@ -12,6 +12,7 @@ class Item extends BaseController
     private $item_model;
     private $database_model;
     private $seller_model;
+    private $item_per_page = 10;
 //
     public function __construct()
     { //{{{
@@ -21,13 +22,42 @@ class Item extends BaseController
         $this->database_model = new DatabaseModel;
     } //}}}
 
+    public function Search(){
+     $uuid = $_SESSION['login_info']['uuid'];
+        $data = $this->seller_model->searchProductList($uuid);
+        $data = array(
+            "search" => $data["data"]
+        );
+        echo view("Common/Header.html");
+        echo view('Seller/ItemList.html',$data);
+        echo view("Common/Footer.html");
+    }
     public function ItemList()
     { // {{{
+
+        $page = (@$_GET["page"])?$_GET["page"] : 1;
+        $this->item_per_page = (@$_GET["length"])?$_GET["length"]:$this->item_per_page;
+
+        $page_query = array(
+        "page" => $page
+        ,"length" => $this->item_per_page
+        );
+
         $uuid = $_SESSION['login_info']['uuid'];
-        $data = $this->seller_model->getProductList($uuid);
+        $data = $this->seller_model->getProductList($uuid,$page_query,0);
+        $data_cnt = $this->seller_model->getProductCount($uuid);
+        $total_count = $data["count"];         // 전체 아이템 수
+        $item_per_page = $this->item_per_page;
+        $page_count = ceil($total_count / $item_per_page);    // 노출될 페이지 수
+        $now_page = $page;
 
         $data = array(
-            "data" => $data["data"]
+            "data" => $data["data"],
+            "data_cnt" => $data_cnt,
+            "pagination" => array(
+             "page_count" => $page_count
+            ,"now_page" => $now_page
+            )
         );
         echo view("Common/Header.html");
         echo view('Seller/ItemList.html',$data);

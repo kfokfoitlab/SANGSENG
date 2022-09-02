@@ -24,8 +24,7 @@ class BuyerModel extends CommonModel
               seller_product
            order by 
                idx desc
-            
-           
+            limit 5  
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
@@ -40,21 +39,19 @@ class BuyerModel extends CommonModel
         $data["data"] = [];
         $query = "
               select
-                  *
+                  *, a.register_id as 'seller_uuid'
             from 
                 seller_product a 
                 join
                     seller_company b 
                         on a.register_id = b.uuid
             where 
-                product_no = $product_no
-              and 
-                a.register_id = b.uuid
+                a.product_no = $product_no
 
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
-            $data["data"] = $row;
+            $data = $row;
         }
         return $data;
     }
@@ -65,7 +62,7 @@ class BuyerModel extends CommonModel
         $contract_no = date("YmdHis");
         //1:���δ��,2:������,3:���ű�� ����,5:���Ϸ�,7:�ݷ�,9:������
         $contract_status = "1";
-
+        $buyer_uuid = $_SESSION['login_info']['uuid'];
         $query = "
           insert into
               contract_condition
@@ -74,7 +71,7 @@ class BuyerModel extends CommonModel
                ,uuid = '".$uuid."'
               ,contract_status = '".$contract_status."'
               ,seller_uuid = '".$data["seller_uuid"]."'
-              ,buyer_uuid = '".$data["buyer_uuid"]."'
+              ,buyer_uuid = '".$buyer_uuid."'
               ,product_no = '".$data["product_no"]."'       
               ,register_date = '".date("Y-m-d H:i:s")."'
               ,del_yn = 'N'          
@@ -131,10 +128,10 @@ class BuyerModel extends CommonModel
         return $list;
     }
 
-    public function CartInsert(){
-        $product_no = $_POST["product_no"];
-        $buyer_id = $_POST["buyer_uuid"];
-        $seller_uuid = $_POST["seller_uuid"];
+    public function CartInsert($data){
+        $product_no = $data["product_no"];
+        $buyer_id = $data["buyer_uuid"];
+        $seller_id = $data["seller_uuid"];
 
         $query = "
           insert into
@@ -142,7 +139,7 @@ class BuyerModel extends CommonModel
           set
                product_no = '".$product_no."'
                ,buyer_id = '".$buyer_id."' 
-               ,seller_id = '".$seller_uuid."' 
+               ,seller_id = '".$seller_id."' 
               ,register_date = '".date("Y-m-d H:i:s")."'
               ,register_id = '".$buyer_id."' 
               ,del_yn = 'N'          
@@ -153,9 +150,6 @@ class BuyerModel extends CommonModel
         }else{
             return null;
         }
-
     }
-
-
 }
 header("Content-Type:text/html;charset=EUC-KR");?>
