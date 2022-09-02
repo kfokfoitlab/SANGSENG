@@ -56,7 +56,14 @@ class SellerModel extends CommonModel
             return null;
         }
     }
-    public function getProductList($uuid){
+    public function getProductList($uuid,$page_query,$limit){
+        $limit = "";
+        if($limit){
+            $limit = "limit ".$limit;
+        }
+        $l_start = $page_query["length"] * ($page_query["page"] - 1);
+        $l_end = $page_query["length"];
+        $limit_query = "limit ".$l_start.", ".$l_end;
 
         $data = [];
         // total
@@ -68,25 +75,82 @@ class SellerModel extends CommonModel
             where register_id ='".$uuid."'
         ";
         $data["count"] = $this->rodb->simple_query($query);
+        $where_query = "";
+
+        if($_GET["search_A"] != ""){
+            $where_query = $where_query." and product_name like '%".$_GET["search_A"]."%'";
+        }
+        if($_GET["search_B"] != "all" && $_GET["search_B"] != ""){
+            if($_GET["search_B"] == "1"){
+                $where_query = $where_query." and status=1";
+            }elseif ($_GET["search_B"] == "5"){
+                $where_query = $where_query." and status=5";
+            }elseif ($_GET["search_B"] == "9"){
+                $where_query = $where_query." and status=9";
+            }
+        }
+        if($_GET["search_C"] != ""){
+            $where_query = $where_query." and product_category = '".$_GET["search_C"]."'";
+        }
+
         $data["data"] = [];
         $query = "
             select
                 *
             from
               seller_product  
-            where register_id ='".$uuid."'
-           order by 
-               product_ranking desc
-           
-           
+            where register_id ='".$uuid."'".$where_query." ".$limit_query."       
         ";
+       // echo $query;
+      //  $query = $query." order by register_date  desc";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
             $data["data"][] = $row;
-
         }
         return $data;
     }
+
+    public function getProductCount($uuid){
+
+        // total
+        $query = "
+            select
+                count(*) as product_cnt,
+                count(case when status =1 then 1 end) as status1,
+                count(case when status=5 then 1 end) as status5,
+                count(case when status=9 then 1 end) as status9
+            from seller_product where 1=1
+                                  and register_id ='".$uuid."'
+                                   and (del_yn != 'y' or del_yn is null)
+    
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $data_cnt = $row;
+        }
+        return $data_cnt;
+}
+
+
+    public function getContractCount($uuid){
+        $query = "
+            select
+                count(*) as contract_cnt,
+                count(case when contract_status =1 then 1 end) as status1,
+                count(case when contract_status=2 then 1 end) as status2,
+                count(case when contract_status=5 then 1 end) as status5
+            from contract_condition where 1=1
+                                  and seller_uuid ='".$uuid."'
+                                   and (del_yn != 'y' or del_yn is null)
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $data_cnt = $row;
+        }
+        return $data_cnt;
+    }
+
+
     public function getContractList($uuid){
 
         $data = [];
@@ -100,6 +164,20 @@ class SellerModel extends CommonModel
         ";
         $data["count"] = $this->rodb->simple_query($query);
         $data["data"] = [];
+        $where_query = "";
+
+        if($_GET["search_A"] != ""){
+            $where_query = $where_query." and contract_no like '%".$_GET["search_A"]."%'";
+        }
+        if($_GET["search_B"] != "all" && $_GET["search_B"] != ""){
+            if($_GET["search_B"] == "1"){
+                $where_query = $where_query." and contract_status=1";
+            }elseif ($_GET["search_B"] == "2"){
+                $where_query = $where_query." and contract_status=2";
+            }elseif ($_GET["search_B"] == "5"){
+                $where_query = $where_query." and contract_status=5";
+            }
+        }
         $query = "
             select
                *
@@ -107,7 +185,7 @@ class SellerModel extends CommonModel
               contract_condition a
             join seller_product b 
             on a.seller_uuid = b.register_id
-            where seller_uuid ='".$uuid."'
+            where seller_uuid ='".$uuid."'".$where_query."
            order by 
                a.idx desc
            

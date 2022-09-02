@@ -111,6 +111,20 @@ class MyPageModel extends CommonModel
         ";
         $data["count"] = $this->rodb->simple_query($query);
         $data["data"] = [];
+        $where_query = "";
+
+        if($_GET["search_A"] != ""){
+            $where_query = $where_query." and contract_no like '%".$_GET["search_A"]."%'";
+        }
+        if($_GET["search_B"] != "all" && $_GET["search_B"] != ""){
+            if($_GET["search_B"] == "1"){
+                $where_query = $where_query." and contract_status=1";
+            }elseif ($_GET["search_B"] == "2"){
+                $where_query = $where_query." and contract_status=2";
+            }elseif ($_GET["search_B"] == "5"){
+                $where_query = $where_query." and contract_status=5";
+            }
+        }
         $query = "
             select
                *
@@ -118,11 +132,9 @@ class MyPageModel extends CommonModel
               contract_condition a
             join seller_product b 
             on a.seller_uuid = b.register_id
-            where buyer_uuid ='".$uuid."'
+            where buyer_uuid ='".$uuid."'".$where_query."
            order by 
-               a.idx desc
-           
-           
+               a.idx desc    
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){

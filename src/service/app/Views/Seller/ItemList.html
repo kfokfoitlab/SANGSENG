@@ -4,122 +4,98 @@
 ?>
 <div class="flex-grow-1">
   <section class="pt-5 layout-pb-120 item-list">
+    <form name="myForm" method="GET" action="" >
+      <input type="hidden" name="page">
     <div class="auto-container">
       <ul class="d-flex border w-100 justify-content-around mb-4 py-4 text-center bg-light item-list-number">
         <li class="px-5 position-relative">
           <p class="h5 text-primary">전체</p>
-          <p class="text-primary"><strong class="h4 fw-bold"><?=count($data)?></strong>건</p>
+          <p class="text-primary"><strong class="h4 fw-bold"><?=$data_cnt['product_cnt']?></strong>건</p>
         </li>
         <li class="px-5 position-relative">
           <p class="h5">승인대기</p>
-          <p><strong class="h4 fw-bold">1</strong>건</p>
+          <p><strong class="h4 fw-bold"><?=$data_cnt['status1']?></strong>건</p>
         </li>
         <li class="px-5 position-relative">
           <p class="h5">판매중</p>
-          <p><strong class="h4 fw-bold">1</strong>건</p>
+          <p><strong class="h4 fw-bold"><?=$data_cnt['status5']?></strong>건</p>
         </li>
         <li class="px-5">
           <p class="h5">판매중지</p>
-          <p><strong class="h4 fw-bold">0</strong>건</p>
+          <p><strong class="h4 fw-bold"><?=$data_cnt['status9']?></strong>건</p>
         </li>
       </ul>
 
-      <form action="">
+
         <table class="item-search-table w-100 bg-light border-top border-bottom">
           <tbody>
           <tr class="border-bottom">
             <th>검색어</th>
             <td>
               <div class="d-flex">
-                <div class="d-flex align-items-center me-3">
-                  <label class="form-label me-1 mb-0 col-form-label-sm flex-shrink-0" for="">상품번호</label>
-                  <input type="text" class="form-control form-control-sm"/>
-                </div>
                 <div class="d-flex align-items-center">
-                  <label class="form-label me-1 mb-0 col-form-label-sm flex-shrink-0" for="">상품명</label>
-                  <input type="text" class="form-control form-control-sm"/>
+                  <label class="form-label me-1 mb-0 col-form-label-sm flex-shrink-0" >상품명</label>
+                  <input type="text" name ="search_A" class="form-control form-control-sm"
+                  <?php if($_GET["search_A"] != ""){ echo "value='".$_GET["search_A"]."'";}?>/>
                 </div>
               </div>
             </td>
           </tr>
           <tr class="border-bottom">
-            <th>계약상태</th>
+            <th>상품상태</th>
             <td>
               <label class="form-check-label me-3" for="flexCheck01">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="flexCheck01"
-                  checked
-                />
-                전체
-              </label>
+                <input class="form-check-input" type="radio" name="search_B" value="all" id="flexCheck01"
+                <?php if($_GET["search_B"] == "all" || $_GET["search_B"] == ""){ echo "checked";}?>/> 전체</label>
               <label class="form-check-label me-3" for="flexCheck02">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="flexCheck02"
-                />
-                승인대기
-              </label>
+                <input class="form-check-input" type="radio" name="search_B" value="1" id="flexCheck02"
+                <?php if($_GET["search_B"] == "1"){ echo "checked";}?>/> 승인대기</label>
               <label class="form-check-label me-3" for="flexCheck03">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="flexCheck03"
-                />
-                판매중
-              </label>
+                <input class="form-check-input" type="radio" name="search_B" value="5" id="flexCheck03"
+                <?php if($_GET["search_B"] == "5"){ echo "checked";}?>/> 판매중</label>
               <label class="form-check-label" for="flexCheck04">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="flexCheck04"
-                />
-                판매중지
-              </label>
+                <input class="form-check-input" type="radio" name="search_B" value="9" id="flexCheck04"
+                <?php if($_GET["search_B"] == "9"){ echo "checked";}?>/> 판매중지</label>
             </td>
           </tr>
           <tr>
             <th>카테고리</th>
             <td>
-              <select class="form-select form-select-sm w-25" aria-label="Default select">
-                <option selected>전체</option>
-                <option value="1">사무용품</option>
-                <option value="2">생활용품</option>
-                <option value="3">전산용품</option>
-                <option value="4">식음료</option>
-                <option value="5">청소용품</option>
+              <select name ="search_C" class="form-select form-select-sm w-25" aria-label="Default select">
+                <!--<option name ="all" selected>전체</option>-->
+                <option value="1" <?php if($_GET["search_C"] == "1"){ echo "selected";}?>>사무용품</option>
+                <option value="2" <?php if($_GET["search_C"] == "2"){ echo "selected";}?>>생활용품</option>
+                <option value="3" <?php if($_GET["search_C"] == "3"){ echo "selected";}?>>전산용품</option>
+                <option value="4" <?php if($_GET["search_C"] == "4"){ echo "selected";}?>>식음료</option>
+                <option value="5" <?php if($_GET["search_C"] == "5"){ echo "selected";}?>>청소용품</option>
               </select>
             </td>
           </tr>
           </tbody>
         </table>
+
+
         <div class="text-center mt-4">
           <button class="btn btn-sm btn-outline-secondary me-3" type="reset">초기화</button>
-          <button class="btn btn-sm btn-primary px-3" type="submit">검색</button>
+          <button class="btn btn-sm btn-primary px-3" onclick="Product_Search();">검색</button>
         </div>
-
         <div class="d-flex justify-content-between align-items-center mt-5 pt-3 border-top border-2">
-          <span>상품목록 (총 <strong>1</strong>개)</span>
+          <span>상품목록 (총 <strong><?=count($data)?></strong>개)</span>
 
           <div class="d-flex">
-            <select class="form-select form-select-sm me-2" aria-label="Default select">
-              <option value="all" selected>전체</option>
-              <option value="recent">최근 등록일순</option>
-              <option value="low">낮은 가격순</option>
-              <option value="high">높은 가격순</option>
-            </select>
-
-            <select class="form-select form-select-sm me-2" aria-label="Default select">
-              <option value="20" selected>20개씩</option>
-              <option value="50">50개씩</option>
-              <option value="100">100개씩</option>
-              <option value="200">200개씩</option>
+            <!-- <select class="form-select form-select-sm me-2" aria-label="Default select">
+               <option value="all" selected>전체</option>
+               <option value="recent">최근 등록일순</option>
+               <option value="low">낮은 가격순</option>
+               <option value="high">높은 가격순</option>
+             </select>-->
+            <select class="form-select form-select-sm me-2"
+                    aria-label="Default select" title="노출 갯수" name="length"
+                    tabindex=103 onchange="this.form.submit()">
+              <option value="20"<?=(@$_GET["length"] == "20")?"selected":""?>>20개씩</option>
+              <option value="50" <?=(@$_GET["length"] == "50")?"selected":""?>>50개씩</option>
+              <option value="100" <?=(@$_GET["length"] == "100")?"selected":""?>>100개씩</option>
+              <option value="200" <?=(@$_GET["length"] == "200")?"selected":""?>>200개씩</option>
             </select>
 
             <button class="btn btn-sm btn-success flex-shrink-0 fw-normal">
@@ -131,13 +107,13 @@
             </button>
           </div>
         </div>
-
         <table class="item-list-table table table-striped text-center mt-5">
           <thead>
           <tr>
             <th>No.</th>
             <th>상품번호</th>
             <th>상품명</th>
+            <th>금액</th>
             <th>판매상태</th>
             <th>카테고리</th>
             <th>판매시작일</th>
@@ -169,11 +145,13 @@
           }else if($item["status"] == 7){
           $status = "반려";
           }
+          $product_price = number_format($item["product_price"]);
           ?>
           <tr>
             <td><?=$item["idx"]?></td>
             <td><a href="/Seller/Item/ItemUpdate/<?=$item['product_no']?>"><?=$item["product_no"]?></a></td>
             <td title="친환경중질지70gA4용지"><p><?=$item["product_name"]?></p></td>
+            <td><?=$product_price?>원</td>
             <td><?=$status?></td>
             <td><?=$category?></td>
             <td><?=$item["product_start"]?></td>
@@ -188,7 +166,55 @@
             ?>
           </tbody>
         </table>
-      </form>
     </div>
+      <nav class="ls-pagination">
+        <!-- Pagination {{{ -->
+        <ul>
+          <li class="prev">
+            <a href="javascript:void(0)"
+               class="pagination"
+               data-page="<?=($pagination["now_page"] > 1)?($pagination["now_page"]-1) : 1?>"
+            title="이전페이지"
+            >
+            <i class="fa fa-arrow-left"></i>
+            </a>
+          </li>
+          <?php
+            for($i=0; $i<$pagination["page_count"]; $i++){
+              if($i == ($pagination["now_page"] - 1)){
+            ?>
+          <li><a href="javascript:void(0)" class="current-page pagination" title="<?=($i+1)?>페이지" data-page="<?=($i+1)?>"><?=($i+1)?></a></li>
+          <?php
+              }
+              else {
+            ?>
+          <li><a href="javascript:void(0)" class="pagination" title="<?=($i+1)?>페이지" data-page="<?=$i+1?>"><?=$i+1?></a></li>
+          <?php
+              }
+            ?>
+          <?php
+            }
+            ?>
+          <li class="next">
+            <a href="javascript:void(0)"
+               class="pagination"
+               data-page="<?=($pagination['now_page'] < $pagination['page_count'])?($pagination['now_page']-1) : $pagination['page_count']?>"
+            title="다음페이지"
+            >
+            <i class="fa fa-arrow-right"></i>
+            </a>
+          </li>
+        </ul>
+        <!-- }}} -->
+      </nav>
+    </form>
   </section>
 </div>
+
+<script>
+  function Product_Search(){
+    document.myForm.action='/Seller/Item/ItemList';
+    document.myForm.submit();
+  }
+
+</script>

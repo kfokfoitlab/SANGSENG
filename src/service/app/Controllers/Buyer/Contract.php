@@ -27,13 +27,6 @@ class Contract extends BaseController
         echo view("Common/Footer.html");
     }
 
-    public function List()
-    { // {{{
-
-        echo view("Common/Header.html");
-        echo view('Shop/List.html');
-        echo view("Common/Footer.html");
-    } // }}}
 
     public function Detail($product_no)
     { // {{{
@@ -52,14 +45,14 @@ class Contract extends BaseController
         if($result == "1") {
             echo "
                 <script>
-                    alert('관리자에게 검토요청을 하였습니다.');
+                    alert('관리자에게 검토요청을 보냈습니다.');
 					window.location.replace('/Buyer');
                 </script>
             ";
         }else{
             echo "
                 <script>
-                    alert('오류발생.');
+                    alert('실패.');
 					history.back(-1);
                 </script>
             ";

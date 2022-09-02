@@ -39,7 +39,7 @@ class BuyerModel extends CommonModel
         $data["data"] = [];
         $query = "
               select
-                  *
+                  *, a.register_id as 'seller_uuid'
             from 
                 seller_product a 
                 join
@@ -62,7 +62,7 @@ class BuyerModel extends CommonModel
         $contract_no = date("YmdHis");
         //1:���δ��,2:������,3:���ű�� ����,5:���Ϸ�,7:�ݷ�,9:������
         $contract_status = "1";
-
+        $buyer_uuid = $_SESSION['login_info']['uuid'];
         $query = "
           insert into
               contract_condition
@@ -71,7 +71,7 @@ class BuyerModel extends CommonModel
                ,uuid = '".$uuid."'
               ,contract_status = '".$contract_status."'
               ,seller_uuid = '".$data["seller_uuid"]."'
-              ,buyer_uuid = '".$data["buyer_uuid"]."'
+              ,buyer_uuid = '".$buyer_uuid."'
               ,product_no = '".$data["product_no"]."'       
               ,register_date = '".date("Y-m-d H:i:s")."'
               ,del_yn = 'N'          

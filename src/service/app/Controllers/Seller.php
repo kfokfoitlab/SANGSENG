@@ -39,12 +39,14 @@ class Seller extends BaseController
     } // }}}
 
     public function Contract()
-    { // {{{
+    {
+
         $uuid = $_SESSION['login_info']['uuid'];
         $data = $this->seller_model->getContractList($uuid);
-
+        $data_cnt = $this->seller_model->getContractCount($uuid);
         $data = array(
-            "data" => $data["data"]
+            "data" => $data["data"],
+            "data_cnt" => $data_cnt,
     );
         echo view("Common/Header.html");
         echo view('Seller/Contract.html',$data);
