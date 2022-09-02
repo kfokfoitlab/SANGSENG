@@ -60,7 +60,7 @@ $(document).ready(function(){
 								switch(data){
 									case "0":
 									case "1":
-										html = "<span class='badge bg-info'>대기중</span>";
+										html = "<span class='badge bg-info'>대기</span>";
 										break;
 									case "5":
 										html = "<span class='badge bg-success'>완료</span>";
