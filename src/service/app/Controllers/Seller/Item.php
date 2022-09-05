@@ -79,7 +79,7 @@ class Item extends BaseController
             echo "
                 <script>
                     alert('상품이 등록되었습니다.');
-					window.location.replace('/Seller');
+					window.location.replace('/Seller/Item/ItemList');
                 </script>
             ";
         }else{
@@ -113,7 +113,7 @@ class Item extends BaseController
             echo "
                 <script>
                     alert('상품이 수정되었습니다.');
-					window.location.replace('/Seller');
+					window.location.replace('/Seller/Item/ItemList');
                 </script>
             ";
         }else{

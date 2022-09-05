@@ -107,7 +107,7 @@
             </button>
           </div>
         </div>
-        <table class="item-list-table table table-striped text-center mt-5">
+        <table class="table table-striped text-center mt-5">
           <thead>
           <tr>
             <th>No.</th>
@@ -124,6 +124,7 @@
           <tbody>
           <?php
           if(is_array($data) && count($data) > 0){
+          $i = 1;
             foreach($data as $item){
             $category = "";
               if($item["product_category"] == 1){
@@ -148,7 +149,7 @@
           $product_price = number_format($item["product_price"]);
           ?>
           <tr>
-            <td><?=$item["idx"]?></td>
+            <td><?=$i?></td>
             <td><a href="/Seller/Item/ItemUpdate/<?=$item['product_no']?>"><?=$item["product_no"]?></a></td>
             <td title="친환경중질지70gA4용지"><p><?=$item["product_name"]?></p></td>
             <td><?=$product_price?>원</td>
@@ -161,6 +162,7 @@
             </td>
           </tr>
           <?php
+          $i = $i + 1;
                 }
               }
             ?>

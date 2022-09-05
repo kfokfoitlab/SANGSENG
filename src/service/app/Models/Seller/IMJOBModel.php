@@ -128,10 +128,14 @@
             from ".$table_name." where 1=1
 			 and company_code= '".$seller_data["company_code"]."'
              and (del_yn != 'y' or del_yn is null)".$where_query."
+
         ";
 			if($_GET["search_v"] != ""){
 				$query = $query." and (worker_name like '%".$_GET["search_v"]."%'
 				 or worker_birth like '%".$_GET["search_v"]."%')";
+			}
+			if($_GET["search_status"] != ""){
+				$query = $query." and status = ".$_GET["search_status"];
 			}
 			$data_cnt = [];
 			$this->rodb->query($query);
@@ -143,8 +147,8 @@
 			if($_GET["p_n"] != ""){
 				$page_start = ($_GET["p_n"] - 1)*10;
 			}
-			$query = $query."limit ".$page_start.", 10";
-			
+			$query = $query." limit ".$page_start.", 10";
+			//echo $query;
 			//echo $query;
 			$data["data"] = [];
 			$this->rodb->query($query);
@@ -166,6 +170,7 @@
             from ".$table_name." where 1=1
 			 and company_code= '".$seller_data["company_code"]."'
 			 and (del_yn != 'y' or del_yn is null)
+			 and (status = 5)
         ";
 			$this->rodb->query($query);
 			while($row = $this->rodb->next_row()){
