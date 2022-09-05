@@ -1,0 +1,35 @@
+<div class="flex-grow-1">
+  <section class="notice">
+    <div class="auto-container py-5">
+      <?php
+        // Nav Menu
+        require APPPATH . '/Views/CS/Components/Nav.html';
+      ?>
+      <h2 class="mb-5 h4 fw-bold text-center">공지사항</h2>
+      <table class="table table-hover mb-5 notice-table">
+        <thead>
+        <tr>
+          <th class="text-center">번호</th>
+          <th class="text-center">제목</th>
+          <th class="text-center">등록일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        for ($i = 1; $i <= 10; $i++) {
+        ?>
+        <tr>
+          <td class="text-center"><?=$i?></td>
+          <td>
+            <a class="text-reset" href="/CS/Notice/Detail">[공지] 공지사항 <?=$i?>번 입니다.</a>
+          </td>
+          <td class="text-center">2022-09-01</td>
+        </tr>
+        <?php
+        }
+        ?>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

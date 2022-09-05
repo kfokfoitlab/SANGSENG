@@ -190,6 +190,14 @@ $routes->group('Seller',  function ($routes){
     $routes->post ($group_name.'/updateWorker',           'Seller\IMJOB::updateWorker');
     $routes->get ($group_name.'/deleteWorker',           'Seller\IMJOB::deleteWorker');
 });
+
+$routes->group('CS', function($routes) {
+    $routes->get('/', 'CS::index');
+    $routes->get('Notice', 'CS\Notice::index');
+    $routes->get('Notice/Detail', 'CS\Notice::Detail');
+    $routes->get('FAQ', 'CS\FAQ::index');
+    $routes->get('Questions', 'CS\Questions::index');
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing
