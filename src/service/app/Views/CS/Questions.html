@@ -1,0 +1,70 @@
+<div class="flex-grow-1">
+  <section class="notice">
+    <div class="auto-container py-5">
+      <?php
+        // Nav Menu
+        require APPPATH . '/Views/CS/Components/Nav.html';
+      ?>
+      <h2 class="mb-5 h4 fw-bold text-center">1:1 문의하기</h2>
+      <form action="">
+        <div>
+          <div class="row mb-3">
+            <label for="" class="col-form-label col-2 fw-bold">제목</label>
+            <div class="col-10">
+              <input type="text" class="form-control" placeholder="제목을 입력해주세요">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="" class="col-form-label col-2 fw-bold">내용</label>
+            <div class="col-10">
+              <textarea class="form-control" placeholder="문의내용을 입력해주세요" style="height: 400px"></textarea>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="" class="col-form-label col-2 fw-bold">담당자 이름</label>
+            <div class="col-10">
+              <input type="text" class="form-control" placeholder="담당자 이름을 입력해주세요">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="" class="col-form-label col-2 fw-bold">회사명</label>
+            <div class="col-10">
+              <input type="text" class="form-control" value="test2" readonly>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="" class="col-form-label col-2 fw-bold">이메일주소</label>
+            <div class="col-10">
+              <input type="text" class="form-control" value="example@sanseng.com" readonly>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="" class="col-form-label col-2 fw-bold">휴대폰 번호</label>
+            <div class="col-10">
+              <input type="text" class="form-control" value="010-0000-0000" readonly>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <input type="checkbox">
+          <label for="">(필수) 개인정보수집, 이용동의
+            <a class="" data-bs-toggle="collapse" href="#privacy" role="button" aria-expanded="false" aria-controls="privacy">
+              전문보기
+            </a>
+          </label>
+          <div class="collapse mt-3" id="privacy">
+            <div class="p-4 bg-light">
+              개인정보 수집·이용에 대한 안내<br/>
+              필수 수집·이용 항목<br/>
+              문의접수와 처리,회신을 위한 최소한의 개인정보입니다.동의가 필요합니다.<br/>
+              더 자세한 내용에 대해서는 <a href="#">개인정보처리방침</a>을 참고하시기 바랍니다.
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-5">
+          <button class="btn btn-primary btn-lg" type="submit">문의접수하기</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
