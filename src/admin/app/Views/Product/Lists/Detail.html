@@ -1,0 +1,136 @@
+<section class="content-main">
+	<div class="content-header">
+    <h2 class="content-title"> <?=$page_name?> 상세보기</h2>
+	</div>
+<?php
+$category ="";
+if($data["product_category"] == 1){
+$category = "사무용품";
+}else if($data["product_category"] == 2){
+$category = "생활용품";
+}else if($data["product_category"] == 3){
+$category = "전산용품";
+}else if($data["product_category"] == 4){
+$category = "식음료";
+}else if($data["product_category"] == 5){
+$category = "청소용품";
+}
+$product_price = number_format($data["product_price"]);
+ $delivery_cycle = "";
+          if($data["delivery_cycle"] == 1){
+          $delivery_cycle = "1번";
+          }else if($data["delivery_cycle"] == 2){
+          $delivery_cycle = "1주일에 한 번";
+          }else if($data["delivery_cycle"] == 3){
+          $delivery_cycle = "1달에 한 번";
+          }else if($data["delivery_cycle"] ==4){
+          $delivery_cycle = "2달에 한 번";
+          }else if($data["delivery_cycle"] == 5){
+          $delivery_cycle = "6달에 한 번";
+          }
+$product_surtax ="";
+if($data['product_surtax'] == 1){
+$product_surtax = "10%";
+}else if($data['product_surtax'] == 2){
+$product_surtax = "-";
+}
+
+$start_date = $data['product_start'];
+$timestamp = strtotime($start_date);
+$start_date = date("Y-m-d", $timestamp);
+
+$end_date = $data['product_end'];
+$timestamp = strtotime($end_date);
+$end_date = date("Y-m-d", $timestamp);
+?>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5>상품 정보</h5>
+      <table class="table table-hover border detail-table">
+      <!-- {{{ -->
+      <tbody>
+        <tr>
+          <td class="th">상품번호</td>
+          <td colspan="3"><?=$data["product_no"]?></td>
+        </tr>
+        <tr>
+          <td class="th">상태</td>
+          <td>        <?php
+                switch($data["status"]){
+                  case "0":
+                  case "1": echo "심사중"; break;
+                  case "5": echo "판매중"; break;
+                  case "7": echo "반려"; break;
+                }
+                ?></td>
+
+          <td colspan="2">comment: <?=$data["status_comment"]?></td>
+        </tr>
+        <tr>
+          <td class="th">추천순위</td>
+          <td colspan="3"><?=$data["product_ranking"]?></td>
+        </tr>
+        <tr>
+          <td class="th">상품등록 회사</td>
+          <td colspan="3"><?=$data["company_name"]?></td>
+        </tr>
+        <tr>
+          <td class="th">카테고리</td>
+          <td colspan="3"><?=$category?></td>
+        </tr>
+        <tr>
+          <td class="th">상품명</td>
+          <td colspan="3"><?=$data["product_name"]?></td>
+        </tr>
+        <tr>
+          <td class="th">판매기간</td>
+          <td colspan="3"><?=$start_date?> ~ <?=$end_date?></td>
+        </tr>
+        <tr>
+          <td class="th">부가세</td>
+          <td colspan="3"><?=$product_surtax ?></td>
+        </tr>
+        <tr>
+          <td class="th">판매수량</td>
+          <td colspan="3"><?=$data["product_quantity"]?></td>
+        </tr>
+        <tr>
+          <td class="th">판매가격</td>
+          <td colspan="3"><?=$product_price?>원</td>
+        </tr>
+        <tr>
+          <td class="th">배송주기</td>
+          <td colspan="3"><?=$delivery_cycle?></td>
+        </tr>
+    <!--    <tr>
+          <td class="th">상품이미지</td>
+          <td>대표이미지 : </td>
+          <td>추가이미지1</td>
+          <td>추가이미지2</td>
+        </tr>-->
+        <tr>
+          <td class="th">상품 상세정보</td>
+          <td colspan="3"><?=$data["product_detail"]?></td>
+        </tr>
+        <tr>
+          <td class="th">등록일</td>
+          <td colspan="3"><?=$data["register_date"]?></td>
+        </tr>
+        <tr>
+          <td class="th">수정일</td>
+          <td colspan="3"><?=$data["update_date"]?></td>
+        </tr>
+      </tbody>
+      <!-- }}} -->
+      </table>
+    </div>
+  </div>
+
+  <div class="text-end">
+    <button class="btn btn-success"><a href="/<?=_CONTROLLER?>/Update/<?=$data['idx']?>">수정하기</a></button>
+    <button class="btn btn-dark" onclick="window.close();">닫기</button>
+  </div>
+
+</section>
+

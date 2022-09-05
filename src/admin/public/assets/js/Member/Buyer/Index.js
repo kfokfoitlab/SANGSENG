@@ -9,7 +9,7 @@ $(document).ready(function(){
         //"dom": 'lt<"float-left"i>p',
         //"dom": 'ltip',
         "exportFilename": "KFO_장애인취업포털_기업목록",
-        "exportTitle": "판매기업 목록",
+        "exportTitle": "구매기업 목록",
         "ajax": {
              url: "/"+_CONTROLLER+"/getList"
             ,type: "POST"
@@ -37,7 +37,7 @@ $(document).ready(function(){
             ,{title: "아이디", data: "email", visible: true, className: "text-nowrap"}
             ,{title: "기업명", data: "company_name", visible: true, className: "text-nowrap"}
             ,{title: "사업자등록번호", data: "company_code", visible: true, className: "text-nowrap"}
-            ,{title: "담당자명", data: "seller_name", visible: true, className: "text-nowrap"}
+            ,{title: "담당자명", data: "buyer_name", visible: true, className: "text-nowrap"}
             ,{title: "연락처", data: "phone", visible: true, className: "text-nowrap"}
             ,{title: "진행상황", data: "status", visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){
@@ -49,7 +49,7 @@ $(document).ready(function(){
                             html = "<span class='badge bg-info'>심사중</span>";
                             break;
                         case "5":
-                            html = "<span class='badge bg-primary'>등록완료</span>";
+                            html = "<span class='badge bg-primary'>승인</span>";
                             break;
                         case "7":
                             html = "<span class='badge bg-danger'>등록거절</span>";
@@ -121,4 +121,8 @@ $(document).ready(function(){
     // }}}
 
 });
+
+function statusUpdate(idx,status){
+    location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
+}
 

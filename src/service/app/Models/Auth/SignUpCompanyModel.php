@@ -63,7 +63,7 @@ class SignUpCompanyModel extends CommonModel
         helper(["uuid_v4", "specialchars"]);
         $uuid = gen_uuid_v4();
         // status == 0:가입신청, 1:심사중, 5:승인,7:거절, 9: 탈퇴
-        $status = '5';
+        $status = '1';
         $receive_yn  = (@$data["ads"] == "y")? 'Y' : 'N';
 
         $salt = $data["password"];

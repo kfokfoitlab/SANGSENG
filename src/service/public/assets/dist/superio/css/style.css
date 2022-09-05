@@ -18,9 +18,9 @@ Version: 1.0.0
 10. Section Title
 11. Banner Section / One to Ten
 12. Work Section
-13. Job Categories
-14. Job Section / Two / Three / Four / Five / Six
-15. Job Detail Section / Style two
+13. Product Categories
+14. Product Section / Two / Three / Four / Five / Six
+15. Product Detail Section / Style two
 16. Features Section
 17. Testimonial Section / Two / Three / Four
 18. Clients Section / Two
@@ -62,7 +62,7 @@ Version: 1.0.0
 54. Invoice Section
 55. Main Footer / Two / Three / Four / Five / Six
 56. Dashboard
-57. User Sidebar
+57. Seller Sidebar
 58. Chat Widget
 59. Left Box
 60. Shop/List
@@ -2427,7 +2427,7 @@ Top Companies
   margin-top: 20px;
 }
 
-/* Company Block */
+/* Buyer Block */
 .company-block {
   position: relative;
   padding: 0 15px;
@@ -2520,7 +2520,7 @@ Top Companies
   width: 100%;
 }
 
-/* Company Block Two */
+/* Buyer Block Two */
 .company-block-two {
   position: relative;
   padding: 0 15px;
@@ -2608,7 +2608,7 @@ Top Companies
   border-radius: 20px;
 }
 
-/* Company Block Three*/
+/* Buyer Block Three*/
 .company-block-three {
   position: relative;
   margin-bottom: 30px;
@@ -2721,7 +2721,7 @@ Top Companies
   justify-content: flex-end;
 }
 
-/*Company Block Four*/
+/*Buyer Block Four*/
 .company-block-four {
   position: relative;
   margin-bottom: 30px;
@@ -3734,7 +3734,7 @@ Listing Block Seven
 /*** 
 
 ====================================================================
-User Sidebar
+Seller Sidebar
 ====================================================================
 
 ***/
@@ -6116,7 +6116,7 @@ Mobile Header
 /*** 
 
 ====================================================================
-Job Categories
+Product Categories
 ====================================================================
 
 ***/
@@ -6399,7 +6399,7 @@ Job Categories
 /*** 
 
 ====================================================================
-Job Section
+Product Section
 ====================================================================
 
 ***/
@@ -6567,7 +6567,7 @@ Job Section
 /*** 
 
 ====================================================================
-Job Section Two
+Product Section Two
 ====================================================================
 
 ***/
@@ -6688,7 +6688,7 @@ Job Section Two
 /*** 
 
 ====================================================================
-Job Section Three
+Product Section Three
 ====================================================================
 
 ***/
@@ -6815,7 +6815,7 @@ Job Section Three
 /*** 
 
 ====================================================================
-Job Section Four
+Product Section Four
 ====================================================================
 
 ***/
@@ -6977,7 +6977,7 @@ Job Section Four
 /*** 
 
 ====================================================================
-Job Section Five
+Product Section Five
 ====================================================================
 
 ***/
@@ -7152,7 +7152,7 @@ Job Section Five
 /*** 
 
 ====================================================================
-Job Section Six
+Product Section Six
 ====================================================================
 
 ***/
@@ -7223,7 +7223,7 @@ Job Section Six
 /*** 
 
 ====================================================================
-Job Detail Section
+Product Detail Section
 ====================================================================
 
 ***/
@@ -7558,7 +7558,7 @@ Job Detail Section
   margin-bottom: 10px;
 }
 
-/* Job Overview*/
+/* Product Overview*/
 .job-overview {
   position: relative;
 }
@@ -7591,7 +7591,7 @@ Job Detail Section
   line-height: 1.4em;
 }
 
-/* Job Overview Two*/
+/* Product Overview Two*/
 .job-overview-two {
   position: relative;
   border: 1px solid #ECEDF2;
@@ -9935,7 +9935,7 @@ b:before {
 /*** 
 
 ====================================================================
-Job Detail Section / Style two
+Product Detail Section / Style two
 ====================================================================
 
 ***/
@@ -14285,7 +14285,7 @@ border-bottom: 0 !important;*/
   height: 60px;
 }
 
-/* Job Search Form */
+/* Product Search Form */
 .job-search-form.style-two,
 .job-search-form.style-two form,
 .job-search-form.style-two .form-group .icon,
@@ -20540,7 +20540,7 @@ border-bottom: 0 !important;*/
   height: 60px;
 }
 
-/* Job Search Form */
+/* Product Search Form */
 .job-search-form.style-two,
 .job-search-form.style-two form,
 .job-search-form.style-two .form-group .icon,
@@ -20622,7 +20622,7 @@ Work Section
   color: #696969;
 }
 
-/* Job Search Form Two*/
+/* Product Search Form Two*/
 .job-search-form-two {
   position: relative;
   background: #FFFFFF;

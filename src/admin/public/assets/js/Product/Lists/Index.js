@@ -8,8 +8,8 @@ $(document).ready(function(){
         "autoWidth": false,
         //"dom": 'lt<"float-left"i>p',
         //"dom": 'ltip',
-        "exportFilename": "KFO_장애인취업포털_구직목록",
-        "exportTitle": "전체 구직 목록",
+        "exportFilename": "상품목록",
+        "exportTitle": "상품목록",
         "ajax": {
              url: "/"+_CONTROLLER+"/getList"
             ,type: "POST"
@@ -25,17 +25,40 @@ $(document).ready(function(){
         ],
         "columns": [
              {title: "idx", data: "idx", visible: false}
-            ,{title: "회사", data: "title", visible: true, className: "text-nowrap"}
-            ,{title: "상품번호", data: "user_name", visible: true, className: "text-nowrap"}
-            ,{title: "상품명", data: "resume_title", visible: true}
-            ,{title: "카테고리", data: "view_count", visible: true}
-            ,{title: "가격", data: "favorites", visible: true}
-            ,{title: "수량", data: "register_date", visible: true, className: "text-nowrap"}
-            ,{title: "판매기간", data: "title", visible: true, className: "text-nowrap"}
-            ,{title: "부가세", data: "user_name", visible: true, className: "text-nowrap"}
-            ,{title: "등록일", data: "resume_title", visible: true}
-            ,{title: "수정일", data: "view_count", visible: true}
-            ,{title: "상태", data: "favorites", visible: true,
+            ,{title: "회사명", data: "company_name", visible: true, className: "text-nowrap"}
+            ,{title: "상품번호", data: "product_no", visible: true, className: "text-nowrap"}
+            ,{title: "상품명", data: "product_name", visible: true}
+            ,{title: "카테고리", data: "product_category", visible: true,
+                "render": function( data, type, row, meta ){
+                    let html = "";
+
+                    switch(data){
+                        case "1":
+                            html = "<span class='badge bg-info'>사무용품</span>";
+                            break;
+                        case "2":
+                            html = "<span class='badge bg-info'>생활용품</span>";
+                            break;
+                        case "3":
+                            html = "<span class='badge bg-success'>전산용품</span>";
+                            break;
+                        case "4":
+                            html = "<span class='badge bg-danger'>식음료</span>";
+                            break;
+                        case "5":
+                            html = "<span class='badge bg-danger'>청소용품</span>";
+                            break;
+                    }
+
+                    return html;
+                }
+
+            }
+            ,{title: "가격", data: "product_price", visible: true}
+            ,{title: "수량", data: "product_quantity", visible: true, className: "text-nowrap"}
+            ,{title: "등록일", data: "register_date", visible: true}
+            ,{title: "수정일", data: "update_date", visible: true}
+            ,{title: "상태", data: "status", visible: true,
                 "render": function( data, type, row, meta ){
                     let html = "";
 
@@ -55,35 +78,17 @@ $(document).ready(function(){
                     return html;
                 }
             }
-            ,{title: "상태변경", data: "register_date", visible: true, className: "text-nowrap",
+            ,{title: "상태변경", data: "idx", visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){
                     let html = "";
-                    html += "<input class='btn btn-info btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",0)' value='승인대기'>";
-                    html += "<input class='btn btn-success btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",1)' value='승인'>";
-                    html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",7)' value='거절'>";
+                    html += "<input class='btn btn-info btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",1)' value='승인대기'>";
+                    html += "<input class='btn btn-success btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",5)' value='승인'>";
+                    html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",7)' value='반려'>";
 
                     return html;
                 }
             }
-            ,{title: "추천 순위", data: "idx", visible: true, className: "text-nowrap",
-                "render": function(data, type, row, meta) {
-                    let html = "";
-                    html += "<select class='form-select form-select-sm' name='product_ranking'>";
-                    html += "<option value='9999'>선택안함</option>";
-                    html += "<option value='1'>1</option>";
-                    html += "<option value='2'>2</option>";
-                    html += "<option value='3'>3</option>";
-                    html += "<option value='4'>4</option>";
-                    html += "<option value='5'>5</option>";
-                    html += "<option value='6'>6</option>";
-                    html += "<option value='7'>7</option>";
-                    html += "<option value='8'>8</option>";
-                    html += "<option value='9'>9</option>";
-                    html += "<option value='10'>10</option>";
-                    html += "</select>";
-                    return html;
-                }
-            }
+            ,{title: "추천 순위", data: "product_ranking", visible: true, className: "text-nowrap"}
             ,{title: "상세보기", data: "idx", visible: true, orderable: false, className: "text-center noExport",
                 "render": function( data, type, row, meta ){
                     var html = "";
@@ -133,4 +138,7 @@ $(document).ready(function(){
     // }}}
 
 });
-
+function statusUpdate(idx,status){
+    location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
+    console.log(`ids, status : ${idx, status}`)
+}

@@ -16,7 +16,7 @@
           <tbody>
             <tr>
               <td class="th">아이디(이메일)</td>
-              <td><input type="email" class="form-control form-control-sm" name="email" value="<?=$data["email"]?>" required></td>
+              <td><input type="email" class="form-control form-control-sm" name="email" value="<?=$data['email']?>" required></td>
             </tr>
             <tr>
               <td class="th">비밀번호 변경</td>
@@ -32,19 +32,19 @@
             </tr>
             <tr>
               <td class="th">담당자명</td>
-              <td><input type="text" class="form-control form-control-sm" name="manager_name" value="<?=$data["manager_name"]?>" ></td>
+              <td><input type="text" class="form-control form-control-sm" name="seller_name" value="<?=$data['seller_name']?>" ></td>
             </tr>
             <tr>
               <td class="th">휴대폰번호</td>
-              <td><input type="text" class="form-control form-control-sm" name="gen_tel" value="<?=$data["gen_tel"]?>" ></td>
+              <td><input type="text" class="form-control form-control-sm" name="phone" value="<?=$data['phone']?>" ></td>
             </tr>
             <tr>
               <td class="th">사업체명</td>
-              <td><input type="text" class="form-control form-control-sm" name="company_name" value="<?=$data["company_name"]?>" required></td>
+              <td><input type="text" class="form-control form-control-sm" name="company_name" value="<?=$data['company_name']?>" required></td>
             </tr>
             <tr>
               <td class="th">사업자등록번호</td>
-              <td><input type="text" class="form-control form-control-sm" name="business_number" value="<?=$data["business_number"]?>" required></td>
+              <td><input type="text" class="form-control form-control-sm" name="company_code" value="<?=$data['company_code']?>" required></td>
             </tr>
             <tr>
               <td class="th">기업형태</td>
@@ -69,26 +69,18 @@
             </tr>
             <tr>
               <td class="th">팩스번호</td>
-              <td><input type="text" class="form-control form-control-sm" name="fax" value="<?=$data["fax"]?>" ></td>
+              <td><input type="text" class="form-control form-control-sm" name="fax" value="<?=$data['fax']?>" ></td>
             </tr>
             <tr>
               <td class="th">주소</td>
               <td>
                 <div class="row">
                   <div class="col-8 col-lg-4 pe-0">
-                    <div class="form-group mb-0">
-                      <input type="text" class="modal-search-post form-control form-control-sm" id="post_code" name="post_code" placeholder="우편번호" value="<?=$data["post_code"]?>" readonly>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <button type="button" class="btn btn-sm btn-primary modal-search-post">우편번호 검색</button>
                   </div>
                 </div>
                 <div class="form-group">
                   <input type="text" id="address_road" name="address" class="form-control form-control-sm my-2" placeholder="주소" value="<?=$data["address"]?>" readonly>
-                  <input type="text" id="address_detail" name="address_detail" class="form-control form-control-sm my-2" placeholder="상세주소" value="<?=$data["address_detail"]?>">
-                  <input type="hidden" name="coordinate_x" id="coordinate_x" value="<?=$data["latitude"]?>">
-                  <input type="hidden" name="coordinate_y" id="coordinate_y" value="<?=$data["logitude"]?>">
+
                 </div>
               </td>
             </tr>
@@ -105,17 +97,6 @@
             <tr>
               <td class="th">중증 장애인 근로자 수</td>
               <td><input type="text" class="form-control form-control-sm" name="severely_disabled" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" required></td>
-            </tr>
-            <tr>
-              <td class="th">상태</td>
-              <td>
-                <select name="" id="" class="form-select form-select-sm">
-                  <option value="1" selected>심사중</option>
-                  <option value="5">승인</option>
-                  <option value="7">반려</option>
-                  <option value="9">탈퇴</option>
-                </select>
-              </td>
             </tr>
           </tbody>
           <!-- }}} -->
@@ -148,7 +129,7 @@
     <button type="submit" class="btn btn-success">수정하기</button>
   </div>
 
-  </form>
+c
 
 </section>
 

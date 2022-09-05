@@ -411,7 +411,7 @@
 		});    		
 	}
 
-	//Job Carousel
+	//Product Carousel
 	if ($('.job-carousel').length) {
 		$('.job-carousel').owlCarousel({
 			loop:true,
@@ -729,7 +729,7 @@
 	});
 
 
-	/*=== User Sidebar / On mobile view ===*/
+	/*=== Seller Sidebar / On mobile view ===*/
 	if($('#toggle-user-sidebar').length) {
 		$('#toggle-user-sidebar, .dashboard-option a').on("click", function() {
 		  $('body').toggleClass('user-sidebar-active');

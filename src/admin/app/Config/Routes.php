@@ -38,22 +38,25 @@ $routes->get('/Image/(:any)/(:any)', 'Image::getImage/$1');
 // 회원
 $routes->group('Member', ['namespace' => 'App\Controllers\Member'], static function ($routes) {
     // 인재
-    $group_name = "User";
-    $routes->get ($group_name.'/',                  $group_name.'::Index');
-    $routes->post($group_name.'/getList',           $group_name.'::getList');
-    $routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
-    $routes->get ($group_name.'/Update/(:any)',     $group_name.'::Update/$1');
-    $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
-    $routes->get ($group_name.'/DeleteSubmit/(:any)', $group_name.'::DeleteSubmit/$1');
-
-    // 기업
-    $group_name = "Company";
+    $group_name = "Buyer";
     $routes->get ($group_name.'/',                  $group_name.'::Index');
     $routes->post($group_name.'/getList',           $group_name.'::getList');
     $routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
     $routes->get ($group_name.'/Confirm/(:any)/(:num)',     $group_name.'::Confirm/$1/$2');
     $routes->get ($group_name.'/Update/(:any)',     $group_name.'::Update/$1');
     $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
+    $routes->get ($group_name.'/statusUpdate', $group_name.'::statusUpdate');
+    $routes->get ($group_name.'/DeleteSubmit/(:any)', $group_name.'::DeleteSubmit/$1');
+
+    // 기업
+  $group_name = "Seller";
+    $routes->get ($group_name.'/',                  $group_name.'::Index');
+    $routes->post($group_name.'/getList',           $group_name.'::getList');
+    $routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
+    $routes->get ($group_name.'/Confirm/(:any)/(:num)',     $group_name.'::Confirm/$1/$2');
+    $routes->get ($group_name.'/Update/(:any)',     $group_name.'::Update/$1');
+    $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
+    $routes->get ($group_name.'/statusUpdate', $group_name.'::statusUpdate');
     $routes->get ($group_name.'/DeleteSubmit/(:any)', $group_name.'::DeleteSubmit/$1');
 	
 	// ID/PW 찾기
@@ -82,13 +85,16 @@ $routes->group('Application', ['namespace' => 'App\Controllers\Application'], st
 });
 
 // 구직
-$routes->group('Job', ['namespace' => 'App\Controllers\Job'], static function ($routes) {
+$routes->group('Product', ['namespace' => 'App\Controllers\Product'], static function ($routes) {
     // 전체 목록
     $group_name = "Lists";
     $routes->get ($group_name.'/',                  $group_name.'::Index');
     $routes->post($group_name.'/getList',           $group_name.'::getList');
     $routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
-    $routes->get ($group_name.'/Update',            $group_name.'::Update');
+    $routes->get ($group_name.'/Update/(:any)',     $group_name.'::Update/$1');
+    $routes->get ($group_name.'/statusUpdate', $group_name.'::statusUpdate');
+
+    $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
 });
 
 // 인재
@@ -144,7 +150,7 @@ $routes->group('Database/Impairment', ['namespace' => 'App\Controllers\Database\
     $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
 });
 
-$routes->group('Database/Job', ['namespace' => 'App\Controllers\Database\Job'], static function ($routes) {
+$routes->group('Database/Product', ['namespace' => 'App\Controllers\Database\Job'], static function ($routes) {
     // 직무 유형
     $group_name = "Profession";
     $routes->get($group_name.'/',                $group_name.'::Index');

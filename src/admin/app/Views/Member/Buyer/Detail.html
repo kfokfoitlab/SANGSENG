@@ -16,16 +16,12 @@
               <td><?=$data["email"]?></td>
             </tr>
             <tr>
-              <td class="th">비밀번호 초기화</td>
-              <td>---</td>
-            </tr>
-            <tr>
               <td class="th">담당자명</td>
-              <td><?=$data["manager_name"]?></td>
+              <td><?=$data["buyer_name"]?></td>
             </tr>
             <tr>
               <td class="th">휴대폰번호</td>
-              <td><?=$data["gen_tel"]?></td>
+              <td><?=$data["phone"]?></td>
             </tr>
             <tr>
               <td class="th">사업체명</td>
@@ -33,7 +29,7 @@
             </tr>
             <tr>
               <td class="th">사업자등록번호</td>
-              <td><?=$data["business_number"]?></td>
+              <td><?=$data["company_code"]?></td>
             </tr>
             <tr>
               <td class="th">기업형태</td>
@@ -46,9 +42,7 @@
             <tr>
               <td class="th">주소</td>
               <td>
-                <?=$data["post_code"]?> <br>
                 <?=$data["address"]?> <br>
-                <?=$data["address_detail"]?>
               </td>
             </tr>
             <tr>
@@ -128,7 +122,7 @@
 
   <div>
     <button class="btn btn-dark float-end" onclick="window.close();">닫기</button>
-    <a href="/<?=_CONTROLLER?>/Update/<?=$data["uuid"]?>" class="btn btn-success">수정하기</a>
+    <a href="/<?=_CONTROLLER?>/Update/<?=$data['uuid']?>" class="btn btn-success">수정하기</a>
   </div>
 
 </section>

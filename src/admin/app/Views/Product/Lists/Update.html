@@ -1,0 +1,170 @@
+<section class="content-main" xmlns="">
+  <div class="content-header">
+    <h2 class="content-title"> <?=$page_name?> 상세보기</h2>
+  </div>
+<?php
+$product_price = number_format($data["product_price"]);
+$start_date = $data['product_start'];
+$timestamp = strtotime($start_date);
+$start_date = date("Y-m-d", $timestamp);
+
+$end_date = $data['product_end'];
+$timestamp = strtotime($end_date);
+$end_date = date("Y-m-d", $timestamp);
+?>
+
+
+  <form name="form-update" method="POST" enctype="multipart/form-data" action="/<?=_CONTROLLER?>/UpdateSubmit">
+    <input type="hidden" name="idx" value="<?=$data['idx']?>">
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5>상품 정보</h5>
+      <table class="table table-hover border detail-table">
+        <!-- {{{ -->
+        <tbody>
+        <tr>
+          <td class="th">상품번호</td>
+          <td colspan="3"><?=$data["product_no"]?></td>
+        </tr>
+        <tr>
+          <td class="th">추천순위</td>
+          <td colspan="3">
+            <select class='form-select' name='product_ranking'>
+              <option value='9999'  <?php if($data['product_ranking']==9999){echo "selected";}?>>선택안함</option>
+              <option value='1' <?php if($data['product_ranking']==1){echo "selected";}?>>1</option>
+              <option value='2'  <?php if($data['product_ranking']==2){echo "selected";}?>>2</option>
+              <option value='3'  <?php if($data['product_ranking']==3){echo "selected";}?>>3</option>
+              <option value='4'  <?php if($data['product_ranking']==4){echo "selected";}?>>4</option>
+              <option value='5'  <?php if($data['product_ranking']==5){echo "selected";}?>>5</option>
+              <option value='6'  <?php if($data['product_ranking']==5){echo "selected";}?>>6</option>
+              <option value='7'  <?php if($data['product_ranking']==7){echo "selected";}?>>7</option>
+              <option value='8'  <?php if($data['product_ranking']==8){echo "selected";}?>>8</option>
+              <option value='9'  <?php if($data['product_ranking']==9){echo "selected";}?>>9</option>
+              <option value='10'  <?php if($data['product_ranking']==10){echo "selected";}?>>10</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">상품등록 회사</td>
+          <td colspan="1"><?=$data["company_name"]?></td>
+        </tr>
+        <tr>
+          <td class="th">카테고리</td>
+          <td colspan="3">
+            <select name="product_category" id="" class="form-select">
+              <option value="1" <?php if($data['product_category']==1){echo "selected";}?>>사무용품</option>
+              <option value="2" <?php if($data['product_category']==2){echo "selected";}?>>생활용품</option>
+              <option value="3" <?php if($data['product_category']==3){echo "selected";}?>>전산용품</option>
+              <option value="4" <?php if($data['product_category']==4){echo "selected";}?>>식음료</option>
+              <option value="5" <?php if($data['product_category']==5){echo "selected";}?>>청소용품</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">상품명</td>
+          <td colspan="3">
+            <input type="text" class="form-control" name="product_name" value="<?=$data['product_name']?>" required>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">판매기간</td>
+          <td colspan="3">
+            <div class="d-flex align-items-center">
+              <label class="visually-hidden" for="productSaleStart">판매시작일</label>
+              <input type="date" value="<?=$start_date?>" name="product_start" id="productSaleStart" class="form-control" required/>
+              <span class="px-2">-</span>
+              <label class="visually-hidden" for="productSaleEnd">판매종료일</label>
+              <input type="date" value="<?=$end_date?>" name="product_end" id="productSaleEnd" class="form-control" required/>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">부가세</td>
+          <td colspan="3">
+            <div class="d-flex">
+              <div class="selector-item me-3">
+                <input type="radio" id="taxation" name="product_surtax" value="1" class="selector-item-radio"
+                <?php if($data['product_surtax']==1){echo "checked";}?>/>
+                <label for="taxation" class="selector-item-label">과세상품 <span class="tax10">(부가세 10%)</span></label>
+              </div>
+              <div class="selector-item">
+                <input type="radio" id="taxFree" name="product_surtax"  <?php if($data['product_surtax']==2){echo "checked";}?> value="2" class="selector-item-radio"/>
+                <label for="taxFree" class="selector-item-label">면세상품</label>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">판매수량</td>
+          <td colspan="3">
+            <input type="text" name="product_quantity" class="form-control" value="<?=$data['product_quantity']?>">
+          </td>
+        </tr>
+        <tr>
+          <td class="th">판매가격</td>
+          <td colspan="3">
+            <input type="text" name="product_price" class="form-control" value="<?=$data['product_price']?>"  oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')">
+          </td>
+        </tr>
+        <tr>
+          <td class="th">배송주기</td>
+          <td colspan="3">
+            <div class="d-flex">
+              <div class="selector-item me-3">
+                <input type="radio" id="deliverOnce" name="delivery_cycle" value="1" class="selector-item-radio"
+                <?php if($data['delivery_cycle']==1){echo "checked";}?>/>
+                <label for="deliverOnce" class="selector-item-label">1번</label>
+              </div>
+              <div class="selector-item me-3">
+                <input type="radio" id="deliverAWeek" name="delivery_cycle" value="2" class="selector-item-radio"
+                <?php if($data['delivery_cycle']==2){echo "checked";}?>/>
+                <label for="deliverAWeek" class="selector-item-label">1주일에 한 번</label>
+              </div>
+              <div class="selector-item me-3">
+                <input type="radio" id="deliver1Month" name="delivery_cycle" value="3" class="selector-item-radio"
+                <?php if($data['delivery_cycle']==3){echo "checked";}?>/>
+                <label for="deliver1Month" class="selector-item-label">1달에 한 번</label>
+              </div>
+              <div class="selector-item me-3">
+                <input type="radio" id="deliver2Months" name="delivery_cycle" value="4" class="selector-item-radio"
+                <?php if($data['delivery_cycle']==4){echo "checked";}?>/>
+                <label for="deliver2Months" class="selector-item-label">2달에 한 번</label>
+              </div>
+              <div class="selector-item me-3">
+                <input type="radio" id="deliver6Months" name="delivery_cycle" value="5" class="selector-item-radio"
+                <?php if($data['delivery_cycle']==5){echo "checked";}?>/>
+                <label for="deliver6Months" class="selector-item-label">6달에 한 번</label>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="th">상품 상세정보</td>
+          <td colspan="3">
+            <textarea name="product_detail" class="form-control" placeholder="상품 상세정보를 입력해주세요."><?=$data['product_detail']?></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">등록일</td>
+          <td colspan="3"><?=$data["register_date"]?></td>
+        </tr>
+        <tr>
+          <td class="th">수정일</td>
+          <td colspan="3"><?=$data["update_date"]?></td>
+        </tr>
+        </tbody>
+        <!-- }}} -->
+      </table>
+    </div>
+  </div>
+
+  <div class="text-end">
+    <button  class="btn btn-danger">삭제</button>
+    <button type ="submit" class="btn btn-success">저장</button>
+    <button class="btn btn-dark" onclick="window.close();">닫기</button>
+  </div>
+  </form>
+</section>
+

@@ -2,9 +2,9 @@
 namespace App\Models\Member;
 use App\Models\CommonModel;
 
-class UserModel extends CommonModel
+class SellerModel extends CommonModel
 {
-    private $table_name = "buyer_company";
+    private $table_name = "seller_company";
 
     public function getListData($data)
     { // {{{
@@ -24,11 +24,11 @@ class UserModel extends CommonModel
         $records_total = $this->rodb->simple_query($query);
         // ---------------------------------------------- }}}
 
-		// Search --------------------------------------- {{{
-		$search_query = null;
-		if(@$data["search"]["value"]){
-			$search_query  = " ";
-		}
+        // Search --------------------------------------- {{{
+        $search_query = null;
+        if(@$data["search"]["value"]){
+            $search_query  = " ";
+        }
         // ---------------------------------------------- }}}
 
         // filtering {{{
@@ -64,11 +64,11 @@ class UserModel extends CommonModel
         $filtered_total = $this->rodb->simple_query($query);
         // ---------------------------------------------- }}}
 
-		// Pagination ----------------------------------- {{{
-		$limit = $data["start"].", ".$data["length"];
+        // Pagination ----------------------------------- {{{
+        $limit = $data["start"].", ".$data["length"];
         // ---------------------------------------------- }}}
 
-		// Ordering ------------------------------------- {{{
+        // Ordering ------------------------------------- {{{
         $order_arr = [];
         foreach($data["order"] as $val){
             $order_field_idx = $val["column"];
@@ -76,7 +76,7 @@ class UserModel extends CommonModel
             $order_field = ($order_field == "num")? "idx":$order_field;
             $order_direction = $val["dir"];
             $order_arr[] = $order_field." ".$order_direction;
-            
+
         }
         $order_query = @join(",", $order_arr);
         // ---------------------------------------------- }}}
@@ -107,9 +107,9 @@ class UserModel extends CommonModel
         }
 
         return array(
-             "records_total" => $records_total
-            ,"data" => $items
-            ,"filtered_total" => $filtered_total
+            "records_total" => $records_total
+        ,"data" => $items
+        ,"filtered_total" => $filtered_total
         );
 
 
@@ -122,8 +122,6 @@ class UserModel extends CommonModel
         $query = "
             select
                 *
-                ,ST_X(coordinate) as latitude
-                ,ST_Y(coordinate) as logitude
             from
                 ".$this->table_name."
             where
@@ -139,11 +137,26 @@ class UserModel extends CommonModel
         return $data;
     } //}}}
 
+    public function Confirm($uuid, $status)
+    { //{{{
+        $query = "
+            update
+                ".$this->table_name."
+            set
+                status = '".$status."'
+            where
+                uuid = '".$uuid."'
+            limit 1
+        ";
+        $this->wrdb->update($query);
+
+        return 1;
+    } //}}}
+
     public function Update($files, $data)
     { //{{{
-        helper(["specialchars"]);
 
-        // profile image upload
+        // image upload
         $file = $files["profile_img"];
         if($file["error"] == 0){
             // 기존 파일 있으면 업데이트
@@ -159,30 +172,12 @@ class UserModel extends CommonModel
             $origin_profile_img_uuid = $this->rodb->simple_query($query);
             $new_profile_img_uuid = $this->uploadFiles($file, $origin_profile_img_uuid);
             $profile_img_uuid = ",profile_img_uuid = '".$new_profile_img_uuid."'";
+
+            $_SESSION["login_info"]["profile_img_uuid"] = $new_profile_img_uuid;
         }
         else {
             $profile_img_uuid = ",profile_img_uuid = null";
-        }
-
-        // welfare card upload
-        $file = $files["welfare_img"];
-        if($file["error"] == 0){
-            // 기존 파일 있으면 업데이트
-            $query = "
-                select
-                    welfare_card_uuid
-                from
-                    ".$this->table_name."
-                where
-                    uuid = '".$data["uuid"]."'
-                limit 1
-            ";
-            $origin_welfare_card_uuid = $this->rodb->simple_query($query);
-            $new_welfare_card_uuid = $this->uploadFiles($file, $origin_welfare_card_uuid);
-            $welfare_card_uuid = ",welfare_card_uuid = '".$new_welfare_card_uuid."'";
-        }
-        else {
-            $welfare_card_uuid = ",welfare_card_uuid = null";
+            $_SESSION["login_info"]["profile_img_uuid"] = "";
         }
 
         // coordinate
@@ -190,58 +185,21 @@ class UserModel extends CommonModel
         $coor_y = @(float)$data["coordinate_y"];
         $coordinate = "POINT(".$coor_x.", ".$coor_y.")";
 
-
-        // calcurating impairment score
-        $impairment_score = 0;
-        foreach($data["impairment"]["assistive_device"] as $score){
-            $impairment_score += @(int)$score;
-        }
-        foreach($data["impairment"]["degree"] as $score){
-            $impairment_score += @(int)$score;
-        }
-        foreach($data["impairment"]["physical_ability"] as $score){
-            $impairment_score += @(int)$score;
-        }
-
-        $detail = specialchars($data["impairment"]["detail"]);
-        $detail0 = str_replace("\n", "\\n", $detail);
-        $detail0 = str_replace("\r", "\\r", $detail0);
-        $detail0 = str_replace("\t", "\\t", $detail0);
-
-        $remark = specialchars($data["impairment"]["remark"]);
-        $remark = str_replace("\n", "\\n", $remark);
-        $remark = str_replace("\r", "\\r", $remark);
-        $remark = str_replace("\t", "\\t", $remark);
-
-        $data["impairment"]["detail"] = $detail;
-        $data["impairment"]["remark"] = $remark;
-
-        $impairment = json_encode($data["impairment"], JSON_UNESCAPED_UNICODE);
-
-
         $query = "
             update
                 ".$this->table_name."
             set
-                 name = '".$data["name"]."'
-                ,email = '".$data["email"]."'
+                 manager_email = '".$data["manager_email"]."'
+                ,manager_name = '".$data["manager_name"]."'
+                ,did_tel = '".$data["did_tel"]."'
+                ,gen_tel = '".$data["gen_tel"]."'
                 ,phone = '".$data["phone"]."'
-                ,tel = '".$data["tel"]."'
                 ,fax = '".$data["fax"]."'
                 ,post_code = '".$data["post_code"]."'
                 ,address = '".$data["address"]."'
                 ,address_detail = '".$data["address_detail"]."'
                 ,coordinate = ".$coordinate."
                 ".$profile_img_uuid."
-                ".$welfare_card_uuid."
-                ,impairment = '".$impairment."'
-                ,impairment_score = ".$impairment_score."
-                ,sns_homepage = '".$data["sns_homepage"]."'
-                ,sns_blog = '".$data["sns_blog"]."'
-                ,sns_facebook = '".$data["sns_facebook"]."'
-                ,sns_twitter = '".$data["sns_twitter"]."'
-                ,sns_linkedin = '".$data["sns_linkedin"]."'
-                ,sns_youtube = '".$data["sns_youtube"]."'
                 ,update_date = '".date("Y-m-d H:i:s")."'
             where
                 uuid = '".$data["uuid"]."'
@@ -249,7 +207,27 @@ class UserModel extends CommonModel
         ";
         $this->wrdb->update($query);
 
+        return 1;
+
     } //}}}
+
+    public function statusUpdate($data)
+    {
+        $query = "
+			UPDATE
+				".$this->table_name."
+			SET
+				status = ".$data["status"]."
+			WHERE
+				idx = ".$data["idx"]."
+			LIMIT 1
+			";
+
+        $this->wrdb->update($query);
+
+        return 1;
+    }
+
 }
 
 

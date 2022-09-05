@@ -70,7 +70,7 @@ echo script_tag("assets/js/Common.js");
   <ul class="menu-aside">
     <li class="menu-item <?=(_CONTROLLER == "Home")?"active":""?>"> 
       <a class="menu-link" href="/"> <i class="icon material-icons md-dashboard"></i> 
-        <span class="text">Dashboard</span> 
+        <span class="text">Dashboard</span>
       </a> 
     </li>
     <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Member") !== false)?"active":""?>"> 
@@ -79,8 +79,8 @@ echo script_tag("assets/js/Common.js");
         <span class="text">회원관리</span>
       </a> 
       <div class="submenu">
-        <a href="/Member/User">구매기업</a>
-        <a href="/Member/Company">판매기업</a>
+        <a href="/Member/Buyer">구매기업</a>
+        <a href="/Member/Seller">판매기업</a>
         <a href="/Member/ForgotInfo">ID/PW찾기</a>
       </div>
     </li>
@@ -108,7 +108,7 @@ echo script_tag("assets/js/Common.js");
         <span class="text">상품관리</span>
       </a> 
       <div class="submenu">
-        <a href="/Job/Lists">전체 목록</a>
+        <a href="/Product/Lists">전체 목록</a>
       </div>
     </li>
     <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Employees") !== false)?"active":""?>">
