@@ -20771,6 +20771,9 @@ Left Box
   margin: 0;
   font-size: 24px;
 }
+.buyer-contract-list li p {
+  font-size: 14px;
+}
 /***
 
 ====================================================================
@@ -21418,3 +21421,71 @@ Seller/item-update,item-regisst
 .item-update textarea {
   height: 200px;
 }
+
+/***
+
+====================================================================
+CS
+====================================================================
+
+***/
+/* Nav */
+.cs-nav li {
+  position: relative;
+  margin-right: 1rem;
+}
+.cs-nav li:not(:last-child)::after {
+  position: absolute;
+  content: '';
+  width: 2px;
+  height: 60%;
+  top: 21%;
+  right: -0.5rem;
+  background-color: #ccc;
+}
+.cs-nav a:hover,
+.cs-nav a.on {
+  font-weight: bold;
+  color: #444;
+}
+/* FAQ */
+.faq-list li {
+  position: relative;
+}
+.faq-question::before {
+  position: absolute;
+  content: 'Q.';
+  left: 10px;
+  top: 16px;
+}
+.faq-question i {
+  transform: rotate(0deg);
+}
+.faq-question[aria-expanded="true"] i {
+  transform: rotate(180deg);
+}
+.faq-question[aria-expanded="true"] span {
+  font-weight: bold;
+}
+.faq-answer {
+  position: relative;
+  word-break: keep-all;
+}
+.faq-answer::before {
+  position: absolute;
+  content: 'A.';
+  left: 28px;
+  top: 28px;
+}
+/* Notice */
+.notice-table th:nth-child(1) {
+  width: 100px;
+}
+.notice-table th:nth-child(3) {
+  width: 150px;
+}
+/* Notice Detail */
+.notice-detail th:nth-child(2) {
+  width: 150px;
+}
+/***

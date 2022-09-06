@@ -2,14 +2,17 @@
 
 namespace App\Controllers;
 use App\Models\Seller\SellerModel;
+use App\Models\Auth\SigninModel;
 class Seller extends BaseController
 {
 
     private $seller_model;
+	private $sigin_model;
 
     public function __construct()
     { //{{{
         $this->seller_model = new SellerModel;
+	    $this->sigin_model = new SigninModel;
     } //}}}
     public function index()
     {
@@ -26,7 +29,7 @@ class Seller extends BaseController
        ,"contractList" =>  $contractList
        ,"disabledCount" =>  $disabledCount
         );
-
+	    $_SESSION["disabledCount"] = $this->sigin_model->getWorkerCount();
         echo view("Common/Header.html");
         echo view('Seller/Index.html', $data);
         echo view("Common/Footer.html");

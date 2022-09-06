@@ -17,8 +17,8 @@ $total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCoun
   </div>
   <div class="mb-3">
     <h3 class="text-white">장애인 근로자</h3>
-    <p class="text-end text-white"><?=$total?>명</p>
-    <p class="text-end">경증 <?=$_SESSION["disabledCount"]['mild_disabled']?>명, 중증<?=$_SESSION["disabledCount"]['severely_disabled']?>명</p>
+    <p class="text-end text-white"><?=$_SESSION["disabledCount"]['worker_cnt']?>명</p>
+    <p class="text-end">중증 <?=$_SESSION["disabledCount"]['degree_1_cnt']?>명,경증 <?=$_SESSION["disabledCount"]['degree_2_cnt']?>명</p>
   </div>
   <div>
     <div class="accordion" id="accordionSellerLeft">

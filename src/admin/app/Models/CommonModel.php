@@ -304,4 +304,42 @@ class CommonModel extends dbModel
 
 
     } //}}}
+	
+	public function getSellerInfo($uuid)
+	{ //{{{
+		$data = [];
+		$query = "
+            select
+                *
+            from
+                seller_company
+            where
+                uuid = '".$uuid."'
+            limit 1
+        ";
+		$this->rodb->query($query);
+		while($row = $this->rodb->next_row()) {
+			$data = $row;
+		}
+		return $data;
+	} //}}}
+	
+	public function getBuyerInfo($uuid)
+	{ //{{{
+		$data = [];
+		$query = "
+            select
+                *
+            from
+                buyer_company
+            where
+                uuid = '".$uuid."'
+            limit 1
+        ";
+		$this->rodb->query($query);
+		while($row = $this->rodb->next_row()) {
+			$data = $row;
+		}
+		return $data;
+	} //}}}
 }

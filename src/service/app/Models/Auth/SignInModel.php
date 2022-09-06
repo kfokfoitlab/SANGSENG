@@ -94,7 +94,7 @@ class SignInModel extends CommonModel
             $_SESSION["totalSales"] = $this->getTotalSales($uuid);
             $_SESSION["expectationSales"] = $this->getexpectationSales($uuid);
             $_SESSION["completionContract"] = $this->getCompletionContract($uuid);
-            $_SESSION["disabledCount"] = $this->getDisabledCount($uuid);
+            $_SESSION["disabledCount"] = $this->getWorkerCount();
             return array(
                  "result" => "success"
             );
@@ -229,4 +229,27 @@ class SignInModel extends CommonModel
         }
         return $disabledCount;
     }
+	
+	// 근로자 수
+	public function getWorkerCount($table_name = "seller_company_worker"){
+		
+		$seller_uuid = $_SESSION["login_info"]["uuid"];
+		$seller_data = $this->getSellerInfo($seller_uuid);
+		
+		$query = "
+            select
+                count(*) as worker_cnt,count(case when disability_degree=1 then 1 end) as degree_1_cnt,
+                count(case when disability_degree=2 then 1 end) as degree_2_cnt
+            from ".$table_name." where 1=1
+			 and company_code= '".$seller_data["company_code"]."'
+			 and (del_yn != 'y' or del_yn is null)
+			 and (status = 5)
+        ";
+		echo $query;
+		$this->rodb->query($query);
+		while($row = $this->rodb->next_row()){
+			$data_cnt = $row;
+		}
+		return $data_cnt;
+	}
 }

@@ -32,6 +32,7 @@
 				"data_cnt" => $data_cnt,
 				"data_page_total_cnt" => $data["count"]
 			);
+			$_SESSION["disabledCount"]  = $data_cnt;
 			echo view("Common/Header.html");
 			echo view('Seller/IMJOB.html',$data);
 			echo view("Common/Footer.html");

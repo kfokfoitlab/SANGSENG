@@ -32,31 +32,41 @@ $Remainder_money = number_format($Remainder);
 
   <div class="mt-4">
     <?php
-  foreach($_SESSION["Contract"] as $item){
-  $contract_regdt = $item["contract_regdt"];
-  $timestamp = strtotime($contract_regdt);
-  $contract_regdt = date("Y-m-d", $timestamp);
-  $product_price = number_format($item["product_price"]);
-  ?>
+    if(!($_SESSION["Contract"])) {
+    ?>
+    <div class="pt-3" style="border-top: 1px dashed #6c757d;">
+      <p class="text-white" style="font-size: 0.8rem;">* 현재 진행중인 계약이 없습니다.</p>
+    </div>
+    <?php
+    } else {
+    ?>
     <ul class="buyer-contract-list p-0" style="max-height: 500px; overflow-y: scroll;">
+    <?php
+    foreach($_SESSION["Contract"] as $item){
+    $contract_regdt = $item["contract_regdt"];
+    $timestamp = strtotime($contract_regdt);
+    $contract_regdt = date("Y-m-d", $timestamp);
+    $product_price = number_format($item["product_price"]);
+    ?>
       <li class="p-2 bg-white text-dark mb-3">
         <h3 class="text-center"><?=$item["company_name"]?></h3>
-        <div class="d-flex justify-content-between">
-          <div>
-            <img style="width: 50px;" src="/Image/6ea0bfe8-315c-4e54-a172-4bc84f8cf9e4" alt="">
-            <h4><?=$item["product_name"]?></h4>
-          </div>
-          <div class="text-end">
-            <p class="m-0"><?=$product_price?>원</p>
-            <p class="m-0"><?=$contract_regdt?></p>
-            <p class="m-0"><?=$item["product_quantity"]?></p>
-          </div>
+        <div class="text-center mb-2">
+          <img style="width: 50px;" src="/Image/6ea0bfe8-315c-4e54-a172-4bc84f8cf9e4" alt="">
+          <h4><?=$item["product_name"]?></h4>
+        </div>
+        <div class="text-end">
+          <p class="m-0"><?=$product_price?>원</p>
+          <p class="m-0"><?=$contract_regdt?></p>
+          <p class="m-0"><?=$item["product_quantity"]?></p>
         </div>
       </li>
-      <?php
-      }
-      ?>
+    <?php
+    }
+    ?>
     </ul>
+    <?php
+    }
+    ?>
   </div>
 </div>
 <?php
