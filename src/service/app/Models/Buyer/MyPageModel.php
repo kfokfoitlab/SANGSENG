@@ -127,11 +127,11 @@ class MyPageModel extends CommonModel
         }
         $query = "
             select
-               *
+               *,a.idx as 'cidx'
             from
               contract_condition a
             join seller_product b 
-            on a.seller_uuid = b.register_id
+            on a.product_no = b.product_no
             where buyer_uuid ='".$uuid."'".$where_query."
            order by 
                a.idx desc    
@@ -158,4 +158,5 @@ class MyPageModel extends CommonModel
         $this->wrdb->update($query);
         return "1";
     }
+
 }

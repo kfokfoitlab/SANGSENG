@@ -112,12 +112,21 @@ class Seller extends Base
 
         $this->model->Update(@$_FILES, $_POST);
 
-        echo "
+        if($this == 1){
+            echo "
             <script>
                 alert('수정하였습니다.');
                 window.location.replace('/"._CONTROLLER."/Detail/".$_POST["uuid"]."');
             </script>
         ";
+        }else{
+            echo "
+            <script>
+                alert('실패했습니다.');
+                window.location.replace('/"._CONTROLLER."/Detail/".$_POST["uuid"]."');
+            </script>
+        ";
+        }
 
         die();
 

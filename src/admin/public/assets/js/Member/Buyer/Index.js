@@ -38,7 +38,7 @@ $(document).ready(function(){
             ,{title: "기업명", data: "company_name", visible: true, className: "text-nowrap"}
             ,{title: "사업자등록번호", data: "company_code", visible: true, className: "text-nowrap"}
             ,{title: "담당자명", data: "buyer_name", visible: true, className: "text-nowrap"}
-            ,{title: "연락처", data: "phone", visible: true, className: "text-nowrap"}
+            ,{title: "연락처", data: "phone", visible: true, className: "mask-phone"}
             ,{title: "진행상황", data: "status", visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){
                     let html = "";

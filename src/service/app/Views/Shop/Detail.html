@@ -26,8 +26,12 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
       <form name="myForm" method="POST" action="">
         <input type ="hidden" id="session" value="<?=$_SESSION['login']?>">
         <input type="hidden" name="product_no" value="<?=$data['product_no']?>">
+        <input type="hidden" name="product_name" value="<?=$data['product_name']?>">
         <input type="hidden" name="buyer_uuid" id ="buyer_uuid"  value="<?=$_SESSION['login_info']['uuid']?>">
+        <input type="hidden" name="buyer_uuid" id ="buyer_comapny"  value="<?=$_SESSION['login_info']['company_name']?>">
         <input type="hidden" name="seller_uuid" id ="seller_uuid" value= "<?=$data['seller_uuid']?>">
+        <input type="hidden" name="product_price" id ="product_price" value= "<?=$data['product_price']?>">
+        <input type="hidden" name="seller_company" id ="seller_company" value= "<?=$data['company_name']?>">
 
         <div class="d-flex pt-4 pb-5 mb-4">
         <div class="detail-left">
@@ -200,7 +204,7 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
       data: JSON.stringify(sign),
       beforeSend: function (xhr) {
         xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-        /!*xhr.setRequestHeader("User-Agent", "esignonapi");*!/
+        /!*xhr.setRequestHeader("Seller-Agent", "esignonapi");*!/
         xhr.setRequestHeader("Authorization", "esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE=");
       },
       success: function (result) {
@@ -281,7 +285,7 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
         data: JSON.stringify(sign),
         beforeSend: function (xhr) {
           xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-          xhr.setRequestHeader("User-Agent", "esignonapi");
+          xhr.setRequestHeader("Seller-Agent", "esignonapi");
           xhr.setRequestHeader("Authorization", "esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE=");
         },
         success: function (result) {

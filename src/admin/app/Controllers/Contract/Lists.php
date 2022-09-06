@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controllers\Member;
+namespace App\Controllers\Contract;
 use App\Controllers\BaseController as Base;
-use App\Models\Member\BuyerModel as Model;
+use App\Models\Contract\ContractModel as Model;
 use App\Models\Database\DatabaseModel;
 
-class Buyer extends Base
+class Lists extends Base
 {
-    private $page_name = "회원관리 > 구매기업";
+    private $page_name = "계약관리 > 전체 목록";
     private $model;
     private $database_model;
 
@@ -19,6 +19,18 @@ class Buyer extends Base
 
     public function Index()
     { //{{{
+
+      /*  $job_category = $this->database_model->getJobAll();
+        $impairments = $this->database_model->getImpairmentAll();
+
+        $data = array(
+            "page_name" => $this->page_name
+        ,"job_category" => $job_category
+        ,"impairments" => $impairments
+
+            //,"data" => $this->model->getList()
+        );
+        */
         $data = array(
             "page_name" => $this->page_name
             //,"data" => $this->model->getList()
@@ -59,78 +71,43 @@ class Buyer extends Base
     public function Detail($uuid)
     { //{{{
 
-        $data = $this->model->Detail($uuid);
+        $item = $this->model->Detail($uuid);
+        $job_category = $this->database_model->getJobAll();
+        $impairments = $this->database_model->getImpairmentAll();
 
         $data = array(
             "page_name" => $this->page_name
-        ,"data" => $data
+        ,"job_category" => $job_category
+        ,"impairments" => $impairments
+        ,"impairment_data" => json_decode($item["application"]["impairment"], true)
+        ,"data" => $item["application"]
+        ,"receipt" => $item["receipt"]
         );
 
         echo view('Common/HeaderSub.html');
         echo view(_CONTROLLER.'/Detail.html', $data);
-        echo script_tag("assets/js/"._CONTROLLER."/Index.js");
+        echo script_tag("assets/js/"._CONTROLLER."/Detail.js");
         echo view('Common/Footer.html');
 
 
     } //}}}
 
-    public function Confirm($uuid, $status)
+    public function RecommendSubmit($type, $uuid)
     { //{{{
-        $data = $this->model->Confirm($uuid, $status);
 
-        echo "
-            <script>
-                alert('처리하였습니다.');
-                window.location.replace('/"._CONTROLLER."/Detail/".$uuid."');
-            </script>
-        ";
+        $this->model->Recommend($type, $uuid);
+
+        echo 1;
 
         die();
 
     } //}}}
 
-    public function Update($uuid)
+    public function Update()
     { //{{{
-
-        $data = $this->model->Detail($uuid);
-
-        $data = array(
-            "page_name" => $this->page_name
-        ,"data" => $data
-        );
-
         echo view('Common/HeaderSub.html');
-        echo view(_CONTROLLER.'/Update.html', $data);
-        echo script_tag("assets/js/"._CONTROLLER."/Update.js");
-        echo view("Modal/SearchPost.html");
+        echo view('Application/Lists/Update.html');
         echo view('Common/Footer.html');
-
-    } //}}}
-
-    public function UpdateSubmit()
-    { //{{{
-
-        $this->model->Update(@$_FILES, $_POST);
-
-        if($this == 1){
-            echo "
-            <script>
-                alert('수정하였습니다.');
-                window.location.replace('/"._CONTROLLER."/Detail/".$_POST["uuid"]."');
-            </script>
-        ";
-        }else{
-            echo "
-            <script>
-                alert('실패했습니다.');
-                window.location.replace('/"._CONTROLLER."/Detail/".$_POST["uuid"]."');
-            </script>
-        ";
-        }
-       
-
-        die();
-
     } //}}}
 
     public function statusUpdate()
@@ -146,5 +123,4 @@ class Buyer extends Base
             </script>
         ";
     }
-
 }

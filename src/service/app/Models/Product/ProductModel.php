@@ -8,7 +8,7 @@ class ProductModel extends CommonModel
         /* $uploads_dir = './uploads';*/
         $allowed_ext = array('jpg','jpeg','png','gif','pdf');
 
-// º¯¼ö Á¤¸®
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         $error = $files['representative_image']['error'];
         $name = $files['representative_image']['name'];
         $exploded_file = explode(".",$name);
@@ -17,32 +17,32 @@ class ProductModel extends CommonModel
         $file_tmp_name = $files["representative_image"]["tmp_name"];
         $file_ext = pathinfo($files["representative_image"]["name"], PATHINFO_EXTENSION);
         $file_new_name = uniqid().".".$file_ext;
-       $email= $_SESSION["login_info"]["email"] ;
+        $email= $_SESSION["login_info"]["email"] ;
         $product_ranking = 9999;
         if( $error != UPLOAD_ERR_OK ) {
             switch( $error ) {
                 case UPLOAD_ERR_INI_SIZE:
                 case UPLOAD_ERR_FORM_SIZE:
-                    echo "ÆÄÀÏÀÌ ³Ê¹« Å®´Ï´Ù. ($error)";
+                    echo "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¹ï¿½ Å®ï¿½Ï´ï¿½. ($error)";
                     break;
                 case UPLOAD_ERR_NO_FILE:
-                    echo "ÆÄÀÏÀÌ Ã·ºÎµÇÁö ¾Ê¾Ò½À´Ï´Ù. ($error)";
+                    echo "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã·ï¿½Îµï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½. ($error)";
                     break;
                 default:
-                    echo "ÆÄÀÏÀÌ Á¦´ë·Î ¾÷·ÎµåµÇÁö ¾Ê¾Ò½À´Ï´Ù. ($error)";
+                    echo "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½. ($error)";
             }
             exit;
         }
-// È®ÀåÀÚ È®ÀÎ
+// È®ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
         if( !in_array($ext, $allowed_ext) ) {
-            echo "Çã¿ëµÇÁö ¾Ê´Â È®ÀåÀÚÀÔ´Ï´Ù.";
+            echo "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ È®ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.";
             exit;
         }
         $product_no = date("YmdHis").$idx;
-// ÆÄÀÏ ÀÌµ¿
+// ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         move_uploaded_file($file_tmp_name,$target_dir. $file_new_name);
 
-        // 1:½ÂÀÎ´ë±â,5:½ÂÀÎ(ÆÇ¸ÅÁß),7:¹Ý·Á
+        // 1:ï¿½ï¿½ï¿½Î´ï¿½ï¿½,5:ï¿½ï¿½ï¿½ï¿½(ï¿½Ç¸ï¿½ï¿½ï¿½),7:ï¿½Ý·ï¿½
         $status = '5';
         $query = "
             insert into

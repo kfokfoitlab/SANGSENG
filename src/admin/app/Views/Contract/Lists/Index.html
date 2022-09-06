@@ -1,0 +1,49 @@
+<section class="content-main">
+	<div class="content-header">
+    <h2 class="content-title"> <?=$page_name?> </h2>
+	</div>
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <form name="form-searchbar">
+
+      <div class="row gx-3">
+        <div class="col-lg-2">
+          <label>계약번호 검색</label>
+          <input type="text" class="form-control form-control-sm search" id="search-number" placeholder="">
+        </div>
+        <div class="col-lg-2">
+          <label>사업체명 검색</label>
+          <input type="text" class="form-control form-control-sm search" id="search-company" placeholder="">
+        </div>
+        <div class="col-lg-1">
+          <label>계약상태</label>
+          <select class="form-control form-control-sm filter" id="search-recommended">
+            <option value="">전체</option>
+            <option value="1">진행중</option>
+            <option value="2">계약내용변경</option>
+            <option value="3">계약완료</option>
+          </select>
+        </div>
+        <div class="col-lg-2">
+          <label>계약등록일 검색</label>
+          <input type="text" class="form-control form-control-sm filter daterange" id="search-daterange" placeholder="기간 검색">
+        </div>
+      </div>
+
+      </form>
+    </div>
+
+
+    <div class="card-body">
+
+      <div class="">
+        <table class="table table-hover small" id="datatables">
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+

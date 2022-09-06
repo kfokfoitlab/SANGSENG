@@ -157,7 +157,7 @@ class SellerModel extends CommonModel
     { //{{{
 
         // image upload
-        $file = $files["profile_img"];
+    /*    $file = $files["profile_img"];
         if($file["error"] == 0){
             // 기존 파일 있으면 업데이트
             $query = "
@@ -183,23 +183,23 @@ class SellerModel extends CommonModel
         // coordinate
         $coor_x = @(float)$data["coordinate_x"];
         $coor_y = @(float)$data["coordinate_y"];
-        $coordinate = "POINT(".$coor_x.", ".$coor_y.")";
+        $coordinate = "POINT(".$coor_x.", ".$coor_y.")";*/
 
         $query = "
             update
                 ".$this->table_name."
             set
-                 manager_email = '".$data["manager_email"]."'
-                ,manager_name = '".$data["manager_name"]."'
-                ,did_tel = '".$data["did_tel"]."'
-                ,gen_tel = '".$data["gen_tel"]."'
+                  email = '".$data["email"]."'
+                ,seller_name = '".$data["seller_name"]."'
                 ,phone = '".$data["phone"]."'
-                ,fax = '".$data["fax"]."'
-                ,post_code = '".$data["post_code"]."'
                 ,address = '".$data["address"]."'
-                ,address_detail = '".$data["address_detail"]."'
-                ,coordinate = ".$coordinate."
-                ".$profile_img_uuid."
+                ,company_name = '".$data["company_name"]."'
+                ,company_code = '".$data["company_code"]."'
+                ,seller_sales = '".$data["seller_sales"]."'
+                ,classification = '".$data["classification"]."'
+                ,fax = '".$data["fax"]."'
+                ,severely_disabled = '".$data["severely_disabled"]."'
+                ,mild_disabled = '".$data["mild_disabled"]."'
                 ,update_date = '".date("Y-m-d H:i:s")."'
             where
                 uuid = '".$data["uuid"]."'

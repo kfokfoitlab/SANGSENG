@@ -4,7 +4,7 @@
 	</div>
 
   <form name="form-update" method="POST" enctype="multipart/form-data" action="/<?=_CONTROLLER?>/UpdateSubmit">
-  <input type="hidden" name="uuid" value="<?=$data["uuid"]?>">
+  <input type="hidden" name="uuid" value="<?=$data['uuid']?>">
 
   <div class="card mb-4">
     <div class="card-body">
@@ -16,19 +16,7 @@
           <tbody>
             <tr>
               <td class="th">아이디(이메일)</td>
-              <td><input type="email" class="form-control form-control-sm" name="email" value="<?=$data["email"]?>" required></td>
-            </tr>
-            <tr>
-              <td class="th">비밀번호 변경</td>
-              <td>
-                <input type="password" class="form-control form-control-sm" name="password" placeholder="영문+숫자+특수문자 조합 6자 이상" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,32}$" required>
-              </td>
-            </tr>
-            <tr>
-              <td class="th">비밀번호 확인</td>
-              <td>
-                <input type="password" class="form-control form-control-sm" name="confirm_password" placeholder="영문+숫자+특수문자 조합 6자 이상" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,32}$" required>
-              </td>
+              <td><input type="email" class="form-control form-control-sm" name="email" value="<?=$data['email']?>" required></td>
             </tr>
             <tr>
               <td class="th">담당자명</td>
@@ -82,15 +70,9 @@
                   </div>-->
                 </div>
                 <div class="form-group">
-                  <input type="text" id="address_road" name="address" class="form-control form-control-sm my-2" placeholder="주소" value="<?=$data['address']?>" readonly>
+                  <input type="text" id="address_road" name="address" class="form-control form-control-sm my-2" placeholder="주소" value="<?=$data['address']?>" >
 
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="th">올해 예상 매출액</td>
-              <td>
-                <input type="text" id="seller_sales" name="seller_sales" class="form-control form-control-sm my-2" value="555">
               </td>
             </tr>
             <tr>
