@@ -20740,7 +20740,7 @@ Left Box
   font-size: 14px;
 }
 .left-fixed-box p {
-  font-size: 16px;
+  font-size: 18px;
 }
 .left-fixed-box .accordion-button,
 .left-fixed-box .accordion-button:not(.collapsed) {
@@ -20798,6 +20798,7 @@ Shop/List
 }
 .shop-list .table td {
   padding: 1rem 0.5rem;
+  vertical-align: middle;
 }
 .shop-list .sub-info {
   font-size: 0.8rem;
@@ -20826,7 +20827,7 @@ Shop/List
 }
 .shop-list .order-items span {
   position: relative;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   color: #777;
   text-align: right;
 }
@@ -21099,6 +21100,9 @@ Seller/Index
 }
 .seller-mypage .card strong {
   font-size: 1.25rem;
+}
+.seller-mypage .card-header {
+  min-height: 59px;
 }
 .seller-mypage .card-icon .card-body {
   min-height: 170px;
@@ -21489,3 +21493,144 @@ CS
   width: 150px;
 }
 /***
+
+====================================================================
+Reduction/Calculator
+====================================================================
+
+***/
+.reduction-calc table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.reduction-calc .reduction-calc-title {
+  display: block;
+  padding: 10px 0 0 20px;
+  margin-bottom: 12px;
+  text-align: left;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.reduction-calc td {
+  height: 60px;
+  vertical-align: middle;
+}
+
+.reduction-calc td:first-child {
+  border-right: solid 1px #c8c6c7;
+  background-color: #fafafa;
+  padding-left: 30px;
+  font-size: 1rem;
+  color: #27303f;
+  width: 400px;
+}
+
+.reduction-calc td:nth-child(2) {
+  padding-left: 16px;
+  width: 880px;
+}
+
+.reduction-calc .calc-input-table td.division {
+  display: flex;
+  align-items: center;
+}
+
+.reduction-calc .calc-input-table td.workerNumber__box,
+.reduction-calc .calc-input-table td.TaxRate__box {
+  display: flex;
+  align-items: center;
+}
+
+.reduction-calc .division p {
+  width: 130px;
+  height: 32px;
+  font-size: 0.9rem;
+  line-height: 32px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.reduction-calc .division p:hover {
+  font-weight: bold;
+}
+
+.reduction-calc .tabMenuActive {
+  background-color: #777;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+}
+
+.reduction-calc .bsDist {
+  cursor: pointer;
+}
+
+.reduction-calc .tax-percent-input,
+.reduction-calc .always-worker-input,
+.reduction-calc .deep-disabled-input,
+.reduction-calc .shallow-disabled-input {
+  width: 154px;
+  height: 25px;
+  border: solid 1px #c8c6c7;
+}
+
+.reduction-calc .input-sub-text {
+  font-size: 1rem;
+  color: #767676;
+  margin-left: 5px;
+  margin-right: 20px;
+}
+
+.reduction-calc .disabled-info {
+  font-size: 0.9rem;
+  color: #767676;
+}
+
+.reduction-calc .calc-input-table td span {
+  font-weight: bold;
+}
+
+/* button */
+.reduction-calc .calcButton{
+  width: 150px;
+  height: 42px;
+  border: none;
+  color: white;
+  font-size: 1rem;
+}
+
+/* 계산 결과 테이블 */
+.reduction-calc .total-charge-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-grow: 1;
+  height: 40px;
+  padding-right: 40px;
+}
+
+.reduction-calc .total-charge-text {
+  font-size: 0.9rem;
+  color: #27303f;
+}
+
+.reduction-calc .total-charge-price {
+  margin-left: 30px;
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.reduction-calc .reduction-result-border{
+  border-top: solid 2px #f67d7d;
+}
+
+.reduction-calc .reduction-result-tr {
+  border-bottom: solid 1px #c8c6c7;
+}
+
+.reduction-calc .reduction-result-td:nth-child(2){
+  font-size: 0.9rem;
+  color: #707070;
+}

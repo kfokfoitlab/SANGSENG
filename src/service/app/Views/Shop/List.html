@@ -20,17 +20,18 @@
           <th>감면액</th>
           <tbody>
           <tr>
-            <?php
+          <?php
           if(is_array($ranking) && count($ranking)){
-        foreach($ranking as $item){
-     $product_price = number_format($item["product_price"]);
-           ?>
+            foreach($ranking as $item){
+              $product_price = number_format($item["product_price"]);
+          ?>
             <td>
-           <img class="preview-img-small" src="/uploads/upload_files/<?=$item['representative_image']?>" alt="기업로고">
+              <img class="preview-img-small" src="/uploads/upload_files/<?=$item['representative_image']?>" alt="기업로고">
             </td>
             <td>
-              <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>"><span class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h3>
-              <p class="mt-2 sub-info"><?=$item['product_detail']?></p>
+              <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>"><span
+                class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h3>
+              <!--              <p class="mt-2 sub-info"><?=$item['product_detail']?></p>-->
             </td>
             <td>
               <p><?=$item['product_quantity']?></p>
@@ -46,7 +47,7 @@
           <?php
                 }
               }
-            ?>
+          ?>
           </tbody>
         </table>
 
@@ -54,68 +55,70 @@
 
       <div class="px-3 mb-5">
         <div class="order-items d-flex justify-content-end mb-4">
-<!--
-          <span class="px-3 active">인기상품순</span>
-          <span class="px-3">높은감면액순</span>
-          <span class="px-3">낮은감면액순</span>
-          <span class="px-3">높은가격순</span>
-          <span class="px-3">낮은가격순</span>
-        </div>
--->
+          <!--
+                    <span class="px-3 active">인기상품순</span>
+                    <span class="px-3">높은감면액순</span>
+                    <span class="px-3">낮은감면액순</span>
+                    <span class="px-3">높은가격순</span>
+                    <span class="px-3">낮은가격순</span>
+                  </div>
+          -->
 
-        <table class="table">
-          <thead>
-          <tr>
-            <th>
-              상품사진
-            </th>
-            <th>
-              회사명/상품명
-            </th>
-            <th>
-              상품구분
-            </th>
-            <th>
-              계약금액
-            </th>
-            <th>
-              감면액
-            </th>
-          </tr>
-          </thead>
-          <tbody>
-          <?php
+          <table class="table">
+            <thead>
+            <tr>
+              <th>
+                상품사진
+              </th>
+              <th>
+                회사명/상품명
+              </th>
+              <th>
+                상품구분
+              </th>
+              <th>
+                계약금액
+              </th>
+              <th>
+                감면액
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
           if(is_array($list)&& count($list)){
           foreach($list as $item){
            $product_price = number_format($item["product_price"]);
           ?>
-          <tr>
-            <td>
-              <img class="preview-img-small" src="/uploads/upload_files/<?=$item['representative_image']?>" alt="기업로고">
-            </td>
-            <td>
-              <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>"><span class="text-primary"><?=$item["company_name"]?></span> / <?=$item["product_name"]?></a></h3>
-              <p class="sub-info"><?=$item["product_detail"]?></p>
-            </td>
-            <td>
-              <p><?=$item["product_quantity"]?></p>
-            </td>
-            <td>
-              <p><?=$product_price?>원</p>
-            </td>
-            <td>
-              <p>1,176,000원</p>
-            </td>
-          </tr>
-          <?php
+            <tr>
+              <td>
+                <img class="preview-img-small" src="/uploads/upload_files/<?=$item['representative_image']?>"
+                     alt="기업로고">
+              </td>
+              <td>
+                <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>"><span
+                  class="text-primary"><?=$item["company_name"]?></span> / <?=$item["product_name"]?></a></h3>
+                <!--                <p class="sub-info"><?=$item["product_detail"]?></p>-->
+              </td>
+              <td>
+                <p><?=$item["product_quantity"]?></p>
+              </td>
+              <td>
+                <p><?=$product_price?>원</p>
+              </td>
+              <td>
+                <p>1,176,000원</p>
+              </td>
+            </tr>
+            <?php
                 }
               }
             ?>
-          </tbody>
+            </tbody>
 
-        </table>
+          </table>
 
+        </div>
       </div>
-    </div>
   </section>
 </div>
