@@ -198,6 +198,10 @@ $routes->group('CS', function($routes) {
     $routes->get('FAQ', 'CS\FAQ::index');
     $routes->get('Questions', 'CS\Questions::index');
 });
+
+$routes->group('Reduction', function($routes) {
+    $routes->get('Calculator', 'Reduction\Calculator::index');
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing
