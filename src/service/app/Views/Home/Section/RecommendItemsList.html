@@ -1,18 +1,17 @@
 <section class="job-section alternate">
   <div class="auto-container">
-    <div class="sec-title text-center">
+    <div class="sec-title text-center mt-5">
       <h2><a tabindex=1000>추천 상품</a></h2>
-      <div class="text"><a tabindex=1000>추천상품 목록</a></div>
     </div>
 
     <div class="tabs-content">
       <!--Tab-->
       <div class="tab active-tab" id="tab1">
-        <?php
-          if(is_array($data) && count($data) > 0){
-        foreach($data as $item){
-        ?>
         <div class="row">
+          <?php
+          if(is_array($data) && count($data) > 0){
+            foreach($data as $item){
+          ?>
           <!-- Job Block -->
           <div class="job-block col-sm-12">
             <div class="inner-box">
@@ -22,23 +21,28 @@
 
                   <img src="/uploads/upload_files/<?=$item['product_image2']?>" alt="상품이미지">
                 </div>
-                <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>" tabindex=1500><span class="text-secondary"><?=$item["company_name"]?></span> <?=$item["product_name"]?></a></h3>
+                <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>" tabindex=1500><span
+                  class="text-secondary"><?=$item["company_name"]?></span> <?=$item["product_name"]?></a></h3>
                 <div>
                   <ul class="job-info">
-                    <li><span class="icon flaticon-briefcase"></span><?=$item["product_detail"]?></li>/
-                    <li><span class="icon flaticon-map-locator"></span><?=$item["product_price"]?>원</li>/
-                    <li><span class="icon flaticon-clock-3"></span><?=$item["product_start"]?></li>/
-                    <li><span class="icon flaticon-money"></span><?=$item["product_end"]?></li>/
+                    <li><span class="icon flaticon-briefcase"></span><?=$item["product_detail"]?></li>
+                    /
+                    <li><span class="icon flaticon-map-locator"></span><?=$item["product_price"]?>원</li>
+                    /
+                    <li><span class="icon flaticon-clock-3"></span><?=$item["product_start"]?></li>
+                    /
+                    <li><span class="icon flaticon-money"></span><?=$item["product_end"]?></li>
+                    /
                   </ul>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <?php
+          <?php
                 }
               }
             ?>
+        </div>
       </div>
     </div>
   </div>

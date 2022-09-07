@@ -1,0 +1,71 @@
+<section class="content-main">
+	<div class="content-header">
+    <h2 class="content-title"> <?=$page_name?> 상세보기</h2>
+	</div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5>계약 내용</h5>
+      <table class="table table-hover border detail-table">
+      <!-- {{{ -->
+      <tbody>
+        <tr>
+          <td class="th">계약서 번호</td>
+          <td colspan="2"><?=$data["title"]?></td>
+        </tr>
+        <tr>
+          <td class="th">계약 상태</td>
+          <td>
+            <select name="" id="" class="form-select form-select-sm">
+              <option value="1" selected>승인대기</option>
+              <option value="2">진행중</option>
+              <option value="3">구매기업 승인</option>
+              <option value="5">계약완료</option>
+              <option value="7">반려</option>
+              <option value="9">계약취소</option>
+            </select>
+          </td>
+          <td>comment: </td>
+        </tr>
+        <tr>
+          <td class="th">판매기업</td>
+          <td colspan="2"></td>
+        </tr>
+        <tr>
+          <td class="th">구매기업</td>
+          <td colspan="2"></td>
+        </tr>
+        <tr>
+          <td class="th">상품고유번호</td>
+          <td colspan="2"></td>
+        </tr>
+        <tr>
+          <td class="th">등록일</td>
+          <td colspan="2"></td>
+        </tr>
+        <tr>
+          <td class="th">승인한 관리자</td>
+          <td colspan="2"></td>
+        </tr>
+        <tr>
+          <td class="th">수정일</td>
+          <td colspan="2"></td>
+        </tr>
+        <tr>
+          <td class="th">수정한 사람</td>
+          <td colspan="2"></td>
+        </tr>
+      </tbody>
+      <!-- }}} -->
+      </table>
+    </div>
+  </div>
+
+  <div class="text-end">
+    <button class="btn btn-danger">삭제</button>
+    <button class="btn btn-success">저장</button>
+    <button class="btn btn-dark" onclick="window.close();">닫기</button>
+  </div>
+
+</section>
+

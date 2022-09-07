@@ -4,7 +4,7 @@
 	</div>
 
   <form name="form-update" method="POST" enctype="multipart/form-data" action="/<?=_CONTROLLER?>/UpdateSubmit">
-  <input type="hidden" name="uuid" value="<?=$data["uuid"]?>">
+  <input type="hidden" name="uuid" value="<?=$data['uuid']?>">
 
   <div class="card mb-4">
     <div class="card-body">
@@ -17,18 +17,6 @@
             <tr>
               <td class="th">아이디(이메일)</td>
               <td><input type="email" class="form-control form-control-sm" name="email" value="<?=$data['email']?>" required></td>
-            </tr>
-            <tr>
-              <td class="th">비밀번호 변경</td>
-              <td>
-                <input type="password" class="form-control form-control-sm" name="password" placeholder="영문+숫자+특수문자 조합 6자 이상" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,32}$" required>
-              </td>
-            </tr>
-            <tr>
-              <td class="th">비밀번호 확인</td>
-              <td>
-                <input type="password" class="form-control form-control-sm" name="confirm_password" placeholder="영문+숫자+특수문자 조합 6자 이상" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,32}$" required>
-              </td>
             </tr>
             <tr>
               <td class="th">담당자명</td>
@@ -92,11 +80,11 @@
             </tr>
             <tr>
               <td class="th">경증 장애인 근로자 수</td>
-              <td><input type="text" class="form-control form-control-sm" name="mild_disabled" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" required></td>
+              <td><input type="text"  value="<?=$data['mild_disabled']?>" class="form-control form-control-sm" name="mild_disabled" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" required></td>
             </tr>
             <tr>
               <td class="th">중증 장애인 근로자 수</td>
-              <td><input type="text" class="form-control form-control-sm" name="severely_disabled" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" required></td>
+              <td><input type="text"   value="<?=$data['severely_disabled']?>" class="form-control form-control-sm" name="severely_disabled" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" required></td>
             </tr>
           </tbody>
           <!-- }}} -->
@@ -104,7 +92,7 @@
         </div>
         <div class="col-2">
           <div class="border">
-            <img class="img-fluid" src="/Image/<?=@$data["profile_img_uuid"]?>" alt="">
+            <img class="img-fluid" src="/Image/<?=@$data['profile_img_uuid']?>" alt="">
             <div class="mt-4 p-2">
               <label>기업로고 교체</label>
               <input class="form-control" type="file" name="profile_img" accept="image/*" id="upload" multiple="">
@@ -113,7 +101,7 @@
         </div>
         <div class="col-2">
           <div class="border">
-            <img class="img-fluid" src="/Image/<?=@$data["profile_img_uuid"]?>" alt="">
+            <img class="img-fluid" src="/Image/<?=@$data['profile_img_uuid']?>" alt="">
             <div class="mt-4 p-2">
               <label>장애인표준사업장 등록증 or 장애인직업재활시설 등록증</label>
               <input class="form-control" type="file" name="profile_img" accept="image/*" id="upload" multiple="">
@@ -128,8 +116,6 @@
     <button class="btn btn-dark float-end" onclick="window.close();">닫기</button>
     <button type="submit" class="btn btn-success">수정하기</button>
   </div>
-
-c
 
 </section>
 

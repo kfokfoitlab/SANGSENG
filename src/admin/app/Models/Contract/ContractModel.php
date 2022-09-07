@@ -1,10 +1,10 @@
 <?php
-namespace App\Models\Member;
+namespace App\Models\Contract;
 use App\Models\CommonModel;
 
-class BuyerModel extends CommonModel
+class ContractModel extends CommonModel
 {
-    private $table_name = "buyer_company";
+    private $table_name = "contract_condition";
 
     public function getListData($data)
     { // {{{
@@ -37,6 +37,14 @@ class BuyerModel extends CommonModel
             if(!@$val["search"]["value"]){
                 continue;
             }
+            else if($val["data"] == "progress"){
+                if($val["search"]["value"] == "1"){
+                    $filtering[] = "receipt_expire_date >= '".date("Y-m-d")."'";
+                }
+                else if($val["search"]["value"] == "2"){
+                    $filtering[] = "receipt_expire_date < '".date("Y-m-d")."'";
+                }
+            }
             else if($val["data"] == "register_date"){
                 $t = explode("~", $val["search"]["value"]);
                 $filtering[] = "register_date between '".$t[0]." 00:00:00' and '".$t[1]." 23:59:59'";
@@ -49,6 +57,7 @@ class BuyerModel extends CommonModel
             }
         }
         $filtering_query = (count($filtering) > 0)? " and ".@join(" and ", $filtering):"";
+        //debug($filtering_query);
         // ---------------------------------------------- }}}
 
         // filtered count ------------------------------- {{{
@@ -84,7 +93,12 @@ class BuyerModel extends CommonModel
         // query
         $query = "
             select
-                 *
+                 *,
+                 (select email from buyer_company where uuid=".$this->table_name.".buyer_uuid) as buyer_email
+                 ,(select email from seller_company where uuid=".$this->table_name.".seller_uuid) as seller_email
+                 , (select seller_name from seller_company where uuid=".$this->table_name.".seller_uuid)as seller_name
+                 ,(select buyer_name from buyer_company where uuid=".$this->table_name.".buyer_uuid) as buyer_name
+
             from
                 ".$this->table_name."
             where
@@ -102,6 +116,16 @@ class BuyerModel extends CommonModel
             $row["num"] = $num--;
 
             unset($row["coordinate"]);
+
+            // 진행여부
+            $exp_time = strtotime($row["receipt_expire_date"]);
+            $now_time = time();
+            if($now_time < $exp_time){
+                $row["progress"] = 1;
+            }
+            else {
+                $row["progress"] = 0;
+            }
 
             $items[] = $row;
         }
@@ -131,32 +155,46 @@ class BuyerModel extends CommonModel
         ";
         $this->rodb->query($query);
         $row = $this->rodb->next_row();
+        $data["application"] = $row;
 
-        $data = $row;
+
+        $query = "
+            select
+                *
+                ,(
+                    select
+                        name 
+                    from
+                        user
+                    where
+                        uuid = t1.user_uuid
+                ) as user_name
+                ,(
+                    select
+                        title 
+                    from
+                        resume
+                    where
+                        uuid = t1.resume_uuid
+                ) as resume_title
+            from
+                ".$this->table_name."_receipt t1
+            where
+                application_uuid = '".$uuid."'
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $data["receipt"][] = $row;
+        }
 
         return $data;
     } //}}}
 
-    public function Confirm($uuid, $status)
-    { //{{{
-        $query = "
-            update
-                ".$this->table_name."
-            set
-                status = '".$status."'
-            where
-                uuid = '".$uuid."'
-            limit 1
-        ";
-        $this->wrdb->update($query);
-
-        return 1;
-    } //}}}
-
     public function Update($files, $data)
     { //{{{
+        helper(["specialchars"]);
 
-    /*    // image upload
+        // profile image upload
         $file = $files["profile_img"];
         if($file["error"] == 0){
             // 기존 파일 있으면 업데이트
@@ -172,36 +210,110 @@ class BuyerModel extends CommonModel
             $origin_profile_img_uuid = $this->rodb->simple_query($query);
             $new_profile_img_uuid = $this->uploadFiles($file, $origin_profile_img_uuid);
             $profile_img_uuid = ",profile_img_uuid = '".$new_profile_img_uuid."'";
-
-            $_SESSION["login_info"]["profile_img_uuid"] = $new_profile_img_uuid;
         }
         else {
             $profile_img_uuid = ",profile_img_uuid = null";
-            $_SESSION["login_info"]["profile_img_uuid"] = "";
+        }
+
+        // welfare card upload
+        $file = $files["welfare_img"];
+        if($file["error"] == 0){
+            // 기존 파일 있으면 업데이트
+            $query = "
+                select
+                    welfare_card_uuid
+                from
+                    ".$this->table_name."
+                where
+                    uuid = '".$data["uuid"]."'
+                limit 1
+            ";
+            $origin_welfare_card_uuid = $this->rodb->simple_query($query);
+            $new_welfare_card_uuid = $this->uploadFiles($file, $origin_welfare_card_uuid);
+            $welfare_card_uuid = ",welfare_card_uuid = '".$new_welfare_card_uuid."'";
+        }
+        else {
+            $welfare_card_uuid = ",welfare_card_uuid = null";
         }
 
         // coordinate
         $coor_x = @(float)$data["coordinate_x"];
         $coor_y = @(float)$data["coordinate_y"];
-        $coordinate = "POINT(".$coor_x.", ".$coor_y.")";*/
+        $coordinate = "POINT(".$coor_x.", ".$coor_y.")";
+
+
+        // calcurating impairment score
+        $impairment_score = 0;
+        foreach($data["impairment"]["assistive_device"] as $score){
+            $impairment_score += @(int)$score;
+        }
+        foreach($data["impairment"]["degree"] as $score){
+            $impairment_score += @(int)$score;
+        }
+        foreach($data["impairment"]["physical_ability"] as $score){
+            $impairment_score += @(int)$score;
+        }
+
+        $detail = specialchars($data["impairment"]["detail"]);
+        $detail0 = str_replace("\n", "\\n", $detail);
+        $detail0 = str_replace("\r", "\\r", $detail0);
+        $detail0 = str_replace("\t", "\\t", $detail0);
+
+        $remark = specialchars($data["impairment"]["remark"]);
+        $remark = str_replace("\n", "\\n", $remark);
+        $remark = str_replace("\r", "\\r", $remark);
+        $remark = str_replace("\t", "\\t", $remark);
+
+        $data["impairment"]["detail"] = $detail;
+        $data["impairment"]["remark"] = $remark;
+
+        $impairment = json_encode($data["impairment"], JSON_UNESCAPED_UNICODE);
+
 
         $query = "
             update
                 ".$this->table_name."
             set
-                 email = '".$data["email"]."'
-                ,buyer_name = '".$data["buyer_name"]."'
+                 name = '".$data["name"]."'
+                ,email = '".$data["email"]."'
                 ,phone = '".$data["phone"]."'
-                ,address = '".$data["address"]."'
-                ,company_name = '".$data["company_name"]."'
-                ,company_code = '".$data["company_code"]."'
-                ,classification = '".$data["classification"]."'
+                ,tel = '".$data["tel"]."'
                 ,fax = '".$data["fax"]."'
-                ,severely_disabled = '".$data["severely_disabled"]."'
-                ,mild_disabled = '".$data["mild_disabled"]."'
+                ,post_code = '".$data["post_code"]."'
+                ,address = '".$data["address"]."'
+                ,address_detail = '".$data["address_detail"]."'
+                ,coordinate = ".$coordinate."
+                ".$profile_img_uuid."
+                ".$welfare_card_uuid."
+                ,impairment = '".$impairment."'
+                ,impairment_score = ".$impairment_score."
+                ,sns_homepage = '".$data["sns_homepage"]."'
+                ,sns_blog = '".$data["sns_blog"]."'
+                ,sns_facebook = '".$data["sns_facebook"]."'
+                ,sns_twitter = '".$data["sns_twitter"]."'
+                ,sns_linkedin = '".$data["sns_linkedin"]."'
+                ,sns_youtube = '".$data["sns_youtube"]."'
                 ,update_date = '".date("Y-m-d H:i:s")."'
             where
                 uuid = '".$data["uuid"]."'
+            limit 1
+        ";
+        $this->wrdb->update($query);
+
+    } //}}}
+
+    public function Recommend($type, $uuid)
+    { //{{{
+
+        $type = ($type == "enable")? "recommended = 1":"recommended = null";
+
+        $query = "
+            update
+                ".$this->table_name."
+            set
+                ".$type."
+            where
+                uuid = '".$uuid."'
             limit 1
         ";
         $this->wrdb->update($query);
@@ -216,7 +328,7 @@ class BuyerModel extends CommonModel
 			UPDATE
 				".$this->table_name."
 			SET
-				status = ".$data["status"]."
+				contract_status = ".$data["status"]."
 			WHERE
 				idx = ".$data["idx"]."
 			LIMIT 1
@@ -226,7 +338,6 @@ class BuyerModel extends CommonModel
 
         return 1;
     }
-
 }
 
 

@@ -73,7 +73,7 @@ $routes->group('Member', ['namespace' => 'App\Controllers\Member'], static funct
 });
 
 // 채용
-$routes->group('Application', ['namespace' => 'App\Controllers\Application'], static function ($routes) {
+$routes->group('Contract', ['namespace' => 'App\Controllers\Contract'], static function ($routes) {
     // 전체 목록
     $group_name = "Lists";
     $routes->get ($group_name.'/',                  $group_name.'::Index');
@@ -81,6 +81,8 @@ $routes->group('Application', ['namespace' => 'App\Controllers\Application'], st
     $routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
     $routes->get ($group_name.'/RecommendSubmit/(:any)/(:any)',     $group_name.'::RecommendSubmit/$1/$2');
     $routes->get ($group_name.'/Update',            $group_name.'::Update');
+    $routes->get ($group_name.'/statusUpdate', $group_name.'::statusUpdate');
+
 
 });
 

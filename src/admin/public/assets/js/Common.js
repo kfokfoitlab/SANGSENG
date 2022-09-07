@@ -54,7 +54,7 @@ $(document).ready(function(){
     });
 
     // Mask 폰번호
-    $(".mask-phone").mask('0099-0009-0000');
+    $(".mask-phone").mask('099-0009-0000');
     // Mask 사업자등록번호
     $(".mask-business-number").mask('000-00-00000');
     // 금액

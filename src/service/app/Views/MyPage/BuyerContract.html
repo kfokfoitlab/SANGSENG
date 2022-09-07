@@ -69,7 +69,7 @@
             <th>감면금액</th>
             <th>계약 등록일</th>
             <th>배송주기</th>
-            <th>최종수정일</th>
+            <th>판매기업</th>
           </tr>
           </thead>
           <tbody>
@@ -119,7 +119,7 @@
           ?>
 
           <tr>
-            <td><?=$item["idx"]?></td>
+            <td><?=$item["cidx"]?></td>
             <td title="진행중"><?=$status?></td>
             <td title="20220801090000-00001"><a href=""><?=$item["contract_no"]?></a></td>
             <td title="친환경중질지70gA4용지"><?=$item["product_name"]?></td>
@@ -129,7 +129,7 @@
             <td title="25,000,000">25,000,000</td>
             <td title="2022-08-01"><?=$item["register_date"]?></td>
             <td title="일주일에 한번"><?=$delivery_cycle?></td>
-            <td title="22-08-02"><?=$item["update_date"]?></td>
+            <td title="22-08-02"><?=$item["seller_company"]?></td>
           </tr>
           <?php
           }

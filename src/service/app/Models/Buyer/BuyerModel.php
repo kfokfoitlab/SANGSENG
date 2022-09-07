@@ -60,9 +60,9 @@ class BuyerModel extends CommonModel
         helper(["uuid_v4", "specialchars"]);
         $uuid = gen_uuid_v4();
         $contract_no = date("YmdHis");
-        //1:���δ��,2:������,3:���ű�� ����,5:���Ϸ�,7:�ݷ�,9:������
         $contract_status = "1";
         $buyer_uuid = $_SESSION['login_info']['uuid'];
+        $buyer_comapny = $_SESSION['login_info']['company_name'];
         $query = "
           insert into
               contract_condition
@@ -72,6 +72,10 @@ class BuyerModel extends CommonModel
               ,contract_status = '".$contract_status."'
               ,seller_uuid = '".$data["seller_uuid"]."'
               ,buyer_uuid = '".$buyer_uuid."'
+              ,seller_company = '".$data["seller_company"]."'
+              ,product_name = '".$data["product_name"]."'
+              ,product_price = '".$data["product_price"]."'
+              ,buyer_company = '".$buyer_comapny."'
               ,product_no = '".$data["product_no"]."'       
               ,register_date = '".date("Y-m-d H:i:s")."'
               ,del_yn = 'N'          
