@@ -14,10 +14,10 @@ $(document).ready(function(){
              url: "/"+_CONTROLLER+"/getList"
             ,type: "POST"
             ,data: function(data){
-                data.columns[1].search.value = $("#search-company-name").val();
-                data.columns[2].search.value = $("#search-business-number").val();
+                data.columns[2].search.value = $("#search-company-name").val();
+                data.columns[3].search.value = $("#search-business-number").val();
                 data.columns[6].search.value = $("#search-status").val();
-                data.columns[7].search.value = $("#search-daterange").val();
+                data.columns[4].search.value = $("#search-buyer_name").val();
 
                 /*
                 data.columns[1].search.value = $("#search-daterange").val();

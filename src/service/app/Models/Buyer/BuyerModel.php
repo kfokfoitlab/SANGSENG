@@ -22,6 +22,8 @@ class BuyerModel extends CommonModel
                 *
             from
               seller_product
+            where status = '5'
+            and del_yn !='Y' 
            order by 
                idx desc
             limit 5  
@@ -95,6 +97,7 @@ class BuyerModel extends CommonModel
                 *
             from
               seller_product
+            where status ='5'
            order by 
                product_ranking desc
             limit 4;
@@ -116,6 +119,8 @@ class BuyerModel extends CommonModel
             from
               seller_product
             where 1=1
+              and status ='5'
+              and del_yn is null
                 and product_category = $value
            
         ";

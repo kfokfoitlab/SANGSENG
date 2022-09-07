@@ -22,7 +22,7 @@ class ItemModel extends CommonModel
         $uuid = $_SESSION["login_info"]["uuid"];
         $company_name = $_SESSION["login_info"]["company_name"];
         $product_ranking = 9999;
-        $status = '5';
+        $status = '1';
         $product_no = date("YmdHis");
 
         $query = "
@@ -85,7 +85,7 @@ public function ItemUpdateSubmit($files, $data){
 	
     $product_no = $data["product_no"];
     $uuid = $_SESSION["login_info"]["uuid"];
-
+    $status = 3;
     $query = "
             update
                 seller_product
@@ -99,6 +99,7 @@ public function ItemUpdateSubmit($files, $data){
                 ,product_surtax = '".$data["product_surtax"]."'
                 ,delivery_cycle = '".$data["delivery_cycle"]."'
                 ,product_detail = '".$data["product_detail"]."'
+                ,status = '".$status."'
                 ,representative_image = '".$upload_representative."'
                 ,product_image1 = '".$upload_image1."'
                 ,product_image2 = '".$upload_image2."'            

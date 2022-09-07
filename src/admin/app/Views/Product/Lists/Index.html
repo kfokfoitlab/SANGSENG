@@ -10,19 +10,32 @@
       <div class="row gx-3">
         <div class="col-2">
           <label>상품번호 검색</label>
-          <input type="text" class="form-control form-control-sm search" id="search-title" placeholder="">
+          <input type="text" class="form-control form-control-sm search" id="search-product_no" placeholder="">
         </div>
         <div class="col-2">
           <label>회사 검색</label>
-          <input type="text" class="form-control form-control-sm search" id="search-user-name" placeholder="">
+          <input type="text" class="form-control form-control-sm search" id="search-company_name" placeholder="">
         </div>
         <div class="col-2">
-          <label>상태 검색</label>
-          <input type="text" class="form-control form-control-sm search" id="search-user-name" placeholder="">
+          <label>상태</label>
+          <select class="form-control form-control-sm filter" id="search-status">
+            <option value="" selected>전체</option>
+            <option value="1">심사중</option>
+            <option value="5">가입완료</option>
+            <option value="7">거절</option>
+            <option value="9">탈퇴</option>
+          </select>
         </div>
         <div class="col-2">
-          <label>등록일 검색</label>
-          <input type="text" class="form-control form-control-sm filter daterange" id="search-daterange" placeholder="기간 검색">
+          <label>카테고리</label>
+          <select class="form-control form-control-sm filter" id="search-product_category">
+            <option value="">전체</option>
+            <option value="1">사무용품</option>
+            <option value="2">생활용품</option>
+            <option value="3">전산용품</option>
+            <option value="4">식음료</option>
+            <option value="5">청소용품</option>
+          </select>
         </div>
       </div>
 

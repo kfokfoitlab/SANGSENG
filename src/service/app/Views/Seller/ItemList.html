@@ -141,6 +141,8 @@
           $status = "";
           if($item["status"] == 1){
           $status = "승인대기";
+          }else if($item["status"] == 3){
+          $status = "수정 요청 심사중";
           }else if($item["status"] == 5){
           $status = "판매중";
           }else if($item["status"] == 7){

@@ -14,10 +14,10 @@ $(document).ready(function(){
              url: "/"+_CONTROLLER+"/getList"
             ,type: "POST"
             ,data: function(data){
-                data.columns[1].search.value = $("#search-title").val();
-                data.columns[2].search.value = $("#search-user-name").val();
-                data.columns[6].search.value = $("#search-daterange").val();
-
+                data.columns[1].search.value = $("#search-company_name").val();
+                data.columns[2].search.value = $("#search-product_no").val();
+                data.columns[4].search.value = $("#search-product_category").val();
+                data.columns[9].search.value = $("#search-status").val();
             }
         },
         "order": [
@@ -66,6 +66,9 @@ $(document).ready(function(){
                         case "0":
                         case "1":
                             html = "<span class='badge bg-info'>승인대기</span>";
+                            break;
+                        case "3":
+                            html = "<span class='badge bg-info'>수정 요청</span>";
                             break;
                         case "5":
                             html = "<span class='badge bg-success'>승인</span>";

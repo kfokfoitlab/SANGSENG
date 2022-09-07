@@ -98,7 +98,6 @@ class ContractModel extends CommonModel
                  ,(select email from seller_company where uuid=".$this->table_name.".seller_uuid) as seller_email
                  , (select seller_name from seller_company where uuid=".$this->table_name.".seller_uuid)as seller_name
                  ,(select buyer_name from buyer_company where uuid=".$this->table_name.".buyer_uuid) as buyer_name
-
             from
                 ".$this->table_name."
             where
@@ -325,18 +324,29 @@ class ContractModel extends CommonModel
     public function statusUpdate($data)
     {
         $query = "
+           select count(*)
+           from ".$this->table_name."
+           WHERE idx = ".$data["idx"]." 
+            and workflow_id != ''
+            LIMIT 1 
+        ";
+        $result = $this->rodb->simple_query($query);
+        if($result <= 0){
+        $query = "
 			UPDATE
 				".$this->table_name."
 			SET
-				contract_status = ".$data["status"]."
-			WHERE
-				idx = ".$data["idx"]."
-			LIMIT 1
-			";
-
+				contract_status = ".$data["status"];
+        if($data["status"] == 2){
+            $query = $query.",workflow_id = ".$data["workflow_id"];
+        }
+		$query = $query." WHERE idx = ".$data["idx"]." LIMIT 1 ";
         $this->wrdb->update($query);
-
         return 1;
+        }
+        else{
+            return 2;
+        }
     }
 }
 
