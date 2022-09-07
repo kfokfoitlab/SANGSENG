@@ -178,6 +178,9 @@ select:focus-visible {
     font-size: 1rem;
     font-weight: 700;
 }
+.btn-sm {
+    font-size: 0.875rem;
+}
 
 .form-group input {
     font-size: 1em;

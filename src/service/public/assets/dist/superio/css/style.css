@@ -75,6 +75,8 @@ Version: 1.0.0
 67. Seller/IMJOB/List
 68. Seller/Item/ItemList
 69. Seller/Contract
+70. Auth/SignIn
+
  */
 **********************************************/
 /*** 
@@ -21608,7 +21610,8 @@ Reduction/Calculator
   justify-content: flex-end;
   flex-grow: 1;
   height: 40px;
-  padding-right: 40px;
+  margin-top: 1rem;
+  padding-right: 20px;
 }
 
 .reduction-calc .total-charge-text {
@@ -21620,6 +21623,7 @@ Reduction/Calculator
   margin-left: 30px;
   color: #ff0000;
   font-weight: bold;
+  font-size: 1.125rem;
 }
 
 .reduction-calc .reduction-result-border{
@@ -21633,4 +21637,42 @@ Reduction/Calculator
 .reduction-calc .reduction-result-td:nth-child(2){
   font-size: 0.9rem;
   color: #707070;
+}
+/***
+
+====================================================================
+Auth/SignIn
+====================================================================
+
+***/
+.login-form .col-2 {
+  font-weight: bold
+}
+.login-form input[name="company_type"] {
+  display: none;
+  appearance: none;
+}
+.login-form input[name="company_type"] + label {
+  display: block;
+  background-color: #f6f6f6;
+  font-weight: bold;
+  cursor: pointer;
+}
+.login-form input[name="company_type"] + label span {
+  position: relative;
+  padding: 0 16px;
+}
+.login-form input[name="company_type"]:checked + label {
+  background-color: #dbe7f9;
+  font-weight: bold;
+}
+.login-form input[name="company_type"]:checked + label span::before {
+  position: absolute;
+  content: ' \2714';
+  left: 0;
+  color: #0067ff;
+}
+.login-form .default-form .form-group input[type='text'],
+.login-form .default-form .form-group input[type='password'] {
+  background-color: #f3fafd;
 }

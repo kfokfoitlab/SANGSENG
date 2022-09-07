@@ -202,6 +202,10 @@ $routes->group('CS', function($routes) {
 $routes->group('Reduction', function($routes) {
     $routes->get('Calculator', 'Reduction\Calculator::index');
 });
+$routes->group('Policy', function($routes) {
+    $routes->get('TOS', 'Policy\TermsOfService::index');
+    $routes->get('Privacy', 'Policy\Privacy::index');
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing
