@@ -36,8 +36,26 @@ $(document).ready(function(){
                 "render": function( data, type, row, meta ){
                     let html = "";
                     var uuid = data['uuid'];
-                    var result = statusCheck();
-                            html = "<span class='badge bg-info'>승인대기</span>";
+                    switch(data['contract_status']){
+                        case "0":
+                        case "1":
+                            html = "<span id ='check' class='badge bg-info'>승인대기</span>";
+                            break;
+                        case "2":
+                            html = "<span id ='check' class='badge bg-primary'>진행중</span>";
+                            break;
+                        case "5":
+                            html = "<span id ='check' class='badge bg-success'>계약완료</span>";
+                            break;
+                        case "7":
+                            html = "<span id ='check' class='badge bg-danger'>반려</span>";
+                            break;
+                        case "9":
+                            html = "<span  id ='check' class='badge bg-dark'>계약취소</span>";
+                            break;
+                    }
+/*
+                    html = "<span class='badge bg-info'>승인대기</span>";
 
                             html = "<button onclick='statusCheck(\""+uuid+"\");' class='badge bg-primary'>진행중</button>";
 
@@ -45,7 +63,7 @@ $(document).ready(function(){
 
                             html = "<span class='badge bg-danger'>반려</span>";
 
-                            html = "<span class='badge bg-dark'>계약취소</span>";
+                            html = "<span class='badge bg-dark'>계약취소</span>";*/
 
 
                     return html;
@@ -68,14 +86,16 @@ $(document).ready(function(){
                     return html;
                 }
             }
-            ,{title: "상세보기", data: "uuid", visible: true, orderable: false, className: "text-center noExport",
+            ,{title: "계약상태 보기", data: "uuid", visible: true, orderable: false, className: "text-center noExport",
                 "render": function( data, type, row, meta ){
                     var html = "";
-                    html += "<a";
+                    html = "<button onclick='statusCheck(\""+data+"\");'class='badge bg-primary'>상태보기</button>";
+
+               /*     html += "<a";
                     html += "   class='btn btn-sm btn-outline-primary text-nowrap'";
                     html += "   href='/"+_CONTROLLER+"/Detail/"+data+"' target='detail'>";
                     html += "   상세보기";
-                    html += "</a>";
+                    html += "</a>";*/
 
                     return html;
 
@@ -152,7 +172,7 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
  //   location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
 }
 
-async function statusCheck(uuid){
+async function statusCheck(uuid) {
     var result ="";
     const options = {
         method: 'GET',
@@ -161,18 +181,43 @@ async function statusCheck(uuid){
             Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
         }
     };
-    const response =  await fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=6&field_name=uuid&field_value='+uuid+'', options)
+    await fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=6&field_name=uuid&field_value=' + uuid + '', options)
         .then(response => response.json())
-        .then( function(response){
-            result =response['workflow_list'][0]['status'];
-            if(result == "Playing"){
-                alert("진행중인 계약입니다");
-            }else if(result == "Complete"){
-                alert("완료된 계약입니다. 진행상황변경을 해주세요");
+       /* .then(response => response['workflow_list'][0]['status'])*/
+/*        .then(response => console.log(response))*/
+        .then(response => {
+            console.log(response);
+            var data = response['workflow_list'][0]['status']
+            console.log(data);
+            if(data =="Playing"){
+                $("#check").html("진행중입니다")
+            }else if(data === "Complate"){
+                $("#check").html("dddd")
+            }else{
+                $("#check").html("aaaaa")
             }
-            return result;
         })
         .catch(err => console.error(err));
-    return response;
 }
 
+const options = {
+    method: 'GET',
+    headers: {
+        Accept: 'application/json',
+        Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+    }
+};
+
+fetch('https://docs.esignon.net/api/v3/workflows?offset=%2B09%3A00&page=1&date_condition=created_date&step=progress&imminent=false&important=false&template_id=6', options)
+    .then(response => response.json())
+   // .then(response => console.log(response['workflow_list'].length))
+    .then(response =>{
+        var workflow_id = "";
+        for(var i =0; i< response['workflow_list'].length; i++){
+            workflow_id = response['workflow_list'][i]['workflow_id'];
+            console.log(workflow_id);
+           // location.href = "/"+_CONTROLLER+"/statusUpdate?workflow_id="+workflow_id;
+        }
+
+    })
+    .catch(err => console.error(err));
