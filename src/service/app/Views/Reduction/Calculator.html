@@ -68,6 +68,7 @@
     </div>
   </section>
 </div>
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const dists = document.querySelectorAll(".bsDist");
@@ -77,167 +78,172 @@
       item.addEventListener("click", function () {
         document.querySelector(".tabMenuActive").classList.remove("tabMenuActive");
         this.classList.add("tabMenuActive");
-        const taxPercnetage = this.getAttribute('tabValue') === '1' ? 3.1 : 3.4;
+        const taxPercnetage = this.getAttribute('tabValue') === '1' ? 3.1 : 3.6;
         document.querySelector('[name="taxPercent"]').value = taxPercnetage;
       });
     })
 
     calcButton.addEventListener("click", () => {
-      const selectedDist = document.querySelector(".tabMenuActive").getAttribute("tabValue");
-      let distValue = selectedDist === "1" ? 3.1 : 3.4;
-      const taxPercent = Number(document.querySelector("input[name=taxPercent]").value.trim());
-      const alWorkCnt = Number(document.querySelector("input[name=alwaysWorkerCount]").value.trim());
-      const dpCount = Number(document.querySelector("input[name=deepDisabledCount]").value.trim());
-      const shCount = Number(document.querySelector("input[name=shallowDisabledCount]").value.trim());
+      const alWorkInput = document.querySelector("input[name=alwaysWorkerCount]");
+      const currDeepWorkInput = document.querySelector("input[name=deepDisabledCount]");
+      const currShallowWorkInput = document.querySelector("input[name=shallowDisabledCount]");
 
-      // if(!taxPercent || !alWorkCnt || !dpCount || !shCount) {
-      //     alert("빈칸없이 숫자만 입력해주세요.");
-      //     return;
-      // }
-
-      //의무고용 인원수
-      let worker_cnt01 = Number.parseInt((alWorkCnt * distValue / 100));
-      //추가고용해야하는 장애인 수 (경증기준)
-      let worker_add = (Number.parseInt(shCount) + Number.parseInt(dpCount) * 2);
-
-      let worker_cnt03;
-      if (Number(worker_cnt01 - worker_add) >= 0) {
-        worker_cnt03 = Number.parseInt((worker_cnt01 - worker_add));
+      if(!alWorkInput.value) {
+        alert('상시근로자 수를 입력해주세요.');
+        alWorkInput.focus();
+      } else if(!currDeepWorkInput.value) {
+        alert('현재 고용중인 중증 장애인 수를 입력해주세요.');
+        currDeepWorkInput.focus();
+      } else if(!currShallowWorkInput.value) {
+        alert('현재 고용중인 경증 장애인 수를 입력해주세요.');
+        currShallowWorkInput.focus();
       } else {
-        worker_cnt03 = 0;
+
+        const selectedDist = document.querySelector(".tabMenuActive").getAttribute("tabValue");
+        let distValue = selectedDist === "1" ? 3.1 : 3.6;
+        const taxPercent = Number(document.querySelector("input[name=taxPercent]").value.trim());
+        const alWorkCnt = Number(alWorkInput.value.trim());
+        const dpCount = Number(currDeepWorkInput.value.trim());
+        const shCount = Number(currShallowWorkInput.value.trim());
+
+        // 의무고용 인원수
+        let worker_cnt01 = Number.parseInt((alWorkCnt * distValue / 100));
+        // 현재 고용 인원수
+        let worker_add = (Number.parseInt(shCount) + Number.parseInt(dpCount) * 2);
+        // 추가 고용해야 하는 장애인 수 (경증기준)
+        let worker_cnt03;
+        if (Number(worker_cnt01 - worker_add) >= 0) {
+          worker_cnt03 = Number.parseInt((worker_cnt01 - worker_add));
+        } else {
+          worker_cnt03 = 0;
+        }
+
+        //고용부담금에 부과된 법인세(연)
+        let money_title01, money_title02, money_title03, money_title04, money_title05;
+        let money_base, money_result, money_buga, worker_cnt06;
+        //  부담기초액,   고용부담금(월), 법인세,      총부과액
+
+        if (worker_add < 1) {
+          // 한 명도 고용하지 않았을 때
+          money_title01 = worker_cnt01;
+          money_base = 1914440;
+          money_result = money_title01 * money_base; // 고용부담금(분납시)
+          money_buga = (money_result * 12) * taxPercent / 100;
+          // money_buga = money_buga + 5;
+          // money_buga = Math.floor(money_buga / 10) * 10;
+          money_buga = Math.floor(money_buga / 10 * 10); // 1원단위
+          worker_cnt06 = Number(money_result * 12) + Number(money_buga);
+        } else if (Math.floor((worker_add / worker_cnt01) * 100) < 25) {
+          // 의무고용인원의 1/4에 미달하는 인원일 때 (~25%) 소수점 내림
+          money_title02 = Math.floor(worker_cnt01 - worker_add);
+          money_base = 1608600; //1509200; // 2022 -> 1,608,600
+          money_result = money_title02 * money_base;
+          money_buga = (money_result * 12) * taxPercent / 100;
+          money_buga = Math.floor(money_buga / 10 * 10);
+          worker_cnt06 = Number(money_result * 12) + Number(money_buga);
+        } else if (Math.floor((worker_add / worker_cnt01) * 100) >= 25 && Math.floor((worker_add / worker_cnt01) * 100) < 50) {
+          // 의무고용인원의 1/4이상 1/2에 미달하는 인원일 때 (25% ~ 50%)
+          money_title03 = Math.floor(worker_cnt01 - worker_add);
+          money_base = 1378800; //1293600; // 2022 -> 1,378,800
+          money_result = money_title03 * money_base;
+          money_buga = (money_result * 12) * taxPercent / 100;
+          // money_buga = money_buga + 5;
+          money_buga = Math.floor(money_buga / 10 * 10);
+          worker_cnt06 = Number(money_result * 12) + Number(money_buga);
+        } else if (Math.floor((worker_add / worker_cnt01) * 100) >= 50 && Math.floor((worker_add / worker_cnt01) * 100) < 75) {
+          // 의무고용인원의 1/2이상 3/4에 미달하는 인원일 때 (50% ~ 75%)
+          money_title04 = Math.floor(worker_cnt01 - worker_add);
+          money_base = 1217940; //1142680; // 2022 -> 1,217,940
+          money_result = money_title04 * money_base;
+          money_buga = (money_result * 12) * taxPercent / 100;
+          // money_buga = money_buga + 5;
+          money_buga = Math.floor(money_buga / 10 * 10);
+          worker_cnt06 = Number(money_result * 12) + Number(money_buga);
+        } else if (Math.floor((worker_add / worker_cnt01) * 100) >= 75 && Math.floor((worker_add / worker_cnt01) * 100) < 100) {
+          // 의무고용인원의 3/4 이상 고용한 경우 (75%~)
+          money_title05 = Math.floor(worker_cnt01 - worker_add);
+          money_base = 1149000; //1078000; // 2022 -> 1,149,000
+          money_result = money_title05 * money_base;
+          money_buga = (money_result * 12) * taxPercent / 100;
+          // money_buga = money_buga + 5;
+          money_buga = Math.floor(money_buga / 10 * 10);
+          worker_cnt06 = Number(money_result * 12) + Number(money_buga);
+        } else if (worker_add >= worker_cnt01) {
+          // 의무고용인원을 충족했을때
+          money_buga = 0;
+          worker_cnt06 = 0;
+        }
+        // location.href = `/taxResult?shPle=${worker_cnt01}&moreCnt=${worker_cnt03}&yearTax=${commaFunc(money_buga)}&resultPrice=${commaFunc(worker_cnt06)}`;
+
+        // 고용부담금계산 결과 나타낼 노드
+        const reductionResult = document.querySelector('.reduction-result');
+
+        // 고용부담금계산 결과 노드 리셋
+        reductionResult.innerHTML = "";
+
+        // 노드 생성
+        const reductionResult_h3 = document.createElement('h3');
+        const reductionResultBorder_div = document.createElement('div');
+        const reductionResult_table = document.createElement('table');
+        const reductionResult_tbody = document.createElement('tbody');
+        const reductionResult_tr_10 = document.createElement('tr');
+        const reductionResult_td_11 = document.createElement('td');
+        const reductionResult_td_12 = document.createElement('td');
+        const reductionResult_tr_20 = document.createElement('tr');
+        const reductionResult_td_21 = document.createElement('td');
+        const reductionResult_td_22 = document.createElement('td');
+        const reductionResult_tr_30 = document.createElement('tr');
+        const reductionResult_td_31 = document.createElement('td');
+        const reductionResult_td_32 = document.createElement('td');
+        const reductionResultTotalCharge_div = document.createElement('div');
+        const reductionResultTotalCharge_p = document.createElement('p');
+        const totalCharge_span = document.createElement('span');
+
+        // 클래스 추가
+        reductionResult_h3.classList.add('reduction-calc-title', 'fotm');
+        reductionResultBorder_div.classList.add('reduction-result-border');
+        reductionResult_tr_10.classList.add('reduction-result-tr');
+        reductionResult_td_11.classList.add('reduction-result-td');
+        reductionResult_td_12.classList.add('reduction-result-td');
+        reductionResult_tr_20.classList.add('reduction-result-tr');
+        reductionResult_td_21.classList.add('reduction-result-td');
+        reductionResult_td_22.classList.add('reduction-result-td');
+        reductionResult_tr_30.classList.add('reduction-result-tr');
+        reductionResult_td_31.classList.add('reduction-result-td');
+        reductionResult_td_32.classList.add('reduction-result-td');
+        reductionResultTotalCharge_div.classList.add('total-charge-wrapper');
+        reductionResultTotalCharge_p.classList.add('total-charge-text');
+        totalCharge_span.classList.add('total-charge-price');
+
+        // 내용 삽입
+        reductionResult_h3.textContent = `고용부담금 감면액 조회 결과`;
+        reductionResult_td_11.textContent = `의무고용인원수`;
+        reductionResult_td_12.textContent = `${worker_cnt01} 명`;
+        reductionResult_td_21.textContent = `추가 고용해야 하는 장애인 수 (경증 기준)`;
+        reductionResult_td_22.textContent = `${worker_cnt03} 명`;
+        reductionResult_td_31.textContent = `고용부담금에 부과된 법인세 (연)`;
+        reductionResult_td_32.textContent = `${commaFunc(money_buga)} 원`;
+        reductionResultTotalCharge_p.textContent = `연간 총 부과액`;
+        totalCharge_span.textContent = `${commaFunc(worker_cnt06)} 원`;
+
+        // 노드 정렬
+        reductionResult.appendChild(reductionResult_h3);
+        reductionResult.appendChild(reductionResultBorder_div);
+        reductionResultBorder_div.appendChild(reductionResult_table);
+        reductionResult_table.appendChild(reductionResult_tbody);
+        reductionResult_tbody.appendChild(reductionResult_tr_10);
+        reductionResult_tbody.appendChild(reductionResult_tr_20);
+        reductionResult_tbody.appendChild(reductionResult_tr_30);
+        reductionResult_tr_10.appendChild(reductionResult_td_11);
+        reductionResult_tr_10.appendChild(reductionResult_td_12);
+        reductionResult_tr_20.appendChild(reductionResult_td_21);
+        reductionResult_tr_20.appendChild(reductionResult_td_22);
+        reductionResult_tr_30.appendChild(reductionResult_td_31);
+        reductionResult_tr_30.appendChild(reductionResult_td_32);
+        reductionResult.appendChild(reductionResultTotalCharge_div);
+        reductionResultTotalCharge_div.appendChild(reductionResultTotalCharge_p);
+        reductionResultTotalCharge_p.appendChild(totalCharge_span);
       }
-
-      //고용부담금에 부과된 법인세(연)
-      let money_title01, money_title02, money_base, money_result, money_buga;
-      let money_title03, money_title04, money_title05, worker_sum, worker_cnt06;
-
-      worker_sum = worker_cnt01 - worker_add;
-
-      if (worker_add < 1) {
-        money_title01 = worker_cnt01;
-        money_base = 1914440; //1795310; // 2020년 기준 금액 // 20222 -> 1,914,440
-        money_result = money_title01 * money_base; // 고용부담금(분납시)
-        money_buga = (money_result * 12) * taxPercent / 100;
-        money_buga = money_buga + 5;
-        money_buga = Math.floor(money_buga / 10) * 10;
-        worker_cnt06 = Number(money_result * 12) + Number(money_buga);
-
-      } else if (Math.floor(worker_cnt01 * 25 / 100) > worker_add) {
-        // 25% 미달 소수점 내림(의무고용인원 * 25%) 가 중증 가산 인원보다 크면(의무고용인원 - 중증가산 인원)
-        money_title02 = Math.floor(worker_cnt01 - worker_add);
-        money_base = 1608600; //1509200; // 2022 -> 1,608,600
-        money_result = money_title02 * money_base;
-        money_buga = (money_result * 12) * taxPercent / 100;
-        money_buga = money_buga + 5;
-        money_buga = Math.floor(money_buga / 10) * 10;
-        worker_cnt06 = Number(money_result * 12) + Number(money_buga);
-      } else if (Math.floor(worker_cnt01 * 50 / 100) > worker_add) {
-        //25%~50%미달 소수점내림(의무고용인원 * 50%)가 중증가산 인원보다 크면 (의무인원 - 중증가산 - 25%미달인원)
-        money_title03 = Math.floor(worker_cnt01 - worker_add);
-        money_base = 1378800; //1293600; // 2022 -> 1,378,800
-        money_result = money_title03 * money_base;
-        money_buga = (money_result * 12) * taxPercent / 100;
-        money_buga = money_buga + 5;
-        money_buga = Math.floor(money_buga / 10) * 10;
-        worker_cnt06 = Number(money_result * 12) + Number(money_buga);
-      } else if (Math.floor(worker_cnt01 * 75 / 100) > worker_add) {
-        //25%~50%미달 소수점내림(의무고용인원 * 50%)가 중증가산 인원보다 크면 (의무인원 - 중증가산 - 25%미달인원 - 25%~50%미달인원)
-        money_title04 = Math.floor(worker_cnt01 - worker_add);
-        money_base = 1217940; //1142680; // 2022 -> 1,217,940
-        money_result = money_title04 * money_base;
-        money_buga = (money_result * 12) * taxPercent / 100;
-        money_buga = money_buga + 5;
-        money_buga = Math.floor(money_buga / 10) * 10;
-        worker_cnt06 = Number(money_result * 12) + Number(money_buga);
-      } else if (worker_sum > 0) {
-        //75%이상 (계값 - 미고용인원 - 25%미달 - 25%~50%미달 - 50%~75%미달) 이 0보다 크면 (계값 - 미고용인원 - 25%미달 - 25%~50%미달 - 50%~75%미달)
-        money_title05 = worker_sum;
-        money_base = 1149000; //1078000; // 2022 -> 1,149,000
-        money_result = money_title05 * money_base;
-        money_buga = (money_result * 12) * taxPercent / 100;
-        money_buga = money_buga + 5;
-        money_buga = Math.floor(money_buga / 10) * 10;
-        worker_cnt06 = Number(money_result * 12) + Number(money_buga);
-      } else if (worker_add >= worker_cnt01) {
-        money_buga = 0;
-        worker_cnt06 = 0;
-      }
-      //console.log(worker_cnt01, worker_cnt03, money_buga, worker_cnt06);
-
-      // malltogether
-      // location.href = `/taxResult?shPle=${worker_cnt01}&moreCnt=${worker_cnt03}&yearTax=${commaFunc(money_buga)}&resultPrice=${commaFunc(worker_cnt06)}`;
-
-      // console.log(`의무고용인원수: ${worker_cnt01}, 추가고용장애인 경증: ${worker_cnt03}, 법인세 ${commaFunc(money_buga)}, 연간 총 부과액 ${commaFunc(worker_cnt06)}`)
-
-      // 고용부담금계산 결과 나타낼 노드
-      const reductionResult = document.querySelector('.reduction-result');
-
-      // 고용부담금계산 결과 노드 리셋
-      reductionResult.innerHTML = "";
-
-      // 노드 생성
-      const reductionResult_h3 = document.createElement('h3');
-      const reductionResultBorder_div = document.createElement('div');
-      const reductionResult_table = document.createElement('table');
-      const reductionResult_tbody = document.createElement('tbody');
-      const reductionResult_tr_10 = document.createElement('tr');
-      const reductionResult_td_11 = document.createElement('td');
-      const reductionResult_td_12 = document.createElement('td');
-      const reductionResult_tr_20 = document.createElement('tr');
-      const reductionResult_td_21 = document.createElement('td');
-      const reductionResult_td_22 = document.createElement('td');
-      const reductionResult_tr_30 = document.createElement('tr');
-      const reductionResult_td_31 = document.createElement('td');
-      const reductionResult_td_32 = document.createElement('td');
-      const reductionResultTotalCharge_div = document.createElement('div');
-      const reductionResultTotalCharge_p = document.createElement('p');
-      const totalCharge_span = document.createElement('span');
-
-      // 클래스 추가
-      reductionResult_h3.classList.add('reduction-calc-title', 'fotm');
-      reductionResultBorder_div.classList.add('reduction-result-border');
-      reductionResult_tr_10.classList.add('reduction-result-tr');
-      reductionResult_td_11.classList.add('reduction-result-td');
-      reductionResult_td_12.classList.add('reduction-result-td');
-      reductionResult_tr_20.classList.add('reduction-result-tr');
-      reductionResult_td_21.classList.add('reduction-result-td');
-      reductionResult_td_22.classList.add('reduction-result-td');
-      reductionResult_tr_30.classList.add('reduction-result-tr');
-      reductionResult_td_31.classList.add('reduction-result-td');
-      reductionResult_td_32.classList.add('reduction-result-td');
-      reductionResultTotalCharge_div.classList.add('total-charge-wrapper');
-      reductionResultTotalCharge_p.classList.add('total-charge-text');
-      totalCharge_span.classList.add('total-charge-price');
-
-      // 내용 삽입
-      reductionResult_h3.textContent = `고용부담금 감면액 조회 결과`;
-      reductionResult_td_11.textContent = `의무고용인원수`;
-      reductionResult_td_12.textContent = `${worker_cnt01} 명`;
-      reductionResult_td_21.textContent = `추가 고용해야 하는 장애인 수 (경증 기준)`;
-      reductionResult_td_22.textContent = `${worker_cnt03} 명`;
-      reductionResult_td_31.textContent = `고용부담금에 부과된 법인세 (연)`;
-      reductionResult_td_32.textContent = `${commaFunc(money_buga)} 원`;
-      reductionResultTotalCharge_p.textContent = `연간 총 부과액`;
-      totalCharge_span.textContent = `${commaFunc(worker_cnt06)} 원`;
-
-      // 노드 정렬
-      reductionResult.appendChild(reductionResult_h3);
-      reductionResult.appendChild(reductionResultBorder_div);
-      reductionResultBorder_div.appendChild(reductionResult_table);
-      reductionResult_table.appendChild(reductionResult_tbody);
-      reductionResult_tbody.appendChild(reductionResult_tr_10);
-      reductionResult_tbody.appendChild(reductionResult_tr_20);
-      reductionResult_tbody.appendChild(reductionResult_tr_30);
-      reductionResult_tr_10.appendChild(reductionResult_td_11);
-      reductionResult_tr_10.appendChild(reductionResult_td_12);
-      reductionResult_tr_20.appendChild(reductionResult_td_21);
-      reductionResult_tr_20.appendChild(reductionResult_td_22);
-      reductionResult_tr_30.appendChild(reductionResult_td_31);
-      reductionResult_tr_30.appendChild(reductionResult_td_32);
-      reductionResult.appendChild(reductionResultTotalCharge_div);
-      reductionResultTotalCharge_div.appendChild(reductionResultTotalCharge_p);
-      reductionResultTotalCharge_p.appendChild(totalCharge_span);
-
     })
 
     const commaFunc = (number) => {
