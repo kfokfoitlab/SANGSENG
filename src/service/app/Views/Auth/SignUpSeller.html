@@ -64,12 +64,23 @@
               <label class="my-2"><sup class="text-danger">*</sup><a title="사업자등록번호 필수입력">사업자등록번호</a></small></label>
               <input type="text" name="company_code" class="mask-business-number" placeholder="숫자만 입력해 주세요." title="사업자등록번호 입력" tabindex=100 required>
             </div>
+
             <div class="form-group">
-              <label class="my-2"><sup class="text-danger">*</sup><a title="기업형태 필수입력">기업형태</a></label>
-              <input type="radio" name="classification" value="1" required >장애인 표준사업장
-              <input type="radio" name="classification" value="2">장애인 직업재활시설
-              <input type="radio" name="classification" value="3">중증장애인생산품 생산시설
-              <input type="radio" name="classification" value="4">장애인기업
+              <p class="mt-4 mb-2 text-dark"><sup class="text-danger">*</sup><a title="기업형태 필수입력">기업형태</a></p>
+              <div>
+                <label class="me-2">
+                  <input type="radio" name="classification" value="1" class="me-1" checked required >장애인 표준사업장
+                </label>
+                <label class="me-2">
+                  <input type="radio" name="classification" value="2" class="me-1">장애인 직업재활시설
+                </label>
+                <label class="me-2">
+                  <input type="radio" name="classification" value="3" class="me-1">중증장애인생산품 생산시설
+                </label>
+                <label class="me-2">
+                  <input type="radio" name="classification" value="4" class="me-1">장애인기업
+                </label>
+              </div>
             </div>
             <div class="form-group">
               <label class="my-2"><a title="팩스번호">팩스번호</a></label>
