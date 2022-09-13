@@ -155,21 +155,15 @@
 			$("#worker_birth").addClass("is-invalid");
 			$("#worker_birth").focus();
 			return false;
-		}else if($("#portrait-photo-input").val() == ""){
-			$("#portrait-photo-input").addClass("is-invalid");
-			$("#portrait-photo-input").focus();
-			return false;
-		}else if($("#formFile").val() == "") {
-			$("#formFile").addClass("is-invalid");
-			$("#formFile").focus();
-			return false;
 		}else {
 			return true;
 		}
 	}
 	function updateWorker(){
+		if(validation()) {
 			var form = $('#info_form');
 			form.submit();
+		}
 	};
 
 	function downloadFileNew(fileName){

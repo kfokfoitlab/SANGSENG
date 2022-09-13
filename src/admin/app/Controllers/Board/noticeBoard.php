@@ -29,4 +29,71 @@
 			
 		} //}}}
 		
+		public function getList()
+		{ //{{{
+			
+			$start = $_POST["start"];
+			$length = $_POST["length"];
+			$limit = array(
+				"start" => $start
+			,"length" => $length
+			);
+			
+			$result = $this->model->getListData($_POST);
+			
+			$data = array(
+				"draw" => @$_POST["draw"]
+			,"recordsTotal" => $result["records_total"]
+			,"recordsFiltered" => $result["filtered_total"]
+			,"data" => $result["data"]
+			);
+			
+			echo json_encode($data, JSON_UNESCAPED_UNICODE);
+			
+			die();
+			
+		} //}}}
+		
+		public function noticeRegister()
+		{ //{{{
+			echo view('Common/Header.html');
+			echo view('Board/noticeBoard/noticeRegister.html',);
+			echo view('Common/Footer.html');
+		} //}}}
+		
+		public function noticeRegisterSubmit()
+		{ //{{{
+			
+			$result = $this->model->Register($_POST);
+			
+			if($result == 1){
+				echo "
+					<script>
+						alert('정상 등록되었습니다');
+						location.href = '/Board/noticeBoard';
+					</script>
+				";
+			}else{
+				echo "
+					<script>
+						alert('오류가 발생했습니다.다시 시도해주세요');
+					</script>
+				";
+			}
+		} //}}}
+		
+		public function statusUpdate()
+		{
+			$data = array(
+				"idx" => $_GET["idx"]
+			,"status" => $_GET["status"]
+			);
+			$this->model->statusUpdate($data);
+			echo "
+            <script>
+                history.back();
+            </script>
+        ";
+		}
+		
 	}
