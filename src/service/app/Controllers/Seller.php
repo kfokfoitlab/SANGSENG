@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\Seller\SellerModel;
-use App\Models\Auth\SigninModel;
+use App\Models\Auth\SignInModel;
 class Seller extends BaseController
 {
 
@@ -12,7 +12,7 @@ class Seller extends BaseController
     public function __construct()
     { //{{{
         $this->seller_model = new SellerModel;
-	    $this->sigin_model = new SigninModel;
+	    $this->sigin_model = new SignInModel;
     } //}}}
     public function index()
     {

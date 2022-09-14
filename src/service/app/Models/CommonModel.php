@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 use App\Models\dbClasses\dbModel;
-
+use function mkdir;
 class CommonModel extends dbModel
 {
 
@@ -329,9 +329,15 @@ class CommonModel extends dbModel
 		$name = $files["$fileName_ori"]['name'];
 		$exploded_file = explode(".",$name);
 		$ext = array_pop($exploded_file);
-		$target_dir = ROOTPATH."/public/uploads/upload_files/";
+		$target_dir = "D:/Project/SANGSENG/src/uploads/";
 		$file_tmp_name = $files["$fileName_ori"]["tmp_name"];
-		
+
+       if(!is_dir($target_dir)){
+           mkdir($target_dir,0777,true);
+       }
+ //       $seed = date("Y/W");
+       // $target_dir = ROOTPATH."public/uploads/upload_files/";
+   //     mkdir($target_dir,0777,true);
 		if( !in_array($ext, $allowed_ext) ) {
 			echo "허용되지 않는 확장자입니다.";
 			exit;
