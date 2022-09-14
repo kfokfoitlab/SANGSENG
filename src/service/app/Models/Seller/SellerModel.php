@@ -225,7 +225,7 @@ class SellerModel extends CommonModel
               sum(b.product_price) as 'price'
             from
               contract_condition a
-            join seller_product b on a.seller_uuid = b.register_id
+            join seller_product b on a.product_no = b.product_no
             where a.seller_uuid = '$uuid'
             and contract_status = 5
                      
@@ -243,7 +243,7 @@ class SellerModel extends CommonModel
               sum(b.product_price) as 'price'
             from
               contract_condition a
-            join seller_product b on a.seller_uuid = b.register_id
+            join seller_product b on a.product_no = b.product_no
             where a.seller_uuid = '$uuid'
               and (contract_status = 2 or contract_status = 5)
 
