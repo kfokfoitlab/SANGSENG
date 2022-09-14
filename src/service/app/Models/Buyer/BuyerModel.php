@@ -16,7 +16,7 @@ class BuyerModel extends CommonModel
                 seller_product
         ";
         $data["count"] = $this->rodb->simple_query($query);
-        $data["data"] = [];
+        $data= [];
         $query = "
             select
                 *
@@ -30,7 +30,7 @@ class BuyerModel extends CommonModel
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
-            $data["data"][] = $row;
+            $data[] = $row;
 
         }
         return $data;
@@ -122,7 +122,7 @@ class BuyerModel extends CommonModel
               seller_product
             where 1=1
               and status ='5'
-              and del_yn is null
+              and del_yn !='Y'
                 and product_category = $value
            
         ";

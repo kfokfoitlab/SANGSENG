@@ -10,14 +10,12 @@ class Home extends BaseController
 {
     private $model;
     private $database_model;
-    private $company_model;
     private $buyer_model;
     public function __construct()
     { //{{{
         $this->buyer_model = new BuyerModel;
         $this->application_model = new ApplicationModel;
         $this->database_model = new DatabaseModel;
-        $this->company_model = new CompanyModel;
     } //}}}
 
     public function index()
@@ -44,11 +42,11 @@ class Home extends BaseController
             ,"length" => $this->item_per_page
         );
         $recent_company = $this->company_model->getAllList(0, $search_query);*/
-        $data = $this->buyer_model->getProductList();
+        $ranking = $this->buyer_model->RecommendationList();
 
 
         $data = array(
-            "data" => $data["data"]
+            "data" => $ranking["data"]
         );
 
 /*        $data = array(

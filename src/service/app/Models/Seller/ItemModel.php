@@ -19,6 +19,11 @@ class ItemModel extends CommonModel
         $upload_image2 = uniqid().".".pathinfo($files["product_image2"]["name"], PATHINFO_EXTENSION);
         $this->uploadFileNew($files,$upload_image2,$allowed_ext,$upload_image2_ori);
 
+        $upload_detail_image_ori = "detail_img";
+        $upload_detail_image = uniqid().".".pathinfo($files["detail_img"]["name"], PATHINFO_EXTENSION);
+        $this->uploadFileNew($files,$upload_detail_image,$allowed_ext,$upload_detail_image_ori);
+
+
         $uuid = $_SESSION["login_info"]["uuid"];
         $company_name = $_SESSION["login_info"]["company_name"];
         $product_ranking = 9999;
@@ -28,7 +33,6 @@ class ItemModel extends CommonModel
         $contribution = $data["product_price"]/$data["seller_sales"];
         $workers = $data["mild_disabled"]+($data["severely_disabled"]*2);
         $reduction = $contribution * $workers;
-
 
         $query = "
           insert into
@@ -48,11 +52,13 @@ class ItemModel extends CommonModel
               ,representative_image = '".$upload_representative."'
               ,product_image1 = '".$upload_image1."'
               ,product_image2 = '".$upload_image2."'
+              ,detail_img = '".$upload_detail_image."'
               ,reduction = '".$reduction."'
               ,register_date = '".date("Y-m-d H:i:s")."'
               ,register_id = '".$uuid."'
               ,company_name = '".$company_name."'
               ,product_ranking = '".$product_ranking."'
+              ,del_yn = 'N'
       ";
         $idx = $this->wrdb->insert($query);
         if($idx){
