@@ -77,7 +77,6 @@ Version: 1.0.0
 69. Seller/Contract
 70. Auth/SignIn
 
- */
 **********************************************/
 /*** 
 
@@ -124,6 +123,7 @@ Global Settings
 }
 
 body {
+  min-width: 1560px;
   font-size: 18px;
   color: #363636;
   line-height: 28px;
@@ -20723,6 +20723,7 @@ Left Box
   min-height: 800px;
   top: 135px;
   left: 0;
+  z-index: 9;
   transition: 0.5s;
 }
 .left-fixed-box.scrolled {
