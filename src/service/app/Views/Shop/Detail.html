@@ -28,11 +28,11 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
         <input type="hidden" name="product_no" value="<?=$data['product_no']?>">
         <input type="hidden" name="product_name" value="<?=$data['product_name']?>">
         <input type="hidden" name="buyer_uuid" id ="buyer_uuid"  value="<?=$_SESSION['login_info']['uuid']?>">
-        <input type="hidden" name="buyer_uuid" id ="buyer_comapny"  value="<?=$_SESSION['login_info']['company_name']?>">
+        <input type="hidden" name="company_name" id ="company_name"  value="<?=$_SESSION['login_info']['company_name']?>">
         <input type="hidden" name="seller_uuid" id ="seller_uuid" value= "<?=$data['seller_uuid']?>">
         <input type="hidden" name="product_price" id ="product_price" value= "<?=$data['product_price']?>">
         <input type="hidden" name="seller_company" id ="seller_company" value= "<?=$data['company_name']?>">
-
+        <input type="hidden" name="reduction_money" id ="reduction_money" value= "<?=$reduction_money?>">
         <div class="d-flex pt-4 pb-5 mb-4">
         <div class="detail-left">
           <div>
@@ -77,8 +77,8 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
             </div>
           </div>
           <div class="mt-5 pt-4 text-end border-top total-price">
-            <h2 class="mb-2"><span>계약금액</span><?=$data["product_price"]?>원</h2>
-            <h2><span>감면액</span> 20,000,000원</h2>
+            <h2 class="mb-2"><span>계약금액</span><?=number_format($data["product_price"])?>원</h2>
+            <h2><span>감면액</span><?=number_format($reduction_money)?>원</h2>
           </div>
         </div>
       </div>

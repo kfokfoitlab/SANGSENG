@@ -65,8 +65,14 @@ class Item extends BaseController
     } // }}}
     public function ItemRegist()
     { // {{{
+
+        $data = $this->item_model->SellerInfo();
+
+        $data = array(
+            "data" => $data
+        );
         echo view("Common/Header.html");
-        echo view('Seller/ItemRegist.html');
+        echo view('Seller/ItemRegist.html',$data);
         echo view("Common/Footer.html");
     } // }}}
 

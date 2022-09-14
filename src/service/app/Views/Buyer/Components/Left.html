@@ -3,13 +3,53 @@
 $workers = $_SESSION['buyer_info']['workers'];
 $severely_disabled = $_SESSION['buyer_info']['severely_disabled'];
 $mild_disabled = $_SESSION['buyer_info']['mild_disabled'];
-$money = 1914440 ;
-$total = ($workers*0.03 -($mild_disabled+$severely_disabled*2)) * $money * 12;
+$classification = 0;
+if($_SESSION['buyer_info']['classification'] == 1){ //기업구분에 따른 의무고용율
+$classification = 0.031;
+}else{
+$classification = 0.034;
+}
+$disabled = $severely_disabled + ($mild_disabled*2);
+if($workers<50){
+$employ = 0;
+}else{
+$employ =  floor($workers*$classification);
+}
+if($employ != 0){
+  $ratio = $disabled/$employ; //의무고용인원충족비율
+}else{
+  $ratio = 0;
+}
+
+$base = 0;     //부담금기초
+if($workers<100){
+$base = 0;
+}
+if($ratio >= 0.75){
+$base = 1149000;
+}
+else if($ratio >= 0.5){
+$base = 1217940;
+}
+else if($ratio >= 0.25){
+$base = 1378800;
+}
+else if($ratio > 0){
+$base = 1608600;
+}else{
+$base = 1914400;
+}
+$employ = $employ-$disabled;
+$total = $base * $employ*12 ;
+$total = $total + ($total*0.1);
 $total_money = number_format($total);
 $Expectation =$_SESSION['Expectation']['Expectation'];
 $Expectation_money = number_format($Expectation);
-$Remainder = $total -$Expectation;
+$reduction_money = $_SESSION['ReductionMoney']['reduction_money'];
+$Remainder = $total -$reduction_money;
 $Remainder_money = number_format($Remainder);
+$reduction_money =  number_format($_SESSION['ReductionMoney']['reduction_money']);
+
 ?>
 <?php
   if($_SESSION["login_info"]["type"] == "buyer"){
@@ -23,7 +63,7 @@ $Remainder_money = number_format($Remainder);
   </div>
   <div class="mb-3">
     <h3 class="h6">기대 감면금액</h3>
-    <p class="text-end m-0"><?=$Expectation_money?>원</p>
+    <p class="text-end m-0"><?=$reduction_money?>원</p>
   </div>
   <div class="mb-3">
     <h3 class="h6">남은 감면금액</h3>

@@ -1,0 +1,109 @@
+<div class="flex-grow-1 bg-light">
+  <section class="py-5 mb-5">
+    <div class="auto-container">
+      <div class="bg-white p-5">
+        <h4 class="fw-bold pb-3 border-bottom border-2">공지사항 상세보기</h4>
+        <form id="info_form" method="post" action="/<?=_CONTROLLER?>/noticeUpdate" enctype="multipart/form-data">
+          <input type="hidden" name="idx" value="<?=$idx?>">
+
+          <div class="row mb-3 align-items-center">
+            <span class="col-2 fw-bold">공지 노출여부</span>
+            <div class="col-6 d-flex">
+              <label class="form-check-label me-3" for="flexCheck01">
+                <input class="form-check-input" type="radio" value="1" id="flexCheck01" name="board_status"
+                <?php if($board_status == 1){echo "checked";}?>>
+                노출
+              </label>
+              <label class="form-check-label me-3" for="flexCheck02">
+                <input class="form-check-input" type="radio" value="2" id="flexCheck02" name="board_status"
+                <?php if($board_status == 2){echo "checked";}?>>
+                미노출
+              </label>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <div class="col-2">
+              <label for="title" class="form-label m-0 fw-bold">제목</label>
+            </div>
+            <div class="col-6">
+              <input type="text" class="form-control" id="title" name="title" value="<?=$title?>">
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <div class="col-2">
+              <label for="upload_file" class="form-label m-0 fw-bold">첨부파일</label>
+            </div>
+            <div class="col-6">
+              <div class="col-6" style="white-space: nowrap;">
+                <button class="btn btn-primary" type="button"  onclick="downloadFileNew('<?=$upload_file?>');">기존파일 다운로드</button>
+                <button class="btn btn-warning" type="button" id="uploadOn">파일수정</button>
+                <input type="hidden" name="upload_file_ori_name" value='<?=$upload_file?>'>
+              </div>
+              <input class="form-control" style="margin-top: 5px;" type="file" id="upload_file" name="upload_file" value="">
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <span class="col-2 fw-bold">공지내용</span>
+            <div class="col-6">
+              <label class="visually-hidden" for="content">공지내용</label>
+              <textarea class="form-control" style="height: 300px;resize: none;" id="content" name="content"><?=$content?></textarea>
+            </div>
+          </div>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-warning" onclick="noticeUpdate()" type="button">수정하기</button>
+        <button class="btn btn-secondary" onclick="goList()" type="button">목록보기</button>
+        <button class="btn btn-danger" type="reset">되돌리기</button>
+      </div>
+      </form>
+    </div>
+</div>
+</section>
+</div>
+<script>
+	$(document).ready(function() {
+		$('#upload_file').hide();
+		$('#uploadOn').on("click",function (){
+			$('#upload_file').show();
+    });
+	});
+	function validation(){
+		if(!$('input:radio[name="board_status"]').is(':checked')){
+			$("#flexCheck01").addClass("is-invalid");
+			$("#flexCheck01").focus();
+			return false;
+		}else if($("#title").val() == ""){
+			$("#title").addClass("is-invalid");
+			$("#title").focus();
+			return false;
+		}else if($("#content").val().trim() == ""){
+			$("#content").addClass("is-invalid");
+			$("#content").focus();
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	function noticeUpdate(){
+		if(validation()) {
+			if(confirm("해당내용으로 수정하시겠습니까?")) {
+				var form = $('#info_form');
+				form.submit();
+			}else {
+				return false;
+      }
+		}
+	};
+
+	function downloadFileNew(fileName){
+		location.href="/IMJOB/Lists/downloadFileNew?fileName="+fileName;
+	};
+
+	function goList(){
+		history.back();
+	};
+</script>

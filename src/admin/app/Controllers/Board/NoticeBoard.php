@@ -1,10 +1,10 @@
 <?php
 	namespace App\Controllers\Board;
 	use App\Controllers\BaseController as Base;
-	use App\Models\Board\noticeBoardModel as Model;
+	use App\Models\Board\NoticeBoardModel as Model;
 	use App\Models\Database\DatabaseModel;
 	
-	class noticeBoard extends Base
+	class NoticeBoard extends Base
 	{
 		private $page_name = "게시판관리 > 공지사항";
 		private $model;
@@ -57,20 +57,20 @@
 		public function noticeRegister()
 		{ //{{{
 			echo view('Common/Header.html');
-			echo view('Board/noticeBoard/noticeRegister.html',);
+			echo view('Board/NoticeBoard/NoticeRegister.html',);
 			echo view('Common/Footer.html');
 		} //}}}
 		
 		public function noticeRegisterSubmit()
 		{ //{{{
 			
-			$result = $this->model->Register($_POST);
+			$result = $this->model->Register($_POST,$_FILES);
 			
 			if($result == 1){
 				echo "
 					<script>
 						alert('정상 등록되었습니다');
-						location.href = '/Board/noticeBoard';
+						location.href = '/Board/NoticeBoard';
 					</script>
 				";
 			}else{
@@ -94,6 +94,40 @@
                 history.back();
             </script>
         ";
+		}
+		
+		public function noticeDetail()
+		{
+			$data = $this->model->getNoticeBoard($_GET);
+			
+			echo view('Common/Header.html');
+			echo view('Board/NoticeBoard/NoticeDetail.html',$data);
+			echo view('Common/Footer.html');
+		}
+		
+		public function downloadFileNew(){
+			$this->model->downloadFileNew();
+		}
+		
+		public function noticeUpdate()
+		{
+			$result = $this->model->noticeUpdate($_POST,$_FILES);
+			
+			if($result == 1) {
+				echo "
+            <script>
+            	alert('수정되었습니다')
+                location.href = '/Board/NoticeBoard/';
+            </script>
+        	";
+			}else{
+				echo "
+            <script>
+            	alert('오류가 발생했습니다');
+                history.back();
+            </script>
+        	";
+			}
 		}
 		
 	}
