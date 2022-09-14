@@ -342,4 +342,69 @@ class CommonModel extends dbModel
 		}
 		return $data;
 	} //}}}
+	
+	public function uploadFileNEW($files,$fileName,$allowed_ext,$fileName_ori){
+		ini_set('memory_limit','-1');
+		$error = $files["$fileName_ori"]['error'];
+		$name = $files["$fileName_ori"]['name'];
+		$exploded_file = explode(".",$name);
+		$ext = array_pop($exploded_file);
+		$target_dir = ROOTPATH."/public/uploads/upload_files/";
+		$file_tmp_name = $files["$fileName_ori"]["tmp_name"];
+		if(count($allowed_ext) != 0) {
+			if (!in_array($ext, $allowed_ext)) {
+				echo "허용되지 않는 확장자입니다.";
+				exit;
+			}
+		}
+		if( $error != UPLOAD_ERR_OK ) {
+			switch( $error ) {
+				case UPLOAD_ERR_INI_SIZE:
+				case UPLOAD_ERR_FORM_SIZE:
+					echo "파일이 너무 큽니다. ($error)";
+					break;
+				case UPLOAD_ERR_NO_FILE:
+					echo "파일이 첨부되지 않았습니다. ($error)";
+					break;
+				default:
+					echo "파일이 제대로 업로드되지 않았습니다. ($error)";
+			}
+			exit;
+		}
+		move_uploaded_file($file_tmp_name,$target_dir.$fileName);
+	}
+	
+	public function downloadFileNew(){
+		
+		$target_Dir = ROOTPATH."/public/uploads/upload_files/";
+		$file = $_GET["fileName"];
+		$down = $target_Dir . $file;
+	//	$filesize = filesize($down);
+		
+		if (file_exists($down)) {
+			header("Content-Type:application/octet-stream");
+			header("Content-Disposition:attachment;filename=$file");
+			header("Content-Transfer-Encoding:binary");
+			header("Content-Length:" . filesize($target_Dir . $file));
+			header("Cache-Control:cache,must-revalidate");
+			header("Pragma:no-cache");
+			header("Expires:0");
+			if (is_file($down)) {
+				$fp = fopen($down, "r");
+				while (!feof($fp)) {
+					$buf = fread($fp, 8096);
+					$read = strlen($buf);
+					print($buf);
+					flush();
+				}
+				fclose($fp);
+			}
+		} else {
+			echo "
+				<script>alert('존재하지 않는 파일입니다.');
+				history.back();</script>
+				";
+		}
+		
+	}
 }

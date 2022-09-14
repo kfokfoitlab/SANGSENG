@@ -10,26 +10,51 @@
         <thead>
         <tr>
           <th class="text-center">번호</th>
-          <th class="text-center">제목</th>
+          <th class="text-center w-50">제목</th>
+          <th class="text-center">조회수</th>
           <th class="text-center">등록일</th>
+          <th class="text-center">수정일</th>
         </tr>
         </thead>
         <tbody>
         <?php
-        for ($i = 1; $i <= 10; $i++) {
+        $i=1;
+        if($_GET["p_n"]!=""){
+          $i=($_GET["p_n"]-1)*10+1;
+        }
+        foreach($data as $item){
         ?>
         <tr>
           <td class="text-center"><?=$i?></td>
-          <td>
-            <a class="text-reset" href="/CS/Notice/Detail">[공지] 공지사항 <?=$i?>번 입니다.</a>
+          <td class="text-center">
+            <a class="text-reset" href="/CS/Notice/Detail?idx=<?=$item['idx']?>"><?=$item["title"]?></a>
           </td>
-          <td class="text-center">2022-09-01</td>
+          <td class="text-center"><?=$item["hit"]?></td>
+          <td class="text-center"><?=substr($item["register_date"],0,-9)?></td>
+          <td class="text-center"><?=substr($item["update_date"],0,-9)?></td>
         </tr>
         <?php
-        }
+          $i++;
+          }
         ?>
         </tbody>
       </table>
+      <?php if($data_page_total_cnt == 0){ echo"<div class='text-center'><span>등록된 근로자가 없습니다</span></div>"; }?>
+
+    <div class="float-start"><div class="dataTables_info" id="datatables_info" role="status" aria-live="polite">(총 <?=$data_page_total_cnt?> 개의 데이터)</div></div>
+    <ul style="float: right" class="pagination">
+      <li class="paginate_button page-item previous disabled" id="datatables_previous">
+        <?php
+         $data_page_num = $data_page_total_cnt/10;
+         for($i=1;$i<=$data_page_num;$i++){
+              if($_GET["p_n"]==$i){?>
+      <li class="paginate_button page-item active">
+        <?php }else{ ?>
+      <li class="paginate_button page-item">
+        <?php } ?>
+        <a href="javascript:nextPage(<?=$i?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a></li>
+      <?php }?>
+    </ul>
     </div>
   </section>
 </div>
