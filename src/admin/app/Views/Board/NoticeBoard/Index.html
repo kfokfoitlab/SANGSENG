@@ -1,0 +1,38 @@
+<section class="content-main">
+	<div class="content-header">
+    <h2 class="content-title"> <?=$page_name?> </h2>
+	</div>
+  <div class="card mb-4">
+    <div class="card-header">
+      <form name="form-searchbar">
+
+      <div class="row gx-3">
+        <div class="col-lg-1">
+          <label>작성자 검색</label>
+          <input type="text" class="form-control form-control-sm search" id="search-id" placeholder="">
+        </div>
+        <div class="col-lg-2">
+          <label>제목 검색</label>
+          <input type="text" class="form-control form-control-sm search" id="search-title" placeholder="">
+        </div>
+        <div class="col-lg-2">
+          <label>내용 검색</label>
+          <input type="text" class="form-control form-control-sm search" id="search-content" placeholder="">
+        </div>
+      </div>
+
+      </form>
+    </div>
+    <div class="card-body">
+      <div class="">
+        <input onclick="noticeRegister();" type="button" class="btn btn-dark" style="float: right;width:200px;margin:0 40px 30px 30px;" value="공지사항 등록">
+      </div>
+      <div class="">
+        <table class="table table-hover small" id="datatables">
+        </table>
+      </div>
+    </div>
+  </div>
+
+</section>
+

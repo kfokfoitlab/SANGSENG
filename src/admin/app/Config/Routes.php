@@ -236,6 +236,20 @@ $routes->group('Employees', ['namespace' => 'App\Controllers\Employees'], static
 
 });
 
+// 게시판관리
+$routes->group('Board', ['namespace' => 'App\Controllers\Board'], static function ($routes) {
+	// 전체 목록
+	$group_name = "noticeBoard";
+	$routes->get ($group_name.'/',                  $group_name.'::Index');
+	$routes->post($group_name.'/getList',           $group_name.'::getList');
+	$routes->get($group_name.'/noticeRegister',           $group_name.'::noticeRegister');
+	$routes->post($group_name.'/noticeRegisterSubmit',           $group_name.'::noticeRegisterSubmit');
+	$routes->get($group_name.'/statusUpdate',           $group_name.'::statusUpdate');
+	$routes->get ($group_name.'/Detail',            $group_name.'::Detail');
+	$routes->get ($group_name.'/Update',            $group_name.'::Update');
+	
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

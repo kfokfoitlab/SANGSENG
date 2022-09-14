@@ -37,16 +37,21 @@
               <p class="my-2"><sup class="text-danger">*</sup><a title="사업체명 필수입력">사업체명</a></p>
               <p title="사업체명"><?=$data["company_name"]?></p>
             </div>
-
             <div class="read-only-group">
               <p class="my-2"><sup class="text-danger">*</sup><a title="사업자등록번호 필수입력">사업자등록번호</a></small></p>
               <p type="text" title="사업자등록번호"><?=$data["company_code"]?></p>
             </div>
             <div class="form-group">
-              <label class="my-2"><sup class="text-danger">*</sup><a title="기업형태 필수입력">기업형태</a></label>
-              <input type="radio" name="classification" value="1"<?php if($data['classification']==1){echo "checked";}?> >민간기업
-              <input type="radio" name="classification" value="2" <?php if($data['classification']==2){echo "checked";}?>>공공기관
-              <input type="radio" name="classification" value="3" <?php if($data['classification']==3){echo "checked";}?>>국가/자치단체
+              <p class="mt-4 mb-2"><sup class="text-danger">*</sup><a title="기업형태 필수입력" class="text-dark">기업형태</a></p>
+              <label class="me-3">
+                <input type="radio" name="classification" value="1" <?php if($data['classification']==1){echo "checked";}?>>민간기업
+              </label>
+              <label class="me-3">
+                <input type="radio" name="classification" value="2" <?php if($data['classification']==2){echo "checked";}?>>공공기관
+              </label>
+              <label class="me-3">
+                <input type="radio" name="classification" value="3" <?php if($data['classification']==3){echo "checked";}?>>국가/자치단체
+              </label>
             </div>
             <div class="form-group">
               <label class="my-2"><a title="팩스번호">팩스번호</a></label>

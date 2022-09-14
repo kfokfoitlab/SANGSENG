@@ -266,7 +266,7 @@ class SignInModel extends CommonModel
 			 and (del_yn != 'y' or del_yn is null)
 			 and (status = 5)
         ";
-		echo $query;
+
 		$this->rodb->query($query);
 		while($row = $this->rodb->next_row()){
 			$data_cnt = $row;

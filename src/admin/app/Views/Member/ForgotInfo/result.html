@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+
+  <title>ID/PW 찾기</title>
+
+  <script>
+		function resetPw() {
+			if(confirm("비밀번호를 초기화 시키겠습니까?(가입회원 핸드폰 번호로 초기화)")) {
+				$.ajax({
+					url: "/Member/ForgotInfo/resetPw",
+					type: "post",
+					data: $('#myform').serialize()
+				}).done(function (data) {
+					$('#resetPw').append("<br><p class='badge badge-light' " +
+							"style='font-size: 23px;'>변경된 비밀번호는 <span style='color: red'>" + data + "</span> 입니다</p>");
+				});
+			}
+		}
+  </script>
+</head>
+<body class="text-center">
+<form method="post" action="/Member/ForgotInfo/resetPw" id="myform" name="myform">
+  <input type="hidden" name="uuid" value="<?=$uuid?>">
+  <input type="hidden" name="email" value="<?=$email?>">
+  <input type="hidden" name="phone" value="<?=$phone?>">
+  <input type="hidden" name="type" value="<?=$_GET['type']?>">
+  <br>
+  <h1 class="display-5">ID/PW 찾기</h1>
+  <hr><br>
+  <?php if($errorMsg != ""){?>
+  <br><br>
+  <div>
+    <span class="badge badge-light" style="font-size: 20px;"><?=$errorMsg?></span>
+  </div>
+  <?php }else{?>
+  <div>
+    <span class="badge badge-light" style="font-size: 20px;">ID : <?=$email?></span>
+  </div><br>
+  <input type="button" class="btn btn-danger" onclick="resetPw()" value="비밀번호 초기화">
+  <?php }?>
+  <div id="resetPw">
+  </div>
+</form>
+</body>
+</html>
