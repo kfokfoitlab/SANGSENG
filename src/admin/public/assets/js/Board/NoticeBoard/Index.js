@@ -24,7 +24,12 @@ $(document).ready(function(){
         ],
         "columns": [
              {title: "idx", data: "idx", visible: false}
-            ,{title: "제목", data: "title", visible: true, className: "text-nowrap w-50 text-center"}
+            ,{title: "제목", data: {"title":"title", "idx":"idx"}, visible: true, className: "text-nowrap w-50 text-center",
+						"render": function( data, type, row, meta ){
+							let html = "";
+									html = "<a href='/"+_CONTROLLER+"/noticeDetail?idx="+data['idx']+"' class='w-50 text-center' style='font-size: 15px;font-weight: bold;color: black'>"+data['title']+"</a>"
+							return html;
+						}}
 						,{title: "작성자", data: "user_id", visible: true, className: "text-nowrap"}
 						,{title: "내용", data: "content", visible: false, className: "text-nowrap"}
 				  	,{title: "등록일", data: "register_date", visible: true, className: "text-nowrap"}
@@ -98,6 +103,9 @@ function statusUpdate(idx,status){
 	location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
 }
 function noticeRegister(){
-	location.href = "/"+_CONTROLLER+"/noticeRegister?";
+	location.href = "/"+_CONTROLLER+"/noticeRegister";
+}
+function noticeDetail(){
+	location.href = "/"+_CONTROLLER+"/noticeDetail";
 }
 

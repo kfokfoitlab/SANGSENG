@@ -47,8 +47,8 @@
             </div>
       </div>
       <div class="text-center">
-        <button class="btn btn-warning" onclick="noticeRegisterSubmit()" type="button">등록하기</button>
-        <button class="btn btn-danger" type="reset">되돌리기</button>
+        <button class="btn btn-dark" onclick="noticeRegisterSubmit()" type="button">등록하기</button>
+        <button class="btn btn-warning" type="reset">되돌리기</button>
       </div>
       </form>
     </div>
@@ -59,7 +59,7 @@
 
 	function validation(){
 		if(!$('input:radio[name="board_status"]').is(':checked')){
-			$("#flexCheck02").addClass("is-invalid");
+			$("#flexCheck01").addClass("is-invalid");
 			$("#flexCheck01").focus();
 			return false;
 		}else if($("#title").val() == ""){

@@ -2,7 +2,7 @@
 	namespace App\Models\Board;
 	use App\Models\CommonModel;
 	
-	class noticeBoardModel extends CommonModel
+	class NoticeBoardModel extends CommonModel
 	{
 		private $table_name = "notice_board";
 		
@@ -115,16 +115,21 @@
 			
 		} // }}}
 		
-		public function Register($data, $table_name = "notice_board"){
+		public function Register($data,$files, $table_name = "notice_board"){
+			$allowed_ext = array();
+			$upload_face_ori = "upload_file";
+			$upload_file = uniqid().".".pathinfo($files["upload_file"]["name"], PATHINFO_EXTENSION);
+			$this->uploadFileNew($files,$upload_file,$allowed_ext,$upload_face_ori);
+			
 			$query = "
             insert into
                 ".$table_name."
             set
-                board_status = '".$_POST["board_status"]."'
+                board_status = '".$data["board_status"]."'
                 ,user_id = 'admin'
-                ,title = '".$_POST["title"]."'
-                ,content = '".$_POST["content"]."'
-                ,upload_file = '".$_POST["upload_file"]."'
+                ,title = '".$data["title"]."'
+                ,content = '".$data["content"]."'
+                ,upload_file = '".$upload_file."'
                 ,register_date = '".date("Y-m-d H:i:s")."'
                 ,register_id = 'admin'
                 ,update_date = '".date("Y-m-d H:i:s")."'
@@ -157,6 +162,52 @@
 			$this->wrdb->update($query);
 			
 			return 1;
+		}
+		
+		public function getNoticeBoard($data){
+			$query = "
+			SELECT
+				*
+			FROM
+				".$this->table_name."
+			WHERE
+				idx = ".$data["idx"]."
+			LIMIT 1
+			";
+			
+			$this->rodb->query($query);
+			$data = $this->rodb->next_row();
+			
+			return $data;
+			
+		}
+		
+		public function noticeUpdate($data,$files, $table_name = "notice_board"){
+			$allowed_ext = array();
+			$upload_file_ori = "upload_file";
+			$upload_file = $data["upload_file_ori_name"];
+			if($files["upload_file"]["name"] != "") {
+				$upload_file = uniqid() . "." . pathinfo($files["upload_file"]["name"], PATHINFO_EXTENSION);
+				$this->uploadFileNew($files, $upload_file, $allowed_ext, $upload_file_ori);
+			}
+			
+			$query = "
+            update
+                ".$table_name."
+            set
+                board_status = '".$data["board_status"]."'
+                ,user_id = 'admin'
+                ,title = '".$data["title"]."'
+                ,content = '".$data["content"]."'
+                ,upload_file = '".$upload_file."'
+                ,update_date = '".date("Y-m-d H:i:s")."'
+                ,update_id = 'admin'
+            where
+                idx = ".$data["idx"]."
+        ";
+			//echo $query;
+			$this->wrdb->update($query);
+			return "1";
 		}
 		
 	}
