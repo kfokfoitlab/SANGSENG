@@ -25,6 +25,11 @@ class ItemModel extends CommonModel
         $status = '1';
         $product_no = date("YmdHis");
 
+        $contribution = $data["product_price"]/$data["seller_sales"];
+        $workers = $data["mild_disabled"]+($data["severely_disabled"]*2);
+        $reduction = $contribution * $workers;
+
+
         $query = "
           insert into
               ".$table_name."
@@ -43,6 +48,7 @@ class ItemModel extends CommonModel
               ,representative_image = '".$upload_representative."'
               ,product_image1 = '".$upload_image1."'
               ,product_image2 = '".$upload_image2."'
+              ,reduction = '".$reduction."'
               ,register_date = '".date("Y-m-d H:i:s")."'
               ,register_id = '".$uuid."'
               ,company_name = '".$company_name."'
@@ -112,4 +118,23 @@ public function ItemUpdateSubmit($files, $data){
     $this->wrdb->update($query);
     return "1";
 }
+
+public function SellerInfo(){
+    $uuid = $_SESSION["login_info"]["uuid"];
+    $data = [];
+    $query = "
+            select
+               *
+            from
+              seller_company
+            where uuid ='".$uuid."'
+ 
+        ";
+    $this->rodb->query($query);
+    while($row = $this->rodb->next_row()){
+        $data = $row;
+    }
+    return $data;
+}
+
 }
