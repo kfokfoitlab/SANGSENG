@@ -64,7 +64,6 @@ class BuyerModel extends CommonModel
         $contract_no = date("YmdHis");
         $contract_status = "1";
         $buyer_uuid = $_SESSION['login_info']['uuid'];
-        $buyer_comapny = $_SESSION['login_info']['company_name'];
         $reduction_money = $data['reduction_money'];
         $query = "
           insert into
@@ -75,10 +74,10 @@ class BuyerModel extends CommonModel
               ,contract_status = '".$contract_status."'
               ,seller_uuid = '".$data["seller_uuid"]."'
               ,buyer_uuid = '".$buyer_uuid."'
-              ,seller_company = '".$data["company_name"]."'
+              ,seller_company = '".$data["seller_company"]."'
               ,product_name = '".$data["product_name"]."'
               ,product_price = '".$data["product_price"]."'
-              ,buyer_company = '".$buyer_comapny."'
+              ,buyer_company = '".$data["buyer_company"]."'
               ,reduction_money = '".$reduction_money."'
               ,product_no = '".$data["product_no"]."'       
               ,register_date = '".date("Y-m-d H:i:s")."'

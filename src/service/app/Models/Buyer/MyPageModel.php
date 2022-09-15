@@ -98,6 +98,31 @@ class MyPageModel extends CommonModel
      return "1";
  }
 
+ public function ContractStatus($data){
+     $workflow_id = $data["workflow_id"];
+     $wArr = explode(",",$workflow_id);
+     $whereQuery = "";
+     if($workflow_id != ""){
+         for($i =0; $i< count($wArr); $i++){
+             $whereQuery = $whereQuery." or workflow_id =".$wArr[$i];
+         }
+         $query = "
+                update
+                    contract_condition
+                set
+                    contract_status = 5
+                where 1=1
+                  $whereQuery
+            ";
+
+    //     echo $query;
+         $this->wrdb->update($query);
+         return 1;
+     }else{
+         return null;
+     }
+ }
+
     public function getContractList($uuid){
         $data = [];
         $query = "

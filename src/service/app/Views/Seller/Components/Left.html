@@ -114,7 +114,7 @@ $total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCoun
           <div class="accordion-body">
             <ul class="p-0 text-start">
               <li>
-                <a href="/Seller/Contract">계약현황 조회</a>
+                <a onclick="contract_status(uuid);">계약현황 조회</a>
               </li>
             </ul>
           </div>
@@ -175,7 +175,10 @@ $total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCoun
     </div>
   </div>
 </div>
-
+<input type="hidden" name ="uuid" id = "uuid" value="<?=$_SESSION['login_info']['uuid']?>">
+<form name="myForm" id="myForm" method="post" action="/Seller/Contract">
+  <input type="hidden" name ="workflow_id" id="workflow_id" value="">
+</form>
 <script>
   const currentURI = window.location.href;
   const headingOne = document.querySelector('div[aria-labelledby="headingOne"]');
@@ -220,5 +223,30 @@ $total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCoun
   const pageWrapper = document.querySelector('.page-wrapper');
   function togglePosition(bodyStatus) {
     bodyStatus ? pageWrapper.style.position = 'static' : pageWrapper.style.position = 'relative'
+  }
+
+  function contract_status(){
+    var uuid = $("#uuid").val();
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+      }
+    };
+
+    fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=6&field_name=seller_uuid&field_value='+uuid+'', options)
+            .then(response => response.json())
+            .then(response => {
+              var workflow_id = [];
+              for(var i =0; i <response['workflow_list'].length; i++){
+                if(response['workflow_list'][i]['status'] == 'Complete'){
+                  workflow_id[i] = response['workflow_list'][i]['workflow_id'];
+                }
+              }
+              $('#workflow_id').val(workflow_id);
+              $("#myForm").submit();
+            })
+            .catch(err => console.error(err));
   }
 </script>

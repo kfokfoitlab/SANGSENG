@@ -21492,8 +21492,24 @@ CS
   width: 150px;
 }
 /* Notice Detail */
-.notice-detail th:nth-child(2) {
-  width: 150px;
+.notice-detail th:nth-child(1) {
+  font-size: 1.1rem;
+}
+.notice-detail th:not(:first-child) {
+  font-size: 0.9rem;
+}
+.notice-detail th:nth-child(2),
+.notice-detail th:nth-child(3) {
+  width: 210px;
+}
+.notice-detail th:nth-child(4) {
+  width: 130px;
+}
+.notice-detail .attach-row {
+  font-size: 0.9rem;
+}
+.notice-detail .attach-row .btn-sm {
+  font-size: 0.7rem;
 }
 /***
 

@@ -152,7 +152,6 @@ class SellerModel extends CommonModel
 
 
     public function getContractList($uuid){
-
         $data = [];
         // total
         $query = "

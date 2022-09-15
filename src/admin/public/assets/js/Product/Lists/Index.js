@@ -34,19 +34,19 @@ $(document).ready(function(){
 
                     switch(data){
                         case "1":
-                            html = "<span class='badge bg-info'>사무용품</span>";
+                            html = "<span>사무용품</span>";
                             break;
                         case "2":
-                            html = "<span class='badge bg-info'>생활용품</span>";
+                            html = "<span>생활용품</span>";
                             break;
                         case "3":
-                            html = "<span class='badge bg-success'>전산용품</span>";
+                            html = "<span>전산용품</span>";
                             break;
                         case "4":
-                            html = "<span class='badge bg-danger'>식음료</span>";
+                            html = "<span>식음료</span>";
                             break;
                         case "5":
-                            html = "<span class='badge bg-danger'>청소용품</span>";
+                            html = "<span>청소용품</span>";
                             break;
                     }
 

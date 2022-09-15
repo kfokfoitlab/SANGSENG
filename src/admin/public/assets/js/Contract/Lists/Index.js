@@ -69,16 +69,20 @@ $(document).ready(function(){
                     return html;
                 }
             }
-            ,{title: "진행상황변경", data: {"idx":"idx","buyer_email":"buyer_email","seller_email":"seller_email","uuid":"uuid","buyer_name":"buyer_name","seller_name":"seller_name"}, visible: true, className: "text-nowrap",
+            ,{title: "진행상황변경", data: {"idx":"idx","buyer_email":"buyer_email","seller_email":"seller_email","uuid":"uuid","buyer_name":"buyer_name","seller_name":"seller_name","buyer_uuid":"buyer_uuid","seller_uuid":"seller_uuid","buyer_company":"buyer_company","seller_company":"seller_company"}, visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){
                     var buyer_email = data['buyer_email'];
                     var seller_email = data['seller_email'];
                     var uuid = data['uuid'];
                     var buyer_name = data['buyer_name'];
                     var seller_name = data['seller_name'];
+                    var buyer_uuid = data['buyer_uuid'];
+                    var buyer_company = data['buyer_company'];
+                    var seller_company = data['seller_company'];
+                    var seller_uuid = data['seller_uuid'];
                     let html = "";
                     html += "<input class='btn btn-info btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data["idx"]+",1)' value='승인대기'>";
-                    html += "<input class='btn btn-primary btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='contract_email("+data['idx']+",2,\""+buyer_email+"\",\""+seller_email+"\",\""+uuid+"\",\""+buyer_name+"\",\""+seller_name+"\")' value='진행'>";
+                    html += "<input class='btn btn-primary btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='contract_email("+data['idx']+",2,\""+buyer_email+"\",\""+seller_email+"\",\""+uuid+"\",\""+buyer_name+"\",\""+seller_name+"\",\""+seller_uuid+"\",\""+buyer_uuid+"\",\""+buyer_company+"\",\""+seller_company+"\")' value='진행'>";
                     html += "<input class='btn btn-success btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data["idx"]+",5)' value='계약완료'>";
                     html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data["idx"]+",7)' value='반려'>";
                     html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data["idx"]+",9)' value='계약취소'>";
@@ -139,7 +143,7 @@ $(document).ready(function(){
 function statusUpdate(idx,status){
     location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
 }
-function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,seller_name){
+function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,seller_name,seller_uuid,buyer_uuid,buyer_company,seller_company){
     const options = {
         method: 'POST',
         headers: {
@@ -154,8 +158,8 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
                 {order: 1, email: buyer_email, name: buyer_name},
                 {order: 2, email: seller_email, name: seller_name}
             ],
-            field_list: [{name: 'uuid', value: uuid}],
-            workflow_name: "계약서",
+            field_list: [{name: 'buyer_uuid', value: buyer_uuid}, {name: 'seller_uuid', value: seller_uuid}],
+            workflow_name: buyer_company +"기업과" + seller_company + "기업의 계약 입니다." ,
             template_id: 6,
         })
     };

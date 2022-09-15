@@ -6,8 +6,13 @@
         require APPPATH . '/Views/CS/Components/Nav.html';
       ?>
       <h2 class="mb-5 h4 fw-bold text-center">공지사항</h2>
+
+      <div class="d-flex justify-content-end mb-3 pe-2 text-secondary" style="font-size: 0.9rem;">
+        <div class="dataTables_info" id="datatables_info" role="status" aria-live="polite">(총 <?=$data_page_total_cnt?> 건)</div>
+      </div>
+
       <table class="table table-hover mb-5 notice-table">
-        <thead>
+        <thead class="table-light">
         <tr>
           <th class="text-center">번호</th>
           <th class="text-center w-50">제목</th>
@@ -37,24 +42,25 @@
           $i++;
           }
         ?>
+        <?php if($data_page_total_cnt == 0){ echo"<tr><td colspan='5' class='fw-bold text-center py-4'>등록된 공지사항이 없습니다</td></tr>"; }?>
         </tbody>
       </table>
-      <?php if($data_page_total_cnt == 0){ echo"<div class='text-center'><span>등록된 근로자가 없습니다</span></div>"; }?>
 
-    <div class="float-start"><div class="dataTables_info" id="datatables_info" role="status" aria-live="polite">(총 <?=$data_page_total_cnt?> 개의 데이터)</div></div>
-    <ul style="float: right" class="pagination">
-      <li class="paginate_button page-item previous disabled" id="datatables_previous">
-        <?php
-         $data_page_num = $data_page_total_cnt/10;
-         for($i=1;$i<=$data_page_num;$i++){
-              if($_GET["p_n"]==$i){?>
-      <li class="paginate_button page-item active">
-        <?php }else{ ?>
-      <li class="paginate_button page-item">
-        <?php } ?>
-        <a href="javascript:nextPage(<?=$i?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a></li>
-      <?php }?>
-    </ul>
+
+      <ul style="float: right" class="pagination">
+        <li class="paginate_button page-item previous disabled" id="datatables_previous">
+          <?php
+           $data_page_num = $data_page_total_cnt/10;
+           for($i=1;$i<=$data_page_num;$i++){
+                if($_GET["p_n"]==$i){?>
+        <li class="paginate_button page-item active">
+          <?php }else{ ?>
+        <li class="paginate_button page-item">
+          <?php } ?>
+          <a href="javascript:nextPage(<?=$i?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a></li>
+        <?php }?>
+      </ul>
+
     </div>
   </section>
 </div>
