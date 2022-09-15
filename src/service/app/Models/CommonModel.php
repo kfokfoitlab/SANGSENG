@@ -333,9 +333,9 @@ class CommonModel extends dbModel
       //  $target_dir2 = ROOTPATH."public/uploads/upload_files/";
 		$file_tmp_name = $files["$fileName_ori"]["tmp_name"];
 
-       if(!is_dir($target_dir)){
+      /* if(!is_dir($target_dir)){
            mkdir($target_dir,0777,true);
-       }
+       }*/
  //       $seed = date("Y/W");
        // $target_dir = ROOTPATH."public/uploads/upload_files/";
    //     mkdir($target_dir,0777,true);
