@@ -329,15 +329,17 @@ class CommonModel extends dbModel
 		$name = $files["$fileName_ori"]['name'];
 		$exploded_file = explode(".",$name);
 		$ext = array_pop($exploded_file);
-		$target_dir = "D:/Project/SANGSENG/src/uploads/";
+		$target_dir = UPLOADPATH."/service/public/uploads/";
+		$target_dir_admin = UPLOADPATH."/admin/public/uploads/";
 		$file_tmp_name = $files["$fileName_ori"]["tmp_name"];
 
-       if(!is_dir($target_dir)){
-           mkdir($target_dir,0777,true);
-       }
- //       $seed = date("Y/W");
-       // $target_dir = ROOTPATH."public/uploads/upload_files/";
-   //     mkdir($target_dir,0777,true);
+        if(!is_dir($target_dir)){
+            mkdir($target_dir,0777,true);
+        }
+		if(!is_dir($target_dir_admin)){
+			mkdir($target_dir_admin,0777,true);
+		}
+		
 		if( !in_array($ext, $allowed_ext) ) {
 			echo "허용되지 않는 확장자입니다.";
 			exit;
@@ -357,11 +359,12 @@ class CommonModel extends dbModel
 			exit;
 		}
 		move_uploaded_file($file_tmp_name,$target_dir.$fileName);
+		copy($target_dir.$fileName,$target_dir_admin.$fileName);
 	}
 	
 	public function downloadFileNew(){
 		
-		$target_Dir = ROOTPATH."/public/uploads/upload_files/";
+		$target_Dir = ROOTPATH."/public/uploads/";
 		$file = $_GET["fileName"];
 		$down = $target_Dir . $file;
 		//	$filesize = filesize($down);

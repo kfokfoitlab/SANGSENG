@@ -2,6 +2,10 @@
 
 namespace Config;
 
+if (! defined('UPLOADPATH')) {
+	define('UPLOADPATH', realpath(APPPATH . '../../') . DIRECTORY_SEPARATOR);
+}
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -166,7 +170,7 @@ $routes->group('Buyer', function($routes){
     $routes->post ('Shop/Cart',            'Buyer\Shop::Cart');
     $routes->get ('MyPage/Cart',           'Buyer\MyPage::Cart');
     $routes->post ('MyPage/CartDel',           'Buyer\MyPage::CartDel');
-    $routes->get ('MyPage/Contract',           'Buyer\MyPage::Contract');
+    $routes->post ('MyPage/Contract',           'Buyer\MyPage::Contract');
 
 
 });
@@ -179,7 +183,7 @@ $routes->group('Seller',  function ($routes){
     $routes->post ($group_name.'/ItemList/Search',   'Seller\Item::Search');
     $routes->post ($group_name.'/ItemSubmit', 'Seller\Item::ItemSubmit');
     $routes->post ($group_name.'/ItemUpdateSubmit', 'Seller\Item::ItemUpdateSubmit');
-    $routes->get ('Contract',               'Seller::Contract');
+    $routes->post ('Contract',               'Seller::Contract');
 
     $group_name = "IMJOB";
     $routes->get ($group_name.'/List',             'Seller\IMJOB::List');
