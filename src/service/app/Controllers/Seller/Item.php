@@ -67,7 +67,7 @@ class Item extends BaseController
     { // {{{
 
         $data = $this->item_model->SellerInfo();
-
+        echo ROOTPATH;
         $data = array(
             "data" => $data
         );
