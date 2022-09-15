@@ -24,8 +24,8 @@ class SignUpCompanyModel extends CommonModel
 
     public function Register($files,$data, $table_name = "seller_company")
     { //{{{
-        $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG');
-        $upload_seller_documents_ori = "buyer_documents";
+        $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG','JPG','PDF');
+        $upload_seller_documents_ori = "seller_documents";
         $upload_seller_documents_image = uniqid().".".pathinfo($files["seller_documents"]["name"], PATHINFO_EXTENSION);
         $this->uploadFileNew($files,$upload_seller_documents_image,$allowed_ext,$upload_seller_documents_ori);
         helper(["uuid_v4", "specialchars"]);
