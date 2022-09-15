@@ -91,7 +91,9 @@
       if(!alWorkInput.value) {
         alert('상시근로자 수를 입력해주세요.');
         alWorkInput.focus();
-      } else if(!currDeepWorkInput.value) {
+      } else if(alWorkInput.value.trim() < 100) {
+        alert('월 평균 상시 100명 이상의 근로자를 고용하는 사업주만 부담금 납부 신고 대상입니다.')
+      }else if(!currDeepWorkInput.value) {
         alert('현재 고용중인 중증 장애인 수를 입력해주세요.');
         currDeepWorkInput.focus();
       } else if(!currShallowWorkInput.value) {

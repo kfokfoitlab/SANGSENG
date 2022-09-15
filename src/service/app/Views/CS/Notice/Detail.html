@@ -5,11 +5,10 @@
       <table class="table mb-3">
         <thead>
         <tr>
-          <th class="text-center py-3 w-75">제목 : <?=$title?></th>
-          <th class="text-end text-nowrap py-3">첨부파일 : <?=$upload_file?></th>
-          <th class="text-end text-nowrap py-3">등록일 : <?=substr($register_date,0,-9)?></th>
-          <th class="text-end text-nowrap py-3">수정일 : <?=substr($update_date,0,-9)?></th>
-          <th class="text-end text-nowrap py-3">조회수 : <?=$hit?></th>
+          <th class="py-2">제목 : <?=$title?></th>
+          <th class="py-2 fw-normal text-secondary">등록일 : <?=substr($register_date,0,-9)?></th>
+          <th class="py-2 fw-normal text-secondary">수정일 : <?=substr($update_date,0,-9)?></th>
+          <th class="py-2 fw-normal text-secondary">조회수 : <?=$hit?></th>
         </tr>
         </thead>
         <tbody>
@@ -18,6 +17,18 @@
             <?=$content?>
           </td>
         </tr>
+        <?php
+        if($upload_file){
+        ?>
+        <tr class='attach-row'>
+          <td colspan='4' class='py-3'>첨부파일 :
+            <?=$upload_file?>
+            <button class='btn btn-sm btn-outline-secondary ms-2 fw-normal'>다운로드</button>
+          </td>
+        </tr>
+        <?php
+        }
+        ?>
         </tbody>
       </table>
       <div class="text-end mb-5">

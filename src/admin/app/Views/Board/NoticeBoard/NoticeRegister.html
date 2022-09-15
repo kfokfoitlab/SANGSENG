@@ -1,14 +1,14 @@
 <div class="flex-grow-1 bg-light">
-  <section class="py-5 mb-5">
+  <section class="p-5 mb-5">
     <div class="auto-container">
       <div class="bg-white p-5">
-        <h4 class="fw-bold pb-3 border-bottom border-2">공지사항 등록</h4>
+        <h4 class="fw-bold mb-4 pb-3 border-bottom border-2">공지사항 등록</h4>
         <form id="reg_form" method="post" action="/<?=_CONTROLLER?>/noticeRegisterSubmit" enctype="multipart/form-data">
           <input type="hidden" name="idx" value="<?=$data['idx']?>">
 
           <div class="row mb-3 align-items-center">
             <span class="col-2 fw-bold">공지 노출여부</span>
-            <div class="col-6 d-flex">
+            <div class="col-10 d-flex">
               <label class="form-check-label me-3" for="flexCheck01">
                 <input class="form-check-input" type="radio" value="1" id="flexCheck01" name="board_status">
                 노출
@@ -20,65 +20,72 @@
             </div>
           </div>
 
-            <div class="row mb-3 align-items-center">
-              <div class="col-2">
-                <label for="title" class="form-label m-0 fw-bold">제목</label>
-              </div>
-              <div class="col-6">
-                <input type="text" class="form-control" id="title" name="title" value="">
-              </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-2">
+              <label for="title" class="form-label m-0 fw-bold">제목</label>
             </div>
+            <div class="col-10">
+              <input type="text" class="form-control" id="title" name="title" value="">
+            </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-              <div class="col-2">
-                <label for="upload_file" class="form-label m-0 fw-bold">첨부파일</label>
-              </div>
-              <div class="col-6">
-                <input class="form-control" type="file" id="upload_file" name="upload_file" value="">
-              </div>
+          <div class="row mb-3 align-items-center">
+            <div class="col-2">
+              <label for="upload_file" class="form-label m-0 fw-bold">첨부파일</label>
             </div>
+            <div class="col-10">
+              <input class="form-control" type="file" id="upload_file" name="upload_file" value="">
+            </div>
+          </div>
 
-            <div class="row mb-3 align-items-center">
-              <span class="col-2 fw-bold">공지내용</span>
-              <div class="col-6">
-                <label class="visually-hidden" for="content">공지내용</label>
-                <textarea class="form-control" style="height: 300px;resize: none;" id="content" name="content" value=""></textarea>
-              </div>
+          <div class="row mb-3 align-items-center">
+            <span class="col-2 fw-bold">공지내용</span>
+            <div class="col-10">
+              <label class="visually-hidden" for="content">공지내용</label>
+              <textarea class="form-control" style="height: 300px;resize: none;" id="content" name="content"
+                        value=""></textarea>
             </div>
+          </div>
+
+          <div class="mt-5 d-flex justify-content-between">
+            <div>
+              <button class="btn btn-secondary" type="reset">되돌리기</button>
+              <button class="btn btn-success" onclick="noticeRegisterSubmit()" type="button">등록하기</button>
+            </div>
+            <div>
+              <button class="btn btn-dark" onclick="javascript:history.back()" type="button">목록보기</button>
+            </div>
+          </div>
+        </form>
       </div>
-      <div class="text-center">
-        <button class="btn btn-dark" onclick="noticeRegisterSubmit()" type="button">등록하기</button>
-        <button class="btn btn-warning" type="reset">되돌리기</button>
-      </div>
-      </form>
     </div>
-</div>
-</section>
+  </section>
 </div>
 <script>
 
-	function validation(){
-		if(!$('input:radio[name="board_status"]').is(':checked')){
-			$("#flexCheck01").addClass("is-invalid");
-			$("#flexCheck01").focus();
-			return false;
-		}else if($("#title").val() == ""){
-			$("#title").addClass("is-invalid");
-			$("#title").focus();
-			return false;
-		}else if($("#content").val().trim() == ""){
-			$("#content").addClass("is-invalid");
-			$("#content").focus();
-			return false;
-		}else{
-			return true;
-		}
-	}
-	function noticeRegisterSubmit(){
-		if(validation()) {
-			var form = $('#reg_form');
-			form.submit();
-		}
-	};
+  function validation() {
+    if (!$('input:radio[name="board_status"]').is(':checked')) {
+      $("#flexCheck01").addClass("is-invalid");
+      $("#flexCheck01").focus();
+      return false;
+    } else if ($("#title").val() == "") {
+      $("#title").addClass("is-invalid");
+      $("#title").focus();
+      return false;
+    } else if ($("#content").val().trim() == "") {
+      $("#content").addClass("is-invalid");
+      $("#content").focus();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  function noticeRegisterSubmit() {
+    if (validation()) {
+      var form = $('#reg_form');
+      form.submit();
+    }
+  };
 
 </script>
