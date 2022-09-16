@@ -31,7 +31,7 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
         <input type="hidden" name="seller_uuid" id ="seller_uuid" value= "<?=$data['seller_uuid']?>">
         <input type="hidden" name="product_price" id ="product_price" value= "<?=$data['product_price']?>">
         <input type="hidden" name="seller_company" id ="seller_company" value= "<?=$data['company_name']?>">
-        <input type="hidden" name="reduction_money" id ="reduction_money" value= "<?=$reduction_money?>">
+        <input type="hidden" name="reduction_money" id ="reduction_money" value= "<?=$_GET['rm']?>">
         <div class="d-flex pt-4 pb-5 mb-4">
         <div class="detail-left">
           <div>
@@ -77,7 +77,7 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
           </div>
           <div class="mt-5 pt-4 text-end border-top total-price">
             <h2 class="mb-2"><span>계약금액</span><?=number_format($data["product_price"])?>원</h2>
-            <h2><span>감면액</span><?=number_format($reduction_money)?>원</h2>
+            <h2><span>감면액</span><?=number_format($_GET['rm'])?>원</h2>
           </div>
         </div>
       </div>
@@ -88,8 +88,6 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
       <div class="mt-4 text-end">
         <button onclick='myCart()' class="btn btn-secondary btn-lg">장바구니</button>
         <button onclick='contract()' class="btn btn-danger btn-lg">계약하기</button>
-        <button onclick='contractCheck()' class="btn btn-danger btn-lg">계약서조회</button>
-        <button onclick='contractSubmit()' class="btn btn-danger btn-lg">계약서전송</button>
       </div>
       <?php
           }
@@ -133,7 +131,7 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
             role="tabpanel"
             aria-labelledby="nav-company-tab"
           >
-            <img src="/assets/images/resource/products/1.png" alt="기업로고">
+            <img src="/uploads/<?=$data['seller_information']?>" alt="기업로고">
           </div>
           <div
             class="tab-pane fade"
@@ -141,7 +139,7 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
             role="tabpanel"
             aria-labelledby="nav-detail-tab"
           >
-            <img src="/assets/images/resource/products/item_detail01.jpg" alt="기업로고">
+            <img src="/uploads/<?=$data['detail_img']?>" alt="상품상세정보">
           </div>
         </div>
       </div>
@@ -158,9 +156,6 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
       alert("로그인 후 이용해주세요");
     }
   }
-
-
-
   function contract(){
     var session = $("#session").val();
     if(session == "success") {

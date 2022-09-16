@@ -28,12 +28,17 @@ class SignUpCompanyModel extends CommonModel
         $upload_seller_documents_ori = "seller_documents";
         $upload_seller_documents_image = uniqid().".".pathinfo($files["seller_documents"]["name"], PATHINFO_EXTENSION);
         $this->uploadFileNew($files,$upload_seller_documents_image,$allowed_ext,$upload_seller_documents_ori);
+
+        if($files["seller_information"]["name"] != ""){
+            $upload_seller_information_ori = "seller_information";
+            $upload_seller_information_image = uniqid().".".pathinfo($files["seller_information"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_seller_information_image,$allowed_ext,$upload_seller_information_ori);
+        }
         helper(["uuid_v4", "specialchars"]);
         $uuid = gen_uuid_v4();
         // status == 0:가입신청, 1:심사중, 5:승인,7:거절, 9: 탈퇴
         $status = '1';
         $receive_yn  = (@$data["ads"] == "y")? 'Y' : 'N';
-
         $salt = $data["password"];
         $query = "
             insert into
@@ -57,6 +62,7 @@ class SignUpCompanyModel extends CommonModel
                 ,register_date = '".date("Y-m-d H:i:s")."'
                 ,register_id = '".$uuid."'
                 ,seller_documents = '".$upload_seller_documents_image."'
+                ,seller_information = '".$upload_seller_information_image."'
         ";
         $idx = $this->wrdb->insert($query);
 

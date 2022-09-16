@@ -33,12 +33,14 @@ class Shop extends BaseController
     public function List()
     { // {{{
         $value = $_GET["value"];
+        $uuid = $_SESSION["login_info"]["uuid"];
         $ranking = $this->buyer_model->RecommendationList();
         $list = $this->buyer_model->CategoryList($value);
-
+        $buyer_info = $this->buyer_model->Buyer_info($uuid);
         $data = array(
             "ranking" => $ranking["data"],
-            "list" => $list["data"]
+            "list" => $list["data"],
+            "buyer_info" => $buyer_info
         );
 
 
@@ -52,6 +54,7 @@ class Shop extends BaseController
         $data = $this->buyer_model->productDetail($product_no);
         $data = array(
             "data" => $data
+        ,"reduction_money" => $_GET["rm"]
         );
         echo view("Common/Header.html");
         echo view('Shop/Detail.html',$data);
@@ -87,7 +90,7 @@ class Shop extends BaseController
         }else{
             echo "
                 <script>
-                    alert('실패했습니다.');
+                    alert('실패했습니다');
 					history.back(-1);
                 </script>
             ";

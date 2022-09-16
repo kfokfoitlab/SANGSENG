@@ -3,6 +3,7 @@
   <ul class="d-flex">
     <li><a class="text-secondary" onclick="contract_status();"> <!--href="/Buyer/MyPage/Contract">-->계약현황</a></li>
     <li><a class="text-secondary" href="/Buyer/MyPage/Info">나의정보수정</a></li>
+    <li><a class="text-secondary" href="/Buyer/MyPage/ConfirmPassword">비밀번호변경</a></li>
     <li><a class="text-secondary" href="/Buyer/MyPage/Cart">장바구니</a></li>
     <li><a class="text-secondary" href="">통계</a></li>
   </ul>
@@ -19,6 +20,9 @@
       nav.classList.add('on')
     } else {
       nav.classList.remove('on')
+    }
+		if(window.location.pathname === '/Buyer/MyPage/ChangePassword') {
+			document.querySelector('a[href="/Buyer/MyPage/ConfirmPassword"]').classList.add('on')
     }
   })
 

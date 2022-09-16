@@ -91,13 +91,6 @@ $routes->group('Person', function($routes){
     $routes->post('Bookmark',      'Person::Bookmark');
 });
 
-$routes->group('Buyer', function($routes){
-    $routes->get ('/',              'Buyer::index');
-    $routes->get ('Detail/(:any)',  'Buyer::Detail/$1');
-    $routes->post('Bookmark',       'Buyer::Bookmark');
-});
-
-
 $routes->group('Management', ['namespace' => 'App\Controllers\Management'], static function ($routes) {
     $group_name = "Seller";
     $routes->get ($group_name.'/Profile/',                      $group_name.'\Profile::Index');
@@ -166,6 +159,8 @@ $routes->group('Buyer', function($routes){
     $routes->get ('Shop/Detail/(:any)',     'Buyer\Shop::Detail/$1');
     $routes->post ('Contract',        'Buyer\Contract::Contract');
     $routes->get ('MyPage/Info',            'Buyer\MyPage::Info');
+    $routes->get ('MyPage/ConfirmPassword',    'Buyer\MyPage::ConfirmPassword');
+    $routes->get ('MyPage/ChangePassword',     'Buyer\MyPage::ChangePassword');
     $routes->post ('MyPage/BuyerUpdateSubmit', 'Buyer\MyPage::BuyerUpdateSubmit');
     $routes->post ('Shop/Cart',            'Buyer\Shop::Cart');
     $routes->get ('MyPage/Cart',           'Buyer\MyPage::Cart');
@@ -205,6 +200,7 @@ $routes->group('CS', function($routes) {
 
 $routes->group('Reduction', function($routes) {
     $routes->get('Calculator', 'Reduction\Calculator::index');
+    $routes->get('Help', 'Reduction\Help::index');
 });
 $routes->group('Policy', function($routes) {
     $routes->get('TOS', 'Policy\TermsOfService::index');
