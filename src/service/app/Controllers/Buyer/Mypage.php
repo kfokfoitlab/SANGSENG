@@ -32,6 +32,8 @@ class MyPage extends BaseController
     public function Contract()
     { // {{{
         $uuid = $_SESSION['login_info']['uuid'];
+
+        $result = $this->mypage_model->ContractStatus($_POST);
         $data = $this->mypage_model->getContractList($uuid);
 
         $data = array(

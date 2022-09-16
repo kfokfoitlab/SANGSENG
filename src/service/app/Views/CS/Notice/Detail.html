@@ -5,22 +5,30 @@
       <table class="table mb-3">
         <thead>
         <tr>
-          <th class="py-3">[공지] 공지사항 1번 입니다.</th>
-          <th class="text-end py-3">2022-09-01</th>
+          <th class="py-2">제목 : <?=$title?></th>
+          <th class="py-2 fw-normal text-secondary">등록일 : <?=substr($register_date,0,-9)?></th>
+          <th class="py-2 fw-normal text-secondary">수정일 : <?=substr($update_date,0,-9)?></th>
+          <th class="py-2 fw-normal text-secondary">조회수 : <?=$hit?></th>
         </tr>
         </thead>
         <tbody>
         <tr>
-          <td colspan="2" class="bg-light py-4 px-5">
-            국가는 과학기술의 혁신과 정보 및 인력의 개발을 통하여 국민경제의 발전에 노력하여야 한다. 저작자·발명가·과학기술자와 예술가의 권리는 법률로써 보호한다.
-
-            제3항의 승인을 얻지 못한 때에는 그 처분 또는 명령은 그때부터 효력을 상실한다. 이 경우 그 명령에 의하여 개정 또는 폐지되었던 법률은 그 명령이 승인을 얻지 못한 때부터 당연히 효력을 회복한다.
-
-            모든 국민은 거주·이전의 자유를 가진다. 헌법재판소에서 법률의 위헌결정, 탄핵의 결정, 정당해산의 결정 또는 헌법소원에 관한 인용결정을 할 때에는 재판관 6인 이상의 찬성이 있어야 한다.
-
-            재산권의 행사는 공공복리에 적합하도록 하여야 한다. 국가는 평생교육을 진흥하여야 한다. 선거와 국민투표의 공정한 관리 및 정당에 관한 사무를 처리하기 위하여 선거관리위원회를 둔다.
+          <td colspan="4" class="bg-light py-4 px-5">
+            <?=$content?>
           </td>
         </tr>
+        <?php
+        if($upload_file){
+        ?>
+        <tr class='attach-row'>
+          <td colspan='4' class='py-3'>첨부파일 :
+            <?=$upload_file?>
+            <button class='btn btn-sm btn-outline-secondary ms-2 fw-normal'>다운로드</button>
+          </td>
+        </tr>
+        <?php
+        }
+        ?>
         </tbody>
       </table>
       <div class="text-end mb-5">

@@ -7,7 +7,7 @@
           <input type="hidden" name="idx" value="<?=$data['idx']?>">
           <div class="d-flex py-5">
             <div class="me-5">
-              <div class="border upload_face-preview" style="width: 150px; height: 192px; background: center / contain url('/uploads/upload_files/<?=$data["upload_face"]?>') no-repeat;"></div>
+              <div class="border upload_face-preview" style="width: 150px; height: 192px; background: center / contain url('/uploads/<?=$data["upload_face"]?>') no-repeat;"></div>
           </div>
 
           <div class="flex-grow-1">
@@ -151,21 +151,15 @@
 			$("#worker_birth").addClass("is-invalid");
 			$("#worker_birth").focus();
 			return false;
-		}else if($("#portrait-photo-input").val() == ""){
-			$("#portrait-photo-input").addClass("is-invalid");
-			$("#portrait-photo-input").focus();
-			return false;
-		}else if($("#formFile").val() == "") {
-			$("#formFile").addClass("is-invalid");
-			$("#formFile").focus();
-			return false;
 		}else {
 			return true;
 		}
 	}
 	function updateWorker(){
-		var form = $('#info_form');
-		form.submit();
+		if(validation()) {
+			var form = $('#info_form');
+			form.submit();
+		}
 	};
 
 	function downloadFileNew(fileName){

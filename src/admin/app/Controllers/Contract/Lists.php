@@ -115,12 +115,25 @@ class Lists extends Base
         $data = array(
             "idx" => $_GET["idx"]
         ,"status" => $_GET["status"]
+        ,"workflow_id" => $_GET["workflow_id"]
         );
         $this->model->statusUpdate($data);
-        echo "
+
+        if($this == 1){
+            echo "
             <script>
+             alert('계약서를 전송하였습니다.');
                 history.back();
             </script>
         ";
+        }else{
+            echo "
+            <script>
+           alert('이미 진행중인 계약입니다');
+                history.back();
+            </script>
+        ";
+        }
+
     }
 }

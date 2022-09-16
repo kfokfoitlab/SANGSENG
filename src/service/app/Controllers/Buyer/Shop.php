@@ -80,14 +80,14 @@ class Shop extends BaseController
         if($result == "1") {
             echo "
                 <script>
-                    alert('Àå¹Ù±¸´Ï¿¡ ´ã¾Ò½À´Ï´Ù.');
+                    alert('ì¥ë°”êµ¬ë‹ˆì— ë‹´ì•˜ìŠµë‹ˆë‹¤.');
 					window.location.replace('/Buyer');
                 </script>
             ";
         }else{
             echo "
                 <script>
-                    alert('¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù.´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä');
+                    alert('ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.');
 					history.back(-1);
                 </script>
             ";

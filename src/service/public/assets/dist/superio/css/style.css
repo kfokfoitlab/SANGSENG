@@ -77,7 +77,6 @@ Version: 1.0.0
 69. Seller/Contract
 70. Auth/SignIn
 
- */
 **********************************************/
 /*** 
 
@@ -124,6 +123,7 @@ Global Settings
 }
 
 body {
+  min-width: 1560px;
   font-size: 18px;
   color: #363636;
   line-height: 28px;
@@ -20723,6 +20723,7 @@ Left Box
   min-height: 800px;
   top: 135px;
   left: 0;
+  z-index: 9;
   transition: 0.5s;
 }
 .left-fixed-box.scrolled {
@@ -21491,8 +21492,24 @@ CS
   width: 150px;
 }
 /* Notice Detail */
-.notice-detail th:nth-child(2) {
-  width: 150px;
+.notice-detail th:nth-child(1) {
+  font-size: 1.1rem;
+}
+.notice-detail th:not(:first-child) {
+  font-size: 0.9rem;
+}
+.notice-detail th:nth-child(2),
+.notice-detail th:nth-child(3) {
+  width: 210px;
+}
+.notice-detail th:nth-child(4) {
+  width: 130px;
+}
+.notice-detail .attach-row {
+  font-size: 0.9rem;
+}
+.notice-detail .attach-row .btn-sm {
+  font-size: 0.7rem;
 }
 /***
 

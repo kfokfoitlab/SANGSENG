@@ -1,6 +1,2 @@
-/src/admin/vendor
-/src/service/vendor
-/src/admin/app/Models/dbClasses/ro_conn_db.php
-/src/admin/app/Models/dbClasses/wr_conn_db.php
-/src/service/app/Models/dbClasses/ro_conn_db.php
-/src/service/app/Models/dbClasses/wr_conn_db.php
+/service/vendor/
+/admin/vendor/

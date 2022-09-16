@@ -51,6 +51,8 @@ class SignInModel extends CommonModel
             $_SESSION["buyer_info"] = $this->getBuyerinfo();
             $_SESSION["Expectation"] = $this->ExpectationMoney();
             $_SESSION["Contract"]= $this->getContractList();
+            $_SESSION["ReductionMoney"]= $this->ReductionMoney();
+
             return array(
                  "result" => "success"
             );
@@ -141,15 +143,34 @@ class SignInModel extends CommonModel
         return $Expectation;
     }
 
+    public function ReductionMoney(){
+        $uuid = $_SESSION["login_info"]["uuid"];
+        $Reduction_money = [];
+        $query = "       
+                
+        select
+        sum(reduction_money) as reduction_money
+        from contract_condition
+        where buyer_uuid = '".$uuid."'
+        and  contract_status = 5
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $Reduction_money = $row;
+        }
+        return $Reduction_money;
+    }
+
+
     public function getContractList(){
         $uuid = $_SESSION["login_info"]["uuid"];
         $contract = [];
         $query = "       
         select *,a.register_date as 'contract_regdt' 
         from contract_condition a
-        join seller_product b on a.seller_uuid = b.register_id
+        join seller_product b on a.product_no = b.product_no
         where a.buyer_uuid = '".$uuid."'
-        and contract_status = '5'
+        and contract_status = '2'
         limit 4;
         ";
         $this->rodb->query($query);
@@ -165,7 +186,7 @@ class SignInModel extends CommonModel
               sum(b.product_price) as 'price'
             from
               contract_condition a
-            join seller_product b on a.seller_uuid = b.register_id
+            join seller_product b on a.product_no = b.product_no
             where a.seller_uuid = '$uuid'
             and contract_status = 5
                      
@@ -245,7 +266,7 @@ class SignInModel extends CommonModel
 			 and (del_yn != 'y' or del_yn is null)
 			 and (status = 5)
         ";
-		echo $query;
+
 		$this->rodb->query($query);
 		while($row = $this->rodb->next_row()){
 			$data_cnt = $row;

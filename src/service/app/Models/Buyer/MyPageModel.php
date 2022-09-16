@@ -14,7 +14,7 @@ class MyPageModel extends CommonModel
            *,a.idx as 'productidx'
         from 
             buyer_cart a 
-                join seller_product b on a.seller_id  = b.register_id
+                join seller_product b on a.product_no  = b.product_no
         where
             a.buyer_id = '$uuid'
             and a.del_yn != 'Y'
@@ -81,7 +81,6 @@ class MyPageModel extends CommonModel
             set
                  buyer_name = '".$data["buyer_name"]."'
                 ,phone = '".$data["phone"]."'
-                 ,password = SHA2('".$newPwd."', 256)
                 ,fax= '".$data["fax"]."'
                  ,classification= '".$data["classification"]."'
                 ,address = '".$data["address"]."'
@@ -99,8 +98,32 @@ class MyPageModel extends CommonModel
      return "1";
  }
 
-    public function getContractList($uuid){
+ public function ContractStatus($data){
+     $workflow_id = $data["workflow_id"];
+     $wArr = explode(",",$workflow_id);
+     $whereQuery = "";
+     if($workflow_id != ""){
+         for($i =0; $i< count($wArr); $i++){
+             $whereQuery = $whereQuery." or workflow_id =".$wArr[$i];
+         }
+         $query = "
+                update
+                    contract_condition
+                set
+                    contract_status = 5
+                where 1=1
+                  $whereQuery
+            ";
 
+    //     echo $query;
+         $this->wrdb->update($query);
+         return 1;
+     }else{
+         return null;
+     }
+ }
+
+    public function getContractList($uuid){
         $data = [];
         $query = "
             select

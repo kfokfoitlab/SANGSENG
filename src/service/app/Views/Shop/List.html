@@ -6,6 +6,46 @@
   require APPPATH.'/Views/Seller/Components/Left.html';
   }
 ?>
+<?php
+$workers = $buyer_info["workers"]; //상시근로자
+$classification = 0;
+if($buyer_info['classification'] == 1){ //기업구분에 따른 의무고용율
+$classification = 0.031;
+}else{
+$classification = 0.034;
+}
+
+$employ = 0; //의무고용인원
+if($workers<50){
+$employ = 0;
+}else{
+$employ = (int)($workers*$classification);
+}
+if($employ != 0){
+  $ratio = ($buyer_info['mild_disabled']+($buyer_info['severely_disabled']*2))/$employ; //의무고용인원충족비율
+}else{
+  $ratio = 0;
+}
+$base = 0;     //부담금기초
+if($workers<100){
+$base = 0;
+}
+if($ratio >= 0.75){
+$base = 1149000;
+}
+else if($ratio >= 0.5){
+$base = 1217940;
+}
+else if($ratio >= 0.25){
+$base = 1378800;
+}
+else if($ratio > 0){
+$base = 1608600;
+}else{
+$base = 1914400;
+}
+$levy = $base * $employ *12; //부담금
+?>
 <div class="flex-grow-1">
   <section class="shop-list">
     <div class="auto-container">
@@ -21,15 +61,27 @@
           <tbody>
           <tr>
           <?php
+
           if(is_array($ranking) && count($ranking)){
             foreach($ranking as $item){
               $product_price = number_format($item["product_price"]);
+              $result_price = $item['reduction'] *$base;
+              $reduction_money = 0;
+              if($result_price > $levy ){
+            $reduction_money = $levy*0.6;
+              }else if($result_price >$item["product_price"]*0.5){
+            $reduction_money = $item["product_price"]*0.5;
+              }else{
+            $reduction_money = $result_price;
+             }
           ?>
             <td>
-              <img class="preview-img-small" src="/uploads/upload_files/<?=$item['representative_image']?>" alt="기업로고">
+<!--
+              <img class="preview-img-small" src="D:/Project/SANGSENG/src/uploads/<?=$item['representative_image']?>" alt="기업로고">
+-->
             </td>
             <td>
-              <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>"><span
+              <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$result?>"><span
                 class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h3>
               <!--              <p class="mt-2 sub-info"><?=$item['product_detail']?></p>-->
             </td>
@@ -41,7 +93,7 @@
 
             </td>
             <td>
-              <p>1,000,000원</p>
+              <p><?=number_format($reduction_money)?>원</p>
             </td>
           </tr>
           <?php
@@ -89,14 +141,23 @@
           if(is_array($list)&& count($list)){
           foreach($list as $item){
            $product_price = number_format($item["product_price"]);
+             $result_price = $item['reduction'] *$base;
+              $reduction_money = 0;
+            if($result_price > $levy ){
+            $reduction_money = $levy*0.6;
+            }else if($result_price >$item["product_price"]*0.5){
+            $reduction_money = $item["product_price"]*0.5;
+            }else{
+            $reduction_money = $result_price;
+            }
           ?>
             <tr>
               <td>
-                <img class="preview-img-small" src="/uploads/upload_files/<?=$item['representative_image']?>"
+                <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>"
                      alt="기업로고">
               </td>
               <td>
-                <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>"><span
+                <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$reduction_money?>"><span
                   class="text-primary"><?=$item["company_name"]?></span> / <?=$item["product_name"]?></a></h3>
                 <!--                <p class="sub-info"><?=$item["product_detail"]?></p>-->
               </td>
@@ -107,7 +168,7 @@
                 <p><?=$product_price?>원</p>
               </td>
               <td>
-                <p>1,176,000원</p>
+                <p><?=number_format($reduction_money)?>원</p>
               </td>
             </tr>
             <?php

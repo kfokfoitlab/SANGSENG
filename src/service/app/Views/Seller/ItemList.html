@@ -118,7 +118,7 @@
             <th>카테고리</th>
             <th>판매시작일</th>
             <th>판매종료일</th>
-            <th>복사</th>
+         <!--   <th>복사</th>-->
           </tr>
           </thead>
           <tbody>
@@ -141,6 +141,8 @@
           $status = "";
           if($item["status"] == 1){
           $status = "승인대기";
+          }else if($item["status"] == 3){
+          $status = "수정 요청 심사중";
           }else if($item["status"] == 5){
           $status = "판매중";
           }else if($item["status"] == 7){
@@ -157,9 +159,9 @@
             <td><?=$category?></td>
             <td><?=$item["product_start"]?></td>
             <td><?=$item["product_end"]?></td>
-            <td>
+          <!--  <td>
               <button class="copy-btn btn btn-sm btn-secondary fw-normal">복사등록</button>
-            </td>
+            </td>-->
           </tr>
           <?php
           $i = $i + 1;

@@ -2,17 +2,19 @@
 
 namespace App\Controllers;
 use App\Models\Seller\SellerModel;
-use App\Models\Auth\SigninModel;
+use App\Models\Auth\SignInModel;
+use App\Models\Buyer\MyPageModel;
 class Seller extends BaseController
 {
 
     private $seller_model;
 	private $sigin_model;
-
+    private $mypage_model;
     public function __construct()
     { //{{{
+        $this->mypage_model = new MyPageModel;
         $this->seller_model = new SellerModel;
-	    $this->sigin_model = new SigninModel;
+	    $this->sigin_model = new SignInModel;
     } //}}}
     public function index()
     {
@@ -45,6 +47,7 @@ class Seller extends BaseController
     {
 
         $uuid = $_SESSION['login_info']['uuid'];
+        $result = $this->mypage_model->ContractStatus($_POST);
         $data = $this->seller_model->getContractList($uuid);
         $data_cnt = $this->seller_model->getContractCount($uuid);
         $data = array(

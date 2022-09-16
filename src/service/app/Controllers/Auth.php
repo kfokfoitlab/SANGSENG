@@ -34,16 +34,16 @@ class Auth extends BaseController
     { // {{{
 
         session_destroy();
-
+/*
         $remember_id = (@$_COOKIE["remember_id"])? $_COOKIE["remember_id"] : "";
         $remember_me = (@$_COOKIE["remember_me"])? $_COOKIE["remember_me"] : "";
         $data = array(
              "remember_me" => $remember_me
             ,"remember_id" => $remember_id
-        );
+        );*/
 
         echo view("Common/Header.html");
-        echo view('Auth/SignIn.html', $data);
+        echo view('Auth/SignIn.html');
         echo view("Common/Footer.html");
 
     } // }}}

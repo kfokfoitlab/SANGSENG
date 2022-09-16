@@ -2,6 +2,10 @@
 
 namespace Config;
 
+if (! defined('UPLOADPATH')) {
+	define('UPLOADPATH', realpath(APPPATH . '../../') . DIRECTORY_SEPARATOR);
+}
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -14,7 +18,8 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
 /*
  * --------------------------------------------------------------------
  * Router Setup
- * --------------------------------------------------------------------
+ * -----------------------------------------------------------------
+ * ---
  */
 $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Home');
@@ -235,6 +240,30 @@ $routes->group('Employees', ['namespace' => 'App\Controllers\Employees'], static
     $routes->get ($group_name.'/Update',            $group_name.'::Update');
 
 });
+
+// 게시판관리
+$routes->group('Board', ['namespace' => 'App\Controllers\Board'], static function ($routes) {
+	// 공지사항
+	$group_name = "NoticeBoard";
+	$routes->get ($group_name.'/',                  $group_name.'::Index');
+	$routes->post($group_name.'/getList',           $group_name.'::getList');
+	$routes->get($group_name.'/noticeRegister',           $group_name.'::noticeRegister');
+	$routes->post($group_name.'/noticeRegisterSubmit',           $group_name.'::noticeRegisterSubmit');
+	$routes->get($group_name.'/statusUpdate',           $group_name.'::statusUpdate');
+	$routes->get ($group_name.'/noticeDetail',            $group_name.'::noticeDetail');
+	$routes->post ($group_name.'/noticeUpdate',            $group_name.'::noticeUpdate');
+	
+	//1:1 문의하기
+	$group_name = "PrivateBoard";
+	$routes->get ($group_name.'/',                  $group_name.'::Index');
+	$routes->post($group_name.'/getList',           $group_name.'::getList');
+	$routes->get($group_name.'/noticeRegister',           $group_name.'::noticeRegister');
+	$routes->post($group_name.'/noticeRegisterSubmit',           $group_name.'::noticeRegisterSubmit');
+	$routes->get($group_name.'/statusUpdate',           $group_name.'::statusUpdate');
+	$routes->get ($group_name.'/noticeDetail',            $group_name.'::noticeDetail');
+	$routes->post ($group_name.'/noticeUpdate',            $group_name.'::noticeUpdate');
+});
+
 
 /*
  * --------------------------------------------------------------------

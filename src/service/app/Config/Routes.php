@@ -2,6 +2,10 @@
 
 namespace Config;
 
+if (! defined('UPLOADPATH')) {
+	define('UPLOADPATH', realpath(APPPATH . '../../') . DIRECTORY_SEPARATOR);
+}
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -87,15 +91,15 @@ $routes->group('Person', function($routes){
     $routes->post('Bookmark',      'Person::Bookmark');
 });
 
-$routes->group('Company', function($routes){
-    $routes->get ('/',              'Company::index');
-    $routes->get ('Detail/(:any)',  'Company::Detail/$1');
-    $routes->post('Bookmark',       'Company::Bookmark');
+$routes->group('Buyer', function($routes){
+    $routes->get ('/',              'Buyer::index');
+    $routes->get ('Detail/(:any)',  'Buyer::Detail/$1');
+    $routes->post('Bookmark',       'Buyer::Bookmark');
 });
 
 
 $routes->group('Management', ['namespace' => 'App\Controllers\Management'], static function ($routes) {
-    $group_name = "User";
+    $group_name = "Seller";
     $routes->get ($group_name.'/Profile/',                      $group_name.'\Profile::Index');
     $routes->post($group_name.'/Profile/UpdateSubmit/(:any)',   $group_name.'\Profile::UpdateSubmit/$1');
 
@@ -131,7 +135,7 @@ $routes->group('Management', ['namespace' => 'App\Controllers\Management'], stat
      */
 
 
-    $group_name = "Company";
+    $group_name = "Buyer";
     $routes->get ($group_name.'/Profile/',                      $group_name.'\Profile::Index');
     $routes->post($group_name.'/Profile/UpdateSubmit/(:any)',   $group_name.'\Profile::UpdateSubmit/$1');
 
@@ -159,14 +163,14 @@ $routes->group('Management', ['namespace' => 'App\Controllers\Management'], stat
 $routes->group('Buyer', function($routes){
     $routes->get ('/',                      'Buyer::index');
     $routes->get ('Shop/List(:any)',       'Buyer\Shop::List$1');
-    $routes->get ('Shop/Detail/(:any)',     'Buyer::Detail/$1');
+    $routes->get ('Shop/Detail/(:any)',     'Buyer\Shop::Detail/$1');
     $routes->post ('Contract',        'Buyer\Contract::Contract');
     $routes->get ('MyPage/Info',            'Buyer\MyPage::Info');
     $routes->post ('MyPage/BuyerUpdateSubmit', 'Buyer\MyPage::BuyerUpdateSubmit');
     $routes->post ('Shop/Cart',            'Buyer\Shop::Cart');
     $routes->get ('MyPage/Cart',           'Buyer\MyPage::Cart');
     $routes->post ('MyPage/CartDel',           'Buyer\MyPage::CartDel');
-    $routes->get ('MyPage/Contract',           'Buyer\MyPage::Contract');
+    $routes->post ('MyPage/Contract',           'Buyer\MyPage::Contract');
 
 
 });
@@ -179,7 +183,7 @@ $routes->group('Seller',  function ($routes){
     $routes->post ($group_name.'/ItemList/Search',   'Seller\Item::Search');
     $routes->post ($group_name.'/ItemSubmit', 'Seller\Item::ItemSubmit');
     $routes->post ($group_name.'/ItemUpdateSubmit', 'Seller\Item::ItemUpdateSubmit');
-    $routes->get ('Contract',               'Seller::Contract');
+    $routes->post ('Contract',               'Seller::Contract');
 
     $group_name = "IMJOB";
     $routes->get ($group_name.'/List',             'Seller\IMJOB::List');

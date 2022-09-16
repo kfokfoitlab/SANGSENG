@@ -59,12 +59,18 @@
           if(is_array($data)){
         foreach($data as $item){
          $product_price = number_format($item["product_price"]);
+         $cart_reduction_money = number_format($item["cart_reduction_money"]);
         ?>
           <input type="hidden" name="product_no" id ="product_no" value="<?=$item['product_no']?>">
           <input type="hidden" name="seller_uuid" id ="seller_id" value="<?=$item['register_id']?>">
-            <tr>
+          <input type="hidden" name="company_name" id ="company_name" value="<?=$item['company_name']?>">
+          <input type="hidden" name="reduction_money" id ="reduction_money" value="<?=$item['cart_reduction_money']?>">
+          <input type="hidden" name="product_price" id ="product_price" value= "<?=$item['product_price']?>">
+          <input type="hidden" name="product_name" id ="product_name" value= "<?=$item['product_name']?>">
+
+          <tr>
               <td>
-                <img src="/uploads/upload_files/<?=$item['representative_image']?>" alt="기업로고" style="width: 100px;">
+                <img src="/uploads/<?=$item['representative_image']?>" alt="기업로고" style="width: 100px;">
               </td>
               <td>
                 <h4><a href=""><span class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h4>
@@ -77,7 +83,7 @@
                 <p><?=$product_price?>원</p>
               </td>
               <td>
-                <p>23,520,000원</p>
+                <p><?=$cart_reduction_money?>원</p>
               </td>
               <td>
                 <button onclick="cart_del(<?=$item['productidx']?>);" class="btn btn-sm btn-danger">삭제</button>

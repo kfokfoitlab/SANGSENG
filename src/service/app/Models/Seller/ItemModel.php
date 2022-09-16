@@ -19,11 +19,20 @@ class ItemModel extends CommonModel
         $upload_image2 = uniqid().".".pathinfo($files["product_image2"]["name"], PATHINFO_EXTENSION);
         $this->uploadFileNew($files,$upload_image2,$allowed_ext,$upload_image2_ori);
 
+        $upload_detail_image_ori = "detail_img";
+        $upload_detail_image = uniqid().".".pathinfo($files["detail_img"]["name"], PATHINFO_EXTENSION);
+        $this->uploadFileNew($files,$upload_detail_image,$allowed_ext,$upload_detail_image_ori);
+
+
         $uuid = $_SESSION["login_info"]["uuid"];
         $company_name = $_SESSION["login_info"]["company_name"];
         $product_ranking = 9999;
-        $status = '5';
+        $status = '1';
         $product_no = date("YmdHis");
+
+        $contribution = $data["product_price"]/$data["seller_sales"];
+        $workers = $data["mild_disabled"]+($data["severely_disabled"]*2);
+        $reduction = $contribution * $workers;
 
         $query = "
           insert into
@@ -43,10 +52,13 @@ class ItemModel extends CommonModel
               ,representative_image = '".$upload_representative."'
               ,product_image1 = '".$upload_image1."'
               ,product_image2 = '".$upload_image2."'
+              ,detail_img = '".$upload_detail_image."'
+              ,reduction = '".$reduction."'
               ,register_date = '".date("Y-m-d H:i:s")."'
               ,register_id = '".$uuid."'
               ,company_name = '".$company_name."'
               ,product_ranking = '".$product_ranking."'
+              ,del_yn = 'N'
       ";
         $idx = $this->wrdb->insert($query);
         if($idx){
@@ -85,7 +97,7 @@ public function ItemUpdateSubmit($files, $data){
 	
     $product_no = $data["product_no"];
     $uuid = $_SESSION["login_info"]["uuid"];
-
+    $status = 3;
     $query = "
             update
                 seller_product
@@ -99,6 +111,7 @@ public function ItemUpdateSubmit($files, $data){
                 ,product_surtax = '".$data["product_surtax"]."'
                 ,delivery_cycle = '".$data["delivery_cycle"]."'
                 ,product_detail = '".$data["product_detail"]."'
+                ,status = '".$status."'
                 ,representative_image = '".$upload_representative."'
                 ,product_image1 = '".$upload_image1."'
                 ,product_image2 = '".$upload_image2."'            
@@ -111,4 +124,23 @@ public function ItemUpdateSubmit($files, $data){
     $this->wrdb->update($query);
     return "1";
 }
+
+public function SellerInfo(){
+    $uuid = $_SESSION["login_info"]["uuid"];
+    $data = [];
+    $query = "
+            select
+               *
+            from
+              seller_company
+            where uuid ='".$uuid."'
+ 
+        ";
+    $this->rodb->query($query);
+    while($row = $this->rodb->next_row()){
+        $data = $row;
+    }
+    return $data;
+}
+
 }

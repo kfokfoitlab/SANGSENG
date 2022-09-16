@@ -16,19 +16,21 @@ class BuyerModel extends CommonModel
                 seller_product
         ";
         $data["count"] = $this->rodb->simple_query($query);
-        $data["data"] = [];
+        $data= [];
         $query = "
             select
                 *
             from
               seller_product
+            where status = '5'
+            and del_yn !='Y' 
            order by 
                idx desc
             limit 5  
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
-            $data["data"][] = $row;
+            $data[] = $row;
 
         }
         return $data;
@@ -40,12 +42,12 @@ class BuyerModel extends CommonModel
         $query = "
               select
                   *, a.register_id as 'seller_uuid'
-            from 
-                seller_product a 
+            from
+                seller_product a
                 join
-                    seller_company b 
+                    seller_company b
                         on a.register_id = b.uuid
-            where 
+            where
                 a.product_no = $product_no
 
         ";
@@ -62,7 +64,7 @@ class BuyerModel extends CommonModel
         $contract_no = date("YmdHis");
         $contract_status = "1";
         $buyer_uuid = $_SESSION['login_info']['uuid'];
-        $buyer_comapny = $_SESSION['login_info']['company_name'];
+        $reduction_money = $data['reduction_money'];
         $query = "
           insert into
               contract_condition
@@ -75,7 +77,8 @@ class BuyerModel extends CommonModel
               ,seller_company = '".$data["seller_company"]."'
               ,product_name = '".$data["product_name"]."'
               ,product_price = '".$data["product_price"]."'
-              ,buyer_company = '".$buyer_comapny."'
+              ,buyer_company = '".$data["buyer_company"]."'
+              ,reduction_money = '".$reduction_money."'
               ,product_no = '".$data["product_no"]."'       
               ,register_date = '".date("Y-m-d H:i:s")."'
               ,del_yn = 'N'          
@@ -95,6 +98,7 @@ class BuyerModel extends CommonModel
                 *
             from
               seller_product
+            where status ='5'
            order by 
                product_ranking desc
             limit 4;
@@ -116,6 +120,8 @@ class BuyerModel extends CommonModel
             from
               seller_product
             where 1=1
+              and status ='5'
+              and del_yn !='Y'
                 and product_category = $value
            
         ";
@@ -132,11 +138,31 @@ class BuyerModel extends CommonModel
         return $list;
     }
 
+    public function Buyer_info($uuid){
+        $buyer_info = [];
+        $query = "
+            select
+                *
+            from
+              buyer_company
+            where  uuid = '".$uuid."'
+           
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $buyer_info = $row;
+
+        }
+        return $buyer_info;
+    }
+
+
+
     public function CartInsert($data){
         $product_no = $data["product_no"];
         $buyer_id = $data["buyer_uuid"];
         $seller_id = $data["seller_uuid"];
-
+        $reduction_money =$data['reduction_money'];
         $query = "
           insert into
                buyer_cart
@@ -144,6 +170,7 @@ class BuyerModel extends CommonModel
                product_no = '".$product_no."'
                ,buyer_id = '".$buyer_id."' 
                ,seller_id = '".$seller_id."' 
+               ,cart_reduction_money = '".$reduction_money."' 
               ,register_date = '".date("Y-m-d H:i:s")."'
               ,register_id = '".$buyer_id."' 
               ,del_yn = 'N'          
