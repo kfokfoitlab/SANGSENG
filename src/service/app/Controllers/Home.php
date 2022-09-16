@@ -43,10 +43,11 @@ class Home extends BaseController
         );
         $recent_company = $this->company_model->getAllList(0, $search_query);*/
         $ranking = $this->buyer_model->RecommendationList();
-
+        $reduction =  $this->buyer_model->ReductionMoney();
 
         $data = array(
-            "data" => $ranking["data"]
+            "data" => $ranking["data"],
+            "reduction" => $reduction
         );
 
 /*        $data = array(

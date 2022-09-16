@@ -111,6 +111,7 @@
             <th>계약등록일</th>
             <th>배송주기</th>
             <th>구매기업</th>
+            <th>계약서 전송받기</th>
           </tr>
           </thead>
           <tbody>
@@ -171,6 +172,15 @@
             <td title="2022-08-01"><?=$item["register_date"]?></td>
             <td title="일주일에 한번"><?=$delivery_cycle?></td>
             <td title="22-08-02"><?=$item["buyer_company"]?></td>
+            <td title="20220801090000-00001">
+              <?php
+            if($item["contract_status"] == 2 || $item["contract_status"] == 5){
+              ?>
+              <button class ="btn btn-success" onclick="Contract_Return(<?=$item['workflow_id']?>,<?=$item['contract_status']?>);">이메일로 받기</button>
+              <?php
+            }
+            ?>
+            </td>
           </tr>
           <?php
           }
@@ -178,8 +188,39 @@
           ?>
           </tbody>
         </table>
-
       </form>
     </div>
   </section>
 </div>
+<script>
+  function Contract_Return(workflow_id,status){
+    if(status == 2){
+      Contract_Playing(workflow_id);
+      alert("이메일로 진행중인 계약서를 전송하였습니다.");
+    }if(status == 5){
+      Contract_Complate(workflow_id);
+      alert("이메일로 완료된 계약서를 전송하였습니다.")
+    }
+  }
+  function Contract_Playing(workflow_id){
+    const options = {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+      }
+    };
+    fetch('https://docs.esignon.net/api/v3/workflows/'+workflow_id+'/resend-playing', options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
+  }
+
+  function Contract_Complate(workflow_id){
+    const sdk = require('api')('@esignon/v3.0#g604e4pl30t2t5s');
+    sdk.auth('esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE=');
+    sdk.resendCompleteWorkflow({workflowId:workflow_id})
+            .then(res => console.log(res))
+            .catch(err => console.error(err));
+  }
+</script>

@@ -70,18 +70,18 @@ $levy = $base * $employ *12; //부담금
               if($result_price > $levy ){
             $reduction_money = $levy*0.6;
               }else if($result_price >$item["product_price"]*0.5){
-            $reduction_money = $item["product_price"]*0.5;
+            $reduction_money = $item["product_price"]*0.5 * 12;
               }else{
-            $reduction_money = $result_price;
+            $reduction_money = $result_price * 12;
              }
+            $reduction_money = (int)$reduction_money;
           ?>
             <td>
-<!--
-              <img class="preview-img-small" src="D:/Project/SANGSENG/src/uploads/<?=$item['representative_image']?>" alt="기업로고">
--->
+              <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>">
+
             </td>
             <td>
-              <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$result?>"><span
+              <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$reduction_money?>"><span
                 class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h3>
               <!--              <p class="mt-2 sub-info"><?=$item['product_detail']?></p>-->
             </td>
@@ -142,14 +142,15 @@ $levy = $base * $employ *12; //부담금
           foreach($list as $item){
            $product_price = number_format($item["product_price"]);
              $result_price = $item['reduction'] *$base;
-              $reduction_money = 0;
+             $reduction_money = 0;
             if($result_price > $levy ){
             $reduction_money = $levy*0.6;
             }else if($result_price >$item["product_price"]*0.5){
-            $reduction_money = $item["product_price"]*0.5;
+            $reduction_money = $item["product_price"]*0.5 *12;
             }else{
-            $reduction_money = $result_price;
+            $reduction_money = $result_price *12;
             }
+            $reduction_money = (int)$reduction_money;
           ?>
             <tr>
               <td>
