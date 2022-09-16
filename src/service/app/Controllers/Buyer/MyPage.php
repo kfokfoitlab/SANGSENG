@@ -60,6 +60,7 @@ class MyPage extends BaseController
     { // {{{
         $uuid = $_SESSION["login_info"]["uuid"];
         $data = $this->mypage_model->getCartList($uuid);
+
         $data = array(
             "data" => $data["data"]
         );
