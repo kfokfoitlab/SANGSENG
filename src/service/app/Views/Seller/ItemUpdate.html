@@ -18,7 +18,7 @@
         $timestamp = strtotime($end_date);
         $end_date = date("Y-m-d", $timestamp);
         ?>
-        <form name="myForm" method="post" action="" enctype="multipart/form-data">
+        <form name="myForm" method="post" action="/Seller/Item/ItemUpdateSubmit" enctype="multipart/form-data">
         <input type="hidden"  value="<?=$item['product_no']?>" name = "product_no">
           <input type="hidden" value="<?=$item['representative_image']?>" name="representative_image_ori_name">
           <input type="hidden" value="<?=$item['product_image1']?>" name="product_image1_ori_name">
@@ -148,7 +148,7 @@
                     <div class="col-6 ms-4 px-4 py-3">
                       <label for="representative-img" class="form-label">대표 이미지</label>
                       <input id="representative-img" name="representative_image" class="form-control product-img-input"
-                           value ="" type="file" accept="image/*" required/>기존파일 : <?=$item['representative_image']?>
+                           value ="" type="file" accept="image/*" />기존파일 : <?=$item['representative_image']?>
                     </div>
                   </li>
                   <!-- 추가이미지 -->
@@ -182,13 +182,23 @@
                 <textarea name="product_detail" class="form-control" placeholder="상품 상세정보를 입력해주세요."><?=$item['product_detail']?></textarea>
               </div>
             </div>
+            <li class="row">
+            <div class="col-2">
+              <div class="preview-bg-img border bg-light border rounded"></div>
+            </div>
+            <div class="col-6 ms-4 px-4 py-3">
+              <label for="detail-img" class="form-label text-secondary">상품상세 이미지<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
+              <input id="detail-img" name="detail_img" class="form-control product-img-input" type="file"
+                     accept="image/*"/>기존파일 : <?=$item['detail_img']?>
+            </div>
+            </li>
         <?php
         }
         }
         ?>
             <div class="form-group mt-5 d-flex justify-content-center">
-              <button type="reset" class="btn btn-outline-secondary px-4 me-3" tabindex=100>취소</button>
-              <button type="button" onclick="updateSubmit();" class="btn btn-primary px-4" tabindex=100>수정</button>
+              <button type="reset" onclick="history.back()" class="btn btn-outline-secondary px-4 me-3" tabindex=100>취소</button>
+              <button type="submit" class="btn btn-primary px-4" tabindex=100>수정</button>
             </div>
           </div>
         </form>
@@ -220,10 +230,12 @@
       }
     })
   })
+/*
 
   function updateSubmit(){
     document.myForm.action='/Seller/Item/ItemUpdateSubmit';
     document.myForm.submit();
   }
+*/
 
 </script>

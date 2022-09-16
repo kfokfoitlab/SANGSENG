@@ -7,14 +7,18 @@
 	{
 		public function Register($data,$files,$table_name = "seller_company_worker"){
 			$allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG');
-			$upload_face_ori = "upload_face";
-			$upload_face = uniqid().".".pathinfo($files["upload_face"]["name"], PATHINFO_EXTENSION);
-			$this->uploadFileNew($files,$upload_face,$allowed_ext,$upload_face_ori);
-			$upload_card_ori = "upload_card";
-			$upload_card = uniqid().".".pathinfo($files["upload_card"]["name"], PATHINFO_EXTENSION);
-			$this->uploadFileNew($files,$upload_card,$allowed_ext,$upload_card_ori);
-			
-			$status = '1';
+
+            if($files["upload_face"]["name"] != ""){
+                $upload_face_ori = "upload_face";
+                $upload_face = uniqid().".".pathinfo($files["upload_face"]["name"], PATHINFO_EXTENSION);
+                $this->uploadFileNew($files,$upload_face,$allowed_ext,$upload_face_ori);
+            }
+            if($files["upload_card"]["name"] != ""){
+                $upload_card_ori = "upload_card";
+                $upload_card = uniqid().".".pathinfo($files["upload_card"]["name"], PATHINFO_EXTENSION);
+                $this->uploadFileNew($files,$upload_card,$allowed_ext,$upload_card_ori);
+            }
+			$status = '5';
 			$seller_uuid = $_SESSION["login_info"]["uuid"];
 			$seller_data = $this->getSellerInfo($seller_uuid);
 			
@@ -60,7 +64,7 @@
 				$this->uploadFileNew($files, $upload_card, $allowed_ext, $upload_card_ori);
 			}
 			
-			$status = '1';
+			$status = '5';
 			$seller_uuid = $_SESSION["login_info"]["uuid"];
 			$seller_data = $this->getSellerInfo($seller_uuid);
 			

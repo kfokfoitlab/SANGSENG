@@ -10,7 +10,17 @@
   <div class="auto-container">
     <div class="cotnent-box">
       <div class="title-box">
-        <h2 title="2022년 상생몰 예상 총 감면금액"><a tabindex=100>2022년 상생몰 예상 총감면금액 <span class="main-banner-counter">123567894</span>원</a></h2>
+        <?php
+        $reduction_money = "";
+        if($reduction['reduction_money'] != null){
+        $reduction_money = $reduction['reduction_money'];
+        }
+        else{
+        $reduction_money = 0;
+        }
+        ?>
+
+        <h2 title="2022년 상생몰 예상 총 감면금액"><a tabindex=100>2022년 상생몰 예상 총감면금액 <span class="main-banner-counter"><?=$reduction_money?></span>원</a></h2>
       </div>
 
       <!-- Job Search Form -->

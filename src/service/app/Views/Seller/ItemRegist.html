@@ -30,7 +30,7 @@
 
             <div class="row mb-4 align-items-center">
               <div class="col-2">
-                <label for="productName" class="form-label">상품명</label>
+                <sup class="text-danger">*</sup> <label for="productName" class="form-label">상품명</label>
               </div>
               <div class="col-10">
                 <input type="text" name="product_name" id="productName" class="form-control" required/>
@@ -39,7 +39,7 @@
 
             <div class="row mb-4 align-items-center">
               <div class="col-2">
-                <span class="form-label">판매기간</span>
+                <sup class="text-danger">*</sup> <span class="form-label">판매기간</span>
               </div>
               <div class="col-10">
                 <div class="d-flex align-items-center">
@@ -106,7 +106,7 @@
 
             <div class="add-quantity-price row mb-4 align-items-center">
               <div class="col-2">
-                <span class="form-label">판매수량/가격</span>
+                <sup class="text-danger">*</sup> <span class="form-label">판매수량/가격</span>
               </div>
               <div class="col-10">
                 <div class="row align-items-center">
@@ -132,7 +132,7 @@
                       <div class="preview-bg-img bg-light border rounded"></div>
                     </div>
                     <div class="col-6 ms-4 px-4 py-3">
-                      <label for="representative-img" class="form-label">대표 이미지</label>
+                      <sup class="text-danger">*</sup> <label for="representative-img" class="form-label">대표 이미지</label>
                       <input id="representative-img" name="representative_image" class="form-control product-img-input"
                              type="file" accept="image/*" required/>
                     </div>
@@ -177,6 +177,7 @@
                 <input id="detail-img" name="detail_img" class="form-control product-img-input" type="file"
                        accept="image/*"/>
               </div>
+            </li>
             <div class="form-group mt-5 d-flex justify-content-center">
               <button type="reset" class="btn btn-outline-secondary px-4 me-3" tabindex=100>취소</button>
               <button type="submit" class="btn btn-primary px-4" tabindex=100>등록</button>
