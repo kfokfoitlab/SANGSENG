@@ -7,23 +7,27 @@ class ItemModel extends CommonModel
 {
     public function Register($files, $data, $table_name = "seller_product"){
         $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG');
-        $upload_representative_ori = "representative_image";
-        $upload_representative = uniqid().".".pathinfo($files["representative_image"]["name"], PATHINFO_EXTENSION);
-        $this->uploadFileNew($files,$upload_representative,$allowed_ext,$upload_representative_ori);
 
-        $upload_image1_ori = "product_image1";
-        $upload_image1 = uniqid().".".pathinfo($files["product_image1"]["name"], PATHINFO_EXTENSION);
-        $this->uploadFileNew($files,$upload_image1,$allowed_ext,$upload_image1_ori);
-
-        $upload_image2_ori = "product_image2";
-        $upload_image2 = uniqid().".".pathinfo($files["product_image2"]["name"], PATHINFO_EXTENSION);
-        $this->uploadFileNew($files,$upload_image2,$allowed_ext,$upload_image2_ori);
-
-        $upload_detail_image_ori = "detail_img";
-        $upload_detail_image = uniqid().".".pathinfo($files["detail_img"]["name"], PATHINFO_EXTENSION);
-        $this->uploadFileNew($files,$upload_detail_image,$allowed_ext,$upload_detail_image_ori);
-
-
+        if($files["representative_image"]["name"] != ""){
+            $upload_representative_ori = "representative_image";
+            $upload_representative = uniqid().".".pathinfo($files["representative_image"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_representative,$allowed_ext,$upload_representative_ori);
+        }
+        if($files["product_image1"]["name"] != ""){
+            $upload_image1_ori = "product_image1";
+            $upload_image1 = uniqid().".".pathinfo($files["product_image1"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_image1,$allowed_ext,$upload_image1_ori);
+        }
+        if($files["product_image2"]["name"] != ""){
+            $upload_image2_ori = "product_image2";
+            $upload_image2 = uniqid().".".pathinfo($files["product_image2"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_image2,$allowed_ext,$upload_image2_ori);
+        }
+        if($files["detail_img"]["name"] != ""){
+            $upload_detail_image_ori = "detail_img";
+            $upload_detail_image = uniqid().".".pathinfo($files["detail_img"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_detail_image,$allowed_ext,$upload_detail_image_ori);
+        }
         $uuid = $_SESSION["login_info"]["uuid"];
         $company_name = $_SESSION["login_info"]["company_name"];
         $product_ranking = 9999;
@@ -94,7 +98,12 @@ public function ItemUpdateSubmit($files, $data){
 		$upload_image2 = uniqid() . "." . pathinfo($files["product_image2"]["name"], PATHINFO_EXTENSION);
 		$this->uploadFileNew($files, $upload_image2, $allowed_ext, $upload_image2_ori);
 	}
-	
+    if($files["detail_img"]["name"] != ""){
+        $upload_detail_image_ori = "detail_img";
+        $upload_detail_image = uniqid().".".pathinfo($files["detail_img"]["name"], PATHINFO_EXTENSION);
+        $this->uploadFileNew($files,$upload_detail_image,$allowed_ext,$upload_detail_image_ori);
+    }
+
     $product_no = $data["product_no"];
     $uuid = $_SESSION["login_info"]["uuid"];
     $status = 3;

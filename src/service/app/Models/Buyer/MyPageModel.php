@@ -7,6 +7,16 @@ class MyPageModel extends CommonModel
 {
 
  public function getCartList($uuid){
+
+     $data = [];
+     // total
+     $query = "
+            select
+                count(*)
+            from
+                seller_product
+        ";
+     $data["count"] = $this->rodb->simple_query($query);
      $data = [];
      $query = "
   

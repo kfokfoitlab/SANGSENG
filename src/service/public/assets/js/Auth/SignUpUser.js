@@ -28,7 +28,16 @@ $(document).ready(function(){
             alert('올바른 사업자등록번호를 입력해주세요')
             return false;
         }
-
+				
+				const workersCount = $("input[name='workers']").val().trim();
+				const workersMild = $("input[name='mild_disabled']").val().trim();
+				const workersSeverely = $("input[name='severely_disabled']").val().trim();
+				if(workersCount < workersMild + workersSeverely) {
+					alert('장애인 근로자 수가 상시 근로자 수 보다 많습니다.');
+					$("input[name='workers']").focus();
+					return false;
+				}
+				
         return true;
     });
 });

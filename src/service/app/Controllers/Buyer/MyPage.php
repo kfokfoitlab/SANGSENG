@@ -60,6 +60,7 @@ class MyPage extends BaseController
     { // {{{
         $uuid = $_SESSION["login_info"]["uuid"];
         $data = $this->mypage_model->getCartList($uuid);
+
         $data = array(
             "data" => $data["data"]
         );
@@ -116,7 +117,28 @@ class MyPage extends BaseController
                 </script>
             ";
         }
-
-
     }
+    public function ConfirmPassword()
+    { // {{{
+        $uuid = $_SESSION["login_info"]["uuid"];
+        $data = $this->mypage_model->getMyInfo($uuid);
+        $data = array(
+            "data" => $data,
+        );
+        echo view("Common/Header.html");
+        echo view('MyPage/BuyerPasswordConfirm.html',$data);
+        echo view("Common/Footer.html");
+    } // }}}
+
+    public function ChangePassword()
+    { // {{{
+        $uuid = $_SESSION["login_info"]["uuid"];
+        $data = $this->mypage_model->getMyInfo($uuid);
+        $data = array(
+            "data" => $data,
+        );
+        echo view("Common/Header.html");
+        echo view('MyPage/BuyerPasswordChange.html',$data);
+        echo view("Common/Footer.html");
+    } // }}}
 }

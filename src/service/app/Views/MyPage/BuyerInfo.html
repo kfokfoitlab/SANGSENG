@@ -12,7 +12,7 @@
       <h3 class="mt-5 h4 fw-bold text-center">나의정보 수정</h3>
       <div class="default-form border rounded my-4 p-4">
         <div class="form-inner">
-          <form name="myForm" method="post" action="" enctype="multipart/form-data">
+          <form name="myForm" method="post" action="/Buyer/MyPage/BuyerUpdateSubmit" enctype="multipart/form-data">
             <input type="hidden" name="sbs" value="<?=$sbs?>">
             <input type="hidden" name="ads" value="<?=$ads?>">
 
@@ -105,25 +105,3 @@
     </div>
   </section>
 </div>
-
-<script>
-/*
-
-  function BuyerUpdateSubmit(){
-    document.myForm.action='/Buyer/MyPage/BuyerUpdateSubmit';
-    document.myForm.submit();
-  }
-*/
-
-</script>
-/*  function pwdCheck() {
-    var password_check = document.getElementById('password_check').value;
-    var confirm_password = document.getElementById('confirm_password').value;
-    if( confirm_password != password_check ) {
-      alert("비밀번호가 일치 하지 않습니다");
-      return false;
-    } else{
-      document.myForm.action='/Buyer/MyPage/BuyerUpdateSubmit';
-      document.myForm.submit();
-    }
-  }*/

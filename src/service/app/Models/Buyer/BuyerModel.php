@@ -100,8 +100,8 @@ class BuyerModel extends CommonModel
               seller_product
             where status ='5'
            order by 
-               product_ranking desc
-            limit 4;
+               product_ranking asc
+            limit 5;
            
         ";
         $this->rodb->query($query);
@@ -175,9 +175,6 @@ class BuyerModel extends CommonModel
         }
         return $buyer_info;
     }
-
-
-
     public function CartInsert($data){
         $product_no = $data["product_no"];
         $buyer_id = $_SESSION['login_info']['uuid'];
@@ -203,4 +200,3 @@ class BuyerModel extends CommonModel
         }
     }
 }
-header("Content-Type:text/html;charset=EUC-KR");?>

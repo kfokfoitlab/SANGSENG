@@ -1,5 +1,5 @@
 <div class="flex-grow-1 bg-light">
-  <section class="py-5 mb-5">
+  <section class="p-5 mb-5">
     <div class="auto-container">
       <div class="bg-white p-5">
         <h4 class="fw-bold pb-3 border-bottom border-2">장애인 근로자 정보</h4>
@@ -7,113 +7,128 @@
           <input type="hidden" name="idx" value="<?=$data['idx']?>">
           <div class="d-flex py-5">
             <div class="me-5">
-              <div class="border upload_face-preview" style="width: 150px; height: 192px; background: center / contain url('/uploads/<?=$data["upload_face"]?>') no-repeat;"></div>
+              <div class="border upload_face-preview"
+                   style="width: 150px; height: 192px; background: center / contain url('/uploads/<?=$data[" upload_face
+              "]?>') no-repeat;">
+              </div>
+            </div>
+
+            <div class="flex-grow-1">
+              <div class="row mb-3 align-items-center">
+                <div class="col-2">
+                  <label for="worker_name" class="form-label m-0 fw-bold">이름</label>
+                </div>
+                <div class="col-6">
+                  <input type="text" class="form-control" id="worker_name" name="worker_name"
+                         value="<?=$data['worker_name']?>">
+                </div>
+                <div class="invalid-feedback">
+                  관심사는 반드시 선택해야 합니다.
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <span class="col-2 fw-bold">계약기간</span>
+                <div class="col-6 d-flex">
+                  <label class="visually-hidden" for="worker_term_start">계약시작일</label>
+                  <input type="date" class="form-control" id="worker_term_start" name="worker_term_start"
+                         value="<?=$data['worker_term_start']?>">
+                  <span class="px-2">-</span>
+                  <label class="visually-hidden" for="worker_term_end">계약종료일</label>
+                  <input type="date" class="form-control" id="worker_term_end" name="worker_term_end"
+                         value="<?=$data['worker_term_end']?>">
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <div class="col-2">
+                  <label for="worker_birth" class="fw-bold">생년월일</label>
+                </div>
+                <div class="col-6">
+                  <input type="text" class="form-control" id="worker_birth" name="worker_birth" placeholder="주민앞자리6숫자"
+                         maxlength="6"
+                         value="<?=$data['worker_birth']?>">
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <span class="col-2 fw-bold">근무 상태</span>
+                <div class="col-6 d-flex">
+                  <label class="form-check-label me-3" for="flexCheck01">
+                    <input class="form-check-input" type="radio" value="1" id="flexCheck01" name="working_status"
+                    <?php if($data["working_status"] == 1){ echo "checked";}?>>
+                    근무
+                  </label>
+                  <label class="form-check-label me-3" for="flexCheck02">
+                    <input class="form-check-input" type="radio" value="2" id="flexCheck02" name="working_status"
+                    <?php if($data["working_status"] == 2){ echo "checked";}?>>
+                    퇴직
+                  </label>
+                  <label class="form-check-label me-3" for="flexCheck03">
+                    <input class="form-check-input" type="radio" value="3" id="flexCheck03" name="working_status"
+                    <?php if($data["working_status"] == 3){ echo "checked";}?>>
+                    휴직
+                  </label>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <span class="col-2 fw-bold">장애유형</span>
+                <div class="col-6 d-flex">
+                  <label class="form-check-label me-3" for="flexCheck04">
+                    <input class="form-check-input" type="radio" value="1" id="flexCheck04" name="disability_degree"
+                    <?php if($data["disability_degree"] == 1){ echo "checked";}?>>
+                    중증
+                  </label>
+                  <label class="form-check-label me-3" for="flexCheck05">
+                    <input class="form-check-input" type="radio" value="2" id="flexCheck05" name="disability_degree"
+                    <?php if($data["disability_degree"] == 2){ echo "checked";}?>>
+                    경증
+                  </label>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <div class="col-2">
+                  <label for="upload_face" class="form-label m-0 fw-bold">증명사진</label>
+                </div>
+                <div class="col-6">
+                  <input class="form-control" type="file" id="upload_face" name="upload_face" value="">
+                  <input type="hidden" name="upload_face_ori_name" value='<?=$data["upload_face"]?>'>
+                  <button class="btn btn-sm btn-primary mt-2" type="button" onclick="downloadFileNew('<?=$data["
+                          upload_face
+                  "]?>');">기존사진 다운로드</button>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <div class="col-2">
+                  <label for="upload_card" class="form-label m-0 fw-bold">복지카드</label>
+                </div>
+                <div class="col-6">
+                  <input class="form-control" type="file" id="upload_card" name="upload_card" value="">
+                  <input type="hidden" name="upload_card_ori_name" value='<?=$data["upload_card"]?>'>
+                  <button class="btn btn-sm btn-primary mt-2" type="button" onclick="downloadFileNew('<?=$data["
+                          upload_card
+                  "]?>');">기존복지카드 다운로드</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <div>
+              <button class="btn btn-secondary" type="reset">되돌리기</button>
+              <button class="btn btn-success" onclick="updateWorker()" type="button">수정하기</button>
+            </div>
+            <div>
+              <button class="btn btn-dark" onclick="goList('<?=$_GET['p_n']?>')" type="reset">목록보기</button>
+            </div>
           </div>
 
-          <div class="flex-grow-1">
-            <div class="row mb-3 align-items-center">
-              <div class="col-2">
-                <label for="worker_name" class="form-label m-0 fw-bold">이름</label>
-              </div>
-              <div class="col-6">
-                <input type="text" class="form-control" id="worker_name" name="worker_name" value="<?=$data['worker_name']?>">
-              </div>
-              <div class="invalid-feedback">
-                관심사는 반드시 선택해야 합니다.
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <span class="col-2 fw-bold">계약기간</span>
-              <div class="col-6 d-flex">
-                <label class="visually-hidden" for="worker_term_start">계약시작일</label>
-                <input type="date" class="form-control" id="worker_term_start" name="worker_term_start" value="<?=$data['worker_term_start']?>">
-                <span class="px-2">-</span>
-                <label class="visually-hidden" for="worker_term_end">계약종료일</label>
-                <input type="date" class="form-control" id="worker_term_end" name="worker_term_end" value="<?=$data['worker_term_end']?>">
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-2">
-                <label for="worker_birth" class="fw-bold">생년월일</label>
-              </div>
-              <div class="col-6">
-                <input type="text" class="form-control" id="worker_birth" name="worker_birth" placeholder="주민앞자리6숫자" maxlength="6"
-                       value="<?=$data['worker_birth']?>">
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <span class="col-2 fw-bold">근무 상태</span>
-              <div class="col-6 d-flex">
-                <label class="form-check-label me-3" for="flexCheck01">
-                  <input class="form-check-input" type="radio" value="1" id="flexCheck01" name="working_status"
-                  <?php if($data["working_status"] == 1){ echo "checked";}?>>
-                  근무
-                </label>
-                <label class="form-check-label me-3" for="flexCheck02">
-                  <input class="form-check-input" type="radio" value="2" id="flexCheck02" name="working_status"
-                  <?php if($data["working_status"] == 2){ echo "checked";}?>>
-                  퇴직
-                </label>
-                <label class="form-check-label me-3" for="flexCheck03">
-                  <input class="form-check-input" type="radio" value="3" id="flexCheck03" name="working_status"
-                  <?php if($data["working_status"] == 3){ echo "checked";}?>>
-                  휴직
-                </label>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <span class="col-2 fw-bold">장애유형</span>
-              <div class="col-6 d-flex">
-                <label class="form-check-label me-3" for="flexCheck04">
-                  <input class="form-check-input" type="radio" value="1" id="flexCheck04" name="disability_degree"
-                  <?php if($data["disability_degree"] == 1){ echo "checked";}?>>
-                  중증
-                </label>
-                <label class="form-check-label me-3" for="flexCheck05">
-                  <input class="form-check-input" type="radio" value="2" id="flexCheck05" name="disability_degree"
-                  <?php if($data["disability_degree"] == 2){ echo "checked";}?>>
-                  경증
-                </label>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-2">
-                <label for="upload_face" class="form-label m-0 fw-bold">증명사진</label>
-              </div>
-              <div class="col-6">
-                <button class="btn btn-primary" type="button"  onclick="downloadFileNew('<?=$data["upload_face"]?>');">기존사진 다운로드</button>
-                <input class="form-control" type="file" id="upload_face" name="upload_face" value="">
-                <input type="hidden" name="upload_face_ori_name" value='<?=$data["upload_face"]?>'>
-              </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <div class="col-2">
-                <label for="upload_card" class="form-label m-0 fw-bold">복지카드</label>
-              </div>
-              <div class="col-6">
-                <button class="btn btn-primary" type="button"  onclick="downloadFileNew('<?=$data["upload_card"]?>');">기존복지카드 다운로드</button>
-                <input class="form-control" type="file" id="upload_card" name="upload_card" value="">
-                <input type="hidden" name="upload_card_ori_name" value='<?=$data["upload_card"]?>'>
-              </div>
-            </div>
-
-          </div>
+        </form>
       </div>
-      <div class="text-center">
-        <button class="btn btn-warning" onclick="updateWorker()" type="button">수정하기</button>
-        <button class="btn btn-secondary" onclick="goList('<?=$_GET['p_n']?>')" type="reset">목록보기</button>
-        <button class="btn btn-danger" type="reset">되돌리기</button>
-      </div>
-      </form>
     </div>
-</div>
-</section>
+  </section>
 </div>
 <script>
 	/* 사진 미리보기 시작 */
@@ -132,41 +147,43 @@
 	});
 
 	image_preview.addEventListener("click", () => image_input.click());
+
 	/* 사진 미리보기 끝 */
 
-	function validation(){
-		if($("#worker_name").val() == ""){
+	function validation() {
+		if ($("#worker_name").val() == "") {
 			$("#worker_name").addClass("is-invalid");
 			$("#worker_name").focus();
 			return false;
-		}else if($("#worker_term_start").val() == ""){
+		} else if ($("#worker_term_start").val() == "") {
 			$("#worker_term_start").addClass("is-invalid");
 			$("#worker_term_start").focus();
 			return false;
-		}else if($("#worker_term_end").val() == ""){
+		} else if ($("#worker_term_end").val() == "") {
 			$("#worker_term_end").addClass("is-invalid");
 			$("#worker_term_end").focus();
 			return false;
-		}else if($("#worker_birth").val() == ""){
+		} else if ($("#worker_birth").val() == "") {
 			$("#worker_birth").addClass("is-invalid");
 			$("#worker_birth").focus();
 			return false;
-		}else {
+		} else {
 			return true;
 		}
 	}
-	function updateWorker(){
-		if(validation()) {
+
+	function updateWorker() {
+		if (validation()) {
 			var form = $('#info_form');
 			form.submit();
 		}
 	};
 
-	function downloadFileNew(fileName){
-		location.href="/IMJOB/Lists/downloadFileNew?fileName="+fileName;
+	function downloadFileNew(fileName) {
+		location.href = "/IMJOB/Lists/downloadFileNew?fileName=" + fileName;
 	};
 
-	function goList(p_n){
+	function goList(p_n) {
 		history.back();
 	};
 </script>
