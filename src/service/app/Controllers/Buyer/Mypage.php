@@ -68,7 +68,6 @@ class MyPage extends BaseController
         echo view("Common/Footer.html");
     } // }}}
     public function BuyerUpdateSubmit(){
-        header("Content-Type: text/html; charset=UTF-8");
         $password = $_POST["password"];
         $pwdCheck =  $this->mypage_model->pwdCheck($password);
         if($pwdCheck == 1){

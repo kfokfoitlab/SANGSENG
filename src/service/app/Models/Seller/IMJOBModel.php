@@ -14,7 +14,7 @@
 			$upload_card = uniqid().".".pathinfo($files["upload_card"]["name"], PATHINFO_EXTENSION);
 			$this->uploadFileNew($files,$upload_card,$allowed_ext,$upload_card_ori);
 			
-			$status = '1';
+			$status = '5';
 			$seller_uuid = $_SESSION["login_info"]["uuid"];
 			$seller_data = $this->getSellerInfo($seller_uuid);
 			
@@ -60,7 +60,7 @@
 				$this->uploadFileNew($files, $upload_card, $allowed_ext, $upload_card_ori);
 			}
 			
-			$status = '1';
+			$status = '5';
 			$seller_uuid = $_SESSION["login_info"]["uuid"];
 			$seller_data = $this->getSellerInfo($seller_uuid);
 			

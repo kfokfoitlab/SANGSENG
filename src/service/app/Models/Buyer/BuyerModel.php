@@ -112,6 +112,26 @@ class BuyerModel extends CommonModel
         return $ranking;
 
     }
+
+    public function ReductionMoney(){
+        $reduction = [];
+
+        $query = "
+            select
+                sum(reduction_money) as reduction_money
+            from
+                contract_condition
+            where 1=1
+              and contract_status ='5'
+              and del_yn !='Y'
+           
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $reduction= $row;
+        }
+        return $reduction;
+    }
     public function CategoryList($value){
         $list = [];
         $query = "
@@ -160,7 +180,7 @@ class BuyerModel extends CommonModel
 
     public function CartInsert($data){
         $product_no = $data["product_no"];
-        $buyer_id = $data["buyer_uuid"];
+        $buyer_id = $_SESSION['login_info']['uuid'];
         $seller_id = $data["seller_uuid"];
         $reduction_money =$data['reduction_money'];
         $query = "

@@ -323,7 +323,7 @@ class CommonModel extends dbModel
 		}
 		return $data;
 	} //}}}
-	
+	/*
 	public function getBuyerInfo($uuid)
 	{ //{{{
 		$data = [];
@@ -341,7 +341,7 @@ class CommonModel extends dbModel
 			$data = $row;
 		}
 		return $data;
-	} //}}}
+	} //}}}*/
 	
 	public function uploadFileNEW($files,$fileName,$allowed_ext,$fileName_ori){
 		ini_set('memory_limit','-1');
