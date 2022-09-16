@@ -1,0 +1,103 @@
+<script>
+	function validation(){
+		if (!$('input:radio[name="board_type"]').is(':checked')) {
+			$("#flexCheck01").addClass("is-invalid");
+			$("#flexCheck01").focus();
+			return false;
+		}else if($("#title").val() == ""){
+			$("#title").addClass("is-invalid");
+			$("#title").focus();
+			return false;
+		}else if($("#content").val() == ""){
+			$("#content").addClass("is-invalid");
+			$("#content").focus();
+			return false;
+		}else if($("#manager_name").val() == ""){
+			$("#manager_name").addClass("is-invalid");
+			$("#manager_name").focus();
+			return false;
+		}else if(!$('input:checkbox[name="agree_privacy"]').is(':checked')){
+      alert("(필수) 개인정보수집에 동의해주세요")
+			return false;
+		}else {
+			return true;
+		}
+	}
+
+	function registerSubmit(){
+		if(validation()) {
+			var form = $('#regi_form');
+			form.submit();
+		}
+  }
+</script>
+<div class="flex-grow-1">
+  <section class="notice">
+    <div class="auto-container py-5">
+      <?php
+        // Nav Menu
+        require APPPATH . '/Views/CS/Components/Nav.html';
+      ?>
+      <h2 class="mb-5 h4 fw-bold text-center">1:1 문의하기</h2>
+      <form name="regi_form" id="regi_form" method="post" action="/CS/Questions/RegisterSubmit">
+        <div>
+          <div class="row mb-3">
+            <label for="title" class="col-form-label col-2 fw-bold">제목</label>
+            <div class="col-10">
+              <input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력해주세요">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="content" class="col-form-label col-2 fw-bold">내용</label>
+            <div class="col-10">
+              <textarea class="form-control" id="content" name="content" placeholder="문의내용을 입력해주세요" style="height: 400px"></textarea>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="manager_name" class="col-form-label col-2 fw-bold">담당자 이름</label>
+            <div class="col-10">
+              <input type="text" class="form-control" id="manager_name" name="manager_name" placeholder="담당자 이름을 입력해주세요">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="user_company_name" class="col-form-label col-2 fw-bold">회사명</label>
+            <div class="col-10">
+              <input type="text" class="form-control" id="user_company_name" name="user_company_name" value="<?=$_SESSION['login_info']['company_name']?>" readonly>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="user_email" class="col-form-label col-2 fw-bold">이메일주소</label>
+            <div class="col-10">
+              <input type="text" class="form-control" id="user_email" name="user_email" value="<?=$_SESSION['login_info']['email']?>" readonly>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="user_phone" class="col-form-label col-2 fw-bold">휴대폰 번호</label>
+            <div class="col-10">
+              <input type="text" class="form-control" id="user_phone" name="user_phone" value="<?=$_SESSION['login_info']['phone']?>" readonly>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <input type="checkbox" id="agree_privacy" name="agree_privacy" value="Y">
+          <label for="agree_privacy">(필수) 개인정보수집, 이용동의
+            <a class="" data-bs-toggle="collapse" href="#privacy" role="button" aria-expanded="false" aria-controls="privacy">
+              전문보기
+            </a>
+          </label>
+          <div class="collapse mt-3" id="privacy">
+            <div class="p-4 bg-light">
+              개인정보 수집·이용에 대한 안내<br/>
+              필수 수집·이용 항목<br/>
+              문의접수와 처리,회신을 위한 최소한의 개인정보입니다.동의가 필요합니다.<br/>
+              더 자세한 내용에 대해서는 <a href="/Policy/Privacy">개인정보처리방침</a>을 참고하시기 바랍니다.
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-5">
+          <input type="button" class="btn btn-primary btn-lg" onclick="registerSubmit()" value="문의접수하기">
+        </div>
+      </form>
+    </div>
+  </section>
+</div>

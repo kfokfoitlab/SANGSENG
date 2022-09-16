@@ -1,10 +1,10 @@
 <?php
 	namespace App\Controllers\Board;
 	use App\Controllers\BaseController as Base;
-	use App\Models\Board\PrivateBoardModel as Model;
+	use App\Models\Board\QuestionsBoardModel as Model;
 	use App\Models\Database\DatabaseModel;
 	
-	class PrivateBoard extends Base
+	class QuestionsBoard extends Base
 	{
 		private $page_name = "게시판관리 > 1:1 문의하기";
 		private $model;
@@ -54,23 +54,16 @@
 			
 		} //}}}
 		
-		public function noticeRegister()
-		{ //{{{
-			echo view('Common/Header.html');
-			echo view('Board/NoticeBoard/NoticeRegister.html',);
-			echo view('Common/Footer.html');
-		} //}}}
-		
-		public function noticeRegisterSubmit()
+		public function replySubmit()
 		{ //{{{
 			
-			$result = $this->model->Register($_POST,$_FILES);
+			$result = $this->model->replySubmit($_POST);
 			
 			if($result == 1){
 				echo "
 					<script>
 						alert('정상 등록되었습니다');
-						location.href = '/Board/NoticeBoard';
+						location.href = '/Board/QuestionsBoard';
 					</script>
 				";
 			}else{
@@ -96,12 +89,12 @@
         ";
 		}
 		
-		public function noticeDetail()
+		public function QuestionsDetail()
 		{
-			$data = $this->model->getNoticeBoard($_GET);
+			$data = $this->model->getQuestionsBoard($_GET);
 			
 			echo view('Common/Header.html');
-			echo view('Board/NoticeBoard/NoticeDetail.html',$data);
+			echo view('Board/QuestionsBoard/QuestionsDetail.html',$data);
 			echo view('Common/Footer.html');
 		}
 		
@@ -109,25 +102,15 @@
 			$this->model->downloadFileNew();
 		}
 		
-		public function noticeUpdate()
+		public function Delete()
 		{
-			$result = $this->model->noticeUpdate($_POST,$_FILES);
-			
-			if($result == 1) {
-				echo "
-            <script>
-            	alert('수정되었습니다')
-                location.href = '/Board/NoticeBoard/';
-            </script>
-        	";
-			}else{
-				echo "
-            <script>
-            	alert('오류가 발생했습니다');
-                history.back();
-            </script>
-        	";
-			}
+			$this->model->delete();
+			echo "
+			<script>
+			alert('삭제되었습니다');
+			location.href='/Board/QuestionsBoard';
+</script>
+			";
 		}
 		
 	}

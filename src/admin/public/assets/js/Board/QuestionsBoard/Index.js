@@ -14,9 +14,9 @@ $(document).ready(function(){
 			url: "/"+_CONTROLLER+"/getList"
 			,type: "POST"
 			,data: function(data){
-				data.columns[1].search.value = $("#search-title").val();
-				data.columns[2].search.value = $("#search-id").val();
-				data.columns[3].search.value = $("#search-content").val();
+				data.columns[4].search.value = $("#search-title").val();
+				data.columns[5].search.value = $("#search-id").val();
+				data.columns[6].search.value = $("#search-content").val();
 			}
 		},
 		"order": [
@@ -24,31 +24,6 @@ $(document).ready(function(){
 		],
 		"columns": [
 			{title: "idx", data: "idx", visible: false}
-			,{title: "공개여부", data: "board_type", visible: true, className: "text-nowrap",
-				"render": function( data, type, row, meta ){
-					let html = "";
-					
-					switch(data){
-						case "1":
-							html = "<span class='badge bg-danger'>비밀글</span>";
-							break;
-						case "2":
-							html = "<span class='badge bg-secondary'>전체</span>";
-							break;
-					}
-					
-					return html;
-				}}
-			,{title: "제목", data: {"title":"title", "idx":"idx"}, visible: true, className: "text-nowrap w-50 text-center",
-				"render": function( data, type, row, meta ){
-					let html = "";
-					html = "<a href='/"+_CONTROLLER+"/privateDetail?idx="+data['idx']+"' class='w-50 text-center' style='font-size: 15px;font-weight: bold;color: black'>"+data['title']+"</a>"
-					return html;
-				}}
-			,{title: "담당자", data: "manager_name", visible: true, className: "text-nowrap"}
-			,{title: "작성자", data: "user_email", visible: true, className: "text-nowrap"}
-			,{title: "회사명", data: "user_company_name", visible: true, className: "text-nowrap"}
-			,{title: "핸드폰", data: "user_phone", visible: true, className: "text-nowrap"}
 			,{title: "답변여부", data: "board_status", visible: true, className: "text-nowrap",
 				"render": function( data, type, row, meta ){
 					let html = "";
@@ -64,13 +39,24 @@ $(document).ready(function(){
 					
 					return html;
 				}}
+			,{title: "제목", data: {"title":"title", "idx":"idx"}, visible: true, className: "text-nowrap w-50 text-center",
+				"render": function( data, type, row, meta ){
+					let html = "";
+					html = "<a href='/"+_CONTROLLER+"/QuestionsDetail?idx="+data['idx']+"' class='w-50 text-center' style='font-size: 15px;font-weight: bold;color: black'>"+data['title']+"</a>"
+					return html;
+				}}
+			,{title: "담당자", data: "manager_name", visible: true, className: "text-nowrap"}
+			,{title: "제목", data: "title", visible: false, className: "text-nowrap"}
+			,{title: "작성자", data: "user_email", visible: true, className: "text-nowrap"}
 			,{title: "내용", data: "content", visible: false, className: "text-nowrap"}
+			,{title: "회사명", data: "user_company_name", visible: true, className: "text-nowrap"}
+			,{title: "핸드폰", data: "user_phone", visible: true, className: "text-nowrap"}
 			,{title: "등록일", data: "register_date", visible: true, className: "text-nowrap"}
 			,{title: "수정일", data: "update_date", visible: true, className: "text-nowrap"}
 			,{title: "삭제", data: "idx", visible: true, className: "text-nowrap",
 				"render": function( data, type, row, meta ){
 					let html = "";
-					html = html + "<input class='btn btn-outline-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",7)' value='삭제'>";
+					html = html + "<input class='btn btn-outline-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='QuestionsDelete("+data+")' value='삭제'>";
 					return html;
 				}
 			}
@@ -108,10 +94,12 @@ $(document).ready(function(){
 	// }}}
 	
 });
-function statusUpdate(idx,status){
-	location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
+function QuestionsDelete(idx){
+	if(confirm("삭제하시겠습니까?")) {
+		location.href = "/" + _CONTROLLER + "/Delete?idx=" + idx;
+	}
 }
-function privateDetail(){
-	location.href = "/"+_CONTROLLER+"/privateDetail";
+function QuestionsDetail(){
+	location.href = "/"+_CONTROLLER+"/QuestionsDetail";
 }
 

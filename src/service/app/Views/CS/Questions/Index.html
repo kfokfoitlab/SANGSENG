@@ -1,0 +1,88 @@
+<script>
+  function moveRegister(){
+		location.href='/CS/Questions/Register';
+  }
+
+</script>
+
+<div class="flex-grow-1">
+  <section class="notice">
+    <div class="auto-container py-5">
+      <?php
+        // Nav Menu
+        require APPPATH . '/Views/CS/Components/Nav.html';
+      ?>
+      <h2 class="mb-5 h4 fw-bold text-center">1:1 문의하기</h2>
+
+      <div class="d-flex justify-content-end mb-3 pe-2 text-secondary" style="font-size: 0.9rem;">
+        <div style="margin-right: 70px;">
+          <input type="button" class="btn btn-dark" onclick="moveRegister()" value="문의하기">
+        </div>
+        <div class="dataTables_info" id="datatables_info" role="status" aria-live="polite">(총 <?=$data_page_total_cnt?> 건)</div>
+      </div>
+
+      <table class="table table-hover mb-5 notice-table">
+        <thead class="table-light">
+        <tr>
+          <th class="text-center">번호</th>
+          <th class="text-center">답변여부</th>
+          <th class="text-center w-50">제목</th>
+          <th class="text-center">작성자</th>
+          <th class="text-center">조회수</th>
+          <th class="text-center">등록일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        $i=1;
+        if($_GET["p_n"]!=""){
+          $i=($_GET["p_n"]-1)*10+1;
+        }
+        foreach($data as $item){
+        ?>
+        <tr>
+          <td class="text-center"><?=$i?></td>
+          <td class="text-center">
+            <?php if($item["board_status"]==1){ ?>
+            <span class="badge bg-info">답변대기</span>
+            <?php }elseif($item["board_status"]==2){?>
+            <span class="badge bg-success">답변완료</span>
+            <?php }?>
+          </td>
+          <td class="text-center">
+            <?php if($item["board_type"]==2 && $_SESSION["login_info"]["uuid"] != $item["user_uuid"]){?>
+            <span style="color: grey">※작성자와 관리자만 볼 수 있는 글입니다</span>
+            <?php }else{?>
+            <a class="text-reset" href="/CS/Questions/Detail?idx=<?=$item['idx']?>"><?=$item["title"]?></a>
+            <?php }?>
+          </td>
+          <td class="text-center"><?=$item["user_email"]?></td>
+          <td class="text-center"><?=$item["hit"]?></td>
+          <td class="text-center"><?=substr($item["register_date"],0,-9)?></td>
+        </tr>
+        <?php
+          $i++;
+          }
+        ?>
+        <?php if($data_page_total_cnt == 0){ echo"<tr><td colspan='5' class='fw-bold text-center py-4'>등록된 문의사항이 없습니다</td></tr>"; }?>
+        </tbody>
+      </table>
+
+
+      <ul style="float: right" class="pagination">
+        <li class="paginate_button page-item previous disabled" id="datatables_previous">
+          <?php
+           $data_page_num = $data_page_total_cnt/10;
+           for($i=1;$i<=$data_page_num;$i++){
+                if($_GET["p_n"]==$i){?>
+        <li class="paginate_button page-item active">
+          <?php }else{ ?>
+        <li class="paginate_button page-item">
+          <?php } ?>
+          <a href="javascript:nextPage(<?=$i?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a></li>
+        <?php }?>
+      </ul>
+
+    </div>
+  </section>
+</div>

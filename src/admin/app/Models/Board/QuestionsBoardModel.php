@@ -2,15 +2,15 @@
 	namespace App\Models\Board;
 	use App\Models\CommonModel;
 	
-	class PrivateBoardModel extends CommonModel
+	class QuestionsBoardModel extends CommonModel
 	{
-		private $table_name = "private_board";
+		private $table_name = "questions_board";
 		
 		public function getListData($data)
 		{ // {{{
 			$items = array();
 			
-			$common_query = " 1";
+			$common_query = " 1 and del_yn != 'y'";
 			
 			// total records -------------------------------- {{{
 			$query = "
@@ -164,17 +164,18 @@
 			return 1;
 		}
 		
-		public function getNoticeBoard($data){
+		public function getQuestionsBoard($data){
 			$query = "
 			SELECT
-				*
+				a.*,b.reply_content as reply_content
 			FROM
 				".$this->table_name."
+				as a left join questions_board_reply as b on a.idx = b.questions_board_idx
 			WHERE
-				idx = ".$data["idx"]."
+				a.idx = ".$data["idx"]."
 			LIMIT 1
 			";
-			
+			//echo $query;
 			$this->rodb->query($query);
 			$data = $this->rodb->next_row();
 			
@@ -182,32 +183,61 @@
 			
 		}
 		
-		public function noticeUpdate($data,$files, $table_name = "notice_board"){
-			$allowed_ext = array();
-			$upload_file_ori = "upload_file";
-			$upload_file = $data["upload_file_ori_name"];
-			if($files["upload_file"]["name"] != "") {
-				$upload_file = uniqid() . "." . pathinfo($files["upload_file"]["name"], PATHINFO_EXTENSION);
-				$this->uploadFileNew($files, $upload_file, $allowed_ext, $upload_file_ori);
-			}
-			
+		public function replySubmit($data, $table_name = "questions_board_reply"){
+
 			$query = "
-            update
+            insert into
                 ".$table_name."
             set
-                board_status = '".$data["board_status"]."'
-                ,user_id = 'admin'
-                ,title = '".$data["title"]."'
-                ,content = '".$data["content"]."'
-                ,upload_file = '".$upload_file."'
+                questions_board_idx = '".$data["idx"]."'
+				,user_uuid = '".$data["user_uuid"]."'
+				,user_company_name = '".$data["user_company_name"]."'
+				,user_email = '".$data["user_email"]."'
+				,user_phone = '".$data["user_phone"]."'
+				,manager_name = '".$data["manager_name"]."'
+				,reply_content = '".$data["reply_content"]."'
+				,register_date = '".date("Y-m-d H:i:s")."'
+                ,register_id = 'admin'
                 ,update_date = '".date("Y-m-d H:i:s")."'
                 ,update_id = 'admin'
-            where
-                idx = ".$data["idx"]."
+                ,del_yn = 'n'
         ";
-			//echo $query;
+			$idx = $this->wrdb->insert($query);
+			
+			if($idx){
+				$query = "
+					UPDATE
+						".$this->table_name."
+					SET
+						board_status = 2
+					WHERE
+						idx = ".$data["idx"]."
+						AND user_uuid = '".$data["user_uuid"]."'
+					LIMIT 1
+					";
+				$this->wrdb->update($query);
+				return "1";
+			}
+			else {
+				return null;
+			}
+		}
+		
+		public function delete()
+		{
+			$query = "
+			UPDATE
+				".$this->table_name."
+			SET
+				del_yn='y'
+			WHERE
+				idx = ".$_GET["idx"]."
+			LIMIT 1
+			";
+			
 			$this->wrdb->update($query);
-			return "1";
+			
+			return 1;
 		}
 		
 	}

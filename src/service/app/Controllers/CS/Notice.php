@@ -38,4 +38,8 @@ class Notice extends BaseController
         echo view("Common/Footer.html");
     }
 	
+	public function downloadFileNew(){
+		$this->model->downloadFileNew();
+	}
+	
 }
