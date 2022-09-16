@@ -1,10 +1,10 @@
 <div class="flex-grow-1">
   <section class="faq">
     <div class="auto-container py-5">
-      <h2 class="mb-5 h4 fw-bold text-center">감면액계산기</h2>
+      <h2 class="mb-5 h4 fw-bold text-center">고용부담금 계산기</h2>
       <div class="reduction-calc" style="margin-bottom:45px;">
         <section>
-          <h3 class="reduction-calc-title fotm"><span>고용부담금 감면액 계산</span></h3>
+          <h3 class="reduction-calc-title fotm"><span>고용부담금 계산</span></h3>
           <div class="border-top border-2 border-primary">
             <table class="calc-input-table">
               <tbody>
@@ -19,7 +19,7 @@
               <tr class="border-bottom">
                 <td>2. 법인세율(%)</td>
                 <td class="TaxRate__box">
-                  <input class="tax-percent-input bg-light" type="text" name="taxPercent" value="3.1" readonly>
+                  <input class="tax-percent-input" type="text" name="taxPercent">
                   <p class="input-sub-text">%</p>
                 </td>
               </tr>
@@ -59,7 +59,7 @@
             </table>
           </div>
           <div class="d-flex justify-content-end mt-4">
-            <button class="calcButton btn btn-primary" type="button">부담금 조회</button>
+            <button class="calcButton btn btn-primary" type="button">부담금 계산</button>
           </div>
         </section>
 
@@ -78,8 +78,6 @@
       item.addEventListener("click", function () {
         document.querySelector(".tabMenuActive").classList.remove("tabMenuActive");
         this.classList.add("tabMenuActive");
-        const taxPercnetage = this.getAttribute('tabValue') === '1' ? 3.1 : 3.6;
-        document.querySelector('[name="taxPercent"]').value = taxPercnetage;
       });
     })
 
@@ -218,7 +216,7 @@
         totalCharge_span.classList.add('total-charge-price');
 
         // 내용 삽입
-        reductionResult_h3.textContent = `고용부담금 감면액 조회 결과`;
+        reductionResult_h3.textContent = `고용부담금 계산 결과`;
         reductionResult_td_11.textContent = `의무고용인원수`;
         reductionResult_td_12.textContent = `${worker_cnt01} 명`;
         reductionResult_td_21.textContent = `추가 고용해야 하는 장애인 수 (경증 기준)`;
