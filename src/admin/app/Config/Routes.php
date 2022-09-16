@@ -254,14 +254,13 @@ $routes->group('Board', ['namespace' => 'App\Controllers\Board'], static functio
 	$routes->post ($group_name.'/noticeUpdate',            $group_name.'::noticeUpdate');
 	
 	//1:1 문의하기
-	$group_name = "PrivateBoard";
+	$group_name = "QuestionsBoard";
 	$routes->get ($group_name.'/',                  $group_name.'::Index');
 	$routes->post($group_name.'/getList',           $group_name.'::getList');
-	$routes->get($group_name.'/noticeRegister',           $group_name.'::noticeRegister');
-	$routes->post($group_name.'/noticeRegisterSubmit',           $group_name.'::noticeRegisterSubmit');
 	$routes->get($group_name.'/statusUpdate',           $group_name.'::statusUpdate');
-	$routes->get ($group_name.'/noticeDetail',            $group_name.'::noticeDetail');
-	$routes->post ($group_name.'/noticeUpdate',            $group_name.'::noticeUpdate');
+	$routes->get ($group_name.'/QuestionsDetail',            $group_name.'::QuestionsDetail');
+	$routes->post ($group_name.'/replySubmit',            $group_name.'::replySubmit');
+	$routes->get ($group_name.'/Delete',            $group_name.'::Delete');
 });
 
 

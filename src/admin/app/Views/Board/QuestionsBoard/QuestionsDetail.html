@@ -1,0 +1,107 @@
+<div class="flex-grow-1 bg-light">
+  <section class="py-5 mb-5">
+    <div class="auto-container">
+      <div class="bg-white p-5">
+        <h4 class="fw-bold pb-3 border-bottom border-2">1:1 문의하기 상세보기</h4>
+          <input type="hidden" name="idx" value="<?=$idx?>">
+
+          <div class="row mb-3 align-items-center">
+            <div class="col-2">
+              <label for="user_email" class="form-label m-0 fw-bold">작성자</label>
+            </div>
+            <div class="col-6">
+              <input type="text" class="form-control" id="user_email" name="title" value="<?=$user_email?>" disabled>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <div class="col-2">
+              <label for="user_phone" class="form-label m-0 fw-bold">핸드폰번호</label>
+            </div>
+            <div class="col-6">
+              <input type="text" class="form-control" id="user_phone" name="title" value="<?=$user_phone?>" disabled>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <div class="col-2">
+              <label for="register_date" class="form-label m-0 fw-bold">등록일</label>
+            </div>
+            <div class="col-6">
+              <input type="text" class="form-control" id="register_date" name="title" value="<?=$register_date?>" disabled>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <div class="col-2">
+              <label for="title" class="form-label m-0 fw-bold">제목</label>
+            </div>
+            <div class="col-6">
+              <input type="text" class="form-control" id="title" name="title" value="<?=$title?>" disabled>
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <span class="col-2 fw-bold">문의내용</span>
+            <div class="col-6">
+              <label class="visually-hidden" for="content">문의내용</label>
+              <textarea class="form-control" style="height: 200px;resize: none;" id="content" name="content" disabled><?=$content?></textarea>
+            </div>
+          </div>
+          <form id="reply_form" name="reply_form" method="post" action="/Board/QuestionsBoard/replySubmit">
+            <input type="hidden" name="idx" value="<?=$_GET['idx']?>">
+            <input type="hidden" name="user_uuid" value="<?=$user_uuid?>">
+            <input type="hidden" name="user_company_name" value="<?=$user_company_name?>">
+            <input type="hidden" name="user_email" value="<?=$user_email?>">
+            <input type="hidden" name="user_phone" value="<?=$user_phone?>">
+            <input type="hidden" name="manager_name" value="<?=$manager_name?>">
+          <div class="row mb-3 align-items-center">
+            <span class="col-2 fw-bold">답변내용</span>
+            <div class="col-6">
+              <label class="visually-hidden" for="reply_content">답변내용</label>
+              <textarea class="form-control" style="height: 200px;resize: none;" id="reply_content" name="reply_content"
+              <?php if($reply_content != ""){echo "disabled";}?>><?=$reply_content?></textarea>
+            </div>
+          </div>
+          </form>
+      </div>
+
+      <div class="text-center">
+        <?php if($reply_content != ""){ ?>
+        <button class="btn btn-warning" onclick="replyUpdate()" type="button">답변수정</button>
+        <?php }else{ ?>
+        <button class="btn btn-warning" onclick="replySubmit()" type="button">답변하기</button>
+        <?php } ?>
+        <button class="btn btn-secondary" onclick="goList()" type="button">목록보기</button>
+        <button class="btn btn-danger" type="reset">되돌리기</button>
+      </div>
+    </div>
+</div>
+</section>
+</div>
+<script>
+	function validation(){
+    if($("#replay_content").val() == ""){
+			$("#replay_content").addClass("is-invalid");
+			$("#replay_content").focus();
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	function replySubmit(){
+		if(validation()) {
+			if(confirm("답변을 등록하시겠습니까?")) {
+				var form = $('#reply_form');
+				form.submit();
+			}else {
+				return false;
+			}
+		}
+	};
+
+	function goList(){
+		history.back();
+	};
+</script>

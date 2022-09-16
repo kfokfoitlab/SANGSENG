@@ -23,7 +23,7 @@
         <tr class='attach-row'>
           <td colspan='4' class='py-3'>첨부파일 :
             <?=$upload_file?>
-            <button class='btn btn-sm btn-outline-secondary ms-2 fw-normal'>다운로드</button>
+            <button class='btn btn-sm btn-outline-secondary ms-2 fw-normal' onclick="downloadFileNew('<?=$upload_file?>');">다운로드</button>
           </td>
         </tr>
         <?php
@@ -37,3 +37,8 @@
     </div>
   </section>
 </div>
+<script>
+  function downloadFileNew(fileName){
+    location.href="/Download/downloadFileNew?fileName="+fileName;
+  };
+</script>
