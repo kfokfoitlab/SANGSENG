@@ -36,7 +36,7 @@
 				echo "
 				<script>
                 	alert('로그인이 필요합니다.');
-                	history.back();
+                	location.href = '/Auth/SignIn';
 				</script>
             ";
 				
@@ -53,7 +53,7 @@
 				echo "
 				<script>
                 	alert('로그인 후 등록가능합니다');
-                	history.back();
+                	location.href = '/Auth/SignIn';
 				</script>
             ";
 				
@@ -75,6 +75,26 @@
 				alert('오류가 발생했습니다');
 				history.back();
 				</script>
+				";
+			}
+		}
+		
+		public function questionsUpdateSubmit(){
+			
+			$result = $this->model->questionsUpdateSubmit($_POST);
+			
+			if($result == 1){
+				echo "
+					<script>
+						alert('정상으로 수정되었습니다');
+						history.back();
+					</script>
+				";
+			}else{
+				echo "
+					<script>
+						alert('오류가 발생했습니다.다시 시도해주세요');
+					</script>
 				";
 			}
 		}

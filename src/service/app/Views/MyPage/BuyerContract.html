@@ -63,14 +63,13 @@
             <th>계약상태</th>
             <th>계약번호</th>
             <th>상품명</th>
-            <th>카테고리</th>
-            <th>물품 수량</th>
+            <th>물품수량</th>
             <th>계약금액</th>
             <th>감면금액</th>
-            <th>계약 등록일</th>
+            <th>계약등록일</th>
             <th>배송주기</th>
             <th>판매기업</th>
-            <th>상세보기</th>
+            <th>계약서확인</th>
           </tr>
           </thead>
           <tbody>
@@ -121,20 +120,19 @@
 
           <tr>
             <td><?=$item["cidx"]?></td>
-            <td title="진행중"><?=$status?></td>
-            <td title="20220801090000-00001"><a onclick="Contract_Return(<?=$item['workflow_id']?>);"><?=$item["contract_no"]?></a></td>
-            <td title="친환경중질지70gA4용지"><?=$item["product_name"]?></td>
-            <td title="사무용품"><?=$category?></td>
-            <td title="100BOX"><?=$item["product_quantity"]?></td>
-            <td title="250,000,000"><?=$item["product_price"]?></td>
+            <td title=<?=$status?>><?=$status?></td>
+            <td title=<?=$item["contract_no"]?>><a onclick="Contract_Return(<?=$item['workflow_id']?>);"><?=$item["contract_no"]?></a></td>
+            <td title=<?=$item["product_name"]?>><?=$item["product_name"]?></td>
+            <td title=<?=$item["product_quantity"]?>><?=$item["product_quantity"]?></td>
+            <td title=<?=$item["product_price"]?>><?=$item["product_price"]?></td>
             <td title="25,000,000">25,000,000</td>
-            <td title="2022-08-01"><?=$item["register_date"]?></td>
-            <td title="일주일에 한번"><?=$delivery_cycle?></td>
-            <td title="22-08-02"><?=$item["seller_company"]?></td>
-            <td title="22-08-02">
+            <td title=<?=$item["register_date"]?>><?=$item["register_date"]?></td>
+            <td title=<?=$delivery_cycle?>><?=$delivery_cycle?></td>
+            <td title=<?=$item["seller_company"]?>><?=$item["seller_company"]?></td>
+            <td title="계약서 이메일로 받기">
               <?php
             if($item["contract_status"] == 2 || $item["contract_status"] == 5){
-              ?><button class ="btn btn-success" onclick="Contract_Return(<?=$item['workflow_id']?>,<?=$item['contract_status']?>);">이메일로 받기</button>
+              ?><button class ="btn btn-success btn-sm" onclick="Contract_Return(<?=$item['workflow_id']?>,<?=$item['contract_status']?>);">이메일로 받기</button>
               <?php
             }
             ?>
