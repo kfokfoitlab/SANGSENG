@@ -45,25 +45,20 @@ class Lists extends Base
 
     public function getList()
     { //{{{
-
         $start = $_POST["start"];
         $length = $_POST["length"];
         $limit = array(
             "start" => $start
         ,"length" => $length
         );
-
         $result = $this->model->getListData($_POST);
-
         $data = array(
             "draw" => @$_POST["draw"]
         ,"recordsTotal" => $result["records_total"]
         ,"recordsFiltered" => $result["filtered_total"]
         ,"data" => $result["data"]
         );
-
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
-
         die();
 
     } //}}}
@@ -110,6 +105,32 @@ class Lists extends Base
         echo view('Common/Footer.html');
     } //}}}
 
+    public function contractSubmit(){
+
+        $data = array(
+            "idx" => $_GET["idx"]
+        ,"status" => $_GET["status"]
+        ,"workflow_id" => $_GET["workflow_id"]
+        );
+        $this->model->contractSubmit($data);
+        if($this == 1){
+            echo "
+            <script>
+             alert('계약서를 전송하였습니다.');
+                history.back();
+            </script>
+        ";
+        }else{
+            echo "
+            <script>
+           alert('이미 진행중인 계약입니다');
+                history.back();
+            </script>
+        ";
+        }
+    }
+
+
     public function statusUpdate()
     {
         $data = array(
@@ -122,7 +143,7 @@ class Lists extends Base
         if($this == 1){
             echo "
             <script>
-             alert('계약서를 전송하였습니다.');
+             alert('상태가 변경되었습니다.');
                 history.back();
             </script>
         ";

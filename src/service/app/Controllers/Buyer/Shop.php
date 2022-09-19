@@ -79,6 +79,18 @@ class Shop extends BaseController
 
     public function Cart()
     { // {{{
+
+        $cart_Check = $this->buyer_model->cartCheck($_POST);
+        if($cart_Check){
+            echo "
+                <script>
+                    alert('이미 장바구니에 있습니다.');
+                    window.location.replace('/Buyer');
+                </script>
+            ";
+
+            die();
+        }
         $result = $this->buyer_model->CartInsert($_POST);
         if($result == "1") {
             echo "

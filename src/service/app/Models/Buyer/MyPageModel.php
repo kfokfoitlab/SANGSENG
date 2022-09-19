@@ -7,16 +7,17 @@ class MyPageModel extends CommonModel
 {
 
  public function getCartList($uuid){
-
-     $data = [];
+/*     $data = [];
      // total
      $query = "
             select
-                count(*)
+                count(*) as 'count'
             from
-                seller_product
+                buyer_cart
+            where buyer_id = '".$uuid."'
+            and del_yn != 'Y'
         ";
-     $data["count"] = $this->rodb->simple_query($query);
+     $data["count"] = $this->rodb->simple_query($query);*/
      $data = [];
      $query = "
   
@@ -26,7 +27,7 @@ class MyPageModel extends CommonModel
             buyer_cart a 
                 join seller_product b on a.product_no  = b.product_no
         where
-            a.buyer_id = '$uuid'
+            a.buyer_id = '".$uuid."'
             and a.del_yn != 'Y'
            
         ";
@@ -48,7 +49,7 @@ class MyPageModel extends CommonModel
         from 
             buyer_company 
         where
-            uuid = '$uuid'
+            uuid = '".$uuid."'
            
         ";
      $this->rodb->query($query);
@@ -60,6 +61,7 @@ class MyPageModel extends CommonModel
 
  public function pwdCheck($password){
      $uuid = $_SESSION["login_info"]["uuid"];
+     $password = $_POST['password'];
      $query = "
 
         select
@@ -67,14 +69,13 @@ class MyPageModel extends CommonModel
         from 
             buyer_company 
         where
-            uuid = '$uuid'
-       and  password = SHA2('".$password."', 256)
-           
+            uuid = '".$uuid."'
+       and  password = SHA2('".$password."', 256)          
         ";
      $this->rodb->query($query);
      $row = $this->rodb->next_row();
     if(isset($row["idx"])){
-        return "1";
+        return 1;
     }else{
         return null;
     }
@@ -120,11 +121,10 @@ class MyPageModel extends CommonModel
                 update
                     contract_condition
                 set
-                    contract_status = 5
+                    contract_status = 2
                 where 1=1
                   $whereQuery
             ";
-
     //     echo $query;
          $this->wrdb->update($query);
          return 1;
@@ -192,4 +192,18 @@ class MyPageModel extends CommonModel
         return "1";
     }
 
+    public function PwdUpdate($uuid){
+        $password = $_POST['new_password'];
+        $query = "
+            update
+                buyer_company
+            set
+              password = SHA2('".$password."', 256)
+            where
+            uuid = '".$uuid."'
+            limit 1
+        ";
+        $this->wrdb->update($query);
+        return "1";
+    }
 }

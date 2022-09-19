@@ -45,9 +45,16 @@ class Seller extends BaseController
 
     public function Contract()
     {
-
         $uuid = $_SESSION['login_info']['uuid'];
         $result = $this->mypage_model->ContractStatus($_POST);
+        if($result == 1){
+            echo "
+                <script>
+                    alert('상태가 변경된 계약이 있습니다.');
+					window.location.replace('/Seller/Item/ItemList');
+                </script>
+            ";
+        }
         $data = $this->seller_model->getContractList($uuid);
         $data_cnt = $this->seller_model->getContractCount($uuid);
         $data = array(

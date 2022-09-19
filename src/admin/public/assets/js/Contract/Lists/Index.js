@@ -166,7 +166,7 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
 // workflowid response로 받아서 계약서 insert할때 넣기(key값)
      fetch('https://docs.esignon.net/api/v3/workflows/start?offset=%2B09%3A00', options)
         .then(response => response.json())
-        .then(response => location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status+"&workflow_id="+response["workflow_id"])
+        .then(response => location.href = "/"+_CONTROLLER+"/contractSubmit?idx="+idx+"&status="+status+"&workflow_id="+response["workflow_id"])
          .then(response => console.log(response))
         .catch(err => console.error(err));
 

@@ -32,7 +32,6 @@ class MyPage extends BaseController
     public function Contract()
     { // {{{
         $uuid = $_SESSION['login_info']['uuid'];
-
         $result = $this->mypage_model->ContractStatus($_POST);
         $data = $this->mypage_model->getContractList($uuid);
 
@@ -63,6 +62,7 @@ class MyPage extends BaseController
 
         $data = array(
             "data" => $data["data"]
+            ,"cnt" => $data["count"]
         );
         echo view("Common/Header.html");
         echo view('MyPage/BuyerCart.html',$data);
@@ -120,25 +120,51 @@ class MyPage extends BaseController
     }
     public function ConfirmPassword()
     { // {{{
-        $uuid = $_SESSION["login_info"]["uuid"];
-        $data = $this->mypage_model->getMyInfo($uuid);
-        $data = array(
-            "data" => $data,
-        );
         echo view("Common/Header.html");
-        echo view('MyPage/BuyerPasswordConfirm.html',$data);
+        echo view('MyPage/BuyerPasswordConfirm.html');
         echo view("Common/Footer.html");
     } // }}}
 
     public function ChangePassword()
     { // {{{
         $uuid = $_SESSION["login_info"]["uuid"];
-        $data = $this->mypage_model->getMyInfo($uuid);
-        $data = array(
-            "data" => $data,
-        );
-        echo view("Common/Header.html");
-        echo view('MyPage/BuyerPasswordChange.html',$data);
-        echo view("Common/Footer.html");
+        $result = $this->mypage_model->pwdCheck($uuid);
+
+        if($result == 1){
+            echo "
+                <script>
+                    alert('새로운 비밀번호를 입력해주세요.');
+                </script>
+            ";
+            echo view("Common/Header.html");
+            echo view('MyPage/BuyerPasswordChange.html');
+            echo view("Common/Footer.html");
+        }else{
+            echo "
+                <script>
+                    alert('비밀번호가 일치하지 않습니다.');
+					history.back(-1);
+                </script>
+            ";
+        }
     } // }}}
+    public function BuyerPwdSubmit(){
+        $uuid = $_SESSION['login_info']['uuid'];
+        $result =  $this->mypage_model->PwdUpdate($uuid);
+        if($result == "1") {
+            echo "
+                <script>
+                    alert('비밀번호가 변경되었습니다.');
+					window.location.replace('/Buyer');
+                </script>
+            ";
+        }else{
+            echo "
+                <script>
+                    alert('오류가 발생했습니다.다시 시도해주세요');
+					window.location.replace('/Buyer/MyPage/ConfirmPassword');
+                </script>
+            ";
+        }
+    }
 }

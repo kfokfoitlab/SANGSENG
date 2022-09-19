@@ -117,7 +117,7 @@ class Item extends BaseController
         if($result == "1") {
             echo "
                 <script>
-                    alert('상품이 수정되었습니다.');
+                    alert('수정사항을 관리자가 검토중입니다.');
 					window.location.replace('/Seller/Item/ItemList');
                 </script>
             ";
