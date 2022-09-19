@@ -98,7 +98,7 @@ class Auth extends BaseController
         else {
             echo "
                 <script>
-                    alert('아이디, 비번이 맞지 않습니다.');
+                    alert('이메일 주소, 비밀번호가 맞지 않습니다.');
                     window.location.replace('/Auth/SignIn');
                 </script>
             ";
