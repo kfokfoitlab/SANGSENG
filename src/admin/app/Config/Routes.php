@@ -79,16 +79,15 @@ $routes->group('Member', ['namespace' => 'App\Controllers\Member'], static funct
 
 // 채용
 $routes->group('Contract', ['namespace' => 'App\Controllers\Contract'], static function ($routes) {
-    // 전체 목록
-    $group_name = "Lists";
-    $routes->get ($group_name.'/',                  $group_name.'::Index');
-    $routes->post($group_name.'/getList',           $group_name.'::getList');
-    $routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
-    $routes->get ($group_name.'/RecommendSubmit/(:any)/(:any)',     $group_name.'::RecommendSubmit/$1/$2');
-    $routes->get ($group_name.'/Update',            $group_name.'::Update');
-    $routes->get ($group_name.'/statusUpdate', $group_name.'::statusUpdate');
-
-
+	// 전체 목록
+	$group_name = "Lists";
+	$routes->get ($group_name.'/',                  $group_name.'::Index');
+	$routes->post($group_name.'/getList',           $group_name.'::getList');
+	$routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
+	$routes->get ($group_name.'/RecommendSubmit/(:any)/(:any)',     $group_name.'::RecommendSubmit/$1/$2');
+	$routes->get ($group_name.'/Update',            $group_name.'::Update');
+	$routes->get ($group_name.'/statusUpdate', $group_name.'::statusUpdate');
+	$routes->get ($group_name.'/contractSubmit', $group_name.'::contractSubmit');
 });
 
 // 구직
@@ -260,6 +259,7 @@ $routes->group('Board', ['namespace' => 'App\Controllers\Board'], static functio
 	$routes->get($group_name.'/statusUpdate',           $group_name.'::statusUpdate');
 	$routes->get ($group_name.'/QuestionsDetail',            $group_name.'::QuestionsDetail');
 	$routes->post ($group_name.'/replySubmit',            $group_name.'::replySubmit');
+	$routes->post ($group_name.'/replyUpdateSubmit',            $group_name.'::replyUpdateSubmit');
 	$routes->get ($group_name.'/Delete',            $group_name.'::Delete');
 });
 

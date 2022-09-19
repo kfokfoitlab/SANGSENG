@@ -1,9 +1,42 @@
 <script>
+	function validation(){
+		if($("#title").val() == ""){
+			$("#title").addClass("is-invalid");
+			$("#title").focus();
+			return false;
+		}else if($("#content").val() == ""){
+			$("#content").addClass("is-invalid");
+			$("#content").focus();
+			return false;
+		}else{
+			return true;
+		}
+	}
+
   function QuestionsDelete(idx){
     if(confirm("정말 삭제하시겠습니까?")) {
 			$('#del_form').submit();
 		}
   }
+
+	function updateBtnChange(){
+		$('#questionsUpdate').hide();
+		$('#questionsUpdateBtn').show();
+		$('#content').removeAttr("disabled");
+		$('#title').removeAttr("disabled");
+	}
+
+	function questionsUpdateSubmit(){
+		if(validation()) {
+			if(confirm("내용을 수정하시겠습니까?")) {
+				var form = $('#info_form');
+				form.attr("action", "/CS/Questions/questionsUpdateSubmit");
+				form.submit();
+			}else {
+				return false;
+			}
+		}
+	}
 </script>
 <div class="flex-grow-1">
   <section class="notice">
@@ -13,6 +46,9 @@
         require APPPATH . '/Views/CS/Components/Nav.html';
       ?>
       <h2 class="mb-5 h4 fw-bold text-center">1:1 문의하기</h2>
+      <form method="post" name="info_form" id="info_form" action="">
+        <input type="hidden" name="user_uuid" value="<?=$user_uuid?>">
+        <input type="hidden" name="idx" value="<?=$_GET['idx']?>">
         <div>
           <div class="row mb-3">
             <label for="user_email" class="col-form-label col-2 fw-bold">작성자</label>
@@ -39,29 +75,47 @@
             </div>
           </div>
           <div class="row mb-3">
-            <label for="reply_content" class="col-form-label col-2 fw-bold">답변내용</label>
-            <div class="col-10">
-              <textarea class="form-control" id="reply_content" name="reply_content" style="height: 200px" disabled><?=$reply_content?></textarea>
-            </div>
-          </div>
-          <div class="row mb-3">
             <label for="manager_name" class="col-form-label col-2 fw-bold">담당자 이름</label>
             <div class="col-10">
               <input type="text" class="form-control" id="manager_name" name="manager_name" value="<?=$manager_name?>" disabled>
             </div>
           </div>
           <div class="row mb-3">
-            <label for="reply_register_date" class="col-form-label col-2 fw-bold">답변등록일</label>
+            <label for="reply_content" class="col-form-label col-2 fw-bold">답변내용</label>
+            <?php if($reply_content == ""){ ?>
+          <div class="col-10">
+            <span class="form-control h-100 border-0">등록된 답변이 없습니다</span>
+          </div>
+            <?php }else{?>
             <div class="col-10">
-              <input type="text" class="form-control" id="reply_register_date" name="manager_name" value="<?=$reply_register_date?>" disabled>
+              <textarea class="form-control" id="reply_content" name="reply_content" style="height: 200px" disabled><?=$reply_content?></textarea>
             </div>
           </div>
+          <div class="row mb-3">
+            <label for="reply_register_date" class="col-form-label col-2 fw-bold">답변등록일</label>
+            <div class="col-10">
+              <input type="text" class="form-control" id="reply_register_date" name="$reply_register_date" value="<?=$reply_register_date?>" disabled>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="reply_update_date" class="col-form-label col-2 fw-bold">답변수정일</label>
+            <div class="col-10">
+              <input type="text" class="form-control" id="reply_update_date" name="reply_update_date" value="<?=$reply_update_date?>" disabled>
+            </div>
+          </div>
+          <?php } ?>
         </div>
+      </form>
         <div class="text-center mt-5">
           <form id="del_form" name="del_form" method="post" action="/CS/Questions/Delete">
             <input type="hidden" name="idx" value="<?=$_GET['idx']?>">
           </form>
-          <input type="button" class="btn btn-primary btn-lg" onclick="history.back()" value="목록보기">
+          <input type="button" class="btn btn-warning" onclick="questionsUpdateSubmit()"
+                 id="questionsUpdateBtn" value="수정하기" style="display:none;">
+          <?php if($reply_content == ""){ ?>
+          <input type="button" class="btn btn-warning btn-lg" onclick="updateBtnChange()" id="questionsUpdate" value="내용수정">
+          <?php } ?>
+          <input type="button" class="btn btn-secondary btn-lg" onclick="history.back()" value="목록보기">
           <input type="button" class="btn btn-danger btn-lg" onclick="QuestionsDelete()" value="삭제">
         </div>
     </div>

@@ -1,3 +1,48 @@
+<script>
+	function validation(){
+		if($("#replay_content").val() == ""){
+			$("#replay_content").addClass("is-invalid");
+			$("#replay_content").focus();
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	function replySubmit(){
+		if(validation()) {
+			if(confirm("답변을 등록하시겠습니까?")) {
+				var form = $('#reply_form');
+				form.submit();
+			}else {
+				return false;
+			}
+		}
+	};
+
+	function goList(){
+		history.back();
+	};
+
+	function replyUpdate(){
+		$('#replyUpdate').hide();
+		$('#replyUpdateSubmit').show();
+		$('#reply_content').removeAttr("disabled");
+	}
+
+	function replyUpdateSubmit(){
+		if(validation()) {
+			if(confirm("답변을 수정하시겠습니까?")) {
+				var form = $('#reply_form');
+				form.attr("action", "/Board/QuestionsBoard/replyUpdateSubmit");
+				form.submit();
+			}else {
+				return false;
+			}
+		}
+  }
+</script>
+
 <div class="flex-grow-1 bg-light">
   <section class="py-5 mb-5">
     <div class="auto-container">
@@ -50,6 +95,7 @@
           </div>
           <form id="reply_form" name="reply_form" method="post" action="/Board/QuestionsBoard/replySubmit">
             <input type="hidden" name="idx" value="<?=$_GET['idx']?>">
+            <input type="hidden" name="reply_idx" value="<?=$reply_idx?>">
             <input type="hidden" name="user_uuid" value="<?=$user_uuid?>">
             <input type="hidden" name="user_company_name" value="<?=$user_company_name?>">
             <input type="hidden" name="user_email" value="<?=$user_email?>">
@@ -67,8 +113,10 @@
       </div>
 
       <div class="text-center">
+        <button class="btn btn-warning" onclick="replyUpdateSubmit()" type="button" id="replyUpdateSubmit"
+        style="display: none">수정하기</button>
         <?php if($reply_content != ""){ ?>
-        <button class="btn btn-warning" onclick="replyUpdate()" type="button">답변수정</button>
+        <button class="btn btn-warning bold" onclick="replyUpdate()" type="button" id="replyUpdate">답변수정</button>
         <?php }else{ ?>
         <button class="btn btn-warning" onclick="replySubmit()" type="button">답변하기</button>
         <?php } ?>
@@ -79,29 +127,3 @@
 </div>
 </section>
 </div>
-<script>
-	function validation(){
-    if($("#replay_content").val() == ""){
-			$("#replay_content").addClass("is-invalid");
-			$("#replay_content").focus();
-			return false;
-		}else{
-			return true;
-		}
-	}
-
-	function replySubmit(){
-		if(validation()) {
-			if(confirm("답변을 등록하시겠습니까?")) {
-				var form = $('#reply_form');
-				form.submit();
-			}else {
-				return false;
-			}
-		}
-	};
-
-	function goList(){
-		history.back();
-	};
-</script>
