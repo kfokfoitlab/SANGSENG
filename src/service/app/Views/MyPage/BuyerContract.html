@@ -54,6 +54,7 @@
         <div class="mt-3 text-center">
           <button class="btn btn-primary" type="submit">검색</button>
           <button class="btn btn-outline-secondary" type="reset">초기화</button>
+          <button class="btn btn-primary" onclick="contract_update()">계약상태 최신화</button>
         </div>
       </form>
         <table class="table table-striped text-center mt-5 result-table">
@@ -146,6 +147,10 @@
         </table>
       </form>
     </div>
+    <form name="statusForm" id="statusForm" method="post" action="/Buyer/MyPage/ContractUpdate">
+      <input type="hidden" name ="workflow_id" id="workflow_id" value="">
+      <input type="hidden" name ="uuid" id = "uuid" value="<?=$_SESSION['login_info']['uuid']?>">
+    </form>
   </section>
 </div>
 <script>
@@ -179,4 +184,31 @@ function Contract_Return(workflow_id,status){
             .then(res => console.log(res))
             .catch(err => console.error(err));
   }
+
+function contract_update(){
+  var uuid = $("#uuid").val();
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+    }
+  };
+
+  fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=6&field_name=buyer_uuid&field_value='+uuid+'', options)
+          .then(response => response.json())
+          .then(response => {
+            var workflow_id = [];
+            var j = 0;
+            for(var i =0; i <response['workflow_list'].length; i++){
+              if(response['workflow_list'][i]['status'] == "Complete"){
+                workflow_id[j] = response['workflow_list'][i]['workflow_id'];
+                $('#workflow_id').val(workflow_id);
+                j++;
+              }
+            }
+            $("#statusForm").submit();
+          })
+          .catch(err => console.error(err));
+}
 </script>

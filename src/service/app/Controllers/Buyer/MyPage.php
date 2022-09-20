@@ -32,15 +32,23 @@ class MyPage extends BaseController
     public function Contract()
     { // {{{
         $uuid = $_SESSION['login_info']['uuid'];
+            $data = $this->mypage_model->getContractList($uuid);
+            $data = array(
+                "data" => $data["data"]
+            );
+            echo view("Common/Header.html");
+            echo view('MyPage/BuyerContract.html',$data);
+            echo view("Common/Footer.html");
+        }
+    public function ContractUpdate()
+    { // {{{
         $result = $this->mypage_model->ContractStatus($_POST);
-        $data = $this->mypage_model->getContractList($uuid);
-
-        $data = array(
-            "data" => $data["data"]
-        );
-        echo view("Common/Header.html");
-        echo view('MyPage/BuyerContract.html',$data);
-        echo view("Common/Footer.html");
+            echo "
+        <script>
+        alert('최신화되었습니다');
+        location.href = '/Buyer/MyPage/Contract';
+</script>
+        ";
     } // }}}
 
     public function Info()

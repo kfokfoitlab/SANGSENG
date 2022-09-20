@@ -121,13 +121,13 @@ class MyPageModel extends CommonModel
                 update
                     contract_condition
                 set
-                    contract_status = 2
+                    contract_status =5
                 where 1=1
                   $whereQuery
             ";
     //     echo $query;
          $this->wrdb->update($query);
-         return 1;
+         return count($wArr);
      }else{
          return null;
      }
