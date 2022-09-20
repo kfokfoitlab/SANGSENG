@@ -330,17 +330,16 @@ class ContractModel extends CommonModel
             LIMIT 1 
         ";
         $result = $this->rodb->simple_query($query);
-        if($result > 0){
+        if($result == 0){
             $query = "
             update
                 contract_condition
             set
+              	 workflow_id = '".$data["workflow_id"]."',
                  contract_status = ".$data["status"]."
             where
-            idx = ".$data["idx"]." 
-            and workflow_id = ".$data["workflow_id"]."
-             ";
-             $this->wrdb->update($query);
+                 idx = ".$data["idx"];
+                  $this->wrdb->update($query);
             return 1;
         }
         else{
@@ -358,16 +357,18 @@ class ContractModel extends CommonModel
             and workflow_id != ''
             LIMIT 1 
         ";
+	   // echo $query;
         $result = $this->rodb->simple_query($query);
         if($result > 0){
-        $query = "
-			UPDATE
-				".$this->table_name."
-			SET
-				contract_status = ".$data["status"];
-		$query = $query." WHERE idx = ".$data["idx"]." LIMIT 1 ";
-        $this->wrdb->update($query);
-        return 1;
+	        $query = "
+				UPDATE
+					".$this->table_name."
+				SET
+					contract_status = ".$data["status"];
+			$query = $query." WHERE idx = ".$data["idx"]." LIMIT 1 ";
+		//	echo $query;
+	        $this->wrdb->update($query);
+	        return 1;
         }
         else{
             return 2;

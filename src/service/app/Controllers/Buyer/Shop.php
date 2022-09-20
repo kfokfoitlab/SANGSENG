@@ -34,7 +34,7 @@ class Shop extends BaseController
     { // {{{
         $value = $_GET["value"];
         $uuid = $_SESSION["login_info"]["uuid"];
-        $ranking = $this->buyer_model->RecommendationList();
+        $ranking = $this->buyer_model->RecommendationList($value);
         $list = $this->buyer_model->CategoryList($value);
         $buyer_info = $this->buyer_model->Buyer_info($uuid);
         $data = array(

@@ -24,7 +24,7 @@
         </li>
       </ul>
 
-      <form name="myForm" method="POST" action="/Seller/Contract" >
+      <form name="myForm" method="post" action="/Seller/Contract" >
         <table class="contract-search-table w-100 bg-light border-top border-bottom">
           <tbody>
           <tr class="border-bottom">
@@ -65,6 +65,8 @@
         <div class="text-center mt-4">
           <button class="btn btn-sm btn-outline-secondary me-3" type="reset">초기화</button>
           <button class="btn btn-sm btn-primary px-3" type="submit">검색</button>
+          <button class="btn btn-sm btn-primary px-3" onclick="contract_update();">계약상태 최신화</button>
+
         </div>
       </form>
         <div class="d-flex justify-content-between align-items-center mt-5 pt-3 border-top border-2">
@@ -104,13 +106,14 @@
             <th>계약상태</th>
             <th>계약번호</th>
             <th>상품명</th>
+            <th>카테고리</th>
             <th>물품수량</th>
             <th>계약금액</th>
             <th>감면금액</th>
             <th>계약등록일</th>
             <th>배송주기</th>
             <th>구매기업</th>
-            <th>계약서확인</th>
+            <th>계약서 전송받기</th>
           </tr>
           </thead>
           <tbody>
@@ -161,20 +164,21 @@
           ?>
           <tr>
             <td><?=$item["cidx"]?></td>
-            <td title=<?=$status?>><?=$status?></td>
-            <td title=<?=$item["contract_no"]?>><a href=""><?=$item["contract_no"]?></a></td>
-            <td title=<?=$item["product_name"]?>><?=$item["product_name"]?></td>
-            <td title=<?=$item["product_quantity"]?>><?=$item["product_quantity"]?></td>
-            <td title=<?=$product_price?>><?=$product_price?>원</td>
+            <td title="진행중"><?=$status?></td>
+            <td title="20220801090000-00001"><a href=""><?=$item["contract_no"]?></a></td>
+            <td title="친환경중질지70gA4용지"><?=$item["product_name"]?></td>
+            <td title="사무용품"><?=$category?></td>
+            <td title="100BOX"><?=$item["product_quantity"]?></td>
+            <td title="250,000,000"><?=$product_price?>원</td>
             <td title="25,000,000">25,000,000</td>
-            <td title=<?=$item["register_date"]?>><?=$item["register_date"]?></td>
-            <td title=<?=$delivery_cycle?>><?=$delivery_cycle?></td>
-            <td title=<?=$item["buyer_company"]?>><?=$item["buyer_company"]?></td>
-            <td title="계약서 이메일로 받기">
+            <td title="2022-08-01"><?=$item["register_date"]?></td>
+            <td title="일주일에 한번"><?=$delivery_cycle?></td>
+            <td title="22-08-02"><?=$item["buyer_company"]?></td>
+            <td title="20220801090000-00001">
               <?php
             if($item["contract_status"] == 2 || $item["contract_status"] == 5){
               ?>
-              <button class ="btn btn-success btn-sm" onclick="Contract_Return(<?=$item['workflow_id']?>,<?=$item['contract_status']?>);">이메일로 받기</button>
+              <button class ="btn btn-success" onclick="Contract_Return(<?=$item['workflow_id']?>,<?=$item['contract_status']?>);">이메일로 받기</button>
               <?php
             }
             ?>
@@ -188,6 +192,10 @@
         </table>
       </form>
     </div>
+    <form name="statusForm" id="statusForm" method="post" action="/Seller/ContractUpdate">
+      <input type="hidden" name ="workflow_id" id="workflow_id" value="">
+      <input type="hidden" name ="uuid" id = "uuid" value="<?=$_SESSION['login_info']['uuid']?>">
+    </form>
   </section>
 </div>
 <script>
@@ -219,6 +227,33 @@
     sdk.auth('esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE=');
     sdk.resendCompleteWorkflow({workflowId:workflow_id})
             .then(res => console.log(res))
+            .catch(err => console.error(err));
+  }
+
+  function contract_update(){
+    var uuid = $("#uuid").val();
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+      }
+    };
+
+    fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=6&field_name=buyer_uuid&field_value='+uuid+'', options)
+            .then(response => response.json())
+            .then(response => {
+              var workflow_id = [];
+              var j = 0;
+              for(var i =0; i <response['workflow_list'].length; i++){
+                if(response['workflow_list'][i]['status'] == "Complete"){
+                  workflow_id[j] = response['workflow_list'][i]['workflow_id'];
+                  $('#workflow_id').val(workflow_id);
+                  j++;
+                }
+              }
+              $("#statusForm").submit();
+            })
             .catch(err => console.error(err));
   }
 </script>
