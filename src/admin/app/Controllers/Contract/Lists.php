@@ -112,8 +112,8 @@ class Lists extends Base
         ,"status" => $_GET["status"]
         ,"workflow_id" => $_GET["workflow_id"]
         );
-        $this->model->contractSubmit($data);
-        if($this == 1){
+        $result = $this->model->contractSubmit($data);
+        if($result == 1){
             echo "
             <script>
              alert('계약서를 전송하였습니다.');
