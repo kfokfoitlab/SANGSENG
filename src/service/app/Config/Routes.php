@@ -165,21 +165,22 @@ $routes->group('Buyer', function($routes){
     $routes->post ('Shop/Cart',            'Buyer\Shop::Cart');
     $routes->get ('MyPage/Cart',           'Buyer\MyPage::Cart');
     $routes->post ('MyPage/CartDel',           'Buyer\MyPage::CartDel');
-    $routes->post ('MyPage/Contract',           'Buyer\MyPage::Contract');
-
-
+    $routes->get ('MyPage/Contract',           'Buyer\MyPage::Contract');
+    $routes->post ('MyPage/ContractUpdate',           'Buyer\MyPage::ContractUpdate');
 });
 $routes->group('Seller',  function ($routes){
     $group_name = "Item";
     $routes->get ( '/',                     'Seller::index');
-  //  $routes->get ( '/Contract(:any)',       'Seller::Contract$1');
+   $routes->get ( 'Contract(:any)',       'Seller::Contract$1');
     $routes->get ($group_name.'/ItemUpdate/(:any)', 'Seller\Item::ItemUpdate/$1');
     $routes->get ($group_name.'/ItemRegist','Seller\Item::ItemRegist');
     $routes->get ($group_name.'/ItemList',   'Seller\Item::ItemList');
     $routes->post ($group_name.'/ItemList/Search',   'Seller\Item::Search');
     $routes->post ($group_name.'/ItemSubmit', 'Seller\Item::ItemSubmit');
     $routes->post ($group_name.'/ItemUpdateSubmit', 'Seller\Item::ItemUpdateSubmit');
-    $routes->post ('Contract(:any)',               'Seller::Contract');
+    $routes->post ('ContractUpdate',           'Seller::ContractUpdate');
+
+    // $routes->get ('Contract(:any)',               'Seller::Contract');
 
     $group_name = "IMJOB";
     $routes->get ($group_name.'/List',             'Seller\IMJOB::List');

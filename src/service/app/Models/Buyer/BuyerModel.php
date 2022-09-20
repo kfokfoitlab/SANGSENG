@@ -138,7 +138,7 @@ class BuyerModel extends CommonModel
         }
     }
 
-    public function RecommendationList(){
+    public function RecommendationList($value){
         $ranking = [];
         $query = "
             select
@@ -146,6 +146,7 @@ class BuyerModel extends CommonModel
             from
               seller_product
             where status ='5'
+            and product_category = $value
            order by 
                product_ranking asc
             limit 5;
