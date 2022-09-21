@@ -70,7 +70,8 @@
             <th>계약등록일</th>
             <th>배송주기</th>
             <th>판매기업</th>
-            <th>계약서확인</th>
+            <th>계약서 재전송</th>
+            <th>계약서조회</th>
           </tr>
           </thead>
           <tbody>
@@ -130,14 +131,14 @@
             <td title=<?=$item["register_date"]?>><?=$item["register_date"]?></td>
             <td title=<?=$delivery_cycle?>><?=$delivery_cycle?></td>
             <td title=<?=$item["seller_company"]?>><?=$item["seller_company"]?></td>
-            <td title="계약서 이메일로 받기">
               <?php
             if($item["contract_status"] == 2 || $item["contract_status"] == 5){
-              ?><button class ="btn btn-success btn-sm" onclick="Contract_Return(<?=$item['workflow_id']?>,<?=$item['contract_status']?>);">이메일로 받기</button>
-              <?php
+              ?><td title="계약서 이메일로 받기"><button class ="btn btn-success btn-sm" onclick="Contract_Return(<?=$item['workflow_id']?>,<?=$item['contract_status']?>);">이메일로 받기</button></td>
+            <td><button class="btn btn-primary" onclick="Contract_Detail(<?=$item['workflow_id']?>)">계약서 조회</button></td>
+            <?php
             }
             ?>
-            </td>
+
           </tr>
           <?php
           }
@@ -154,6 +155,26 @@
   </section>
 </div>
 <script>
+
+  function Contract_Detail(workflow_id){
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+      }
+    };
+    fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_id + '?offset=%2B09%3A00', options)
+            .then(response => response.json())
+            .then(response => {/*console.log(response['field_list']['name']))*/
+              if(response['download_url'] == ""){
+                window.open(response['playing_url']);
+              }else{
+                window.open(response['download_url']);
+              }
+            })
+            .catch(err => console.error(err));
+  }
 function Contract_Return(workflow_id,status){
   if(status == 2){
     Contract_Playing(workflow_id);
