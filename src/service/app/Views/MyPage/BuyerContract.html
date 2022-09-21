@@ -166,7 +166,13 @@
     };
     fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_id + '?offset=%2B09%3A00', options)
             .then(response => response.json())
-            .then(response => {/*console.log(response['field_list']['name']))*/
+            .then(response => {
+              /*$.each(response['field_list'], function (idx, row) {
+                if (response['field_list'][idx].name == "1") {
+                  alert(response['field_list'][idx].value);
+                }
+              })
+            })*/
               if(response['download_url'] == ""){
                 window.open(response['playing_url']);
               }else{

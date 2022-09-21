@@ -212,11 +212,19 @@ class BuyerModel extends CommonModel
 
     public function statusUpdate($data)
     {
+
+        $update_query = "";
+        if($data['status'] == 9){
+            $update_query = "status = ".$data["status"].", del_yn = 'Y' ";
+        }else{
+            $update_query = "status = ".$data["status"].", del_yn ='N' ";
+        }
+
         $query = "
 			UPDATE
 				".$this->table_name."
 			SET
-				status = ".$data["status"]."
+			$update_query
 			WHERE
 				idx = ".$data["idx"]."
 			LIMIT 1
