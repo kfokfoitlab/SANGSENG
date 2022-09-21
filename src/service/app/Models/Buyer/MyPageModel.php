@@ -110,13 +110,10 @@ class MyPageModel extends CommonModel
  }
 
  public function ContractStatus($data){
-     $workflow_id = $data["workflow_id"];
-     $wArr = explode(",",$workflow_id);
-     $whereQuery = "";
-     if($workflow_id != ""){
-         for($i =0; $i< count($wArr); $i++){
-             $whereQuery = $whereQuery." or workflow_id =".$wArr[$i];
-         }
+	 $workflow_id = $data["workflow_id"];
+	 $whereQuery = "";
+	 if($workflow_id != ""){
+		 $whereQuery = " AND workflow_id in (".$workflow_id.")";
          $query = "
                 update
                     contract_condition
@@ -127,7 +124,7 @@ class MyPageModel extends CommonModel
             ";
     //     echo $query;
          $this->wrdb->update($query);
-         return count($wArr);
+		 return 1;
      }else{
          return null;
      }
@@ -140,7 +137,7 @@ class MyPageModel extends CommonModel
                 count(*)
             from
                 contract_condition
-            where seller_uuid ='".$uuid."'
+            where del_yn != 'Y' AND seller_uuid ='".$uuid."'
         ";
         $data["count"] = $this->rodb->simple_query($query);
         $data["data"] = [];
@@ -165,7 +162,7 @@ class MyPageModel extends CommonModel
               contract_condition a
             join seller_product b 
             on a.product_no = b.product_no
-            where buyer_uuid ='".$uuid."'".$where_query."
+            where a.del_yn != 'Y' AND buyer_uuid ='".$uuid."'".$where_query."
            order by 
                a.idx desc    
         ";

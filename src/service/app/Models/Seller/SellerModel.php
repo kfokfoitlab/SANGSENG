@@ -141,7 +141,7 @@ class SellerModel extends CommonModel
                 count(case when contract_status=5 then 1 end) as status5
             from contract_condition where 1=1
                                   and seller_uuid ='".$uuid."'
-                                   and (del_yn != 'y' or del_yn is null)
+                                   and (del_yn != 'Y' or del_yn is null)
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
@@ -159,7 +159,7 @@ class SellerModel extends CommonModel
                 count(*)
             from
                 contract_condition
-            where seller_uuid ='".$uuid."'
+            where (del_yn != 'Y' or del_yn is null) AND seller_uuid ='".$uuid."'
         ";
         $data["count"] = $this->rodb->simple_query($query);
         $data["data"] = [];
@@ -184,7 +184,7 @@ class SellerModel extends CommonModel
               contract_condition a
             join seller_product b 
             on a.product_no = b.product_no
-            where seller_uuid ='".$uuid."'".$where_query."
+            where (a.del_yn != 'Y' or a.del_yn is null) AND seller_uuid ='".$uuid."'".$where_query."
            order by 
                a.idx desc
            

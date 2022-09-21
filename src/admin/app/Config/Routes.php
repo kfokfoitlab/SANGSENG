@@ -88,6 +88,8 @@ $routes->group('Contract', ['namespace' => 'App\Controllers\Contract'], static f
 	$routes->get ($group_name.'/Update',            $group_name.'::Update');
 	$routes->get ($group_name.'/statusUpdate', $group_name.'::statusUpdate');
 	$routes->get ($group_name.'/contractSubmit', $group_name.'::contractSubmit');
+	$routes->post ($group_name.'/ContractUpdate', $group_name.'::ContractUpdate');
+	$routes->get ($group_name.'/ContractDelete', $group_name.'::ContractDelete');
 });
 
 // 구직
@@ -251,6 +253,7 @@ $routes->group('Board', ['namespace' => 'App\Controllers\Board'], static functio
 	$routes->get($group_name.'/statusUpdate',           $group_name.'::statusUpdate');
 	$routes->get ($group_name.'/noticeDetail',            $group_name.'::noticeDetail');
 	$routes->post ($group_name.'/noticeUpdate',            $group_name.'::noticeUpdate');
+	$routes->get ($group_name.'/noticeDelete',            $group_name.'::noticeDelete');
 	
 	//1:1 문의하기
 	$group_name = "QuestionsBoard";

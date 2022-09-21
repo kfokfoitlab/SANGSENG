@@ -10,7 +10,7 @@
 		{ // {{{
 			$items = array();
 			
-			$common_query = " 1";
+			$common_query = " 1 and del_yn != 'Y' ";
 			
 			// total records -------------------------------- {{{
 			$query = "
@@ -117,10 +117,11 @@
 		
 		public function Register($data,$files, $table_name = "notice_board"){
 			$allowed_ext = array();
-			$upload_face_ori = "upload_file";
-			$upload_file = uniqid().".".pathinfo($files["upload_file"]["name"], PATHINFO_EXTENSION);
-			$this->uploadFileNew($files,$upload_file,$allowed_ext,$upload_face_ori);
-			
+			if($files["upload_file"]["name"] != "") {
+				$upload_face_ori = "upload_file";
+				$upload_file = uniqid() . "." . pathinfo($files["upload_file"]["name"], PATHINFO_EXTENSION);
+				$this->uploadFileNew($files, $upload_file, $allowed_ext, $upload_face_ori);
+			}
 			$query = "
             insert into
                 ".$table_name."
@@ -130,11 +131,12 @@
                 ,title = '".$data["title"]."'
                 ,content = '".$data["content"]."'
                 ,upload_file = '".$upload_file."'
+                ,upload_file_ori = '".$files["upload_file"]["name"]."'
                 ,register_date = '".date("Y-m-d H:i:s")."'
                 ,register_id = 'admin'
                 ,update_date = '".date("Y-m-d H:i:s")."'
                 ,update_id = 'admin'
-                ,del_yn = 'n'
+                ,del_yn = 'N'
         ";
 			//echo $query;
 			$idx = $this->wrdb->insert($query);
@@ -154,6 +156,25 @@
 				".$this->table_name."
 			SET
 				board_status = ".$data["status"]."
+			WHERE
+				idx = ".$data["idx"]."
+			LIMIT 1
+			";
+			
+			$this->wrdb->update($query);
+			
+			return 1;
+		}
+		
+		public function noticeDelete($data)
+		{
+			$query = "
+			UPDATE
+				".$this->table_name."
+			SET
+			    delete_date = '".date("Y-m-d H:i:s")."'
+                ,delete_id = 'admin'
+				,del_yn = 'Y'
 			WHERE
 				idx = ".$data["idx"]."
 			LIMIT 1
@@ -186,7 +207,9 @@
 			$allowed_ext = array();
 			$upload_file_ori = "upload_file";
 			$upload_file = $data["upload_file_ori_name"];
+			$upload_file_ori_new = $data["upload_face_ori"];
 			if($files["upload_file"]["name"] != "") {
+				$upload_file_ori_new = $files["upload_file"]["name"];
 				$upload_file = uniqid() . "." . pathinfo($files["upload_file"]["name"], PATHINFO_EXTENSION);
 				$this->uploadFileNew($files, $upload_file, $allowed_ext, $upload_file_ori);
 			}
@@ -200,6 +223,8 @@
                 ,title = '".$data["title"]."'
                 ,content = '".$data["content"]."'
                 ,upload_file = '".$upload_file."'
+                
+                ,upload_file_ori = '".$upload_file_ori_new."'
                 ,update_date = '".date("Y-m-d H:i:s")."'
                 ,update_id = 'admin'
             where

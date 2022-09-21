@@ -61,7 +61,7 @@ $(document).ready(function(){
 						,{title: "삭제", data: "idx", visible: true, className: "text-nowrap",
 						"render": function( data, type, row, meta ){
 							let html = "";
-							html = html + "<input class='btn btn-outline-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",7)' value='삭제'>";
+							html = html + "<input class='btn btn-outline-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='noticeDelete("+data+")' value='삭제'>";
 							return html;
 						}
 					}
@@ -107,5 +107,8 @@ function noticeRegister(){
 }
 function noticeDetail(){
 	location.href = "/"+_CONTROLLER+"/noticeDetail";
+}
+function noticeDelete(idx){
+	location.href = "/"+_CONTROLLER+"/noticeDelete?idx="+idx;
 }
 

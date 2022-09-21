@@ -13,7 +13,7 @@
                 *
             from ".$this->table_name." where 1=1
              and user_uuid = '".$_SESSION["login_info"]["uuid"]."'
-             and (del_yn != 'y' or del_yn is null)
+             and (del_yn != 'Y' or del_yn is null)
         ";
 			if($_GET["search_v"] != ""){
 				$query = $query." and (title like '%".$_GET["search_v"]."%'
@@ -136,7 +136,7 @@
 			UPDATE
 				".$this->table_name."
 			SET
-				del_yn='y'
+				del_yn='Y'
 			WHERE
 				idx = ".$_POST["idx"]."
 				AND user_uuid = '".$_SESSION["login_info"]["uuid"]."'

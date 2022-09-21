@@ -10,7 +10,7 @@
 		{ // {{{
 			$items = array();
 			
-			$common_query = " 1 and del_yn != 'y'";
+			$common_query = " 1 and del_yn != 'Y'";
 			
 			// total records -------------------------------- {{{
 			$query = "
@@ -250,7 +250,7 @@
 			UPDATE
 				".$this->table_name."
 			SET
-				del_yn='y'
+				del_yn='Y'
 			WHERE
 				idx = ".$_GET["idx"]."
 			LIMIT 1

@@ -30,7 +30,6 @@ class SignInModel extends CommonModel
             from
                 buyer_company
             where
-                status != '9' and
                 email = '".$email."' and
                 password = SHA2('".$password."', 256)
             limit 1
@@ -47,6 +46,7 @@ class SignInModel extends CommonModel
                 ,"buyer_name" => $row["buyer_name"]
                 ,"company_name" => $row["company_name"]
                 ,"email" => $row["email"]
+                ,"phone" => $row["phone"]
             );
             $_SESSION["buyer_info"] = $this->getBuyerinfo();
             $_SESSION["Expectation"] = $this->ExpectationMoney();
@@ -74,7 +74,6 @@ class SignInModel extends CommonModel
             from
                 seller_company
             where
-                status != '9' and
                 email = '".$email."' and
                 password = SHA2('".$password."', 256)
             limit 1
@@ -90,7 +89,7 @@ class SignInModel extends CommonModel
                 ,"seller_name" => $row["seller_name"]
                 ,"company_name" => $row["company_name"]
                 ,"email" => $row["email"]
-
+                ,"phone" => $row["phone"]
             );
             $uuid = $_SESSION["login_info"]["uuid"];
             $_SESSION["totalSales"] = $this->getTotalSales($uuid);
@@ -263,7 +262,7 @@ class SignInModel extends CommonModel
                 count(case when disability_degree=2 then 1 end) as degree_2_cnt
             from ".$table_name." where 1=1
 			 and company_code= '".$seller_data["company_code"]."'
-			 and (del_yn != 'y' or del_yn is null)
+			 and (del_yn != 'Y' or del_yn is null)
 			 and (status = 5)
         ";
 

@@ -10,7 +10,7 @@ class ContractModel extends CommonModel
     { // {{{
         $items = array();
 
-        $common_query = " 1";
+        $common_query = " 1 AND del_yn != 'Y' ";
 
         // total records -------------------------------- {{{
         $query = "
@@ -374,6 +374,41 @@ class ContractModel extends CommonModel
             return 2;
         }
     }
+	
+	public function ContractStatus($data){
+		$workflow_id = $data["workflow_id"];
+		$whereQuery = "";
+		if($workflow_id != ""){
+			$whereQuery = " AND workflow_id in (".$workflow_id.")";
+			$query = "
+                update
+                    contract_condition
+                set
+                    contract_status = ".$data["contract_status"]."
+                where 1=1
+                  $whereQuery
+            ";
+			//     echo $query;
+			$this->wrdb->update($query);
+			return 1;
+		}else{
+			return null;
+		}
+	}
+	
+	public function ContractDelete($data){
+			$query = "
+                update
+                    contract_condition
+                set
+                    del_yn = 'Y'
+                where 1=1
+                  AND idx = ".$data["idx"]."
+            ";
+			//     echo $query;
+			$this->wrdb->update($query);
+			return 1;
+	}
 }
 
 
