@@ -18,7 +18,8 @@ class Buyer extends BaseController
 
     public function index()
     {
-        $data = $this->buyer_model->RecommendationList();
+        $value = $_GET["value"];
+        $data = $this->buyer_model->RecommendationList($value);
         $reduction =  $this->buyer_model->ReductionMoney();
         $data = array(
             "data" => $data["data"],

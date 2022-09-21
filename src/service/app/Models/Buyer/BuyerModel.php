@@ -140,6 +140,7 @@ class BuyerModel extends CommonModel
 
     public function RecommendationList($value){
         $where = "";
+
         if($value != ""){
             $where = "  and product_category = $value";
         }
