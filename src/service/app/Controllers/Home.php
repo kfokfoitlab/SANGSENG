@@ -42,7 +42,8 @@ class Home extends BaseController
             ,"length" => $this->item_per_page
         );
         $recent_company = $this->company_model->getAllList(0, $search_query);*/
-        $ranking = $this->buyer_model->RecommendationList();
+        $value = $_GET["value"];
+        $ranking = $this->buyer_model->RecommendationList($value);
         $reduction =  $this->buyer_model->ReductionMoney();
 
         $data = array(

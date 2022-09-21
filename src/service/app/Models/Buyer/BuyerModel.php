@@ -139,6 +139,10 @@ class BuyerModel extends CommonModel
     }
 
     public function RecommendationList($value){
+        $where = "";
+        if($value != ""){
+            $where = "  and product_category = $value";
+        }
         $ranking = [];
         $query = "
             select
@@ -146,7 +150,7 @@ class BuyerModel extends CommonModel
             from
               seller_product
             where status ='5'
-            and product_category = $value
+           $where
            order by 
                product_ranking asc
             limit 5;
@@ -194,7 +198,7 @@ class BuyerModel extends CommonModel
            
         ";
         if($_GET["search_v"] != ""){
-            $query = $query."and (product_name like '%".$_GET["search_v"]."%'
+            $query = $query." and (product_name like '%".$_GET["search_v"]."%'
              or company_name like '%".$_GET["search_v"]."%')";
         }
         $query = $query." order by register_date  desc";
