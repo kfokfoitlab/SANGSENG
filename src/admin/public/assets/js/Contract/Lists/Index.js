@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
     // datatable {{{
     var dt_option = {
         "searching": false,
@@ -24,7 +23,7 @@ $(document).ready(function(){
             [0, "desc"]
         ],
         "columns": [
-            {title: "No", data: "idx", visible: true}
+            {title: "No", data: "idx", visible: false}
             ,{title: "판매자", data: "seller_company", visible: true, className: "text-nowrap"}
             ,{title: "구매자", data: "buyer_company", visible: true, className: "text-nowrap"}
             ,{title: "계약번호", data: "contract_no", visible: true, className: "text-nowrap"}
@@ -69,7 +68,8 @@ $(document).ready(function(){
                     return html;
                 }
             }
-            ,{title: "진행상황변경", data: {"idx":"idx","buyer_email":"buyer_email","seller_email":"seller_email","uuid":"uuid","buyer_name":"buyer_name","seller_name":"seller_name","buyer_uuid":"buyer_uuid","seller_uuid":"seller_uuid","buyer_company":"buyer_company","seller_company":"seller_company"}, visible: true, className: "text-nowrap",
+            ,{title: "진행상황변경", data: {"idx":"idx","buyer_email":"buyer_email","seller_email":"seller_email","uuid":"uuid","buyer_name":"buyer_name","seller_name":"seller_name","buyer_uuid":"buyer_uuid","seller_uuid":"seller_uuid","buyer_company":"buyer_company","seller_company":"seller_company",
+						"contract_status":"contract_status"}, visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){
                     var buyer_email = data['buyer_email'];
                     var seller_email = data['seller_email'];
@@ -80,20 +80,29 @@ $(document).ready(function(){
                     var buyer_company = data['buyer_company'];
                     var seller_company = data['seller_company'];
                     var seller_uuid = data['seller_uuid'];
+										var contract_status = data['contract_status'];
                     let html = "";
-                    html += "<input class='btn btn-info btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data["idx"]+",1)' value='승인대기'>";
-                    html += "<input class='btn btn-primary btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='contract_email("+data['idx']+",2,\""+buyer_email+"\",\""+seller_email+"\",\""+uuid+"\",\""+buyer_name+"\",\""+seller_name+"\",\""+seller_uuid+"\",\""+buyer_uuid+"\",\""+buyer_company+"\",\""+seller_company+"\")' value='진행'>";
-                    html += "<input class='btn btn-success btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data["idx"]+",5)' value='계약완료'>";
-                    html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data["idx"]+",7)' value='반려'>";
-                    html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data["idx"]+",9)' value='계약취소'>";
+/*										if(contract_status == 2 || contract_status == 5 ){
+											html += "<input class='btn btn-info btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='playingAlert()' value='승인대기'>";
+										}else {
+											html += "<input class='btn btn-info btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data["idx"]+",1)' value='승인대기'>";
+										}*/
+									if(contract_status != 2 && contract_status != 5) {
+										html += "<input class='btn btn-warning btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='contract_email(" + data['idx'] + ",2,\"" + buyer_email + "\",\"" + seller_email + "\",\"" + uuid + "\",\"" + buyer_name + "\",\"" + seller_name + "\",\"" + seller_uuid + "\",\"" + buyer_uuid + "\",\"" + buyer_company + "\",\"" + seller_company + "\")' value='계약서 전송'>";
+									}else {
+										html += "<input class='btn btn-secondary btn-sm m-1' style='font-size: 12px;color: white' type='button' value='전송완료'>";
+									}
+ /*                   html += "<input class='btn btn-success btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data["idx"]+",5)' value='계약완료'>";
+                   html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data["idx"]+",7)' value='반려'>";
+                    html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data["idx"]+",9)' value='계약취소'>";*/
 
                     return html;
                 }
             }
-            ,{title: "계약상태 보기", data: "uuid", visible: true, orderable: false, className: "text-center noExport",
+            ,{title: "계약상태 보기", data: {"buyer_uuid":"buyer_uuid", "workflow_id":"workflow_id"}, visible: true, orderable: false, className: "text-center noExport",
                 "render": function( data, type, row, meta ){
                     var html = "";
-                    html = "<button onclick='statusCheck(\""+data+"\");'class='badge bg-primary'>상태보기</button>";
+                    html = "<button onclick='statusCheck(\"updateType\",\"all\");'class='badge bg-primary'>상태보기</button>";
 
                /*     html += "<a";
                     html += "   class='btn btn-sm btn-outline-primary text-nowrap'";
@@ -143,6 +152,11 @@ $(document).ready(function(){
 function statusUpdate(idx,status){
     location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
 }
+
+function playingAlert(){
+	alert('이미 진행중인 계약입니다');
+}
+
 function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,seller_name,seller_uuid,buyer_uuid,buyer_company,seller_company){
     const options = {
         method: 'POST',
@@ -158,7 +172,8 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
                 {order: 1, email: buyer_email, name: buyer_name},
                 {order: 2, email: seller_email, name: seller_name}
             ],
-            field_list: [{name: 'buyer_uuid', value: buyer_uuid}, {name: 'seller_uuid', value: seller_uuid}],
+            field_list: [{name: 'buyer_uuid', value: buyer_uuid}, {name: 'seller_uuid', value: seller_uuid},
+							{name: 'updateType', value: "all"}],
             workflow_name: buyer_company +" 기업과" + seller_company + " 기업의 계약서" ,
             template_id: 6,
         })
@@ -176,52 +191,32 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
  //   location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
 }
 
-async function statusCheck(uuid) {
-    var result ="";
-    const options = {
-        method: 'GET',
-        headers: {
-            Accept: 'application/json',
-            Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
-        }
-    };
-    await fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=6&field_name=uuid&field_value=' + uuid + '', options)
-        .then(response => response.json())
-       /* .then(response => response['workflow_list'][0]['status'])*/
-/*        .then(response => console.log(response))*/
-        .then(response => {
-            console.log(response);
-            var data = response['workflow_list'][0]['status']
-            console.log(data);
-            if(data =="Playing"){
-                $("#check").html("진행중입니다")
-            }else if(data === "Complate"){
-                $("#check").html("dddd")
-            }else{
-                $("#check").html("aaaaa")
-            }
-        })
-        .catch(err => console.error(err));
+function statusCheck(field_name,field_value) {
+	var field_name = field_name;
+	var field_value = field_value;
+	const options = {
+		method: 'GET',
+		headers: {
+			accept: 'application/json',
+			Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+		}
+	};
+	
+	fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=6&field_name='+field_name+'&field_value='+field_value+'', options)
+			.then(response => response.json())
+			.then(response => {
+				var j = 0;
+				for (var i = 0; i < response['workflow_list'].length; i++) {
+					if (response['workflow_list'][i]['status'] == "Playing"
+							/*&& response['workflow_list'][i]['workflow_id'] == workflow_id*/) {
+							alert("진행중입니다");
+					}else if(response['workflow_list'][i]['status'] == "Complete"
+							/*&& response['workflow_list'][i]['workflow_id'] == workflow_id*/){
+						alert("계약완료");
+					}
+				}
+			//	location.href='/Buyer/MyPage/Contract?workflow_id='+workflow_id+'&updateResult=success';
+				//$("#myForm").submit();
+			})
+			.catch(err => console.error(err));
 }
-
-const options = {
-    method: 'GET',
-    headers: {
-        Accept: 'application/json',
-        Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
-    }
-};
-
-fetch('https://docs.esignon.net/api/v3/workflows?offset=%2B09%3A00&page=1&date_condition=created_date&step=progress&imminent=false&important=false&template_id=6', options)
-    .then(response => response.json())
-   // .then(response => console.log(response['workflow_list'].length))
-    .then(response =>{
-        var workflow_id = "";
-        for(var i =0; i< response['workflow_list'].length; i++){
-            workflow_id = response['workflow_list'][i]['workflow_id'];
-            console.log(workflow_id);
-           // location.href = "/"+_CONTROLLER+"/statusUpdate?workflow_id="+workflow_id;
-        }
-
-    })
-    .catch(err => console.error(err));

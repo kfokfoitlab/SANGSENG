@@ -21,18 +21,14 @@
 
                   <img src="/uploads/<?=$item['representative_image']?>">
                 </div>
-                <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>" tabindex=1500><span
+                <div class="content-detail">
+                  <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>" tabindex=1500><span
                   class="text-secondary"><?=$item["company_name"]?></span> <?=$item["product_name"]?></a></h3>
-                <div>
                   <ul class="job-info">
-                    <li><?=$item["product_detail"]?></li>
-                    /
-                    <li><?=$item["product_price"]?>원</li>
-                    /
-                    <li><?=$item["product_start"]?></li>
-                    /
-                    <li><?=$item["product_end"]?></li>
-                    /
+                    <li>계약금액: <span class="fw-bold"><span class="mask-pay"><?=$item["product_price"]?></span>원</span></li>
+                    <li>판매수량: <span class="fw-bold"><?=$item["product_quantity"]?></span></li>
+                    <li>판매기간: <span class="fw-bold"><?=$item["product_start"]?> ~ <?=$item["product_end"]?></span></li>
+                    <li class="description"><?=$item["product_detail"]?></li>
                   </ul>
                 </div>
               </div>

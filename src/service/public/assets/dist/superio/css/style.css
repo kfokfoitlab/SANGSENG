@@ -6451,6 +6451,12 @@ Product Section
   width: 200px;
 }
 
+.job-block .content .content-detail {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .job-block h3 {
   font-size: 1.4em;
   color: #202124;
@@ -6471,8 +6477,6 @@ Product Section
 
 .job-block .job-info {
   position: relative;
-  display: flex;
-  flex-wrap: wrap;
   margin-bottom: 10px;
 }
 
@@ -6480,11 +6484,14 @@ Product Section
   position: relative;
   font-size: 0.9em;
   /*line-height: 1.2em;*/
-  color: #696969;
+  color: #888;
   font-weight: 400;
   padding-left: 5px;
-  margin-bottom: 5px;
+  /*margin-bottom: 5px;*/
   margin-right: 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .job-block .job-info li .icon {
