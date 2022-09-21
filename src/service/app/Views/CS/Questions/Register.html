@@ -1,10 +1,6 @@
 <script>
 	function validation(){
-		if (!$('input:radio[name="board_type"]').is(':checked')) {
-			$("#flexCheck01").addClass("is-invalid");
-			$("#flexCheck01").focus();
-			return false;
-		}else if($("#title").val() == ""){
+		if($("#title").val() == ""){
 			$("#title").addClass("is-invalid");
 			$("#title").focus();
 			return false;
@@ -17,7 +13,7 @@
 			$("#manager_name").focus();
 			return false;
 		}else if(!$('input:checkbox[name="agree_privacy"]').is(':checked')){
-      alert("(필수) 개인정보수집에 동의해주세요")
+      alert("(필수) 개인정보수집에 동의해주세요");
 			return false;
 		}else {
 			return true;

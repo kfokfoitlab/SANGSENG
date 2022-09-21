@@ -58,6 +58,53 @@ class BuyerModel extends CommonModel
         return $data;
     }
 
+    public function contract_Check($data){
+        $uuid = $_SESSION['login_info']['uuid'];
+        $product_no = $_POST['product_no'];
+
+        $query = "
+            select
+                count(*)
+            from
+                contract_condition
+            where
+                product_no = $product_no
+                and buyer_uuid = '".$uuid."'
+        ";
+        return $this->rodb->simple_query($query);
+
+
+    }
+
+    public function cartDel($data){
+        $idx = $data['idx'];
+        $uuid = $_SESSION["login_info"]["uuid"];
+        $query = " 
+           select count(*)
+           from buyer_cart
+           WHERE idx = $idx
+           and buyer_id ='".$uuid."'
+            LIMIT 1 
+        ";
+        $cart_del = $this->rodb->simple_query($query);
+        if($cart_del >0){
+        $query = "
+            update
+                buyer_cart
+            set
+                 del_yn = 'Y'
+            where
+            register_id = '".$uuid."'
+            and idx = $idx
+            limit 1
+        ";
+        $this->wrdb->update($query);
+        return "1";
+        }else{
+            return null;
+        }
+    }
+
     public function contract($data){
         helper(["uuid_v4", "specialchars"]);
         $uuid = gen_uuid_v4();
@@ -91,7 +138,12 @@ class BuyerModel extends CommonModel
         }
     }
 
-    public function RecommendationList(){
+    public function RecommendationList($value){
+        $where = "";
+
+        if($value != ""){
+            $where = "  and product_category = $value";
+        }
         $ranking = [];
         $query = "
             select
@@ -99,6 +151,7 @@ class BuyerModel extends CommonModel
             from
               seller_product
             where status ='5'
+           $where
            order by 
                product_ranking asc
             limit 5;
@@ -146,7 +199,7 @@ class BuyerModel extends CommonModel
            
         ";
         if($_GET["search_v"] != ""){
-            $query = $query."and (product_name like '%".$_GET["search_v"]."%'
+            $query = $query." and (product_name like '%".$_GET["search_v"]."%'
              or company_name like '%".$_GET["search_v"]."%')";
         }
         $query = $query." order by register_date  desc";
@@ -175,6 +228,27 @@ class BuyerModel extends CommonModel
         }
         return $buyer_info;
     }
+
+    public function cartCheck($data){
+        $uuid = $_SESSION['login_info']['uuid'];
+        $product_no = $data['product_no'];
+
+        $query = "
+            select
+                count(*)
+            from
+                buyer_cart
+            where
+                product_no = $product_no
+                and buyer_id = '".$uuid."'
+                and del_yn ='N'
+            limit 1
+        ";
+        return $this->rodb->simple_query($query);
+
+
+    }
+
     public function CartInsert($data){
         $product_no = $data["product_no"];
         $buyer_id = $_SESSION['login_info']['uuid'];

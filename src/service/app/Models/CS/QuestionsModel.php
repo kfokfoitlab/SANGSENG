@@ -20,6 +20,7 @@
 				 or content like '%".$_GET["search_v"]."%')";
 			}
 			
+			//echo $query;
 			$data_cnt = [];
 			$this->rodb->query($query);
 			while($row = $this->rodb->next_row()){
@@ -47,7 +48,6 @@
                 ".$this->table_name."
             set
                 board_status = 1
-                ,board_type= ".$data["board_type"]."
                 ,user_uuid = '".$_SESSION["login_info"]["uuid"]."'
                 ,user_company_name = '".$data["user_company_name"]."'
                 ,user_email = '".$data["user_email"]."'
@@ -62,7 +62,7 @@
                 ,update_id = '".$_SESSION["login_info"]["uuid"]."'
                 ,del_yn = 'n'
         ";
-			echo $query;
+		//	echo $query;
 			$idx = $this->wrdb->insert($query);
 			
 			if($idx){
@@ -90,10 +90,30 @@
 			return 1;
 		}
 		
+		public function questionsUpdateSubmit($data){
+			$query = "
+			UPDATE
+				".$this->table_name."
+			SET
+				title = '".$data["title"]."',
+				content = '".$data["content"]."'
+			WHERE 1=1
+				AND idx = ".$data["idx"]."
+				AND user_uuid = '".$data["user_uuid"]."'
+			LIMIT 1
+			";
+			
+			//echo $query;
+			$this->wrdb->update($query);
+			
+			return 1;
+		}
+		
 		public function getQuestionsBoard(){
 			$query = "
 			SELECT
-				a.*,b.reply_content as reply_content,b.register_date as reply_register_date
+				a.*,b.reply_content as reply_content,b.register_date as reply_register_date,
+				b.update_date as reply_update_date
 			FROM
 				".$this->table_name."
 				as a left join questions_board_reply as b on a.idx = b.questions_board_idx

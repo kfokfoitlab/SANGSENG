@@ -167,7 +167,7 @@
 		public function getQuestionsBoard($data){
 			$query = "
 			SELECT
-				a.*,b.reply_content as reply_content
+				a.*,b.reply_content as reply_content,b.idx as reply_idx
 			FROM
 				".$this->table_name."
 				as a left join questions_board_reply as b on a.idx = b.questions_board_idx
@@ -210,8 +210,8 @@
 						".$this->table_name."
 					SET
 						board_status = 2
-					WHERE
-						idx = ".$data["idx"]."
+					WHERE   1=1
+					    AND	idx = ".$data["idx"]."
 						AND user_uuid = '".$data["user_uuid"]."'
 					LIMIT 1
 					";
@@ -221,6 +221,27 @@
 			else {
 				return null;
 			}
+		}
+		
+		public function replyUpdateSubmit($data, $table_name = "questions_board_reply")
+		{
+			$query = "
+			UPDATE
+				".$table_name."
+			SET
+				reply_content = '".$data["reply_content"]."'
+                ,update_date = '".date("Y-m-d H:i:s")."'
+                ,update_id = 'admin'
+			WHERE 1=1
+				AND idx = ".$data["reply_idx"]."
+				AND user_uuid = '".$data["user_uuid"]."'
+			LIMIT 1
+			";
+			
+			//echo $query;
+			$this->wrdb->update($query);
+			
+			return 1;
 		}
 		
 		public function delete()

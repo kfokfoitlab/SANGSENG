@@ -12,7 +12,15 @@
       <h3 class="mt-5 h4 fw-bold text-center">장바구니</h3>
       <div class="px-3 mb-5">
         <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom ">
-          <p>상품목록 (총 <span><?=$data['count']?></span>개)</p>
+          <?php
+          $count = 0;
+          if(is_array($data)){
+          $count = count($data);
+          }else{
+          $count = 0;
+          }
+          ?>
+          <p>상품목록 (총 <span><?=$count?></span>개)</p>
           <div class="d-flex">
             <select class="form-select form-select-sm me-3" aria-label="Default select example">
               <option selected>최근등록일순</option>
@@ -52,8 +60,7 @@
             </th>
           </tr>
           </thead>
-          <form name="myForm" method="post" action="">
-
+          <form name="myForm" method="post" action="/Buyer/Contract">
           <tbody>
           <?php
           if(is_array($data)){
@@ -62,12 +69,14 @@
          $cart_reduction_money = number_format($item["cart_reduction_money"]);
         ?>
           <input type="hidden" name="product_no" id ="product_no" value="<?=$item['product_no']?>">
-          <input type="hidden" name="seller_uuid" id ="seller_id" value="<?=$item['register_id']?>">
+          <input type="hidden" name="seller_uuid" id ="seller_uuid" value= "<?=$data['seller_uuid']?>">
           <input type="hidden" name="company_name" id ="company_name" value="<?=$item['company_name']?>">
           <input type="hidden" name="reduction_money" id ="reduction_money" value="<?=$item['cart_reduction_money']?>">
           <input type="hidden" name="product_price" id ="product_price" value= "<?=$item['product_price']?>">
           <input type="hidden" name="product_name" id ="product_name" value= "<?=$item['product_name']?>">
-
+          <input type="hidden" name="buyer_company" id ="buyer_company"  value="<?=$_SESSION['login_info']['company_name']?>">
+          <input type="hidden" name="seller_company" id ="seller_company" value= "<?=$item['company_name']?>">
+          <input type="hidden" name="idx" id ="idx" value= "<?=$item['productidx']?>">
           <tr>
               <td>
                 <img src="/uploads/<?=$item['representative_image']?>" alt="기업로고" style="width: 100px;">
@@ -103,7 +112,6 @@
 </div>
 <script>
   function contract(){
-    document.myForm.action='/Buyer/Contract';
     document.myForm.submit();
   };
 

@@ -24,7 +24,7 @@
         </li>
       </ul>
 
-      <form name="myForm" method="GET" action="/Seller/Contract" >
+      <form name="myForm" method="post" action="/Seller/Contract" >
         <table class="contract-search-table w-100 bg-light border-top border-bottom">
           <tbody>
           <tr class="border-bottom">
@@ -65,6 +65,8 @@
         <div class="text-center mt-4">
           <button class="btn btn-sm btn-outline-secondary me-3" type="reset">초기화</button>
           <button class="btn btn-sm btn-primary px-3" type="submit">검색</button>
+          <button class="btn btn-sm btn-primary px-3" onclick="contract_update();">계약상태 최신화</button>
+
         </div>
       </form>
         <div class="d-flex justify-content-between align-items-center mt-5 pt-3 border-top border-2">
@@ -190,6 +192,10 @@
         </table>
       </form>
     </div>
+    <form name="statusForm" id="statusForm" method="post" action="/Seller/ContractUpdate">
+      <input type="hidden" name ="workflow_id" id="workflow_id" value="">
+      <input type="hidden" name ="uuid" id = "uuid" value="<?=$_SESSION['login_info']['uuid']?>">
+    </form>
   </section>
 </div>
 <script>
@@ -221,6 +227,33 @@
     sdk.auth('esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE=');
     sdk.resendCompleteWorkflow({workflowId:workflow_id})
             .then(res => console.log(res))
+            .catch(err => console.error(err));
+  }
+
+  function contract_update(){
+    var uuid = $("#uuid").val();
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+      }
+    };
+
+    fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=6&field_name=buyer_uuid&field_value='+uuid+'', options)
+            .then(response => response.json())
+            .then(response => {
+              var workflow_id = [];
+              var j = 0;
+              for(var i =0; i <response['workflow_list'].length; i++){
+                if(response['workflow_list'][i]['status'] == "Complete"){
+                  workflow_id[j] = response['workflow_list'][i]['workflow_id'];
+                  $('#workflow_id').val(workflow_id);
+                  j++;
+                }
+              }
+              $("#statusForm").submit();
+            })
             .catch(err => console.error(err));
   }
 </script>

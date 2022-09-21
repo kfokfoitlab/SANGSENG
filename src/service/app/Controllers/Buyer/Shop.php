@@ -34,7 +34,7 @@ class Shop extends BaseController
     { // {{{
         $value = $_GET["value"];
         $uuid = $_SESSION["login_info"]["uuid"];
-        $ranking = $this->buyer_model->RecommendationList();
+        $ranking = $this->buyer_model->RecommendationList($value);
         $list = $this->buyer_model->CategoryList($value);
         $buyer_info = $this->buyer_model->Buyer_info($uuid);
         $data = array(
@@ -79,6 +79,18 @@ class Shop extends BaseController
 
     public function Cart()
     { // {{{
+
+        $cart_Check = $this->buyer_model->cartCheck($_POST);
+        if($cart_Check){
+            echo "
+                <script>
+                    alert('이미 장바구니에 있습니다.');
+                    window.location.replace('/Buyer');
+                </script>
+            ";
+
+            die();
+        }
         $result = $this->buyer_model->CartInsert($_POST);
         if($result == "1") {
             echo "

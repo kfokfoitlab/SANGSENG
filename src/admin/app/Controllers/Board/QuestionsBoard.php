@@ -75,6 +75,27 @@
 			}
 		} //}}}
 		
+		public function replyUpdateSubmit()
+		{ //{{{
+			
+			$result = $this->model->replyUpdateSubmit($_POST);
+			
+			if($result == 1){
+				echo "
+					<script>
+						alert('정상으로 수정되었습니다');
+						history.back();
+					</script>
+				";
+			}else{
+				echo "
+					<script>
+						alert('오류가 발생했습니다.다시 시도해주세요');
+					</script>
+				";
+			}
+		} //}}}
+		
 		public function statusUpdate()
 		{
 			$data = array(

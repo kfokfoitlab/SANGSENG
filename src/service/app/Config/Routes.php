@@ -160,25 +160,27 @@ $routes->group('Buyer', function($routes){
     $routes->post ('Contract',        'Buyer\Contract::Contract');
     $routes->get ('MyPage/Info',            'Buyer\MyPage::Info');
     $routes->get ('MyPage/ConfirmPassword',    'Buyer\MyPage::ConfirmPassword');
-    $routes->get ('MyPage/ChangePassword',     'Buyer\MyPage::ChangePassword');
-    $routes->post ('MyPage/BuyerUpdateSubmit', 'Buyer\MyPage::BuyerUpdateSubmit');
+    $routes->post ('MyPage/ChangePassword',     'Buyer\MyPage::ChangePassword');
+    $routes->post ('MyPage/BuyerPwdSubmit', 'Buyer\MyPage::BuyerPwdSubmit');
     $routes->post ('Shop/Cart',            'Buyer\Shop::Cart');
     $routes->get ('MyPage/Cart',           'Buyer\MyPage::Cart');
     $routes->post ('MyPage/CartDel',           'Buyer\MyPage::CartDel');
-    $routes->post ('MyPage/Contract',           'Buyer\MyPage::Contract');
-
-
+    $routes->get ('MyPage/Contract',           'Buyer\MyPage::Contract');
+    $routes->post ('MyPage/ContractUpdate',           'Buyer\MyPage::ContractUpdate');
 });
 $routes->group('Seller',  function ($routes){
     $group_name = "Item";
     $routes->get ( '/',                     'Seller::index');
+   $routes->get ( 'Contract(:any)',       'Seller::Contract$1');
     $routes->get ($group_name.'/ItemUpdate/(:any)', 'Seller\Item::ItemUpdate/$1');
     $routes->get ($group_name.'/ItemRegist','Seller\Item::ItemRegist');
     $routes->get ($group_name.'/ItemList',   'Seller\Item::ItemList');
     $routes->post ($group_name.'/ItemList/Search',   'Seller\Item::Search');
     $routes->post ($group_name.'/ItemSubmit', 'Seller\Item::ItemSubmit');
     $routes->post ($group_name.'/ItemUpdateSubmit', 'Seller\Item::ItemUpdateSubmit');
-    $routes->post ('Contract',               'Seller::Contract');
+    $routes->post ('ContractUpdate',           'Seller::ContractUpdate');
+
+    // $routes->get ('Contract(:any)',               'Seller::Contract');
 
     $group_name = "IMJOB";
     $routes->get ($group_name.'/List',             'Seller\IMJOB::List');
@@ -188,13 +190,29 @@ $routes->group('Seller',  function ($routes){
     $routes->get ($group_name.'/downloadFileNew',           'Seller\IMJOB::downloadFileNew');
     $routes->post ($group_name.'/updateWorker',           'Seller\IMJOB::updateWorker');
     $routes->get ($group_name.'/deleteWorker',           'Seller\IMJOB::deleteWorker');
+    $routes->get ('MyPage/Info',                'Seller\MyPage::Info');
+    $routes->get ('MyPage/ConfirmPassword',     'Seller\MyPage::ConfirmPassword');
+    $routes->get ('MyPage/ChangePassword',      'Seller\MyPage::ChangePassword');
+});
+    $routes->group('Download', function($routes) {
+    $routes->get('downloadFileNew', 'Download::downloadFileNew');
 });
 
 $routes->group('CS', function($routes) {
     $routes->get('/', 'CS::index');
+
     $routes->get('Notice', 'CS\Notice::index');
     $routes->get('Notice/Detail', 'CS\Notice::Detail');
+
+    $routes->get('Questions', 'CS\Questions::index');
+    $routes->get('Questions/Detail', 'CS\Questions::Detail');
+    $routes->post('Questions/Delete', 'CS\Questions::Delete');
+    $routes->get('Questions/Register', 'CS\Questions::Register');
+    $routes->post('Questions/questionsUpdateSubmit', 'CS\Questions::questionsUpdateSubmit');
+    $routes->post('Questions/RegisterSubmit', 'CS\Questions::RegisterSubmit');
+
     $routes->get('FAQ', 'CS\FAQ::index');
+
     $routes->get('Questions', 'CS\Questions::index');
 });
 

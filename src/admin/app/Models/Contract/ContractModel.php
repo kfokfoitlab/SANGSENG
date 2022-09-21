@@ -321,9 +321,8 @@ class ContractModel extends CommonModel
 
     } //}}}
 
-    public function statusUpdate($data)
-    {
-        $query = "
+    public function contractSubmit($data){
+        $query = " 
            select count(*)
            from ".$this->table_name."
            WHERE idx = ".$data["idx"]." 
@@ -331,18 +330,45 @@ class ContractModel extends CommonModel
             LIMIT 1 
         ";
         $result = $this->rodb->simple_query($query);
-        if($result <= 0){
-        $query = "
-			UPDATE
-				".$this->table_name."
-			SET
-				contract_status = ".$data["status"];
-        if($data["status"] == 2){
-            $query = $query.",workflow_id = ".$data["workflow_id"];
+        if($result == 0){
+            $query = "
+            update
+                contract_condition
+            set
+              	 workflow_id = '".$data["workflow_id"]."',
+                 contract_status = ".$data["status"]."
+            where
+                 idx = ".$data["idx"];
+                  $this->wrdb->update($query);
+            return 1;
         }
-		$query = $query." WHERE idx = ".$data["idx"]." LIMIT 1 ";
-        $this->wrdb->update($query);
-        return 1;
+        else{
+            return 2;
+        }
+    }
+
+
+    public function statusUpdate($data)
+    {
+        $query = " 
+           select count(*)
+           from ".$this->table_name."
+           WHERE idx = ".$data["idx"]." 
+            and workflow_id != ''
+            LIMIT 1 
+        ";
+	   // echo $query;
+        $result = $this->rodb->simple_query($query);
+        if($result > 0){
+	        $query = "
+				UPDATE
+					".$this->table_name."
+				SET
+					contract_status = ".$data["status"];
+			$query = $query." WHERE idx = ".$data["idx"]." LIMIT 1 ";
+		//	echo $query;
+	        $this->wrdb->update($query);
+	        return 1;
         }
         else{
             return 2;

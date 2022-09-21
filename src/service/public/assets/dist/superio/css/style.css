@@ -6451,6 +6451,12 @@ Product Section
   width: 200px;
 }
 
+.job-block .content .content-detail {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .job-block h3 {
   font-size: 1.4em;
   color: #202124;
@@ -6471,8 +6477,6 @@ Product Section
 
 .job-block .job-info {
   position: relative;
-  display: flex;
-  flex-wrap: wrap;
   margin-bottom: 10px;
 }
 
@@ -6480,11 +6484,14 @@ Product Section
   position: relative;
   font-size: 0.9em;
   /*line-height: 1.2em;*/
-  color: #696969;
+  color: #888;
   font-weight: 400;
   padding-left: 5px;
-  margin-bottom: 5px;
+  /*margin-bottom: 5px;*/
   margin-right: 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .job-block .job-info li .icon {
@@ -20964,40 +20971,48 @@ MyPage/BuyerContract
   table-layout: fixed;
 }
 .buyer-contract .result-table th,
-.buyer-contract .result-table td {
+.buyer-contract .result-table td:not(:last-child) {
   font-size: 0.9rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   box-sizing: border-box;
 }
+.buyer-contract .result-table td .btn.btn-sm {
+  font-weight: normal;
+  font-size: 0.8rem;
+  padding: 0.25rem
+}
 .buyer-contract .result-table th:nth-child(1) {
   width: 55px;
 }
-.buyer-contract .result-table th:nth-child(2),
+.buyer-contract .result-table th:nth-child(2) {
+  width: 100px;
+}
 .buyer-contract .result-table th:nth-child(3) {
-  width: 80px;
+  width: 125px;
 }
 .buyer-contract .result-table th:nth-child(4) {
   width: 140px;
 }
 .buyer-contract .result-table th:nth-child(5) {
-  width: 80px;
+  width: 105px;
 }
-.buyer-contract .result-table th:nth-child(6) {
-  width: 90px;
+.buyer-contract .result-table th:nth-child(6),
+.buyer-contract .result-table th:nth-child(7) {
+  width: 145px;
 }
-.buyer-contract .result-table th:nth-child(7),
-.buyer-contract .result-table th:nth-child(8),
-.buyer-contract .result-table th:nth-child(9),
+.buyer-contract .result-table th:nth-child(8) {
+  width: 130px;
+}
+.buyer-contract .result-table th:nth-child(9) {
+  width: 120px;
+}
 .buyer-contract .result-table th:nth-child(10) {
-  width: 135px;
-}
-.buyer-contract .result-table th:nth-child(11) {
   width: 95px;
 }
-.buyer-contract .result-table th:nth-child(12) {
-  width: 112px;
+.buyer-contract .result-table th:nth-child(11) {
+  width: 120px;
 }
 /***
 
@@ -21169,6 +21184,12 @@ Seller/Index
 }
 .seller-mypage .card-board .card-body a:hover {
   font-weight: bold;
+}
+.seller-mypage .my-info-card p {
+  font-size: 18px;
+}
+.seller-mypage .my-info-card li:hover a {
+  background: #f9f9f9;
 }
 /***
 
@@ -21352,35 +21373,40 @@ Seller/Contract
   box-sizing: border-box;
 }
 .contract-list .contract-list-table th:nth-child(1) {
-  width: 50px;
+  width: 55px;
 }
-.contract-list .contract-list-table th:nth-child(2),
-.contract-list .contract-list-table th:nth-child(5),
-.contract-list .contract-list-table th:nth-child(6) {
+.contract-list .contract-list-table th:nth-child(2) {
   width: 100px;
 }
 .contract-list .contract-list-table th:nth-child(3) {
-  width: 120px;
-}
-.contract-list .contract-list-table th:nth-child(4) {
-  width: 130px;
-}
-.contract-list .contract-list-table th:nth-child(7),
-.contract-list .contract-list-table th:nth-child(8) {
   width: 125px;
 }
-.contract-list .contract-list-table th:nth-child(9),
+.contract-list .contract-list-table th:nth-child(4) {
+  width: 140px;
+}
+.contract-list .contract-list-table th:nth-child(5) {
+  width: 105px;
+}
+.contract-list .contract-list-table th:nth-child(6),
+.contract-list .contract-list-table th:nth-child(7) {
+  width: 145px;
+}
+.contract-list .contract-list-table th:nth-child(8) {
+  width: 130px;
+}
+.contract-list .contract-list-table th:nth-child(9) {
+  width: 120px
+}
 .contract-list .contract-list-table th:nth-child(10) {
-  width: 115px;
+  width: 95px;
 }
 .contract-list .contract-list-table th:nth-child(11) {
-  width: 90px;
+  width: 120px;
 }
-.contract-list .contract-list-table th:nth-child(12) {
-  width: 110px;
-}
-.contract-list .contract-list-table .copy-btn {
+.contract-list .contract-list-table td .btn.btn-sm {
+  font-weight: normal;
   font-size: 0.8rem;
+  padding: 0.25rem;
 }
 /***
 
@@ -21692,4 +21718,35 @@ Auth/SignIn
 .login-form .default-form .form-group input[type='text'],
 .login-form .default-form .form-group input[type='password'] {
   background-color: #f3fafd;
+}
+/***
+
+====================================================================
+Reduction/Help
+====================================================================
+
+***/
+.reduction-help table th:nth-child(1) {
+  width: 200px;
+}
+.reduction-help table th:nth-child(2) {
+  width: 780px;
+}
+.reduction-help table th:nth-child(3),
+.reduction-help table th:nth-child(4) {
+  width: 150px;
+}
+.reduction-help table td .btn-sm {
+  padding: 1px 10px;
+}
+.reduction-help table td {
+  padding: 1rem 0.75rem;
+  vertical-align: middle;
+  word-break: keep-all;
+}
+.reduction-help table td:not(:nth-child(2)) {
+  text-align: center;
+}
+.reduction-help table .text-small {
+  font-size: 0.9rem;
 }
