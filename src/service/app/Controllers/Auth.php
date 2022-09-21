@@ -79,6 +79,9 @@ class Auth extends BaseController
                     case "7" :
                         header("Location:/Auth/SignInCompanyReport/reject");
                         break;
+                    case "9" :
+                        header("Location:/Auth/SignInCompanyReport/delete");
+                        break;
                 }
             }else{
                 switch ($_SESSION["login_info"]["status"]) {
@@ -91,6 +94,9 @@ class Auth extends BaseController
                         break;
                     case "7" :
                         header("Location:/Auth/SignInCompanyReport/reject");
+                        break;
+                    case "9" :
+                        header("Location:/Auth/SignInCompanyReport/delete");
                         break;
                 }
             }
