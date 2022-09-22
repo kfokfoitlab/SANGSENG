@@ -39,6 +39,10 @@
 </div>
 <script>
   function downloadFileNew(fileName,fileNameOri){
-    location.href="/Download/downloadFileNew?fileName="+fileName+"&fileNameOri="+fileNameOri;;
+		if(fileName == ""){
+			alert("등록된 파일이 없습니다");
+		}else {
+			location.href = "/Download/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+		}
   };
 </script>

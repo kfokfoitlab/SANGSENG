@@ -11,7 +11,13 @@
           <input type="hidden" name="idx" value="<?=$data['idx']?>">
           <div class="d-flex py-5">
             <div class="me-5">
-              <div class="border upload_face-preview" style="width: 150px; height: 192px; background: center / contain url('/uploads/<?=$data["upload_face"]?>') no-repeat;"></div>
+              <?php
+                $imgUrl = "/assets/images/resource/icons/person_filled.svg";
+                if($data["upload_face"] != ""){
+                  $imgUrl = "/uploads/".$data["upload_face"];
+                }
+              ?>
+              <div class="border upload_face-preview" style="width: 150px; height: 192px; background: center / contain url('<?=$imgUrl?>') no-repeat;"></div>
             </div>
 
             <div class="flex-grow-1">
@@ -169,8 +175,12 @@
 	};
 
 	function downloadFileNew(fileName,fileNameOri){
-    location.href="/Seller/IMJOB/downloadFileNew?fileName="+fileName+"&fileNameOri="+fileNameOri;
-	};
+		if(fileName == ""){
+			alert("등록된 파일이 없습니다");
+    }else {
+			location.href = "/Seller/IMJOB/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+		}
+  };
 
 	function goList(p_n){
 		location.href="/Seller/IMJOB/List?p_n="+p_n;

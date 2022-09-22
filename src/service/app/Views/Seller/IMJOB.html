@@ -79,6 +79,7 @@
           <th>근무상태</th>
           <th style="width: auto">장애유형</th>
           <th>복지카드</th>
+          <th>진행상황</th>
           <th>상세보기</th>
           <th>삭제</th>
         </tr>
@@ -119,12 +120,13 @@
           <td><?=$disability_degree?></td>
           <td><?=$upload_card?></td>
           <?php if($item["status"] == 5){?>
-          <td><button type="button" class="button btn-secondary btn-sm" onclick='IMJOBView(<?=$item["idx"]?>,<?=$_GET["p_n"]?>)'>상세보기</button></td>
+          <td><span class="text-success">승인완료</span></td>
           <?php }elseif($item["status"] == 1){ ?>
           <td><span class="text-primary">승인대기</span></td>
           <?php }elseif($item["status"] == 7){ ?>
           <td><span class="text-danger">반려</span></td>
           <?php } ?>
+          <td><button type="button" class="button btn-secondary btn-sm" onclick='IMJOBView(<?=$item["idx"]?>,<?=$_GET["p_n"]?>)'>상세보기</button></td>
           <td><button type="button" class="button btn-danger btn-sm" onclick='deleteWorker(<?=$item["idx"]?>)'>삭제</button></td>
         </tr>
         <?php
