@@ -9,11 +9,12 @@
         // NAV
         require(__DIR__.'/Components/Nav.html');
       ?>
+      <h3 class="mt-5 mb-4 h4 fw-bold text-center">계약현황</h3>
       <form name="myForm" method="GET" action="/Buyer/MyPage/Contract" >
         <table class="w-100 bg-light search-table">
           <tbody>
           <tr>
-            <th>계약번호</th>
+            <th>상품명</th>
             <td>
               <input name="search_A"class="form-control me-3" type="text"
               <?php if($_GET["search_A"] != ""){ echo "value='".$_GET["search_A"]."'";}?>/>
@@ -54,24 +55,20 @@
         <div class="mt-3 text-center">
           <button class="btn btn-primary" type="submit">검색</button>
           <button class="btn btn-outline-secondary" type="reset">초기화</button>
+          <button class="btn btn-primary" onclick="contract_update()">계약상태 최신화</button>
         </div>
       </form>
-      <button class="btn btn-primary" onclick="contract_update()">계약상태 최신화</button>
       <table class="table table-striped text-center mt-5 result-table">
           <thead>
           <tr>
             <th>No.</th>
             <th>계약상태</th>
-            <th>계약번호</th>
             <th>상품명</th>
-            <th>물품수량</th>
+            <th>상품수량</th>
             <th>계약금액</th>
             <th>감면금액</th>
-            <th>계약등록일</th>
-            <th>배송주기</th>
-            <th>판매기업</th>
-            <th>계약서 재전송</th>
             <th>계약서조회</th>
+            <th>계약서전송</th>
           </tr>
           </thead>
           <tbody>
@@ -123,18 +120,16 @@
           <tr>
             <td><?=$item["cidx"]?></td>
             <td title=<?=$status?>><?=$status?></td>
-            <td title=<?=$item["contract_no"]?>><a onclick="Contract_Return(<?=$item['workflow_id']?>);"><?=$item["contract_no"]?></a></td>
             <td title=<?=$item["product_name"]?>><?=$item["product_name"]?></td>
             <td title=<?=$item["product_quantity"]?>><?=$item["product_quantity"]?></td>
             <td title=<?=$item["product_price"]?>><?=number_format($item["product_price"])?>원</td>
             <td title="25,000,000"><?=number_format($item["reduction_money"])?>원</td>
-            <td title=<?=$item["register_date"]?>><?=$item["register_date"]?></td>
-            <td title=<?=$delivery_cycle?>><?=$delivery_cycle?></td>
-            <td title=<?=$item["seller_company"]?>><?=$item["seller_company"]?></td>
-              <?php
+
+            <?php
             if($item["contract_status"] == 2 || $item["contract_status"] == 5){
-              ?><td title="계약서 이메일로 받기"><button class ="btn btn-success btn-sm" onclick="Contract_Return(<?=$item['workflow_id']?>,<?=$item['contract_status']?>);">이메일로 받기</button></td>
-            <td><button class="btn btn-primary" onclick="Contract_Detail(<?=$item['workflow_id']?>)">계약서 조회</button></td>
+              ?>
+            <td><button class="btn btn-primary btn-sm" onclick="Contract_Detail(<?=$item['workflow_id']?>)">계약서 조회</button></td>
+            <td title="계약서 이메일로 받기"><button class ="btn btn-success btn-sm" onclick="Contract_Return(<?=$item['workflow_id']?>,<?=$item['contract_status']?>);">이메일로 받기</button></td>
             <?php
             }
             ?>

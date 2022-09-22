@@ -115,17 +115,6 @@ class MyPageModel extends CommonModel
         $uuid = $data['uuid'];
         $whereQuery = "";
         if($workflow_id != ""){
-            $query = "
-                update
-                    contract_condition
-                set
-                    contract_status =5
-                where 1=1
-                  $whereQuery
-            ";
-            //     echo $query;
-            $this->wrdb->update($query);
-
                 $query = "
                     select
                         *
@@ -212,8 +201,6 @@ class MyPageModel extends CommonModel
                 $reduction_money = $result_price * 12;
             }
             $reduction_money = (int)$reduction_money;
-
-
                 $reduction_query = "
                 update
                     contract_condition
@@ -297,7 +284,7 @@ class MyPageModel extends CommonModel
         $where_query = "";
 
         if($_GET["search_A"] != ""){
-            $where_query = $where_query." and contract_no like '%".$_GET["search_A"]."%'";
+            $where_query = $where_query." and a.product_name like '%".$_GET["search_A"]."%'";
         }
         if($_GET["search_B"] != "all" && $_GET["search_B"] != ""){
             if($_GET["search_B"] == "1"){

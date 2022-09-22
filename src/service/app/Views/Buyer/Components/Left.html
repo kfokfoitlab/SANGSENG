@@ -76,7 +76,7 @@ $buyer_reduction =  number_format($buyer_reduction);
 
   <div class="mt-4">
     <?php
-    if(!($_SESSION["Contract"])) {
+    if(!$_SESSION["Contract"]) {
     ?>
     <div class="pt-3" style="border-top: 1px dashed #6c757d;">
       <p class="text-white" style="font-size: 0.8rem;">* 현재 진행중인 계약이 없습니다.</p>

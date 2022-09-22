@@ -11,6 +11,16 @@
           <table class="table table-hover border detail-table">
           <!-- {{{ -->
           <tbody>
+          <?php
+          $classification = "";
+          if($data["classification"] == 1){
+          $classification = "민간기업";
+          } if($data["classification"] == 2){
+          $classification = "공공기관";
+          } if($data["classification"] == 3){
+          $classification = "국가/자치단체";
+          }
+          ?>
             <tr>
               <td class="th">아이디(이메일)</td>
               <td><?=$data["email"]?></td>
@@ -33,7 +43,7 @@
             </tr>
             <tr>
               <td class="th">기업형태</td>
-              <td><?=$data["classification"]?></td>
+              <td><?=$classification?></td>
             </tr>
             <tr>
               <td class="th">팩스번호</td>
