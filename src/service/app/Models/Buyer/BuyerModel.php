@@ -185,6 +185,25 @@ class BuyerModel extends CommonModel
         }
         return $reduction;
     }
+
+    public function BuyerReduction(){
+        $uuid = $_SESSION['login_info']['uuid'];
+        $buyer_reduction =[];
+        $query = "
+            select
+                sum(reduction_money) as buyer_reduction
+            from
+                contract_condition
+            where 1=1
+            and   buyer_uuid = '".$uuid."'          
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $buyer_reduction= $row;
+        }
+        return $buyer_reduction;
+    }
+
     public function CategoryList($value){
         $list = [];
         $query = "

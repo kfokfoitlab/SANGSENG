@@ -143,21 +143,21 @@ class SignInModel extends CommonModel
     }
 
     public function ReductionMoney(){
-        $uuid = $_SESSION["login_info"]["uuid"];
-        $Reduction_money = [];
-        $query = "       
-                
-        select
-        sum(reduction_money) as reduction_money
-        from contract_condition
-        where buyer_uuid = '".$uuid."'
-        and  contract_status = 5
+        $uuid = $_SESSION['login_info']['uuid'];
+        $buyer_reduction =[];
+        $query = "
+            select
+                sum(reduction_money) as buyer_reduction
+            from
+                contract_condition
+            where 1=1
+            and   buyer_uuid = '".$uuid."'          
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
-            $Reduction_money = $row;
+            $buyer_reduction= $row;
         }
-        return $Reduction_money;
+        return $buyer_reduction;
     }
 
 

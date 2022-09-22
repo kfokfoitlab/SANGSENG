@@ -54,10 +54,10 @@
         <div class="mt-3 text-center">
           <button class="btn btn-primary" type="submit">검색</button>
           <button class="btn btn-outline-secondary" type="reset">초기화</button>
-          <button class="btn btn-primary" onclick="contract_update()">계약상태 최신화</button>
         </div>
       </form>
-        <table class="table table-striped text-center mt-5 result-table">
+      <button class="btn btn-primary" onclick="contract_update()">계약상태 최신화</button>
+      <table class="table table-striped text-center mt-5 result-table">
           <thead>
           <tr>
             <th>No.</th>
@@ -126,8 +126,8 @@
             <td title=<?=$item["contract_no"]?>><a onclick="Contract_Return(<?=$item['workflow_id']?>);"><?=$item["contract_no"]?></a></td>
             <td title=<?=$item["product_name"]?>><?=$item["product_name"]?></td>
             <td title=<?=$item["product_quantity"]?>><?=$item["product_quantity"]?></td>
-            <td title=<?=$item["product_price"]?>><?=$item["product_price"]?></td>
-            <td title="25,000,000">25,000,000</td>
+            <td title=<?=$item["product_price"]?>><?=number_format($item["product_price"])?>원</td>
+            <td title="25,000,000"><?=number_format($item["reduction_money"])?>원</td>
             <td title=<?=$item["register_date"]?>><?=$item["register_date"]?></td>
             <td title=<?=$delivery_cycle?>><?=$delivery_cycle?></td>
             <td title=<?=$item["seller_company"]?>><?=$item["seller_company"]?></td>
@@ -149,12 +149,49 @@
       </form>
     </div>
     <form name="statusForm" id="statusForm" method="post" action="/Buyer/MyPage/ContractUpdate">
-      <input type="hidden" name ="workflow_id" id="workflow_id" value="">
+      <input type="hidden" name ="workflow_id" id="workflow_id" value="0">
+      <input type="hidden" name ="complete_reduction" id="complete_reduction" value="0">
       <input type="hidden" name ="uuid" id = "uuid" value="<?=$_SESSION['login_info']['uuid']?>">
     </form>
   </section>
 </div>
 <script>
+
+  function Contract_reduction(workflow_id){
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+      }
+    };
+      var workflow_key = "";
+      var contract_reduction = 0;
+      var complete_reduction = 0;
+      var workflow = "";
+    for(var i = 0; i<workflow_id.length;i++) {
+        workflow_key = workflow_id[i];
+    fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_key + '?offset=%2B09%3A00', options)
+            .then(response => response.json())
+            .then(response => {
+              $.each(response['field_list'], function (idx, row) {
+                if (response['field_list'][idx].name == "Contract_Cost") {
+                    console.log(response);
+                    contract_reduction = response['field_list'][idx].value;
+                    complete_reduction = parseInt(contract_reduction.replace(/,/g,""));
+                }
+              })
+                workflow = response['workflow_id'];
+                $('#complete_reduction').val(complete_reduction);
+                $('#workflow_id').val(workflow);
+                $("#statusForm").submit();
+               // alert(contract_reduction);
+             //   alert(complete_reduction);
+            })
+            .catch(err => console.error(err));
+    }
+  }
+
 
   function Contract_Detail(workflow_id){
     const options = {
@@ -166,13 +203,7 @@
     };
     fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_id + '?offset=%2B09%3A00', options)
             .then(response => response.json())
-            .then(response => {
-              /*$.each(response['field_list'], function (idx, row) {
-                if (response['field_list'][idx].name == "1") {
-                  alert(response['field_list'][idx].value);
-                }
-              })
-            })*/
+            .then(response => /*console.log(response)*/{
               if(response['download_url'] == ""){
                 window.open(response['playing_url']);
               }else{
@@ -222,7 +253,7 @@ function contract_update(){
     }
   };
 
-  fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=6&field_name=buyer_uuid&field_value='+uuid+'', options)
+  fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=9&field_name=buyer_uuid&field_value='+uuid+'', options)
           .then(response => response.json())
           .then(response => {
             var workflow_id = [];
@@ -230,11 +261,11 @@ function contract_update(){
             for(var i =0; i <response['workflow_list'].length; i++){
               if(response['workflow_list'][i]['status'] == "Complete"){
                 workflow_id[j] = response['workflow_list'][i]['workflow_id'];
-                $('#workflow_id').val(workflow_id);
+                //$('#workflow_id').val(workflow_id);
                 j++;
               }
             }
-            $("#statusForm").submit();
+              Contract_reduction(workflow_id);
           })
           .catch(err => console.error(err));
 }

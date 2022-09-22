@@ -1,6 +1,11 @@
 <?php
   // Left Menu
   require APPPATH . '/Views/Buyer/Components/Left.html';
+
+      if($_SESSION["login_info"]["type"] != "buyer"){
+        echo "<script>alert('판매기업으로 로그인 되었습니다');</script>";
+        echo "<script>location.href = '/Seller';</script>";
+      }
 ?>
 <div class="flex-grow-1">
   <section class="buyer-info">

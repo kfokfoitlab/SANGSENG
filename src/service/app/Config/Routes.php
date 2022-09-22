@@ -120,14 +120,6 @@ $routes->group('Management', ['namespace' => 'App\Controllers\Management'], stat
 
     $routes->get ($group_name.'/Chat',        $group_name.'\Chat::Index');
 
-    /*
-    $routes->get ($group_name.'/Application',       $group_name.'::Application');
-    $routes->get ($group_name.'/BookmarkApplication',   $group_name.'::BookmarkApplication');
-    $routes->get ($group_name.'/BookmarkCompany',   $group_name.'::BookmarkCompany');
-    $routes->get ($group_name.'/Message',           $group_name.'::Message');
-     */
-
-
     $group_name = "Buyer";
     $routes->get ($group_name.'/Profile/',                      $group_name.'\Profile::Index');
     $routes->post($group_name.'/Profile/UpdateSubmit/(:any)',   $group_name.'\Profile::UpdateSubmit/$1');
@@ -167,6 +159,9 @@ $routes->group('Buyer', function($routes){
     $routes->post ('MyPage/CartDel',           'Buyer\MyPage::CartDel');
     $routes->get ('MyPage/Contract',           'Buyer\MyPage::Contract');
     $routes->post ('MyPage/ContractUpdate',           'Buyer\MyPage::ContractUpdate');
+    $routes->post ('MyPage/BuyerUpdateSubmit',           'Buyer\MyPage::BuyerUpdateSubmit');
+
+
 });
 $routes->group('Seller',  function ($routes){
     $group_name = "Item";
