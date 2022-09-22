@@ -5,6 +5,12 @@ use App\Models\CommonModel;
 class ForgotInfoModel extends CommonModel
 {
 	public function Register($data, $table_name = "search_id_pw"){
+
+		$result = $this->getCompanyEmail($data);
+		if($result != 1) {
+			return null;
+		}
+
 		$status = '1';
 		$query = "
             insert into
@@ -26,6 +32,54 @@ class ForgotInfoModel extends CommonModel
 		else {
 			return null;
 		}
+	}
+	
+	public function getCompanyEmail($data)
+	{
+		$query = "
+			SELECT
+				*
+			FROM
+				seller_company
+			WHERE
+				phone = '".$data["user_phone"]."'
+			";
+		if($data["search_type"] == 2){
+			$query = $query." AND email = '".$data["user_id"]."'";
+		}
+		$query = $query." LIMIT 1";
+
+//			echo $query;
+		$this->rodb->query($query);
+		$result = $this->rodb->next_row();
+		
+		if($result != ""){
+			return 1 ;
+		}
+		
+		$query = "
+			SELECT
+				*
+			FROM
+				buyer_company
+			WHERE
+				phone = '".$data["user_phone"]."'
+			";
+		
+		if($data["search_type"] == 2){
+			$query = $query." AND email = '".$data["user_id"]."'";
+		}
+		$query = $query." LIMIT 1";
+
+//			echo $query;
+		$this->rodb->query($query);
+		$result = $this->rodb->next_row();
+		
+		if($result != ""){
+			return 1 ;
+		}
+		
+		return 2;
 	}
 	
 }

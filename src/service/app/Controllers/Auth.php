@@ -410,8 +410,8 @@ class Auth extends BaseController
 		}else{
 			echo "
                 <script>
-                    alert('오류가 발생했습니다.다시 시도해주세요');
-					window.location.replace('/"._CONTROLLER."/SignIn');
+                    alert('가입된 정보가 없습니다. 다시 입력해주세요');
+					history.back();
                 </script>
             ";
 		}
