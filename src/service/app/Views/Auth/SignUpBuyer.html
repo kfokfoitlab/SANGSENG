@@ -1,3 +1,20 @@
+<script>
+
+  $(function() {
+		$('#classificationCheck').hide();
+	});
+
+	function validationJoin(){
+		if(!$('input:radio[name="classification"]').is(':checked')){
+			$('#classificationCheck').show();
+			$('input:radio[name="classification"]:eq(1)').focus();
+			return false;
+    }else {
+			$('#classificationCheck').hide();
+    };
+  }
+
+</script>
 <section class="container" style="padding-top: 172px; margin-bottom: 128px;">
 
   <div id="row">
@@ -77,6 +94,7 @@
                   <input type="radio" name="classification" value="3" tabindex=100>국가/자치단체
                 </label>
               </div>
+              <span style="color: red;display: none;" id="classificationCheck">※기업형태를 선택해주세요</span>
             </div>
             <div class="form-group">
               <label class="my-2"><a title="팩스번호">팩스번호</a></label>
@@ -133,7 +151,7 @@
               <input type="file" name="buyer_documents" class="form-control" placeholder="사업자등록증 첨부" title="사업자등록증 첨부" tabindex=100 required>
             </div>
             <div class="form-group mt-5">
-              <button type="submit" class="theme-btn btn-style-one py-3 w-100" tabindex=100>회원가입</button>
+              <button type="submit" class="theme-btn btn-style-one py-3 w-100" onclick="validationJoin()" tabindex=100>회원가입</button>
             </div>
           </form>
 
