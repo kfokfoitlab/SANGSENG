@@ -5452,6 +5452,10 @@ Main Header
   margin-right: 100px;
   transition: all 300ms ease;
 }
+.main-header .logo img {
+  width: 110px;
+  padding-top: 5px;
+}
 
 .main-header .menu-box {
   position: static;

@@ -121,9 +121,9 @@
             <td><?=$item["cidx"]?></td>
             <td title=<?=$status?>><?=$status?></td>
             <td title=<?=$item["product_name"]?>><?=$item["product_name"]?></td>
-            <td title=<?=$item["product_quantity"]?>><?=$item["product_quantity"]?></td>
-            <td title=<?=$item["product_price"]?>><?=number_format($item["product_price"])?>원</td>
-            <td title="25,000,000"><?=number_format($item["reduction_money"])?>원</td>
+            <td class="text-end" title=<?=$item["product_quantity"]?>><?=$item["product_quantity"]?></td>
+            <td class="text-end" title=<?=$item["product_price"]?>><?=number_format($item["product_price"])?>원</td>
+            <td class="text-end" title="25,000,000"><?=number_format($item["reduction_money"])?>원</td>
 
             <?php
             if($item["contract_status"] == 2 || $item["contract_status"] == 5){
