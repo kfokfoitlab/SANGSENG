@@ -1,6 +1,11 @@
 <?php
   // Left Menu
   require APPPATH . '/Views/Buyer/Components/Left.html';
+
+      if($_SESSION["login_info"]["type"] != "buyer"){
+        echo "<script>alert('판매기업으로 로그인 되었습니다');</script>";
+        echo "<script>location.href = '/Seller';</script>";
+      }
 ?>
 <div class="flex-grow-1">
   <section class="buyer-info">
@@ -22,7 +27,7 @@
             </div>
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="비밀번호 필수입력">현재 비밀번호</a></label>
-              <input type="password" name="password" placeholder="영문+숫자+특수문자 조합 6자 이상" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,32}$" title="영문+숫자+특수문자 조합 6자 이상 비밀번호 입력" tabindex=100 required>
+              <input type="password" name="password" placeholder="영문+숫자+특수문자 조합 6자 이상" title="영문+숫자+특수문자 조합 6자 이상 비밀번호 입력" tabindex=100 required>
             </div>
 
             <div class="form-group">

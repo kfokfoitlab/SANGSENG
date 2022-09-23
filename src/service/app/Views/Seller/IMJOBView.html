@@ -11,7 +11,13 @@
           <input type="hidden" name="idx" value="<?=$data['idx']?>">
           <div class="d-flex py-5">
             <div class="me-5">
-              <div class="border upload_face-preview" style="width: 150px; height: 192px; background: center / contain url('/uploads/<?=$data["upload_face"]?>') no-repeat;"></div>
+              <?php
+                $imgUrl = "/assets/images/resource/icons/person_filled.svg";
+                if($data["upload_face"] != ""){
+                  $imgUrl = "/uploads/".$data["upload_face"];
+                }
+              ?>
+              <div class="border upload_face-preview" style="width: 150px; height: 192px; background: center / contain url('<?=$imgUrl?>') no-repeat;"></div>
             </div>
 
             <div class="flex-grow-1">
@@ -90,9 +96,10 @@
                   <label for="upload_face" class="form-label m-0 fw-bold">증명사진</label>
                 </div>
                 <div class="col-6">
-                  <button class="btn btn-primary" type="button"  onclick="downloadFileNew('<?=$data["upload_face"]?>');">기존사진 다운로드</button>
+                  <button class="btn btn-primary" type="button"  onclick="downloadFileNew('<?=$data["upload_face"]?>','<?=$data["upload_face_ori"]?>');">기존사진 다운로드</button>
                   <input class="form-control" type="file" id="upload_face" name="upload_face" value="">
                   <input type="hidden" name="upload_face_ori_name" value='<?=$data["upload_face"]?>'>
+                  <input type="hidden" name="upload_face_ori" value='<?=$data["upload_face_ori"]?>'>
                 </div>
               </div>
 
@@ -101,9 +108,10 @@
                   <label for="upload_card" class="form-label m-0 fw-bold">복지카드</label>
                 </div>
                 <div class="col-6">
-                  <button class="btn btn-primary" type="button"  onclick="downloadFileNew('<?=$data["upload_card"]?>');">기존복지카드 다운로드</button>
+                  <button class="btn btn-primary" type="button"  onclick="downloadFileNew('<?=$data["upload_card"]?>','<?=$data["upload_card_ori"]?>');">기존복지카드 다운로드</button>
                   <input class="form-control" type="file" id="upload_card" name="upload_card" value="">
                   <input type="hidden" name="upload_card_ori_name" value='<?=$data["upload_card"]?>'>
+                  <input type="hidden" name="upload_card_ori" value='<?=$data["upload_card_ori"]?>'>
                 </div>
               </div>
 
@@ -166,9 +174,13 @@
 		}
 	};
 
-	function downloadFileNew(fileName){
-    location.href="/Seller/IMJOB/downloadFileNew?fileName="+fileName;
-	};
+	function downloadFileNew(fileName,fileNameOri){
+		if(fileName == ""){
+			alert("등록된 파일이 없습니다");
+    }else {
+			location.href = "/Seller/IMJOB/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+		}
+  };
 
 	function goList(p_n){
 		location.href="/Seller/IMJOB/List?p_n="+p_n;

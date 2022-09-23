@@ -1,3 +1,21 @@
+<script>
+
+	$(function() {
+		$('#classificationCheck').hide();
+	});
+
+	function validationJoin(){
+		if(!$('input:radio[name="classification"]').is(':checked')){
+			$('#classificationCheck').show();
+			$('input:radio[name="classification"]:eq(1)').focus();
+			return false;
+		}else {
+			$('#classificationCheck').hide();
+		};
+	}
+
+</script>
+
 <section class="container" style="padding-top: 172px; margin-bottom: 128px;">
 
   <div id="row">
@@ -128,7 +146,7 @@
               <input type="file" name="seller_information" class="form-control" placeholder="기업상세정보 첨부" title="기업상세정보 첨부" tabindex=100>
             </div>
             <div class="form-group mt-5">
-              <button type="submit" class="theme-btn btn-style-one py-3 w-100" tabindex=100>회원가입</button>
+              <button type="submit" class="theme-btn btn-style-one py-3 w-100" onclick="validationJoin();" tabindex=100>회원가입</button>
             </div>
           </form>
 

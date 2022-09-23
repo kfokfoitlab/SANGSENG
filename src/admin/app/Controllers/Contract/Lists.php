@@ -157,4 +157,26 @@ class Lists extends Base
         }
 
     }
+	
+	public function ContractUpdate()
+	{ // {{{
+		$this->model->ContractStatus($_POST);
+		echo "
+        <script>
+        alert('최신화되었습니다.');
+        location.href = '/Contract/Lists';
+		</script>
+        ";
+	} // }}}
+	
+	public function ContractDelete()
+	{ // {{{
+		$this->model->ContractDelete($_GET);
+		echo "
+        <script>
+        alert('삭제되었습니다.');
+        location.href = '/Contract/Lists';
+		</script>
+        ";
+	} // }}}
 }

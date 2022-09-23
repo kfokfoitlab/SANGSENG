@@ -42,13 +42,17 @@ $base = 1914400;
 $employ = $employ-$disabled;
 $total = $base * $employ*12 ;
 $total = $total + ($total*0.1);
-$total_money = number_format($total);
+$total_money = number_format($total); // 납부금액
+
 $Expectation =$_SESSION['Expectation']['Expectation'];
 $Expectation_money = number_format($Expectation);
-$reduction_money = $_SESSION['ReductionMoney']['reduction_money'];
-$Remainder = $total -$reduction_money;
+
+$reduction_money = $data['ReductionMoney']['reduction_money'];
+$buyer_reduction = $buyer_reduction['buyer_reduction'];
+$Remainder = $total -$buyer_reduction;
 $Remainder_money = number_format($Remainder);
 $reduction_money =  number_format($_SESSION['ReductionMoney']['reduction_money']);
+$buyer_reduction =  number_format($buyer_reduction);
 
 ?>
 <?php
@@ -72,7 +76,7 @@ $reduction_money =  number_format($_SESSION['ReductionMoney']['reduction_money']
 
   <div class="mt-4">
     <?php
-    if(!($_SESSION["Contract"])) {
+    if(!$_SESSION["Contract"]) {
     ?>
     <div class="pt-3" style="border-top: 1px dashed #6c757d;">
       <p class="text-white" style="font-size: 0.8rem;">* 현재 진행중인 계약이 없습니다.</p>

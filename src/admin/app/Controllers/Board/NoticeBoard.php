@@ -96,6 +96,17 @@
         ";
 		}
 		
+		public function noticeDelete()
+		{
+			$this->model->noticeDelete($_GET);
+			echo "
+            <script>
+            	alert('삭제되었습니다');
+                history.back();
+            </script>
+        ";
+		}
+		
 		public function noticeDetail()
 		{
 			$data = $this->model->getNoticeBoard($_GET);

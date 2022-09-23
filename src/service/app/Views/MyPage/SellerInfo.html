@@ -40,80 +40,79 @@
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <label class="my-2"><sup class="text-danger">*</sup><a title="이메일주소 필수입력">이메일주소(로그인 시 아이디로 사용됩니다)</a></label>
-                  <input type="email" name="email" placeholder="이메일주소를 입력해 주세요" title="이메일주소 입력" tabindex=100 required>
+                <div class="read-only-group">
+                  <p class="my-2"><sup class="text-danger">*</sup><a title="이메일주소">이메일주소</a></p>
+                  <p type="text"><?=$data["email"]?></p>
                 </div>
                 <div class="form-group">
                   <label class="my-2"><sup class="text-danger">*</sup><a title="비밀번호 필수입력">현재 비밀번호</a></label>
                   <input type="password" name="password" placeholder="영문+숫자+특수문자 조합 6자 이상"
-                         pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,32}$"
                          title="영문+숫자+특수문자 조합 6자 이상 비밀번호 입력" tabindex=100 required>
                 </div>
                 <div class="form-group">
                   <label class="my-2"><sup class="text-danger">*</sup><a title="담당자 이름 필수입력">담당자 이름</a></label>
-                  <input type="text" name="seller_name" placeholder="담당자이름을 입력해주세요" title="담당자 이름 입력" tabindex=100
+                  <input type="text" name="seller_name" value ="<?=$data['seller_name']?>" placeholder="담당자이름을 입력해주세요" title="담당자 이름 입력" tabindex=100
                          required>
                 </div>
                 <div class="form-group">
                   <label class="my-2"><sup class="text-danger">*</sup><a title="휴대폰번호 필수입력">휴대폰번호</a></label>
-                  <input type="text" class="mask-phone" name="phone" placeholder="숫자만 입력해주세요" title="휴대폰번호 숫자만 입력"
+                  <input type="text" class="mask-phone"   value ="<?=$data['phone']?>" name="phone" placeholder="숫자만 입력해주세요" title="휴대폰번호 숫자만 입력"
                          tabindex=100 required>
                 </div>
                 <div class="form-group">
                   <label class="my-2"><sup class="text-danger">*</sup><a title="사업체명 필수입력">사업체명</a></label>
-                  <input type="text" name="company_name" placeholder="사업체명을 입력해주세요" title="사업체명 입력" tabindex=100
+                  <input type="text" name="company_name" value ="<?=$data['company_name']?>" placeholder="사업체명을 입력해주세요" title="사업체명 입력" tabindex=100
                          required>
                 </div>
                 <div class="form-group">
                   <label class="my-2"><sup class="text-danger">*</sup><a title="사업자등록번호 필수입력">사업자등록번호</a></small>
                   </label>
-                  <input type="text" name="company_code" class="mask-business-number" placeholder="숫자만 입력해 주세요."
+                  <input type="text" name="company_code"  value ="<?=$data['company_code']?>" class="mask-business-number" placeholder="숫자만 입력해 주세요."
                          title="사업자등록번호 입력" tabindex=100 required>
                 </div>
                 <div class="form-group">
                   <p class="mt-4 mb-2 text-dark"><sup class="text-danger">*</sup><a title="기업형태 필수입력">기업형태</a></p>
                   <div>
                     <label class="me-2">
-                      <input type="radio" name="classification" value="1" class="me-1" checked required>장애인 표준사업장
+                      <input type="radio" name="classification" value="1" class="me-1" <?php if($data['classification']==1){echo "checked";}?>>장애인 표준사업장
                     </label>
                     <label class="me-2">
-                      <input type="radio" name="classification" value="2" class="me-1">장애인 직업재활시설
+                      <input type="radio" name="classification" value="2" class="me-1" <?php if($data['classification']==2){echo "checked";}?>>장애인 직업재활시설
                     </label>
                     <label class="me-2">
-                      <input type="radio" name="classification" value="3" class="me-1">중증장애인생산품 생산시설
+                      <input type="radio" name="classification" value="3" class="me-1" <?php if($data['classification']==3){echo "checked";}?>>중증장애인생산품 생산시설
                     </label>
                     <label class="me-2">
-                      <input type="radio" name="classification" value="4" class="me-1">장애인기업
+                      <input type="radio" name="classification" value="4" class="me-1" <?php if($data['classification']==4){echo "checked";}?>>장애인기업
                     </label>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="my-2"><a title="팩스번호">팩스번호</a></label>
-                  <input type="text" class="mask-phone" name="fax" placeholder="숫자, '-'만 입력" title="팩스번호 숫자, '-'만 입력"
+                  <input type="text" class="mask-phone" name="fax" value ="<?=$data['fax']?>" placeholder="숫자, '-'만 입력" title="팩스번호 숫자, '-'만 입력"
                          tabindex=100>
                 </div>
                 <div class="form-group">
                   <label class="my-2"><sup class="text-danger">*</sup><a title="담당자 이름 필수입력">주소</a></label>
-                  <input type="text" name="address" placeholder="주소를 입력해주세요" title="담당자 이름 입력" tabindex=100 required>
+                  <input type="text" name="address"  value ="<?=$data['address']?>" placeholder="주소를 입력해주세요" title="담당자 이름 입력" tabindex=100 required>
                 </div>
                 <div class="form-group">
                   <label class="my-2"><sup class="text-danger">*</sup><a title="올해 예상 매출액 필수입력">올해 예상 매출액</a></label>
-                  <input type="text" name="seller_sales" placeholder="숫자만 입력"
+                  <input type="text" name="seller_sales" value ="<?=$data['seller_sales']?>"  placeholder="숫자만 입력"
                          oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')"
                          title="상시 근로자 수 입력" tabindex=100 required>
                 </div>
                 <div class="form-group">
                   <label class="my-2"><sup class="text-danger">*</sup><a title="경증 장애인 근로자 수 필수입력">경증 장애인 근로자
                     수</a></label>
-                  <input type="text" name="mild_disabled" placeholder="숫자만 입력"
+                  <input type="text" name="mild_disabled" value ="<?=$data['mild_disabled']?>"  placeholder="숫자만 입력"
                          oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')"
                          title="경증 장애인 근로자 수 입력" tabindex=100 required>
                 </div>
                 <div class="form-group">
                   <label class="my-2"><sup class="text-danger">*</sup><a title="중증 장애인 근로자 수 필수입력">중증 장애인 근로자
                     수</a></label>
-                  <input type="text" name="severely_disabled" placeholder="숫자만 입력"
+                  <input type="text" name="severely_disabled" value ="<?=$data['severely_disabled']?>" placeholder="숫자만 입력"
                          oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')"
                          title="중증 장애인 근로자 수 입력" tabindex=100 required>
                 </div>

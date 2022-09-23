@@ -37,11 +37,12 @@
             </div>
             <div class="col-10">
               <div class="d-flex">
-                <button class="btn btn-outline-primary me-3" type="button" onclick="downloadFileNew('<?=$upload_file?>');">기존파일
+                <button class="btn btn-outline-primary me-3" type="button" onclick="downloadFileNew('<?=$upload_file?>','<?=$upload_file_ori?>');">기존파일
                   다운로드
                 </button>
                 <button class="btn btn-outline-warning" type="button" id="uploadOn">파일수정</button>
                 <input type="hidden" name="upload_file_ori_name" value='<?=$upload_file?>'>
+                <input type="hidden" name="upload_file_ori" value='<?=$upload_file_ori?>'>
               </div>
               <input class="form-control" style="margin-top: 5px;" type="file" id="upload_file" name="upload_file"
                      value="">
@@ -108,8 +109,12 @@
     }
   };
 
-  function downloadFileNew(fileName) {
-    location.href = "/IMJOB/Lists/downloadFileNew?fileName=" + fileName;
+  function downloadFileNew(fileName,fileNameOri) {
+		if(fileName == ""){
+			alert("등록된 파일이 없습니다");
+		}else {
+			location.href = "/IMJOB/Lists/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+		}
   };
 
   function goList() {

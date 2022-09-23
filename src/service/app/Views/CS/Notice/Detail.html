@@ -22,8 +22,8 @@
         ?>
         <tr class='attach-row'>
           <td colspan='4' class='py-3'>첨부파일 :
-            <?=$upload_file?>
-            <button class='btn btn-sm btn-outline-secondary ms-2 fw-normal' onclick="downloadFileNew('<?=$upload_file?>');">다운로드</button>
+            <?=$upload_file_ori?>
+            <button class='btn btn-sm btn-outline-secondary ms-2 fw-normal' onclick="downloadFileNew('<?=$upload_file?>','<?=$upload_file_ori?>');">다운로드</button>
           </td>
         </tr>
         <?php
@@ -38,7 +38,11 @@
   </section>
 </div>
 <script>
-  function downloadFileNew(fileName){
-    location.href="/Download/downloadFileNew?fileName="+fileName;
+  function downloadFileNew(fileName,fileNameOri){
+		if(fileName == ""){
+			alert("등록된 파일이 없습니다");
+		}else {
+			location.href = "/Download/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+		}
   };
 </script>

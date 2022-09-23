@@ -42,6 +42,7 @@ class MyPage extends BaseController
         }
     public function ContractUpdate()
     { // {{{
+
         $result = $this->mypage_model->ContractStatus($_POST);
             echo "
         <script>

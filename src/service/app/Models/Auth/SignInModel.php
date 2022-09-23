@@ -30,7 +30,6 @@ class SignInModel extends CommonModel
             from
                 buyer_company
             where
-                status != '9' and
                 email = '".$email."' and
                 password = SHA2('".$password."', 256)
             limit 1
@@ -47,6 +46,7 @@ class SignInModel extends CommonModel
                 ,"buyer_name" => $row["buyer_name"]
                 ,"company_name" => $row["company_name"]
                 ,"email" => $row["email"]
+                ,"phone" => $row["phone"]
             );
             $_SESSION["buyer_info"] = $this->getBuyerinfo();
             $_SESSION["Expectation"] = $this->ExpectationMoney();
@@ -74,7 +74,6 @@ class SignInModel extends CommonModel
             from
                 seller_company
             where
-                status != '9' and
                 email = '".$email."' and
                 password = SHA2('".$password."', 256)
             limit 1
@@ -90,7 +89,7 @@ class SignInModel extends CommonModel
                 ,"seller_name" => $row["seller_name"]
                 ,"company_name" => $row["company_name"]
                 ,"email" => $row["email"]
-
+                ,"phone" => $row["phone"]
             );
             $uuid = $_SESSION["login_info"]["uuid"];
             $_SESSION["totalSales"] = $this->getTotalSales($uuid);
@@ -144,21 +143,21 @@ class SignInModel extends CommonModel
     }
 
     public function ReductionMoney(){
-        $uuid = $_SESSION["login_info"]["uuid"];
-        $Reduction_money = [];
-        $query = "       
-                
-        select
-        sum(reduction_money) as reduction_money
-        from contract_condition
-        where buyer_uuid = '".$uuid."'
-        and  contract_status = 5
+        $uuid = $_SESSION['login_info']['uuid'];
+        $buyer_reduction =[];
+        $query = "
+            select
+                sum(reduction_money) as buyer_reduction
+            from
+                contract_condition
+            where 1=1
+            and   buyer_uuid = '".$uuid."'          
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
-            $Reduction_money = $row;
+            $buyer_reduction= $row;
         }
-        return $Reduction_money;
+        return $buyer_reduction;
     }
 
 
@@ -263,7 +262,7 @@ class SignInModel extends CommonModel
                 count(case when disability_degree=2 then 1 end) as degree_2_cnt
             from ".$table_name." where 1=1
 			 and company_code= '".$seller_data["company_code"]."'
-			 and (del_yn != 'y' or del_yn is null)
+			 and (del_yn != 'Y' or del_yn is null)
 			 and (status = 5)
         ";
 

@@ -76,6 +76,9 @@ $(document).ready(function(){
                         case "7":
                             html = "<span class='badge bg-danger'>반려</span>";
                             break;
+                        case "9":
+                            html = "<span class='badge bg-danger'>삭제</span>";
+                            break;
                     }
 
                     return html;
@@ -87,6 +90,7 @@ $(document).ready(function(){
                     html += "<input class='btn btn-info btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",1)' value='승인대기'>";
                     html += "<input class='btn btn-success btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",5)' value='승인'>";
                     html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",7)' value='반려'>";
+                    html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",9)' value='삭제'>";
 
                     return html;
                 }

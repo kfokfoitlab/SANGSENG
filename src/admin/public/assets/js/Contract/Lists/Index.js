@@ -68,7 +68,7 @@ $(document).ready(function(){
                     return html;
                 }
             }
-            ,{title: "진행상황변경", data: {"idx":"idx","buyer_email":"buyer_email","seller_email":"seller_email","uuid":"uuid","buyer_name":"buyer_name","seller_name":"seller_name","buyer_uuid":"buyer_uuid","seller_uuid":"seller_uuid","buyer_company":"buyer_company","seller_company":"seller_company",
+            ,{title: "계약서 전송", data: {"idx":"idx","buyer_email":"buyer_email","seller_email":"seller_email","uuid":"uuid","buyer_name":"buyer_name","seller_name":"seller_name","buyer_uuid":"buyer_uuid","seller_uuid":"seller_uuid","buyer_company":"buyer_company","seller_company":"seller_company",
 						"contract_status":"contract_status"}, visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){
                     var buyer_email = data['buyer_email'];
@@ -99,21 +99,14 @@ $(document).ready(function(){
                     return html;
                 }
             }
-            ,{title: "계약상태 보기", data: {"buyer_uuid":"buyer_uuid", "workflow_id":"workflow_id"}, visible: true, orderable: false, className: "text-center noExport",
-                "render": function( data, type, row, meta ){
-                    var html = "";
-                    html = "<button onclick='statusCheck(\"updateType\",\"all\");'class='badge bg-primary'>상태보기</button>";
-
-               /*     html += "<a";
-                    html += "   class='btn btn-sm btn-outline-primary text-nowrap'";
-                    html += "   href='/"+_CONTROLLER+"/Detail/"+data+"' target='detail'>";
-                    html += "   상세보기";
-                    html += "</a>";*/
-
-                    return html;
-
-                }
-            }
+						,{title: "삭제", data: "idx", visible: true, className: "text-nowrap",
+						"render": function( data, type, row, meta ){
+							let html = "";
+								html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='contractDelete(" + data + ")' value='삭제'>";
+							return html;
+						}
+					}
+						
         ],
         "initComplete": function(settings, json)
         {
@@ -153,6 +146,14 @@ function statusUpdate(idx,status){
     location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
 }
 
+function contractDelete(idx){
+	if(confirm("삭제하시겠습니까?")) {
+		location.href = "/" + _CONTROLLER + "/ContractDelete?idx=" + idx;
+	}else {
+		return false;
+	}
+}
+
 function playingAlert(){
 	alert('이미 진행중인 계약입니다');
 }
@@ -170,19 +171,20 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
             is_preview: false,
             recipient_list: [
                 {order: 1, email: buyer_email, name: buyer_name},
-                {order: 2, email: seller_email, name: seller_name}
+                {order: 2, email: seller_email, name: seller_name},
+								{order: 3, email: buyer_email, name: buyer_email}
             ],
             field_list: [{name: 'buyer_uuid', value: buyer_uuid}, {name: 'seller_uuid', value: seller_uuid},
-							{name: 'updateType', value: "all"}],
+							{name: 'updateType', value: 'all'}],
             workflow_name: buyer_company +" 기업과" + seller_company + " 기업의 계약서" ,
-            template_id: 6,
+            template_id: 9
         })
     };
 // workflowid response로 받아서 계약서 insert할때 넣기(key값)
      fetch('https://docs.esignon.net/api/v3/workflows/start?offset=%2B09%3A00', options)
         .then(response => response.json())
         .then(response => location.href = "/"+_CONTROLLER+"/contractSubmit?idx="+idx+"&status="+status+"&workflow_id="+response["workflow_id"])
-         .then(response => console.log(response))
+				 .then(response => console.log(response))
         .catch(err => console.error(err));
 
     /* let text = response.text();
@@ -191,7 +193,7 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
  //   location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
 }
 
-function statusCheck(field_name,field_value) {
+function contract_update(field_name,field_value) {
 	var field_name = field_name;
 	var field_value = field_value;
 	const options = {
@@ -206,17 +208,28 @@ function statusCheck(field_name,field_value) {
 			.then(response => response.json())
 			.then(response => {
 				var j = 0;
-				for (var i = 0; i < response['workflow_list'].length; i++) {
-					if (response['workflow_list'][i]['status'] == "Playing"
-							/*&& response['workflow_list'][i]['workflow_id'] == workflow_id*/) {
-							alert("진행중입니다");
-					}else if(response['workflow_list'][i]['status'] == "Complete"
-							/*&& response['workflow_list'][i]['workflow_id'] == workflow_id*/){
-						alert("계약완료");
+				var workflow_id = [];
+				for(var i =0; i <response['workflow_list'].length; i++){
+					if(response['workflow_list'][i]['status'] == "Complete"){
+						workflow_id[j] = response['workflow_list'][i]['workflow_id'];
+						$('#workflow_id').val(workflow_id);
+						$('#contract_status').val(5);
+						j++;
 					}
 				}
-			//	location.href='/Buyer/MyPage/Contract?workflow_id='+workflow_id+'&updateResult=success';
-				//$("#myForm").submit();
+				$("#statusForm").submit();
+				
+				j = 0;
+				for(var i =0; i <response['workflow_list'].length; i++){
+					if(response['workflow_list'][i]['status'] == "Playing"){
+						workflow_id[j] = response['workflow_list'][i]['workflow_id'];
+						$('#workflow_id').val(workflow_id);
+						$('#contract_status').val(2);
+						j++;
+					}
+				}
+				$("#statusForm").submit();
+				
 			})
 			.catch(err => console.error(err));
 }

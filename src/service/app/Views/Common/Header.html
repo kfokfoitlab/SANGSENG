@@ -46,7 +46,7 @@ echo doctype("html5");
         <div class="d-flex justify-content-between py-1">
           <a href="/assets/download/연계고용안내.pdf" download class="btn py-0" tabindex=1>장애인 연계고용 제도</a>
           <ul class="list-unstyled d-flex justify-content-center">
-            <li class=""><button class="btn py-0" tabindex=2>이용방법</button></li>
+<!--            <li class=""><button class="btn py-0" tabindex=2>이용방법</button></li>-->
             <li class=""><a href="/Reduction/Calculator" class="btn py-0" tabindex=3>고용부담금계산기</a></li>
             <li class=""><a href="/Reduction/Help" class="btn py-0" tabindex=4>감면신청도우미</a></li>
             <li class=""><a href="/CS/Notice" class="btn py-0" tabindex=5>고객센터</a></li>
@@ -68,17 +68,17 @@ echo doctype("html5");
               <!-- brand --> <?php
             if(@$_SESSION["login"] != "success"){
             ?>
-              <h1 class="logo"><a href="/" tabindex=10><img src="https://kfo.ai/images/top/top_06_r_17_17.png" alt="한국직업개발원로고" title="한국직업개발원로고"></a></h1>
+              <h1 class="logo"><a href="/" tabindex=10><img src="/assets/images/logo.png" alt="상생몰로고" title="상생몰로고"></a></h1>
              <?php
               } else {
               if($_SESSION["login_info"]["type"] == "buyer"){
               ?>
-              <h1 class="logo"><a href="/Buyer" tabindex=10><img src="https://kfo.ai/images/top/top_06_r_17_17.png" alt="한국직업개발원로고" title="한국직업개발원로고"></a></h1>
+              <h1 class="logo"><a href="/Buyer" tabindex=10><img src="/assets/images/logo.png" alt="상생몰로고" title="상생몰로고"></a></h1>
             <?php
               }
              else if($_SESSION["login_info"]["type"] == "seller"){
               ?>
-              <h1 class="logo"><a href="/Seller" tabindex=10><img src="https://kfo.ai/images/top/top_06_r_17_17.png" alt="한국직업개발원로고" title="한국직업개발원로고"></a></h1>
+              <h1 class="logo"><a href="/Seller" tabindex=10><img src="/assets/images/logo.png" alt="상생몰로고" title="상생몰로고"></a></h1>
             <?php
               }
             }

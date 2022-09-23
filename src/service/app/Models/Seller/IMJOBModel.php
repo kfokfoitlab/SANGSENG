@@ -37,6 +37,8 @@
 				,disability_degree = '".$data["disability_degree"]."'
 				,upload_face = '".$upload_face."'
 				,upload_card = '".$upload_card."'
+				,upload_face_ori = '".$files["upload_face"]["name"]."'
+				,upload_card_ori = '".$files["upload_card"]["name"]."'
                 ,register_date = '".date("Y-m-d H:i:s")."'
                 ,register_id = '".$_SESSION["login_info"]["uuid"]."'
         ";
@@ -54,12 +56,16 @@
 			$upload_face_ori = "upload_face";
 			$upload_face = $data["upload_face_ori_name"];
 			$upload_card = $data["upload_card_ori_name"];
+			$upload_face_ori_new = $data["upload_face_ori"];
+			$upload_card_ori_new = $data["upload_card_ori"];
 			if($files["upload_face"]["name"] != "") {
+				$upload_face_ori_new = $files["upload_face"]["name"];
 				$upload_face = uniqid() . "." . pathinfo($files["upload_face"]["name"], PATHINFO_EXTENSION);
 				$this->uploadFileNew($files, $upload_face, $allowed_ext, $upload_face_ori);
 			}
 			$upload_card_ori = "upload_card";
-			if($files["upload_face"]["name"] != "") {
+			if($files["upload_card"]["name"] != "") {
+				$upload_card_ori_new = $files["upload_card"]["name"];
 				$upload_card = uniqid() . "." . pathinfo($files["upload_card"]["name"], PATHINFO_EXTENSION);
 				$this->uploadFileNew($files, $upload_card, $allowed_ext, $upload_card_ori);
 			}
@@ -83,6 +89,8 @@
 				,disability_degree = '".$data["disability_degree"]."'
 				,upload_face = '".$upload_face."'
 				,upload_card = '".$upload_card."'
+				,upload_face_ori = '".$upload_face_ori_new."'
+				,upload_card_ori = '".$upload_card_ori_new."'
                 ,update_date = '".date("Y-m-d H:i:s")."'
                 ,update_id = '".$_SESSION["login_info"]["uuid"]."'
             where
@@ -101,7 +109,7 @@
             set
                 delete_date = '".date("Y-m-d H:i:s")."'
                 ,delete_id = '".$_SESSION["login_info"]["uuid"]."'
-                ,del_yn = 'y'
+                ,del_yn = 'Y'
             where
                 idx = ".$_GET["idx"]."
         ";
@@ -131,7 +139,7 @@
                 *
             from ".$table_name." where 1=1
 			 and company_code= '".$seller_data["company_code"]."'
-             and (del_yn != 'y' or del_yn is null)".$where_query."
+             and (del_yn != 'Y' or del_yn is null)".$where_query."
 
         ";
 			if($_GET["search_v"] != ""){

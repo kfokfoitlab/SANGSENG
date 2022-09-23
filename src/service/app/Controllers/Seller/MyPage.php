@@ -4,8 +4,7 @@ namespace App\Controllers\Seller;
 use App\Controllers\BaseController;
 use App\Models\Seller\ItemModel;
 use App\Models\DatabaseModel;
-use App\Models\Management\Company\ApplicationModel;
-use App\Models\Seller\SellerModel;
+use App\Models\Seller\SellerInfoModel;
 
 class Mypage extends BaseController
 {
@@ -17,15 +16,21 @@ class Mypage extends BaseController
     public function __construct()
     { //{{{
         $this->item_model = new ItemModel;
-        $this->seller_model = new SellerModel;
-        $this->application_model = new ApplicationModel;
+        $this->sellerinfo_model = new SellerInfoModel;
         $this->database_model = new DatabaseModel;
     } //}}}
 	
 	public function Info()
 	{
+        $uuid = $_SESSION["login_info"]["uuid"];
+        $data = $this->sellerinfo_model->getMyInfo($uuid);
+
+        $data = array(
+            "data" => $data,
+        );
+
 		echo view("Common/Header.html");
-		echo view('MyPage/SellerInfo.html');
+		echo view('MyPage/SellerInfo.html',$data);
 		echo view("Common/Footer.html");
 	}
 	

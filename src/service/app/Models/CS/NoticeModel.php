@@ -13,7 +13,7 @@
                 *
             from ".$this->table_name." where 1=1
 			 and board_status=1
-             and (del_yn != 'y' or del_yn is null)
+             and (del_yn != 'Y' or del_yn is null)
         ";
 			if($_GET["search_v"] != ""){
 				$query = $query." and (title like '%".$_GET["search_v"]."%'

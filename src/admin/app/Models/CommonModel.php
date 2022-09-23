@@ -387,13 +387,14 @@ class CommonModel extends dbModel
 	public function downloadFileNew(){
 		
 		$target_Dir = ROOTPATH."/public/uploads/";
+		$file_ori = $_GET["fileNameOri"];
 		$file = $_GET["fileName"];
 		$down = $target_Dir . $file;
 	//	$filesize = filesize($down);
 		
 		if (file_exists($down)) {
 			header("Content-Type:application/octet-stream");
-			header("Content-Disposition:attachment;filename=$file");
+			header("Content-Disposition:attachment;filename=$file_ori");
 			header("Content-Transfer-Encoding:binary");
 			header("Content-Length:" . filesize($target_Dir . $file));
 			header("Cache-Control:cache,must-revalidate");

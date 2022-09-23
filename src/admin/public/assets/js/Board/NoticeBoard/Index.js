@@ -15,8 +15,8 @@ $(document).ready(function(){
             ,type: "POST"
             ,data: function(data){
                 data.columns[1].search.value = $("#search-title").val();
-                data.columns[2].search.value = $("#search-id").val();
-                data.columns[3].search.value = $("#search-content").val();
+                data.columns[3].search.value = $("#search-id").val();
+                data.columns[4].search.value = $("#search-content").val();
             }
         },
         "order": [
@@ -24,6 +24,7 @@ $(document).ready(function(){
         ],
         "columns": [
              {title: "idx", data: "idx", visible: false}
+						,{title: "제목검색", data: "title", visible: false}
             ,{title: "제목", data: {"title":"title", "idx":"idx"}, visible: true, className: "text-nowrap w-50 text-center",
 						"render": function( data, type, row, meta ){
 							let html = "";
@@ -61,7 +62,7 @@ $(document).ready(function(){
 						,{title: "삭제", data: "idx", visible: true, className: "text-nowrap",
 						"render": function( data, type, row, meta ){
 							let html = "";
-							html = html + "<input class='btn btn-outline-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",7)' value='삭제'>";
+							html = html + "<input class='btn btn-outline-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='noticeDelete("+data+")' value='삭제'>";
 							return html;
 						}
 					}
@@ -107,5 +108,8 @@ function noticeRegister(){
 }
 function noticeDetail(){
 	location.href = "/"+_CONTROLLER+"/noticeDetail";
+}
+function noticeDelete(idx){
+	location.href = "/"+_CONTROLLER+"/noticeDelete?idx="+idx;
 }
 

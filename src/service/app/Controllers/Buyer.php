@@ -21,9 +21,11 @@ class Buyer extends BaseController
         $value = $_GET["value"];
         $data = $this->buyer_model->RecommendationList($value);
         $reduction =  $this->buyer_model->ReductionMoney();
+        $buyer_reduction =  $this->buyer_model->BuyerReduction();
         $data = array(
             "data" => $data["data"],
-            "reduction" => $reduction
+            "reduction" => $reduction,
+            "buyer_reduction" => $buyer_reduction
         );
         echo view("Common/Header.html");
         echo view('Buyer/Index.html', $data);
