@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+
+  <title>반려메세지</title>
+
+  <script>
+		function StatusUpdate() {
+      if($('#status_comment').val() == ""){
+				alert('반려메세지를 입력해주세요');
+				$('#status_comment').focus();
+      }else {
+				var form = $('#myform');
+				form.submit();
+      }
+		}
+  </script>
+</head>
+<body class="text-center">
+<form method="get" action="/Product/Lists/statusUpdate" id="myform" name="myform">
+  <input type="hidden" name="idx" value="<?=$_GET['idx']?>">
+  <input type="hidden" name="status" value="7">
+  <br>
+  <h1 class="display-5">반려메세지</h1>
+  <hr>
+  <textarea name="status_comment" id="status_comment" class="form-control" style="height: 150px;resize: none;" placeholder="반려 메세지를 입력해주세요."></textarea>
+    <br>
+  <input type="button" class="btn btn-danger" onclick="StatusUpdate()" value="확인">
+</form>
+</body>
+</html>

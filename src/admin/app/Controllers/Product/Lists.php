@@ -142,11 +142,25 @@ class Lists extends Base
         ,"status" => $_GET["status"]
         );
         $this->model->statusUpdate($data);
-        echo "
+		if($_GET["status"] == 7){
+			echo "
+            <script>
+            	alert('반려되었습니다');
+                opener.location.reload();
+    			window.close();
+            </script>
+        ";
+		}else {
+			echo "
             <script>
                 history.back();
             </script>
-        ";
+       	 ";
+		}
     }
+	
+	public function StatusComment(){
+		echo view(_CONTROLLER.'/StatusComment.html');
+	}
 
 }

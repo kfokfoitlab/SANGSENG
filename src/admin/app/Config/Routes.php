@@ -101,6 +101,7 @@ $routes->group('Product', ['namespace' => 'App\Controllers\Product'], static fun
     $routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
     $routes->get ($group_name.'/Update/(:any)',     $group_name.'::Update/$1');
     $routes->get ($group_name.'/statusUpdate', $group_name.'::statusUpdate');
+	$routes->get ($group_name.'/StatusComment(:any)', $group_name.'::StatusComment$1');
 
     $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
 });

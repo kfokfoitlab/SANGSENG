@@ -249,6 +249,8 @@ class ProductModel extends CommonModel
         $update_query = "";
         if($data['status'] == 9){
             $update_query = "status = ".$data["status"].", del_yn = 'Y' ";
+        }elseif($data['status'] == 7){
+	        $update_query = "status = ".$data["status"].", del_yn ='N', status_comment = '".$_GET["status_comment"]."'";
         }else{
             $update_query = "status = ".$data["status"].", del_yn ='N' ";
         }

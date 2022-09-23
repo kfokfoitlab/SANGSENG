@@ -89,7 +89,7 @@ $(document).ready(function(){
                     let html = "";
                     html += "<input class='btn btn-info btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",1)' value='승인대기'>";
                     html += "<input class='btn btn-success btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",5)' value='승인'>";
-                    html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",7)' value='반려'>";
+                   html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='window.open(\"/Product/Lists/StatusComment?idx="+data+"\", \"_blank\", \"width=500,height=330,toolbars=no,scrollbars=no\"); return false;' value='반려'>";
                     html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",9)' value='삭제'>";
 
                     return html;
