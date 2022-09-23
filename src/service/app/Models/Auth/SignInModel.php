@@ -51,7 +51,7 @@ class SignInModel extends CommonModel
             $_SESSION["buyer_info"] = $this->getBuyerinfo();
             $_SESSION["Expectation"] = $this->ExpectationMoney();
             $_SESSION["Contract"]= $this->getContractList();
-            $_SESSION["ReductionMoney"]= $this->ReductionMoney();
+            $_SESSION["ReductionMoney"]= $this->BuyerReduction();
 
             return array(
                  "result" => "success"
@@ -142,7 +142,24 @@ class SignInModel extends CommonModel
         return $Expectation;
     }
 
-    public function ReductionMoney(){
+    /*public function ReductionMoney(){
+        $uuid = $_SESSION['login_info']['uuid'];
+        $buyer_reduction =[];
+        $query = "
+            select
+                sum(reduction_money) as buyer_reduction
+            from
+                contract_condition
+            where 1=1
+            and   buyer_uuid = '".$uuid."'          
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $buyer_reduction= $row;
+        }
+        return $buyer_reduction;
+    }*/
+    public function BuyerReduction(){
         $uuid = $_SESSION['login_info']['uuid'];
         $buyer_reduction =[];
         $query = "
@@ -159,7 +176,6 @@ class SignInModel extends CommonModel
         }
         return $buyer_reduction;
     }
-
 
     public function getContractList(){
         $uuid = $_SESSION["login_info"]["uuid"];

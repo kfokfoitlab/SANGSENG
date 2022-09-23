@@ -48,7 +48,7 @@ $Expectation =$_SESSION['Expectation']['Expectation'];
 $Expectation_money = number_format($Expectation);
 
 $reduction_money = $data['ReductionMoney']['reduction_money'];
-$buyer_reduction = $buyer_reduction['buyer_reduction'];
+$buyer_reduction = $_SESSION['ReductionMoney']['buyer_reduction'];
 $Remainder = $total -$buyer_reduction;
 $Remainder_money = number_format($Remainder);
 $reduction_money =  number_format($_SESSION['ReductionMoney']['reduction_money']);
