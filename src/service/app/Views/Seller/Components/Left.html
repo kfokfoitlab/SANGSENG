@@ -159,27 +159,11 @@ $total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCoun
   </div>
 </div>
 
-<!-- jobOn Modal -->
-<div class="modal fade" id="jpbOnModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="jpbOnModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="jpbOnModalLabel">장애인 근로자 고용</h5>
-      </div>
-      <div class="modal-body py-4 text-center">
-        장애인 인재 채용 플랫폼 <strong>『jobon』</strong>으로 연결합니다.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="togglePosition(false)">취소</button>
-        <a href="http://jobon.kr/" type="button" class="btn btn-primary" target="_blank" rel="noopener noreferrer">확인</a>
-      </div>
-    </div>
-  </div>
-</div>
 <input type="hidden" name ="uuid" id = "uuid" value="<?=$_SESSION['login_info']['uuid']?>">
 <form name="myForm" id="myForm" method="post" action="/Seller/Contract">
   <input type="hidden" name ="workflow_id" id="workflow_id" value="">
 </form>
+
 <script>
   const currentURI = window.location.href;
   const headingOne = document.querySelector('div[aria-labelledby="headingOne"]');
@@ -251,3 +235,36 @@ $total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCoun
             .catch(err => console.error(err));
   }
 </script>
+
+<style>
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1055;
+    display: none;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+    background: transparent;
+  }
+</style>
+<!-- jobOn Modal -->
+<div class="modal fade" id="jpbOnModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="jpbOnModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="jpbOnModalLabel">장애인 근로자 고용</h5>
+      </div>
+      <div class="modal-body py-4 text-center">
+        장애인 인재 채용 플랫폼 <strong>『jobon』</strong>으로 연결합니다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="togglePosition(false)">취소</button>
+        <a href="http://jobon.kr/" type="button" class="btn btn-primary" target="_blank" rel="noopener noreferrer">확인</a>
+      </div>
+    </div>
+  </div>
+</div>

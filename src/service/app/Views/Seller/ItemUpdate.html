@@ -151,6 +151,9 @@
                       <label for="representative-img" class="form-label">대표 이미지</label>
                       <input id="representative-img" name="representative_image" class="form-control product-img-input"
                            value ="" type="file" accept="image/*" />기존파일 : <?=$item['representative_image']?>
+                      <button class="btn btn-outline-primary me-3" type="button" onclick="downloadFileNew('<?=$item['representative_image']?>','대표이미지<?=substr($item['representative_image'],-4)?>');">기존파일
+                        다운로드
+                      </button>
                     </div>
                   </li>
                   <!-- 추가이미지 -->
@@ -162,6 +165,9 @@
                       <label for="product-img1" class="form-label text-secondary">추가 이미지 01<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
                       <input id="product-img1" value ="" name="product_image1" class="form-control product-img-input" type="file"
                              accept="image/*"/>기존파일 : <?=$item['product_image1']?>
+                      <button class="btn btn-outline-primary me-3" type="button" onclick="downloadFileNew('<?=$item['product_image1']?>','추가이미지01<?=substr($item['product_image1'],-4)?>');">기존파일
+                        다운로드
+                      </button>
                     </div>
                   </li>
                   <li class="row">
@@ -172,6 +178,9 @@
                       <label for="product-img2" class="form-label text-secondary">추가 이미지 02<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
                       <input id="product-img2" name="product_image2" value ="" class="form-control product-img-input" type="file"
                              accept="image/*"/>기존파일 : <?=$item['product_image2']?>
+                      <button class="btn btn-outline-primary me-3" type="button" onclick="downloadFileNew('<?=$item['product_image2']?>','추가이미지02<?=substr($item['product_image2'],-4)?>');">기존파일
+                        다운로드
+                      </button>
                     </div>
                   </li>
                 </ul>
@@ -186,12 +195,15 @@
             </div>
             <li class="row">
             <div class="col-2">
-              <div class="preview-bg-img border bg-light border rounded"></div>
+              <div class="preview-bg-img border bg-light border rounded" style="background-size: contain;background-image: url('/uploads/<?=$item['detail_img']?>')"></div>
             </div>
             <div class="col-6 ms-4 px-4 py-3">
               <label for="detail-img" class="form-label text-secondary">상품상세 이미지<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
               <input id="detail-img" name="detail_img" class="form-control product-img-input" type="file"
                      accept="image/*"/>기존파일 : <?=$item['detail_img']?>
+              <button class="btn btn-outline-primary me-3" type="button" onclick="downloadFileNew('<?=$item['detail_img']?>','상세이미지<?=substr($item['detail_img'],-4)?>');">기존파일
+                다운로드
+              </button>
             </div>
             </li>
         <?php
@@ -239,5 +251,11 @@
     document.myForm.submit();
   }
 */
-
+	function downloadFileNew(fileName,fileNameOri){
+		if(fileName == ""){
+			alert("등록된 파일이 없습니다");
+		}else {
+			location.href = "/Download/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+		}
+	};
 </script>

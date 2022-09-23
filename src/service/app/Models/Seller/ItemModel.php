@@ -123,7 +123,7 @@ public function ItemUpdateSubmit($files, $data){
                 ,status = '".$status."'
                 ,representative_image = '".$upload_representative."'
                 ,product_image1 = '".$upload_image1."'
-                ,product_image1 = '".$upload_image1."'
+                ,product_image2 = '".$upload_image2."'
                 ,detail_img = '".$upload_detail_image."'            
                 ,update_id  = '".$uuid."'      
                 ,update_date = '".date("Y-m-d H:i:s")."'
