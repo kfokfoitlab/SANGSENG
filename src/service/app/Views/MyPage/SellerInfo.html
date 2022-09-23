@@ -11,11 +11,11 @@
         <div class="col-12">
           <div class="default-form border rounded my-4 p-4">
             <div class="form-inner">
-              <form name="form-submit" method="post" action="" enctype="multipart/form-data">
+              <form name="form-submit" method="post" action="/Seller/MyPage/InfoUpdate" enctype="multipart/form-data">
                 <input type="hidden" name="sbs" value="<?=$sbs?>">
                 <input type="hidden" name="ads" value="<?=$ads?>">
 
-                <div class="add-logo-img mb-3">
+<!--                <div class="add-logo-img mb-3">
 
                   <div class="row">
                     <div class="col-2">
@@ -37,11 +37,14 @@
                       <input id="representative-img" name="representative_image" class="form-control product-img-input"
                            type="file" accept="image/*" required/>
                     </div>
+
+
                   </div>
-                </div>
+                </div>-->
 
                 <div class="read-only-group">
                   <p class="my-2"><sup class="text-danger">*</sup><a title="이메일주소">이메일주소</a></p>
+                  <input type="hidden" name="email" value="<?=$data['email']?>">
                   <p type="text"><?=$data["email"]?></p>
                 </div>
                 <div class="form-group">
@@ -126,6 +129,7 @@
                     등록증 or 장애인직업재활시설 등록증)첨부</a></label><br>
                   <input type="file" name="seller_documents" class="form-control" placeholder="인증서류 첨부"
                          title="인증서류 첨부" tabindex=100>
+                  <input type="hidden" name="seller_documents_ori_name" value="<?=$data['seller_documents']?>">
                 </div>
                 <div class="form-group">
                   <label class="my-2"><a title="매출증빙 첨부">매출증빙 첨부</a></label><br>
@@ -142,6 +146,7 @@
                     노출됩니다)</a></label><br>
                   <input type="file" name="seller_information" class="form-control" placeholder="기업상세정보 첨부"
                          title="기업상세정보 첨부" tabindex=100>
+                  <input type="hidden" name="seller_information_ori_name" value="<?=$data['seller_information']?>">
                 </div>
                 <div class="form-group mt-5 d-flex justify-content-center">
                   <button type="button" onclick="history.back()" class="theme-btn btn-style-three py-3 me-3" tabindex="100">취소</button>

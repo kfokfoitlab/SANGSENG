@@ -146,7 +146,9 @@
           }else if($item["status"] == 5){
           $status = "판매중";
           }else if($item["status"] == 7){
-          $status = "반려";
+          $status = "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button'
+                            onClick='window.open(\"/Seller/Item/StatusComment?idx=".$item["idx"]."&status_comment=".$item["status_comment"]."\", \"_blank\", \"width=500,height=330,toolbars=no,scrollbars=no\"); return false;'
+                            value='반려(상세보기)'>";
           }
           $product_price = number_format($item["product_price"]);
           ?>

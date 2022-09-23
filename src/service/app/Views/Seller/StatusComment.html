@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+
+  <title>반려메세지</title>
+</head>
+<body class="text-center">
+  <input type="hidden" name="idx" value="<?=$_GET['idx']?>">
+  <br>
+  <h1 class="display-5">반려메세지</h1>
+  <hr>
+  <textarea name="status_comment" id="status_comment" class="form-control" style="height: 150px;resize: none;" disabled placeholder="반려 메세지를 입력해주세요.">
+    <?=$_GET["status_comment"]?>
+  </textarea>
+  <br>
+  <input type="button" class="btn btn-danger" onclick="window.close()" value="확인">
+</body>
+</html>

@@ -58,5 +58,45 @@ class Mypage extends BaseController
         echo view('Seller/ItemList.html',$data);
         echo view("Common/Footer.html");
     }
+	
+	public function InfoUpdate(){
+		
+		if(@$_SESSION["login"] != "success"){
+			echo "
+				<script>
+                	alert('로그인 후 이용가능합니다');
+                	location.href = '/Auth/SignIn';
+				</script>
+            ";
+			
+			die();
+		}
+		$pwdCheck = $this->sellerinfo_model->pwdCheck();
+		if($pwdCheck == 1) {
+			$result = $this->sellerinfo_model->infoUpdate($_FILES, $_POST);
+			if ($result == 1) {
+				echo "
+				<script>
+                	alert('수정되었습니다');
+                	location.href = '/Seller';
+				</script>
+            ";
+			} else {
+				echo "
+				<script>
+                	alert('오류가 발생했습니다');
+                	history.back();
+				</script>
+            ";
+			}
+		}else{
+			echo "
+				<script>
+                	alert('현재 비밀번호를 다시 확인해주세요');
+                	history.back();
+				</script>
+            ";
+		}
+	}
 
 }
