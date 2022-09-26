@@ -55,10 +55,9 @@
         <div class="mt-3 text-center">
           <button class="btn btn-primary" type="submit">검색</button>
           <button class="btn btn-outline-secondary" type="reset">초기화</button>
-
+            <button class="btn btn-primary" onclick="contract_update()">계약상태 최신화</button>
         </div>
       </form>
-        <button class="btn btn-primary" onclick="contract_update()">계약상태 최신화</button>
       <table class="table table-striped text-center mt-5 result-table">
           <thead>
           <tr>
@@ -181,8 +180,6 @@
                 $('#complete_reduction').val(complete_reduction);
                 $('#workflow_id').val(workflow);
                 $("#statusForm").submit();
-               // alert(contract_reduction);
-             //   alert(complete_reduction);
             })
             .catch(err => console.error(err));
     }
