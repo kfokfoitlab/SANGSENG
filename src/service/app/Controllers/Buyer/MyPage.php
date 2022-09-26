@@ -54,7 +54,7 @@ class MyPage extends BaseController
         }else{
             echo "
         <script>
-        alert('오류가 발생했습니다. 관리자에게 문의해주세요');
+        alert('최신상태 입니다.');
         location.href = '/Buyer/MyPage/Contract';
 </script>
         ";
