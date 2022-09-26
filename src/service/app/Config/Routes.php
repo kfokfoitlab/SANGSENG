@@ -173,7 +173,10 @@ $routes->group('Seller',  function ($routes){
     $routes->post ($group_name.'/ItemList/Search',   'Seller\Item::Search');
     $routes->post ($group_name.'/ItemSubmit', 'Seller\Item::ItemSubmit');
     $routes->post ($group_name.'/ItemUpdateSubmit', 'Seller\Item::ItemUpdateSubmit');
+	$routes->get ($group_name.'/StatusComment', 'Seller\Item::StatusComment');
     $routes->post ('ContractUpdate',           'Seller::ContractUpdate');
+    $routes->get ('MyPage/downloadFileNew',           'Seller\MyPage::downloadFileNew');
+
 
     // $routes->get ('Contract(:any)',               'Seller::Contract');
 
@@ -186,6 +189,7 @@ $routes->group('Seller',  function ($routes){
     $routes->post ($group_name.'/updateWorker',           'Seller\IMJOB::updateWorker');
     $routes->get ($group_name.'/deleteWorker',           'Seller\IMJOB::deleteWorker');
     $routes->get ('MyPage/Info',                'Seller\MyPage::Info');
+	$routes->post ('MyPage/InfoUpdate',                'Seller\MyPage::InfoUpdate');
     $routes->get ('MyPage/ConfirmPassword',     'Seller\MyPage::ConfirmPassword');
     $routes->get ('MyPage/ChangePassword',      'Seller\MyPage::ChangePassword');
 });
@@ -214,6 +218,8 @@ $routes->group('CS', function($routes) {
 $routes->group('Reduction', function($routes) {
     $routes->get('Calculator', 'Reduction\Calculator::index');
     $routes->get('Help', 'Reduction\Help::index');
+    $routes->get ('Help/downloadFileNew',           'Reduction\Help::downloadFileNew');
+
 });
 $routes->group('Policy', function($routes) {
     $routes->get('TOS', 'Policy\TermsOfService::index');

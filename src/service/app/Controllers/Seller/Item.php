@@ -131,4 +131,8 @@ class Item extends BaseController
         }
 
     }
+	
+	public function StatusComment(){
+		echo view('/Seller/StatusComment.html');
+	}
 }

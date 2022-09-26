@@ -205,6 +205,7 @@ class MyPageModel extends CommonModel
                 update
                     contract_condition
                 set
+                    product_price = $complete_reduction,
                     contract_status =5,
                     reduction_money = $reduction_money
                 where 
@@ -297,7 +298,7 @@ class MyPageModel extends CommonModel
         }
         $query = "
             select
-               *,a.idx as 'cidx'
+               *,a.idx as 'cidx',a.product_price as contract_price
             from
               contract_condition a
             join seller_product b 

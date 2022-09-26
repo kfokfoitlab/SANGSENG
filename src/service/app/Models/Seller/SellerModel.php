@@ -179,7 +179,7 @@ class SellerModel extends CommonModel
         }
         $query = "
             select
-               *,a.idx as 'cidx'
+               *,a.idx as 'cidx',a.product_price as contract_price
             from
               contract_condition a
             join seller_product b 
