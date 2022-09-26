@@ -36,7 +36,6 @@ class BuyerModel extends CommonModel
         return $data;
     }
 
-
     public function productDetail($product_no){
         $data["data"] = [];
         $query = "
@@ -72,10 +71,7 @@ class BuyerModel extends CommonModel
                 and buyer_uuid = '".$uuid."'
         ";
         return $this->rodb->simple_query($query);
-
-
     }
-
     public function cartDel($data){
         $idx = $data['idx'];
         $uuid = $_SESSION["login_info"]["uuid"];
@@ -264,8 +260,6 @@ class BuyerModel extends CommonModel
             limit 1
         ";
         return $this->rodb->simple_query($query);
-
-
     }
 
     public function CartInsert($data){

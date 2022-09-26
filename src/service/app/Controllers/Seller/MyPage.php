@@ -2,20 +2,24 @@
 
 namespace App\Controllers\Seller;
 use App\Controllers\BaseController;
+use App\Models\CommonModel;
 use App\Models\Seller\ItemModel;
 use App\Models\DatabaseModel;
 use App\Models\Seller\SellerInfoModel;
-
+use App\Models\Seller\SellerModel;
 class Mypage extends BaseController
 {
     private $item_model;
     private $database_model;
     private $seller_model;
+    private $common_model;
     private $item_per_page = 10;
 //
     public function __construct()
     { //{{{
+        $this->common_model = new CommonModel;
         $this->item_model = new ItemModel;
+        $this->seller_model = new SellerModel;
         $this->sellerinfo_model = new SellerInfoModel;
         $this->database_model = new DatabaseModel;
     } //}}}
@@ -98,5 +102,7 @@ class Mypage extends BaseController
             ";
 		}
 	}
-
+    public function downloadFileNew(){
+        $this->seller_model->downloadFileNew();
+    }
 }

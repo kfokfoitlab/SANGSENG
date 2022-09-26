@@ -1,0 +1,186 @@
+CRITICAL - 2022-09-21 09:32:41 --> Too few arguments to function App\Models\Buyer\BuyerModel::RecommendationList(), 0 passed in D:\Project\SANGSENG\src\service\app\Controllers\Home.php on line 45 and exactly 1 expected
+in APPPATH\Models\Buyer\BuyerModel.php on line 141.
+ 1 APPPATH\Controllers\Home.php(45): App\Models\Buyer\BuyerModel->RecommendationList()
+ 2 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Home->index()
+ 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 09:32:59 --> Too few arguments to function App\Models\Buyer\BuyerModel::RecommendationList(), 0 passed in D:\Project\SANGSENG\src\service\app\Controllers\Home.php on line 45 and exactly 1 expected
+in APPPATH\Models\Buyer\BuyerModel.php on line 141.
+ 1 APPPATH\Controllers\Home.php(45): App\Models\Buyer\BuyerModel->RecommendationList()
+ 2 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Home->index()
+ 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 09:33:21 --> Too few arguments to function App\Models\Buyer\BuyerModel::RecommendationList(), 0 passed in D:\Project\SANGSENG\src\service\app\Controllers\Home.php on line 45 and exactly 1 expected
+in APPPATH\Models\Buyer\BuyerModel.php on line 141.
+ 1 APPPATH\Controllers\Home.php(45): App\Models\Buyer\BuyerModel->RecommendationList()
+ 2 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Home->index()
+ 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 09:33:54 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by 
+               product_ranking asc
+            limit 5' at line 7
+in APPPATH\Models\dbClasses\dbQueryClass.php on line 64.
+ 1 APPPATH\Models\dbClasses\dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error('You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near \'order by 
+               product_ranking asc
+            limit 5\' at line 7')
+ 2 APPPATH\Models\Buyer\BuyerModel.php(155): App\Models\dbClasses\dbQueryClass->query('
+            select
+                *
+            from
+              seller_product
+            where status =\'5\'
+            and product_category = 
+           order by 
+               product_ranking asc
+            limit 5;
+           
+        ')
+ 3 APPPATH\Controllers\Home.php(46): App\Models\Buyer\BuyerModel->RecommendationList(null)
+ 4 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Home->index()
+ 5 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 09:35:03 --> Too few arguments to function App\Models\Buyer\BuyerModel::RecommendationList(), 0 passed in D:\Project\SANGSENG\src\service\app\Controllers\Home.php on line 46 and exactly 1 expected
+in APPPATH\Models\Buyer\BuyerModel.php on line 141.
+ 1 APPPATH\Controllers\Home.php(46): App\Models\Buyer\BuyerModel->RecommendationList()
+ 2 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Home->index()
+ 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 09:35:05 --> Too few arguments to function App\Models\Buyer\BuyerModel::RecommendationList(), 0 passed in D:\Project\SANGSENG\src\service\app\Controllers\Home.php on line 46 and exactly 1 expected
+in APPPATH\Models\Buyer\BuyerModel.php on line 141.
+ 1 APPPATH\Controllers\Home.php(46): App\Models\Buyer\BuyerModel->RecommendationList()
+ 2 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Home->index()
+ 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 09:35:44 --> Too few arguments to function App\Models\Buyer\BuyerModel::RecommendationList(), 0 passed in D:\Project\SANGSENG\src\service\app\Controllers\Home.php on line 46 and exactly 1 expected
+in APPPATH\Models\Buyer\BuyerModel.php on line 141.
+ 1 APPPATH\Controllers\Home.php(46): App\Models\Buyer\BuyerModel->RecommendationList()
+ 2 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Home->index()
+ 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 09:38:16 --> Too few arguments to function App\Models\Buyer\BuyerModel::RecommendationList(), 0 passed in D:\Project\SANGSENG\src\service\app\Controllers\Home.php on line 46 and exactly 1 expected
+in APPPATH\Models\Buyer\BuyerModel.php on line 141.
+ 1 APPPATH\Controllers\Home.php(46): App\Models\Buyer\BuyerModel->RecommendationList()
+ 2 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Home->index()
+ 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 09:41:09 --> Too few arguments to function App\Models\Buyer\BuyerModel::RecommendationList(), 0 passed in D:\Project\SANGSENG\src\service\app\Controllers\Home.php on line 46 and exactly 1 expected
+in APPPATH\Models\Buyer\BuyerModel.php on line 141.
+ 1 APPPATH\Controllers\Home.php(46): App\Models\Buyer\BuyerModel->RecommendationList()
+ 2 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Home->index()
+ 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 09:41:16 --> Too few arguments to function App\Models\Buyer\BuyerModel::RecommendationList(), 0 passed in D:\Project\SANGSENG\src\service\app\Controllers\Home.php on line 46 and exactly 1 expected
+in APPPATH\Models\Buyer\BuyerModel.php on line 141.
+ 1 APPPATH\Controllers\Home.php(46): App\Models\Buyer\BuyerModel->RecommendationList()
+ 2 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Home->index()
+ 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 09:41:26 --> Too few arguments to function App\Models\Buyer\BuyerModel::RecommendationList(), 0 passed in D:\Project\SANGSENG\src\service\app\Controllers\Home.php on line 46 and exactly 1 expected
+in APPPATH\Models\Buyer\BuyerModel.php on line 141.
+ 1 APPPATH\Controllers\Home.php(46): App\Models\Buyer\BuyerModel->RecommendationList()
+ 2 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Home->index()
+ 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 09:41:39 --> Too few arguments to function App\Models\Buyer\BuyerModel::RecommendationList(), 0 passed in D:\Project\SANGSENG\src\service\app\Controllers\Home.php on line 46 and exactly 1 expected
+in APPPATH\Models\Buyer\BuyerModel.php on line 141.
+ 1 APPPATH\Controllers\Home.php(46): App\Models\Buyer\BuyerModel->RecommendationList()
+ 2 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Home->index()
+ 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 09:45:26 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by 
+               product_ranking asc
+            limit 5' at line 7
+in APPPATH\Models\dbClasses\dbQueryClass.php on line 64.
+ 1 APPPATH\Models\dbClasses\dbQueryClass.php(25): App\Models\dbClasses\dbQueryClass->trace_error('You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near \'order by 
+               product_ranking asc
+            limit 5\' at line 7')
+ 2 APPPATH\Models\Buyer\BuyerModel.php(156): App\Models\dbClasses\dbQueryClass->query('
+            select
+                *
+            from
+              seller_product
+            where status =\'5\'
+            and product_category = 
+           order by 
+               product_ranking asc
+            limit 5;
+           
+        ')
+ 3 APPPATH\Controllers\Home.php(46): App\Models\Buyer\BuyerModel->RecommendationList(null)
+ 4 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Home->index()
+ 5 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 10:00:51 --> Class 'App\Models\Seller\SellerInfoModelModel' not found
+in APPPATH\Controllers\Seller\MyPage.php on line 19.
+ 1 SYSTEMPATH\CodeIgniter.php(866): App\Controllers\Seller\Mypage->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(448): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 10:01:15 --> Class 'App\Controllers\Seller\ApplicationModel' not found
+in APPPATH\Controllers\Seller\MyPage.php on line 20.
+ 1 SYSTEMPATH\CodeIgniter.php(866): App\Controllers\Seller\Mypage->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(448): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 10:01:17 --> Class 'App\Controllers\Seller\ApplicationModel' not found
+in APPPATH\Controllers\Seller\MyPage.php on line 20.
+ 1 SYSTEMPATH\CodeIgniter.php(866): App\Controllers\Seller\Mypage->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(448): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 10:01:19 --> Class 'App\Controllers\Seller\ApplicationModel' not found
+in APPPATH\Controllers\Seller\MyPage.php on line 20.
+ 1 SYSTEMPATH\CodeIgniter.php(866): App\Controllers\Seller\Mypage->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(448): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 10:02:59 --> syntax error, unexpected '이메일주소를' (T_STRING)
+in APPPATH\Views\MyPage\SellerInfo.html on line 45.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH\Common.php(1137): CodeIgniter\View\View->render('MyPage/SellerInfo.html', [], true)
+ 3 APPPATH\Controllers\Seller\MyPage.php(33): view('MyPage/SellerInfo.html', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Seller\Mypage->Info()
+ 5 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Seller\Mypage))
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 10:10:55 --> Too few arguments to function App\Models\Buyer\BuyerModel::RecommendationList(), 0 passed in D:\Project\SANGSENG\src\service\app\Controllers\Buyer.php on line 21 and exactly 1 expected
+in APPPATH\Models\Buyer\BuyerModel.php on line 141.
+ 1 APPPATH\Controllers\Buyer.php(21): App\Models\Buyer\BuyerModel->RecommendationList()
+ 2 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Buyer->index()
+ 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Buyer))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 10:11:27 --> Too few arguments to function App\Models\Buyer\BuyerModel::RecommendationList(), 0 passed in D:\Project\SANGSENG\src\service\app\Controllers\Buyer.php on line 21 and exactly 1 expected
+in APPPATH\Models\Buyer\BuyerModel.php on line 141.
+ 1 APPPATH\Controllers\Buyer.php(21): App\Models\Buyer\BuyerModel->RecommendationList()
+ 2 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Buyer->index()
+ 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Buyer))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 10:11:37 --> Too few arguments to function App\Models\Buyer\BuyerModel::RecommendationList(), 0 passed in D:\Project\SANGSENG\src\service\app\Controllers\Buyer.php on line 21 and exactly 1 expected
+in APPPATH\Models\Buyer\BuyerModel.php on line 141.
+ 1 APPPATH\Controllers\Buyer.php(21): App\Models\Buyer\BuyerModel->RecommendationList()
+ 2 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Buyer->index()
+ 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Buyer))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2022-09-21 10:12:32 --> Too few arguments to function App\Models\Buyer\BuyerModel::RecommendationList(), 0 passed in D:\Project\SANGSENG\src\service\app\Controllers\Buyer.php on line 21 and exactly 1 expected
+in APPPATH\Models\Buyer\BuyerModel.php on line 141.
+ 1 APPPATH\Controllers\Buyer.php(21): App\Models\Buyer\BuyerModel->RecommendationList()
+ 2 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Buyer->index()
+ 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Buyer))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(56): CodeIgniter\CodeIgniter->run()

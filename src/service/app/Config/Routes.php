@@ -175,6 +175,8 @@ $routes->group('Seller',  function ($routes){
     $routes->post ($group_name.'/ItemUpdateSubmit', 'Seller\Item::ItemUpdateSubmit');
 	$routes->get ($group_name.'/StatusComment', 'Seller\Item::StatusComment');
     $routes->post ('ContractUpdate',           'Seller::ContractUpdate');
+    $routes->get ('MyPage/downloadFileNew',           'Seller\MyPage::downloadFileNew');
+
 
     // $routes->get ('Contract(:any)',               'Seller::Contract');
 
@@ -216,6 +218,8 @@ $routes->group('CS', function($routes) {
 $routes->group('Reduction', function($routes) {
     $routes->get('Calculator', 'Reduction\Calculator::index');
     $routes->get('Help', 'Reduction\Help::index');
+    $routes->get ('Help/downloadFileNew',           'Reduction\Help::downloadFileNew');
+
 });
 $routes->group('Policy', function($routes) {
     $routes->get('TOS', 'Policy\TermsOfService::index');

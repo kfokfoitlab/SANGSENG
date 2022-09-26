@@ -198,7 +198,7 @@ class SignInModel extends CommonModel
         $sales =[];
         $query = "
             select
-              sum(b.product_price) as 'price'
+              sum(a.product_price) as 'price'
             from
               contract_condition a
             join seller_product b on a.product_no = b.product_no

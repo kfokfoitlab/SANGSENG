@@ -119,35 +119,48 @@
                          oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')"
                          title="중증 장애인 근로자 수 입력" tabindex=100 required>
                 </div>
+
                 <div class="form-group">
                   <label class="my-2"><a title="사업자등록증 첨부">사업자등록증 첨부</a></label><br>
-                  <input type="file" name="" class="form-control" placeholder="사업자등록증 첨부"
+                  <button class="btn btn-primary" type="button"  onclick="downloadFileNew('<?=$data["seller_business_license"]?>','<?=$data["seller_business_license_ori"]?>');">기존파일 다운로드</button>
+                  <input type="file" name="seller_business_license" class="form-control" placeholder="사업자등록증 첨부"
                          title="사업자등록증 첨부" tabindex=100>
+                  <input type="hidden" name="seller_business_license" value='<?=$data["seller_business_license"]?>'>
+                  <input type="hidden" name="seller_business_license_ori" value='<?=$data["seller_business_license_ori"]?>'>
                 </div>
                 <div class="form-group">
                   <label class="my-2"><a title="인증서류(장애인표준사업장 등록증 or 장애인직업재활시설 등록증)첨부">인증서류(장애인표준사업장
                     등록증 or 장애인직업재활시설 등록증)첨부</a></label><br>
+                  <button class="btn btn-primary" type="button"  onclick="downloadFileNew('<?=$data["seller_information"]?>','<?=$data["seller_information_ori"]?>');">기존파일 다운로드</button>
                   <input type="file" name="seller_documents" class="form-control" placeholder="인증서류 첨부"
                          title="인증서류 첨부" tabindex=100>
-                  <input type="hidden" name="seller_documents_ori_name" value="<?=$data['seller_documents']?>">
-                </div>
+                  <input type="hidden" name="seller_information" value='<?=$data["seller_information"]?>'>
+                  <input type="hidden" name="seller_information_ori" value='<?=$data["seller_information_ori"]?>'></div>
                 <div class="form-group">
                   <label class="my-2"><a title="매출증빙 첨부">매출증빙 첨부</a></label><br>
-                  <input type="file" name="" class="form-control" placeholder="매출증빙 첨부"
+                  <button class="btn btn-primary" type="button"  onclick="downloadFileNew('<?=$data["sales_file"]?>','<?=$data["sales_file_ori"]?>');">기존파일 다운로드</button>
+                  <input type="file" name="sales_file" class="form-control" placeholder="매출증빙 첨부"
                          title="매출증빙 첨부" tabindex=100>
+                  <input type="hidden" name="sales_file" value='<?=$data["sales_file"]?>'>
+                  <input type="hidden" name="sales_file_ori" value='<?=$data["sales_file_ori"]?>'>
                 </div>
                 <div class="form-group">
                   <label class="my-2"><a title="장애인근로자 증빙서류 첨부">장애인근로자 증빙서류 첨부</a></label><br>
-                  <input type="file" name="" class="form-control" placeholder="장애인근로자 증빙서류 첨부"
+                  <button class="btn btn-primary" type="button"  onclick="downloadFileNew('<?=$data["workers_file"]?>','<?=$data["workers_file_ori"]?>');">기존파일 다운로드</button>
+                  <input type="file" name="workers_file" class="form-control" placeholder="장애인근로자 증빙서류 첨부"
                          title="장애인근로자 증빙서류 첨부" tabindex=100>
+                  <input type="hidden" name="workers_file" value='<?=$data["workers_file"]?>'>
+                  <input type="hidden" name="workers_file_ori" value='<?=$data["workers_file_ori"]?>'>
                 </div>
                 <div class="form-group">
                   <label class="my-2"><a title="기업상세정보첨부">기업상세정보 첨부(상품상세정보에
                     노출됩니다)</a></label><br>
+                  <button class="btn btn-primary" type="button"  onclick="downloadFileNew('<?=$data["seller_information"]?>','<?=$data["seller_information_ori"]?>');">기존파일 다운로드</button>
                   <input type="file" name="seller_information" class="form-control" placeholder="기업상세정보 첨부"
-                         title="기업상세정보 첨부" tabindex=100>
-                  <input type="hidden" name="seller_information_ori_name" value="<?=$data['seller_information']?>">
-                </div>
+                         title="기업상세정보 첨부"  tabindex=100>
+                  <input type="hidden" name="seller_information" value='<?=$data["seller_information"]?>'>
+                  <input type="hidden" name="seller_information_ori" value='<?=$data["seller_information_ori"]?>'>                </div>
+
                 <div class="form-group mt-5 d-flex justify-content-center">
                   <button type="button" onclick="history.back()" class="theme-btn btn-style-three py-3 me-3" tabindex="100">취소</button>
                   <button type="submit" class="theme-btn btn-style-one py-3" tabindex="100">수정</button>
@@ -187,4 +200,13 @@
 			}
 		})
 	})
+
+
+    function downloadFileNew(fileName,fileNameOri){
+      if(fileName == ""){
+        alert("등록된 파일이 없습니다");
+      }else {
+        location.href = "/Seller/MyPage/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+      }
+    };
 </script>
