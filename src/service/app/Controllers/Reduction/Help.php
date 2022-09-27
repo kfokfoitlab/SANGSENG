@@ -22,13 +22,27 @@ class Help extends BaseController
 
     public function index()
     {
+        if($_SESSION['login_info']['type'] != "buyer" ){
+            echo "
+        <script>
+        alert('구매기업만 이용 가능합니다.');
+        history.back();
+        </script>
+        ";
+        }
+
+
         if($_GET['cn'] != ""){
         $seller_info = $this->reduction_model->getdownloadList($_GET);
+        $buyer_info = $this->reduction_model->getBuyerdownloadList($_GET);
+        $workflow = $this->reduction_model->getWorkflowId($_GET);
     }
-        $data = $this->reduction_model->getdocumentList($_GET);
+        $data = $this->reduction_model->getdocumentList();
         $data = array(
             "data" => $data
             ,"seller_info" =>$seller_info
+            ,"buyer_info" =>$buyer_info
+            ,"workflow" =>$workflow
         );
 
         echo view("Common/Header.html");
@@ -39,4 +53,24 @@ class Help extends BaseController
     public function downloadFileNew(){
         $this->reduction_model->downloadFileNew();
     }
+    public function ProvisionUpload(){
+       $provision = $this->reduction_model->provisionUpload($_FILES,$_POST);
+       if($provision == 1){
+           echo "
+                <script>
+                    alert('업로드 완료.');
+					window.location.replace('/Reduction/Help');
+                </script>
+            ";
+       }else{
+           echo "
+                <script>
+                    alert('업로드 실패.');
+					window.location.replace('/Reduction/Help');
+                </script>
+            ";
+       }
+
+    }
+
 }

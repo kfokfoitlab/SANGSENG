@@ -160,6 +160,7 @@ $routes->group('Buyer', function($routes){
     $routes->get ('MyPage/Contract',           'Buyer\MyPage::Contract');
     $routes->post ('MyPage/ContractUpdate',           'Buyer\MyPage::ContractUpdate');
     $routes->post ('MyPage/BuyerUpdateSubmit',           'Buyer\MyPage::BuyerUpdateSubmit');
+    $routes->post ('MyPage/downloadFileNew',           'Buyer\MyPage::downloadFileNew');
 
 
 });
@@ -214,12 +215,11 @@ $routes->group('CS', function($routes) {
 
     $routes->get('Questions', 'CS\Questions::index');
 });
-
 $routes->group('Reduction', function($routes) {
     $routes->get('Calculator', 'Reduction\Calculator::index');
     $routes->get('Help', 'Reduction\Help::index');
     $routes->get ('Help/downloadFileNew',           'Reduction\Help::downloadFileNew');
-
+    $routes->post ('Help/ProvisionUpload',           'Reduction\Help::ProvisionUpload');
 });
 $routes->group('Policy', function($routes) {
     $routes->get('TOS', 'Policy\TermsOfService::index');

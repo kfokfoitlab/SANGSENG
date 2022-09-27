@@ -6,12 +6,15 @@
         <section>
 
           <select class="form-select w-25" name="seller_uuid" id="contract_select">
-            <option value="" selected>(계약번호)물품명</option>
+            <option value="" >(계약번호)물품명</option>
             <?php if(is_array($data) && count($data) > 0){
             foreach($data as $item){
             ?>
             <option value="<?=$item['contract_no']?>" <?php if($item['contract_no']==$_GET["cn"]){echo "selected";}?>>(<?=$item['contract_no']?>)<?=$item['product_name']?></option>
-
+            <?php
+              }
+            }
+            ?>
           </select>
 
           <table class="table mt-4">
@@ -36,15 +39,12 @@
                 <?php
                  $workflow_id = "";
                  if($_GET["cn"] != ""){
-                 $workflow_id = $item['workflow_id'];
+                $workflow_id = $workflow['workflow_id'];
                  }
                   ?>
                 <button class="btn btn-outline-secondary btn-sm" onclick="Contract_Detail(<?=$workflow_id?>);">다운로드 링크</button>
               </td>
-              <?php
-          }
-          }
-          ?>
+
               <td>
                 <p>2022.08.30</p>
               </td>
@@ -52,14 +52,21 @@
             <tr>
               <td>
                 <p class="fw-bold">지급증빙서류</p>
-                <button class="btn btn-outline-secondary btn-sm">업로드</button>
+                <form method="post"  action ="/Reduction/Help/ProvisionUpload"  enctype="multipart/form-data">
+                <input type="file" name="provision_file"placeholder="지급증빙서류 첨부"
+                       title="지급증빙서류 첨부" tabindex=100> <button type="submit" class="btn btn-outline-secondary btn-sm">업로드</button>
+                  <br>
+                  기존 파일 : <?=$workflow["provision_file_ori"]?>
+                  <input type="hidden" name ="contract_no" value="<?=$workflow['contract_no']?>">
+
+                </form>
               </td>
               <td>
                 <p class="mb-1">(구매기업)지급증빙서류.pdf</p>
                 <p class="text-small">※ 연계고용 도급계약에 따른 보수지급 영수증</p>
               </td>
               <td>
-                <button class="btn btn-outline-secondary btn-sm">다운로드</button>
+                <button class="btn btn-outline-secondary btn-sm" onclick="downloadFileNew('<?=$workflow["provision_file"]?>','<?=$workflow["provision_file_ori"]?>');" >다운로드</button>
               </td>
               <td>
                 <p>2022.08.30</p>
@@ -74,7 +81,7 @@
                 <p class="text-small">※ 판매기업의 매출액 증빙자료(결산서, 손익계산서, 부가가치세 과세표준증명, 매출처별세금 계산서 합계표 등) 업로드 내용 표시</p>
               </td>
               <td>
-                <button class="btn btn-outline-secondary btn-sm"onclick="downloadFileNew('<?=$seller_info["sales_file"]?>','<?=$seller_info["sales_file_ori"]?>');" >다운로드</button>
+                <button class="btn btn-outline-secondary btn-sm" onclick="downloadFileNew('<?=$seller_info["sales_file"]?>','<?=$seller_info["sales_file_ori"]?>');" >다운로드</button>
                 <input type="hidden" name="sales_file" value='<?=$data["sales_file"]?>'>
                 <input type="hidden" name="sales_file_ori" value='<?=$data["sales_file_ori"]?>'>
               </td>
@@ -112,6 +119,9 @@
                 <button class="btn btn-outline-secondary btn-sm"onclick="downloadFileNew('<?=$seller_info["seller_business_license"]?>','<?=$seller_info["seller_business_license_ori"]?>');" >다운로드</button>
                 <input type="hidden" name="seller_business_license" value='<?=$data["seller_business_license"]?>'>
                 <input type="hidden" name="seller_business_license_ori" value='<?=$data["seller_business_license_ori"]?>'>
+                <button class="btn btn-outline-secondary btn-sm"onclick="downloadFileNew('<?=$buyer_info["buyer_documents"]?>','<?=$buyer_info["buyer_documents_ori"]?>');" >다운로드</button>
+                <input type="hidden" name="buyer_documents" value='<?=$data["buyer_documents"]?>'>
+                <input type="hidden" name="buyer_documents_ori" value='<?=$data["buyer_documents_ori"]?>'>
               </td>
               <td>
                 <p>2022.08.30</p>
@@ -121,7 +131,7 @@
           </table>
           <div class="d-flex justify-content-center mt-5">
             <a href="/assets/download/부담금감면신청서.hwp" download class="btn btn-dark me-3">부담금 감면 신청서 양식 다운로드</a>
-            <a class="btn btn-dark">제출문서 일괄 다운로드</a>
+            <a class="btn btn-dark" onclick="zip('<?=$seller_info["sales_file"]?>','<?=$seller_info["workers_file"]?>','<?=$seller_info["seller_business_license"]?>');">제출문서 일괄 다운로드</a>
           </div>
         </section>
       </div>
@@ -130,22 +140,7 @@
 </div>
 
 <script>
- /* $(document).on("change", "#contract_select", function(){
-    var seller_uuid = $("#contract_select").val();
-    //alert(seller_uuid);
-    $.ajax({
-      type: 'get',
-      url: '/Reduction/Help',
-      data: {
-        seller_uuid: seller_uuid
-      },
-      success: function (result)
-      {
-      },error:function(e){
-        alert("전송 실패");
-      }
-    });
-  });*/
+
  $(document).ready(function(){
    $('#contract_select').on('change',function(){
      var contract_no = $("#contract_select").val();
@@ -156,7 +151,9 @@
    })
  })
 
+ function provision(){
 
+ }
 
   function Contract_Detail(workflow_id){
     const options = {
