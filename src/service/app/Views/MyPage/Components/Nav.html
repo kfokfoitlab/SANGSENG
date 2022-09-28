@@ -5,6 +5,7 @@
     <li><a class="text-secondary" href="/Buyer/MyPage/ConfirmPassword">비밀번호변경</a></li>
     <li><a class="text-secondary" href="/Buyer/MyPage/Cart">장바구니</a></li>
     <li><a class="text-secondary" href="/Buyer/MyPage/Contract"><!--href="/Buyer/MyPage/Contract">-->계약현황</a></li>
+    <li><a class="text-secondary" href="/Buyer/MyPage/DeliveryStatus">배송조회</a></li>
   </ul>
   <input type="hidden" name ="uuid" id = "uuid" value="<?=$_SESSION['login_info']['uuid']?>">
 </nav>
@@ -22,9 +23,6 @@
 		if(window.location.pathname === '/Buyer/MyPage/ChangePassword') {
 			document.querySelector('a[href="/Buyer/MyPage/ConfirmPassword"]').classList.add('on')
     }
-		if(window.location.pathname === '/Buyer/MyPage/Contract') {
-			document.querySelector('.buyer-nav li:last-child a').classList.add('on')
-		}
   })
 function contractMove(){
   $("#myForm").submit();

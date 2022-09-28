@@ -1,0 +1,86 @@
+<?php
+  // Left Menu
+  require APPPATH . '/Views/Buyer/Components/Left.html';
+?>
+<style>
+  th,td{text-align: center; vertical-align: middle;}
+</style>
+<div class="flex-grow-1">
+  <section class="buyer-delivery-status">
+    <div class="auto-container py-5">
+      <?php
+        // NAV
+        require(__DIR__.'/Components/Nav.html');
+      ?>
+      <h3 class="mt-5 mb-4 h4 fw-bold text-center">배송조회</h3>
+      <select name="" id="" class="w-100 border mb-4 p-3">
+        <option value="">회사명과 상품명의 계약서_계약번호1</option>
+        <option value="">회사명과 상품명의 계약서_계약번호2</option>
+        <option value="">회사명과 상품명의 계약서_계약번호3</option>
+      </select>
+      <ul class="d-flex border w-100 justify-content-around mb-4 py-4 text-center bg-light item-list-number">
+        <li class="px-5 position-relative">
+          <p class="mb-2">상품명</p>
+          <p><strong>보스볼펜</strong></p>
+        </li>
+        <li class="px-5 position-relative">
+          <p class="mb-2">상품수량</p>
+          <p><strong>1,000BOX(100,000개)</strong></p>
+        </li>
+        <li class="px-5 position-relative">
+          <p class="mb-2">계약금액</p>
+          <p><strong>600,000,000원</strong></p>
+        </li>
+        <li class="px-5">
+          <p class="mb-2">계약업체</p>
+          <p><strong>시험용사업체</strong></p>
+        </li>
+        <li class="px-5">
+          <p class="mb-2">계약일</p>
+          <p><strong>2022.09.22</strong></p>
+        </li>
+      </ul>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>횟수</th>
+          <th>배송 예정일</th>
+          <th>배송 시작일</th>
+          <th>배송 도착일</th>
+          <th>상태</th>
+          <th>송장확인</th>
+          <th>배송완료</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1회</td>
+          <td>2022.01.01</td>
+          <td>2022.01.01</td>
+          <td>2022.01.05</td>
+          <td>도착완료</td>
+          <td>
+            <button class="btn btn-outline-dark btn-sm">송장확인</button>
+          </td>
+          <td>
+            <button class="btn btn-success btn-sm fw-normal">배송완료</button>
+          </td>
+        </tr>
+        <tr>
+          <td>2회</td>
+          <td>2022.01.01</td>
+          <td>2022.01.01</td>
+          <td>2022.01.05</td>
+          <td>배송중</td>
+          <td>
+            <button class="btn btn-outline-dark btn-sm">송장확인</button>
+          </td>
+          <td>
+            <button class="btn btn-success btn-sm fw-normal">배송완료</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
