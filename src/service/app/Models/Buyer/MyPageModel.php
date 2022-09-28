@@ -82,9 +82,16 @@ class MyPageModel extends CommonModel
  }
 
 
- public function updateMyInfo($data){
+ public function updateMyInfo($files,$data){
     $uuid = $_SESSION["login_info"]["uuid"];
-    $newPwd = $data["confirm_password"];
+     $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG','JPG','PDF');
+
+     if($files["buyer_documents"]["name"] != ""){
+         $buyer_documents_ori = $files["buyer_documents"]["name"];
+         $upload_buyer_documents_ori = "buyer_documents";
+         $upload_buyer_documents_image = uniqid().".".pathinfo($files["buyer_documents"]["name"], PATHINFO_EXTENSION);
+         $this->uploadFileNew($files,$upload_buyer_documents_image,$allowed_ext,$upload_buyer_documents_ori);
+     }
 
      $query = "
             update
@@ -101,6 +108,8 @@ class MyPageModel extends CommonModel
                 ,tax_rate = '".$data["tax_rate"]."'
                 ,update_id = '".$uuid."'               
                 ,update_date = '".date("Y-m-d H:i:s")."'
+                ,buyer_documents = '".$upload_buyer_documents_image."'
+                ,buyer_documents_ori = '".$buyer_documents_ori."'
             where
                 uuid = '".$uuid."'
             limit 1
@@ -134,8 +143,6 @@ class MyPageModel extends CommonModel
                 $contribution =  $complete_reduction/$seller_sales;
                 $seller_workers = $mild_disabled+($severely_disabled*2);
                 $reduction =$contribution*$seller_workers;
-
-
             $query = "
                     select
                         *

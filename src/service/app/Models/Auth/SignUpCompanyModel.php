@@ -25,11 +25,11 @@ class SignUpCompanyModel extends CommonModel
     public function Register($files,$data, $table_name = "seller_company")
     { //{{{
         $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG','JPG','PDF');
-        if($files["seller_information"]["name"] != ""){
-            $seller_information_ori = $files["seller_information"]["name"];
-            $upload_seller_information_ori = "seller_information";
-            $upload_seller_information_image = uniqid().".".pathinfo($files["seller_information"]["name"], PATHINFO_EXTENSION);
-            $this->uploadFileNew($files,$upload_seller_information_image,$allowed_ext,$upload_seller_information_ori);
+        if($files["seller_business_license"]["name"] != ""){
+            $seller_business_license_ori = $files["seller_business_license"]["name"];
+            $upload_seller_business_license_ori = "seller_business_license";
+            $upload_seller_business_license_image = uniqid().".".pathinfo($files["seller_business_license"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_seller_business_license_image,$allowed_ext,$upload_seller_business_license_ori);
         }
 
         if($files["seller_documents"]["name"] != ""){
@@ -44,6 +44,7 @@ class SignUpCompanyModel extends CommonModel
         $uuid = gen_uuid_v4();
         // status == 0:가입신청, 1:심사중, 5:승인,7:거절, 9: 탈퇴
         $status = '1';
+        $del_yn = 'N';
         $receive_yn  = (@$data["ads"] == "y")? 'Y' : 'N';
         $salt = $data["password"];
         $query = "
@@ -67,9 +68,10 @@ class SignUpCompanyModel extends CommonModel
                 ,receive_yn = '".$receive_yn ."'
                 ,register_date = '".date("Y-m-d H:i:s")."'
                 ,register_id = '".$uuid."'
+                 ,del_yn = '".$del_yn ."'
                 ,seller_documents = '".$upload_seller_documents_image."'
-                ,seller_information = '".$upload_seller_information_image."'
-                ,seller_information_ori = '".$seller_information_ori."'
+                ,seller_business_license = '".$upload_seller_business_license_image."'
+                ,seller_business_license_ori = '".$seller_business_license_ori."'
                 ,seller_documents_ori = '".$seller_documents_ori."'
         ";
         $idx = $this->wrdb->insert($query);

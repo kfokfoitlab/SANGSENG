@@ -91,11 +91,19 @@
               <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_cleaning" <?php if($data['interest_cleaning']=='Y'){echo "checked";}?>> 청소용품</label>
             </div>
             <br>
-
+            <div class="form-group">
+              <label class="my-2"><a title="사업자등록증 첨부">사업자등록증 첨부</a></label><br>
+              <button class="btn btn-primary" type="button"  onclick="downloadFileNew('<?=$data["buyer_documents"]?>','<?=$data["buyer_documents_ori"]?>');">기존파일 다운로드</button>
+              <input type="file" name="buyer_documents" class="form-control" placeholder="사업자등록증 첨부"
+                     title="사업자등록증 첨부" tabindex=100>
+              <input type="hidden" name="buyer_documents" value='<?=$data["buyer_documents"]?>'>
+              <input type="hidden" name="buyer_documents_ori" value='<?=$data["buyer_documents_ori"]?>'>
+            </div>
             <div class="form-group mt-5 d-flex justify-content-center">
               <button type="button" onclick="history.back()" class="theme-btn btn-style-three py-3 me-3" tabindex=100>취소</button>
               <button type="submit" class="theme-btn btn-style-one py-3" tabindex=100>수정</button>
             </div>
+
           </form>
      <!--       <div class="form-group">
               <label for="formFile" class="form-label my-2"><sup class="text-danger">*</sup><a title="사업자등록증 첨부">사업자등록증 첨부</a></label>
@@ -110,3 +118,14 @@
     </div>
   </section>
 </div>
+<script>
+
+  function downloadFileNew(fileName,fileNameOri){
+    if(fileName == ""){
+      alert("등록된 파일이 없습니다");
+    }else {
+      location.href = "/Buyer/MyPage/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+    }
+  };
+
+</script>

@@ -160,6 +160,7 @@ $routes->group('Buyer', function($routes){
     $routes->get ('MyPage/Contract',           'Buyer\MyPage::Contract');
     $routes->post ('MyPage/ContractUpdate',           'Buyer\MyPage::ContractUpdate');
     $routes->post ('MyPage/BuyerUpdateSubmit',           'Buyer\MyPage::BuyerUpdateSubmit');
+    $routes->post ('MyPage/downloadFileNew',           'Buyer\MyPage::downloadFileNew');
 
 
 });
@@ -192,6 +193,8 @@ $routes->group('Seller',  function ($routes){
 	$routes->post ('MyPage/InfoUpdate',                'Seller\MyPage::InfoUpdate');
     $routes->get ('MyPage/ConfirmPassword',     'Seller\MyPage::ConfirmPassword');
     $routes->get ('MyPage/ChangePassword',      'Seller\MyPage::ChangePassword');
+	
+	$routes->get ('DeliveryStatus',      'Seller\Delivery::Status');
 });
     $routes->group('Download', function($routes) {
     $routes->get('downloadFileNew', 'Download::downloadFileNew');
@@ -214,12 +217,11 @@ $routes->group('CS', function($routes) {
 
     $routes->get('Questions', 'CS\Questions::index');
 });
-
 $routes->group('Reduction', function($routes) {
     $routes->get('Calculator', 'Reduction\Calculator::index');
     $routes->get('Help', 'Reduction\Help::index');
     $routes->get ('Help/downloadFileNew',           'Reduction\Help::downloadFileNew');
-
+    $routes->post ('Help/ProvisionUpload',           'Reduction\Help::ProvisionUpload');
 });
 $routes->group('Policy', function($routes) {
     $routes->get('TOS', 'Policy\TermsOfService::index');

@@ -25,6 +25,7 @@ class SignUpUserModel extends CommonModel
     public function Register($files, $data, $table_name = "buyer_company")
     { //{{{
         $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG','JPG','PDF');
+        $buyer_documents_ori = $files["buyer_documents"]["name"];
         $upload_buyer_documents_ori = "buyer_documents";
         $upload_buyer_documents_image = uniqid().".".pathinfo($files["buyer_documents"]["name"], PATHINFO_EXTENSION);
         $this->uploadFileNew($files,$upload_buyer_documents_image,$allowed_ext,$upload_buyer_documents_ori);
@@ -33,6 +34,7 @@ class SignUpUserModel extends CommonModel
         $uuid = gen_uuid_v4();
         // status == 0:가입신청, 1:심사중, 5:승인,7:거절, 9: 탈퇴	
         $status = '1';
+        $del_yn = 'N';
         $receive_yn  = (@$data["ads"] == "y")? 'Y' : 'N';
         if($data['tax_rate'] == null){
             $data['tax_rate'] = 10;
@@ -62,9 +64,11 @@ class SignUpUserModel extends CommonModel
                 ,interest_computerized = '".$data["interest_computerized"]."'
                 ,interest_food = '".$data["interest_food"]."'            
                 ,receive_yn = '".$receive_yn ."'
+                ,del_yn = '".$del_yn ."'
                 ,register_date = '".date("Y-m-d H:i:s")."'
                 ,register_id ='".$uuid."'
                 ,buyer_documents = '".$upload_buyer_documents_image."'
+                ,buyer_documents_ori = '".$buyer_documents_ori."'
         ";
         $idx = $this->wrdb->insert($query);
 

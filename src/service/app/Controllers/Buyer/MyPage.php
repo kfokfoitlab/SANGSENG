@@ -90,12 +90,12 @@ class MyPage extends BaseController
         $password = $_POST["password"];
         $pwdCheck =  $this->mypage_model->pwdCheck($password);
         if($pwdCheck == 1){
-            $result = $this->mypage_model->updateMyInfo($_POST);
+            $result = $this->mypage_model->updateMyInfo($_FILES,$_POST);
             if($result == "1") {
                 echo "
                 <script>
                     alert('회원님의 정보가 변경 되었습니다.');
-					window.location.replace('/Buyer');
+					window.location.replace('/Buyer/MyPage/Info');
                 </script>
             ";
             }else{
@@ -184,5 +184,8 @@ class MyPage extends BaseController
                 </script>
             ";
         }
+    }
+    public function downloadFileNew(){
+        $this->mypage_model->downloadFileNew();
     }
 }
