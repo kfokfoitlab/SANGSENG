@@ -106,6 +106,20 @@ $routes->group('Product', ['namespace' => 'App\Controllers\Product'], static fun
     $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
 });
 
+// 배송
+$routes->group('Delivery', ['namespace' => 'App\Controllers\Delivery'], static function ($routes) {
+	// 전체 목록
+	$group_name = "Lists";
+	$routes->get ($group_name.'/',                  $group_name.'::Index');
+	$routes->post($group_name.'/getList',           $group_name.'::getList');
+	$routes->get ($group_name.'/Detail',     $group_name.'::Detail');
+	$routes->get ($group_name.'/Update/(:any)',     $group_name.'::Update/$1');
+	$routes->get ($group_name.'/statusUpdate', $group_name.'::statusUpdate');
+	$routes->get ($group_name.'/StatusComment(:any)', $group_name.'::StatusComment$1');
+	
+	$routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
+});
+
 // 인재
 $routes->group('IMJOB', ['namespace' => 'App\Controllers\IMJOB'], static function ($routes) {
     // 전체 목록
