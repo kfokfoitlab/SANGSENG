@@ -108,6 +108,7 @@ class BuyerModel extends CommonModel
         $contract_status = "1";
         $buyer_uuid = $_SESSION['login_info']['uuid'];
         $reduction_money = $data['reduction_money'];
+        $product_quantity = $data['product_quantity'];
         $query = "
           insert into
               contract_condition
@@ -121,6 +122,7 @@ class BuyerModel extends CommonModel
               ,product_name = '".$data["product_name"]."'
               ,product_price = '".$data["product_price"]."'
               ,buyer_company = '".$data["buyer_company"]."'
+              ,product_quantity = '".$data["product_quantity"]."'
               ,reduction_money = '".$reduction_money."'
               ,product_no = '".$data["product_no"]."'       
               ,register_date = '".date("Y-m-d H:i:s")."'

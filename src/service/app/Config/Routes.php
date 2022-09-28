@@ -161,7 +161,7 @@ $routes->group('Buyer', function($routes){
     $routes->post ('MyPage/ContractUpdate',           'Buyer\MyPage::ContractUpdate');
     $routes->post ('MyPage/BuyerUpdateSubmit',           'Buyer\MyPage::BuyerUpdateSubmit');
     $routes->post ('MyPage/downloadFileNew',           'Buyer\MyPage::downloadFileNew');
-
+    $routes->get ('MyPage/DeliveryStatus',           'Buyer\Delivery::Status');
 
 });
 $routes->group('Seller',  function ($routes){
@@ -177,7 +177,8 @@ $routes->group('Seller',  function ($routes){
 	$routes->get ($group_name.'/StatusComment', 'Seller\Item::StatusComment');
     $routes->post ('ContractUpdate',           'Seller::ContractUpdate');
     $routes->get ('MyPage/downloadFileNew',           'Seller\MyPage::downloadFileNew');
-
+    $routes->get ('DeliveryStatus',      'Seller\Delivery::Status');
+    $routes->post ('Delivery/Submit',      'Seller\Delivery::DeliverySubmit');
 
     // $routes->get ('Contract(:any)',               'Seller::Contract');
 
@@ -194,7 +195,7 @@ $routes->group('Seller',  function ($routes){
     $routes->get ('MyPage/ConfirmPassword',     'Seller\MyPage::ConfirmPassword');
     $routes->get ('MyPage/ChangePassword',      'Seller\MyPage::ChangePassword');
 	
-	$routes->get ('DeliveryStatus',      'Seller\Delivery::Status');
+
 });
     $routes->group('Download', function($routes) {
     $routes->get('downloadFileNew', 'Download::downloadFileNew');
@@ -226,6 +227,8 @@ $routes->group('Reduction', function($routes) {
 $routes->group('Policy', function($routes) {
     $routes->get('TOS', 'Policy\TermsOfService::index');
     $routes->get('Privacy', 'Policy\Privacy::index');
+    $routes->get('EmailRefusal', 'Policy\EmailRefusal::index');
+    $routes->get('Disclaimer', 'Policy\Disclaimer::index');
 });
 /*
  * --------------------------------------------------------------------

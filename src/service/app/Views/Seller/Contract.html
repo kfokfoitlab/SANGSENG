@@ -193,7 +193,8 @@
       </form>
     </div>
     <form name="statusForm" id="statusForm" method="post" action="/Seller/ContractUpdate">
-      <input type="hidden" name ="workflow_id" id="workflow_id" value="">
+      <input type="hidden" name ="workflow_id" id="workflow_id" value="0">
+      <input type="hidden" name ="complete_reduction" id="complete_reduction" value="0">
       <input type="hidden" name ="uuid" id = "uuid" value="<?=$_SESSION['login_info']['uuid']?>">
     </form>
   </section>
@@ -273,7 +274,7 @@
       }
     };
 
-    fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=6&field_name=buyer_uuid&field_value='+uuid+'', options)
+    fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=9&field_name=seller_uuid&field_value='+uuid+'', options)
             .then(response => response.json())
             .then(response => {
               var workflow_id = [];
@@ -281,7 +282,7 @@
               for(var i =0; i <response['workflow_list'].length; i++){
                 if(response['workflow_list'][i]['status'] == "Complete"){
                   workflow_id[j] = response['workflow_list'][i]['workflow_id'];
-                  $('#workflow_id').val(workflow_id);
+                 // $('#workflow_id').val(workflow_id);
                   j++;
                 }
               }
