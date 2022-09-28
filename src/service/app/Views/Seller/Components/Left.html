@@ -117,6 +117,9 @@ $total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCoun
               <li>
                 <a href="/Seller/Contract">계약현황 조회</a>
               </li>
+              <li>
+                <a href="/Seller/DeliveryStatus">배송현황 조회</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -194,6 +197,9 @@ $total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCoun
     case currentURI.includes('Seller/Contract'):
       panelShow(headingThree);
       break;
+		case currentURI.includes('Seller/DeliveryStatus'):
+			panelShow(headingThree);
+			break;
     default:
       break;
   }

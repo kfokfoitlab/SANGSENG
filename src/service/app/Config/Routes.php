@@ -193,6 +193,8 @@ $routes->group('Seller',  function ($routes){
 	$routes->post ('MyPage/InfoUpdate',                'Seller\MyPage::InfoUpdate');
     $routes->get ('MyPage/ConfirmPassword',     'Seller\MyPage::ConfirmPassword');
     $routes->get ('MyPage/ChangePassword',      'Seller\MyPage::ChangePassword');
+	
+	$routes->get ('DeliveryStatus',      'Seller\Delivery::Status');
 });
     $routes->group('Download', function($routes) {
     $routes->get('downloadFileNew', 'Download::downloadFileNew');
