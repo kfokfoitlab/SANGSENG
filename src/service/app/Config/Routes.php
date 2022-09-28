@@ -161,6 +161,7 @@ $routes->group('Buyer', function($routes){
     $routes->post ('MyPage/ContractUpdate',           'Buyer\MyPage::ContractUpdate');
     $routes->post ('MyPage/BuyerUpdateSubmit',           'Buyer\MyPage::BuyerUpdateSubmit');
     $routes->post ('MyPage/downloadFileNew',           'Buyer\MyPage::downloadFileNew');
+	$routes->get ('MyPage/DeliveryStatus',           'Buyer\Delivery::Status');
 
 
 });
@@ -226,6 +227,8 @@ $routes->group('Reduction', function($routes) {
 $routes->group('Policy', function($routes) {
     $routes->get('TOS', 'Policy\TermsOfService::index');
     $routes->get('Privacy', 'Policy\Privacy::index');
+	$routes->get('EmailRefusal', 'Policy\EmailRefusal::index');
+	$routes->get('Disclaimer', 'Policy\Disclaimer::index');
 });
 /*
  * --------------------------------------------------------------------
