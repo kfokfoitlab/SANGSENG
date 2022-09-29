@@ -59,7 +59,7 @@ class Help extends BaseController
            echo "
                 <script>
                     alert('업로드 완료.');
-					window.location.replace('/Reduction/Help');
+					window.location.replace('/Reduction/Help/?cn=".$_POST["cn"]."');
                 </script>
             ";
        }else{
