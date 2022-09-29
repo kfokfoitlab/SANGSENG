@@ -4,7 +4,6 @@ use App\Models\dbClasses\dbModel;
 use function mkdir;
 class CommonModel extends dbModel
 {
-
     /**
      * 환경설정
      */
@@ -333,6 +332,9 @@ class CommonModel extends dbModel
 		$target_dir_admin = UPLOADPATH."/admin/public/uploads/";
 		$file_tmp_name = $files["$fileName_ori"]["tmp_name"];
 
+
+
+
         if(!is_dir($target_dir)){
             mkdir($target_dir,0777,true);
         }
@@ -394,6 +396,32 @@ class CommonModel extends dbModel
 				
 				";
 		}
-		
 	}
+
+    public function zip_downloadFileNew(){
+        $file_path = ROOTPATH."/public/uploads/";
+        $sales_file = $_GET["sales_file"];
+        $workers_file = $_GET["workers_file"];
+        $seller_business_license = $_GET["seller_business_license"];
+//압축할 파일명
+        $file_names = array($sales_file,$workers_file,$seller_business_license);
+//다운로드되는 파일명
+        $file_name = "test.zip";
+        $this->createZipArchive();
+/*        $zip = new ZipArchive();
+        if ($zip->open($file_name, ZipArchive::CREATE) !== true){
+            exit("cannot open [".$file_name."]");
+        }
+        foreach($file_names as $files){
+            $zip->addFile($file_path.$files, $files);
+        }
+        $zip->close();*/
+        header("Content-type: application/zip");
+        header("Content-Disposition: attachment; filename=".$file_name);
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        readfile($file_name);
+        unlink($file_name);
+    }
+
 }

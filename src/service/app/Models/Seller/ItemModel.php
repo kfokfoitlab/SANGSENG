@@ -54,7 +54,7 @@ class ItemModel extends CommonModel
               ,delivery_cycle = '".$data["delivery_cycle"]."'
               ,product_detail = '".$data["product_detail"]."'
               ,representative_image = '".$upload_representative."'
-              ,product_image1 = '".$upload_image1."'
+              ,product_imag1 = '".$upload_image1."'
               ,product_image2 = '".$upload_image2."'
               ,detail_img = '".$upload_detail_image."'
               ,reduction = '".$reduction."'

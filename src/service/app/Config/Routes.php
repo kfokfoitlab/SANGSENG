@@ -178,7 +178,10 @@ $routes->group('Seller',  function ($routes){
 	$routes->get ($group_name.'/StatusComment', 'Seller\Item::StatusComment');
     $routes->post ('ContractUpdate',           'Seller::ContractUpdate');
     $routes->get ('MyPage/downloadFileNew',           'Seller\MyPage::downloadFileNew');
-
+    $routes->post ('Delivery/Submit',      'Seller\Delivery::DeliverySubmit');
+    $routes->get ('DeliveryStatus',      'Seller\Delivery::Status');
+    $routes->post ('Delivery/invoice',      'Seller\Delivery::invoice');
+    $routes->get ('Delivery/downloadFileNew',           'Seller\Delivery::downloadFileNew');
 
     // $routes->get ('Contract(:any)',               'Seller::Contract');
 
@@ -194,8 +197,7 @@ $routes->group('Seller',  function ($routes){
 	$routes->post ('MyPage/InfoUpdate',                'Seller\MyPage::InfoUpdate');
     $routes->get ('MyPage/ConfirmPassword',     'Seller\MyPage::ConfirmPassword');
     $routes->get ('MyPage/ChangePassword',      'Seller\MyPage::ChangePassword');
-	
-	$routes->get ('DeliveryStatus',      'Seller\Delivery::Status');
+
 });
     $routes->group('Download', function($routes) {
     $routes->get('downloadFileNew', 'Download::downloadFileNew');
@@ -223,6 +225,7 @@ $routes->group('Reduction', function($routes) {
     $routes->get('Help', 'Reduction\Help::index');
     $routes->get ('Help/downloadFileNew',           'Reduction\Help::downloadFileNew');
     $routes->post ('Help/ProvisionUpload',           'Reduction\Help::ProvisionUpload');
+    $routes->get('CostCal', 'Reduction\CostCal::index');
 });
 $routes->group('Policy', function($routes) {
     $routes->get('TOS', 'Policy\TermsOfService::index');
