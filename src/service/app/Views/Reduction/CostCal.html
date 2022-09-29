@@ -155,6 +155,12 @@
 			var m = m.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 			return m;
     }
+
+		function nReset(x){
+			$('#error_message').hide();
+			$('#error_message1').hide();
+			x.reset();
+    }
   </script>
 </head>
 <body class="text-center">
@@ -242,7 +248,7 @@
   </tbody>
 
 </table>
-  <button class="btn btn-secondary" type="reset">초기화</button>
+  <button class="btn btn-secondary" type="button" onclick="nReset(money_form)">초기화</button>
   <button class="btn btn-danger" type="button" onclick="window.close();">닫기</button>
 </form>
 <!--금액 계산기 끝-->
@@ -323,7 +329,7 @@
     </tbody>
 
   </table>
-  <button class="btn btn-secondary" type="reset">초기화</button>
+  <button class="btn btn-secondary" type="button" onclick="nReset(per_form)">초기화</button>
   <button class="btn btn-danger" type="button" onclick="window.close();">닫기</button>
 </form>
 <!--비율 계산기 끝-->
