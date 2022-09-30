@@ -105,15 +105,11 @@
           <tr>
             <th>No.</th>
             <th>계약상태</th>
-            <th>계약번호</th>
             <th>상품명</th>
-            <th>카테고리</th>
-            <th>물품수량</th>
-            <th>계약금액</th>
-            <th>감면금액</th>
-            <th>계약등록일</th>
-            <th>배송주기</th>
             <th>구매기업</th>
+            <th>상품수량</th>
+            <th>계약금액</th>
+            <th>계약서조회</th>
             <th>계약서 전송받기</th>
           </tr>
           </thead>
@@ -164,21 +160,17 @@
           ?>
           <tr>
             <td><?=$item["cidx"]?></td>
-            <td title="진행중"><?=$status?></td>
-            <td title="20220801090000-00001"><a href=""><?=$item["contract_no"]?></a></td>
-            <td title="친환경중질지70gA4용지"><?=$item["product_name"]?></td>
-            <td title="사무용품"><?=$category?></td>
-            <td title="100BOX"><?=$item["product_quantity"]?></td>
-            <td title="250,000,000"><?=number_format($item["contract_price"])?>원</td>
-            <td title="25,000,000"><?=number_format($item["reduction_money"])?>원</td>
-            <td title="2022-08-01"><?=$item["register_date"]?></td>
-            <td title="일주일에 한번"><?=$delivery_cycle?></td>
-            <td title="22-08-02"><?=$item["buyer_company"]?></td>
-            <td title="20220801090000-00001">
+            <td><?=$status?></td>
+            <td class="text-start"><?=$item["product_name"]?></td>
+            <td><?=$item["buyer_company"]?></td>
+            <td class="text-end"><?=$item["product_quantity"]?></td>
+            <td class="text-end"><?=number_format($item["contract_price"])?>원</td>
+            <td><button class="btn btn-primary btn-sm">계약서 조회</button></td>
+            <td>
               <?php
             if($item["contract_status"] == 2 || $item["contract_status"] == 5){
               ?>
-              <button class ="btn btn-success" onclick="Contract_Return(<?=$item['workflow_id']?>,<?=$item['contract_status']?>);">이메일로 받기</button>
+              <button class ="btn btn-success btn-sm" onclick="Contract_Return(<?=$item['workflow_id']?>,<?=$item['contract_status']?>);">이메일로 받기</button>
               <?php
             }
             ?>
