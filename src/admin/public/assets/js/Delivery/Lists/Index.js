@@ -14,11 +14,11 @@ $(document).ready(function(){
 			url: "/"+_CONTROLLER+"/getList"
 			,type: "POST"
 			,data: function(data){
-				data.columns[1].search.value = $("#search-company-name").val();
-				data.columns[2].search.value = $("#search-worker-name").val();
-				data.columns[6].search.value = $("#search-working_status").val();
+				data.columns[3].search.value = $("#contract_no").val();
+				data.columns[2].search.value = $("#buyer_company").val();
+				data.columns[1].search.value = $("#seller_company").val();
 				data.columns[7].search.value = $("#search-disability_degree").val();
-				data.columns[8].search.value = $("#search-status").val();
+				//data.columns[8].search.value = $("#search-status").val();
 			}
 		},
 		"order": [
@@ -26,16 +26,16 @@ $(document).ready(function(){
 		],
 		"columns": [
 			{title: "idx", data: "idx", visible: false}
-			,{title: "판매자", data: "company_name", visible: true, className: "text-nowrap"}
-			,{title: "구매자", data: "worker_name", visible: true, className: "text-nowrap"}
-			,{title: "계약번호", data: "worker_birth", visible: true, className: "text-nowrap"}
-			,{title: "상품명", data: "worker_term_start", visible: true, className: "text-nowrap"}
-			,{title: "계약금액", data: "worker_term_end", visible: true, className: "text-nowrap"}
-			,{title: "계약등록일", data: "working_status", visible: true, className: "text-nowrap"}
-			,{title: "배송 수", data: "worker_term_end", visible: true, className: "text-nowrap"}
-			,{title: "배송 대기", data: "worker_term_end", visible: true, className: "text-nowrap"}
-			,{title: "배송 중", data: "worker_term_end", visible: true, className: "text-nowrap"}
-			,{title: "배송 완료", data: "worker_term_end", visible: true, className: "text-nowrap"}
+			,{title: "판매자", data: "seller_company", visible: true, className: "text-nowrap"}
+			,{title: "구매자", data: "buyer_company", visible: true, className: "text-nowrap"}
+			,{title: "계약번호", data: "contract_no", visible: true, className: "text-nowrap"}
+			,{title: "상품명", data: "product_name", visible: true, className: "text-nowrap"}
+			,{title: "계약금액", data: "product_price", visible: true, className: "text-nowrap"}
+			,{title: "계약등록일", data: "register_date", visible: true, className: "text-nowrap"}
+			,{title: "배송 수(건)", data: "delivery_total_cnt", visible: true, className: "text-nowrap"}
+			,{title: "배송 대기(건)", data: "delivery_wait_cnt", visible: true, className: "text-nowrap"}
+			,{title: "배송 중(건)", data: "delivery_ready_cnt", visible: true, className: "text-nowrap"}
+			,{title: "배송 완료(건)", data: "delivery_end_cnt", visible: true, className: "text-nowrap"}
 			,{title: "상세보기", data: "idx", visible: true, orderable: false, className: "text-center noExport",
 				"render": function( data, type, row, meta ){
 					var html = "";
