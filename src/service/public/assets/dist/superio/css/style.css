@@ -21153,6 +21153,21 @@ Seller/Index
 .seller-mypage #extra-tab {
   background: center 10px / 42px url("/assets/images/resource/icons/bell.svg") no-repeat;
 }
+.seller-mypage .question-answer .new-badge {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 19px;
+  height: 19px;
+  top: 7px;
+  right: 8px;
+  border-radius: 50%;
+  background: #1d53ff;
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+}
 .seller-mypage .tab-content li {
   margin-bottom: 0.25rem;
   font-size: 0.9rem;
@@ -21160,6 +21175,10 @@ Seller/Index
 .seller-mypage .tab-content a {
   padding: 0 5px;
   color: #444;
+}
+.seller-mypage .tab-content a.new {
+  color: #0067ff;
+  font-weight: bold;
 }
 .seller-mypage .tab-content a:hover {
   font-weight: bold;
@@ -21720,9 +21739,11 @@ Reduction/Help
   width: 200px;
 }
 .reduction-help table th:nth-child(2) {
-  width: 780px;
+  width: 770px;
 }
-.reduction-help table th:nth-child(3),
+.reduction-help table th:nth-child(3) {
+  width: 160px;
+}
 .reduction-help table th:nth-child(4) {
   width: 150px;
 }
@@ -21738,6 +21759,14 @@ Reduction/Help
   text-align: center;
 }
 .reduction-help table .text-small {
+  font-size: 0.9rem;
+}
+
+.reduction-help .upload-text {
+  width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: 0.9rem;
 }
 /***

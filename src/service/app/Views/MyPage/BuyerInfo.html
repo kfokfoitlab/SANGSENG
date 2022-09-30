@@ -92,8 +92,8 @@
             </div>
             <br>
             <div class="form-group">
-              <label class="my-2"><a title="사업자등록증 첨부">사업자등록증 첨부</a></label><br>
-              <button class="btn btn-primary" type="button"  onclick="downloadFileNew('<?=$data["buyer_documents"]?>','<?=$data["buyer_documents_ori"]?>');">기존파일 다운로드</button>
+              <label class="my-2"><a title="사업자등록증 첨부">사업자등록증 첨부</a></label>
+              <button class="btn btn-outline-secondary btn-sm fw-normal my-2" type="button"  onclick="downloadFileNew('<?=$data["buyer_documents"]?>','<?=$data["buyer_documents_ori"]?>');">기존파일 다운로드</button>
               <input type="file" name="buyer_documents" class="form-control" placeholder="사업자등록증 첨부"
                      title="사업자등록증 첨부" tabindex=100>
               <input type="hidden" name="buyer_documents" value='<?=$data["buyer_documents"]?>'>

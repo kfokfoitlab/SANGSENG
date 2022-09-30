@@ -98,14 +98,14 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button
-              class="nav-link active"
+              class="nav-link"
               id="nav-company-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-company"
               type="button"
               role="tab"
               aria-controls="nav-company"
-              aria-selected="true"
+              aria-selected="false"
             >
               기업 상세정보
             </button>
@@ -121,6 +121,18 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
             >
               상품 상세정보
             </button>
+            <button
+                class="nav-link active"
+                id="nav-review-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#nav-review"
+                type="button"
+                role="tab"
+                aria-controls="nav-review"
+                aria-selected="true"
+            >
+              기업/상품 리뷰
+            </button>
           </div>
         </nav>
         <div
@@ -128,7 +140,7 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
           id="nav-tabContent"
         >
           <div
-            class="tab-pane fade show active"
+            class="tab-pane fade"
             id="nav-company"
             role="tabpanel"
             aria-labelledby="nav-company-tab"
@@ -142,6 +154,89 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
             aria-labelledby="nav-detail-tab"
           >
             <img src="/uploads/<?=$data['detail_img']?>" alt="상품상세정보">
+          </div>
+          <div
+              class="tab-pane fade show active"
+              id="nav-review"
+              role="tabpanel"
+              aria-labelledby="nav-review-tab"
+          >
+            <div class="mb-5">
+              <div class="d-flex mb-4">
+                <input type="text" name="" id="" class="w-100 px-3 py-2 bg-light border rounded-3 me-2" placeholder="리뷰를 남겨주세요.">
+                <button class="btn btn-dark btn-sm fw-normal flex-shrink-0 px-3">등록</button>
+              </div>
+              <ul>
+                <li>
+                  <div class="product-review py-4 border-bottom">
+                    <div class="mb-2">
+                      <strong class="me-2">(주)파워소프트</strong>
+                      <span class="text-secondary">2022.09.30 09:00</span>
+                    </div>
+                    <div class="mb-2">
+                      <p>컴퓨터 성능이 매우 좋다고 생각합니다. 가격도 합리적입니다.</p>
+                    </div>
+                    <div>
+                      <button class="btn btn-dark btn-sm py-0 fw-normal">답글</button>
+                    </div>
+                  </div>
+
+                  <div class="product-review-answer d-flex p-4 border-bottom">
+                    <div>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
+                      </svg>
+                    </div>
+                    <div class="ms-3 flex-grow-1">
+                      <div class="mb-2">
+                        <span class="badge bg-primary fw-normal">판매기업</span>
+                        <strong class="me-2">몬스타주식회사</strong>
+                        <span class="text-secondary">2022.10.01 01:12</span>
+                      </div>
+                      <div class="mb-2">
+                        <p>좋게 평가해주셔서 감사합니다.</p>
+                      </div>
+                      <div>
+                        <button class="btn btn-dark btn-sm py-0 fw-normal">답글</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </li>
+                <li>
+                  <div class="product-review py-4 border-bottom">
+                    <div class="mb-2">
+                      <strong class="me-2">구매회사</strong>
+                      <span class="text-secondary">2022.09.30 09:00</span>
+                    </div>
+                    <div class="mb-2">
+                      <p>좋습니다.</p>
+                    </div>
+                    <div>
+                      <button class="btn btn-dark btn-sm py-0 fw-normal">답글</button>
+                    </div>
+                  </div>
+
+                  <div class="product-review-writing d-flex p-4 border-bottom bg-light">
+                    <div>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
+                      </svg>
+                    </div>
+                    <div class="ms-3 flex-grow-1">
+                      <div class="mb-2">
+                        <span class="badge bg-primary fw-normal">판매기업</span>
+                        <strong class="me-2">몬스타주식회사</strong>
+                      </div>
+                      <div class="d-flex">
+                        <input type="text" name="" id="" class="w-100 px-3 py-2 bg-light border rounded-3 me-2 bg-white" placeholder="리뷰를 남겨주세요.">
+                        <button class="btn btn-dark btn-sm fw-normal flex-shrink-0 px-3">등록</button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
