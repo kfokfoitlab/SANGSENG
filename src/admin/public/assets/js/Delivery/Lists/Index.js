@@ -31,26 +31,12 @@ $(document).ready(function(){
 			,{title: "계약번호", data: "worker_birth", visible: true, className: "text-nowrap"}
 			,{title: "상품명", data: "worker_term_start", visible: true, className: "text-nowrap"}
 			,{title: "계약금액", data: "worker_term_end", visible: true, className: "text-nowrap"}
-			,{title: "계약등록일", data: "working_status", visible: true, className: "text-nowrap",
-				"render": function( data, type, row, meta ){
-					let html = "";
-					
-					switch(data){
-						case "1":
-							html = "<span class='text-success'>근무</span>";
-							break;
-						case "2":
-							html = "<span class='text-danger'>퇴직</span>";
-							break;
-						case "3":
-							html = "<span class='text-info'>휴직</span>";
-							break;
-					}
-					
-					return html;
-				}}
-			,{title: "배송상태", data: "worker_term_end", visible: true, className: "text-nowrap"}
-			,{title: "세부내용 조회", data: "idx", visible: true, orderable: false, className: "text-center noExport",
+			,{title: "계약등록일", data: "working_status", visible: true, className: "text-nowrap"}
+			,{title: "배송 수", data: "worker_term_end", visible: true, className: "text-nowrap"}
+			,{title: "배송 대기", data: "worker_term_end", visible: true, className: "text-nowrap"}
+			,{title: "배송 중", data: "worker_term_end", visible: true, className: "text-nowrap"}
+			,{title: "배송 완료", data: "worker_term_end", visible: true, className: "text-nowrap"}
+			,{title: "상세보기", data: "idx", visible: true, orderable: false, className: "text-center noExport",
 				"render": function( data, type, row, meta ){
 					var html = "";
 					html += "<a";

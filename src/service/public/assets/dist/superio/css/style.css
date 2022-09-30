@@ -21370,35 +21370,28 @@ Seller/Contract
   box-sizing: border-box;
 }
 .contract-list .contract-list-table th:nth-child(1) {
-  width: 55px;
+  width: 70px;
 }
 .contract-list .contract-list-table th:nth-child(2) {
-  width: 100px;
+  width: 120px;
 }
 .contract-list .contract-list-table th:nth-child(3) {
-  width: 125px;
+  width: 240px;
 }
 .contract-list .contract-list-table th:nth-child(4) {
-  width: 140px;
+  width: 180px;
 }
 .contract-list .contract-list-table th:nth-child(5) {
-  width: 105px;
+  width: 155px;
 }
-.contract-list .contract-list-table th:nth-child(6),
+.contract-list .contract-list-table th:nth-child(6){
+  width: 170px;
+}
 .contract-list .contract-list-table th:nth-child(7) {
-  width: 145px;
+  width: 170px;
 }
 .contract-list .contract-list-table th:nth-child(8) {
-  width: 130px;
-}
-.contract-list .contract-list-table th:nth-child(9) {
-  width: 120px
-}
-.contract-list .contract-list-table th:nth-child(10) {
-  width: 95px;
-}
-.contract-list .contract-list-table th:nth-child(11) {
-  width: 120px;
+  width: 170px;
 }
 .contract-list .contract-list-table td .btn.btn-sm {
   font-weight: normal;
