@@ -3,7 +3,7 @@
 	namespace App\Controllers\Seller;
 	use App\Controllers\BaseController;
 	use App\Models\Management\Company\ApplicationModel;
-	use App\Models\Delivery\DeliveryModel;
+	use App\Models\Delivery\SellerDeliveryModel;
 	use App\Models\DatabaseModel;
 	use App\Models\Seller\IMJOBModel;
 	
@@ -11,7 +11,7 @@
 	{
 		private $model;
 		private $database_model;
-		private $delivery_model;
+		private $seller_delivery_model;
 		private $seller_model;
 		
 		public function __construct()
@@ -19,10 +19,10 @@
 			$this->imjob_model = new IMJOBModel;
 			$this->application_model = new ApplicationModel;
 			$this->database_model = new DatabaseModel;
-			$this->delivery_model = new DeliveryModel;
+			$this->seller_delivery_model = new SellerDeliveryModel;
 		} //}}}
 		
-		public function List()
+	/*	public function List()
 		{ // {{{
 			$data = $this->imjob_model->getWorkerList();
 			$data_cnt = $this->imjob_model->getWorkerCount();
@@ -36,16 +36,16 @@
 			echo view("Common/Header.html");
 			echo view('Seller/IMJOB.html',$data);
 			echo view("Common/Footer.html");
-		} // }}}
+		} // }}}*/
 		
 		public function Status()
 		{ // {{{
             if($_GET['cn'] != ""){
-                $delivery = $this->delivery_model->getDeliveryList($_GET);
-                $contents = $this->delivery_model->getContents($_GET);
+                $delivery = $this->seller_delivery_model->getDeliveryList($_GET);
+                $contents = $this->seller_delivery_model->getContents($_GET);
             }
             $uuid = $_SESSION['login_info']['uuid'];
-            $contractList = $this->delivery_model->getContractList($uuid);
+            $contractList = $this->seller_delivery_model->getContractList($uuid);
             $data = array(
                 "contractList" => $contractList
                 ,"delivery" => $delivery
@@ -57,7 +57,7 @@
 		} // }}}
 
         public function DeliverySubmit(){
-                $result = $this->delivery_model->Register($_FILES,$_POST);
+                $result = $this->seller_delivery_model->Register($_FILES,$_POST);
                 if($result != "") {
                     echo "
                 <script>
@@ -75,7 +75,7 @@
                 }
         }
         public function invoice(){
-            $result = $this->delivery_model->invoice($_POST);
+            $result = $this->seller_delivery_model->invoice($_POST);
             if($result == 1) {
                 echo "
                 <script>
@@ -94,7 +94,7 @@
         }
 
         public function downloadFileNew(){
-            $this->delivery_model->downloadFileNew();
+            $this->seller_delivery_model->downloadFileNew();
         }
 	}
   ?>

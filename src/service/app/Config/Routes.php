@@ -161,7 +161,9 @@ $routes->group('Buyer', function($routes){
     $routes->post ('MyPage/ContractUpdate',           'Buyer\MyPage::ContractUpdate');
     $routes->post ('MyPage/BuyerUpdateSubmit',           'Buyer\MyPage::BuyerUpdateSubmit');
     $routes->post ('MyPage/downloadFileNew',           'Buyer\MyPage::downloadFileNew');
-	$routes->get ('MyPage/DeliveryStatus',           'Buyer\Delivery::Status');
+	$routes->get ('DeliveryStatus',           'Buyer\Delivery::Status');
+    $routes->get ('DeliveryStatusUpdate',           'Buyer\Delivery::DeliveryStatusUpdate');
+    $routes->get ('Delivery/downloadFileNew',           'Buyer\Delivery::downloadFileNew');
 
 
 });
