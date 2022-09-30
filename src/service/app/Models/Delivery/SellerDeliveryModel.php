@@ -3,7 +3,7 @@
 namespace App\Models\Delivery;
 use App\Models\CommonModel;
 
-class DeliveryModel extends CommonModel
+class SellerDeliveryModel extends CommonModel
 {
 
     public function getContractList($uuid){
@@ -23,7 +23,7 @@ class DeliveryModel extends CommonModel
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
-            $contractList = $row;
+            $contractList[] = $row;
         }
         return $contractList;
 
@@ -40,6 +40,7 @@ class DeliveryModel extends CommonModel
         $delivery_no = date("YmdHis");
         $dcount = $data['count'];
         $delivery_predicted =$data['delivery_predicted'];
+        $contract_date = $data['register_date'];
         $query = "
           insert into
              delivery
@@ -53,6 +54,7 @@ class DeliveryModel extends CommonModel
               ,product_name = '".$product_name."'
               ,product_price = '".$product_price."'
               ,delivery_predicted = '".$delivery_predicted."'
+              ,contract_date = '".$data['register_date']."'
               ,register_date = '".date("Y-m-d")."'
               ,register_id = '".$seller_uuid."'
               ,dcount = '".$dcount."'
@@ -147,6 +149,7 @@ class DeliveryModel extends CommonModel
         return $delivery;
 
     }
+
 
     public function getContents($data){
         $contents = [];

@@ -125,7 +125,7 @@ class BuyerModel extends CommonModel
               ,product_quantity = '".$data["product_quantity"]."'
               ,reduction_money = '".$reduction_money."'
               ,product_no = '".$data["product_no"]."'       
-              ,register_date = '".date("Y-m-d H:i:s")."'
+              ,register_date ='".date("Y-m-d")."'
               ,del_yn = 'N'          
       ";
         $idx = $this->wrdb->insert($query);

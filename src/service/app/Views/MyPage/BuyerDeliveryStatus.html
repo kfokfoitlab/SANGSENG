@@ -13,31 +13,57 @@
         require(__DIR__.'/Components/Nav.html');
       ?>
       <h3 class="mt-5 mb-4 h4 fw-bold text-center">배송조회</h3>
-      <select name="" id="" class="w-100 border mb-4 p-3">
-        <option value="">회사명과 상품명의 계약서_계약번호1</option>
-        <option value="">회사명과 상품명의 계약서_계약번호2</option>
-        <option value="">회사명과 상품명의 계약서_계약번호3</option>
+      <select name="contract_select" id="contract_select" class="w-100 border mb-4 p-3">
+        <?php
+        if(count($contractList) == 0){
+        ?>
+        <option value="" selected>완료된 계약서가 없습니다</option>
+        <?php
+        }else{
+        ?>
+        <option value="" >계약서 선택</option>
+        <?php if(is_array($contractList) && count($contractList) > 0){
+        foreach($contractList as $item){
+        ?>
+        <option value="<?=$item['contract_no']?>" <?php if($item['contract_no']==$_GET["cn"]){echo "selected";}?>><?=$item['seller_company']?> 와  <?=$item['buyer_company']?> 의 계약 <?=$item['contract_no']?></option>
+        <?php
+        }
+        }
+        ?>
+        <?php
+        }
+        ?>
       </select>
       <ul class="d-flex border w-100 justify-content-around mb-4 py-4 text-center bg-light item-list-number">
         <li class="px-5 position-relative">
           <p class="mb-2">상품명</p>
-          <p><strong>보스볼펜</strong></p>
+          <p><strong><?=$contents['product_name']?></strong></p>
         </li>
         <li class="px-5 position-relative">
           <p class="mb-2">상품수량</p>
-          <p><strong>1,000BOX(100,000개)</strong></p>
+          <p><strong><?=$contents['product_quinality']?></strong></p>
         </li>
         <li class="px-5 position-relative">
           <p class="mb-2">계약금액</p>
-          <p><strong>600,000,000원</strong></p>
+          <?php
+        if(count($contractList) == 0 || $_GET['cn'] == ""){
+        ?>
+          <p><strong></strong></p>
+          <?php
+        }else{
+        ?>
+          <p><strong><?=number_format($contents['product_price'])?>원</strong></p>
+        <?php
+        }
+        ?>
         </li>
         <li class="px-5">
           <p class="mb-2">계약업체</p>
-          <p><strong>시험용사업체</strong></p>
+          <p><strong><?=$contents['seller_company']?></strong></p>
         </li>
         <li class="px-5">
           <p class="mb-2">계약일</p>
-          <p><strong>2022.09.22</strong></p>
+          <p><strong><?=substr($contents["register_date"], 0, 10)?></strong></p>
         </li>
       </ul>
       <table class="table table-striped">
@@ -54,33 +80,62 @@
         </thead>
         <tbody>
         <tr>
-          <td>1회</td>
-          <td>2022.01.01</td>
-          <td>2022.01.01</td>
-          <td>2022.01.05</td>
-          <td>도착완료</td>
+          <?php if(is_array($delivery) && count($delivery) > 0){
+          foreach($delivery as $item){
+          $delivery_status = "";
+          if($item['delivery_status'] == '1'){
+          $delivery_status = "배송대기";
+          }else if($item['delivery_status'] == '3'){
+          $delivery_status = "배송중";
+          }else if($item['delivery_status'] == '5'){
+          $delivery_status = "배송완료";
+          }
+          ?>
+          <td><?=$item['dcount']?>회</td>
+          <td><?=substr($item["delivery_predicted"],0,10)?></td>
+          <td><?=substr($item["delivery_start"],0,10)?></td>
+          <td><?=substr($item["delivery_arrival"],0,10)?></td>
+          <td><?=$delivery_status?></td>
           <td>
-            <button class="btn btn-outline-dark btn-sm">송장확인</button>
+            <button class="btn btn-outline-dark btn-sm" onclick="downloadFileNew('<?=$item["invoice_file"]?>','<?=$item["invoice_file_ori"]?>');">송장확인</button>
           </td>
           <td>
-            <button class="btn btn-success btn-sm fw-normal">배송완료</button>
+            <?php
+            if($item['delivery_status'] == 3){
+            ?>
+            <button type="button" class="btn btn-success btn-sm fw-normal" onclick="deliveryStatus(<?=$item['idx']?>,<?=$item['contract_no']?>);">배송완료</button>
+            <?php
+            }
+            ?>
           </td>
         </tr>
-        <tr>
-          <td>2회</td>
-          <td>2022.01.01</td>
-          <td>2022.01.01</td>
-          <td>2022.01.05</td>
-          <td>배송중</td>
-          <td>
-            <button class="btn btn-outline-dark btn-sm">송장확인</button>
-          </td>
-          <td>
-            <button class="btn btn-success btn-sm fw-normal">배송완료</button>
-          </td>
-        </tr>
+        <?php
+          }
+          }
+          ?>
         </tbody>
       </table>
     </div>
   </section>
 </div>
+
+<script>
+  function downloadFileNew(fileName,fileNameOri){
+    if(fileName == ""){
+      alert("등록된 파일이 없습니다");
+    }else {
+      location.href = "/Buyer/Delivery/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+    }
+  };
+
+  $(document).ready(function(){
+    $('#contract_select').on('change',function(){
+      var contract_no = $("#contract_select").val();
+      location.href = "/Buyer/DeliveryStatus/?cn=" + contract_no;
+    })
+  });
+
+  function deliveryStatus(idx,cn){
+    location.href = "/Buyer/DeliveryStatusUpdate/?idx=" + idx + "&cn=" +cn ;
+  };
+</script>
