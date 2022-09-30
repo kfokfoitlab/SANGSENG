@@ -47,7 +47,7 @@ $routes->get ('/Image/(:any)/(:any)',       'Image::getImage/$1');
 $routes->group('Chat', function($routes){
     $routes->get ('Room/(:any)',                            'Chat::Room/$1');
     $routes->post('Send',                                   'Chat::Send');
-    $routes->get ('CreateChannel/(:any)/(:any)',            'Chat::CreateChannel/$1/$2');
+    $routes->get ('CreateChannel/(:any)/(:any)',          'Chat::CreateChannel/$1/$2');
 });
 
 
