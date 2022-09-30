@@ -3,7 +3,7 @@
 namespace Config;
 
 if (! defined('UPLOADPATH')) {
-	define('UPLOADPATH', realpath(APPPATH . '../') . DIRECTORY_SEPARATOR);
+	define('UPLOADPATH', realpath(APPPATH . '../../') . DIRECTORY_SEPARATOR);
 }
 
 // Create a new instance of our RouteCollection class.
@@ -199,6 +199,9 @@ $routes->group('Seller',  function ($routes){
 	$routes->post ('MyPage/InfoUpdate',                'Seller\MyPage::InfoUpdate');
     $routes->get ('MyPage/ConfirmPassword',     'Seller\MyPage::ConfirmPassword');
     $routes->get ('MyPage/ChangePassword',      'Seller\MyPage::ChangePassword');
+
+    $group_name = "Statistics";
+    $routes->get ($group_name.'/SalesAnalysis',  'Seller\Statistics::SalesAnalysis');
 
 });
     $routes->group('Download', function($routes) {
