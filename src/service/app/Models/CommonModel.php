@@ -328,8 +328,8 @@ class CommonModel extends dbModel
 		$name = $files["$fileName_ori"]['name'];
 		$exploded_file = explode(".",$name);
 		$ext = array_pop($exploded_file);
-		$target_dir = UPLOADPATH."/service/public/uploads/";
-		$target_dir_admin = UPLOADPATH."/admin/public/uploads/";
+		$target_dir = UPLOADPATH."service/public/uploads/";
+		$target_dir_admin = UPLOADPATH."admin/public/uploads/";
 		$file_tmp_name = $files["$fileName_ori"]["tmp_name"];
 
 
