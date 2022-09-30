@@ -47,7 +47,7 @@ $routes->get ('/Image/(:any)/(:any)',       'Image::getImage/$1');
 $routes->group('Chat', function($routes){
     $routes->get ('Room/(:any)',                            'Chat::Room/$1');
     $routes->post('Send',                                   'Chat::Send');
-    $routes->get ('CreateChannel/(:any)/(:any)',            'Chat::CreateChannel/$1/$2');
+    $routes->get ('CreateChannel/(:any)/(:any)',          'Chat::CreateChannel/$1/$2');
 });
 
 
@@ -161,7 +161,9 @@ $routes->group('Buyer', function($routes){
     $routes->post ('MyPage/ContractUpdate',           'Buyer\MyPage::ContractUpdate');
     $routes->post ('MyPage/BuyerUpdateSubmit',           'Buyer\MyPage::BuyerUpdateSubmit');
     $routes->post ('MyPage/downloadFileNew',           'Buyer\MyPage::downloadFileNew');
-	$routes->get ('MyPage/DeliveryStatus',           'Buyer\Delivery::Status');
+	$routes->get ('DeliveryStatus',           'Buyer\Delivery::Status');
+    $routes->get ('DeliveryStatusUpdate',           'Buyer\Delivery::DeliveryStatusUpdate');
+    $routes->get ('Delivery/downloadFileNew',           'Buyer\Delivery::downloadFileNew');
 
 
 });
@@ -197,6 +199,9 @@ $routes->group('Seller',  function ($routes){
 	$routes->post ('MyPage/InfoUpdate',                'Seller\MyPage::InfoUpdate');
     $routes->get ('MyPage/ConfirmPassword',     'Seller\MyPage::ConfirmPassword');
     $routes->get ('MyPage/ChangePassword',      'Seller\MyPage::ChangePassword');
+
+    $group_name = "Statistics";
+    $routes->get ($group_name.'/SalesAnalysis',  'Seller\Statistics::SalesAnalysis');
 
 });
     $routes->group('Download', function($routes) {
