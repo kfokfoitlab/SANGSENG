@@ -3,7 +3,7 @@
 namespace Config;
 
 if (! defined('UPLOADPATH')) {
-	define('UPLOADPATH', realpath(APPPATH . '../../') . DIRECTORY_SEPARATOR);
+	define('UPLOADPATH', realpath(APPPATH . '../') . DIRECTORY_SEPARATOR);
 }
 
 // Create a new instance of our RouteCollection class.
