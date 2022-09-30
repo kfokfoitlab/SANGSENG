@@ -1,0 +1,49 @@
+<section class="content-main">
+	<div class="content-header">
+    <h2 class="content-title"> <?=$page_name?> </h2>
+	</div>
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <form name="form-searchbar">
+      <div class="row gx-3">
+        <div class="col-2">
+          <label>계약번호 검색</label>
+          <input type="text" class="form-control form-control-sm search" id="search-product_no" placeholder="">
+        </div>
+        <div class="col-2">
+          <label>구매기업 사업체명 검색</label>
+          <input type="text" class="form-control form-control-sm search" id="search-company_name" placeholder="">
+        </div>
+        <div class="col-2">
+          <label>판매기업 사업체명 검색</label>
+          <input type="text" class="form-control form-control-sm search" id="" placeholder="">
+        </div>
+        <div class="col-2">
+          <label>상태</label>
+          <select class="form-control form-control-sm filter" id="search-status">
+            <option value="" selected>전체</option>
+            <option value="1">대기중</option>
+            <option value="5">배송중</option>
+            <option value="7">배송완료</option>
+          </select>
+        </div>
+
+      </div>
+
+      </form>
+    </div>
+
+
+    <div class="card-body">
+
+      <div class="">
+        <table class="table table-hover small" id="datatables">
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+

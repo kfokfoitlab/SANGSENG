@@ -6,11 +6,11 @@
         <section>
 
           <select class="form-select w-25" name="seller_uuid" id="contract_select">
-            <option value="" >(계약번호)물품명</option>
+            <option value="" >계약서 선택</option>
             <?php if(is_array($data) && count($data) > 0){
             foreach($data as $item){
             ?>
-            <option value="<?=$item['contract_no']?>" <?php if($item['contract_no']==$_GET["cn"]){echo "selected";}?>>(<?=$item['contract_no']?>)<?=$item['product_name']?></option>
+            <option value="<?=$item['contract_no']?>" <?php if($item['contract_no']==$_GET["cn"]){echo "selected";}?>><?=$item['product_name']?> / <?=number_format($item['product_price'])?>원 / <?=substr($item['register_date'],0,10)?></option>
             <?php
               }
             }
@@ -32,7 +32,7 @@
                 <p class="fw-bold">연계고용도급계약서</p>
               </td>
               <td>
-                <p class="mb-1">(계약번호)연계고용도급계약서.pdf</p>
+                <p class="mb-1">(<?=$_GET['cn']?>)<?=$seller_info['company_name'].' 와 '. $buyer_info['company_name'].'의 계약'?></p>
                 <p class="text-small">※ 물품구매에 따른 계약서 내용 자동 추가</p>
               </td>
               <td>
@@ -52,9 +52,10 @@
             <tr>
               <td>
                 <p class="fw-bold">지급증빙서류</p>
-                <form method="post"  action ="/Reduction/Help/ProvisionUpload"  enctype="multipart/form-data">
-                <input type="file" name="provision_file"placeholder="지급증빙서류 첨부"
-                       title="지급증빙서류 첨부" tabindex=100> <button type="submit" class="btn btn-outline-secondary btn-sm">업로드</button>
+                <form method="post" id ="fileForm"  action ="/Reduction/Help/ProvisionUpload"  enctype="multipart/form-data">
+                  <input type="hidden" name ="cn" value="<?=$_GET['cn']?>">
+                <input type="file" id = "provision_file" name="provision_file"placeholder="지급증빙서류 첨부"
+                       title="지급증빙서류 첨부" tabindex=100> <button type="button" onclick="file_check();" class="btn btn-outline-danger btn-sm">등록</button>
                   <br>
                   기존 파일 : <?=$workflow["provision_file_ori"]?>
                   <input type="hidden" name ="contract_no" value="<?=$workflow['contract_no']?>">
@@ -62,11 +63,11 @@
                 </form>
               </td>
               <td>
-                <p class="mb-1">(구매기업)지급증빙서류.pdf</p>
+                <p class="mb-1">(<?=$buyer_info['company_name']?>)<br>파일명 : <?=$workflow["provision_file_ori"]?></p>
                 <p class="text-small">※ 연계고용 도급계약에 따른 보수지급 영수증</p>
               </td>
               <td>
-                <button class="btn btn-outline-secondary btn-sm" onclick="downloadFileNew('<?=$workflow["provision_file"]?>','<?=$workflow["provision_file_ori"]?>');" >다운로드</button>
+                <button class="btn btn-outline-secondary btn-sm" onclick="uploadCheck('<?=$workflow["provision_file"]?>','<?=$workflow["provision_file_ori"]?>');" >다운로드</button>
               </td>
               <td>
                 <p>2022.08.30</p>
@@ -77,7 +78,7 @@
                 <p class="fw-bold">매출증빙서류</p>
               </td>
               <td>
-                <p class="mb-1">(판매기업)매출증빙서류.pdf</p>
+                <p class="mb-1">(<?=$seller_info['company_name']?>)<br>파일명 : <?=$seller_info['sales_file_ori']?></p>
                 <p class="text-small">※ 판매기업의 매출액 증빙자료(결산서, 손익계산서, 부가가치세 과세표준증명, 매출처별세금 계산서 합계표 등) 업로드 내용 표시</p>
               </td>
               <td>
@@ -94,7 +95,7 @@
                 <p class="fw-bold">장애인근로자증빙</p>
               </td>
               <td>
-                <p class="mb-1">(판매기업)장애인근로자증빙자료.pdf</p>
+                <p class="mb-1">(<?=$seller_info['company_name']?>)<br>파일명 : <?=$seller_info['workers_file_ori']?></p>
                 <p class="text-small">※ 판매기업의 장애인 현황 증빙자료(월별 임금대장, 장애인등록증 등) 업로드 내용 표시</p>
               </td>
               <td>
@@ -111,14 +112,16 @@
                 <p class="fw-bold">사업자등록증</p>
               </td>
               <td>
-                <p class="mb-1">(구매기업)사업자등록증.pdf</p>
-                <p class="mb-1">(판매기업)사업자등록증.pdf</p>
+                <p class="mb-1">(<?=$buyer_info['company_name']?>)<br>파일명 : <?=$buyer_info['buyer_documents_ori']?></p>
+                <br>
+                <p class="mb-1">(<?=$seller_info['company_name']?>)<br>파일명 :<?=$seller_info['seller_business_license_ori']?></p>
                 <p class="text-small">※ 구매기업과 판매기업의 사용자등록증 자동 추가</p>
               </td>
               <td>
                 <button class="btn btn-outline-secondary btn-sm"onclick="downloadFileNew('<?=$seller_info["seller_business_license"]?>','<?=$seller_info["seller_business_license_ori"]?>');" >다운로드</button>
                 <input type="hidden" name="seller_business_license" value='<?=$data["seller_business_license"]?>'>
                 <input type="hidden" name="seller_business_license_ori" value='<?=$data["seller_business_license_ori"]?>'>
+                <br><br><br>
                 <button class="btn btn-outline-secondary btn-sm"onclick="downloadFileNew('<?=$buyer_info["buyer_documents"]?>','<?=$buyer_info["buyer_documents_ori"]?>');" >다운로드</button>
                 <input type="hidden" name="buyer_documents" value='<?=$data["buyer_documents"]?>'>
                 <input type="hidden" name="buyer_documents_ori" value='<?=$data["buyer_documents_ori"]?>'>
@@ -151,7 +154,13 @@
    })
  })
 
- function provision(){
+ function file_check(){
+
+   if($("#provision_file").val() ==""){
+     alert("파일을 선택해주세요");
+   }else{
+     $("#fileForm").submit();
+   }
 
  }
 
@@ -182,6 +191,16 @@
       location.href = "/Reduction/Help/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
     }
   };
+
+ function uploadCheck(fileName,fileNameOri){
+   if(fileName != ""){
+     location.href = "/Reduction/Help/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+   }else if($('#provision_file').val() == ""){
+     alert("파일을 먼저 등록해주세요");
+   }else{
+     alert("등록된 파일이 없습니다.");
+   }
+ }
 </script>
 
 

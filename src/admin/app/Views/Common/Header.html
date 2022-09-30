@@ -111,6 +111,15 @@ echo script_tag("assets/js/Common.js");
         <a href="/Product/Lists">전체 목록</a>
       </div>
     </li>
+    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Job") !== false)?"active":""?>">
+    <a class="menu-link" href="#">
+      <i class="icon material-icons md-local_shipping"></i>
+      <span class="text">배송관리</span>
+    </a>
+    <div class="submenu">
+      <a href="/Delivery/Lists">전체 목록</a>
+    </div>
+    </li>
 <!--    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Employees") !== false)?"active":""?>">
     <a class="menu-link" href="#">
       <i class="icon material-icons md-face"></i>

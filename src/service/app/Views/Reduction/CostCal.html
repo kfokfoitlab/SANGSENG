@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+
+  <title>제조원가계산기</title>
+
+  <script>
+
+    function costCal(e){
+			replaceNum(e);
+
+			var money1_1 = parseInt($('#money1_1').val().replace(/,/g, ""));
+			var money1_2 = parseInt($('#money1_2').val().replace(/,/g, ""));
+			var money1_3 = parseInt($('#money1_3').val().replace(/,/g, ""));
+			var money2_1 = parseInt($('#money2_1').val().replace(/,/g, ""));
+			var money2_2 = parseInt($('#money2_2').val().replace(/,/g, ""));
+			var money3_1 = parseInt($('#money3_1').val().replace(/,/g, ""));
+			var money3_2 = parseInt($('#money3_2').val().replace(/,/g, ""));
+			var money3_3 = parseInt($('#money3_3').val().replace(/,/g, ""));
+
+			var money1_total = money1_1 + money1_2 + money1_3;
+      var money2_total = money2_1 + money2_2;
+      var money3_total = money3_1 + money3_2 + money3_3;
+      var money_total = money1_total + money2_total + money3_total;
+
+			var money_per1 = 0;
+			var money_per2 = 0;
+			var money_per3 = 0;
+
+			if(money1_total != 0) {
+				money_per1 = parseInt((money1_total / money_total) * 100);
+				$('#money_per1').val(money_per1 + "%");
+				$('#money_per1_1').val(parseInt((money1_1 / money1_total) * money_per1) + "%");
+				$('#money_per1_2').val(parseInt((money1_2 / money1_total) * money_per1) + "%");
+				$('#money_per1_3').val(parseInt((money1_3 / money1_total) * money_per1) + "%");
+			}
+
+			if(money2_total != 0) {
+				money_per2 = parseInt((money2_total / money_total) * 100);
+				$('#money_per2').val(money_per2 + "%");
+				$('#money_per2_1').val(parseInt((money2_1 / money2_total) * money_per2) + "%");
+				$('#money_per2_2').val(parseInt((money2_2 / money2_total) * money_per2) + "%");
+			}
+
+			if(money3_total != 0) {
+				money_per3 = parseInt((money3_total / money_total) * 100);
+				$('#money_per3').val(money_per3 + "%");
+				$('#money_per3_1').val(parseInt((money3_1 / money3_total) * money_per3) + "%");
+				$('#money_per3_2').val(parseInt((money3_2 / money3_total) * money_per3) + "%");
+				$('#money_per3_3').val(parseInt((money3_3 / money3_total) * money_per3) + "%");
+			}
+
+			$('#money1').val(addComma(money1_total));
+			$('#money2').val(addComma(money2_total));
+			$('#money3').val(addComma(money3_total));
+			$('#money_total').val(addComma(money_total));
+
+			e.value = addComma(e.value);
+
+			$('#money_per_total').val((money_per1 + money_per2 + money_per3) + "%");
+
+			if(money_per1 + money_per2 + money_per3 > 100){
+				$('#error_message').show();
+				return false;
+			}else{
+				$('#error_message').hide();
+			}
+
+    }
+
+		function costPerCal(e){
+			replaceNum(e);
+
+			var money_total = parseInt($('#money_total1').val().replace(/,/g, ""));
+
+			var money_per1_1 = parseInt($('#money_per1_11').val());
+			var money_per1_2 = parseInt($('#money_per1_21').val());
+			var money_per1_3 = parseInt($('#money_per1_31').val());
+			var money_per2_1 = parseInt($('#money_per2_11').val());
+			var money_per2_2 = parseInt($('#money_per2_21').val());
+			var money_per3_1 = parseInt($('#money_per3_11').val());
+			var money_per3_2 = parseInt($('#money_per3_21').val());
+			var money_per3_3 = parseInt($('#money_per3_31').val());
+
+			var money_per1 = money_per1_1 + money_per1_2 + money_per1_3;
+			var money_per2 = money_per2_1 + money_per2_2
+			var money_per3 = money_per3_1 + money_per3_2 + money_per3_3;
+			var money_per_total = money_per1 + money_per2 + money_per3;
+
+			$('#money_per11').val(money_per1 + "%");
+			$('#money11').val(addComma(parseInt((money_total/100)*money_per1)));
+			$('#money1_11').val(addComma(parseInt((money_total/100)*money_per1_1)));
+			$('#money1_21').val(addComma(parseInt((money_total/100)*money_per1_2)));
+			$('#money1_31').val(addComma(parseInt((money_total/100)*money_per1_3)));
+
+			$('#money_per21').val(money_per2 + "%");
+			$('#money21').val(addComma(parseInt((money_total/100)*money_per2)));
+			$('#money2_11').val(addComma(parseInt((money_total/100)*money_per2_1)));
+			$('#money2_21').val(addComma(parseInt((money_total/100)*money_per2_2)));
+
+			$('#money_per31').val(money_per3 + "%");
+			$('#money31').val(addComma(parseInt((money_total/100)*money_per3)));
+			$('#money3_11').val(addComma(parseInt((money_total/100)*money_per3_1)));
+			$('#money3_21').val(addComma(parseInt((money_total/100)*money_per3_2)));
+			$('#money3_31').val(addComma(parseInt((money_total/100)*money_per3_3)));
+
+			if(money_per_total > 100){
+				$('#error_message1').show();
+				return false;
+			}else{
+				$('#error_message1').hide();
+      }
+
+      $('#money_per_total1').val(money_per_total + "%");
+
+			e.value = addComma(e.value);
+    }
+
+		function moveTab(n){
+			if(n == 1) {
+				$('#moeny_tab').attr('class', 'btn-success h-100 w-100');
+				$('#per_tab').attr('class', 'btn-light h-100 w-100');
+				$('#per_form').hide();
+				$('#money_form').show();
+			}else if(n == 2){
+				$('#per_tab').attr('class', 'btn-success h-100 w-100');
+				$('#moeny_tab').attr('class', 'btn-light h-100 w-100');
+				$('#money_form').hide();
+				$('#per_form').show();
+      }
+    }
+
+		function replaceNum(e){
+			e.value = e.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+
+			if ($(e).val().length > 1) {
+				e.value = e.value.replace(/(^0+)/, "");
+			}
+
+			if($(e).val() == ""){
+				$(e).val(0);
+			};
+    }
+
+		function addComma(m){
+			var m = m.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			return m;
+    }
+
+		function nReset(x){
+			$('#error_message').hide();
+			$('#error_message1').hide();
+			x.reset();
+    }
+  </script>
+</head>
+<body class="text-center">
+
+<table class="table table-bordered w100" style="padding: 0;margin: 0">
+  <tbody>
+  <td><button class="btn-success h-100 w-100" id="moeny_tab" onclick="moveTab(1)">제조원가 계산기(금액)</button></td>
+  <td><button class="btn-light h-100 w-100" id="per_tab" onclick="moveTab(2)">제조원가 계산기(비율)</button></td>
+  </tbody>
+</table>
+
+<!--금액 계산기-->
+<form id="money_form" name="money_form">
+<table class="table table-bordered w100">
+  <thead class="bg-info">
+  <th style="width: 300px;">내용</th>
+  <th style="width: 100px;">비율</th>
+  <th style="width: 200px;">금액</th>
+  </thead>
+  <tbody>
+  <tr class="bg-light">
+    <td class="text-left"><span class="font-weight-bold">1.직접재료비</span></td>
+    <td><input class="float-right bg-light w-50 text-right border-0" style="outline: none" name="money_per1" id="money_per1" value="0%" disabled></td>
+    <td class="text-left"><span>&#8361;</span><input class="float-right bg-light text-right border-0" style="outline: none" name="money1" id="money1" value="0" disabled></td>
+  </tr>
+  <tr>
+    <td class="text-left bg-light"><span>&emsp;가. 기초재료재고액</span></td>
+    <td class="bg-light"><input class="float-right bg-light w-50 text-right border-0" style="outline: none" name="money_per1_1" id="money_per1_1" value="0%" disabled></td>
+    <td class="text-left"><span>&#8361;</span><input oninput="costCal(this)" class="float-right text-right border-0" style="outline: none" type="text" name="money1_1" id="money1_1" value="0"></td>
+  </tr>
+
+  <tr>
+    <td class="text-left bg-light"><span>&emsp;나. 당기재료재고액</span></td>
+    <td class="bg-light"><input class="float-right bg-light w-50 text-right border-0" style="outline: none" name="money_per1_2" id="money_per1_2" value="0%" disabled></td>
+    <td class="text-left"><span>&#8361;</span><input oninput="costCal(this)" class="float-right text-right border-0" style="outline: none" type="text" name="money1_2" id="money1_2" value="0"></td>
+  </tr>
+  <tr>
+    <td class="text-left bg-light"><span>&emsp;다. 기말재료재고액</span></td>
+    <td class="bg-light"><input class="float-right bg-light w-50 text-right border-0" style="outline: none" name="money_per1_3" id="money_per1_3" value="0%" disabled></td>
+    <td class="text-left"><span>&#8361;</span><input oninput="costCal(this)" class="float-right text-right border-0" style="outline: none" type="text" name="money1_3" id="money1_3" value="0"></td>
+  </tr>
+  <tr class="bg-light">
+    <td class="text-left"><span class="font-weight-bold">2.노무비</span></td>
+    <td><input class="float-right bg-light w-50 text-right border-0" style="outline: none" name="money_per2" id="money_per2" value="0%" disabled></td>
+    <td class="text-left"><span>&#8361;</span><input class="float-right bg-light text-right border-0" style="outline: none" name="money2" id="money2" value="0" disabled></td>
+  </tr>
+  <tr>
+    <td class="text-left bg-light"><span>&emsp;가. 금료및임금·재수당</span></td>
+    <td class="bg-light"><input class="float-right bg-light w-50 text-right border-0" style="outline: none" name="money_per2_1" id="money_per2_1" value="0%" disabled></td>
+    <td class="text-left"><span>&#8361;</span><input oninput="costCal(this)" class="float-right text-right border-0" style="outline: none" type="text" name="money2_1" id="money2_1" value="0"></td>
+  </tr>
+  <tr>
+    <td class="text-left bg-light"><span>&emsp;나. 퇴직급여(충당금전입액포함)</span></td>
+    <td class="bg-light"><input class="float-right bg-light w-50 text-right border-0" style="outline: none" name="money_per2_2" id="money_per2_2" value="0%" disabled></td>
+    <td class="text-left"><span>&#8361;</span><input oninput="costCal(this)" class="float-right text-right border-0" style="outline: none" type="text" name="money2_2" id="money2_2" value="0"></td>
+  </tr>
+  <tr class="bg-light">
+    <td class="text-left"><span class="font-weight-bold">3.제조경비</span></td>
+    <td><input class="float-right bg-light w-50 text-right border-0" style="outline: none" name="money_per3" id="money_per3" value="0%" disabled></td>
+    <td class="text-left"><span>&#8361;</span><input class="float-right bg-light text-right border-0" style="outline: none" name="money3" id="money3" value="0" disabled></td>
+  </tr>
+  <tr>
+    <td class="text-left bg-light"><span>&emsp;가. 직접경비(변동)</span></td>
+    <td class="bg-light"><input class="float-right bg-light w-50 text-right border-0" style="outline: none" name="money_per3_1" id="money_per3_1" value="0%" disabled></td>
+    <td class="text-left"><span>&#8361;</span><input oninput="costCal(this)" class="float-right text-right border-0" style="outline: none" type="text" name="money3_1" id="money3_1" value="0"></td>
+  </tr>
+  <tr>
+    <td class="text-left bg-light"><span>&emsp;나. 공통경비(고정)</span></td>
+    <td class="bg-light"><input class="float-right bg-light w-50 text-right border-0" style="outline: none" name="money_per3_2" id="money_per3_2" value="0%" disabled></td>
+    <td class="text-left"><span>&#8361;</span><input oninput="costCal(this)" class="float-right text-right border-0" style="outline: none" type="text" name="money3_2" id="money3_2" value="0"></td>
+  </tr>
+  <tr>
+    <td class="text-left bg-light"><span>&emsp;다. 간접경비(고정)</span></td>
+    <td class="bg-light"><input class="float-right bg-light w-50 text-right border-0" style="outline: none" name="money_per3_3" id="money_per3_3" value="0%" disabled></td>
+    <td class="text-left"><span>&#8361;</span><input oninput="costCal(this)" class="float-right text-right border-0" style="outline: none" type="text" name="money3_3" id="money3_3" value="0"></td>
+  </tr>
+  <tr class="bg-warning">
+    <td><span class="font-weight-bold">제조원가</span></td>
+    <td><input class="float-right bg-warning w-50 text-right border-0" style="outline: none" name="money_per_total" id="money_per_total" value="0%" disabled></td>
+    <td class="text-left"><span>&#8361;</span><input class="float-right bg-warning text-right border-0" style="outline: none" name="money_total" id="money_total" value="0" disabled></td>
+  </tr>
+  <tr id="error_message" style="display: none">
+    <td colspan="3"><div><span style="color: red">제조원가가 100%이상입니다. 다시 입력해주세요.</span></div></td>
+  </tr>
+  </tbody>
+
+</table>
+  <button class="btn btn-secondary" type="button" onclick="nReset(money_form)">초기화</button>
+  <button class="btn btn-danger" type="button" onclick="window.close();">닫기</button>
+</form>
+<!--금액 계산기 끝-->
+
+<!--비율 계산기-->
+<form id="per_form" name="per_form" style="display: none">
+  <table class="table table-bordered w100">
+    <thead class="bg-info">
+    <th style="width: 300px;">내용</th>
+    <th style="width: 100px;">비율</th>
+    <th style="width: 200px;">금액</th>
+    </thead>
+    <tbody>
+    <tr class="bg-light">
+      <td class="text-left"><span class="font-weight-bold">1.직접재료비</span></td>
+      <td><input class="float-right bg-light w-50 text-right border-0" style="outline: none" name="money_per11" id="money_per11" value="0%" disabled></td>
+      <td class="text-left"><span>&#8361;</span><input class="float-right bg-light text-right border-0" style="outline: none" name="money11" id="money11" value="0" disabled></td>
+    </tr>
+    <tr>
+      <td class="text-left bg-light"><span>&emsp;가. 기초재료재고액</span></td>
+      <td><input class="float-right w-50 text-right border-0" oninput="costPerCal(this)" style="outline: none" name="money_per1_11" id="money_per1_11" value="0" maxlength="3"></td>
+      <td class="bg-light"><span>&#8361;</span><input oninput="costCal(this)" class="float-right bg-light text-right border-0" style="outline: none" type="text" name="money1_11" id="money1_11" value="0" disabled></td>
+    </tr>
+
+    <tr>
+      <td class="text-left bg-light"><span>&emsp;나. 당기재료재고액</span></td>
+      <td><input class="float-right w-50 text-right border-0" oninput="costPerCal(this)" style="outline: none" name="money_per1_21" id="money_per1_21" value="0" maxlength="3"></td>
+      <td class="bg-light"><span>&#8361;</span><input oninput="costCal(this)" class="float-right bg-light text-right border-0" style="outline: none" type="text" name="money1_2" id="money1_21" value="0" disabled></td>
+    </tr>
+    <tr>
+      <td class="text-left bg-light"><span>&emsp;다. 기말재료재고액</span></td>
+      <td><input class="float-right w-50 text-right border-0" oninput="costPerCal(this)" style="outline: none" name="money_per1_31" id="money_per1_31" value="0" maxlength="3"></td>
+      <td class="bg-light"><span>&#8361;</span><input oninput="costCal(this)" class="float-right bg-light text-right border-0" style="outline: none" type="text" name="money1_31" id="money1_31" value="0" disabled></td>
+    </tr>
+    <tr class="bg-light">
+      <td class="text-left"><span class="font-weight-bold">2.노무비</span></td>
+      <td><input class="float-right bg-light w-50 text-right border-0" style="outline: none" name="money_per21" id="money_per21" value="0%" disabled></td>
+      <td class="text-left"><span>&#8361;</span><input class="float-right bg-light text-right border-0" style="outline: none" name="money21" id="money21" value="0" disabled></td>
+    </tr>
+    <tr>
+      <td class="text-left bg-light"><span>&emsp;가. 금료및임금·재수당</span></td>
+      <td><input class="float-right w-50 text-right border-0" oninput="costPerCal(this)" style="outline: none" name="money_per2_11" id="money_per2_11" value="0" maxlength="3"></td>
+      <td class="bg-light"><span>&#8361;</span><input oninput="costCal(this)" class="float-right bg-light text-right border-0" style="outline: none" type="text" name="money2_11" id="money2_11" value="0" disabled></td>
+    </tr>
+    <tr>
+      <td class="text-left bg-light"><span>&emsp;나. 퇴직급여(충당금전입액포함)</span></td>
+      <td><input class="float-right w-50 text-right border-0" oninput="costPerCal(this)" style="outline: none" name="money_per2_21" id="money_per2_21" value="0" maxlength="3"></td>
+      <td class="bg-light"><span>&#8361;</span><input oninput="costCal(this)" class="float-right bg-light text-right border-0" style="outline: none" type="text" name="money2_21" id="money2_21" value="0" disabled></td>
+    </tr>
+    <tr class="bg-light">
+      <td class="text-left"><span class="font-weight-bold">3.제조경비</span></td>
+      <td><input class="float-right bg-light w-50 text-right border-0" style="outline: none" name="money_per3" id="money_per31" value="0%" disabled></td>
+      <td class="text-left"><span>&#8361;</span><input class="float-right bg-light text-right border-0" style="outline: none" name="money3" id="money31" value="0" disabled></td>
+    </tr>
+    <tr>
+      <td class="text-left bg-light"><span>&emsp;가. 직접경비(변동)</span></td>
+      <td><input class="float-right w-50 text-right border-0" oninput="costPerCal(this)" style="outline: none" name="money_per3_11" id="money_per3_11" value="0" maxlength="3"></td>
+      <td class="bg-light"><span>&#8361;</span><input oninput="costCal(this)" class="float-right bg-light text-right border-0" style="outline: none" type="text" name="money3_11" id="money3_11" value="0" disabled></td>
+    </tr>
+    <tr>
+      <td class="text-left bg-light"><span>&emsp;나. 공통경비(고정)</span></td>
+      <td><input class="float-right w-50 text-right border-0" oninput="costPerCal(this)" style="outline: none" name="money_per3_21" id="money_per3_21" value="0" maxlength="3"></td>
+      <td class="bg-light"><span>&#8361;</span><input oninput="costCal(this)" class="float-right bg-light text-right border-0" style="outline: none" type="text" name="money3_21" id="money3_21" value="0" disabled></td>
+    </tr>
+    <tr>
+      <td class="text-left bg-light"><span>&emsp;다. 간접경비(고정)</span></td>
+      <td><input class="float-right w-50 text-right border-0" oninput="costPerCal(this)" style="outline: none" name="money_per3_31" id="money_per3_31" value="0" maxlength="3"></td>
+      <td class="bg-light"><span>&#8361;</span><input oninput="costCal(this)" class="float-right bg-light text-right border-0" style="outline: none" type="text" name="money3_31" id="money3_31" value="0" disabled></td>
+    </tr>
+    <tr>
+      <td class="bg-warning"><span class="font-weight-bold">제조원가</span></td>
+      <td class="bg-warning"><input class="float-right bg-warning w-50 text-right border-0" style="outline: none" name="money_per_total1" id="money_per_total1" value="0%" disabled></td>
+      <td class="text-left"><span>&#8361;</span><input class="float-right text-right border-0" oninput="costPerCal(this)" style="outline: none" name="money_total1" id="money_total1" value="0"></td>
+    </tr>
+    <tr id="error_message1" style="display: none">
+      <td colspan="3"><div><span style="color: red">제조원가가 100%이상입니다. 다시 입력해주세요.</span></div></td>
+    </tr>
+    </tbody>
+
+  </table>
+  <button class="btn btn-secondary" type="button" onclick="nReset(per_form)">초기화</button>
+  <button class="btn btn-danger" type="button" onclick="window.close();">닫기</button>
+</form>
+<!--비율 계산기 끝-->
+
+</body>
+</html>
