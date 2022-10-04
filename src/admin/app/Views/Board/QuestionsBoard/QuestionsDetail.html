@@ -44,10 +44,10 @@
 </script>
 
 <div class="flex-grow-1 bg-light">
-  <section class="py-5 mb-5">
+  <section class="p-5 mb-5">
     <div class="auto-container">
       <div class="bg-white p-5">
-        <h4 class="fw-bold pb-3 border-bottom border-2">1:1 문의하기 상세보기</h4>
+        <h4 class="fw-bold pb-3 mb-4 border-bottom border-2">1:1 문의하기 상세보기</h4>
           <input type="hidden" name="idx" value="<?=$idx?>">
 
           <div class="row mb-3 align-items-center">
@@ -110,20 +110,25 @@
             </div>
           </div>
           </form>
-      </div>
 
-      <div class="text-center">
-        <button class="btn btn-warning" onclick="replyUpdateSubmit()" type="button" id="replyUpdateSubmit"
-        style="display: none">수정하기</button>
-        <?php if($reply_content != ""){ ?>
-        <button class="btn btn-warning bold" onclick="replyUpdate()" type="button" id="replyUpdate">답변수정</button>
-        <?php }else{ ?>
-        <button class="btn btn-warning" onclick="replySubmit()" type="button">답변하기</button>
-        <?php } ?>
-        <button class="btn btn-secondary" onclick="goList()" type="button">목록보기</button>
-        <button class="btn btn-danger" type="reset">되돌리기</button>
+        <div class="d-flex justify-content-between mt-5">
+          <div>
+            <button class="btn btn-secondary" type="reset">되돌리기</button>
+            <button class="btn btn-warning" onclick="replyUpdateSubmit()" type="button" id="replyUpdateSubmit"
+                    style="display: none">수정하기</button>
+            <?php if($reply_content != ""){ ?>
+            <button class="btn btn-success bold" onclick="replyUpdate()" type="button" id="replyUpdate">답변수정</button>
+            <?php }else{ ?>
+            <button class="btn btn-success" onclick="replySubmit()" type="button">답변하기</button>
+            <?php } ?>
+
+          </div>
+          <div>
+            <button class="btn btn-dark" onclick="goList()" type="button">목록보기</button>
+          </div>
+        </div>
       </div>
     </div>
-</div>
+
 </section>
 </div>

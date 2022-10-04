@@ -19,7 +19,7 @@
 			$this->imjob_model = new IMJOBModel;
 			$this->application_model = new ApplicationModel;
 			$this->database_model = new DatabaseModel;
-			$this->delivery_model = new DeliveryModel;
+//			$this->delivery_model = new DeliveryModel;
 		} //}}}
 		
 		public function SalesAnalysis()
