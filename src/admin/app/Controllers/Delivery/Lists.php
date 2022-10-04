@@ -53,80 +53,62 @@
 			die();
 		} //}}}
 		
-		public function Detail()
+		public function Detail($idx)
 		{ //{{{
-			$data = $this->model->getWorkerInfo();
+			$data = $this->model->Detail($idx);
+            $contract = $this->model->Contract($idx);
 			$data = array(
 				"data" => $data
+                ,"contract" => $contract
 			);
 			echo view('Common/Header.html');
-			echo view('IMJOB/Lists/Detail.html',$data);
+			echo view('Delivery/Lists/Detail.html',$data);
 			echo view('Common/Footer.html');
 		} //}}}
 		
-		public function Update()
+		public function DateUpdate()
 		{ //{{{
-		
+
+            $result = $this->model->DateUpdate($_GET);
+            if($result == "1") {
+                echo "
+                <script>
+                    alert('수정되었습니다.');
+					window.location.replace('/Delivery/Lists/Detail/".$_GET["cidx"]."');
+                </script>
+            ";
+            }else{
+                echo "
+                <script>
+                    alert('오류가 발생했습니다.다시 시도해주세요');
+					history.back(-1);
+                </script>
+            ";
+            }
 		} //}}}
-		
-		public function statusUpdate()
-		{
-			$data = array(
-				"idx" => $_GET["idx"]
-			,"status" => $_GET["status"]
-			);
-			$this->model->statusUpdate($data);
-			echo "
-            <script>
-                history.back();
-            </script>
-        ";
-		}
-		
+
+        public function DeliveryDel(){
+            $result = $this->model->DeliveryDel($_GET);
+            if($result == "1") {
+                echo "
+                <script>
+                    alert('삭제 되었습니다.');
+					window.location.replace('/Delivery/Lists/Detail/".$_GET["cidx"]."');
+                </script>
+            ";
+            }else{
+                echo "
+                <script>
+                    alert('오류가 발생했습니다.다시 시도해주세요');
+					history.back(-1);
+                </script>
+            ";
+            }
+        }
+
 		public function downloadFileNew(){
 			$this->model->downloadFileNew();
 		}
-		
-		public function updateWorker(){
-			
-			$result = $this->model->Update($_POST,$_FILES);
-			
-			if($result == "1") {
-				echo "
-                <script>
-                    alert('근로자정보가 수정되었습니다.');
-					window.location.replace('/IMJOB/Lists');
-                </script>
-            ";
-			}else{
-				echo "
-                <script>
-                    alert('오류가 발생했습니다.다시 시도해주세요');
-					history.back(-1);
-                </script>
-            ";
-			}
-		}
-		
-		public function deleteWorker(){
-			
-			$result = $this->model->delete();
-			
-			if($result == "1") {
-				echo "
-                <script>
-                    alert('근로자정보가 삭제되었습니다.');
-					window.location.replace('/IMJOB/Lists');
-                </script>
-            ";
-			}else{
-				echo "
-                <script>
-                    alert('오류가 발생했습니다.다시 시도해주세요');
-					history.back(-1);
-                </script>
-            ";
-			}
-		}
+
 		
 	}

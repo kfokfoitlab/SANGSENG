@@ -114,5 +114,92 @@
 			, "filtered_total" => $filtered_total
 			);
 		}
-		
+
+        public function Contract($idx){
+            $contract = [];
+            $query = "
+            select
+                *
+            from
+               contract_condition
+            where
+                idx = '".$idx."'
+        ";
+            $this->rodb->query($query);
+            while($row = $this->rodb->next_row()){
+                $contract = $row;
+            }
+            return $contract;
+        }
+
+        public function Detail($idx){
+            $data = [];
+            $query = "
+            select
+                *
+            from
+                " . $this->table_name . "
+            where
+                idx = '".$idx."'
+            limit
+                1
+        ";
+            $this->rodb->query($query);
+            $contract = $this->rodb->next_row();
+
+            $delivery_contract = $contract['contract_no'];
+
+            $query = "
+            select
+                *
+            from
+               delivery
+            where
+                contract_no = '".$delivery_contract."'
+                and del_yn != 'Y'
+        ";
+            $this->rodb->query($query);
+            while($row = $this->rodb->next_row()){
+                $data[] = $row;
+            }
+            return $data;
+        }
+
+        public function DateUpdate($data){
+            $setquery ="";
+            if($data['ds'] != "" && $data['da'] != ""){
+                $setquery = " ,delivery_start = '".$data["ds"]."' , delivery_arrival ='".$data["da"]."', delivery_status = '5' ";
+            }else if($data['ds'] == "" && $data['da' != ""]){
+                $setquery = " ,delivery_arrival = '".$data["da"]."', delivery_status = '5' ";
+            }else if($data['ds'] != "" && $data['da'] == ""){
+                $setquery = " ,delivery_start = '".$data["ds"]."' ";
+            }
+
+            $query = "
+            update
+                delivery
+            set
+                 delivery_predicted = '".$data["dp"]."'
+             $setquery
+        
+            where
+                idx = '".$data["idx"]."'
+            limit 1
+        ";
+            $this->wrdb->update($query);
+            return 1;
+    }
+    public function DeliveryDel($data){
+        $query = "
+            update
+                delivery
+            set
+                del_yn = 'Y'
+            where
+                idx = '".$data["idx"]."'
+            limit 1
+        ";
+        $this->wrdb->update($query);
+        return 1;
+    }
 	}
