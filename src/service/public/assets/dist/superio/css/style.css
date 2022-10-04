@@ -6416,6 +6416,7 @@ Product Section
 
 .job-section.alternate {
   padding: 20px 0 70px;
+  background-color: #F3F7FB;
 }
 
 .job-section .tab-buttons {
@@ -20897,6 +20898,7 @@ Shop/Detail
   flex-basis: 30%;
   flex-grow: 0;
   flex-shrink: 0;
+  height: 115px;
 }
 .shop-detail .total-price h2 {
   font-weight: bold;

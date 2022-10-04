@@ -28,8 +28,27 @@ $(document).ready(function(){
             ,{title: "구매자", data: "buyer_company", visible: true, className: "text-nowrap"}
             ,{title: "계약번호", data: "contract_no", visible: true, className: "text-nowrap"}
             ,{title: "상품명", data: "product_name", visible: true, className: "text-nowrap"}
-            ,{title: "계약금액", data: "product_price", visible: true, className: "text-nowrap"}
-            ,{title: "계약등록일", data: "register_date", visible: true, className: "text-nowrap"}
+            ,{title: "계약금액", data: "product_price", visible: true, className: "text-nowrap",
+                "render": function( data, type, row, meta ) {
+                    var html = "";
+                    html += "<td";
+                    html += "   class='nowrap'>";
+                    html +=  data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                    html += "원</td>";
+                    return html;
+                }
+            }
+            , {
+                title: "계약등록일", data: "register_date", visible: true, className: "text-nowrap",
+                "render": function (data, type, row, meta) {
+                    var html = "";
+                    html += "<td";
+                    html += "   class='nowrap'>";
+                    html += data.substring(0, 10);
+                    html += "</td>";
+                    return html;
+                }
+            }
             ,{title: "진행상황", data: "contract_status", visible: false, className: "text-nowrap"}
             ,{title: "진행상황 보기", data: {"contract_status":"contract_status","uuid":"uuid"}, visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){

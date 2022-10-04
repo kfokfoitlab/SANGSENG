@@ -17,7 +17,7 @@ $(document).ready(function(){
 				data.columns[3].search.value = $("#contract_no").val();
 				data.columns[2].search.value = $("#buyer_company").val();
 				data.columns[1].search.value = $("#seller_company").val();
-				data.columns[7].search.value = $("#search-disability_degree").val();
+				//data.columns[7].search.value = $("#search-status").val();
 				//data.columns[8].search.value = $("#search-status").val();
 			}
 		},
@@ -30,8 +30,26 @@ $(document).ready(function(){
 			,{title: "구매자", data: "buyer_company", visible: true, className: "text-nowrap"}
 			,{title: "계약번호", data: "contract_no", visible: true, className: "text-nowrap"}
 			,{title: "상품명", data: "product_name", visible: true, className: "text-nowrap"}
-			,{title: "계약금액", data: "product_price", visible: true, className: "text-nowrap"}
-			,{title: "계약등록일", data: "register_date", visible: true, className: "text-nowrap"}
+			,{title: "계약금액", data: "product_price", visible: true, className: "text-nowrap",
+				"render": function( data, type, row, meta ) {
+					var html = "";
+					html += "<td";
+					html += "   class='nowrap'>";
+					html +=  data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+					html += "원</td>";
+					return html;
+					}
+				}
+			,{title: "계약등록일", data: "register_date", visible: true, className: "text-nowrap",
+				"render": function (data, type, row, meta) {
+					var html = "";
+					html += "<td";
+					html += "   class='nowrap'>";
+					html += data.substring(0, 10);
+					html += "</td>";
+					return html;
+				}
+			}
 			,{title: "배송 수(건)", data: "delivery_total_cnt", visible: true, className: "text-nowrap"}
 			,{title: "배송 대기(건)", data: "delivery_wait_cnt", visible: true, className: "text-nowrap"}
 			,{title: "배송 중(건)", data: "delivery_ready_cnt", visible: true, className: "text-nowrap"}
@@ -81,16 +99,4 @@ $(document).ready(function(){
 	
 	
 	// }}}
-	
 });
-function statusUpdate(idx,status){
-	location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
-}
-function deleteWorker(idx){
-	if(confirm("해당 근로자를 삭제하시겠습니까?")){
-		location.href = "/"+_CONTROLLER+"/deleteWorker?idx="+idx
-	}else{
-		return false;
-	}
-}
-

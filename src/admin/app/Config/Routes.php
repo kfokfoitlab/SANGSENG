@@ -112,11 +112,16 @@ $routes->group('Delivery', ['namespace' => 'App\Controllers\Delivery'], static f
 	$group_name = "Lists";
 	$routes->get ($group_name.'/',                  $group_name.'::Index');
 	$routes->post($group_name.'/getList',           $group_name.'::getList');
-	$routes->get ($group_name.'/Detail',     $group_name.'::Detail');
+    $routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
 	$routes->get ($group_name.'/Update/(:any)',     $group_name.'::Update/$1');
-	$routes->get ($group_name.'/statusUpdate', $group_name.'::statusUpdate');
+    $routes->get ($group_name.'/DateUpdate(:any)',     $group_name.'::DateUpdate/$1');
+    $routes->get ($group_name.'/DeliveryDel(:any)',     $group_name.'::DeliveryDel/$1');
+
+    $routes->get ($group_name.'/statusUpdate', $group_name.'::statusUpdate');
 	$routes->get ($group_name.'/StatusComment(:any)', $group_name.'::StatusComment$1');
-	
+
+
+
 	$routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
 });
 
@@ -203,8 +208,7 @@ $routes->group('Database/Product', ['namespace' => 'App\Controllers\Database\Job
     $routes->post($group_name.'/UpdateSubmit',   $group_name.'::UpdateSubmit');
 
 });
-
-
+    $routes->get ($group_name.'/contractSubmit', $group_name.'::contractSubmit');
 // 환경 설정
 $routes->group('Configuration', ['namespace' => 'App\Controllers\Configuration'], static function ($routes) {
     // 승인 설정
