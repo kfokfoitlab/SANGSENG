@@ -18,14 +18,13 @@
         </tr>
         </thead>
         <tbody>
-
         <tr>
-          <td class="text-center fw-bold">판매기업체명</td>
-          <td class="text-center fw-bold">구매기업체명</td>
-          <td class="text-center fw-bold">20222092317320</td>
-          <td class="text-center fw-bold">[해찌]100% 초전수-해결한다 찌든때! 다목적 세정제</td>
-          <td class="text-center fw-bold">15000000</td>
-          <td class="text-center fw-bold">2022-09-23 17:30:33</td>
+          <td class="text-center fw-bold"><?=$contract['seller_company']?></td>
+          <td class="text-center fw-bold"><?=$contract['buyer_company']?></td>
+          <td class="text-center fw-bold"><?=$contract['contract_no']?></td>
+          <td class="text-center fw-bold"><?=$contract['product_name']?></td>
+          <td class="text-center fw-bold"><?=number_format($contract['product_price'])?>원</td>
+          <td class="text-center fw-bold"><?=substr($contract["register_date"], 0, 10)?></td>
         </tr>
         </tbody>
       </table>
@@ -33,6 +32,7 @@
       <table class="table table-hover border detail-table">
         <thead>
         <tr>
+
           <th class="text-center">횟수</th>
           <th class="text-center">배송 예정일</th>
           <th class="text-center">배송 시작일</th>
@@ -40,47 +40,64 @@
           <th class="text-center">진행상황 보기</th>
           <th class="text-center">수정</th>
           <th class="text-center">삭제</th>
+
         </tr>
         </thead>
       <!-- {{{ -->
       <tbody>
+      <?php
+      if(@is_array($data) && count($data) > 0){
+      foreach($data as $item){
+      $status = "";
+      $btn_type = "";
+      if($item['delivery_status'] == 1){
+      $status = "배송대기";
+      $btn_type = "badge bg-info";
+      }else if($item['delivery_status'] == 3){
+      $status = "배송중";
+      $btn_type = "badge bg-primary";
+      }else if($item['delivery_status'] == 5){
+      $status = "배송완료";
+      $btn_type = "badge bg-success";
+      }
+      ?>
         <tr>
-          <td class="text-center">1회</td>
-          <td class="text-center">2022.01.01</td>
-          <td class="text-center">2022.01.01</td>
-          <td class="text-center">2022.01.31</td>
-          <td class="text-center"><span class="badge bg-success">배송완료</span></td>
-          <td class="text-center"><span class="btn btn-warning btn-sm text-white">수정</span></td>
-          <td class="text-center"><span class="btn btn-danger btn-sm">삭제</span></td>
+          <input type="hidden" name ="url" id ="url" value="<?=$_GET['idx']?>">
+          <td class="text-center"><?=$item['dcount']?>회</td>
+          <td><input type="date" value="<?=substr($item['delivery_predicted'], 0, 10)?>" name="delivery_predicted_<?=$item['idx']?>" id="delivery_predicted_<?=$item['idx']?>" class="form-control" required/></td>
+          <td><input type="date" value="<?=substr($item['delivery_start'], 0, 10)?>" name="delivery_start_<?=$item['idx']?>" id="delivery_start_<?=$item['idx']?>" class="form-control" required/></td>
+          <td><input type="date" value="<?=substr($item['delivery_arrival'], 0, 10)?>" name="delivery_arrival_<?=$item['idx']?>" id="delivery_arrival_<?=$item['idx']?>" class="form-control" required/></td>
+          <td class="text-center"><button type="button" class="<?=$btn_type?>"><?=$status?></button></td>
+          <td class="text-center"><span  class="btn btn-warning btn-sm text-white" onclick="dateUpdate('<?=$item['idx']?>','delivery_predicted_<?=$item['idx']?>','delivery_start_<?=$item['idx']?>','delivery_arrival_<?=$item['idx']?>','<?=$contract['idx']?>');">수정</span></td>
+          <td class="text-center"><span class="btn btn-danger btn-sm" onclick="delivery_delete('<?=$item['idx']?>','<?=$contract['idx']?>');">삭제</span></td>
         </tr>
-        <tr>
-          <td class="text-center">2회</td>
-          <td class="text-center">2022.01.01</td>
-          <td class="text-center">2022.01.01</td>
-          <td class="text-center"></td>
-          <td class="text-center"><span class="badge bg-primary">배송중</span></td>
-          <td class="text-center"><span class="btn btn-warning btn-sm text-white">수정</span></td>
-          <td class="text-center"><span class="btn btn-danger btn-sm">삭제</span></td>
-        </tr>
-        <tr>
-          <td class="text-center">3회</td>
-          <td class="text-center">2022.01.01</td>
-          <td class="text-center">2022.01.01</td>
-          <td class="text-center"></td>
-          <td class="text-center"><span class="badge bg-secondary">대기중</span></td>
-          <td class="text-center"><span class="btn btn-warning btn-sm text-white">수정</span></td>
-          <td class="text-center"><span class="btn btn-danger btn-sm">삭제</span></td>
-        </tr>
+      <?php
+          }
+          }
+          ?>
       </tbody>
-      <!-- }}} -->
       </table>
     </div>
   </div>
 
   <div class="d-flex justify-content-end">
     <button class="btn btn-secondary me-2"><a class="text-white" onclick="javascript:history.back()">목록보기</a></button>
-    <button class="btn btn-dark" onclick="window.close();">닫기</button>
   </div>
 
 </section>
 
+<script>
+
+  function dateUpdate(idx,delivery_predicted,delivery_start,delivery_arrival,cidx){
+    var dp =$("#"+delivery_predicted).val();
+    var ds = $("#"+delivery_start).val();
+    var da = $("#"+delivery_arrival).val();
+
+   // alert(#index);
+    location.href = '/Delivery/Lists/DateUpdate?idx='+idx+'&dp='+dp+'&ds='+ds+'&da='+da+'&cidx='+cidx;
+  }
+function delivery_delete(idx,cidx){
+    location.href = '/Delivery/Lists/DeliveryDel?idx='+idx+'&cidx='+cidx;
+
+}
+</script>

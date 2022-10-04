@@ -54,9 +54,27 @@ $(document).ready(function(){
                 }
 
             }
-            ,{title: "가격", data: "product_price", visible: true}
+            ,{title: "가격", data: "product_price", visible: true,
+                "render": function( data, type, row, meta ) {
+                    var html = "";
+                    html += "<td";
+                    html += "   class='nowrap'>";
+                    html +=  data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                    html += "원</td>";
+                    return html;
+                }
+            }
             ,{title: "수량", data: "product_quantity", visible: true, className: "text-nowrap"}
-            ,{title: "등록일", data: "register_date", visible: true}
+            ,{title: "등록일", data: "register_date", visible: true,
+                "render": function( data, type, row, meta ) {
+                    var html = "";
+                    html += "<td";
+                    html += "   class='nowrap'>";
+                    html +=  data.substring(0,10);
+                    html += "</td>";
+                    return html;
+                }
+            }
             ,{title: "수정일", data: "update_date", visible: true}
             ,{title: "상태", data: "status", visible: true,
                 "render": function( data, type, row, meta ){

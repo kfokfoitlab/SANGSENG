@@ -97,7 +97,13 @@
           <td><?=substr($item["delivery_arrival"],0,10)?></td>
           <td><?=$delivery_status?></td>
           <td>
+            <?php
+            if($item['delivery_status'] == 3 || $item['delivery_status'] == 5){
+            ?>
             <button class="btn btn-outline-dark btn-sm" onclick="downloadFileNew('<?=$item["invoice_file"]?>','<?=$item["invoice_file_ori"]?>');">송장확인</button>
+            <?php
+            }
+            ?>
           </td>
           <td>
             <?php
@@ -122,7 +128,7 @@
 <script>
   function downloadFileNew(fileName,fileNameOri){
     if(fileName == ""){
-      alert("등록된 파일이 없습니다");
+      alert("등록된 송장이 없습니다");
     }else {
       location.href = "/Buyer/Delivery/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
     }
