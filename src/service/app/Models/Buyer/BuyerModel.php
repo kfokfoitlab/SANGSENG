@@ -2,6 +2,7 @@
 
 namespace App\Models\Buyer;
 use App\Models\CommonModel;
+use function Sodium\add;
 
 class BuyerModel extends CommonModel
 {
@@ -288,4 +289,55 @@ class BuyerModel extends CommonModel
             return null;
         }
     }
+	
+	public function SellerReplyReg($data){
+		$product_no = $data["product_no"];
+		$user_uuid = $_SESSION['login_info']['uuid'];
+		$user_company_name = $_SESSION['login_info']['company_name'];
+		$reply_content = $data['reply_content'];
+		$reply_step = $data['reply_step'];
+		$reply_no = date("YmdHis");
+		if($reply_step != 1){
+			$reply_no = $data["reply_no"];
+			$reply_step = "(select max(a.reply_step) from seller_product_reply as a where a.reply_no = '".$reply_no."') + 1";
+		}
+		$query = "
+          insert into
+               seller_product_reply
+          set
+               product_no = '".$product_no."'
+              ,user_uuid = '".$user_uuid."'
+              ,user_company_name = '".$user_company_name."'
+              ,user_type = '".$_SESSION['login_info']['type']."'
+              ,reply_content = '".$reply_content."'
+              ,reply_no = '".$reply_no."'
+              ,reply_step = ".$reply_step."
+              ,register_date = '".date("Y-m-d H:i:s")."'
+              ,register_id = '".$user_uuid."'
+      ";
+		$idx = $this->wrdb->insert($query);
+		if($idx){
+			return 1;
+		}else{
+			return null;
+		}
+	}
+	
+	public function SellerReplyList($product_no){
+		$data = [];
+		$query = "
+              select
+                  *
+            from
+                seller_product_reply
+            where
+                product_no = '".$product_no."'
+            order by reply_no desc,reply_step asc
+        ";
+		$this->rodb->query($query);
+		while($row = $this->rodb->next_row()){
+			$data[] = $row;
+		}
+		return $data;
+	}
 }

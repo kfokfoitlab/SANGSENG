@@ -149,6 +149,7 @@ $routes->group('Buyer', function($routes){
     $routes->get ('/',                      'Buyer::index');
     $routes->get ('Shop/List(:any)',       'Buyer\Shop::List$1');
     $routes->get ('Shop/Detail/(:any)',     'Buyer\Shop::Detail/$1');
+	$routes->post ('Shop/SellerReplySubmit',     'Buyer\Shop::SellerReplySubmit');
     $routes->post ('Contract',        'Buyer\Contract::Contract');
     $routes->get ('MyPage/Info',            'Buyer\MyPage::Info');
     $routes->get ('MyPage/ConfirmPassword',    'Buyer\MyPage::ConfirmPassword');
@@ -228,6 +229,7 @@ $routes->group('CS', function($routes) {
 $routes->group('Reduction', function($routes) {
     $routes->get('Calculator', 'Reduction\Calculator::index');
     $routes->get('Help', 'Reduction\Help::index');
+	$routes->get('CostCal', 'Reduction\CostCal::index');
     $routes->get ('Help/downloadFileNew',           'Reduction\Help::downloadFileNew');
     $routes->post ('Help/ProvisionUpload',           'Reduction\Help::ProvisionUpload');
     $routes->get('CostCal', 'Reduction\CostCal::index');
