@@ -32,7 +32,7 @@
                 <p class="fw-bold">연계고용도급계약서</p>
               </td>
               <td>
-                <p class="mb-1">(<?=$_GET['cn']?>)<?=$seller_info['company_name'].' 와 '. $buyer_info['company_name'].'의 계약'?></p>
+                <p class="mb-1">(<?=$_GET['cn']?>)<?=$seller_info['company_name'].'와 '. $buyer_info['company_name'].'의 계약'?></p>
                 <p class="text-small">※ 물품구매에 따른 계약서 내용 자동 추가</p>
               </td>
               <td>
@@ -51,15 +51,14 @@
             </tr>
             <tr>
               <td>
-                <p class="fw-bold">지급증빙서류</p>
+                <p class="fw-bold mb-2">지급증빙서류</p>
                 <form method="post" id ="fileForm"  action ="/Reduction/Help/ProvisionUpload"  enctype="multipart/form-data">
                   <input type="hidden" name ="cn" value="<?=$_GET['cn']?>">
-                <input type="file" id = "provision_file" name="provision_file"placeholder="지급증빙서류 첨부"
-                       title="지급증빙서류 첨부" tabindex=100> <button type="button" onclick="file_check();" class="btn btn-outline-danger btn-sm">등록</button>
-                  <br>
-                  기존 파일 : <?=$workflow["provision_file_ori"]?>
+                  <label for="provision_file" class="btn btn-outline-success btn-sm fw-normal">파일 선택</label>
+                  <input type="file" id="provision_file" name="provision_file" class="d-none">
+                  <button type="button" onclick="file_check();" class="btn btn-success btn-sm fw-normal">등록</button>
+                  <p class="upload-text mt-1">: <span class="upload-name">선택된 파일이 없습니다.</span></p>
                   <input type="hidden" name ="contract_no" value="<?=$workflow['contract_no']?>">
-
                 </form>
               </td>
               <td>
@@ -145,23 +144,26 @@
 <script>
 
  $(document).ready(function(){
+	 $("#provision_file").on('change',function(e){
+		 const files = e.target.files;
+		 for (const file of files) {
+			 $(".upload-name").text(file.name)
+		 }
+	 });
+
    $('#contract_select').on('change',function(){
      var contract_no = $("#contract_select").val();
-
     // alert(seller_uuid);
      location.href = "/Reduction/Help/?cn=" + contract_no;
-
    })
  })
 
  function file_check(){
-
    if($("#provision_file").val() ==""){
      alert("파일을 선택해주세요");
    }else{
      $("#fileForm").submit();
    }
-
  }
 
   function Contract_Detail(workflow_id){

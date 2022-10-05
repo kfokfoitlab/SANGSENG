@@ -6,7 +6,7 @@ use App\Models\Terms\TermsModel as Model;
 
 class ServiceLevelAgreement extends Base
 {
-    private $page_name = "약관 관리 > 서비스 이용 약관";
+    private $page_name = "약관 관리 > 책임한계 및 법적고시";
     private $model;
 
     public function __construct()

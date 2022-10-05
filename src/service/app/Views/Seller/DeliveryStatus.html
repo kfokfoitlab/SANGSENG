@@ -9,8 +9,25 @@
   <section class="pt-5 layout-pb-120 contract-list">
     <div class="auto-container">
       <select name="contract_select" id="contract_select" class="w-100 border mb-4 p-3">
+        <?php
+        if(count($contractList) == 0){
+        ?>
+        <option value="" selected>완료된 계약서가 없습니다</option>
+        <?php
+        }else{
+        ?>
         <option value="" >계약서 선택</option>
-        <option value="<?=$contractList['contract_no']?>" <?php if($contractList['contract_no']==$_GET["cn"]){echo "selected";}?>><?=$contractList['seller_company'].' 와 '. $contractList['buyer_company'].'의 계약' .'_'.$contractList['contract_no']?></option>
+        <?php if(is_array($contractList) && count($contractList) > 0){
+        foreach($contractList as $item){
+        ?>
+        <option value="<?=$item['contract_no']?>" <?php if($item['contract_no']==$_GET["cn"]){echo "selected";}?>><?=$item['seller_company']?> 와  <?=$item['buyer_company']?> 의 계약 <?=$item['contract_no']?></option>
+        <?php
+        }
+        }
+        ?>
+        <?php
+        }
+        ?>
       </select>
       <ul class="d-flex border w-100 justify-content-around mb-4 py-4 text-center bg-light item-list-number">
         <li class="px-5 position-relative">
@@ -23,7 +40,17 @@
         </li>
         <li class="px-5 position-relative">
           <p class="mb-2">계약금액</p>
+          <?php
+          if(count($contractList) == 0 || $_GET['cn'] == ""){
+          ?>
+          <p><strong></strong></p>
+          <?php
+        }else{
+        ?>
           <p><strong><?=number_format($contents['product_price'])?>원</strong></p>
+          <?php
+        }
+        ?>
         </li>
         <li class="px-5">
           <p class="mb-2">계약업체</p>
@@ -31,7 +58,7 @@
         </li>
         <li class="px-5">
           <p class="mb-2">계약일</p>
-          <p><strong><?=$contents['register_date']?></strong></p>
+          <p><strong><?=substr($contents["register_date"], 0, 10)?></strong></p>
         </li>
       </ul>
 <!--      <div class="d-flex justify-content-end mt-5 mb-4">
@@ -56,13 +83,16 @@
         $cnt = count($delivery);
         }
         ?>
+
+
         <form name="invoiceForm" id="invoiceForm" method="post" action="/Seller/Delivery/invoice">
-          <input type="hidden" name="contract_no" value="<?=$contractList['contract_no']?>">
-          <input type="hidden" name="seller_uuid" value="<?=$contractList['seller_uuid']?>">
-          <input type="hidden" name="seller_company" value="<?=$contractList['seller_company']?>">
-          <input type="hidden" name="product_no" value="<?=$contractList['product_no']?>">
-          <input type="hidden" name="product_name" value="<?=$contractList['product_name']?>">
-          <input type="hidden" name="product_price" value="<?=$contractList['product_price']?>">
+          <input type="hidden" name="contract_no" value="<?=$contents['contract_no']?>">
+          <input type="hidden" name="seller_uuid" value="<?=$contents['seller_uuid']?>">
+          <input type="hidden" name="seller_company" value="<?=$contents['seller_company']?>">
+          <input type="hidden" name="product_no" value="<?=$contents['product_no']?>">
+          <input type="hidden" name="product_name" value="<?=$contents['product_name']?>">
+          <input type="hidden" name="product_price" value="<?=$contents['product_price']?>">
+          <input type="hidden" name="register_date" value="<?=substr($contents['register_date'],0,10)?>">
           <input type="hidden" name="cnt" id ="cnt" value="<?=$cnt?>">
           <input type="hidden" name = "count" id ="count" value="<?=$cnt+1?>">
 <!--
@@ -111,14 +141,22 @@
           <td><?=substr($item["delivery_arrival"],0,10)?></td>
           <td><?=$delivery_status?></td>
           <td>
+            <?php if($item['delivery_status'] == 5){ ?>
+            </td>
+          <?php
+          }else{
+          ?>
             <div><label for="invoice_file_<?=$item['idx']?>" class="m-0 form-label btn btn-outline-dark btn-sm fw-normal">
               <?php if($item['delivery_status'] == 1){ ?>
               송장 등록
               <?php }else if($item['delivery_status'] == 3){ ?>
               송장 수정
-              <?php } ?></label>
+              <?php
+              }
+              }
+              ?>
+            </label>
               <input class="d-none" type="file" name="" id="invoice_file_<?=$item['idx']?>"></div>
-            </div>
           </td>
 
           <td>

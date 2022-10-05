@@ -141,7 +141,7 @@
       <ul style="float: right" class="pagination">
         <li class="paginate_button page-item previous disabled" id="datatables_previous">
         <?php
-         $data_page_num = $data_page_total_cnt/10;
+         $data_page_num = ($data_page_total_cnt/10) + 1;
          for($i=1;$i<=$data_page_num;$i++){
               if($_GET["p_n"]==$i){?>
                 <li class="paginate_button page-item active">

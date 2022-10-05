@@ -6,7 +6,7 @@ use App\Models\Terms\TermsModel as Model;
 
 class AdditionalService extends Base
 {
-    private $page_name = "약관 관리 > 부가서비스 및 혜택 안내";
+    private $page_name = "약관 관리 > 이메일 주소 무단 수집 거부";
     private $model;
 
     public function __construct()

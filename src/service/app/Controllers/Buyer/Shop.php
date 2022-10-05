@@ -52,8 +52,10 @@ class Shop extends BaseController
     public function Detail($product_no)
     { // {{{
         $data = $this->buyer_model->productDetail($product_no);
+	    $reply_data = $this->buyer_model->SellerReplyList($product_no);
         $data = array(
             "data" => $data
+	        ,"reply_data" => $reply_data
         ,"reduction_money" => $_GET["rm"]
         );
         echo view("Common/Header.html");
@@ -109,4 +111,13 @@ class Shop extends BaseController
         }
         die();
     } // }}}
+	
+	public function SellerReplySubmit(){
+		$result = $this->buyer_model->SellerReplyReg($_POST);
+		if($result == 1) {
+			echo "1";
+		}else {
+			echo "2";
+		}
+	}
 }

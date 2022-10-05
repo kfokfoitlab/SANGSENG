@@ -1,7 +1,64 @@
 <?php
   // Left Menu
-require APPPATH . '/Views/Buyer/Components/Left.html';
+  if($_SESSION['login_info']['type'] == 'buyer'){
+  require APPPATH . '/Views/Buyer/Components/Left.html';
+  }elseif($_SESSION['login_info']['type'] == 'seller'){
+  require APPPATH.'/Views/Seller/Components/Left.html';
+  }
 ?>
+
+<?php
+  $user_type = "";
+  if($_SESSION['login_info']['type'] == "buyer" ){
+    $user_type = "구매기업";
+  }elseif($_SESSION['login_info']['type'] == "seller" ){
+    $user_type = "판매기업";
+  }
+?>
+
+<script>
+  function sellerReplySubmit(reply_step,reply_no){
+			if ($('#reply_content_'+reply_no).val() == "") {
+				alert("답변을 등록해주세요");
+				return false;
+			}
+
+      if(reply_step == 1) {
+        var data = {
+          "reply_step": reply_step,
+          "product_no": $('#product_no').val(),
+          "reply_content": $('#reply_content').val()
+        };
+      }else if(reply_step != 1){
+				var data = {
+					"reply_step": reply_step,
+					"reply_no": reply_no,
+					"product_no": $('#product_no').val(),
+					"reply_content": $('#reply_content_'+reply_no).val()
+				}
+			}
+
+
+		$.ajax({
+			url: "/"+_CONTROLLER + "/SellerReplySubmit"
+			,data: data
+			,dataType: "json"
+			,type: "post"
+			,success: function(data){
+        if(data == 1) {
+					alert("답변등록이 완료되었습니다");
+					location.reload();
+				}else {
+					alert("답변등록이 실패했습니다.\n다시 시도해주세요");
+        }
+			}
+			,error: function(res){
+				console.log("error", res);
+			}
+		});
+  }
+
+</script>
 <div style="flex-grow: 1" xmlns="http://www.w3.org/1999/html">
   <div class="shop-detail">
     <div class="auto-container">
@@ -20,12 +77,12 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
         $delivery_cycle = "6달에 한 번";
         }
         ?>
-        <h2 class="mb-2"><span class="text-primary"><?=$data["company_name"]?></span><?=$data["product_name"]?></h2>
+        <h2 class="mb-3 fw-bold"><span class="text-primary"><?=$data["company_name"]?></span><?=$data["product_name"]?></h2>
         <p class="mb-3"><?=$data["product_detail"]?></p>
       </div>
       <form name="myForm" method="POST" action="">
         <input type ="hidden" id="session" value="<?=$_SESSION['login']?>">
-        <input type="hidden" name="product_no" value="<?=$data['product_no']?>">
+        <input type="hidden" name="product_no" id="product_no" value="<?=$data['product_no']?>">
         <input type="hidden" name="product_name" value="<?=$data['product_name']?>">
         <input type="hidden" name="buyer_company" id ="buyer_company"  value="<?=$_SESSION['login_info']['company_name']?>">
         <input type="hidden" name="seller_uuid" id ="seller_uuid" value= "<?=$data['seller_uuid']?>">
@@ -37,18 +94,34 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
         <div class="d-flex pt-4 pb-5 mb-4">
         <div class="detail-left">
           <div>
-            <div class="p-3 border preview-img-big">
-              <img src="/uploads/<?=$data['representative_image']?>" alt="기업로고">
+            <div class="p-3 border w-100 d-flex align-items-center preview-img-big" style="height: 384px">
+              <img src="/uploads/<?=$data['representative_image']?>" alt="상품 이미지" class="mh-100">
             </div>
             <ul class="d-flex justify-content-between mt-3 list-preview">
-              <li class="border p-2">
-                <img class="preview-img-small" src="/uploads/<?=$data['representative_image']?>" alt="기업로고">
+              <li class="preview-img-small border p-2">
+                <img class="mh-100" src="/uploads/<?=$data['representative_image']?>" alt="상품 상세이미지1">
               </li>
-              <li class="border p-2">
-                <img class="preview-img-small" src="/uploads/<?=$data['product_image1']?>" alt="기업로고">
+              <li class="preview-img-small border p-2">
+                <?php
+              if( ! empty($data['product_image1']) ) {
+            ?>
+                <img class="mh-100" src="/uploads/<?=$data['product_image1']?>" alt="상품 상세이미지2">
+                <?php } else { ?>
+                <p class="text-center fw-bold text-black-50" style="font-size: 16px; margin-top: 37px;">이미지 없음</p>
+                <?php
+            }
+            ?>
               </li>
-              <li class="border p-2">
-                <img class="preview-img-small" src="/uploads/<?=$data['product_image2']?>" alt="기업로고">
+              <li class="preview-img-small border p-2">
+                <?php
+              if( ! empty($data['product_image2']) ) {
+            ?>
+                <img class="mh-100" src="/uploads/<?=$data['product_image2']?>" alt="상품 상세이미지3">
+                <?php } else { ?>
+                <p class="text-center fw-bold text-black-50" style="font-size: 16px; margin-top: 37px;">이미지 없음</p>
+                <?php
+              }
+            ?>
               </li>
             </ul>
           </div>
@@ -78,8 +151,8 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
             </div>
           </div>
           <div class="mt-5 pt-4 text-end border-top total-price">
-            <h2 class="mb-2"><span>계약금액</span><?=number_format($data["product_price"])?>원</h2>
-            <h2><span>감면액</span><?=number_format($_GET['rm'])?>원</h2>
+            <h2 class="mb-2"><span>계약금액&nbsp;</span><?=number_format($data["product_price"])?>원</h2>
+            <h2><span>감면액&nbsp;</span><?=number_format($_GET['rm'])?>원</h2>
           </div>
         </div>
       </div>
@@ -98,14 +171,14 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button
-              class="nav-link active"
+              class="nav-link"
               id="nav-company-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-company"
               type="button"
               role="tab"
               aria-controls="nav-company"
-              aria-selected="true"
+              aria-selected="false"
             >
               기업 상세정보
             </button>
@@ -121,6 +194,18 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
             >
               상품 상세정보
             </button>
+            <button
+                class="nav-link active"
+                id="nav-review-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#nav-review"
+                type="button"
+                role="tab"
+                aria-controls="nav-review"
+                aria-selected="true"
+            >
+              기업/상품 리뷰
+            </button>
           </div>
         </nav>
         <div
@@ -128,7 +213,7 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
           id="nav-tabContent"
         >
           <div
-            class="tab-pane fade show active"
+            class="tab-pane fade"
             id="nav-company"
             role="tabpanel"
             aria-labelledby="nav-company-tab"
@@ -142,6 +227,99 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
             aria-labelledby="nav-detail-tab"
           >
             <img src="/uploads/<?=$data['detail_img']?>" alt="상품상세정보">
+          </div>
+          <div
+              class="tab-pane fade show active"
+              id="nav-review"
+              role="tabpanel"
+              aria-labelledby="nav-review-tab"
+          >
+            <div class="mb-5">
+              <div class="d-flex mb-4">
+                <input type="text" name="reply_content" id="reply_content" class="w-100 px-3 py-2 bg-light border rounded-3 me-2" placeholder="리뷰를 남겨주세요.">
+                <button class="btn btn-dark btn-sm fw-normal flex-shrink-0 px-3" onclick="sellerReplySubmit(1);">등록</button>
+              </div>
+              <?php if(count($reply_data)){ ?>
+              <ul>
+                <?php foreach($reply_data as $item){ ?>
+                <li>
+                  <?php if($item["reply_step"] == 1){
+                      $reply_user_type = "";
+                      if($item['user_type'] == "buyer" ){
+                        $reply_user_type = "구매기업";
+                      }elseif($item['user_type'] == "seller" ){
+                        $reply_user_type = "판매기업";
+                      }
+                  ?>
+                  <div class="product-review py-4 border-bottom">
+                    <div class="mb-2">
+                      <span class="badge bg-primary fw-normal"><?=$reply_user_type?></span>
+                      <strong class="me-2"><?=$item["user_company_name"]?></strong>
+                      <span class="text-secondary"><?=substr($item["register_date"],0,16)?></span>
+                    </div>
+                    <div class="mb-2">
+                      <p><?=$item["reply_content"]?></p>
+                    </div>
+<!--                    <div>
+                      <button class="btn btn-dark btn-sm py-0 fw-normal">답글</button>
+                    </div>-->
+                  </div>
+                  <?php  foreach($reply_data as $item_re) {?>
+                  <?php if($item_re["reply_no"] == $item["reply_no"] && $item_re["reply_step"] != 1){
+                      $reply_user_type = "";
+                      if($item_re['user_type'] == "buyer" ){
+                        $reply_user_type = "구매기업";
+                      }elseif($item_re['user_type'] == "seller" ){
+                        $reply_user_type = "판매기업";
+                      }
+                  ?>
+                  <div class="product-review-answer d-flex p-4 border-bottom">
+                    <div>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
+                      </svg>
+                    </div>
+                    <div class="ms-3 flex-grow-1">
+                      <div class="mb-2">
+                        <span class="badge bg-primary fw-normal"><?=$reply_user_type?></span>
+                        <strong class="me-2"><?=$item_re["user_company_name"]?></strong>
+                        <span class="text-secondary"><?=substr($item_re["register_date"],0,16)?></span>
+                      </div>
+                      <div class="mb-2">
+                        <p><?=$item_re["reply_content"]?></p>
+                      </div>
+ <!--                     <div>
+                        <button class="btn btn-dark btn-sm py-0 fw-normal">답글</button>
+                      </div>-->
+                    </div>
+                  </div>
+                        <?php } ?>
+                      <?php } ?>
+                  <div class="product-review-writing d-flex p-4 border-bottom bg-light">
+                    <div>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
+                      </svg>
+                    </div>
+                    <div class="ms-3 flex-grow-1">
+                      <div class="mb-2">
+                        <span class="badge bg-primary fw-normal"><?=$user_type?></span>
+                        <strong class="me-2"><?=$_SESSION['login_info']['company_name']?></strong>
+                      </div>
+                      <div class="d-flex">
+                        <input type="text" name="reply_content_<?=$item['reply_no']?>" id="reply_content_<?=$item["reply_no"]?>" class="w-100 px-3 py-2 bg-light border rounded-3 me-2 bg-white" placeholder="리뷰를 남겨주세요.">
+                        <button class="btn btn-dark btn-sm fw-normal flex-shrink-0 px-3" onclick="sellerReplySubmit(2,'<?=$item["reply_no"]?>');">등록</button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                    <?php } ?>
+                <?php } ?>
+              </ul>
+              <?php }else{ ?>
+              <div class="text-center"><span>등록된 리뷰가 없습니다.</span></div>
+              <?php }?>
+            </div>
           </div>
         </div>
       </div>
@@ -215,8 +393,15 @@ require APPPATH . '/Views/Buyer/Components/Left.html';
       }
     });*/
   }
-let img = document.querySelector('.preview-img-big img');
-  $('.preview-img-small').on('click', function(e){
-    img.src = e.target.src
-  })
+	let img = document.querySelector('.preview-img-big img');
+	$('.preview-img-small').on('click', function(e){
+		img.src = e.target.src
+		//console.log(e.target)
+		if(e.target.src) {
+			img.src = e.target.src
+		} else {
+			return false;
+		}
+
+	})
 </script>
