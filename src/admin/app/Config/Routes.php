@@ -285,7 +285,14 @@ $routes->group('Board', ['namespace' => 'App\Controllers\Board'], static functio
 	$routes->get ($group_name.'/Delete',            $group_name.'::Delete');
 });
 
-
+// 홍보영상
+$routes->group('Video', ['namespace' => 'App\Controllers\Video'], static function ($routes) {
+	// 전체 목록
+	$group_name = "Lists";
+	$routes->get ($group_name.'/',                  $group_name.'::Index');
+	$routes->get ($group_name.'/VideoRegister',           $group_name.'::Register');
+	
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing
