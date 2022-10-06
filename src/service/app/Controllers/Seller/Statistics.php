@@ -3,37 +3,38 @@
 	namespace App\Controllers\Seller;
 	use App\Controllers\BaseController;
 	use App\Models\Management\Company\ApplicationModel;
-	use App\Models\Delivery\DeliveryModel;
 	use App\Models\DatabaseModel;
-	use App\Models\Seller\IMJOBModel;
-	
-	class Statistics extends BaseController
+    use App\Models\Seller\StatisticsModel;
+
+
+    class Statistics extends BaseController
 	{
-		private $model;
+		private $statistics_model;
 		private $database_model;
-		private $delivery_model;
 		private $seller_model;
 		
 		public function __construct()
 		{ //{{{
-			$this->imjob_model = new IMJOBModel;
+			$this->statistics_model = new StatisticsModel;
 			$this->application_model = new ApplicationModel;
 			$this->database_model = new DatabaseModel;
-//			$this->delivery_model = new DeliveryModel;
 		} //}}}
 		
 		public function SalesAnalysis()
 		{ // {{{
-			echo view("Common/Header.html");
-			echo view('Seller/SalesAnalysis.html');
+            $uuid = $_SESSION["login_info"]["uuid"];
+            $total = $this->statistics_model->TotalPrice($uuid);
+            $static_list = $this->statistics_model->getStatistics($uuid);
+
+            $data = array(
+                "static_list" => $static_list,
+                "year_total" => $total
+            );
+
+            echo view("Common/Header.html");
+			echo view('Seller/SalesAnalysis.html',$data);
 			echo view("Common/Footer.html");
 		} // }}}
-		
-		
 
-  
-  
-
-  
 	}
   ?>

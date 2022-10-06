@@ -206,7 +206,7 @@ class SellerModel extends CommonModel
             from
               seller_product  
             where product_no = $product_no
-            and register_id = '$uuid'
+            and register_id = '".$uuid."'
                      
         ";
         $this->rodb->query($query);
@@ -225,7 +225,7 @@ class SellerModel extends CommonModel
             from
               contract_condition a
             join seller_product b on a.product_no = b.product_no
-            where a.seller_uuid = '$uuid'
+            where a.seller_uuid = '".$uuid."'
             and contract_status = 5
                      
         ";
@@ -243,7 +243,7 @@ class SellerModel extends CommonModel
             from
               contract_condition a
             join seller_product b on a.product_no = b.product_no
-            where a.seller_uuid = '$uuid'
+            where a.seller_uuid = '".$uuid."'
               and (contract_status = 2 or contract_status = 5)
 
                      
@@ -261,7 +261,7 @@ class SellerModel extends CommonModel
              count(*) as'count'
             from
               contract_condition          
-            where seller_uuid = '$uuid'
+            where seller_uuid = '".$uuid."'
               and  contract_status = 5             
         ";
         $this->rodb->query($query);
@@ -277,7 +277,7 @@ class SellerModel extends CommonModel
              count(*) as 'count'
             from
               contract_condition          
-            where seller_uuid = '$uuid'
+            where seller_uuid = '".$uuid."'
               and  contract_status = 2             
         ";
         $this->rodb->query($query);
@@ -295,7 +295,7 @@ class SellerModel extends CommonModel
              mild_disabled
             from
               seller_company          
-            where uuid = '$uuid'            
+            where uuid = '".$uuid."'        
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
