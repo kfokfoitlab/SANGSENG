@@ -25,10 +25,11 @@
             $uuid = $_SESSION["login_info"]["uuid"];
             $total = $this->statistics_model->TotalPrice($uuid);
             $static_list = $this->statistics_model->getStatistics($uuid);
-
+            $month_static_list = $this->statistics_model->getMonthStatistics($uuid);
             $data = array(
                 "static_list" => $static_list,
                 "year_total" => $total
+                ,"month_static_list" => $month_static_list
             );
 
             echo view("Common/Header.html");
