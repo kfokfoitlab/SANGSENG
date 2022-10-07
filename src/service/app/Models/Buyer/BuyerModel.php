@@ -323,6 +323,75 @@ class BuyerModel extends CommonModel
 		}
 	}
 	
+	public function SellerReplyCheck($data){
+		$user_uuid = $_SESSION['login_info']['uuid'];
+		$product_no = $data['product_no'];
+		
+		$query = "
+            select
+                count(*)
+            from
+                contract_condition
+            where
+                product_no = $product_no
+                and buyer_uuid = '".$user_uuid."'
+                and contract_status = '5'
+            limit 1
+        ";
+		
+		return $this->rodb->simple_query($query);
+	}
+	
+	public function SellerReplyCountCheck($data){
+		$user_uuid = $_SESSION['login_info']['uuid'];
+		$product_no = $data['product_no'];
+		
+		$query = "
+            select
+                count(*)
+            from
+                seller_product_reply
+            where
+                product_no = $product_no
+                and user_uuid = '".$user_uuid."'
+            limit 1
+        ";
+		
+		return $this->rodb->simple_query($query);
+	}
+	
+	public function SellerReReplyCheck($data){
+		$user_uuid = $_SESSION['login_info']['uuid'];
+		$product_no = $data['product_no'];
+		
+		if($_SESSION['login_info']['type'] == 'buyer') {
+			$query = "
+            select
+                count(*)
+            from
+                seller_product_reply
+            where
+                product_no = $product_no
+                and user_uuid = '" . $user_uuid . "'
+                and reply_no = '" . $_POST["reply_no"] . "'
+            limit 1
+            ";
+		}elseif ($_SESSION['login_info']['type'] == 'seller'){
+			$query = "
+            select
+                count(*)
+            from
+                seller_product
+            where
+                product_no = $product_no
+                and register_id = '" . $user_uuid . "'
+            limit 1
+            ";
+		}
+		
+		return $this->rodb->simple_query($query);
+	}
+	
 	public function SellerReplyList($product_no){
 		$data = [];
 		$query = "
