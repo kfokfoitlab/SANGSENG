@@ -41,4 +41,25 @@ class StatisticsModel extends CommonModel
         $total = $this->rodb->simple_query($query);
         return $total;
     }
+
+    public function getMonthStatistics($uuid){
+        $month_static_list =[];
+        $query = "
+            select
+                 sum(product_price) as product_price,count(*) as contract_count,month(register_date) as reg_month
+            from
+              contract_condition  
+            where register_date >= '2022-01-01'
+              and register_date <= '2022-12-31'
+              and seller_uuid = '".$uuid."'
+              and contract_status = '5'
+              group by reg_month
+                order by reg_month asc
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $month_static_list[] = $row;
+        }
+        return $month_static_list;
+    }
 }
