@@ -69,18 +69,18 @@ $buyer_reduction =  number_format($buyer_reduction);
 <div
   class="left-fixed-box buyer-left-box bg-dark py-4 px-3 text-white">
   <h2 class="visually-hidden">감면액 및 계약리스트</h2>
-  <div class="mb-3">
-    <h3 class="h6">예상 납부금액</h3>
-    <p class="text-end m-0"><?=$total_money?>원</p>
+  <div class="mb-4 pb-3 reduction-box">
+    <h3 class="h6 mb-3">예상 납부금액</h3>
+    <p class="text-end m-0 text-white fw-bold"><?=$total_money?>원</p>
   </div>
-  <div class="mb-3">
-    <h3 class="h6">기대 감면금액</h3>
-    <h6>(납부금액의 60%만 감면받을 수 있습니다.)</h6>
-    <p class="text-end m-0"><?=$buyer_reduction?>원</p>
+  <div class="mb-4 pb-3 reduction-box">
+    <h3 class="h6 mb-1">기대 감면금액</h3>
+    <p class="mb-3 text-white-50" style="font-size: 14px;">* 납부금액의 <span class="text-warning">60%</span>까지 감면받을 수 있습니다.</p>
+    <p class="text-end m-0 text-white fw-bold"><?=$buyer_reduction?>원</p>
   </div>
-  <div class="mb-3">
-    <h3 class="h6">남은 감면금액</h3>
-    <p class="text-end m-0"><?=$Remainder_money?>원</p>
+  <div class="mb-4 border-bottom-0 reduction-box">
+    <h3 class="h6 mb-3">남은 감면금액</h3>
+    <p class="text-end m-0 text-white fw-bold"><?=$Remainder_money?>원</p>
   </div>
 
   <div class="mt-4">
@@ -93,7 +93,7 @@ $buyer_reduction =  number_format($buyer_reduction);
     <?php
     } else {
     ?>
-    <ul class="buyer-contract-list p-0" style="max-height: 500px; overflow-y: scroll;">
+    <ul class="buyer-contract-list p-0">
     <?php
     foreach($_SESSION["Contract"] as $item){
     $contract_regdt = $item["contract_regdt"];
@@ -103,9 +103,11 @@ $buyer_reduction =  number_format($buyer_reduction);
     ?>
       <li class="p-2 bg-white text-dark mb-3">
         <h3 class="text-center"><?=$item["company_name"]?></h3>
-        <div class="text-center mb-2">
-          <img style="width: 50px;" src="/Image/6ea0bfe8-315c-4e54-a172-4bc84f8cf9e4" alt="">
-          <h4><?=$item["product_name"]?></h4>
+        <div class="d-flex flex-column align-items-center mb-2">
+          <div class="left-item-img d-flex align-items-center justify-content-center border">
+            <img class="mh-100" src="/Image/6ea0bfe8-315c-4e54-a172-4bc84f8cf9e4" alt="상품이미지">
+          </div>
+          <h4 class="mt-1"><?=$item["product_name"]?></h4>
         </div>
         <div class="text-end">
           <p class="m-0"><?=$product_price?>원</p>

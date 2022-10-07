@@ -20782,12 +20782,31 @@ Left Box
 .left-fixed-box .accordion-button:not(.collapsed)::after {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
 }
-.seller-left-box .accordion h3 {
-  margin: 0;
-  font-size: 24px;
+.buyer-left-box .reduction-box:not(:last-child) {
+  border-bottom: 1px solid #ffffff50;
+}
+.buyer-left-box .reduction-box h3 {
+  font-size: 16px;
+}
+.buyer-left-box .reduction-box p {
+  font-size: 22px;
+}
+.buyer-contract-list {
+  max-height: 380px;
+  overflow-y: auto;
 }
 .buyer-contract-list li p {
   font-size: 14px;
+}
+.buyer-contract-list .left-item-img {
+  height: 50px;
+}
+.buyer-contract-list .left-item-img img {
+  width: 50px;
+}
+.seller-left-box .accordion h3 {
+  margin: 0;
+  font-size: 24px;
 }
 /***
 
@@ -20820,10 +20839,12 @@ Shop/List
 }
 .shop-list td:nth-child(1) {
   width: 15%;
+  height: 150px;
   padding-left: 1rem;
 }
 .shop-list td:nth-child(1) img {
   width: 150px;
+  max-height: 150px;
 }
 .shop-list td:nth-child(2) {
   width: 35%;
@@ -20895,6 +20916,9 @@ Shop/Detail
   color: white;
 }
 .shop-detail .list-preview li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-basis: 30%;
   flex-grow: 0;
   flex-shrink: 0;
