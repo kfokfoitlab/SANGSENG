@@ -113,11 +113,30 @@ class Shop extends BaseController
     } // }}}
 	
 	public function SellerReplySubmit(){
-		$result = $this->buyer_model->SellerReplyReg($_POST);
-		if($result == 1) {
-			echo "1";
-		}else {
-			echo "2";
+		if($_POST["reply_step"] == 1) {
+			$replyCheck = $this->buyer_model->SellerReplyCheck($_POST);
+			$replyCountCheck = $this->buyer_model->SellerReplyCountCheck($_POST);
+			if($replyCheck == 0){
+				echo "2";
+				die();
+			}elseif ($replyCountCheck > 0){
+				echo "3";
+				die();
+			}
+		}elseif ($_POST["reply_step"] == 2){
+			$reReplyCheck = $this->buyer_model->SellerReReplyCheck($_POST);
+			if($reReplyCheck == 0){
+				echo "4";
+				die();
+			}
 		}
+		
+		$result = $this->buyer_model->SellerReplyReg($_POST);
+		if ($result == 1) {
+			echo "1";
+		} else {
+			echo "0";
+		}
+		
 	}
 }
