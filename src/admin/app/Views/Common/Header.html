@@ -102,7 +102,7 @@ echo script_tag("assets/js/Common.js");
         <a href="/Contract/Lists">전체 목록</a>
       </div>
     </li>
-    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Job") !== false)?"active":""?>"> 
+    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Product") !== false)?"active":""?>">
       <a class="menu-link" href="#">
         <i class="icon material-icons md-task_alt"></i>  
         <span class="text">상품관리</span>
@@ -111,7 +111,7 @@ echo script_tag("assets/js/Common.js");
         <a href="/Product/Lists">전체 목록</a>
       </div>
     </li>
-    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Job") !== false)?"active":""?>">
+    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Delivery") !== false)?"active":""?>">
     <a class="menu-link" href="#">
       <i class="icon material-icons md-local_shipping"></i>
       <span class="text">배송관리</span>
@@ -148,6 +148,16 @@ echo script_tag("assets/js/Common.js");
       <a href="/Board/QuestionsBoard">1:1 문의하기</a>
     </div>
     </li>
+    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Video") !== false)?"active":""?>">
+    <a class="menu-link" href="#">
+      <i class="icon material-icons md-videocam"></i>
+      <span class="text">홍보영상관리</span>
+    </a>
+    <div class="submenu">
+      <a href="/Video/Lists">전체목록</a>
+    </div>
+    </li>
+
 <!--    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Chat") !== false)?"active":""?>"> -->
 <!--      <a class="menu-link" href="#">-->
 <!--        <i class="icon material-icons md-forum"></i>  -->

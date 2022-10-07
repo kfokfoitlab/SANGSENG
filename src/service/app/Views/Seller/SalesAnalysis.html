@@ -5,56 +5,184 @@
 <div class="flex-grow-1">
   <section class="pt-5 layout-pb-120 item-list">
     <div class="auto-container">
-      <div class="mb-4 h4 bg-light px-5 py-4">2022년도 총 계약금액: <span class="h3 fw-bold">&#8361; 0,000,000</span></div>
-      <div class="d-flex">
-        <div class="w-50 p-3">
-          그래프
+        <?php ?>
+      <div class="mb-4 h4 bg-light px-5 py-4">2022년도 총 계약금액: <span class="h3 fw-bold"><?=number_format($year_total)?>원</span></div>
+      <input type="button" onclick="test00000()" value="배열확인">
+
+      <nav>
+        <div class="nav nav-pills" id="nav-tab" role="tablist">
+          <a class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+          <a class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
         </div>
-        <div class="w-50 p-3">
-          <table class="table table-striped">
-            <thead>
-            <tr>
-              <th class="text-center">No.</th>
-              <th class="text-center">상품명</th>
-              <th class="text-center">수량</th>
-              <th class="text-center">계약금액</th>
-              <th class="text-center">계약일</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <td class="text-center">1</td>
-              <td>(몬스타)슬림 12세대 사무용 PC</td>
-              <td class="text-center">5대</td>
-              <td class="text-end">&#8361; 000,000</td>
-              <td class="text-end">2022.09.01</td>
-            </tr>
-            <tr>
-              <td class="text-center">2</td>
-              <td>(몬스타)슬림 12세대 사무용 PC</td>
-              <td class="text-center">5대</td>
-              <td class="text-end">&#8361; 000,000</td>
-              <td class="text-end">2022.09.01</td>
-            </tr>
-            <tr>
-              <td class="text-center">3</td>
-              <td>(몬스타)슬림 12세대 사무용 PC</td>
-              <td class="text-center">5대</td>
-              <td class="text-end">&#8361; 000,000</td>
-              <td class="text-end">2022.09.01</td>
-            </tr>
-            <tr>
-              <td class="text-center">4</td>
-              <td>(몬스타)슬림 12세대 사무용 PC</td>
-              <td class="text-center">5대</td>
-              <td class="text-end">&#8361; 000,000</td>
-              <td class="text-end">2022.09.01</td>
-            </tr>
-            </tbody>
-          </table>
+      </nav>
+
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+          <!--여기부터-->
+          <div class="d-flex">
+
+            <div class="w-50 p-3">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center">No.</th>
+                  <th class="text-center">상품명</th>
+                  <th class="text-center">계약(건)</th>
+                  <th class="text-center">계약금액</th>
+                 <!-- <th class="text-center">계약일</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                if(is_array($static_list) && count($static_list) > 0){
+                $i = 1;
+                foreach($static_list as $item){
+                ?>
+                <tr>
+                  <td class="text-center"><?=$i?></td>
+                  <td class="text-center"><?=$item['product_name']?></td>
+                  <td class="text-center"><?=$item['contract_count']?></td>
+                  <td class="text-center"><?=number_format($item['product_price'])?>원</td>
+                <!--  <td class="text-end"><?=substr($item['register_date'],0,10)?></td>-->
+                </tr>
+                <?php
+                 $i++;
+                }
+                }
+                ?>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+          <div class="p-3">
+            <div id="top_x_div" style="width: 900px; height: 500px;"></div>
+          </div>
+          <!--여기까지-->
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+          <!--여기부터-->
+          <div class="d-flex">
+
+            <div class="w-50 p-3">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center">No.</th>
+                  <th class="text-center">상품명</th>
+                  <th class="text-center">계약(건)</th>
+                  <th class="text-center">계약금액33</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                if(is_array($static_list) && count($static_list) > 0){
+                $i = 1;
+                foreach($static_list as $item){
+                ?>
+                <tr>
+                  <td class="text-center"><?=$i?></td>
+                  <td class="text-center"><?=$item['product_name']?></td>
+                  <td class="text-center"><?=$item['contract_count']?></td>
+                  <td class="text-center"><?=number_format($item['product_price'])?>원</td>
+                </tr>
+                <?php
+                 $i++;
+                }
+                }
+                ?>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+          <div class="p-3">
+            <!--  <div id="barchart_material" style="width: 900px; height: 500px;"></div>-->
+            <div id="barchart_material" style="width: 900px; height: 500px;"></div>
+          </div>
+          <!--여기까지-->
         </div>
       </div>
+
     </div>
   </section>
 </div>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['bar']});
+  google.charts.setOnLoadCallback(drawStuff);
+
+  function drawStuff() {
+    var arr = []
+    arr = <?php echo json_encode($static_list)?>;
+    var chartData =[['', '']];
+    for(var i = 0; i <arr.length;i++) {
+      chartData.push([arr[i]['product_name'] + ' ' + '(' + arr[i]['contract_count']   + '건'+')',  parseInt(arr[i]['product_price']).toLocaleString() +'(원)'])
+    }
+    console.log(chartData)
+      var data = new google.visualization.arrayToDataTable(
+        chartData
+      );
+      var options = {
+        title: 'Chess opening moves',
+        width: 900,
+        legend: {position: 'none'},
+        bars: 'horizontal',
+        axes: {
+          x: {
+            0: {fontsize: '30px', side: 'top', label: '계약금액(원)'},
+            // Top x-axis.
+          }
+        },
+        bar: {groupWidth: "90%"}
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+      chart.draw(data, options);
+  }
+
+   google.charts.load('current', {'packages':['bar']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Year', 'Sales', 'Expenses', 'Profit'],
+      ['2014', 1000, 400, 200],
+      ['2015', 1170, 460, 250],
+      ['2016', 660, 1120, 300],
+      ['2017', 1030, 540, 350]
+    ]);
+
+    var options = {
+      width: 900,
+      height: 500,
+      chart: {
+        title: 'Company Performance',
+        subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+      },
+      bars: 'horizontal' // Required for Material Bar Charts.
+    };
+
+    var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+    chart.draw(data, google.charts.Bar.convertOptions(options));
+  }
+
+
+
+
+
+
+
+  function test00000(){
+    var arr = []
+    arr = <?php echo json_encode($static_list)?>;
+    var testData =[];
+    var chartData = ['물품명(계약 건수)', '계약금액'];
+      for (var i = 0; i <= arr.length; i++) {
+        chartData.push([arr[i]['product_name'] + ' ' + '(' + arr[i]['contract_count'] + ')' + '건', arr[i]['product_price']])
+        //chartData[i] = arr[i]['product_name'] + ' ' + '('+arr[i]['contract_count']+')'+'건' +','+ arr[i]['product_price'];
+        console.log(chartData)
+      }
+  }
+</script>
