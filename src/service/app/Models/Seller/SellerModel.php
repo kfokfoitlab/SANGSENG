@@ -179,14 +179,12 @@ class SellerModel extends CommonModel
         }
         $query = "
             select
-               *,a.idx as 'cidx',a.product_price as contract_price
+               *,idx as 'cidx',product_price as contract_price
             from
-              contract_condition a
-            join seller_product b 
-            on a.product_no = b.product_no
-            where (a.del_yn != 'Y' or a.del_yn is null) AND seller_uuid ='".$uuid."'".$where_query."
+              contract_condition 
+            where (del_yn != 'Y' or del_yn is null) AND seller_uuid ='".$uuid."'".$where_query."
            order by 
-               a.idx desc
+               idx desc
            
            
         ";
@@ -221,11 +219,10 @@ class SellerModel extends CommonModel
         $sales =[];
         $query = "
             select
-              sum(b.product_price) as 'price'
+              sum(product_price) as 'price'
             from
-              contract_condition a
-            join seller_product b on a.product_no = b.product_no
-            where a.seller_uuid = '".$uuid."'
+              contract_condition 
+            where seller_uuid = '".$uuid."'
             and contract_status = 5
                      
         ";
@@ -239,11 +236,10 @@ class SellerModel extends CommonModel
         $expectationSales =[];
         $query = "
             select
-              sum(b.product_price) as 'price'
+              sum(product_price) as 'price'
             from
-              contract_condition a
-            join seller_product b on a.product_no = b.product_no
-            where a.seller_uuid = '".$uuid."'
+              contract_condition 
+            where seller_uuid = '".$uuid."'
               and (contract_status = 2 or contract_status = 5)
 
                      
@@ -292,7 +288,8 @@ class SellerModel extends CommonModel
         $query = "
             select
              severely_disabled,
-             mild_disabled
+             mild_disabled,
+             seller_logo
             from
               seller_company          
             where uuid = '".$uuid."'        

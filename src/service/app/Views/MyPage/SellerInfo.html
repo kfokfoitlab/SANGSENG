@@ -15,11 +15,11 @@
                 <input type="hidden" name="sbs" value="<?=$sbs?>">
                 <input type="hidden" name="ads" value="<?=$ads?>">
 
-<!--                <div class="add-logo-img mb-3">
+       <div class="add-logo-img mb-3">
 
                   <div class="row">
                     <div class="col-2">
-                      <label for="representative-img" class="form-label">
+                      <label for="seller_logo-img" class="form-label">
                         <div
                             class="preview-bg-img bg-light border rounded"
                             style="background-image: url(/assets/images/resource/icons/image.svg);
@@ -34,13 +34,13 @@
                     </div>
                     <div class="col-5 ms-4">
                       <p class="mb-3"><sup class="text-danger">*</sup> 기업로고 이미지</p>
-                      <input id="representative-img" name="representative_image" class="form-control product-img-input"
-                           type="file" accept="image/*" required/>
+                      <input id="seller_logo-img" name="seller_logo" class="form-control product-img-input"
+                           type="file" accept="image/*"/>
                     </div>
 
 
                   </div>
-                </div>-->
+                </div>
 
                 <div class="read-only-group">
                   <p class="my-2"><sup class="text-danger">*</sup><a title="이메일주소">이메일주소</a></p>
@@ -180,7 +180,7 @@
 	document.querySelectorAll('input[accept="image/*"]').forEach(item => {
 		item.addEventListener("change", function () {
 			const filePath = item.value;
-			const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+			const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.JPG|\.GIF|\.PNG)$/i;
 			// const image_preview = item.parentElement.previousElementSibling.firstElementChild;
 			const image_preview = document.querySelector('.preview-bg-img');
 			const reader = new FileReader();

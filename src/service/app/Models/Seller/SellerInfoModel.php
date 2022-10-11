@@ -62,6 +62,17 @@ class SellerInfoModel extends CommonModel
            $upload_seller_business_license_image = uniqid().".".pathinfo($files["seller_business_license"]["name"], PATHINFO_EXTENSION);
            $this->uploadFileNew($files,$upload_seller_business_license_image,$allowed_ext,$upload_seller_business_license_ori);
        }
+
+        if($files["seller_logo"]["name"] != ""){
+            $seller_logo_ori = $files["seller_logo"]["name"];
+            $upload_seller_logo_ori = "seller_logo";
+            $upload_seller_logo_image = uniqid().".".pathinfo($files["seller_logo"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_seller_logo_image,$allowed_ext,$upload_seller_logo_ori);
+        }
+
+
+
+
 		$uuid = $_SESSION["login_info"]["uuid"];
 		$query = "
             update
@@ -88,6 +99,8 @@ class SellerInfoModel extends CommonModel
                 ,workers_file_ori = '".$workers_file_ori."'
                 ,sales_file = '".$upload_sales_file_image."'
                 ,sales_file_ori = '".$sales_file_ori."'
+                ,seller_logo = '".$upload_seller_logo_image."'
+                ,seller_logo_ori = '".$seller_logo_ori."'
                  ,seller_business_license = '".$upload_seller_business_license_image."'
                 ,seller_business_license_ori = '".$seller_business_license_ori."'
             where uuid = '".$uuid."'

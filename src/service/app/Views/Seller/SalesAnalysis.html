@@ -56,7 +56,7 @@
 
           </div>
           <div class="p-3">
-            <div id="top_x_div" style="width: 900px; height: 500px;"></div>
+            <div id="chart_div2" style="width: 900px; height: 500px;"></div>
           </div>
           <!--여기까지-->
         </div>
@@ -109,7 +109,7 @@
           </div>
           <div class="p-3">
             <!--  <div id="barchart_material" style="width: 900px; height: 500px;"></div>-->
-            <div id="top_x_div2" style="width: 900px; height: 500px;"></div>
+            <div id="chart_div" style="width: 1200px; height: 500px;"></div>
           </div>
           <!--여기까지-->
         </div>
@@ -121,17 +121,46 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-  google.charts.load('current', {'packages':['bar']});
+  google.charts.load('current', {packages: ['corechart', 'bar']});
   google.charts.setOnLoadCallback(drawStuff);
 
   function drawStuff() {
     var arr = []
     arr = <?php echo json_encode($static_list)?>;
+    var chartData =[['상품명(계약)', '금액(원)',{ role: 'annotation' }]];
+    for(var i = 0; i <arr.length;i++) {
+      chartData.push([arr[i]['product_name'] + ' ' + '(' + arr[i]['contract_count']   + '건'+')',  parseInt(arr[i]['product_price']),arr[i]['product_name']])
+
+    }
+
+    console.log(chartData)
+    var data = new google.visualization.arrayToDataTable(
+            chartData
+    );
+    console.log(data)
+    var options = {
+      title: '',
+      width:1200,
+      height:500,
+      legend: {position: 'none'},
+      bar : {
+        groupWidth : '10%' // 그래프 너비 설정 %
+      },
+      vAxis: {minValue:0},
+      hAxis: {
+        title: '상품명(계약 건)',
+      }
+    };
+    var chart2 = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
+    chart2.draw(data, options);
+  };
+ /* function drawStuff() {
+    var arr = []
+    arr = <?php echo json_encode($static_list)?>;
     var chartData =[['', '']];
     for(var i = 0; i <arr.length;i++) {
-      chartData.push([arr[i]['product_name'] + ' ' + '(' + arr[i]['contract_count']   + '건'+')',  parseInt(arr[i]['product_price']).toLocaleString() +'(원)'])
+      chartData.push([arr[i]['product_name'] + ' ' + '(' + arr[i]['contract_count']   + '건'+')',  parseInt(arr[i]['product_price'])])
     }
-    console.log(chartData)
       var data = new google.visualization.arrayToDataTable(
         chartData
       );
@@ -142,7 +171,7 @@
         bars: 'horizontal',
         axes: {
           x: {
-            0: {fontsize: '30px', side: 'top', label: '계약금액(원)'},
+            0: {side: 'top', label: '계약금액(원)'},
             // Top x-axis.
           }
         },
@@ -151,62 +180,118 @@
 
       var chart = new google.charts.Bar(document.getElementById('top_x_div'));
       chart.draw(data, options);
-  }
+  };*/
+  google.charts.load('current', {packages: ['corechart', 'bar']});
+  google.charts.setOnLoadCallback(drawBasic);
+  function drawBasic() {
+    var arr = [];
+    arr = <?php echo json_encode($month_static_list)?>;
+    var chartData =[['계약(건)', '금액(원)']];
+    for(var i =1; i <=12; i++) {
+      var reg_month = i + "월";
+      var contract_count = 0 + "건";
+      var product_price = 0;
+      for (var j = 0; j < arr.length; j++) {
+        if (arr[j]['reg_month'] == i) {
+          var reg_month = arr[j]['reg_month'] + "월";
+          var contract_count = arr[j]['contract_count'] +'건';
+          var product_price =  parseInt(arr[j]['product_price']);
+        }
+      }
+      chartData.push([reg_month + '(' + contract_count + ')', product_price])
+    }
+
+    console.log(chartData)
+    var data = new google.visualization.arrayToDataTable(
+      chartData
+          /*  [
+              ['City', '2010 Population',],
+              ['New York City, NY', 8175000],
+              ['Los Angeles, CA', 3792000],
+              ['Chicago, IL', 2695000],
+              ['Houston, TX', 2099000],
+              ['Philadelphia, PA', 1526000]
+            ]*/
+    );
+    console.log(data)
+    var options = {
+      title: '월별 계약',
+      width:1200,
+      height:500,
+      legend: {position: 'none'},
+      chartArea: {width: '85%'},
+      bar : {
+        groupWidth : '30%' // 그래프 너비 설정 %
+      },
+      vAxis: {minValue:0,maxValue:5},
+      hAxis: {
+        title: '월(계약 건)',
+        minValue: 0
+      },
+
+    };
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  };
 
 
-
-  google.charts.load('current', {'packages':['bar']});
+/*  google.charts.load('current', {'packages':['bar']});
   google.charts.setOnLoadCallback(drawMonth);
     function drawMonth() {
       var arr = [];
       arr = <?php echo json_encode($month_static_list)?>;
       var chartData =[['', '']];
       for(var i =1; i <=12; i++) {
-        var reg_month = i + "월";
-        var contract_count = 0 + "건";
-        var product_price = 0;
         for (var j = 0; j < arr.length; j++) {
           if (arr[j]['reg_month'] == i) {
             var reg_month = arr[j]['reg_month'] + "월";
-            var contract_count = arr[j]['contract_count'] + "건";
+            var contract_count = arr[j]['contract_count'];
             var product_price =  arr[j]['product_price'];
+          }else{
+            var reg_month = i + "월";
+            var contract_count = 0 + "건";
+            var product_price = 0;
           }
         }
-        chartData.push([reg_month + '(' + contract_count + ')', parseInt(product_price).toLocaleString() + '(원)'])
+        chartData.push([reg_month + '(' + contract_count + ')', parseInt(product_price)])
       }
-      console.log(chartData)
       var data = new google.visualization.arrayToDataTable(
               chartData
       );
       var options = {
-        title: 'Chess opening moves',
+    /!*    title: '',
         width: 900,
-        height :1000,
+        height :500,
         legend: {position: 'none'},
         bars: 'horizontal',
         axes: {
           x: {
-            0: {fontsize: '30px', side: 'top', label: '계약금액(원)'},
+            0: { side: 'top', label: '계약금액(십만원)'},
             // Top x-axis.
+            minValue: 0
           }
         },
-        bar: {groupWidth: "90%"}
+        bar: {groupWidth: "90%"}*!/
+        title: '',
+        chartArea: {width: '50%'},
+        hAxis: {
+          title: '금액(원)',
+          minValue: 0
+        },
+        vAxis: {
+          title: 'City'
+        }
       };
 
       var chart = new google.charts.Bar(document.getElementById('top_x_div2'));
       chart.draw(data, options);
 
-    }
-
-
-
-
-
+    }*/
 
   function test00000(){
-    var arr = [];
+   var arr = [];
     arr = <?php echo json_encode($month_static_list)?>;
-    var chartData =[['', '']];
+    var chartData =[['', '',]];
       for(var i =1; i <=12; i++) {
           var reg_month = i + "월";
           var contract_count = 0 + "건";
@@ -218,11 +303,11 @@
             var product_price =  arr[j]['product_price'];
           }
         }
-        chartData.push([reg_month + '(' + contract_count + ')', parseInt(product_price).toLocaleString() + '(원)'])
+        chartData.push([reg_month + '(' + contract_count + ')', parseInt(product_price)])
       }
     console.log(chartData)
-/*
-    var arr = []
+
+/*    var arr = []
     arr = <?php echo json_encode($static_list)?>;
     var chartData =[['', '']];
     for(var i = 0; i <arr.length;i++) {
