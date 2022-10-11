@@ -31,7 +31,7 @@
         };
       }else if(reply_step != 1){
 				if ($('#reply_content_'+reply_no).val() == "") {
-					alert("리뷰를 등록해주세요");
+					alert("답변을 등록해주세요");
 					return false;
 				}
 				var data = {
@@ -49,8 +49,11 @@
 			,dataType: "json"
 			,type: "post"
 			,success: function(data){
-        if(data == 1) {
+        if(data == 1 && reply_step == 1) {
 					alert("리뷰등록이 완료되었습니다");
+					location.reload();
+				}else if(data == 1 && reply_step == 2) {
+					alert("답변등록이 완료되었습니다");
 					location.reload();
 				}else if(data == 2){
 					alert("배송중이거나 구매하신 물품이 아닙니다");
@@ -261,7 +264,7 @@
                         $reply_user_type = "<span class='badge bg-danger fw-normal'>판매기업</span>";
                       }
                   ?>
-                  <div class="product-review py-4 border-bottom">
+                  <div class="product-review py-2 border-bottom">
                     <div class="mb-2">
                       <?=$reply_user_type?>
                       <strong class="me-2"><?=$item["user_company_name"]?></strong>
@@ -283,7 +286,7 @@
                         $reply_user_type = "<span class='badge bg-danger fw-normal'>판매기업</span>";
                       }
                   ?>
-                  <div class="product-review-answer d-flex p-4 border-bottom">
+                  <div class="product-review-answer d-flex p-2 border-bottom">
                     <div>
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
@@ -305,7 +308,8 @@
                   </div>
                         <?php } ?>
                       <?php } ?>
-                  <div class="product-review-writing d-flex p-4 border-bottom bg-light">
+                  <?php if(@$_SESSION["login"] == "success"){ ?>
+                  <div class="product-review-writing d-flex p-2 border-bottom bg-light">
                     <div>
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
@@ -314,6 +318,7 @@
                     <div class="ms-3 flex-grow-1">
                       <div class="mb-2">
                   <?php
+
                           if($_SESSION['login_info']['type'] == "buyer" ){
                             $user_type = "<span class='badge bg-warning fw-normal'>구매기업</span>";
                           }elseif($_SESSION['login_info']['type'] == "seller" ){
@@ -324,11 +329,12 @@
                         <strong class="me-2"><?=$_SESSION['login_info']['company_name']?></strong>
                       </div>
                       <div class="d-flex">
-                        <input type="text" name="reply_content_<?=$item['reply_no']?>" id="reply_content_<?=$item["reply_no"]?>" class="w-100 px-3 py-2 bg-light border rounded-3 me-2 bg-white" placeholder="리뷰를 남겨주세요.">
+                        <input type="text" name="reply_content_<?=$item['reply_no']?>" id="reply_content_<?=$item["reply_no"]?>" class="w-100 px-3 py-2 bg-light border rounded-3 me-2 bg-white" placeholder="답변을 등록해주세요.">
                         <button class="btn btn-dark btn-sm fw-normal flex-shrink-0 px-3" onclick="sellerReplySubmit(2,'<?=$item["reply_no"]?>');">등록</button>
                       </div>
                     </div>
                   </div>
+                  <?php } ?>
                 </li>
                     <?php } ?>
                 <?php } ?>
