@@ -155,36 +155,13 @@ class BuyerModel extends CommonModel
 
     public function Update($files, $data)
     { //{{{
-
-    /*    // image upload
-        $file = $files["profile_img"];
-        if($file["error"] == 0){
-            // 기존 파일 있으면 업데이트
-            $query = "
-                select
-                    profile_img_uuid
-                from
-                    ".$this->table_name."
-                where
-                    uuid = '".$data["uuid"]."'
-                limit 1
-            ";
-            $origin_profile_img_uuid = $this->rodb->simple_query($query);
-            $new_profile_img_uuid = $this->uploadFiles($file, $origin_profile_img_uuid);
-            $profile_img_uuid = ",profile_img_uuid = '".$new_profile_img_uuid."'";
-
-            $_SESSION["login_info"]["profile_img_uuid"] = $new_profile_img_uuid;
+        $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG','JPG','PDF');
+        if($files["buyer_documents"]["name"] != ""){
+            $buyer_documents_ori = $files["buyer_documents"]["name"];
+            $upload_buyer_documents_ori = "buyer_documents";
+            $upload_buyer_documents_image = uniqid().".".pathinfo($files["buyer_documents"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_buyer_documents_image,$allowed_ext,$upload_buyer_documents_ori);
         }
-        else {
-            $profile_img_uuid = ",profile_img_uuid = null";
-            $_SESSION["login_info"]["profile_img_uuid"] = "";
-        }
-
-        // coordinate
-        $coor_x = @(float)$data["coordinate_x"];
-        $coor_y = @(float)$data["coordinate_y"];
-        $coordinate = "POINT(".$coor_x.", ".$coor_y.")";*/
-
         $query = "
             update
                 ".$this->table_name."
@@ -200,6 +177,8 @@ class BuyerModel extends CommonModel
                 ,severely_disabled = '".$data["severely_disabled"]."'
                 ,mild_disabled = '".$data["mild_disabled"]."'
                 ,update_date = '".date("Y-m-d H:i:s")."'
+                ,buyer_documents = '".$upload_buyer_documents_image."'
+                ,buyer_documents_ori = '".$buyer_documents_ori."'
             where
                 uuid = '".$data["uuid"]."'
             limit 1

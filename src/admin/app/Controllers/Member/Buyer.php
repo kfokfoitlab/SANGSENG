@@ -146,5 +146,8 @@ class Buyer extends Base
             </script>
         ";
     }
+    public function downloadFileNew(){
+        $this->model->downloadFileNew();
+    }
 
 }

@@ -90,10 +90,10 @@
         </div>
         <div class="col-2">
           <div class="border">
-            <img class="img-fluid" src="/Image/<?=@$data["profile_img_uuid"]?>" alt="">
             <div class="mt-4 p-2">
               <label>사업자 등록증</label>
-              <input class="form-control" type="file" name="profile_img" accept="image/*" id="upload" multiple="">
+              <button class="btn btn-outline-secondary btn-sm my-2 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["buyer_documents"]?>','<?=$data["buyer_documents_ori"]?>');">기존파일 다운로드</button>
+              <input class="form-control" type="file" name="buyer_documents" accept="image/*" id="upload" multiple="">
             </div>
           </div>
         </div>
@@ -119,3 +119,12 @@
 
 </section>
 
+<script>
+  function downloadFileNew(fileName,fileNameOri){
+    if(fileName == ""){
+      alert("등록된 파일이 없습니다");
+    }else {
+      location.href = "/<?=_CONTROLLER?>/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+    }
+  };
+</script>

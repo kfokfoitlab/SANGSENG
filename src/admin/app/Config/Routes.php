@@ -48,6 +48,7 @@ $routes->group('Member', ['namespace' => 'App\Controllers\Member'], static funct
     $routes->post($group_name.'/getList',           $group_name.'::getList');
     $routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
     $routes->get ($group_name.'/Confirm/(:any)/(:num)',     $group_name.'::Confirm/$1/$2');
+    $routes->get ($group_name.'/downloadFileNew',            $group_name.'::downloadFileNew');
     $routes->get ($group_name.'/Update/(:any)',     $group_name.'::Update/$1');
     $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
     $routes->get ($group_name.'/statusUpdate', $group_name.'::statusUpdate');
