@@ -220,8 +220,7 @@ $.extend({
             $("body").removeClass("dark-mode");
             bg_color = 1;
         }
-    } // }}}
-
+    }
     ,"wysiwig": function(obj)
     { // {{{
         tinymce.init({

@@ -37,7 +37,7 @@ class ItemModel extends CommonModel
         $contribution = $data["product_price"]/$data["seller_sales"];
         $workers = $data["mild_disabled"]+($data["severely_disabled"]*2);
         $reduction = $contribution * $workers;
-
+        $reduction = round($reduction,4);
         $query = "
           insert into
               ".$table_name."
@@ -76,6 +76,29 @@ class ItemModel extends CommonModel
 
 
 public function ItemUpdateSubmit($files, $data){
+
+    $uuid = $_SESSION["login_info"]["uuid"];
+    $seller_info = "
+                    select
+                        *
+                    from
+                        seller_company 
+                    where
+                         uuid ='".$uuid."'
+                    limit 1
+                ";
+    $this->rodb->query($seller_info);
+    $seller = $this->rodb->next_row();
+
+    $seller_mild_disabled = $seller["mild_disabled"];
+    $seller_severely_disabled = $seller["severely_disabled"];
+    $seller_sales = $seller["seller_sales"];
+
+    $contribution = $data["product_price"]/$seller_sales;
+    $workers = $seller_mild_disabled+($seller_severely_disabled*2);
+    $reduction = $contribution * $workers;
+    $reduction = round($reduction,4);
+
     $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG');
 	$upload_representative = $data["representative_image_ori_name"];
 	$upload_image1 = $data["product_image1_ori_name"];
@@ -105,7 +128,6 @@ public function ItemUpdateSubmit($files, $data){
     }
 
     $product_no = $data["product_no"];
-    $uuid = $_SESSION["login_info"]["uuid"];
     $status = 3;
     $query = "
             update
@@ -126,6 +148,7 @@ public function ItemUpdateSubmit($files, $data){
                 ,product_image2 = '".$upload_image2."'
                 ,detail_img = '".$upload_detail_image."'            
                 ,update_id  = '".$uuid."'      
+                ,reduction  = '".$reduction."'  
                 ,update_date = '".date("Y-m-d H:i:s")."'
             where
                 register_id = '".$uuid."'

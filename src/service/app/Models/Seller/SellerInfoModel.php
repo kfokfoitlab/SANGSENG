@@ -69,10 +69,6 @@ class SellerInfoModel extends CommonModel
             $upload_seller_logo_image = uniqid().".".pathinfo($files["seller_logo"]["name"], PATHINFO_EXTENSION);
             $this->uploadFileNew($files,$upload_seller_logo_image,$allowed_ext,$upload_seller_logo_ori);
         }
-
-
-
-
 		$uuid = $_SESSION["login_info"]["uuid"];
 		$query = "
             update
@@ -106,6 +102,34 @@ class SellerInfoModel extends CommonModel
             where uuid = '".$uuid."'
         ";
 		$this->wrdb->update($query);
+
+        $seller_severely_disabled = $data['severely_disabled'];
+        $seller_mild_disabled = $data['mild_disabled'];
+        $seller_sales = $data['seller_sales'];
+
+        $product_info =[];
+        $product_query = "
+			SELECT * FROM seller_product
+			WHERE register_id='".$uuid."'
+		";
+        $this->rodb->query($product_query);
+        while($row = $this->rodb->next_row()){
+            $product_info= $row;
+
+            $contribution = $product_info["product_price"]/$seller_sales;
+            $workers = $seller_mild_disabled+($seller_severely_disabled*2);
+            $reduction = $contribution * $workers;
+            $reduction = round($reduction,4);
+            $query = "
+            update
+               seller_product
+            set
+                reduction = $reduction
+            where product_no = '".$product_info["product_no"]."'
+        ";
+            $this->wrdb->update($query);
+        }
+
 		return 1;
 	}
 	

@@ -173,7 +173,7 @@ $routes->group('Buyer', function($routes){
 $routes->group('Seller',  function ($routes){
     $group_name = "Item";
     $routes->get ( '/',                     'Seller::index');
-   $routes->get ( 'Contract(:any)',       'Seller::Contract$1');
+    $routes->get ( 'Contract',       'Seller::Contract');
     $routes->get ($group_name.'/ItemUpdate/(:any)', 'Seller\Item::ItemUpdate/$1');
     $routes->get ($group_name.'/ItemRegist','Seller\Item::ItemRegist');
     $routes->get ($group_name.'/ItemList',   'Seller\Item::ItemList');

@@ -32,6 +32,7 @@ class Seller extends BaseController
        ,"disabledCount" =>  $disabledCount
         );
 	    $_SESSION["disabledCount"] = $this->sigin_model->getWorkerCount();
+
         echo view("Common/Header.html");
         echo view('Seller/Index.html', $data);
         echo view("Common/Footer.html");
