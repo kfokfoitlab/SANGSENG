@@ -101,7 +101,7 @@ $buyer_reduction =  number_format($buyer_reduction);
     $contract_regdt = date("Y-m-d", $timestamp);
     $product_price = number_format($item["product_price"]);
     ?>
-      <li class="p-2 bg-white text-dark mb-3">
+      <li class="p-2 bg-white text-dark mb-3" onclick="contractView(<?=$item["workflow_id"]?>);">
         <h3 class="text-center"><?=$item["company_name"]?></h3>
         <div class="d-flex flex-column align-items-center mb-2">
           <div class="left-item-img d-flex align-items-center justify-content-center border">
@@ -127,3 +127,25 @@ $buyer_reduction =  number_format($buyer_reduction);
 <?php
 }
 ?>
+<script>
+  function contractView(workflow_id){
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+      }
+    };
+    fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_id + '?offset=%2B09%3A00', options)
+            .then(response => response.json())
+            .then(response => /*console.log(response)*/{
+              if(response['download_url'] == ""){
+                window.open(response['playing_url']);
+              }else{
+                window.open(response['download_url']);
+              }
+            })
+            .catch(err => console.error(err));
+  }
+
+</script>

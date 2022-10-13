@@ -3,114 +3,109 @@
   require(__DIR__.'/Components/Left.html');
 ?>
 <div class="flex-grow-1">
-  <section class="pt-5 layout-pb-120 item-list">
+  <section class="pt-5 layout-pb-120 salesAnalysis">
     <div class="auto-container">
         <?php ?>
       <div class="mb-4 h4 bg-light px-5 py-4">2022년도 총 계약금액: <span class="h3 fw-bold"><?=number_format($year_total)?>원</span></div>
-      <input type="button" onclick="test00000()" value="배열확인">
+<!--      <input type="button" onclick="test00000()" value="배열확인">-->
 
-      <nav>
+      <nav class="d-flex justify-content-center">
         <div class="nav nav-pills" id="nav-tab" role="tablist">
-          <a class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">일반</a>
-          <a class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">1년 기준</a>
+          <a class="nav-link active me-3" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-normal" type="button" role="tab" aria-controls="nav-normal" aria-selected="true">일반</a>
+          <a class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-year" type="button" role="tab" aria-controls="nav-year" aria-selected="false">1년 기준</a>
         </div>
       </nav>
 
       <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="tab-pane fade show active" id="nav-normal" role="tabpanel" aria-labelledby="nav-normal-tab">
           <!--여기부터-->
-          <div class="d-flex">
-
-            <div class="w-50 p-3">
-              <table class="table table-striped">
-                <thead>
-                <tr>
-                  <th class="text-center">No.</th>
-                  <th class="text-center">상품명</th>
-                  <th class="text-center">계약(건)</th>
-                  <th class="text-center">계약금액</th>
-                 <!-- <th class="text-center">계약일</th>-->
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                if(is_array($static_list) && count($static_list) > 0){
-                $i = 1;
-                foreach($static_list as $item){
-                ?>
-                <tr>
-                  <td class="text-center"><?=$i?></td>
-                  <td class="text-center"><?=$item['product_name']?></td>
-                  <td class="text-center"><?=$item['contract_count']?></td>
-                  <td class="text-center"><?=number_format($item['product_price'])?>원</td>
-                <!--  <td class="text-end"><?=substr($item['register_date'],0,10)?></td>-->
-                </tr>
-                <?php
-                 $i++;
-                }
-                }
-                ?>
-                </tbody>
-              </table>
-            </div>
-
+          <div class="p-3 my-5 border">
+            <div id="chart_div2" style="width: 900px; height: 500px;"></div>
           </div>
-          <div class="p-3">
-            <div id="top_x_div" style="width: 900px; height: 500px;"></div>
+
+          <div class="w-100 p-3">
+            <table class="table table-bordered table-sm table-striped">
+              <thead class="table-dark">
+              <tr>
+                <th class="text-center">No.</th>
+                <th class="text-center">상품명</th>
+                <th class="text-center">계약(건)</th>
+                <th class="text-center">계약금액</th>
+                <!-- <th class="text-center">계약일</th>-->
+              </tr>
+              </thead>
+              <tbody>
+              <?php
+              if(is_array($static_list) && count($static_list) > 0){
+              $i = 1;
+              foreach($static_list as $item){
+              ?>
+              <tr>
+                <td class="text-center"><?=$i?></td>
+                <td class="text-center"><?=$item['product_name']?></td>
+                <td class="text-center"><?=$item['contract_count']?></td>
+                <td class="text-center"><?=number_format($item['product_price'])?>원</td>
+                <!--  <td class="text-end"><?=substr($item['register_date'],0,10)?></td>-->
+              </tr>
+              <?php
+               $i++;
+              }
+              }
+              ?>
+              </tbody>
+            </table>
           </div>
           <!--여기까지-->
         </div>
-        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <div class="tab-pane fade" id="nav-year" role="tabpanel" aria-labelledby="nav-year-tab">
           <!--여기부터-->
-          <div class="d-flex">
-
-            <div class="w-50 p-3">
-              <table class="table table-striped">
-                <thead>
-                <tr>
-                  <th class="text-center">월</th>
-                  <th class="text-center">계약(건)</th>
-                  <th class="text-center">계약금액</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                if(is_array($month_static_list) && count($month_static_list) > 0){
-                $contract_count = "";
-                $product_price = 0;
-                $reg_month = "";
-                }
-                ?>
-                <?php
-                for($i =1; $i <=12; $i++){
-                      $reg_month = $i;
-                      $contract_count = 0;
-                      $product_price = 0;
-                  for($j=0; $j<count($month_static_list); $j++){
-                    if($month_static_list[$j]['reg_month'] == $i){
-                      $contract_count = $month_static_list[$j]['contract_count'];
-                      $product_price = $month_static_list[$j]['product_price'];
-                      $reg_month = $month_static_list[$j]['reg_month'];
-                    }
-                  }
-                ?>
-                <tr>
-                  <td class="text-center"><?=$reg_month?>월</td>
-                  <td class="text-center"><?=$contract_count?>건</td>
-                  <td class="text-center"><?=number_format($product_price)?>원</td>
-                </tr>
-                <?php
-                }
-                ?>
-                </tbody>
-              </table>
-            </div>
-
-          </div>
-          <div class="p-3">
+          <div class="p-3 my-5 border">
             <!--  <div id="barchart_material" style="width: 900px; height: 500px;"></div>-->
-            <div id="top_x_div2" style="width: 900px; height: 500px;"></div>
+            <div id="chart_div" style="width: 1200px; height: 500px;"></div>
           </div>
+
+          <div class="w-100 p-3">
+            <table class="table table-bordered table-sm table-striped">
+              <thead class="table-dark">
+              <tr>
+                <th class="text-center">월</th>
+                <th class="text-center">계약(건)</th>
+                <th class="text-center">계약금액</th>
+              </tr>
+              </thead>
+              <tbody>
+              <?php
+              if(is_array($month_static_list) && count($month_static_list) > 0){
+              $contract_count = "";
+              $product_price = 0;
+              $reg_month = "";
+              }
+              ?>
+              <?php
+              for($i =1; $i <=12; $i++){
+                    $reg_month = $i;
+                    $contract_count = 0;
+                    $product_price = 0;
+                for($j=0; $j<count($month_static_list); $j++){
+                  if($month_static_list[$j]['reg_month'] == $i){
+                    $contract_count = $month_static_list[$j]['contract_count'];
+                    $product_price = $month_static_list[$j]['product_price'];
+                    $reg_month = $month_static_list[$j]['reg_month'];
+                  }
+                }
+              ?>
+              <tr>
+                <td class="text-center"><?=$reg_month?>월</td>
+                <td class="text-center"><?=$contract_count?>건</td>
+                <td class="text-center"><?=number_format($product_price)?>원</td>
+              </tr>
+              <?php
+              }
+              ?>
+              </tbody>
+            </table>
+          </div>
+
           <!--여기까지-->
         </div>
       </div>
@@ -121,17 +116,46 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-  google.charts.load('current', {'packages':['bar']});
+  google.charts.load('current', {packages: ['corechart', 'bar']});
   google.charts.setOnLoadCallback(drawStuff);
 
   function drawStuff() {
     var arr = []
     arr = <?php echo json_encode($static_list)?>;
+    var chartData =[['상품명(계약)', '금액(원)',{ role: 'annotation' }]];
+    for(var i = 0; i <arr.length;i++) {
+      chartData.push([arr[i]['product_name'] + ' ' + '(' + arr[i]['contract_count']   + '건'+')',  parseInt(arr[i]['product_price']),arr[i]['product_name']])
+
+    }
+
+    console.log(chartData)
+    var data = new google.visualization.arrayToDataTable(
+            chartData
+    );
+    console.log(data)
+    var options = {
+      title: '',
+      width:1200,
+      height:500,
+      legend: {position: 'none'},
+      bar : {
+        groupWidth : '10%' // 그래프 너비 설정 %
+      },
+      vAxis: {minValue:0},
+      hAxis: {
+        title: '상품명(계약 건)',
+      }
+    };
+    var chart2 = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
+    chart2.draw(data, options);
+  };
+ /* function drawStuff() {
+    var arr = []
+    arr = <?php echo json_encode($static_list)?>;
     var chartData =[['', '']];
     for(var i = 0; i <arr.length;i++) {
-      chartData.push([arr[i]['product_name'] + ' ' + '(' + arr[i]['contract_count']   + '건'+')',  parseInt(arr[i]['product_price']).toLocaleString() +'(원)'])
+      chartData.push([arr[i]['product_name'] + ' ' + '(' + arr[i]['contract_count']   + '건'+')',  parseInt(arr[i]['product_price'])])
     }
-    console.log(chartData)
       var data = new google.visualization.arrayToDataTable(
         chartData
       );
@@ -142,7 +166,7 @@
         bars: 'horizontal',
         axes: {
           x: {
-            0: {fontsize: '30px', side: 'top', label: '계약금액(원)'},
+            0: {side: 'top', label: '계약금액(원)'},
             // Top x-axis.
           }
         },
@@ -151,62 +175,118 @@
 
       var chart = new google.charts.Bar(document.getElementById('top_x_div'));
       chart.draw(data, options);
-  }
+  };*/
+  google.charts.load('current', {packages: ['corechart', 'bar']});
+  google.charts.setOnLoadCallback(drawBasic);
+  function drawBasic() {
+    var arr = [];
+    arr = <?php echo json_encode($month_static_list)?>;
+    var chartData =[['계약(건)', '금액(원)']];
+    for(var i =1; i <=12; i++) {
+      var reg_month = i + "월";
+      var contract_count = 0 + "건";
+      var product_price = 0;
+      for (var j = 0; j < arr.length; j++) {
+        if (arr[j]['reg_month'] == i) {
+          var reg_month = arr[j]['reg_month'] + "월";
+          var contract_count = arr[j]['contract_count'] +'건';
+          var product_price =  parseInt(arr[j]['product_price']);
+        }
+      }
+      chartData.push([reg_month + '(' + contract_count + ')', product_price])
+    }
+
+    console.log(chartData)
+    var data = new google.visualization.arrayToDataTable(
+      chartData
+          /*  [
+              ['City', '2010 Population',],
+              ['New York City, NY', 8175000],
+              ['Los Angeles, CA', 3792000],
+              ['Chicago, IL', 2695000],
+              ['Houston, TX', 2099000],
+              ['Philadelphia, PA', 1526000]
+            ]*/
+    );
+    console.log(data)
+    var options = {
+      title: '월별 계약',
+      width:1200,
+      height:500,
+      legend: {position: 'none'},
+      chartArea: {width: '85%'},
+      bar : {
+        groupWidth : '30%' // 그래프 너비 설정 %
+      },
+      vAxis: {minValue:0,maxValue:5},
+      hAxis: {
+        title: '월(계약 건)',
+        minValue: 0
+      },
+
+    };
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  };
 
 
-
-  google.charts.load('current', {'packages':['bar']});
+/*  google.charts.load('current', {'packages':['bar']});
   google.charts.setOnLoadCallback(drawMonth);
     function drawMonth() {
       var arr = [];
       arr = <?php echo json_encode($month_static_list)?>;
       var chartData =[['', '']];
       for(var i =1; i <=12; i++) {
-        var reg_month = i + "월";
-        var contract_count = 0 + "건";
-        var product_price = 0;
         for (var j = 0; j < arr.length; j++) {
           if (arr[j]['reg_month'] == i) {
             var reg_month = arr[j]['reg_month'] + "월";
-            var contract_count = arr[j]['contract_count'] + "건";
+            var contract_count = arr[j]['contract_count'];
             var product_price =  arr[j]['product_price'];
+          }else{
+            var reg_month = i + "월";
+            var contract_count = 0 + "건";
+            var product_price = 0;
           }
         }
-        chartData.push([reg_month + '(' + contract_count + ')', parseInt(product_price).toLocaleString() + '(원)'])
+        chartData.push([reg_month + '(' + contract_count + ')', parseInt(product_price)])
       }
-      console.log(chartData)
       var data = new google.visualization.arrayToDataTable(
               chartData
       );
       var options = {
-        title: 'Chess opening moves',
+    /!*    title: '',
         width: 900,
-        height :1000,
+        height :500,
         legend: {position: 'none'},
         bars: 'horizontal',
         axes: {
           x: {
-            0: {fontsize: '30px', side: 'top', label: '계약금액(원)'},
+            0: { side: 'top', label: '계약금액(십만원)'},
             // Top x-axis.
+            minValue: 0
           }
         },
-        bar: {groupWidth: "90%"}
+        bar: {groupWidth: "90%"}*!/
+        title: '',
+        chartArea: {width: '50%'},
+        hAxis: {
+          title: '금액(원)',
+          minValue: 0
+        },
+        vAxis: {
+          title: 'City'
+        }
       };
 
       var chart = new google.charts.Bar(document.getElementById('top_x_div2'));
       chart.draw(data, options);
 
-    }
-
-
-
-
-
+    }*/
 
   function test00000(){
-    var arr = [];
+   var arr = [];
     arr = <?php echo json_encode($month_static_list)?>;
-    var chartData =[['', '']];
+    var chartData =[['', '',]];
       for(var i =1; i <=12; i++) {
           var reg_month = i + "월";
           var contract_count = 0 + "건";
@@ -218,11 +298,11 @@
             var product_price =  arr[j]['product_price'];
           }
         }
-        chartData.push([reg_month + '(' + contract_count + ')', parseInt(product_price).toLocaleString() + '(원)'])
+        chartData.push([reg_month + '(' + contract_count + ')', parseInt(product_price)])
       }
     console.log(chartData)
-/*
-    var arr = []
+
+/*    var arr = []
     arr = <?php echo json_encode($static_list)?>;
     var chartData =[['', '']];
     for(var i = 0; i <arr.length;i++) {

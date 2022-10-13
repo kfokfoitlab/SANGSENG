@@ -26,24 +26,7 @@ if($employ != 0){
 }else{
   $ratio = 0;
 }
-$base = 0;     //부담금기초
-if($workers<100){
-$base = 0;
-}
-if($ratio >= 0.75){
 $base = 1149000;
-}
-else if($ratio >= 0.5){
-$base = 1217940;
-}
-else if($ratio >= 0.25){
-$base = 1378800;
-}
-else if($ratio > 0){
-$base = 1608600;
-}else{
-$base = 1914400;
-}
 $levy = $base * $employ *12; //부담금
 ?>
 <div class="flex-grow-1">

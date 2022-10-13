@@ -110,32 +110,30 @@
             <div class="p-3 border w-100 d-flex align-items-center preview-img-big" style="height: 384px">
               <img src="/uploads/<?=$data['representative_image']?>" alt="상품 이미지" class="mh-100">
             </div>
-            <ul class="d-flex justify-content-between mt-3 list-preview">
+            <ul class="d-flex mt-3 list-preview">
               <li class="preview-img-small border p-2">
                 <img class="mh-100" src="/uploads/<?=$data['representative_image']?>" alt="상품 상세이미지1">
               </li>
-              <li class="preview-img-small border p-2">
-                <?php
+
+              <?php
               if( ! empty($data['product_image1']) ) {
-            ?>
-                <img class="mh-100" src="/uploads/<?=$data['product_image1']?>" alt="상품 상세이미지2">
-                <?php } else { ?>
-                <p class="text-center fw-bold text-black-50" style="font-size: 16px;">이미지 없음</p>
-                <?php
-            }
-            ?>
-              </li>
+              ?>
               <li class="preview-img-small border p-2">
-                <?php
-              if( ! empty($data['product_image2']) ) {
-            ?>
-                <img class="mh-100" src="/uploads/<?=$data['product_image2']?>" alt="상품 상세이미지3">
-                <?php } else { ?>
-                <p class="text-center fw-bold text-black-50" style="font-size: 16px;">이미지 없음</p>
-                <?php
-              }
-            ?>
+                <img class="mh-100" src="/uploads/<?=$data['product_image1']?>" alt="상품 상세이미지2">
               </li>
+              <?php
+              }
+              ?>
+
+              <?php
+              if( ! empty($data['product_image2']) ) {
+              ?>
+              <li class="preview-img-small border p-2">
+                <img class="mh-100" src="/uploads/<?=$data['product_image2']?>" alt="상품 상세이미지3">
+              </li>
+              <?php
+              }
+              ?>
             </ul>
           </div>
         </div>
@@ -184,6 +182,18 @@
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button
+                class="nav-link active"
+                id="nav-detail-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#nav-detail"
+                type="button"
+                role="tab"
+                aria-controls="nav-detail"
+                aria-selected="true"
+            >
+              상품 상세정보
+            </button>
+            <button
               class="nav-link"
               id="nav-company-tab"
               data-bs-toggle="tab"
@@ -196,26 +206,14 @@
               기업 상세정보
             </button>
             <button
-              class="nav-link"
-              id="nav-detail-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#nav-detail"
-              type="button"
-              role="tab"
-              aria-controls="nav-detail"
-              aria-selected="false"
-            >
-              상품 상세정보
-            </button>
-            <button
-                class="nav-link active"
+                class="nav-link"
                 id="nav-review-tab"
                 data-bs-toggle="tab"
                 data-bs-target="#nav-review"
                 type="button"
                 role="tab"
                 aria-controls="nav-review"
-                aria-selected="true"
+                aria-selected="false"
             >
               기업/상품 리뷰
             </button>
@@ -226,23 +224,43 @@
           id="nav-tabContent"
         >
           <div
-            class="tab-pane fade"
-            id="nav-company"
-            role="tabpanel"
-            aria-labelledby="nav-company-tab"
-          >
-            <img src="/uploads/<?=$data['seller_information']?>" alt="기업로고">
-          </div>
-          <div
-            class="tab-pane fade"
+            class="tab-pane fade show active"
             id="nav-detail"
             role="tabpanel"
             aria-labelledby="nav-detail-tab"
           >
+            <?php
+            if( ! empty($data['detail_img']) ) {
+            ?>
             <img src="/uploads/<?=$data['detail_img']?>" alt="상품상세정보">
+            <?php
+            } else {
+            ?>
+            <p class="text-secondary text-center my-5">등록된 상품 상세정보가 없습니다.</p>
+            <?php
+            }
+            ?>
           </div>
           <div
-              class="tab-pane fade show active"
+              class="tab-pane fade"
+              id="nav-company"
+              role="tabpanel"
+              aria-labelledby="nav-company-tab"
+          >
+            <?php
+            if( ! empty($data['seller_information']) ) {
+            ?>
+            <img src="/uploads/<?=$data['seller_information']?>" alt="기업상세정보">
+            <?php
+            } else {
+            ?>
+            <p class="text-secondary text-center my-5">등록된 기업 상세정보가 없습니다.</p>
+            <?php
+            }
+            ?>
+          </div>
+          <div
+              class="tab-pane fade"
               id="nav-review"
               role="tabpanel"
               aria-labelledby="nav-review-tab"

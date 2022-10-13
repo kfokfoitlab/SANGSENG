@@ -108,10 +108,22 @@
           <!-- }}} -->
           </table>
         </div>
+        <?php
+        $buyer_documents = "첨부파일 X";
+        if($data['buyer_documents'] != ""){
+        $buyer_documents = "첨부파일 O";
+        }
+        ?>
         <div class="col-2">
           <div class="border">
-            <label>사업자 등록증</label>
-            <img class="img-fluid" src="/Image/<?=@$data['profile_img_uuid']?>" alt="">
+            <label>사업자 등록증 / <?=$buyer_documents?></label>
+            <?php
+            if($data['buyer_documents'] != ""){
+            ?>
+            <button class="btn btn-outline-secondary btn-sm my-2 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["buyer_documents"]?>','<?=$data["buyer_documents_ori"]?>');">기존파일 다운로드</button>
+            <?php
+            }
+            ?>
           </div>
         </div>
 <!--        <div class="col-2">-->
@@ -133,3 +145,14 @@
 
 </section>
 
+<script>
+
+  function downloadFileNew(fileName,fileNameOri){
+    if(fileName == ""){
+      alert("등록된 파일이 없습니다");
+    }else {
+      location.href = "/<?=_CONTROLLER?>/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+    }
+  };
+
+</script>

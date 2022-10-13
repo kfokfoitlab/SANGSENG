@@ -89,8 +89,10 @@ class SellerModel extends CommonModel
                 $where_query = $where_query." and status=9";
             }
         }
-        if($_GET["search_C"] != ""){
+        if($_GET["search_C"] != "all"){
             $where_query = $where_query." and product_category = '".$_GET["search_C"]."'";
+        }else{
+            $where_query = $where_query." ";
         }
 
         $data["data"] = [];
@@ -165,28 +167,26 @@ class SellerModel extends CommonModel
         $data["data"] = [];
         $where_query = "";
 
-        if($_POST["search_A"] != ""){
-            $where_query = $where_query." and contract_no like '%".$_POST["search_A"]."%'";
+        if($_GET["search_A"] != ""){
+            $where_query = $where_query." and contract_no like '%".$_GET["search_A"]."%'";
         }
-        if($_POST["search_B"] != "all" && $_POST["search_B"] != ""){
-            if($_POST["search_B"] == "1"){
+        if($_GET["search_B"] != "all" && $_GET["search_B"] != ""){
+            if($_GET["search_B"] == "1"){
                 $where_query = $where_query." and contract_status=1";
-            }elseif ($_POST["search_B"] == "2"){
+            }elseif ($_GET["search_B"] == "2"){
                 $where_query = $where_query." and contract_status=2";
-            }elseif ($_POST["search_B"] == "5"){
+            }elseif ($_GET["search_B"] == "5"){
                 $where_query = $where_query." and contract_status=5";
             }
         }
         $query = "
             select
-               *,a.idx as 'cidx',a.product_price as contract_price
+               *,idx as 'cidx',product_price as contract_price
             from
-              contract_condition a
-            join seller_product b 
-            on a.product_no = b.product_no
-            where (a.del_yn != 'Y' or a.del_yn is null) AND seller_uuid ='".$uuid."'".$where_query."
+              contract_condition 
+            where (del_yn != 'Y' or del_yn is null) AND seller_uuid ='".$uuid."'".$where_query."
            order by 
-               a.idx desc
+               idx desc
            
            
         ";
@@ -221,11 +221,10 @@ class SellerModel extends CommonModel
         $sales =[];
         $query = "
             select
-              sum(b.product_price) as 'price'
+              sum(product_price) as 'price'
             from
-              contract_condition a
-            join seller_product b on a.product_no = b.product_no
-            where a.seller_uuid = '".$uuid."'
+              contract_condition 
+            where seller_uuid = '".$uuid."'
             and contract_status = 5
                      
         ";
@@ -239,11 +238,10 @@ class SellerModel extends CommonModel
         $expectationSales =[];
         $query = "
             select
-              sum(b.product_price) as 'price'
+              sum(product_price) as 'price'
             from
-              contract_condition a
-            join seller_product b on a.product_no = b.product_no
-            where a.seller_uuid = '".$uuid."'
+              contract_condition 
+            where seller_uuid = '".$uuid."'
               and (contract_status = 2 or contract_status = 5)
 
                      
@@ -292,7 +290,8 @@ class SellerModel extends CommonModel
         $query = "
             select
              severely_disabled,
-             mild_disabled
+             mild_disabled,
+             seller_logo
             from
               seller_company          
             where uuid = '".$uuid."'        

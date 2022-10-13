@@ -57,7 +57,7 @@
           </div>
 
           <div>
-            <button class="btn btn-outline-success btn-sm">
+            <button type="button" class="btn btn-outline-success btn-sm" onclick="excelFileExport();">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
                 <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                 <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
@@ -68,7 +68,7 @@
         </div>
       </form>
 
-      <table class="table table-striped text-center mt-5 imjob-list-table">
+      <table class="table table-striped text-center mt-5 imjob-list-table" id ="imjobTbl">
         <thead>
         <tr>
           <th>No.</th>
@@ -168,5 +168,16 @@
 	function IMJOBView(idx,p_n){
 		location.href = '/Seller/IMJOB/IMJOBView?idx='+idx+'&p_n='+p_n;
 	}
+
+
+  function excelFileExport() {
+    var wb = XLSX.utils.table_to_book(document.getElementById('imjobTbl'), {
+      sheet: "sheet1",
+      raw: true
+    });
+    let today = new Date();
+    XLSX.writeFile(wb, ('근로자리스트'+ today.getFullYear() + today.getMonth() + today.getDate()
+            + today.getHours() + today.getMinutes() + today.getSeconds() +'.xlsx'));
+  }
 
 </script>
