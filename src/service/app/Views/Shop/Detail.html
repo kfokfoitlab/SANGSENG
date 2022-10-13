@@ -269,6 +269,10 @@
                       <?=$reply_user_type?>
                       <strong class="me-2"><?=$item["user_company_name"]?></strong>
                       <span class="text-secondary"><?=substr($item["register_date"],0,16)?></span>
+                      <?php if($item['user_uuid'] == $_SESSION['login_info']['uuid']){ ?>
+                      <a class="btn-sm btn-danger" style="float: right">삭제</a>
+                      <a class="btn-sm btn-warning" style="float: right;margin-right: 1px">수정</a>
+                      <?php } ?>
                     </div>
                     <div class="mb-2">
                       <p><?=$item["reply_content"]?></p>
