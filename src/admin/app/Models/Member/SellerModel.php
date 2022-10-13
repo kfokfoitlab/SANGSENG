@@ -155,55 +155,96 @@ class SellerModel extends CommonModel
 
     public function Update($files, $data)
     { //{{{
-
-        // image upload
-    /*    $file = $files["profile_img"];
-        if($file["error"] == 0){
-            // 기존 파일 있으면 업데이트
-            $query = "
-                select
-                    profile_img_uuid
-                from
-                    ".$this->table_name."
-                where
-                    uuid = '".$data["uuid"]."'
-                limit 1
-            ";
-            $origin_profile_img_uuid = $this->rodb->simple_query($query);
-            $new_profile_img_uuid = $this->uploadFiles($file, $origin_profile_img_uuid);
-            $profile_img_uuid = ",profile_img_uuid = '".$new_profile_img_uuid."'";
-
-            $_SESSION["login_info"]["profile_img_uuid"] = $new_profile_img_uuid;
-        }
-        else {
-            $profile_img_uuid = ",profile_img_uuid = null";
-            $_SESSION["login_info"]["profile_img_uuid"] = "";
+        $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG','JPG','PDF');
+        if($files["seller_information"]["name"] != ""){
+            $seller_information_ori = $files["seller_information"]["name"];
+            $upload_seller_information_ori = "seller_information";
+            $upload_seller_information_image = uniqid().".".pathinfo($files["seller_information"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_seller_information_image,$allowed_ext,$upload_seller_information_ori);
+        }else{
+            $seller_information_ori = $data["seller_information_ori"];
+            $upload_seller_information_image = $data["seller_information"];
         }
 
-        // coordinate
-        $coor_x = @(float)$data["coordinate_x"];
-        $coor_y = @(float)$data["coordinate_y"];
-        $coordinate = "POINT(".$coor_x.", ".$coor_y.")";*/
+        if($files["seller_documents"]["name"] != ""){
+            $seller_documents_ori = $files["seller_documents"]["name"];
+            $upload_seller_documents_ori = "seller_documents";
+            $upload_seller_documents_image = uniqid().".".pathinfo($files["seller_documents"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_seller_documents_image,$allowed_ext,$upload_seller_documents_ori);
+        }else{
+            $seller_documents_ori = $data["seller_documents_ori"];
+            $upload_seller_documents_image = $data["seller_documents"];
+        }
 
+        if($files["sales_file"]["name"] != ""){
+            $sales_file_ori = $files["sales_file"]["name"];
+            $upload_sales_file_ori = "sales_file";
+            $upload_sales_file_image = uniqid().".".pathinfo($files["sales_file"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_sales_file_image,$allowed_ext,$upload_sales_file_ori);
+        }else{
+            $sales_file_ori = $data["sales_file_ori"];
+            $upload_sales_file_image = $data["sales_file"];
+        }
+
+        if($files["workers_file"]["name"] != ""){
+            $workers_file_ori = $files["workers_file"]["name"];
+            $upload_workers_file_ori = "workers_file";
+            $upload_workers_file_image = uniqid().".".pathinfo($files["workers_file"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_workers_file_image,$allowed_ext,$upload_workers_file_ori);
+        }else{
+            $workers_file_ori = $data["workers_file_ori"];
+            $upload_workers_file_image = $data["workers_file"];
+        }
+
+        if($files["seller_business_license"]["name"] != ""){
+            $seller_business_license_ori = $files["seller_business_license"]["name"];
+            $upload_seller_business_license_ori = "seller_business_license";
+            $upload_seller_business_license_image = uniqid().".".pathinfo($files["seller_business_license"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_seller_business_license_image,$allowed_ext,$upload_seller_business_license_ori);
+        }else{
+            $seller_business_license_ori = $data["seller_business_license_ori"];
+            $upload_seller_business_license_image = $data["seller_business_license"];
+        }
+
+        if($files["seller_logo"]["name"] != ""){
+            $seller_logo_ori = $files["seller_logo"]["name"];
+            $upload_seller_logo_ori = "seller_logo";
+            $upload_seller_logo_image = uniqid().".".pathinfo($files["seller_logo"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_seller_logo_image,$allowed_ext,$upload_seller_logo_ori);
+        }else{
+            $seller_logo_ori = $data["seller_logo_ori"];
+            $upload_seller_logo_image = $data["seller_logo"];
+        }
+        $uuid = $data["uuid"];
         $query = "
             update
-                ".$this->table_name."
+                    ".$this->table_name."
             set
-                  email = '".$data["email"]."'
-                ,seller_name = '".$data["seller_name"]."'
+                seller_name = '".$data["seller_name"]."'
+                ,email = '".$data["email"]."'
                 ,phone = '".$data["phone"]."'
+                ,fax = '".$data["fax"]."'
                 ,address = '".$data["address"]."'
                 ,company_name = '".$data["company_name"]."'
                 ,company_code = '".$data["company_code"]."'
-                ,seller_sales = '".$data["seller_sales"]."'
-                ,classification = '".$data["classification"]."'
-                ,fax = '".$data["fax"]."'
-                ,severely_disabled = '".$data["severely_disabled"]."'
-                ,mild_disabled = '".$data["mild_disabled"]."'
+                ,seller_sales = '".$data['seller_sales']."'
+                ,severely_disabled = '".$data['severely_disabled']."'
+                ,mild_disabled = '".$data['mild_disabled']."'
                 ,update_date = '".date("Y-m-d H:i:s")."'
-            where
-                uuid = '".$data["uuid"]."'
-            limit 1
+                ,update_id = '".$uuid."'
+                ,seller_documents = '".$upload_seller_documents_image."'
+                ,seller_documents_ori = '".$seller_documents_ori."'
+                ,seller_information = '".$upload_seller_information_image."'
+                ,seller_information_ori = '".$seller_information_ori."'
+                ,workers_file = '".$upload_workers_file_image."'
+                ,workers_file_ori = '".$workers_file_ori."'
+                ,sales_file = '".$upload_sales_file_image."'
+                ,sales_file_ori = '".$sales_file_ori."'
+                ,seller_logo = '".$upload_seller_logo_image."'
+                ,seller_logo_ori = '".$seller_logo_ori."'
+                 ,seller_business_license = '".$upload_seller_business_license_image."'
+                ,seller_business_license_ori = '".$seller_business_license_ori."'
+                 where uuid = '".$uuid."'
         ";
         $this->wrdb->update($query);
 

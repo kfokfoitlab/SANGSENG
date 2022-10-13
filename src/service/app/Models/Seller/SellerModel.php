@@ -89,7 +89,7 @@ class SellerModel extends CommonModel
                 $where_query = $where_query." and status=9";
             }
         }
-        if($_GET["search_C"] != "all"){
+        if($_GET["search_C"] != "all" && $_GET["search_C"] != ""){
             $where_query = $where_query." and product_category = '".$_GET["search_C"]."'";
         }else{
             $where_query = $where_query." ";

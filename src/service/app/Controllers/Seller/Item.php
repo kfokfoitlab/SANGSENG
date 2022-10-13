@@ -131,7 +131,26 @@ class Item extends BaseController
         }
 
     }
-	
+    public function ItemDelete()
+    {
+        $result = $this->item_model->ItemDelete($_GET);
+        if ($result == "1") {
+            echo "
+                <script>
+                    alert('관리자에게 삭제를 요청했습니다..');
+					window.location.replace('/Seller/Item/ItemList');
+                </script>
+            ";
+        } else {
+            echo "
+                <script>
+                    alert('오류가 발생했습니다. 관리자에게 문의해주세요');
+					history.back(-1);
+                </script>
+            ";
+        }
+    }
+
 	public function StatusComment(){
 		echo view('/Seller/StatusComment.html');
 	}

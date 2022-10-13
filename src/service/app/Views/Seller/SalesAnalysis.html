@@ -19,10 +19,12 @@
       <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-normal" role="tabpanel" aria-labelledby="nav-normal-tab">
           <!--여기부터-->
+          <?php
+            if(is_array($static_list) && count($static_list) > 0){
+          ?>
           <div class="p-3 my-5 border">
             <div id="chart_div2" style="width: 900px; height: 500px;"></div>
           </div>
-
           <div class="w-100 p-3">
             <table class="table table-bordered table-sm table-striped">
               <thead class="table-dark">
@@ -36,7 +38,6 @@
               </thead>
               <tbody>
               <?php
-              if(is_array($static_list) && count($static_list) > 0){
               $i = 1;
               foreach($static_list as $item){
               ?>
@@ -50,11 +51,18 @@
               <?php
                $i++;
               }
-              }
               ?>
               </tbody>
             </table>
           </div>
+          <?php
+          }else{
+          ?>
+          <br><br>
+          <h1 class="text-center">완료된 계약이 없습니다.</h1>
+          <?php
+          }
+          ?>
           <!--여기까지-->
         </div>
         <div class="tab-pane fade" id="nav-year" role="tabpanel" aria-labelledby="nav-year-tab">

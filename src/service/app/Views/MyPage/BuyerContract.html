@@ -76,6 +76,7 @@
           <tbody>
           <?php
           if(is_array($data) && count($data) > 0){
+          $i = 1;
           foreach($data as $item){
           $status = "";
           if($item["contract_status"] == 1){
@@ -120,9 +121,9 @@
           ?>
 
           <tr>
-            <td><?=$item["cidx"]?></td>
+            <td><?=$i?></td>
             <td title=<?=$status?>><?=$status?></td>
-            <td title=<?=$item["product_name"]?>><?=$item["product_name"]?></td>
+            <td title=<?=$item["product_name"]?>><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>"><?=$item["product_name"]?></a> </td>
             <td class="text-end" title=<?=$item["product_quantity"]?>><?=$item["product_quantity"]?></td>
             <td class="text-end" title=<?=$item["product_price"]?>><?=number_format($item["contract_price"])?>원</td>
             <td class="text-end" title="25,000,000"><?=number_format($item["reduction_money"])?>원</td>
@@ -138,6 +139,7 @@
 
           </tr>
           <?php
+          $i++;
           }
           }
           ?>

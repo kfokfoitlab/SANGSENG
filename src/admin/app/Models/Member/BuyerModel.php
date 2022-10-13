@@ -161,6 +161,9 @@ class BuyerModel extends CommonModel
             $upload_buyer_documents_ori = "buyer_documents";
             $upload_buyer_documents_image = uniqid().".".pathinfo($files["buyer_documents"]["name"], PATHINFO_EXTENSION);
             $this->uploadFileNew($files,$upload_buyer_documents_image,$allowed_ext,$upload_buyer_documents_ori);
+        }else{
+            $buyer_documents_ori = $data["buyer_documents_ori"];
+            $upload_buyer_documents_image = $data["buyer_documents"];
         }
         $query = "
             update

@@ -94,6 +94,9 @@ $(document).ready(function(){
                         case "7":
                             html = "<span class='badge bg-danger'>반려</span>";
                             break;
+                        case "8":
+                            html = "<span class='badge bg-warning'>삭제요청</span>";
+                            break;
                         case "9":
                             html = "<span class='badge bg-danger'>삭제</span>";
                             break;

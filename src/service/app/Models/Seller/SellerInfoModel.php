@@ -27,12 +27,14 @@ class SellerInfoModel extends CommonModel
 	
 	public function infoUpdate($files,$data, $table_name = "seller_company"){
 		$allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG','JPG','PDF');
-
         if($files["seller_information"]["name"] != ""){
             $seller_information_ori = $files["seller_information"]["name"];
             $upload_seller_information_ori = "seller_information";
             $upload_seller_information_image = uniqid().".".pathinfo($files["seller_information"]["name"], PATHINFO_EXTENSION);
             $this->uploadFileNew($files,$upload_seller_information_image,$allowed_ext,$upload_seller_information_ori);
+        }else{
+            $seller_information_ori = $data["seller_information_ori"];
+            $upload_seller_information_image = $data["seller_information"];
         }
 
         if($files["seller_documents"]["name"] != ""){
@@ -40,6 +42,9 @@ class SellerInfoModel extends CommonModel
             $upload_seller_documents_ori = "seller_documents";
             $upload_seller_documents_image = uniqid().".".pathinfo($files["seller_documents"]["name"], PATHINFO_EXTENSION);
             $this->uploadFileNew($files,$upload_seller_documents_image,$allowed_ext,$upload_seller_documents_ori);
+        }else{
+            $seller_documents_ori = $data["seller_documents_ori"];
+            $upload_seller_documents_image = $data["seller_documents"];
         }
 
         if($files["sales_file"]["name"] != ""){
@@ -47,6 +52,9 @@ class SellerInfoModel extends CommonModel
             $upload_sales_file_ori = "sales_file";
             $upload_sales_file_image = uniqid().".".pathinfo($files["sales_file"]["name"], PATHINFO_EXTENSION);
             $this->uploadFileNew($files,$upload_sales_file_image,$allowed_ext,$upload_sales_file_ori);
+        }else{
+            $sales_file_ori = $data["sales_file_ori"];
+            $upload_sales_file_image = $data["sales_file"];
         }
 
         if($files["workers_file"]["name"] != ""){
@@ -54,6 +62,9 @@ class SellerInfoModel extends CommonModel
             $upload_workers_file_ori = "workers_file";
             $upload_workers_file_image = uniqid().".".pathinfo($files["workers_file"]["name"], PATHINFO_EXTENSION);
             $this->uploadFileNew($files,$upload_workers_file_image,$allowed_ext,$upload_workers_file_ori);
+        }else{
+            $workers_file_ori = $data["workers_file_ori"];
+            $upload_workers_file_image = $data["workers_file"];
         }
 
        if($files["seller_business_license"]["name"] != ""){
@@ -61,6 +72,9 @@ class SellerInfoModel extends CommonModel
            $upload_seller_business_license_ori = "seller_business_license";
            $upload_seller_business_license_image = uniqid().".".pathinfo($files["seller_business_license"]["name"], PATHINFO_EXTENSION);
            $this->uploadFileNew($files,$upload_seller_business_license_image,$allowed_ext,$upload_seller_business_license_ori);
+       }else{
+           $seller_business_license_ori = $data["seller_business_license_ori"];
+           $upload_seller_business_license_image = $data["seller_business_license"];
        }
 
         if($files["seller_logo"]["name"] != ""){
@@ -68,6 +82,9 @@ class SellerInfoModel extends CommonModel
             $upload_seller_logo_ori = "seller_logo";
             $upload_seller_logo_image = uniqid().".".pathinfo($files["seller_logo"]["name"], PATHINFO_EXTENSION);
             $this->uploadFileNew($files,$upload_seller_logo_image,$allowed_ext,$upload_seller_logo_ori);
+        }else{
+            $seller_logo_ori = $data["seller_logo_ori"];
+            $upload_seller_logo_image = $data["seller_logo"];
         }
 		$uuid = $_SESSION["login_info"]["uuid"];
 		$query = "

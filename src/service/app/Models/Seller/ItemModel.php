@@ -73,7 +73,20 @@ class ItemModel extends CommonModel
         }
     }
 
-
+    public function ItemDelete($data){
+        $idx = $data['idx'];
+        $status = '8';
+        $query = "
+            update
+                seller_product
+            set
+                status = '".$status."'
+            where
+                idx = '".$idx."'
+        ";
+        $this->wrdb->update($query);
+        return "1";
+    }
 
 public function ItemUpdateSubmit($files, $data){
 

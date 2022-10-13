@@ -181,6 +181,7 @@ $routes->group('Seller',  function ($routes){
     $routes->post ($group_name.'/ItemSubmit', 'Seller\Item::ItemSubmit');
     $routes->post ($group_name.'/ItemUpdateSubmit', 'Seller\Item::ItemUpdateSubmit');
 	$routes->get ($group_name.'/StatusComment', 'Seller\Item::StatusComment');
+    $routes->get ($group_name.'/ItemDelete', 'Seller\Item::ItemDelete');
     $routes->post ('ContractUpdate',           'Seller::ContractUpdate');
     $routes->get ('MyPage/downloadFileNew',           'Seller\MyPage::downloadFileNew');
     $routes->post ('Delivery/Submit',      'Seller\Delivery::DeliverySubmit');
