@@ -36,7 +36,7 @@ class Delivery extends BaseController
 
     public function Status()
     { // {{{
-
+        $notification_del = $this->buyer_model->NotificationDel();
         if($_GET['cn'] != ""){
             $delivery = $this->buyer_delivery_model->getDeliveryList($_GET);
             $contents = $this->buyer_delivery_model->getContents($_GET);

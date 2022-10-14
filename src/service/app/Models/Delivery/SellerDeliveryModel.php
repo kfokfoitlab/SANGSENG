@@ -32,6 +32,7 @@ class SellerDeliveryModel extends CommonModel
     public function invoice($data){
         $contract_no = $data['contract_no'];
         $seller_uuid = $data['seller_uuid'];
+        $buyer_uuid = $data['buyer_uuid'];
         $seller_company = $data['seller_company'];
         $product_no = $data['product_no'];
         $product_price = $data['product_price'];
@@ -62,6 +63,14 @@ class SellerDeliveryModel extends CommonModel
       ";
         $idx = $this->wrdb->insert($query);
         if($idx){
+            $query = "
+            update
+                buyer_company
+            set
+                buyer_notification = '1'
+            where uuid ='".$buyer_uuid."'
+        ";
+            $this->wrdb->update($query);
             return 1;
         }
         else {
@@ -110,6 +119,7 @@ class SellerDeliveryModel extends CommonModel
         }else if($data['type'] == 'update'){
             $msg = "수정완료되었습니다";
         }
+        $buyer_uuid = $data['buyer_uuid'];
 
         $idx = $data['idx'];
         $delivery_status = '3';
@@ -122,6 +132,14 @@ class SellerDeliveryModel extends CommonModel
                 ,invoice_file = '".$upload_invoice_file_image."'
                 $set
             where idx = '".$idx."'
+        ";
+        $this->wrdb->update($query);
+        $query = "
+            update
+                buyer_company
+            set
+                buyer_notification = '1'
+            where uuid ='".$buyer_uuid."'
         ";
         $this->wrdb->update($query);
         return $msg;

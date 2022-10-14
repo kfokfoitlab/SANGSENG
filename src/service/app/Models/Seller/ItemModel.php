@@ -34,8 +34,37 @@ class ItemModel extends CommonModel
         $status = '1';
         $product_no = date("YmdHis");
 
+        $mild_disabled_count = "
+                    select
+                        count(*) as mild_disabled_cnt
+                    from
+                        seller_company_worker
+                    where
+                         register_id ='".$uuid."'
+                         and disability_degree ='2'
+                    limit 1
+                ";
+        $this->rodb->query($mild_disabled_count);
+        $mild_disabled_cnt = $this->rodb->next_row();
+        $mild_disabled = $mild_disabled_cnt["mild_disabled_cnt"];
+
+        $severely_disabled_count = "
+                    select
+                        count(*) as severely_disabled_cnt
+                    from
+                        seller_company_worker
+                    where
+                         register_id ='".$uuid."'
+                         and disability_degree ='1'
+                    limit 1
+                ";
+        $this->rodb->query($severely_disabled_count);
+        $severely_disabled_cnt = $this->rodb->next_row();
+        $severely_disabled = $severely_disabled_cnt["severely_disabled_cnt"];
+
+
         $contribution = $data["product_price"]/$data["seller_sales"];
-        $workers = $data["mild_disabled"]+($data["severely_disabled"]*2);
+        $workers = $mild_disabled+($severely_disabled*2);
         $reduction = $contribution * $workers;
         $reduction = round($reduction,4);
         $query = "
@@ -91,24 +120,37 @@ class ItemModel extends CommonModel
 public function ItemUpdateSubmit($files, $data){
 
     $uuid = $_SESSION["login_info"]["uuid"];
-    $seller_info = "
+    $mild_disabled_count = "
                     select
-                        *
+                        count(*) as mild_disabled_cnt
                     from
-                        seller_company 
+                        seller_company_worker
                     where
-                         uuid ='".$uuid."'
+                         register_id ='".$uuid."'
+                         and disability_degree ='2'
                     limit 1
                 ";
-    $this->rodb->query($seller_info);
-    $seller = $this->rodb->next_row();
+    $this->rodb->query($mild_disabled_count);
+    $mild_disabled_cnt = $this->rodb->next_row();
+    $mild_disabled = $mild_disabled_cnt["mild_disabled_cnt"];
 
-    $seller_mild_disabled = $seller["mild_disabled"];
-    $seller_severely_disabled = $seller["severely_disabled"];
-    $seller_sales = $seller["seller_sales"];
+    $severely_disabled_count = "
+                    select
+                        count(*) as severely_disabled_cnt
+                    from
+                        seller_company_worker
+                    where
+                         uuid ='".$uuid."'
+                         and disability_degree ='1'
+                    limit 1
+                ";
+    $this->rodb->query($severely_disabled_count);
+    $severely_disabled_cnt = $this->rodb->next_row();
+    $severely_disabled = $severely_disabled_cnt["severely_disabled_cnt"];
 
-    $contribution = $data["product_price"]/$seller_sales;
-    $workers = $seller_mild_disabled+($seller_severely_disabled*2);
+
+    $contribution = $data["product_price"]/$data["seller_sales"];
+    $workers = $mild_disabled+($severely_disabled*2);
     $reduction = $contribution * $workers;
     $reduction = round($reduction,4);
 

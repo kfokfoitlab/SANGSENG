@@ -285,6 +285,22 @@ class SellerModel extends CommonModel
         return $contract;
     }
 
+    public function NotificationDel(){
+        $uuid = $_SESSION['login_info']['uuid'];
+        $query = "
+            update
+                seller_company
+            set
+                 seller_notification = '0'
+            where
+            uuid = '".$uuid."'
+            limit 1
+        ";
+        $this->wrdb->update($query);
+        return "1";
+    }
+
+
     public function getDisabledCount($uuid){
         $disabledCount =[];
         $query = "

@@ -59,6 +59,8 @@
       </form>
       <div class="mt-4 pb-3 text-end border-bottom border-2">
         <button class="btn btn-warning" onclick="contract_update()">계약상태 최신화</button>
+          <button class="btn btn-warning" onclick="nameCheck()">알림확인</button>
+
       </div>
       <table class="table table-striped text-center mt-5 result-table">
           <thead>
@@ -265,5 +267,9 @@ function contract_update(){
               Contract_reduction(workflow_id);
           })
           .catch(err => console.error(err));
+}
+
+function nameCheck(){
+      alert("ddd");
 }
 </script>

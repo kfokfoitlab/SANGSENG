@@ -237,60 +237,6 @@
     chart.draw(data, options);
   };
 
-
-/*  google.charts.load('current', {'packages':['bar']});
-  google.charts.setOnLoadCallback(drawMonth);
-    function drawMonth() {
-      var arr = [];
-      arr = <?php echo json_encode($month_static_list)?>;
-      var chartData =[['', '']];
-      for(var i =1; i <=12; i++) {
-        for (var j = 0; j < arr.length; j++) {
-          if (arr[j]['reg_month'] == i) {
-            var reg_month = arr[j]['reg_month'] + "월";
-            var contract_count = arr[j]['contract_count'];
-            var product_price =  arr[j]['product_price'];
-          }else{
-            var reg_month = i + "월";
-            var contract_count = 0 + "건";
-            var product_price = 0;
-          }
-        }
-        chartData.push([reg_month + '(' + contract_count + ')', parseInt(product_price)])
-      }
-      var data = new google.visualization.arrayToDataTable(
-              chartData
-      );
-      var options = {
-    /!*    title: '',
-        width: 900,
-        height :500,
-        legend: {position: 'none'},
-        bars: 'horizontal',
-        axes: {
-          x: {
-            0: { side: 'top', label: '계약금액(십만원)'},
-            // Top x-axis.
-            minValue: 0
-          }
-        },
-        bar: {groupWidth: "90%"}*!/
-        title: '',
-        chartArea: {width: '50%'},
-        hAxis: {
-          title: '금액(원)',
-          minValue: 0
-        },
-        vAxis: {
-          title: 'City'
-        }
-      };
-
-      var chart = new google.charts.Bar(document.getElementById('top_x_div2'));
-      chart.draw(data, options);
-
-    }*/
-
   function test00000(){
    var arr = [];
     arr = <?php echo json_encode($month_static_list)?>;

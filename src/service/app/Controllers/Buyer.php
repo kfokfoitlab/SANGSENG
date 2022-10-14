@@ -22,6 +22,7 @@ class Buyer extends BaseController
         $data = $this->buyer_model->RecommendationList($value);
         $reduction =  $this->buyer_model->ReductionMoney();
         $buyer_reduction =  $this->buyer_model->BuyerReduction();
+        $notification_del = $this->buyer_model->NotificationDel();
         $data = array(
             "data" => $data["data"],
             "reduction" => $reduction,

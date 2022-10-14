@@ -120,9 +120,33 @@ class SellerInfoModel extends CommonModel
         ";
 		$this->wrdb->update($query);
 
-        $seller_severely_disabled = $data['severely_disabled'];
-        $seller_mild_disabled = $data['mild_disabled'];
-        $seller_sales = $data['seller_sales'];
+        $mild_disabled_count = "
+                    select
+                        count(*) as mild_disabled_cnt
+                    from
+                        seller_company_worker
+                    where
+                         uuid ='".$uuid."'
+                         and disability_degree ='2'
+                    limit 1
+                ";
+        $this->rodb->query($mild_disabled_count);
+        $mild_disabled_cnt = $this->rodb->next_row();
+        $mild_disabled = $mild_disabled_cnt["mild_disabled_cnt"];
+
+        $severely_disabled_count = "
+                    select
+                        count(*) as severely_disabled_cnt
+                    from
+                        seller_company_worker
+                    where
+                         uuid ='".$uuid."'
+                         and disability_degree ='1'
+                    limit 1
+                ";
+        $this->rodb->query($severely_disabled_count);
+        $severely_disabled_cnt = $this->rodb->next_row();
+        $severely_disabled = $severely_disabled_cnt["severely_disabled_cnt"];
 
         $product_info =[];
         $product_query = "
@@ -133,8 +157,8 @@ class SellerInfoModel extends CommonModel
         while($row = $this->rodb->next_row()){
             $product_info= $row;
 
-            $contribution = $product_info["product_price"]/$seller_sales;
-            $workers = $seller_mild_disabled+($seller_severely_disabled*2);
+            $contribution = $data["product_price"]/$data["seller_sales"];
+            $workers = $mild_disabled+($severely_disabled*2);
             $reduction = $contribution * $workers;
             $reduction = round($reduction,4);
             $query = "
