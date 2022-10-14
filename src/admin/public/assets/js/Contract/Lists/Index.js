@@ -117,7 +117,17 @@ $(document).ready(function(){
 
                     return html;
                 }
-            }
+            }/*,{title: "알림 전송", data: {"buyer_uuid":"buyer_uuid","seller_uuid":"seller_uuid"},
+                visible: true, className: "text-nowrap",
+                "render": function( data, type, row, meta ){
+                    var buyer_uuid = data['buyer_uuid'];
+                    var seller_uuid = data['seller_uuid'];
+                    let html = "";
+                        html += "<input class='btn btn-warning btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='Notification(\"" + seller_uuid + "\",\"" + buyer_uuid + "\")' value='알림 전송'>";
+
+                    return html;
+                }
+            }*/
 						,{title: "삭제", data: "idx", visible: true, className: "text-nowrap",
 						"render": function( data, type, row, meta ){
 							let html = "";
@@ -179,6 +189,13 @@ function contractDelete(idx){
 		return false;
 	}
 }
+/*
+function Notification(seller_uuid,buyer_uuid){
+    location.href = "/Buyer/Notification?buyer_uuid=" + buyer_uuid;
+    location.href = "/Seller/Notification?seller_uuid=" + seller_uuid;
+    return false;
+}
+*/
 
 function playingAlert(){
 	alert('이미 진행중인 계약입니다');
@@ -217,6 +234,7 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
     alert(text);*/
 
  //   location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
+
 }
 
 function contract_update(field_name,field_value) {

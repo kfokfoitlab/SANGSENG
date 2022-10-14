@@ -37,6 +37,7 @@ class SignInModel extends CommonModel
         $this->rodb->query($query);
         $row = $this->rodb->next_row();
 
+
         if(isset($row["idx"])){
             $_SESSION["login"] = "success";
             $_SESSION["login_info"] = array(
@@ -55,6 +56,7 @@ class SignInModel extends CommonModel
 
             return array(
                  "result" => "success"
+                ,"buyer_notification"=> $row["buyer_notification"]
             );
 
         }else{
@@ -99,8 +101,8 @@ class SignInModel extends CommonModel
             $_SESSION["sellerinfo"] = $this->Sellerinfo();
             return array(
                  "result" => "success"
+            ,"seller_notification"=> $row["seller_notification"]
             );
-
         }else{
             return array(
                  "result" => "failed"

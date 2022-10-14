@@ -69,14 +69,14 @@
          $cart_reduction_money = number_format($item["cart_reduction_money"]);
         ?>
           <input type="hidden" name="product_no" id ="product_no" value="<?=$item['product_no']?>">
-          <input type="hidden" name="seller_uuid" id ="seller_uuid" value= "<?=$data['seller_uuid']?>">
+          <input type="hidden" name="seller_uuid" id ="seller_uuid" value= "<?=$item['seller_uuid']?>">
           <input type="hidden" name="company_name" id ="company_name" value="<?=$item['company_name']?>">
           <input type="hidden" name="reduction_money" id ="reduction_money" value="<?=$item['cart_reduction_money']?>">
           <input type="hidden" name="product_price" id ="product_price" value= "<?=$item['product_price']?>">
           <input type="hidden" name="product_name" id ="product_name" value= "<?=$item['product_name']?>">
           <input type="hidden" name="buyer_company" id ="buyer_company"  value="<?=$_SESSION['login_info']['company_name']?>">
           <input type="hidden" name="seller_company" id ="seller_company" value= "<?=$item['company_name']?>">
-          <input type="hidden" name="idx" id ="idx" value= "<?=$item['productidx']?>">
+          <input type="hidden" name="idx" id ="idx" value= "<?=$item['idx']?>">
           <input type="hidden" name="product_quantity" id ="product_quantity" value= "<?=$item['product_quantity']?>">
           <tr>
               <td>
