@@ -157,9 +157,20 @@ class SellerDeliveryModel extends CommonModel
             where del_yn !='Y' 
             and contract_no = '".$contract_no."'
             and seller_uuid = '".$uuid."'
-           order by 
-               idx desc
         ";
+        $delivery_cnt = [];
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $delivery_cnt[] = $row;
+        }
+        $delivery["count"] = count($delivery_cnt);
+        $page_start = 0;
+        if($_GET["p_n"] != ""){
+            $page_start = ($_GET["p_n"] - 1)*10;
+        }
+        $query = $query." order by delivery_status asc";
+        $query = $query." limit ".$page_start.", 10";
+
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
             $delivery[] = $row;

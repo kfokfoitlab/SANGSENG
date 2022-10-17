@@ -83,8 +83,6 @@
         $cnt = count($delivery);
         }
         ?>
-
-
         <form name="invoiceForm" id="invoiceForm" method="post" action="/Seller/Delivery/invoice">
           <input type="hidden" name="contract_no" value="<?=$contents['contract_no']?>">
           <input type="hidden" name="seller_uuid" value="<?=$contents['seller_uuid']?>">
@@ -102,7 +100,6 @@
           <tbody id ="my-tbody">
           <?php
           if($_GET['cn'] != ""){
-
           ?>
           <tr>
             <td></td>
@@ -125,6 +122,7 @@
           <input type="hidden" name="idx" id="idx" value="">
           <input type="hidden" name="type" id="type" value="">
           <?php if(is_array($delivery) && count($delivery) > 0){
+
           foreach($delivery as $item){
           $delivery_status = "";
           if($item['delivery_status'] == '1'){
@@ -134,6 +132,7 @@
           }else if($item['delivery_status'] == '5'){
           $delivery_status = "배송완료";
           }
+          if($item['idx'] != ""){
           ?>
 
         <tr>
@@ -185,16 +184,37 @@
             </td>
           </tr>
           <?php
+            }?>
+          <?php
           }
           }
           ?>
         </form>
           </tbody>
         </table>
+      <ul style="float: right" class="pagination">
+        <li class="paginate_button page-item previous disabled" id="datatables_previous">
+          <?php
+         $data_page_num = ($data_page_total_cnt/10) + 1;
+          $cn = $_GET["cn"];
+         for($i=1;$i<=$data_page_num;$i++){
+              if($_GET["p_n"]==$i){?>
+        <li class="paginate_button page-item active">
+          <?php }else{ ?>
+        <li class="paginate_button page-item">
+          <?php } ?>
+          <a href="javascript:nextPage(<?=$cn?>,<?=$i?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a></li>
+        <?php }?>
+      </ul>
       </div>
     </section>
+
   </div>
   <script>
+    function nextPage(contract_no,p_n){
+      location.href = '/Seller/DeliveryStatus/?cn='+contract_no+'&p_n='+p_n;
+
+    }
 
     function reservation(){
       if($("#delivery_predicted").val() == ""){

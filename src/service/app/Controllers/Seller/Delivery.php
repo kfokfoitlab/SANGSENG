@@ -21,35 +21,23 @@
 			$this->database_model = new DatabaseModel;
 			$this->seller_delivery_model = new SellerDeliveryModel;
 		} //}}}
-		
-	/*	public function List()
-		{ // {{{
-			$data = $this->imjob_model->getWorkerList();
-			$data_cnt = $this->imjob_model->getWorkerCount();
-			$data_page_total_cnt = count($data);
-			$data = array(
-				"data" => $data["data"],
-				"data_cnt" => $data_cnt,
-				"data_page_total_cnt" => $data["count"]
-			);
-			$_SESSION["disabledCount"]  = $data_cnt;
-			echo view("Common/Header.html");
-			echo view('Seller/IMJOB.html',$data);
-			echo view("Common/Footer.html");
-		} // }}}*/
-		
+
 		public function Status()
 		{ // {{{
             if($_GET['cn'] != ""){
                 $delivery = $this->seller_delivery_model->getDeliveryList($_GET);
                 $contents = $this->seller_delivery_model->getContents($_GET);
+                $data_page_total_cnt = count($delivery);
             }
             $uuid = $_SESSION['login_info']['uuid'];
             $contractList = $this->seller_delivery_model->getContractList($uuid);
+
             $data = array(
                 "contractList" => $contractList
                 ,"delivery" => $delivery
                 ,"contents" => $contents
+                ,"data_page_total_cnt" => $delivery["count"]
+
             );
 			echo view("Common/Header.html");
 			echo view('Seller/DeliveryStatus.html',$data);

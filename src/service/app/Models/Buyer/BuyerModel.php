@@ -161,7 +161,7 @@ class BuyerModel extends CommonModel
             where status ='5'
            $where
            order by 
-               product_ranking asc
+               register_date desc
             limit 5;
            
         ";
@@ -244,7 +244,18 @@ class BuyerModel extends CommonModel
             $query = $query." and (product_name like '%".$_GET["search_v"]."%'
              or company_name like '%".$_GET["search_v"]."%')";
         }
-        $query = $query." order by register_date  desc";
+        $list_cnt = [];
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $list_cnt[] = $row;
+        }
+        $list["count"] = count($list_cnt);
+        $page_start = 0;
+        if($_GET["p_n"] != ""){
+            $page_start = ($_GET["p_n"] - 1)*10;
+        }
+        $query = $query." order by product_price desc,reduction desc";
+        $query = $query." limit ".$page_start.", 10";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
             $list["data"][]= $row;
