@@ -184,6 +184,8 @@ $routes->group('Seller',  function ($routes){
     $routes->get ($group_name.'/ItemDelete', 'Seller\Item::ItemDelete');
     $routes->post ('ContractUpdate',           'Seller::ContractUpdate');
     $routes->get ('MyPage/downloadFileNew',           'Seller\MyPage::downloadFileNew');
+    $routes->post ('MyPage/PwUpdate',           'Seller\MyPage::PasswordCheck');
+    $routes->post ('MyPage/ChangePassword',           'Seller\MyPage::ChangePassword');
     $routes->post ('Delivery/Submit',      'Seller\Delivery::DeliverySubmit');
     $routes->get ('DeliveryStatus',      'Seller\Delivery::Status');
     $routes->post ('Delivery/invoice',      'Seller\Delivery::invoice');

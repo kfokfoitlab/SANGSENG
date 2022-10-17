@@ -5,8 +5,7 @@
 <div class="flex-grow-1">
   <section class="pt-5 layout-pb-120 item-list">
     <form name="myForm" method="GET" action="" >
-      <input type="hidden" name="page">
-    <div class="auto-container">
+=    <div class="auto-container">
       <ul class="d-flex border w-100 justify-content-around mb-4 py-4 text-center bg-light item-list-number">
         <li class="px-5 position-relative">
           <p class="h5 text-primary">전체</p>
@@ -174,47 +173,26 @@
             ?>
           </tbody>
         </table>
+      <?php if($data_page_total_cnt == 0){ echo"<div class='text-center'><span>등록된 상품이 없습니다</span></div>"; }?>
+</div>
+</div>
+<div class="float-start"><div class="dataTables_info" id="datatables_info" role="status" aria-live="polite"></div></div>
+<ul style="float: right" class="pagination">
+  <li class="paginate_button page-item previous disabled" id="datatables_previous">
+    <?php
+         $value = $_GET["value"];
+         $data_page_num = ($data_page_total_cnt/10) + 1;
+         for($i=1;$i<=$data_page_num;$i++){
+              if($_GET["p_n"]==$i){?>
+  <li class="paginate_button page-item active">
+    <?php }else{ ?>
+  <li class="paginate_button page-item">
+    <?php } ?>
+    <a href="javascript:nextPage(<?=$i?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a></li>
+  <?php }?>
+</ul>
+</div>
     </div>
-      <nav class="ls-pagination">
-        <!-- Pagination {{{ -->
-        <ul>
-          <li class="prev">
-            <a href="javascript:void(0)"
-               class="pagination"
-               data-page="<?=($pagination['now_page'] > 1)?($pagination['now_page']-1) : 1?>"
-            title="이전페이지"
-            >
-            <i class="fa fa-arrow-left"></i>
-            </a>
-          </li>
-          <?php
-            for($i=0; $i<$pagination["page_count"]; $i++){
-              if($i == ($pagination["now_page"] - 1)){
-            ?>
-          <li><a href="javascript:void(0)" class="current-page pagination" title="<?=($i+1)?>페이지" data-page="<?=($i+1)?>"><?=($i+1)?></a></li>
-          <?php
-              }
-              else {
-            ?>
-          <li><a href="javascript:void(0)" class="pagination" title="<?=($i+1)?>페이지" data-page="<?=$i+1?>"><?=$i+1?></a></li>
-          <?php
-              }
-            ?>
-          <?php
-            }
-            ?>
-          <li class="next">
-            <a href="javascript:void(0)"
-               class="pagination"
-               data-page="<?=($pagination['now_page'] < $pagination['page_count'])?($pagination['now_page']-1) : $pagination['page_count']?>"
-            title="다음페이지"
-            >
-            <i class="fa fa-arrow-right"></i>
-            </a>
-          </li>
-        </ul>
-        <!-- }}} -->
-      </nav>
     </form>
   </section>
 </div>
@@ -225,6 +203,10 @@
     document.myForm.submit();
   }
 
+
+  function nextPage(p_n){
+    location.href = '/Seller/Item/ItemList?p_n='+p_n;
+  }
   function excelFileExport() {
     var wb = XLSX.utils.table_to_book(document.getElementById('productTbl'), {
       sheet: "sheet1",

@@ -44,20 +44,13 @@ class Item extends BaseController
         );
 
         $uuid = $_SESSION['login_info']['uuid'];
-        $data = $this->seller_model->getProductList($uuid,$page_query,0);
+        $data = $this->seller_model->getProductList($uuid);
         $data_cnt = $this->seller_model->getProductCount($uuid);
-        $total_count = $data["count"];         // 전체 아이템 수
-        $item_per_page = $this->item_per_page;
-        $page_count = ceil($total_count / $item_per_page);    // 노출될 페이지 수
-        $now_page = $page;
-
+        $data_page_total_cnt = count($data);
         $data = array(
             "data" => $data["data"],
             "data_cnt" => $data_cnt,
-            "pagination" => array(
-             "page_count" => $page_count
-            ,"now_page" => $now_page
-            )
+            "data_page_total_cnt" => $data["count"]
         );
         echo view("Common/Header.html");
         echo view('Seller/ItemList.html',$data);

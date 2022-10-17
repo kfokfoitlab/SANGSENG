@@ -174,8 +174,7 @@ class SellerInfoModel extends CommonModel
 		return 1;
 	}
 	
-	public function pwdCheck(){
-		$uuid = $_SESSION["login_info"]["uuid"];
+	public function pwdCheck($uuid){
 		$pwd = $_POST["password"];
 		$query = "
 			SELECT * FROM seller_company
@@ -189,5 +188,20 @@ class SellerInfoModel extends CommonModel
 		}
 		return null;
 	}
+
+    public function PwdUpdate($uuid){
+        $password = $_POST['new_password'];
+        $query = "
+            update
+                seller_company
+            set
+              password = SHA2('".$password."', 256)
+            where
+            uuid = '".$uuid."'
+            limit 1
+        ";
+        $this->wrdb->update($query);
+        return "1";
+    }
 
 }
