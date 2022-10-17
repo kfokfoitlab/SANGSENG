@@ -62,7 +62,7 @@
             <th>카테고리</th>
             <td>
               <select name ="search_C" class="form-select form-select-sm w-25" aria-label="Default select">
-                <!--<option name ="all" selected>전체</option>-->
+                <option value="all" <?php if($_GET["search_C"] == "all"){ echo "selected";}?>>전체</option>
                 <option value="1" <?php if($_GET["search_C"] == "1"){ echo "selected";}?>>사무용품</option>
                 <option value="2" <?php if($_GET["search_C"] == "2"){ echo "selected";}?>>생활용품</option>
                 <option value="3" <?php if($_GET["search_C"] == "3"){ echo "selected";}?>>전산용품</option>
@@ -98,7 +98,7 @@
               <option value="200" <?=(@$_GET["length"] == "200")?"selected":""?>>200개씩</option>
             </select>
 
-            <button class="btn btn-sm btn-success flex-shrink-0 fw-normal">
+            <button type="button" class="btn btn-sm btn-success flex-shrink-0 fw-normal" onclick="excelFileExport();">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
                 <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                 <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
@@ -107,7 +107,7 @@
             </button>
           </div>
         </div>
-        <table class="table table-striped text-center mt-5">
+        <table id = "productTbl" class="table table-striped text-center mt-5">
           <thead>
           <tr>
             <th>No.</th>
@@ -149,6 +149,8 @@
           $status = "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button'
                             onClick='window.open(\"/Seller/Item/StatusComment?idx=".$item["idx"]."&status_comment=".$item["status_comment"]."\", \"_blank\", \"width=500,height=330,toolbars=no,scrollbars=no\"); return false;'
                             value='반려(상세보기)'>";
+          }else if($item["status"] == 8){
+          $status = "삭제 요청";
           }
           $product_price = number_format($item["product_price"]);
           ?>
@@ -159,14 +161,14 @@
             <td><?=$product_price?>원</td>
             <td><?=$status?></td>
             <td><?=$category?></td>
-            <td><?=$item["product_start"]?></td>
-            <td><?=$item["product_end"]?></td>
+            <td><?= substr($item["product_start"], 0, 10)?></td>
+            <td><?=substr($item["product_end"], 0, 10)?></td>
           <!--  <td>
               <button class="copy-btn btn btn-sm btn-secondary fw-normal">복사등록</button>
             </td>-->
           </tr>
           <?php
-          $i = $i + 1;
+          $i++;
                 }
               }
             ?>
@@ -223,4 +225,13 @@
     document.myForm.submit();
   }
 
+  function excelFileExport() {
+    var wb = XLSX.utils.table_to_book(document.getElementById('productTbl'), {
+      sheet: "sheet1",
+      raw: true
+    });
+    let today = new Date();
+    XLSX.writeFile(wb, ('상품리스트'+ today.getFullYear() + today.getMonth() + today.getDate()
+            + today.getHours() + today.getMinutes() + today.getSeconds() +'.xlsx'));
+  }
 </script>

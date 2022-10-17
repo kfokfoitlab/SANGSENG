@@ -24,7 +24,7 @@
         </li>
       </ul>
 
-      <form name="myForm" method="post" action="/Seller/Contract" >
+      <form name="myForm" method="get" action="/Seller/Contract" >
         <table class="contract-search-table w-100 bg-light border-top border-bottom">
           <tbody>
           <tr class="border-bottom">
@@ -88,7 +88,7 @@
               <option value="200">200개씩</option>
             </select>
 
-            <button class="me-2 btn btn-sm btn-success flex-shrink-0 fw-normal">
+            <button type="button" class="me-2 btn btn-sm btn-success flex-shrink-0 fw-normal" onclick="excelFileExport();">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
                 <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                 <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
@@ -100,7 +100,7 @@
           </div>
         </div>
 
-        <table class="contract-list-table table table-striped text-center mt-5">
+        <table id ="contractTbl" class="contract-list-table table table-striped text-center mt-5">
           <thead>
           <tr>
             <th>No.</th>
@@ -116,6 +116,7 @@
           <tbody>
           <?php
           if(is_array($data) && count($data) > 0){
+          $i = 1;
           foreach($data as $item){
           $status = "";
           if($item["contract_status"] == 1){
@@ -159,7 +160,7 @@
           }
           ?>
           <tr>
-            <td><?=$item["cidx"]?></td>
+            <td><?=$i?></td>
             <td><?=$status?></td>
             <td class="text-start"><?=$item["product_name"]?></td>
             <td><?=$item["buyer_company"]?></td>
@@ -177,6 +178,7 @@
             </td>
           </tr>
           <?php
+          $i++;
           }
           }
           ?>
@@ -281,5 +283,16 @@
               Contract_reduction(workflow_id);
             })
             .catch(err => console.error(err));
+  }
+
+
+  function excelFileExport() {
+    var wb = XLSX.utils.table_to_book(document.getElementById('contractTbl'), {
+      sheet: "sheet1",
+      raw: true
+    });
+    let today = new Date();
+    XLSX.writeFile(wb, ('계약리스트'+ today.getFullYear() + today.getMonth() + today.getDate()
+            + today.getHours() + today.getMinutes() + today.getSeconds() +'.xlsx'));
   }
 </script>

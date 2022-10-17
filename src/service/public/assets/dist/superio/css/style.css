@@ -5453,7 +5453,7 @@ Main Header
   transition: all 300ms ease;
 }
 .main-header .logo img {
-  width: 110px;
+  width: 100px;
   padding-top: 5px;
 }
 
@@ -20923,6 +20923,10 @@ Shop/Detail
   flex-grow: 0;
   flex-shrink: 0;
   height: 115px;
+  margin-right: 18px;
+}
+.shop-detail .list-preview li:last-child {
+  margin-right: 0;
 }
 .shop-detail .total-price h2 {
   font-weight: bold;
@@ -21814,4 +21818,19 @@ Common/Footer
   width: 1px;
   height: 70%;
   background: #d9d9d9;
+}
+/***
+
+====================================================================
+Sales/salesAnalysis
+====================================================================
+
+***/
+.salesAnalysis .nav-pills .nav-link {
+  border: 1px solid #222;
+  color: #222;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background: #222;
+  color: #fff;
 }

@@ -114,20 +114,98 @@
           <!-- }}} -->
           </table>
         </div>
+        <?php
+        $seller_logo = "첨부파일 X";
+        if($data['seller_logo'] != ""){
+        $seller_logo = "첨부파일 O";
+        }
+        ?>
         <div class="col-2">
           <div class="border">
-            <label>기업 로고</label>
-            <img class="img-fluid" src="/Image/<?=@$data["profile_img_uuid"]?>" alt="">
+            <label>기업 로고 / <?=$seller_logo?></label>
+            <?php
+            if($data['seller_logo'] != ""){
+            ?>
+            <button class="btn btn-outline-secondary btn-sm my-2 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["seller_logo"]?>','<?=$data["seller_logo_ori"]?>');">기존파일 다운로드</button>
+            <?php
+            }
+            ?>
           </div>
-        </div>
-        <div class="col-2">
+          <br>
+          <?php
+        $sales_file = "첨부파일 X";
+        if($data['sales_file'] != ""){
+        $sales_file = "첨부파일 O";
+        }
+        ?>
+
           <div class="border">
-            <label>장애인표준사업장 등록증 or 장애인직업재활시설 등록증</label>
-            <a href="/Image/<?=@$data["welfare_card_uuid"]?>" target="_blank">
-              <img class="img-fluid" src="/Image/<?=@$data["welfare_card_uuid"]?>">
-            </a>
+            <label>매출 증빙 / <?=$sales_file?></label>
+            <?php
+            if($data['sales_file'] != ""){
+            ?>
+            <button class="btn btn-outline-secondary btn-sm my-2 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["sales_file"]?>','<?=$data["sales_file_ori"]?>');">기존파일 다운로드</button>
+            <?php
+            }
+            ?>
           </div>
+          <br>
+          <?php
+        $seller_documents = "첨부파일 X";
+        if($data['seller_documents'] != ""){
+        $seller_documents = "첨부파일 O";
+        }
+        ?>
+
+          <div class="border">
+            <label>장애인표준사업장 등록증<br> 장애인직업재활시설 등록증<br> <?=$seller_documents?></label>
+            <?php
+            if($data['seller_documents'] != ""){
+            ?>
+            <button class="btn btn-outline-secondary btn-sm my-2 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["seller_documents"]?>','<?=$data["seller_documents_ori"]?>');">기존파일 다운로드</button>
+            <?php
+            }
+            ?>
+          </div>
+          <br>
+          <?php
+        $workers_file = "첨부파일 X";
+        if($data['workers_file'] != ""){
+        $workers_file = "첨부파일 O";
+        }
+        ?>
+
+          <div class="border">
+            <label>근로자 증빙 서류 / <?=$workers_file?></label>
+            <?php
+            if($data['workers_file'] != ""){
+            ?>
+            <button class="btn btn-outline-secondary btn-sm my-2 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["workers_file"]?>','<?=$data["workers_file_ori"]?>');">기존파일 다운로드</button>
+            <?php
+            }
+            ?>
+          </div>
+          <br>
+          <?php
+        $seller_business_license = "첨부파일 X";
+        if($data['seller_business_license'] != ""){
+        $seller_business_license = "첨부파일 O";
+        }
+        ?>
+
+          <div class="border">
+            <label>사업자 등록증 / <?=$seller_business_license?></label>
+            <?php
+            if($data['seller_business_license'] != ""){
+            ?>
+            <button class="btn btn-outline-secondary btn-sm my-2 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["seller_business_license"]?>','<?=$data["seller_business_license_ori"]?>');">기존파일 다운로드</button>
+            <?php
+            }
+            ?>
+          </div>
+
         </div>
+
       </div>
     </div>
   </div>
@@ -138,4 +216,13 @@
   </div>
 
 </section>
+<script>
 
+  function downloadFileNew(fileName,fileNameOri){
+    if(fileName == ""){
+      alert("등록된 파일이 없습니다");
+    }else {
+      location.href = "/<?=_CONTROLLER?>/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+    }
+  };
+</script>

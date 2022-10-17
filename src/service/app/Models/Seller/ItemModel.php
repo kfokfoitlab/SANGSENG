@@ -34,10 +34,39 @@ class ItemModel extends CommonModel
         $status = '1';
         $product_no = date("YmdHis");
 
-        $contribution = $data["product_price"]/$data["seller_sales"];
-        $workers = $data["mild_disabled"]+($data["severely_disabled"]*2);
-        $reduction = $contribution * $workers;
+        $mild_disabled_count = "
+                    select
+                        count(*) as mild_disabled_cnt
+                    from
+                        seller_company_worker
+                    where
+                         register_id ='".$uuid."'
+                         and disability_degree ='2'
+                    limit 1
+                ";
+        $this->rodb->query($mild_disabled_count);
+        $mild_disabled_cnt = $this->rodb->next_row();
+        $mild_disabled = $mild_disabled_cnt["mild_disabled_cnt"];
 
+        $severely_disabled_count = "
+                    select
+                        count(*) as severely_disabled_cnt
+                    from
+                        seller_company_worker
+                    where
+                         register_id ='".$uuid."'
+                         and disability_degree ='1'
+                    limit 1
+                ";
+        $this->rodb->query($severely_disabled_count);
+        $severely_disabled_cnt = $this->rodb->next_row();
+        $severely_disabled = $severely_disabled_cnt["severely_disabled_cnt"];
+
+
+        $contribution = $data["product_price"]/$data["seller_sales"];
+        $workers = $mild_disabled+($severely_disabled*2);
+        $reduction = $contribution * $workers;
+        $reduction = round($reduction,4);
         $query = "
           insert into
               ".$table_name."
@@ -73,9 +102,58 @@ class ItemModel extends CommonModel
         }
     }
 
-
+    public function ItemDelete($data){
+        $idx = $data['idx'];
+        $status = '8';
+        $query = "
+            update
+                seller_product
+            set
+                status = '".$status."'
+            where
+                idx = '".$idx."'
+        ";
+        $this->wrdb->update($query);
+        return "1";
+    }
 
 public function ItemUpdateSubmit($files, $data){
+
+    $uuid = $_SESSION["login_info"]["uuid"];
+    $mild_disabled_count = "
+                    select
+                        count(*) as mild_disabled_cnt
+                    from
+                        seller_company_worker
+                    where
+                         register_id ='".$uuid."'
+                         and disability_degree ='2'
+                    limit 1
+                ";
+    $this->rodb->query($mild_disabled_count);
+    $mild_disabled_cnt = $this->rodb->next_row();
+    $mild_disabled = $mild_disabled_cnt["mild_disabled_cnt"];
+
+    $severely_disabled_count = "
+                    select
+                        count(*) as severely_disabled_cnt
+                    from
+                        seller_company_worker
+                    where
+                         uuid ='".$uuid."'
+                         and disability_degree ='1'
+                    limit 1
+                ";
+    $this->rodb->query($severely_disabled_count);
+    $severely_disabled_cnt = $this->rodb->next_row();
+    $severely_disabled = $severely_disabled_cnt["severely_disabled_cnt"];
+
+
+    $contribution = $data["product_price"]/$data["seller_sales"];
+    $workers = $mild_disabled+($severely_disabled*2);
+    $reduction = $contribution * $workers;
+    $reduction = round($reduction,4);
+
     $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG');
 	$upload_representative = $data["representative_image_ori_name"];
 	$upload_image1 = $data["product_image1_ori_name"];
@@ -105,7 +183,6 @@ public function ItemUpdateSubmit($files, $data){
     }
 
     $product_no = $data["product_no"];
-    $uuid = $_SESSION["login_info"]["uuid"];
     $status = 3;
     $query = "
             update
@@ -126,6 +203,7 @@ public function ItemUpdateSubmit($files, $data){
                 ,product_image2 = '".$upload_image2."'
                 ,detail_img = '".$upload_detail_image."'            
                 ,update_id  = '".$uuid."'      
+                ,reduction  = '".$reduction."'  
                 ,update_date = '".date("Y-m-d H:i:s")."'
             where
                 register_id = '".$uuid."'

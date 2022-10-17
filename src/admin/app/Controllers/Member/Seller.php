@@ -146,4 +146,9 @@ class Seller extends Base
         ";
     }
 
+    public function downloadFileNew(){
+        $this->model->downloadFileNew();
+    }
+
+
 }

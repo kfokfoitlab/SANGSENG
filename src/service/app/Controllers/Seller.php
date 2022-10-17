@@ -24,7 +24,8 @@ class Seller extends BaseController
         $completionContract = $this->seller_model->getCompletionContract($uuid);
         $contractList = $this->seller_model->getContract($uuid);
         $disabledCount = $this->seller_model->getDisabledCount($uuid);
-       $data = array(
+
+        $data = array(
             "totalSales" => $totalSales
         ,"expectationSales" => $expectationSales
        ,"completionContract" =>  $completionContract
@@ -32,6 +33,7 @@ class Seller extends BaseController
        ,"disabledCount" =>  $disabledCount
         );
 	    $_SESSION["disabledCount"] = $this->sigin_model->getWorkerCount();
+
         echo view("Common/Header.html");
         echo view('Seller/Index.html', $data);
         echo view("Common/Footer.html");
@@ -45,6 +47,7 @@ class Seller extends BaseController
 
     public function Contract()
     {
+        $notification_del = $this->seller_model->NotificationDel();
         $uuid = $_SESSION['login_info']['uuid'];
         $data = $this->seller_model->getContractList($uuid);
         $data_cnt = $this->seller_model->getContractCount($uuid);

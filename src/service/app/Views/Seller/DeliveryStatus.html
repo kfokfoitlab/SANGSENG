@@ -88,6 +88,7 @@
         <form name="invoiceForm" id="invoiceForm" method="post" action="/Seller/Delivery/invoice">
           <input type="hidden" name="contract_no" value="<?=$contents['contract_no']?>">
           <input type="hidden" name="seller_uuid" value="<?=$contents['seller_uuid']?>">
+          <input type="hidden" name="buyer_uuid" value="<?=$contents['buyer_uuid']?>">
           <input type="hidden" name="seller_company" value="<?=$contents['seller_company']?>">
           <input type="hidden" name="product_no" value="<?=$contents['product_no']?>">
           <input type="hidden" name="product_name" value="<?=$contents['product_name']?>">
@@ -120,6 +121,7 @@
         </form>
         <form id ="deliveryForm" action="/Seller/Delivery/Submit" method="post" enctype="multipart/form-data">
           <input type="hidden" name="cn" value="<?=$contractList['contract_no']?>">
+          <input type="hidden" name="buyer_uuid" value="<?=$contents['buyer_uuid']?>">
           <input type="hidden" name="idx" id="idx" value="">
           <input type="hidden" name="type" id="type" value="">
           <?php if(is_array($delivery) && count($delivery) > 0){

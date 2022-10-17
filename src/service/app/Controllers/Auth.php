@@ -56,17 +56,6 @@ class Auth extends BaseController
         $result = $this->model->SignIn($email, $password,$company_type);
 
         if($result["result"] == "success"){
-            // 아이디 저장 쿠키 처리 - 1개월간
-        /*    if(@$_POST["remember_me"] == 1){
-                setcookie("remember_me", "1", strtotime("+1 month"), "/");
-                setcookie("remember_id", $email, strtotime("+1 month"), "/");
-            }
-            else{
-                setcookie("remember_me", null, -1, "/");
-                setcookie("remember_id", null, -1, "/");
-            }*/
-
-            // 기업회원이고 승인 대기중일때.
             if($_SESSION["login_info"]["type"] == 'buyer') {
                 switch ($_SESSION["login_info"]["status"]) {
                     case "0" :
@@ -74,8 +63,18 @@ class Auth extends BaseController
                         header("Location:/Auth/SignInCompanyReport/review");
                         break;
                     case "5" : // OK
-                        header("Location:/Buyer");
-                        break;
+                        if($result['buyer_notification'] >0){
+                            echo "
+                         <script>
+                            alert('배송현황이 변경되었습니다 확인해주세요.');
+                            window.location.replace('/Buyer/DeliveryStatus');
+                        </script>
+                      ";
+                            break;
+                        }else{
+                            header("Location:/Buyer");
+                            break;
+                        }
                     case "7" :
                         header("Location:/Auth/SignInCompanyReport/reject");
                         break;
@@ -90,8 +89,18 @@ class Auth extends BaseController
                         header("Location:/Auth/SignInCompanyReport/review");
                         break;
                     case "5" : // OK
-                        header("Location:/Seller");
-                        break;
+                        if($result['seller_notification'] >0){
+                            echo "
+                         <script>
+                            alert('새로운 계약서가 등록되었습니다.');
+                            window.location.replace('/Seller/Contract');
+                        </script>
+                      ";
+                            break;
+                        }else{
+                            header("Location:/Seller");
+                            break;
+                        }
                     case "7" :
                         header("Location:/Auth/SignInCompanyReport/reject");
                         break;

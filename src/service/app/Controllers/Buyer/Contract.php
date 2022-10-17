@@ -52,6 +52,7 @@ class Contract extends BaseController
 
             die();
         }
+
         $cart_del = $this->buyer_model->cartDel($_POST);
         $result = $this->buyer_model->contract($_POST);
         if($result == "1") {

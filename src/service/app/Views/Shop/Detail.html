@@ -31,7 +31,7 @@
         };
       }else if(reply_step != 1){
 				if ($('#reply_content_'+reply_no).val() == "") {
-					alert("리뷰를 등록해주세요");
+					alert("답변을 등록해주세요");
 					return false;
 				}
 				var data = {
@@ -49,8 +49,11 @@
 			,dataType: "json"
 			,type: "post"
 			,success: function(data){
-        if(data == 1) {
+        if(data == 1 && reply_step == 1) {
 					alert("리뷰등록이 완료되었습니다");
+					location.reload();
+				}else if(data == 1 && reply_step == 2) {
+					alert("답변등록이 완료되었습니다");
 					location.reload();
 				}else if(data == 2){
 					alert("배송중이거나 구매하신 물품이 아닙니다");
@@ -107,32 +110,30 @@
             <div class="p-3 border w-100 d-flex align-items-center preview-img-big" style="height: 384px">
               <img src="/uploads/<?=$data['representative_image']?>" alt="상품 이미지" class="mh-100">
             </div>
-            <ul class="d-flex justify-content-between mt-3 list-preview">
+            <ul class="d-flex mt-3 list-preview">
               <li class="preview-img-small border p-2">
                 <img class="mh-100" src="/uploads/<?=$data['representative_image']?>" alt="상품 상세이미지1">
               </li>
-              <li class="preview-img-small border p-2">
-                <?php
+
+              <?php
               if( ! empty($data['product_image1']) ) {
-            ?>
-                <img class="mh-100" src="/uploads/<?=$data['product_image1']?>" alt="상품 상세이미지2">
-                <?php } else { ?>
-                <p class="text-center fw-bold text-black-50" style="font-size: 16px;">이미지 없음</p>
-                <?php
-            }
-            ?>
-              </li>
+              ?>
               <li class="preview-img-small border p-2">
-                <?php
-              if( ! empty($data['product_image2']) ) {
-            ?>
-                <img class="mh-100" src="/uploads/<?=$data['product_image2']?>" alt="상품 상세이미지3">
-                <?php } else { ?>
-                <p class="text-center fw-bold text-black-50" style="font-size: 16px;">이미지 없음</p>
-                <?php
-              }
-            ?>
+                <img class="mh-100" src="/uploads/<?=$data['product_image1']?>" alt="상품 상세이미지2">
               </li>
+              <?php
+              }
+              ?>
+
+              <?php
+              if( ! empty($data['product_image2']) ) {
+              ?>
+              <li class="preview-img-small border p-2">
+                <img class="mh-100" src="/uploads/<?=$data['product_image2']?>" alt="상품 상세이미지3">
+              </li>
+              <?php
+              }
+              ?>
             </ul>
           </div>
         </div>
@@ -181,6 +182,18 @@
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button
+                class="nav-link active"
+                id="nav-detail-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#nav-detail"
+                type="button"
+                role="tab"
+                aria-controls="nav-detail"
+                aria-selected="true"
+            >
+              상품 상세정보
+            </button>
+            <button
               class="nav-link"
               id="nav-company-tab"
               data-bs-toggle="tab"
@@ -193,26 +206,14 @@
               기업 상세정보
             </button>
             <button
-              class="nav-link"
-              id="nav-detail-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#nav-detail"
-              type="button"
-              role="tab"
-              aria-controls="nav-detail"
-              aria-selected="false"
-            >
-              상품 상세정보
-            </button>
-            <button
-                class="nav-link active"
+                class="nav-link"
                 id="nav-review-tab"
                 data-bs-toggle="tab"
                 data-bs-target="#nav-review"
                 type="button"
                 role="tab"
                 aria-controls="nav-review"
-                aria-selected="true"
+                aria-selected="false"
             >
               기업/상품 리뷰
             </button>
@@ -223,23 +224,43 @@
           id="nav-tabContent"
         >
           <div
-            class="tab-pane fade"
-            id="nav-company"
-            role="tabpanel"
-            aria-labelledby="nav-company-tab"
-          >
-            <img src="/uploads/<?=$data['seller_information']?>" alt="기업로고">
-          </div>
-          <div
-            class="tab-pane fade"
+            class="tab-pane fade show active"
             id="nav-detail"
             role="tabpanel"
             aria-labelledby="nav-detail-tab"
           >
+            <?php
+            if( ! empty($data['detail_img']) ) {
+            ?>
             <img src="/uploads/<?=$data['detail_img']?>" alt="상품상세정보">
+            <?php
+            } else {
+            ?>
+            <p class="text-secondary text-center my-5">등록된 상품 상세정보가 없습니다.</p>
+            <?php
+            }
+            ?>
           </div>
           <div
-              class="tab-pane fade show active"
+              class="tab-pane fade"
+              id="nav-company"
+              role="tabpanel"
+              aria-labelledby="nav-company-tab"
+          >
+            <?php
+            if( ! empty($data['seller_information']) ) {
+            ?>
+            <img src="/uploads/<?=$data['seller_information']?>" alt="기업상세정보">
+            <?php
+            } else {
+            ?>
+            <p class="text-secondary text-center my-5">등록된 기업 상세정보가 없습니다.</p>
+            <?php
+            }
+            ?>
+          </div>
+          <div
+              class="tab-pane fade"
               id="nav-review"
               role="tabpanel"
               aria-labelledby="nav-review-tab"
@@ -261,11 +282,15 @@
                         $reply_user_type = "<span class='badge bg-danger fw-normal'>판매기업</span>";
                       }
                   ?>
-                  <div class="product-review py-4 border-bottom">
+                  <div class="product-review py-2 border-bottom">
                     <div class="mb-2">
                       <?=$reply_user_type?>
                       <strong class="me-2"><?=$item["user_company_name"]?></strong>
                       <span class="text-secondary"><?=substr($item["register_date"],0,16)?></span>
+                      <?php if($item['user_uuid'] == $_SESSION['login_info']['uuid']){ ?>
+                      <a class="btn-sm btn-danger" style="float: right">삭제</a>
+                      <a class="btn-sm btn-warning" style="float: right;margin-right: 1px">수정</a>
+                      <?php } ?>
                     </div>
                     <div class="mb-2">
                       <p><?=$item["reply_content"]?></p>
@@ -283,7 +308,7 @@
                         $reply_user_type = "<span class='badge bg-danger fw-normal'>판매기업</span>";
                       }
                   ?>
-                  <div class="product-review-answer d-flex p-4 border-bottom">
+                  <div class="product-review-answer d-flex p-2 border-bottom">
                     <div>
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
@@ -305,7 +330,8 @@
                   </div>
                         <?php } ?>
                       <?php } ?>
-                  <div class="product-review-writing d-flex p-4 border-bottom bg-light">
+                  <?php if(@$_SESSION["login"] == "success"){ ?>
+                  <div class="product-review-writing d-flex p-2 border-bottom bg-light">
                     <div>
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
@@ -314,6 +340,7 @@
                     <div class="ms-3 flex-grow-1">
                       <div class="mb-2">
                   <?php
+
                           if($_SESSION['login_info']['type'] == "buyer" ){
                             $user_type = "<span class='badge bg-warning fw-normal'>구매기업</span>";
                           }elseif($_SESSION['login_info']['type'] == "seller" ){
@@ -324,11 +351,12 @@
                         <strong class="me-2"><?=$_SESSION['login_info']['company_name']?></strong>
                       </div>
                       <div class="d-flex">
-                        <input type="text" name="reply_content_<?=$item['reply_no']?>" id="reply_content_<?=$item["reply_no"]?>" class="w-100 px-3 py-2 bg-light border rounded-3 me-2 bg-white" placeholder="리뷰를 남겨주세요.">
+                        <input type="text" name="reply_content_<?=$item['reply_no']?>" id="reply_content_<?=$item["reply_no"]?>" class="w-100 px-3 py-2 bg-light border rounded-3 me-2 bg-white" placeholder="답변을 등록해주세요.">
                         <button class="btn btn-dark btn-sm fw-normal flex-shrink-0 px-3" onclick="sellerReplySubmit(2,'<?=$item["reply_no"]?>');">등록</button>
                       </div>
                     </div>
                   </div>
+                  <?php } ?>
                 </li>
                     <?php } ?>
                 <?php } ?>

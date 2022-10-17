@@ -1,11 +1,10 @@
 <section class="content-main">
 	<div class="content-header">
     <h2 class="content-title"> <?=$page_name?> </h2>
-		<div>
-      <a href="/<?=_CONTROLLER?>/Create" class="btn btn-primary">기업 등록</a>
-		</div>
 	</div>
-
+  <!--		<div>
+        <a href="/<?=_CONTROLLER?>/Create" class="btn btn-primary">기업 등록</a>
+          </div>-->
   <div class="card mb-4">
     <div class="card-header">
       <form name="form-searchbar">
@@ -24,7 +23,7 @@
           <select class="form-control form-control-sm filter" id="search-status">
             <option value="" selected>전체</option>
             <option value="1">심사중</option>
-            <option value="5">가입완료</option>
+            <option value="5">승인</option>
             <option value="7">거절</option>
             <option value="9">탈퇴</option>
           </select>

@@ -107,6 +107,7 @@ class BuyerModel extends CommonModel
         $uuid = gen_uuid_v4();
         $contract_no = date("YmdHis");
         $contract_status = "1";
+        $seller_uuid = $data['seller_uuid'];
         $buyer_uuid = $_SESSION['login_info']['uuid'];
         $reduction_money = $data['reduction_money'];
         $product_quantity = $data['product_quantity'];
@@ -131,6 +132,14 @@ class BuyerModel extends CommonModel
       ";
         $idx = $this->wrdb->insert($query);
         if($idx){
+            $query = "
+            update
+                seller_company
+            set
+                seller_notification = '1'
+            where uuid ='".$seller_uuid."'
+        ";
+            $this->wrdb->update($query);
             return 1;
         }else{
             return null;
@@ -162,6 +171,21 @@ class BuyerModel extends CommonModel
 
         }
         return $ranking;
+
+    }
+    public function NotificationDel(){
+        $uuid = $_SESSION['login_info']['uuid'];
+        $query = "
+            update
+                buyer_company
+            set
+                 buyer_notification = '0'
+            where
+            uuid = '".$uuid."'
+            limit 1
+        ";
+        $this->wrdb->update($query);
+        return "1";
 
     }
 
@@ -270,6 +294,7 @@ class BuyerModel extends CommonModel
         $buyer_id = $_SESSION['login_info']['uuid'];
         $seller_id = $data["seller_uuid"];
         $reduction_money =$data['reduction_money'];
+        $seller_company = $data["seller_company"];
         $query = "
           insert into
                buyer_cart
@@ -277,6 +302,7 @@ class BuyerModel extends CommonModel
                product_no = '".$product_no."'
                ,buyer_id = '".$buyer_id."' 
                ,seller_id = '".$seller_id."' 
+               ,seller_company = '".$seller_company."' 
                ,cart_reduction_money = '".$reduction_money."' 
               ,register_date = '".date("Y-m-d H:i:s")."'
               ,register_id = '".$buyer_id."' 

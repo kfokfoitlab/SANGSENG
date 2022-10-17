@@ -87,7 +87,7 @@ class Shop extends BaseController
             echo "
                 <script>
                     alert('이미 장바구니에 있습니다.');
-                    window.location.replace('/Buyer');
+                    history.back();
                 </script>
             ";
 
@@ -98,13 +98,13 @@ class Shop extends BaseController
             echo "
                 <script>
                     alert('장바구니에 담았습니다.');
-					window.location.replace('/Buyer');
+					history.back();
                 </script>
             ";
         }else{
             echo "
                 <script>
-                    alert('실패했습니다');
+                    alert('오류가 발생했습니다. 관리자에게 문의해주세요');
 					history.back(-1);
                 </script>
             ";

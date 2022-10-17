@@ -17,7 +17,7 @@ $(document).ready(function(){
                 data.columns[2].search.value = $("#search-company-name").val();
                 data.columns[3].search.value = $("#search-company_code").val();
                 data.columns[4].search.value = $("#search-seller_name").val();
-                data.columns[6].search.value = $("#search-daterange").val();
+                data.columns[6].search.value = $("#search-status").val();
 
             }
         },

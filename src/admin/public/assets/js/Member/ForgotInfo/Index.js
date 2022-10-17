@@ -14,18 +14,8 @@ $(document).ready(function(){
              url: "/"+_CONTROLLER+"/getList"
             ,type: "POST"
             ,data: function(data){
-                data.columns[1].search.value = $("#search-name").val();
-                data.columns[2].search.value = $("#search-email").val();
-                data.columns[6].search.value = $("#search-daterange").val();
-
-                /*
-                data.columns[1].search.value = $("#search-daterange").val();
-                data.columns[2].search.value = $("#search-elements").val();
-                data.columns[4].search.value = $("#search-text").val();
-                data.columns[12].search.value = $("#search-lot1").val();
-                data.columns[13].search.value = $("#search-lot2").val();
-                data.columns[14].search.value = $("#search-lot3").val();
-                */
+				data.columns[2].search.value = $("#search-id").val();
+                data.columns[5].search.value = $("#search-name").val();
             }
         },
         "order": [
@@ -33,7 +23,7 @@ $(document).ready(function(){
         ],
         "columns": [
              {title: "idx", data: "idx", visible: false}
-						,{title: "타입", data: "search_type", visible: true, className: "text-nowrap",
+			 ,{title: "타입", data: "search_type", visible: true, className: "text-nowrap",
 						"render": function( data, type, row, meta ){
 							let html = "";
 			

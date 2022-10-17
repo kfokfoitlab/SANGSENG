@@ -117,14 +117,31 @@ $(document).ready(function(){
 
                     return html;
                 }
-            }
+            }/*,{title: "알림 전송", data: {"buyer_uuid":"buyer_uuid","seller_uuid":"seller_uuid"},
+                visible: true, className: "text-nowrap",
+                "render": function( data, type, row, meta ){
+                    var buyer_uuid = data['buyer_uuid'];
+                    var seller_uuid = data['seller_uuid'];
+                    let html = "";
+                        html += "<input class='btn btn-warning btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='Notification(\"" + seller_uuid + "\",\"" + buyer_uuid + "\")' value='알림 전송'>";
+
+                    return html;
+                }
+            }*/
 						,{title: "삭제", data: "idx", visible: true, className: "text-nowrap",
 						"render": function( data, type, row, meta ){
 							let html = "";
 								html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='contractDelete(" + data + ")' value='삭제'>";
 							return html;
 						}
-					}
+					},
+            {title: "계약서 조회", data: "workflow_id", visible: true, className: "text-nowrap",
+                "render": function( data, type, row, meta ){
+                    let html = "";
+                    html += "<input type = 'button' class='btn btn-warning btn-sm m-2' style='font-size: 12px;color: white' onClick='contractView(" + data + ")' value='조회'>";
+                    return html;
+                }
+            }
 						
         ],
         "initComplete": function(settings, json)
@@ -172,6 +189,13 @@ function contractDelete(idx){
 		return false;
 	}
 }
+/*
+function Notification(seller_uuid,buyer_uuid){
+    location.href = "/Buyer/Notification?buyer_uuid=" + buyer_uuid;
+    location.href = "/Seller/Notification?seller_uuid=" + seller_uuid;
+    return false;
+}
+*/
 
 function playingAlert(){
 	alert('이미 진행중인 계약입니다');
@@ -210,6 +234,7 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
     alert(text);*/
 
  //   location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
+
 }
 
 function contract_update(field_name,field_value) {
@@ -222,7 +247,7 @@ function contract_update(field_name,field_value) {
 			Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
 		}
 	};
-	
+
 	fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=6&field_name='+field_name+'&field_value='+field_value+'', options)
 			.then(response => response.json())
 			.then(response => {
@@ -237,7 +262,7 @@ function contract_update(field_name,field_value) {
 					}
 				}
 				$("#statusForm").submit();
-				
+
 				j = 0;
 				for(var i =0; i <response['workflow_list'].length; i++){
 					if(response['workflow_list'][i]['status'] == "Playing"){
@@ -248,7 +273,27 @@ function contract_update(field_name,field_value) {
 					}
 				}
 				$("#statusForm").submit();
-				
+
 			})
 			.catch(err => console.error(err));
+}
+
+function contractView(workflow_id){
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+        }
+    };
+    fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_id + '?offset=%2B09%3A00', options)
+        .then(response => response.json())
+        .then(response => /*console.log(response)*/{
+            if(response['download_url'] == ""){
+                window.open(response['playing_url']);
+            }else{
+                window.open(response['download_url']);
+            }
+        })
+        .catch(err => console.error(err));
 }

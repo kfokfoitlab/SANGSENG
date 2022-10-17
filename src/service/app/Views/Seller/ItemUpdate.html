@@ -25,7 +25,6 @@
           <input type="hidden" value="<?=$item['product_image2']?>" name="product_image2_ori_name">
           <input type="hidden" value="<?=$item['detail_img']?>" name="detail_img">
 
-
           <div class="px-3">
             <div class="row mb-4 align-items-center">
               <div class="col-2">
@@ -213,6 +212,7 @@
             <div class="form-group mt-5 d-flex justify-content-center">
               <button type="reset" onclick="history.back()" class="btn btn-outline-secondary px-4 me-3" tabindex=100>취소</button>
               <button type="submit" class="btn btn-primary px-4" tabindex=100>수정</button>
+              <button type="button" class="btn btn-primary px-4" tabindex=100 onclick="productDel(<?=$item['idx']?>);">삭제</button>
             </div>
           </div>
         </form>
@@ -244,13 +244,6 @@
       }
     })
   })
-/*
-
-  function updateSubmit(){
-    document.myForm.action='/Seller/Item/ItemUpdateSubmit';
-    document.myForm.submit();
-  }
-*/
 	function downloadFileNew(fileName,fileNameOri){
 		if(fileName == ""){
 			alert("등록된 파일이 없습니다");
@@ -258,4 +251,11 @@
 			location.href = "/Download/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
 		}
 	};
+
+    function productDel(idx){
+      if(confirm("삭제하시겠습니까?")){
+        location.href = "/Seller/Item/ItemDelete?idx=" + idx;
+      }
+
+    }
 </script>

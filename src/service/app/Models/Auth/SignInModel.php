@@ -37,6 +37,7 @@ class SignInModel extends CommonModel
         $this->rodb->query($query);
         $row = $this->rodb->next_row();
 
+
         if(isset($row["idx"])){
             $_SESSION["login"] = "success";
             $_SESSION["login_info"] = array(
@@ -55,6 +56,7 @@ class SignInModel extends CommonModel
 
             return array(
                  "result" => "success"
+                ,"buyer_notification"=> $row["buyer_notification"]
             );
 
         }else{
@@ -96,10 +98,11 @@ class SignInModel extends CommonModel
             $_SESSION["expectationSales"] = $this->getexpectationSales($uuid);
             $_SESSION["completionContract"] = $this->getCompletionContract($uuid);
             $_SESSION["disabledCount"] = $this->getWorkerCount();
+            $_SESSION["sellerinfo"] = $this->Sellerinfo();
             return array(
                  "result" => "success"
+            ,"seller_notification"=> $row["seller_notification"]
             );
-
         }else{
             return array(
                  "result" => "failed"
@@ -108,6 +111,23 @@ class SignInModel extends CommonModel
         }
 
     } //}}}
+
+    public function Sellerinfo(){
+        $uuid = $_SESSION["login_info"]["uuid"];
+        $seller_info = [];
+        $query = "
+            select
+                *
+            from
+              seller_company
+            where uuid = '".$uuid."'
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $seller_info = $row;
+        }
+        return $seller_info;
+    }
 
     public function getBuyerinfo(){
         $uuid = $_SESSION["login_info"]["uuid"];
@@ -142,23 +162,6 @@ class SignInModel extends CommonModel
         return $Expectation;
     }
 
-    /*public function ReductionMoney(){
-        $uuid = $_SESSION['login_info']['uuid'];
-        $buyer_reduction =[];
-        $query = "
-            select
-                sum(reduction_money) as buyer_reduction
-            from
-                contract_condition
-            where 1=1
-            and   buyer_uuid = '".$uuid."'          
-        ";
-        $this->rodb->query($query);
-        while($row = $this->rodb->next_row()){
-            $buyer_reduction= $row;
-        }
-        return $buyer_reduction;
-    }*/
     public function BuyerReduction(){
         $uuid = $_SESSION['login_info']['uuid'];
         $buyer_reduction =[];
