@@ -172,7 +172,7 @@
             }else if($data['ds'] == "" && $data['da' != ""]){
                 $setquery = " ,delivery_arrival = '".$data["da"]."', delivery_status = '5' ";
             }else if($data['ds'] != "" && $data['da'] == ""){
-                $setquery = " ,delivery_start = '".$data["ds"]."' ";
+                $setquery = " ,delivery_start = '".$data["ds"]."' , delivery_status = '3'";
             }
 
             $query = "

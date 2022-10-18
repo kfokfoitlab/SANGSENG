@@ -41,8 +41,10 @@ class Shop extends BaseController
         $data = array(
             "ranking" => $ranking["data"],
             "list" => $list["data"],
+            "listReplyCount" => $list["replyCount"],
             "buyer_info" => $buyer_info,
-            "data_page_total_cnt" => $list["count"]
+            "data_page_total_cnt" => $list["count"],
+            "rankingReplyCount" => $ranking["replyCount"]
         );
 
 
@@ -54,11 +56,13 @@ class Shop extends BaseController
     public function Detail($product_no)
     { // {{{
         $data = $this->buyer_model->productDetail($product_no);
-	    $reply_data = $this->buyer_model->SellerReplyList($product_no);
+        $reply_data = $this->buyer_model->SellerReplyList($product_no);
+        $replyCount = $this->buyer_model->SellerReplyCount($product_no);
         $data = array(
             "data" => $data
-	        ,"reply_data" => $reply_data
+        ,"reply_data" => $reply_data
         ,"reduction_money" => $_GET["rm"]
+        ,"replyCount" => $replyCount
         );
         echo view("Common/Header.html");
         echo view('Shop/Detail.html',$data);
@@ -113,32 +117,42 @@ class Shop extends BaseController
         }
         die();
     } // }}}
-	
-	public function SellerReplySubmit(){
-		if($_POST["reply_step"] == 1) {
-			$replyCheck = $this->buyer_model->SellerReplyCheck($_POST);
-			$replyCountCheck = $this->buyer_model->SellerReplyCountCheck($_POST);
-			if($replyCheck == 0){
-				echo "2";
-				die();
-			}elseif ($replyCountCheck > 0){
-				echo "3";
-				die();
-			}
-		}elseif ($_POST["reply_step"] == 2){
-			$reReplyCheck = $this->buyer_model->SellerReReplyCheck($_POST);
-			if($reReplyCheck == 0){
-				echo "4";
-				die();
-			}
-		}
-		
-		$result = $this->buyer_model->SellerReplyReg($_POST);
-		if ($result == 1) {
-			echo "1";
-		} else {
-			echo "0";
-		}
-		
-	}
+
+    public function SellerReplySubmit(){
+        if($_POST["reply_step"] == 1) {
+            $replyCheck = $this->buyer_model->SellerReplyCheck($_POST);
+            $replyCountCheck = $this->buyer_model->SellerReplyCountCheck($_POST);
+            if($replyCheck == 0){
+                echo "2";
+                die();
+            }elseif ($replyCountCheck > 0){
+                echo "3";
+                die();
+            }
+        }elseif ($_POST["reply_step"] == 2){
+            $reReplyCheck = $this->buyer_model->SellerReReplyCheck($_POST);
+            if($reReplyCheck == 0){
+                echo "4";
+                die();
+            }
+        }
+
+        $result = $this->buyer_model->SellerReplyReg($_POST);
+        if ($result == 1) {
+            echo "1";
+        } else {
+            echo "0";
+        }
+
+    }
+    public function SellerReplyDelete(){
+
+        $result = $this->buyer_model->SellerReplyDelete($_POST);
+        echo $result;
+    }
+
+    public function SellerReplyUpdate(){
+        $result = $this->buyer_model->SellerReplyUpdate($_POST);
+        echo $result;
+    }
 }

@@ -17,60 +17,136 @@
 ?>
 
 <script>
+  $(document).ready(function(){
+    $("#moveReplyContent").click( function() {
+      $("#nav-review-tab").trigger("click");
+      var menuHeight = document.querySelector("#nav-tabContent").offsetHeight;
+      var location = document.querySelector("#nav-review-tab").offsetTop;
+      window.scrollTo({top:location - menuHeight, behavior:'smooth'});
+    });
+  });
   function sellerReplySubmit(reply_step,reply_no){
 
-      if(reply_step == 1) {
-				if ($('#reply_content').val() == "") {
-					alert("리뷰를 등록해주세요");
-					return false;
-				}
-        var data = {
-          "reply_step": reply_step,
-          "product_no": $('#product_no').val(),
-          "reply_content": $('#reply_content').val()
-        };
-      }else if(reply_step != 1){
-				if ($('#reply_content_'+reply_no).val() == "") {
-					alert("답변을 등록해주세요");
-					return false;
-				}
-				var data = {
-					"reply_step": reply_step,
-					"reply_no": reply_no,
-					"product_no": $('#product_no').val(),
-					"reply_content": $('#reply_content_'+reply_no).val()
-				}
-			}
+    if(reply_step == 1) {
+      if ($('#reply_content').val() == "") {
+        alert("리뷰를 등록해주세요");
+        return false;
+      }
+      var data = {
+        "reply_step": reply_step,
+        "product_no": $('#product_no').val(),
+        "reply_content": $('#reply_content').val()
+      };
+    }else if(reply_step != 1){
+      if ($('#reply_content_'+reply_no).val() == "") {
+        alert("답변을 등록해주세요");
+        return false;
+      }
+      var data = {
+        "reply_step": reply_step,
+        "reply_no": reply_no,
+        "product_no": $('#product_no').val(),
+        "reply_content": $('#reply_content_'+reply_no).val()
+      }
+    }
 
 
-		$.ajax({
-			url: "/"+_CONTROLLER + "/SellerReplySubmit"
-			,data: data
-			,dataType: "json"
-			,type: "post"
-			,success: function(data){
+    $.ajax({
+      url: "/"+_CONTROLLER + "/SellerReplySubmit"
+      ,data: data
+      ,dataType: "json"
+      ,type: "post"
+      ,success: function(data){
         if(data == 1 && reply_step == 1) {
-					alert("리뷰등록이 완료되었습니다");
-					location.reload();
-				}else if(data == 1 && reply_step == 2) {
-					alert("답변등록이 완료되었습니다");
-					location.reload();
-				}else if(data == 2){
-					alert("배송중이거나 구매하신 물품이 아닙니다");
-				}else if(data == 3){
-					alert("이미 등록하신 리뷰가 있습니다");
-				}else if(data == 4){
-					alert("등록하신 리뷰가 아니거나 판매기업이 아닙니다");
-				}else {
-					alert("리뷰등록이 실패했습니다.\n다시 시도해주세요");
+          alert("리뷰등록이 완료되었습니다");
+          location.reload();
+        }else if(data == 1 && reply_step == 2) {
+          alert("답변등록이 완료되었습니다");
+          location.reload();
+        }else if(data == 2){
+          alert("배송중이거나 구매하신 물품이 아닙니다");
+        }else if(data == 3){
+          alert("이미 등록하신 리뷰가 있습니다");
+        }else if(data == 4){
+          alert("등록하신 리뷰가 아니거나 판매기업이 아닙니다");
+        }else {
+          alert("리뷰등록이 실패했습니다.\n다시 시도해주세요");
         }
-			}
-			,error: function(res){
-				console.log("error", res);
-			}
-		});
+      }
+      ,error: function(res){
+        console.log("error", res);
+      }
+    });
   }
 
+  function replyDelete(idx,reply_no,reply_step){
+    if(confirm("정말 삭제하시겠습니까?")) {
+      var data = {
+        "idx": idx,
+        "reply_no": reply_no,
+        "reply_step": reply_step
+      }
+
+      $.ajax({
+        url: "/" + _CONTROLLER + "/SellerReplyDelete"
+        , data: data
+        , dataType: "json"
+        , type: "post"
+        , success: function (data) {
+          if (data >= 1) {
+            alert("삭제가 완료되었습니다");
+            location.reload();
+          } else {
+            alert("오류가 발생했습니다.\n다시 시도해주세요");
+          }
+        }
+        , error: function (res) {
+          console.log("error", res);
+        }
+      });
+    }
+  }
+
+  function replyUpdate(idx){
+    if($('#reply_content_ud_'+idx).is(":disabled")) {
+      $('#reply_content_ud_' + idx).prop("disabled", false);
+      $('#reply_ud_cancel_' + idx).show();
+      $('#reply_content_ud_' + idx).addClass('w-100 px-3 py-2 bg-light border rounded-3 me-2');
+    }else {
+      var reply_content = $('#reply_content_ud_' + idx).val();
+      if (confirm("수정하시겠습니까?")) {
+        var data = {
+          "idx": idx,
+          "reply_content": reply_content
+        }
+
+        $.ajax({
+          url: "/" + _CONTROLLER + "/SellerReplyUpdate"
+          , data: data
+          , dataType: "json"
+          , type: "post"
+          , success: function (data) {
+            if (data == 1) {
+              alert("수정되었습니다.");
+              location.reload();
+            } else {
+              alert("오류가 발생했습니다.\n다시 시도해주세요");
+            }
+          }
+          , error: function (res) {
+            console.log("error", res);
+          }
+        });
+      }
+    }
+  }
+
+  function replyUpdateCancel(idx,reply_content){
+    $('#reply_content_ud_' + idx).prop("disabled", true);
+    $('#reply_ud_cancel_' + idx).hide();
+    $('#reply_content_ud_' + idx).val(reply_content);
+    $('#reply_content_ud_' + idx).removeClass('w-100 px-3 py-2 bg-light border rounded-3 me-2');
+  }
 </script>
 <div style="flex-grow: 1" xmlns="http://www.w3.org/1999/html">
   <div class="shop-detail">
@@ -90,7 +166,7 @@
         $delivery_cycle = "6달에 한 번";
         }
         ?>
-        <h2 class="mb-3 fw-bold"><span class="text-primary"><?=$data["company_name"]?></span> <?=$data["product_name"]?></h2>
+        <h2 class="mb-3 fw-bold"><span class="text-primary"><?=$data["company_name"]?></span> <?=$data["product_name"]?> <span id="moveReplyContent" style="color:darkorange;cursor: pointer">(<?=$replyCount?>)</span></h2>
         <p class="mb-3"><?=$data["product_detail"]?></p>
       </div>
       <form name="myForm" method="POST" action="">
@@ -105,68 +181,80 @@
         <input type="hidden" name="reduction_money" id ="reduction_money" value= "<?=$_GET['rm']?>">
         <input type="hidden" name="product_quantity" id ="product_quantity" value= "<?=$item['product_quantity']?>">
         <div class="d-flex pt-4 pb-5 mb-4">
-        <div class="detail-left">
-          <div>
-            <div class="p-3 border w-100 d-flex align-items-center preview-img-big" style="height: 384px">
-              <img src="/uploads/<?=$data['representative_image']?>" alt="상품 이미지" class="mh-100">
-            </div>
-            <ul class="d-flex mt-3 list-preview">
-              <li class="preview-img-small border p-2">
-                <img class="mh-100" src="/uploads/<?=$data['representative_image']?>" alt="상품 상세이미지1">
-              </li>
+          <div class="detail-left">
+            <div>
+              <div class="p-3 border w-100 d-flex align-items-center preview-img-big" style="height: 384px">
+                <img src="/uploads/<?=$data['representative_image']?>" alt="상품 이미지" class="mh-100">
+              </div>
+              <ul class="d-flex mt-3 list-preview">
+                <li class="preview-img-small border p-2">
+                  <img class="mh-100" src="/uploads/<?=$data['representative_image']?>" alt="상품 상세이미지1">
+                </li>
 
-              <?php
+                <?php
               if( ! empty($data['product_image1']) ) {
               ?>
-              <li class="preview-img-small border p-2">
-                <img class="mh-100" src="/uploads/<?=$data['product_image1']?>" alt="상품 상세이미지2">
-              </li>
-              <?php
+                <li class="preview-img-small border p-2">
+                  <img class="mh-100" src="/uploads/<?=$data['product_image1']?>" alt="상품 상세이미지2">
+                </li>
+                <?php
               }
               ?>
 
-              <?php
+                <?php
               if( ! empty($data['product_image2']) ) {
               ?>
-              <li class="preview-img-small border p-2">
-                <img class="mh-100" src="/uploads/<?=$data['product_image2']?>" alt="상품 상세이미지3">
-              </li>
-              <?php
+                <li class="preview-img-small border p-2">
+                  <img class="mh-100" src="/uploads/<?=$data['product_image2']?>" alt="상품 상세이미지3">
+                </li>
+                <?php
               }
               ?>
-            </ul>
-          </div>
-        </div>
-        <div class="detail-right">
-          <h3>상품선택</h3>
-          <div class="d-flex mb-4">
-         <div class="selecotr-item" id="item">
-          <input type="radio" id="item01" name="items" class="selector-item_radio" checked/>
-          <label for="item01" class="selector-item_label px-2 py-1 me-2"><?=$data["product_quantity"]?></label>
-        </div>
-        </div>
-          <div class="d-flex">
-            <h3>배송주기</h3>
-            <p class="ms-2 text-danger">(계약기간은 1년 기준입니다.)</p>
-          </div>
-          <div class="d-flex mb-4">
-            <div class="selecotr-item">
-              <input
-                type="radio"
-                id="delivery01"
-                name="delivery_cycle"
-                class="selector-item_radio"
-                checked
-              />
-              <label for="delivery01" class="selector-item_label px-2 py-1 me-2"><?=$delivery_cycle?></label>
+              </ul>
             </div>
           </div>
-          <div class="mt-5 pt-4 text-end border-top total-price">
-            <h2 class="mb-2"><span>계약금액&nbsp;</span><?=number_format($data["product_price"])?>원</h2>
-            <h2><span>감면액&nbsp;</span><?=number_format($_GET['rm'])?>원</h2>
+          <div class="detail-right">
+            <h3>상품선택</h3>
+            <div class="d-flex mb-4">
+              <div class="selecotr-item" id="item">
+                <input type="radio" id="item01" name="items" class="selector-item_radio" checked/>
+                <label for="item01" class="selector-item_label px-2 py-1 me-2"><?=$data["product_quantity"]?></label>
+              </div>
+            </div>
+            <div class="d-flex">
+              <h3>배송주기</h3>
+              <p class="ms-2 text-danger">(계약기간은 1년 기준입니다.)</p>
+            </div>
+            <div class="d-flex mb-4">
+              <div class="selecotr-item">
+                <input
+                        type="radio"
+                        id="delivery01"
+                        name="delivery_cycle"
+                        class="selector-item_radio"
+                        checked
+                />
+                <label for="delivery01" class="selector-item_label px-2 py-1 me-2"><?=$delivery_cycle?></label>
+              </div>
+            </div>
+
+            <div class="mt-5 pt-4 text-end border-top total-price">
+              <h2 class="mb-2"><span>계약금액&nbsp;</span><?=number_format($data["product_price"])?>원</h2>
+              <?php
+          if($_GET['rm'] != ""){
+          ?>
+              <h2><span>감면액&nbsp;</span><?=number_format($_GET['rm'])?>원</h2>
+              <?php
+            }
+            if($_GET['rm'] == ""){
+            ?>
+              <h2><span>감면액&nbsp;</span>0원</h2>
+              <?php
+            }
+            ?>
+            </div>
           </div>
         </div>
-      </div>
       </form>
       <?php
         if($_SESSION["login_info"]["type"] == "buyer" || $_SESSION["login"] != "success"){
@@ -182,52 +270,52 @@
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button
-                class="nav-link active"
-                id="nav-detail-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#nav-detail"
-                type="button"
-                role="tab"
-                aria-controls="nav-detail"
-                aria-selected="true"
+                    class="nav-link active"
+                    id="nav-detail-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#nav-detail"
+                    type="button"
+                    role="tab"
+                    aria-controls="nav-detail"
+                    aria-selected="true"
             >
               상품 상세정보
             </button>
             <button
-              class="nav-link"
-              id="nav-company-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#nav-company"
-              type="button"
-              role="tab"
-              aria-controls="nav-company"
-              aria-selected="false"
+                    class="nav-link"
+                    id="nav-company-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#nav-company"
+                    type="button"
+                    role="tab"
+                    aria-controls="nav-company"
+                    aria-selected="false"
             >
               기업 상세정보
             </button>
             <button
-                class="nav-link"
-                id="nav-review-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#nav-review"
-                type="button"
-                role="tab"
-                aria-controls="nav-review"
-                aria-selected="false"
+                    class="nav-link"
+                    id="nav-review-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#nav-review"
+                    type="button"
+                    role="tab"
+                    aria-controls="nav-review"
+                    aria-selected="false"
             >
-              기업/상품 리뷰
+              기업/상품 리뷰 (<?=$replyCount?>)
             </button>
           </div>
         </nav>
         <div
-          class="tab-content p-5"
-          id="nav-tabContent"
+                class="tab-content p-5"
+                id="nav-tabContent"
         >
           <div
-            class="tab-pane fade show active"
-            id="nav-detail"
-            role="tabpanel"
-            aria-labelledby="nav-detail-tab"
+                  class="tab-pane fade show active"
+                  id="nav-detail"
+                  role="tabpanel"
+                  aria-labelledby="nav-detail-tab"
           >
             <?php
             if( ! empty($data['detail_img']) ) {
@@ -242,10 +330,10 @@
             ?>
           </div>
           <div
-              class="tab-pane fade"
-              id="nav-company"
-              role="tabpanel"
-              aria-labelledby="nav-company-tab"
+                  class="tab-pane fade"
+                  id="nav-company"
+                  role="tabpanel"
+                  aria-labelledby="nav-company-tab"
           >
             <?php
             if( ! empty($data['seller_information']) ) {
@@ -260,13 +348,13 @@
             ?>
           </div>
           <div
-              class="tab-pane fade"
-              id="nav-review"
-              role="tabpanel"
-              aria-labelledby="nav-review-tab"
+                  class="tab-pane fade"
+                  id="nav-review"
+                  role="tabpanel"
+                  aria-labelledby="nav-review-tab"
           >
             <div class="mb-5">
-              <div class="d-flex mb-4">
+              <div class="d-flex mb-4" id="reviewMoveId" tabindex="0">
                 <input type="text" name="reply_content" id="reply_content" class="w-100 px-3 py-2 bg-light border rounded-3 me-2" placeholder="리뷰를 남겨주세요.">
                 <button class="btn btn-dark btn-sm fw-normal flex-shrink-0 px-3" onclick="sellerReplySubmit(1);">등록</button>
               </div>
@@ -278,9 +366,9 @@
                       $reply_user_type = "";
                       if($item['user_type'] == "buyer" ){
                         $reply_user_type = "<span class='badge bg-warning fw-normal'>구매기업</span>";
-                      }elseif($item['user_type'] == "seller" ){
-                        $reply_user_type = "<span class='badge bg-danger fw-normal'>판매기업</span>";
-                      }
+                  }elseif($item['user_type'] == "seller" ){
+                  $reply_user_type = "<span class='badge bg-danger fw-normal'>판매기업</span>";
+                  }
                   ?>
                   <div class="product-review py-2 border-bottom">
                     <div class="mb-2">
@@ -288,25 +376,28 @@
                       <strong class="me-2"><?=$item["user_company_name"]?></strong>
                       <span class="text-secondary"><?=substr($item["register_date"],0,16)?></span>
                       <?php if($item['user_uuid'] == $_SESSION['login_info']['uuid']){ ?>
-                      <a class="btn-sm btn-danger" style="float: right">삭제</a>
-                      <a class="btn-sm btn-warning" style="float: right;margin-right: 1px">수정</a>
+                      <button class="btn-sm btn-danger" onclick="replyDelete('<?=$item['idx']?>','<?=$item['reply_no']?>',<?=$item['reply_step']?>)" style="float: right;">삭제</button>
+                      <button class="btn-sm btn-secondary" id="reply_ud_cancel_<?=$item['idx']?>" onclick="replyUpdateCancel('<?=$item['idx']?>','<?=$item['reply_content']?>')" style="float: right;margin-right: 1px;display: none">취소</button>
+                      <button class="btn-sm btn-warning" onclick="replyUpdate('<?=$item['idx']?>')" style="float: right;margin-right: 1px">수정</button>
+
                       <?php } ?>
                     </div>
                     <div class="mb-2">
-                      <p><?=$item["reply_content"]?></p>
+                      <input style="background-color: white" value="<?=$item['reply_content']?>"
+                             name="reply_content_ud_<?=$item['idx']?>" id="reply_content_ud_<?=$item["idx"]?>" disabled>
                     </div>
-<!--                    <div>
-                      <button class="btn btn-dark btn-sm py-0 fw-normal">답글</button>
-                    </div>-->
+                    <!--                    <div>
+                                          <button class="btn btn-dark btn-sm py-0 fw-normal">답글</button>
+                                        </div>-->
                   </div>
                   <?php  foreach($reply_data as $item_re) {?>
                   <?php if($item_re["reply_no"] == $item["reply_no"] && $item_re["reply_step"] != 1){
                       $reply_user_type = "";
                       if($item_re['user_type'] == "buyer" ){
                         $reply_user_type = "<span class='badge bg-warning fw-normal'>구매기업</span>";
-                      }elseif($item_re['user_type'] == "seller" ){
-                        $reply_user_type = "<span class='badge bg-danger fw-normal'>판매기업</span>";
-                      }
+                  }elseif($item_re['user_type'] == "seller" ){
+                  $reply_user_type = "<span class='badge bg-danger fw-normal'>판매기업</span>";
+                  }
                   ?>
                   <div class="product-review-answer d-flex p-2 border-bottom">
                     <div>
@@ -319,18 +410,25 @@
                         <?=$reply_user_type?>
                         <strong class="me-2"><?=$item_re["user_company_name"]?></strong>
                         <span class="text-secondary"><?=substr($item_re["register_date"],0,16)?></span>
+                        <?php if($item_re['user_uuid'] == $_SESSION['login_info']['uuid']){ ?>
+                        <button class="btn-sm btn-danger" onclick="replyDelete('<?=$item_re['idx']?>','<?=$item_re['reply_no']?>',<?=$item_re['reply_step']?>)" style="float: right;">삭제</button>
+                        <button class="btn-sm btn-secondary" id="reply_ud_cancel_<?=$item_re['idx']?>" onclick="replyUpdateCancel('<?=$item_re['idx']?>','<?=$item_re['reply_content']?>')" style="float: right;margin-right: 1px;display: none" >취소</button>
+                        <button class="btn-sm btn-warning" onclick="replyUpdate('<?=$item_re['idx']?>')" style="float: right;margin-right: 1px">수정</button>
+                        <?php } ?>
                       </div>
                       <div class="mb-2">
-                        <p><?=$item_re["reply_content"]?></p>
+                        <input style="background-color: white" value="<?=$item_re['reply_content']?>"
+                               name="reply_content_ud_<?=$item_re['idx']?>" id="reply_content_ud_<?=$item_re["idx"]?>"disabled>
                       </div>
- <!--                     <div>
-                        <button class="btn btn-dark btn-sm py-0 fw-normal">답글</button>
-                      </div>-->
+                      <!--                     <div>
+                                             <button class="btn btn-dark btn-sm py-0 fw-normal">답글</button>
+                                           </div>-->
                     </div>
                   </div>
-                        <?php } ?>
-                      <?php } ?>
-                  <?php if(@$_SESSION["login"] == "success"){ ?>
+                  <?php } ?>
+                  <?php } ?>
+                  <?php if(@$_SESSION["login"] == "success" && ($data["seller_uuid"] == $_SESSION['login_info']['uuid']
+                  || $item['user_uuid'] == $_SESSION['login_info']['uuid'])){ ?>
                   <div class="product-review-writing d-flex p-2 border-bottom bg-light">
                     <div>
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
@@ -339,13 +437,13 @@
                     </div>
                     <div class="ms-3 flex-grow-1">
                       <div class="mb-2">
-                  <?php
+                        <?php
 
                           if($_SESSION['login_info']['type'] == "buyer" ){
                             $user_type = "<span class='badge bg-warning fw-normal'>구매기업</span>";
-                          }elseif($_SESSION['login_info']['type'] == "seller" ){
-                            $user_type = "<span class='badge bg-danger fw-normal'>판매기업</span>";
-                          }
+                        }elseif($_SESSION['login_info']['type'] == "seller" ){
+                        $user_type = "<span class='badge bg-danger fw-normal'>판매기업</span>";
+                        }
                         ?>
                         <?=$user_type?>
                         <strong class="me-2"><?=$_SESSION['login_info']['company_name']?></strong>
@@ -358,7 +456,7 @@
                   </div>
                   <?php } ?>
                 </li>
-                    <?php } ?>
+                <?php } ?>
                 <?php } ?>
               </ul>
               <?php }else{ ?>
@@ -438,13 +536,13 @@
       }
     });*/
   }
-	let img = document.querySelector('.preview-img-big img');
-	$('.preview-img-small').on('click', function(e){
-		if(e.target.src) {
-			img.src = e.target.src
-		} else {
-			return false;
-		}
+  let img = document.querySelector('.preview-img-big img');
+  $('.preview-img-small').on('click', function(e){
+    if(e.target.src) {
+      img.src = e.target.src
+    } else {
+      return false;
+    }
 
-	})
+  })
 </script>

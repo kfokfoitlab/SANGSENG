@@ -150,6 +150,8 @@ $routes->group('Buyer', function($routes){
     $routes->get ('Shop/List(:any)',       'Buyer\Shop::List$1');
     $routes->get ('Shop/Detail/(:any)',     'Buyer\Shop::Detail/$1');
 	$routes->post ('Shop/SellerReplySubmit',     'Buyer\Shop::SellerReplySubmit');
+    $routes->post ('Shop/SellerReplyDelete',     'Buyer\Shop::SellerReplyDelete');
+    $routes->post ('Shop/SellerReplyUpdate',     'Buyer\Shop::SellerReplyUpdate');
     $routes->post ('Contract',        'Buyer\Contract::Contract');
     $routes->get ('MyPage/Info',            'Buyer\MyPage::Info');
     $routes->get ('MyPage/ConfirmPassword',    'Buyer\MyPage::ConfirmPassword');

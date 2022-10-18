@@ -7,13 +7,14 @@ use App\Models\Seller\ItemModel;
 use App\Models\DatabaseModel;
 use App\Models\Seller\SellerInfoModel;
 use App\Models\Seller\SellerModel;
+use App\Models\Auth\SignInModel;
 class Mypage extends BaseController
 {
     private $item_model;
     private $database_model;
     private $seller_model;
     private $common_model;
-    private $item_per_page = 10;
+    private $sigin_model;
 //
     public function __construct()
     { //{{{
@@ -22,6 +23,8 @@ class Mypage extends BaseController
         $this->seller_model = new SellerModel;
         $this->sellerinfo_model = new SellerInfoModel;
         $this->database_model = new DatabaseModel;
+        $this->sigin_model = new SignInModel;
+
     } //}}}
 	
 	public function Info()
@@ -101,7 +104,7 @@ class Mypage extends BaseController
     }
 	
 	public function InfoUpdate(){
-		
+		$uuid = $_SESSION['login_info']['uuid'];
 		if(@$_SESSION["login"] != "success"){
 			echo "
 				<script>
@@ -112,10 +115,12 @@ class Mypage extends BaseController
 			
 			die();
 		}
-		$pwdCheck = $this->sellerinfo_model->pwdCheck();
+		$pwdCheck = $this->sellerinfo_model->pwdCheck($uuid);
 		if($pwdCheck == 1) {
 			$result = $this->sellerinfo_model->infoUpdate($_FILES, $_POST);
 			if ($result == 1) {
+                $_SESSION["totalSales"] = $this->sigin_model->getTotalSales($uuid);
+                $_SESSION["sellerinfo"] = $this->sigin_model->Sellerinfo();
 				echo "
 				<script>
                 	alert('수정되었습니다');

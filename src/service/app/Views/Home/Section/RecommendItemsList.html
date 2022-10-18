@@ -3,7 +3,29 @@
     <div class="sec-title text-center mt-5">
       <h2><a tabindex=1000>추천 상품</a></h2>
     </div>
+<?php
+$workers = $buyer_info["workers"]; //상시근로자
+$classification = 0;
+if($buyer_info['classification'] == 1){ //기업구분에 따른 의무고용율
+$classification = 0.031;
+}else{
+$classification = 0.034;
+}
 
+$employ = 0; //의무고용인원
+if($workers<50){
+$employ = 0;
+}else{
+$employ = (int)($workers*$classification);
+}
+if($employ != 0){
+  $ratio = ($buyer_info['mild_disabled']+($buyer_info['severely_disabled']*2))/$employ; //의무고용인원충족비율
+}else{
+  $ratio = 0;
+}
+$base = 1149000;
+$levy = $base * $employ *12; //부담금
+?>
     <div class="tabs-content">
       <!--Tab-->
       <div class="tab active-tab" id="tab1">
@@ -11,6 +33,19 @@
           <?php
           if(is_array($data) && count($data) > 0){
             foreach($data as $item){
+          $product_price = number_format($item["product_price"]);
+          $result_price = $item['reduction'] *$base;
+          $reduction_money = 0;
+          if($result_price > $levy){
+          $reduction_money = $levy*0.6;
+          }else if($result_price >$item["product_price"]*0.5){
+          $reduction_money = $item["product_price"]*0.5 * 12;
+          }else{
+          $reduction_money = $result_price * 12;
+          }
+          if($reduction_money > $item['product_price']*0.5){
+          $reduction_money = $item['product_price']*0.5;
+          }
           ?>
           <!-- Job Block -->
           <div class="job-block col-sm-12">
@@ -22,7 +57,7 @@
                   <img src="/uploads/<?=$item['representative_image']?>">
                 </div>
                 <div class="content-detail">
-                  <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>" tabindex=1500><span
+                  <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$reduction_money?>" tabindex=1500><span
                   class="text-secondary"><?=$item["company_name"]?></span> <?=$item["product_name"]?></a></h3>
                   <ul class="job-info">
                     <li>계약금액: <span class="fw-bold"><span class="mask-pay"><?=$item["product_price"]?></span>원</span></li>

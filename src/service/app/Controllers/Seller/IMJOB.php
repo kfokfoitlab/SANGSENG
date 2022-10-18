@@ -6,21 +6,25 @@
 	use App\Models\CompanyModel;
 	use App\Models\DatabaseModel;
 	use App\Models\Seller\IMJOBModel;
-	
-	class IMJOB extends BaseController
+    use App\Models\Auth\SignInModel;
+
+    class IMJOB extends BaseController
 	{
 		private $model;
 		private $database_model;
 		private $company_model;
 		private $seller_model;
-		
-		public function __construct()
+        private $sigin_model;
+
+        public function __construct()
 		{ //{{{
 			$this->imjob_model = new IMJOBModel;
 			$this->application_model = new ApplicationModel;
 			$this->database_model = new DatabaseModel;
 			$this->company_model = new CompanyModel;
-		} //}}}
+            $this->sigin_model = new SignInModel;
+
+        } //}}}
 		
 		public function List()
 		{ // {{{
@@ -46,10 +50,10 @@
 		} // }}}
 		
 		public function reg_worker(){
-			
 			$result = $this->imjob_model->Register($_POST,$_FILES);
 			
 			if($result == "1") {
+                $_SESSION["disabledCount"] = $this->sigin_model->getWorkerCount();
 				echo "
                 <script>
                     alert('근로자가 등록되었습니다.');
@@ -92,6 +96,7 @@
 			$result = $this->imjob_model->delete();
 			
 			if($result == "1") {
+                $_SESSION["disabledCount"] = $this->sigin_model->getWorkerCount();
 				echo "
                 <script>
                     alert('근로자정보가 삭제되었습니다.');

@@ -58,8 +58,6 @@
                 ,agree_privacy = '".$data["agree_privacy"]."'
                 ,register_date = '".date("Y-m-d H:i:s")."'
                 ,register_id = '".$_SESSION["login_info"]["uuid"]."'
-                ,update_date = '".date("Y-m-d H:i:s")."'
-                ,update_id = '".$_SESSION["login_info"]["uuid"]."'
                 ,del_yn = 'n'
         ";
 		//	echo $query;

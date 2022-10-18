@@ -126,7 +126,7 @@ class SellerInfoModel extends CommonModel
                     from
                         seller_company_worker
                     where
-                         uuid ='".$uuid."'
+                         register_id ='".$uuid."'
                          and disability_degree ='2'
                     limit 1
                 ";
@@ -140,7 +140,7 @@ class SellerInfoModel extends CommonModel
                     from
                         seller_company_worker
                     where
-                         uuid ='".$uuid."'
+                         register_id ='".$uuid."'
                          and disability_degree ='1'
                     limit 1
                 ";
@@ -179,8 +179,8 @@ class SellerInfoModel extends CommonModel
 		$query = "
 			SELECT * FROM seller_company
 			WHERE 1=1
-			AND uuid='".$uuid."'
-			AND password=SHA2('".$pwd."', 256)
+			AND uuid = '".$uuid."'
+			AND password = SHA2('".$pwd."', 256)
 		";
 		$this->rodb->query($query);
 		while($this->rodb->next_row()) {

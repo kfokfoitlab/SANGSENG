@@ -132,8 +132,6 @@
                 ,upload_file = '".$upload_file."'
                 ,register_date = '".date("Y-m-d H:i:s")."'
                 ,register_id = 'admin'
-                ,update_date = '".date("Y-m-d H:i:s")."'
-                ,update_id = 'admin'
                 ,del_yn = 'n'
         ";
 			//echo $query;
@@ -154,6 +152,7 @@
 				".$this->table_name."
 			SET
 				board_status = ".$data["status"]."
+				,update_date = '".date("Y-m-d H:i:s")."'
 			WHERE
 				idx = ".$data["idx"]."
 			LIMIT 1
@@ -198,8 +197,7 @@
 				,reply_content = '".$data["reply_content"]."'
 				,register_date = '".date("Y-m-d H:i:s")."'
                 ,register_id = 'admin'
-                ,update_date = '".date("Y-m-d H:i:s")."'
-                ,update_id = 'admin'
+
                 ,del_yn = 'n'
         ";
 			$idx = $this->wrdb->insert($query);
@@ -210,6 +208,8 @@
 						".$this->table_name."
 					SET
 						board_status = 2
+						,update_date = '".date("Y-m-d H:i:s")."'
+                        ,update_id = 'admin'
 					WHERE   1=1
 					    AND	idx = ".$data["idx"]."
 						AND user_uuid = '".$data["user_uuid"]."'
