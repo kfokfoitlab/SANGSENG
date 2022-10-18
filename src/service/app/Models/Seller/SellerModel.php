@@ -312,4 +312,41 @@ class SellerModel extends CommonModel
         return $disabledCount;
     }
 
+    public function getQuestionsList(){
+        $uuid = $_SESSION['login_info']['uuid'];
+        $questions =[];
+        $query = "
+            select
+            *
+            from
+             questions_board          
+            where user_uuid = '".$uuid."'
+            order by update_date desc
+            limit 4        
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $questions[] = $row;
+        }
+        return $questions;
+    }
+
+    public function getProductreplyList(){
+        $uuid = $_SESSION['login_info']['uuid'];
+        $questions =[];
+        $query = "
+            select
+            *
+            from
+             seller_product_reply          
+            where user_uuid = '".$uuid."'
+            order by update_date desc
+            limit 4        
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $questions[] = $row;
+        }
+        return $questions;
+    }
 }

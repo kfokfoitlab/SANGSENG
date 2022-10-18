@@ -108,7 +108,7 @@
             </tr>
             <tr>
               <td class="th">가입일</td>
-              <td><?=$data["register_date"]?></td>
+              <td><?=substr($data["register_date"], 0, 10)?></td>
             </tr>
           </tbody>
           <!-- }}} -->
@@ -191,16 +191,20 @@
         if($data['seller_business_license'] != ""){
         $seller_business_license = "첨부파일 O";
         }
+
+        $seller_information = "첨부파일 X";
+        if($data['seller_information'] != ""){
+        $seller_information = "첨부파일 O";
+        }
         ?>
-
           <div class="border">
-            <label>기업상세정보<br> </label>
+            <label>기업상세정보 /<?=$seller_information?> <br> </label>
             <?php
-
+            if($data['seller_information'] != ""){
             ?>
-            <button class="btn btn-outline-secondary btn-sm my-2 fw-normal" type="button">기존파일 다운로드</button>
+            <button class="btn btn-outline-secondary btn-sm my-2 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["seller_information"]?>','<?=$data["seller_information_ori"]?>');">기존파일 다운로드</button>
             <?php
-
+            }
             ?>
           </div>
           <br/>
@@ -215,9 +219,6 @@
             }
             ?>
           </div>
-
-
-
         </div>
 
       </div>

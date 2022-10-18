@@ -111,6 +111,11 @@ class MyPageModel extends CommonModel
                 ,tax_rate = '".$data["tax_rate"]."'
                 ,update_id = '".$uuid."'               
                 ,update_date = '".date("Y-m-d H:i:s")."'
+                ,interest_office = '".$data["interest_office"]."'
+                ,interest_daily = '".$data["interest_daily"]."'
+                ,interest_computerized = '".$data["interest_computerized"]."'
+                ,interest_food = '".$data["interest_food"]."'       
+                ,interest_cleaning = '".$data["interest_cleaning"]."'     
                 ,buyer_documents = '".$upload_buyer_documents_image."'
                 ,buyer_documents_ori = '".$buyer_documents_ori."'
             where

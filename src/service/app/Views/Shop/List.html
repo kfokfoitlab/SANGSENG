@@ -29,7 +29,7 @@ if($employ != 0){
 $base = 1149000;
 $levy = $base * $employ *12; //부담금
 ?>
-<div class="flex-grow-1">
+  <div class="flex-grow-1 pb-5">
   <section class="shop-list">
     <div class="auto-container">
       <div class="w-100 py-5 mb-5">
@@ -157,7 +157,7 @@ $levy = $base * $employ *12; //부담금
             }
             krsort($ret);
             foreach($ret as $item){
-            }
+          }
           ?>
             <tr>
               <td>
@@ -182,6 +182,7 @@ $levy = $base * $employ *12; //부담금
             <?php
               }
               }
+
             ?>
             </tbody>
 
@@ -190,7 +191,7 @@ $levy = $base * $employ *12; //부담금
         <?php
             if(!is_array($list)){
             ?>
-        <h1>등록된 상품이 없습니다</h1>
+        <h2 class="text-center fw-bold my-5">등록된 상품이 없습니다</h2>
         <?php
              }
               ?>
