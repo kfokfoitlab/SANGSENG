@@ -61,7 +61,9 @@ class Seller extends BaseController
     } // }}}
 
     public function ContractUpdate(){
+        $uuid = $_SESSION['login_info']['uuid'];
         $result = $this->mypage_model->ContractStatus($_POST);
+        $_SESSION["totalSales"] = $this->sigin_model->getTotalSales($uuid);
         echo "
         <script>
            alert('최신화되었습니다');
@@ -69,5 +71,6 @@ class Seller extends BaseController
         </script>
         ";
     }
+
 
 }

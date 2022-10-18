@@ -2,19 +2,17 @@
 
 namespace App\Controllers\Buyer;
 use App\Controllers\BaseController;
-
-use App\Models\DatabaseModel;
+use App\Models\Auth\SignInModel;
 use App\Models\Buyer\MyPageModel;
 class MyPage extends BaseController
 {
-
-    private $model;
-    private $database_model;
+    private $sigin_model;
     private $mypage_model;
     public function __construct()
     { //{{{
         $this->mypage_model = new MyPageModel;
-        $this->database_model = new DatabaseModel;
+        $this->sigin_model = new SignInModel;
+
     } //}}}
 
     public function index()
@@ -45,6 +43,7 @@ class MyPage extends BaseController
 
         $result = $this->mypage_model->ContractStatus($_POST);
         if($result == 1 ){
+            $_SESSION["Contract"]= $this->sigin_model->getContractList();
             echo "
         <script>
         alert('최신화되었습니다');

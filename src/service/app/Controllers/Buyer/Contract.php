@@ -4,12 +4,17 @@ namespace App\Controllers\Buyer;
 use App\Controllers\BaseController;
 use App\Models\DatabaseModel;
 use App\Models\Buyer\BuyerModel;
+use App\Models\Auth\SignInModel;
+
 class Contract extends BaseController
 {
+    private $sigin_model;
     private $database_model;
     private $buyer_model;
+
     public function __construct()
     { //{{{
+        $this->sigin_model = new SignInModel;
         $this->buyer_model = new BuyerModel;
         $this->database_model = new DatabaseModel;
     } //}}}
@@ -56,6 +61,7 @@ class Contract extends BaseController
         $cart_del = $this->buyer_model->cartDel($_POST);
         $result = $this->buyer_model->contract($_POST);
         if($result == "1") {
+            $_SESSION["Contract"]= $this->sigin_model->getContractList();
             echo "
                 <script>
                     alert('관리자에게 검토요청을 보냈습니다.');
