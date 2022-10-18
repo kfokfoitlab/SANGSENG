@@ -82,7 +82,7 @@ class SellerModel extends CommonModel
                 *
             from
               seller_product  
-            where register_id ='".$uuid."'".$where_query." 
+            where del_yn != 'Y' and register_id ='".$uuid."'".$where_query." 
         ";
 
         $data_cnt = [];
