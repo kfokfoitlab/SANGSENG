@@ -14227,7 +14227,7 @@ TNC Section
   line-height: 30px;
   font-size: 24px;
   color: #5c6770;
-  background: #ffffff;
+  background: transparent;
   z-index: 9;
 }
 
@@ -20482,7 +20482,7 @@ Banner Section
   line-height: 30px;
   font-size: 24px;
   color: #5c6770;
-  background: #ffffff;
+  background: transparent;
   z-index: 9;
 }
 
@@ -21331,6 +21331,10 @@ Seller/Item/ItemList
 }
 .item-list .btn-sm {
   font-size: 0.9rem;
+}
+.item-list th,
+.item-list td {
+  vertical-align: middle;
 }
 .item-list .item-list-table {
   table-layout: fixed;
