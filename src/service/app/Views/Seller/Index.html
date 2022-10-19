@@ -114,7 +114,6 @@
                   >
                     1:1 문의
                   </button>
-                  <span class="new-badge extra-new-badge">N</span>
                 </li>
               </ul>
               <div class="tab-content mt-2">
@@ -183,28 +182,39 @@
                   role="tabpanel"
                   aria-labelledby="extra-tab"
                 >
+                  <?php
+                   if(is_array($questions)&& count($questions) > 0){
+                  foreach($questions as $item){
+                  ?>
                   <ul>
                     <li>
-                      <a class="d-flex justify-content-between new" href="">
-                        <span>문의제목</span><span class="flex-shrink-0 text-secondary">22-08-01</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="d-flex justify-content-between" href="">
-                        <span>문의제목</span><span class="flex-shrink-0 text-secondary">22-08-01</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="d-flex justify-content-between" href="">
-                        <span>문의제목</span><span class="flex-shrink-0 text-secondary">22-08-01</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="d-flex justify-content-between" href="">
-                        <span>문의제목</span><span class="flex-shrink-0 text-secondary">22-08-01</span>
+                      <a class="d-flex justify-content-between new" href="/CS/Questions/Detail?idx=<?=$item['idx']?>">
+                        <span><?=$item['title']?></span><span class="flex-shrink-0 text-secondary"><?=substr($item["register_date"],0,10)?></span>
+                        <?php if($item["board_status"]==1){ ?>
+                        <span class="badge bg-info">답변대기</span>
+                        <?php
+                         }
+                         if($item["board_status"]==2 && substr($item['update_date'],0,10) == substr(date("Y-m-d H:i:s"),0,10)){
+                          ?>
+                        <span class="badge bg-success">답변완료</span> New
+                        <?php
+                         }if($item["board_status"]==2 && substr($item['update_date'],0,10) !=  substr(date("Y-m-d H:i:s"),0,10)){
+                          ?>
+                        <span class="badge bg-success">답변완료</span>
+                        <?php
+                        }
+                        ?>
                       </a>
                     </li>
                   </ul>
+                  <?php
+                  }
+                  }else{
+                  ?>
+                  <p>등록된 게시물이 없습니다</p>
+                  <?php
+                  }
+                  ?>
                 </div>
               </div>
             </div>

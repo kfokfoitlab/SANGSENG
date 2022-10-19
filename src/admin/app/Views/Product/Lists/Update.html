@@ -1,3 +1,6 @@
+<style>
+  .preview-bg-img {width: 200px; height: 200px; background-size: contain; background-repeat: no-repeat; background-position: center;}
+</style>
 <section class="content-main" xmlns="">
   <div class="content-header">
     <h2 class="content-title"> <?=$page_name?> 상세보기</h2>
@@ -20,7 +23,9 @@ $end_date = date("Y-m-d", $timestamp);
   <div class="card mb-4">
     <div class="card-body">
       <h5>상품 정보</h5>
-      <table class="table table-hover border detail-table">
+      <div class="row">
+        <div class="col-8">
+          <table class="table table-hover border detail-table">
         <!-- {{{ -->
         <tbody>
         <tr>
@@ -157,6 +162,67 @@ $end_date = date("Y-m-d", $timestamp);
         </tbody>
         <!-- }}} -->
       </table>
+        </div>
+
+        <div class="col-4">
+          <div class="row mb-4">
+            <div class="col-6">
+              <label for="representative-img" class="form-label">대표 이미지</label>
+              <input id="representative-img" name="representative_image" class="form-control product-img-input mb-2"
+                     value ="" type="file" accept="image/*" />기존파일 : <?=$item['representative_image']?>
+              <br/>
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['representative_image']?>','대표이미지<?=substr($item['representative_image'],-4)?>');">기존파일
+                다운로드
+              </button>
+            </div>
+            <div class="col-6">
+              <div class="preview-bg-img bg-light border rounded" style="background-image: url('/uploads/<?=$item['representative_image']?>')"></div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-6">
+              <label for="product-img1" class="form-label text-secondary">추가 이미지 01<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
+              <input id="product-img1" value ="" name="product_image1" class="form-control product-img-input mb-2" type="file"
+                     accept="image/*"/>기존파일 : <?=$item['product_image1']?>
+              <br/>
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['product_image1']?>','추가이미지01<?=substr($item['product_image1'],-4)?>');">기존파일
+                다운로드
+              </button>
+            </div>
+            <div class="col-6">
+              <div class="preview-bg-img border bg-light border rounded" style="background-image: url('/uploads/<?=$item['product_image1']?>')"></div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-6">
+              <label for="product-img2" class="form-label text-secondary">추가 이미지 02<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
+              <input id="product-img2" name="product_image2" value ="" class="form-control product-img-input mb-2" type="file"
+                     accept="image/*"/>기존파일 : <?=$item['product_image2']?>
+              <br/>
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['product_image2']?>','추가이미지02<?=substr($item['product_image2'],-4)?>');">기존파일
+                다운로드
+              </button>
+            </div>
+            <div class="col-6">
+              <div class="preview-bg-img border bg-light border rounded" style="background-image: url('/uploads/<?=$item['product_image2']?>')"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label for="detail-img" class="form-label text-secondary">상품상세 이미지<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
+              <input id="detail-img" name="detail_img" class="form-control product-img-input mb-2" type="file"
+                     accept="image/*"/>기존파일 : <?=$item['detail_img']?>
+              <br/>
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['detail_img']?>','상세이미지<?=substr($item['detail_img'],-4)?>');">기존파일
+                다운로드
+              </button>
+            </div>
+            <div class="col-6">
+              <div class="preview-bg-img border bg-light border rounded" style="background-image: url('/uploads/<?=$item['detail_img']?>')"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -172,3 +238,29 @@ $end_date = date("Y-m-d", $timestamp);
   </form>
 </section>
 
+<script>
+	/* 이미지 파일 타입 체크 & 미리보기 시작 */
+	document.querySelectorAll('input[accept="image/*"]').forEach(item => {
+
+		item.addEventListener("change", function () {
+			const filePath = item.value;
+			const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+			const image_preview = item.parentElement.nextElementSibling.firstElementChild;
+			const reader = new FileReader();
+			let uploaded_image = "";
+			console.log(image_preview)
+			if (!allowedExtensions.exec(filePath)) {
+				alert('jpg, jpeg, png, gif 파일만 업로드 가능합니다.');
+				item.value = '';
+				return false;
+			} else if (item.files && item.files[0]) {
+				reader.addEventListener("load", () => {
+					uploaded_image = reader.result;
+					image_preview.style.backgroundSize = `contain`;
+					image_preview.style.backgroundImage = `url(${uploaded_image})`;
+				});
+				reader.readAsDataURL(this.files[0]);
+			}
+		})
+	})
+</script>

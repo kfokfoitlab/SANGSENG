@@ -52,13 +52,13 @@
       $btn_type = "";
       if($item['delivery_status'] == 1){
       $status = "배송대기";
-      $btn_type = "badge bg-info";
+      $btn_type = "btn btn-info btn-sm";
       }else if($item['delivery_status'] == 3){
       $status = "배송중";
-      $btn_type = "badge bg-primary";
+      $btn_type = "btn btn-primary btn-sm";
       }else if($item['delivery_status'] == 5){
       $status = "배송완료";
-      $btn_type = "badge bg-success";
+      $btn_type = "btn btn-success btn-sm";
       }
       ?>
         <tr>

@@ -85,7 +85,7 @@ class BuyerModel extends CommonModel
         ";
         $cart_del = $this->rodb->simple_query($query);
         if($cart_del >0){
-        $query = "
+            $query = "
             update
                 buyer_cart
             set
@@ -95,8 +95,8 @@ class BuyerModel extends CommonModel
             and idx = $idx
             limit 1
         ";
-        $this->wrdb->update($query);
-        return "1";
+            $this->wrdb->update($query);
+            return "1";
         }else{
             return null;
         }
@@ -124,7 +124,7 @@ class BuyerModel extends CommonModel
               ,product_name = '".$data["product_name"]."'
               ,product_price = '".$data["product_price"]."'
               ,buyer_company = '".$data["buyer_company"]."'
-              ,product_quantity = '".$data["product_quantity"]."'
+              ,product_quantity = '".$product_quantity."'
               ,reduction_money = '".$reduction_money."'
               ,product_no = '".$data["product_no"]."'       
               ,register_date ='".date("Y-m-d")."'
@@ -161,7 +161,7 @@ class BuyerModel extends CommonModel
             where status ='5'
            $where
            order by 
-               product_ranking asc
+               register_date desc
             limit 5;
            
         ";
@@ -169,6 +169,9 @@ class BuyerModel extends CommonModel
         while($row = $this->rodb->next_row()){
             $ranking["data"][]= $row;
 
+        }
+        foreach($ranking["data"] as $item){
+            $ranking["replyCount"][] = $this->SellerReplyCount($item["product_no"]);
         }
         return $ranking;
 
@@ -244,11 +247,27 @@ class BuyerModel extends CommonModel
             $query = $query." and (product_name like '%".$_GET["search_v"]."%'
              or company_name like '%".$_GET["search_v"]."%')";
         }
-        $query = $query." order by register_date  desc";
+        $list_cnt = [];
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $list_cnt[] = $row;
+        }
+        $list["count"] = count($list_cnt);
+        $page_start = 0;
+        if($_GET["p_n"] != ""){
+            $page_start = ($_GET["p_n"] - 1)*10;
+        }
+        $query = $query." order by product_price desc,reduction desc";
+        $query = $query." limit ".$page_start.", 10";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
             $list["data"][]= $row;
 
+        }
+        if(!empty($list['data'])) {
+            foreach ($list["data"] as $item) {
+                $list["replyCount"][] = $this->SellerReplyCount($item["product_no"]);
+            }
         }
         return $list;
     }
@@ -315,19 +334,19 @@ class BuyerModel extends CommonModel
             return null;
         }
     }
-	
-	public function SellerReplyReg($data){
-		$product_no = $data["product_no"];
-		$user_uuid = $_SESSION['login_info']['uuid'];
-		$user_company_name = $_SESSION['login_info']['company_name'];
-		$reply_content = $data['reply_content'];
-		$reply_step = $data['reply_step'];
-		$reply_no = date("YmdHis");
-		if($reply_step != 1){
-			$reply_no = $data["reply_no"];
-			$reply_step = "(select max(a.reply_step) from seller_product_reply as a where a.reply_no = '".$reply_no."') + 1";
-		}
-		$query = "
+
+    public function SellerReplyReg($data){
+        $product_no = $data["product_no"];
+        $user_uuid = $_SESSION['login_info']['uuid'];
+        $user_company_name = $_SESSION['login_info']['company_name'];
+        $reply_content = $data['reply_content'];
+        $reply_step = $data['reply_step'];
+        $reply_no = date("YmdHis");
+        if($reply_step != 1){
+            $reply_no = $data["reply_no"];
+            $reply_step = "(select max(a.reply_step) from seller_product_reply as a where a.reply_no = '".$reply_no."') + 1";
+        }
+        $query = "
           insert into
                seller_product_reply
           set
@@ -341,19 +360,19 @@ class BuyerModel extends CommonModel
               ,register_date = '".date("Y-m-d H:i:s")."'
               ,register_id = '".$user_uuid."'
       ";
-		$idx = $this->wrdb->insert($query);
-		if($idx){
-			return 1;
-		}else{
-			return null;
-		}
-	}
-	
-	public function SellerReplyCheck($data){
-		$user_uuid = $_SESSION['login_info']['uuid'];
-		$product_no = $data['product_no'];
-		
-		$query = "
+        $idx = $this->wrdb->insert($query);
+        if($idx){
+            return 1;
+        }else{
+            return null;
+        }
+    }
+
+    public function SellerReplyCheck($data){
+        $user_uuid = $_SESSION['login_info']['uuid'];
+        $product_no = $data['product_no'];
+
+        $query = "
             select
                 count(*)
             from
@@ -362,17 +381,18 @@ class BuyerModel extends CommonModel
                 product_no = $product_no
                 and buyer_uuid = '".$user_uuid."'
                 and contract_status = '5'
+				and del_yn = 'n'
             limit 1
         ";
-		
-		return $this->rodb->simple_query($query);
-	}
-	
-	public function SellerReplyCountCheck($data){
-		$user_uuid = $_SESSION['login_info']['uuid'];
-		$product_no = $data['product_no'];
-		
-		$query = "
+
+        return $this->rodb->simple_query($query);
+    }
+
+    public function SellerReplyCountCheck($data){
+        $user_uuid = $_SESSION['login_info']['uuid'];
+        $product_no = $data['product_no'];
+
+        $query = "
             select
                 count(*)
             from
@@ -380,18 +400,19 @@ class BuyerModel extends CommonModel
             where
                 product_no = $product_no
                 and user_uuid = '".$user_uuid."'
+				and del_yn = 'n'
             limit 1
         ";
-		
-		return $this->rodb->simple_query($query);
-	}
-	
-	public function SellerReReplyCheck($data){
-		$user_uuid = $_SESSION['login_info']['uuid'];
-		$product_no = $data['product_no'];
-		
-		if($_SESSION['login_info']['type'] == 'buyer') {
-			$query = "
+
+        return $this->rodb->simple_query($query);
+    }
+
+    public function SellerReReplyCheck($data){
+        $user_uuid = $_SESSION['login_info']['uuid'];
+        $product_no = $data['product_no'];
+
+        if($_SESSION['login_info']['type'] == 'buyer') {
+            $query = "
             select
                 count(*)
             from
@@ -400,10 +421,11 @@ class BuyerModel extends CommonModel
                 product_no = $product_no
                 and user_uuid = '" . $user_uuid . "'
                 and reply_no = '" . $_POST["reply_no"] . "'
+				and del_yn = 'n'
             limit 1
             ";
-		}elseif ($_SESSION['login_info']['type'] == 'seller'){
-			$query = "
+        }elseif ($_SESSION['login_info']['type'] == 'seller'){
+            $query = "
             select
                 count(*)
             from
@@ -413,26 +435,83 @@ class BuyerModel extends CommonModel
                 and register_id = '" . $user_uuid . "'
             limit 1
             ";
-		}
-		
-		return $this->rodb->simple_query($query);
-	}
-	
-	public function SellerReplyList($product_no){
-		$data = [];
-		$query = "
+        }
+
+        return $this->rodb->simple_query($query);
+    }
+
+    public function SellerReplyList($product_no){
+        $data = [];
+        $query = "
               select
                   *
             from
                 seller_product_reply
             where
                 product_no = '".$product_no."'
+				and del_yn = 'n'
             order by reply_no desc,reply_step asc
         ";
-		$this->rodb->query($query);
-		while($row = $this->rodb->next_row()){
-			$data[] = $row;
-		}
-		return $data;
-	}
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $data[] = $row;
+        }
+        return $data;
+    }
+
+    public function SellerReplyCount($product_no){
+        $query = "
+              select
+                  count(idx)
+            from
+                seller_product_reply
+            where
+                product_no = '".$product_no."'
+                and reply_step=1
+                and del_yn = 'n'
+        ";
+
+        $replyCount = $this->rodb->simple_query($query);
+
+        return $replyCount;
+    }
+
+    public function SellerReplyDelete($data){
+        $user_uuid = $_SESSION['login_info']['uuid'];
+
+        if($data["reply_step"] == 1){
+            $WhereQuery = " reply_no = ".$data["reply_no"];
+        }else{
+            $WhereQuery = " idx = ".$data["idx"];
+        }
+        $query = "
+			UPDATE
+			seller_product_reply SET
+			del_yn = 'y'
+			,delete_date = '".date("Y-m-d H:i:s")."'
+			,delete_id = '".$user_uuid."'
+			WHERE
+			    ".$WhereQuery."
+		";
+
+        $result = $this->wrdb->update($query);
+        return $result;
+    }
+
+    public function SellerReplyUpdate($data){
+        $user_uuid = $_SESSION['login_info']['uuid'];
+
+        $query = "
+			UPDATE
+			seller_product_reply SET
+			reply_content = '".$data["reply_content"]."'
+			,update_date = '".date("Y-m-d H:i:s")."'
+			,update_id = '".$user_uuid."'
+			WHERE
+			    idx = ".$data["idx"]."
+		";
+
+        $result = $this->wrdb->update($query);
+        return $result;
+    }
 }

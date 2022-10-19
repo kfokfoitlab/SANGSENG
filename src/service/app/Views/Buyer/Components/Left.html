@@ -39,27 +39,30 @@ $base = 1608600;
 }else{
 $base = 1914400;
 }
+
 $employ = $employ-$disabled;
 $total = $base * $employ*12 ;
+//echo $total;
 $total = $total + ($total*0.1);
-$total_money = number_format($total); // 납부금액
-
+$total_money = $total; // 납부금액
+//echo $total_money;
 $Expectation =$_SESSION['Expectation']['Expectation'];
 $Expectation_money = number_format($Expectation);
 
 $reduction_money = $data['ReductionMoney']['reduction_money'];
 $buyer_reduction = $_SESSION['ReductionMoney']['buyer_reduction'];
 $Remainder = $total -$buyer_reduction;
-
+if($buyer_reduction !=""){
 $limit = ($buyer_reduction /$total_money)*100;
-if($limit > 60){
+$limit = (int)($limit);
+if((int)$limit >= 60){
 $buyer_reduction = $total*60/100;
 $Remainder = 0;
 }
-
-$Remainder_money = number_format($Remainder);
-$reduction_money =  number_format($_SESSION['ReductionMoney']['reduction_money']);
-$buyer_reduction =  number_format($buyer_reduction);
+}
+$Remainder_money = $Remainder;
+$reduction_money =  $_SESSION['ReductionMoney']['reduction_money'];
+$buyer_reduction =  $buyer_reduction;
 
 
 ?>
@@ -71,16 +74,16 @@ $buyer_reduction =  number_format($buyer_reduction);
   <h2 class="visually-hidden">감면액 및 계약리스트</h2>
   <div class="mb-4 pb-3 reduction-box">
     <h3 class="h6 mb-3">예상 납부금액</h3>
-    <p class="text-end m-0 text-white fw-bold"><?=$total_money?>원</p>
+    <p class="text-end m-0 text-white fw-bold"><?=number_format($total_money)?>원</p>
   </div>
   <div class="mb-4 pb-3 reduction-box">
     <h3 class="h6 mb-1">기대 감면금액</h3>
     <p class="mb-3 text-white-50" style="font-size: 14px;">* 납부금액의 <span class="text-warning">60%</span>까지 감면받을 수 있습니다.</p>
-    <p class="text-end m-0 text-white fw-bold"><?=$buyer_reduction?>원</p>
+    <p class="text-end m-0 text-white fw-bold"><?=number_format($buyer_reduction)?>원</p>
   </div>
   <div class="mb-4 border-bottom-0 reduction-box">
     <h3 class="h6 mb-3">남은 감면금액</h3>
-    <p class="text-end m-0 text-white fw-bold"><?=$Remainder_money?>원</p>
+    <p class="text-end m-0 text-white fw-bold"><?=number_format($Remainder_money)?>원</p>
   </div>
 
   <div class="mt-4">
@@ -105,7 +108,7 @@ $buyer_reduction =  number_format($buyer_reduction);
         <h3 class="text-center"><?=$item["company_name"]?></h3>
         <div class="d-flex flex-column align-items-center mb-2">
           <div class="left-item-img d-flex align-items-center justify-content-center border">
-            <img class="mh-100" src="/Image/6ea0bfe8-315c-4e54-a172-4bc84f8cf9e4" alt="상품이미지">
+            <img class="mh-100" src="/uploads/<?=$item['representative_image']?>" alt="상품이미지">
           </div>
           <h4 class="mt-1"><?=$item["product_name"]?></h4>
         </div>

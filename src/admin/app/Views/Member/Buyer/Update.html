@@ -34,6 +34,13 @@
               <td class="th">사업자등록번호</td>
               <td><input type="text" class="form-control form-control-sm" name="company_code" value="<?=$data['company_code']?>" required></td>
             </tr>
+            <tr>
+              <td class="th">기업형태</td>
+                <td><input type="radio" name="classification" value="1" <?php if($data['classification']==1){echo "checked";}?>>민간기업
+                <input type="radio" name="classification" value="2" <?php if($data['classification']==2){echo "checked";}?>>공공기관
+                <input type="radio" name="classification" value="3" <?php if($data['classification']==3){echo "checked";}?>>국가/자치단체</td>
+            </tr>
+            <tr>
               <td class="th">팩스번호</td>
               <td><input type="text" class="form-control form-control-sm" name="fax" value="<?=$data['fax']?>" ></td>
             </tr>
@@ -54,6 +61,10 @@
               </td>
             </tr>
             <tr>
+              <td class="th">상시 근로자 수</td>
+              <td><input type="text" class="form-control form-control-sm" value ="<?=$data['workers']?>" name="workers" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" required></td>
+            </tr>
+            <tr>
               <td class="th">경증 장애인 근로자 수</td>
               <td><input type="text" class="form-control form-control-sm" value ="<?=$data['mild_disabled']?>" name="mild_disabled" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" required></td>
             </tr>
@@ -61,7 +72,20 @@
               <td class="th">중증 장애인 근로자 수</td>
               <td><input type="text" class="form-control form-control-sm"  value ="<?=$data['severely_disabled']?>" name="severely_disabled" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" required></td>
             </tr>
-
+            <tr>
+              <td class="th">적용 법인세율</td>
+              <td><input type="text" class="form-control form-control-sm" value ="<?=$data['tax_rate']?>" name="tax_rate" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" required></td>
+            </tr>
+            <tr>
+              <td class="th">관심상품</td>
+              <td>
+                <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_office" <?php if($data['interest_office']=='Y'){echo "checked";}?>> 사무용품</label>
+                <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_daily" <?php if($data['interest_daily']=='Y'){echo "checked";}?>> 생활용품</label>
+                <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_computerized" <?php if($data['interest_computerized']=='Y'){echo "checked";}?>> 전산용품</label>
+                <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_food" <?php if($data['interest_food']=='Y'){echo "checked";}?>> 식음료</label>
+                <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_cleaning" <?php if($data['interest_cleaning']=='Y'){echo "checked";}?>> 청소용품</label>
+              </td>
+            </tr>
           </tbody>
           <!-- }}} -->
           </table>

@@ -47,7 +47,9 @@ $end_date = date("Y-m-d", $timestamp);
   <div class="card mb-4">
     <div class="card-body">
       <h5>상품 정보</h5>
-      <table class="table table-hover border detail-table">
+      <div class="row">
+        <div class="col-8">
+          <table class="table table-hover border detail-table">
       <!-- {{{ -->
       <tbody>
         <tr>
@@ -124,6 +126,59 @@ $end_date = date("Y-m-d", $timestamp);
       </tbody>
       <!-- }}} -->
       </table>
+        </div>
+
+        <div class="col-4">
+          <div class="row mb-3">
+            <div class="col-6">
+              <p class="mb-1 fw-bold">대표 이미지</p>
+              <p class="mb-1">기존파일 : <?=$item['representative_image']?></p>
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['representative_image']?>','대표이미지<?=substr($item['representative_image'],-4)?>');">기존파일
+                다운로드
+              </button>
+            </div>
+            <div class="col-6">
+              <img style="width: 200px; height: 200px;" src="" alt="">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-6">
+              <p class="mb-1 fw-bold">추가 이미지 01 (선택사항)</p>
+              <p class="mb-1">기존파일 : <?=$item['product_image1']?></p>
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['product_image1']?>','추가이미지01<?=substr($item['product_image1'],-4)?>');">기존파일
+                다운로드
+              </button>
+            </div>
+            <div class="col-6">
+              <img style="width: 200px; height: 200px;" src="" alt="">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-6">
+              <p class="mb-1 fw-bold">추가 이미지 02 (선택사항)</p>
+              <p class="mb-1">기존파일 : <?=$item['product_image2']?></p>
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['product_image1']?>','추가이미지01<?=substr($item['product_image1'],-4)?>');">기존파일
+                다운로드
+              </button>
+            </div>
+            <div class="col-6">
+              <img style="width: 200px; height: 200px;" src="" alt="">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <p class="mb-1 fw-bold">상품상세 이미지 (선택사항)</p>
+              <p class="mb-1">기존파일 : <?=$item['detail_img']?></p>
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['detail_img']?>','상세이미지<?=substr($item['detail_img'],-4)?>');">기존파일
+                다운로드
+              </button>
+            </div>
+            <div class="col-6">
+              <img style="width: 200px; height: 200px;" src="" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

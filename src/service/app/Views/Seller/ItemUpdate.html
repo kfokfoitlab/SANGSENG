@@ -158,7 +158,17 @@
                   <!-- 추가이미지 -->
                   <li class="row mb-3">
                     <div class="col-2">
+                      <?php
+                      if( ! empty($item['product_image1']) ) {
+                      ?>
                       <div class="preview-bg-img border bg-light border rounded" style="background-size: contain;background-image: url('/uploads/<?=$item['product_image1']?>')"></div>
+                      <?php
+                      } else {
+                      ?>
+                      <div class="preview-bg-img border bg-light border rounded" style="background-size: 50%; background-image: url('/assets/images/resource/icons/image.svg')"></div>
+                      <?php
+                      }
+                      ?>
                     </div>
                     <div class="col-6 ms-4 px-4 py-3">
                       <label for="product-img1" class="form-label text-secondary">추가 이미지 01<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
@@ -171,7 +181,17 @@
                   </li>
                   <li class="row">
                     <div class="col-2">
+                      <?php
+                      if( ! empty($item['product_image2']) ) {
+                      ?>
                       <div class="preview-bg-img border bg-light border rounded" style="background-size: contain;background-image: url('/uploads/<?=$item['product_image2']?>')"></div>
+                      <?php
+                      } else {
+                      ?>
+                      <div class="preview-bg-img border bg-light border rounded" style="background-size: 50%; background-image: url('/assets/images/resource/icons/image.svg')"></div>
+                      <?php
+                      }
+                      ?>
                     </div>
                     <div class="col-6 ms-4 px-4 py-3">
                       <label for="product-img2" class="form-label text-secondary">추가 이미지 02<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
@@ -194,7 +214,17 @@
             </div>
             <li class="row">
             <div class="col-2">
+              <?php
+              if( ! empty($item['detail_img']) ) {
+              ?>
               <div class="preview-bg-img border bg-light border rounded" style="background-size: contain;background-image: url('/uploads/<?=$item['detail_img']?>')"></div>
+              <?php
+              } else {
+              ?>
+              <div class="preview-bg-img border bg-light border rounded" style="background-size: 50%; background-image: url('/assets/images/resource/icons/image.svg')"></div>
+              <?php
+              }
+              ?>
             </div>
             <div class="col-6 ms-4 px-4 py-3">
               <label for="detail-img" class="form-label text-secondary">상품상세 이미지<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
@@ -209,10 +239,14 @@
         }
         }
         ?>
-            <div class="form-group mt-5 d-flex justify-content-center">
-              <button type="reset" onclick="history.back()" class="btn btn-outline-secondary px-4 me-3" tabindex=100>취소</button>
-              <button type="submit" class="btn btn-primary px-4" tabindex=100>수정</button>
-              <button type="button" class="btn btn-primary px-4" tabindex=100 onclick="productDel(<?=$item['idx']?>);">삭제</button>
+            <div class="form-group mt-5">
+              <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-danger px-4" tabindex=100 onclick="productDel(<?=$item['idx']?>);">삭제</button>
+                <div>
+                  <button type="reset" onclick="history.back()" class="btn btn-outline-secondary px-4 me-3" tabindex=100>취소</button>
+                  <button type="submit" class="btn btn-primary px-4" tabindex=100>수정</button>
+                </div>
+              </div>
             </div>
           </div>
         </form>

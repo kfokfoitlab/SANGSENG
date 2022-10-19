@@ -7,13 +7,14 @@ use App\Models\Seller\ItemModel;
 use App\Models\DatabaseModel;
 use App\Models\Seller\SellerInfoModel;
 use App\Models\Seller\SellerModel;
+use App\Models\Auth\SignInModel;
 class Mypage extends BaseController
 {
     private $item_model;
     private $database_model;
     private $seller_model;
     private $common_model;
-    private $item_per_page = 10;
+    private $sigin_model;
 //
     public function __construct()
     { //{{{
@@ -22,6 +23,8 @@ class Mypage extends BaseController
         $this->seller_model = new SellerModel;
         $this->sellerinfo_model = new SellerInfoModel;
         $this->database_model = new DatabaseModel;
+        $this->sigin_model = new SignInModel;
+
     } //}}}
 	
 	public function Info()
@@ -44,12 +47,49 @@ class Mypage extends BaseController
 		echo view('MyPage/SellerPasswordConfirm.html');
 		echo view("Common/Footer.html");
 	} // }}}
-	
-	public function ChangePassword()
+
+    public function PasswordCheck()
+    { // {{{
+        $uuid = $_SESSION["login_info"]["uuid"];
+        $result = $this->sellerinfo_model->pwdCheck($uuid);
+        if($result == 1){
+            echo "
+                <script>
+                    alert('새로운 비밀번호를 입력해주세요.');
+                </script>
+            ";
+            echo view("Common/Header.html");
+            echo view('MyPage/SellerPasswordChange.html');
+            echo view("Common/Footer.html");
+        }else{
+            echo "
+                <script>
+                    alert('비밀번호가 일치하지 않습니다.');
+					history.back(-1);
+                </script>
+            ";
+        }
+    } // }}}
+
+    public function ChangePassword()
 	{ // {{{
-		echo view("Common/Header.html");
-		echo view('MyPage/SellerPasswordChange.html');
-		echo view("Common/Footer.html");
+        $uuid = $_SESSION['login_info']['uuid'];
+        $result =  $this->sellerinfo_model->PwdUpdate($uuid);
+        if($result == "1") {
+            echo "
+                <script>
+                    alert('비밀번호가 변경되었습니다.');
+					window.location.replace('/Seller');
+                </script>
+            ";
+        }else{
+            echo "
+                <script>
+                    alert('오류가 발생했습니다.다시 시도해주세요');
+					window.location.replace('/Seller');
+                </script>
+            ";
+        }
 	} // }}}
 
     public function Search(){
@@ -64,7 +104,7 @@ class Mypage extends BaseController
     }
 	
 	public function InfoUpdate(){
-		
+		$uuid = $_SESSION['login_info']['uuid'];
 		if(@$_SESSION["login"] != "success"){
 			echo "
 				<script>
@@ -75,10 +115,12 @@ class Mypage extends BaseController
 			
 			die();
 		}
-		$pwdCheck = $this->sellerinfo_model->pwdCheck();
+		$pwdCheck = $this->sellerinfo_model->pwdCheck($uuid);
 		if($pwdCheck == 1) {
 			$result = $this->sellerinfo_model->infoUpdate($_FILES, $_POST);
 			if ($result == 1) {
+                $_SESSION["totalSales"] = $this->sigin_model->getTotalSales($uuid);
+                $_SESSION["sellerinfo"] = $this->sigin_model->Sellerinfo();
 				echo "
 				<script>
                 	alert('수정되었습니다');

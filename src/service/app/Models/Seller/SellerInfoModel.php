@@ -126,7 +126,7 @@ class SellerInfoModel extends CommonModel
                     from
                         seller_company_worker
                     where
-                         uuid ='".$uuid."'
+                         register_id ='".$uuid."'
                          and disability_degree ='2'
                     limit 1
                 ";
@@ -140,7 +140,7 @@ class SellerInfoModel extends CommonModel
                     from
                         seller_company_worker
                     where
-                         uuid ='".$uuid."'
+                         register_id ='".$uuid."'
                          and disability_degree ='1'
                     limit 1
                 ";
@@ -157,7 +157,7 @@ class SellerInfoModel extends CommonModel
         while($row = $this->rodb->next_row()){
             $product_info= $row;
 
-            $contribution = $data["product_price"]/$data["seller_sales"];
+            $contribution = $product_info["product_price"]/$data["seller_sales"];
             $workers = $mild_disabled+($severely_disabled*2);
             $reduction = $contribution * $workers;
             $reduction = round($reduction,4);
@@ -174,14 +174,13 @@ class SellerInfoModel extends CommonModel
 		return 1;
 	}
 	
-	public function pwdCheck(){
-		$uuid = $_SESSION["login_info"]["uuid"];
+	public function pwdCheck($uuid){
 		$pwd = $_POST["password"];
 		$query = "
 			SELECT * FROM seller_company
 			WHERE 1=1
-			AND uuid='".$uuid."'
-			AND password=SHA2('".$pwd."', 256)
+			AND uuid = '".$uuid."'
+			AND password = SHA2('".$pwd."', 256)
 		";
 		$this->rodb->query($query);
 		while($this->rodb->next_row()) {
@@ -189,5 +188,20 @@ class SellerInfoModel extends CommonModel
 		}
 		return null;
 	}
+
+    public function PwdUpdate($uuid){
+        $password = $_POST['new_password'];
+        $query = "
+            update
+                seller_company
+            set
+              password = SHA2('".$password."', 256)
+            where
+            uuid = '".$uuid."'
+            limit 1
+        ";
+        $this->wrdb->update($query);
+        return "1";
+    }
 
 }

@@ -59,7 +59,7 @@
       </form>
       <div class="mt-4 pb-3 text-end border-bottom border-2">
         <button class="btn btn-warning" onclick="contract_update()">계약상태 최신화</button>
-          <button class="btn btn-warning" onclick="nameCheck()">알림확인</button>
+<!--        <button class="btn btn-warning" onclick="nameCheck()">알림확인</button>-->
 
       </div>
       <table class="table table-striped text-center mt-5 result-table">
@@ -135,6 +135,11 @@
               ?>
             <td><button class="btn btn-primary btn-sm" onclick="Contract_Detail(<?=$item['workflow_id']?>)">계약서 조회</button></td>
             <td title="계약서 이메일로 받기"><button class ="btn btn-success btn-sm" onclick="Contract_Return(<?=$item['workflow_id']?>,<?=$item['contract_status']?>);">이메일로 받기</button></td>
+            <?php
+            } else {
+            ?>
+            <td></td>
+            <td></td>
             <?php
             }
             ?>

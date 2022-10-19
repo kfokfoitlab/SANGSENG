@@ -20,6 +20,28 @@
           } if($data["classification"] == 3){
           $classification = "국가/자치단체";
           }
+
+          $interest_office = "";
+          $interest_daily = "";
+          $interest_computerized = "";
+          $interest_food = "";
+          $interest_cleaning = "";
+          if($data["interest_office"] == 'Y'){
+          $interest_office = "사무용품,";
+          }
+          if($data["interest_daily"] == 'Y'){
+          $interest_daily = "생활용품";
+          }
+          if($data["interest_computerized"] == 'Y'){
+          $interest_computerized = "전산용품,";
+          }
+          if($data["interest_food"] == 'Y'){
+          $interest_food = "식음료,";
+          }
+          if($data["interest_cleaning"] == 'Y'){
+          $interest_cleaning = "청소용품";
+          }
+
           ?>
             <tr>
               <td class="th">아이디(이메일)</td>
@@ -56,12 +78,24 @@
               </td>
             </tr>
             <tr>
+              <td class="th">상시 근로자 수</td>
+              <td><?=$data["workers"]?></td>
+            </tr>
+            <tr>
               <td class="th">경증 장애인 근로자 수</td>
               <td><?=$data["mild_disabled"]?></td>
             </tr>
             <tr>
               <td class="th">중증 장애인 근로자 수</td>
               <td><?=$data["severely_disabled"]?></td>
+            </tr>
+            <tr>
+              <td class="th">적용 법인세율</td>
+              <td><?=$data["tax_rate"]?></td>
+            </tr>
+            <tr>
+              <td class="th">관심상품</td>
+              <td><?=$interest_office?><?=$interest_daily ?><?=$interest_computerized ?><?=$interest_food?><?=$interest_cleaning?></td>
             </tr>
             <tr>
               <td class="th">상태</td>
@@ -126,14 +160,6 @@
             ?>
           </div>
         </div>
-<!--        <div class="col-2">-->
-<!--          <div class="border">-->
-<!--            <label>장애인표준사업장 등록증 or 장애인직업재활시설 등록증</label>-->
-<!--            <a href="/Image/<?=@$data['welfare_card_uuid']?>" target="_blank">-->
-<!--              <img class="img-fluid" src="/Image/<?=@$data['welfare_card_uuid']?>">-->
-<!--            </a>-->
-<!--          </div>-->
-<!--        </div>-->
       </div>
     </div>
   </div>

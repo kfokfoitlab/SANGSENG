@@ -150,6 +150,8 @@ $routes->group('Buyer', function($routes){
     $routes->get ('Shop/List(:any)',       'Buyer\Shop::List$1');
     $routes->get ('Shop/Detail/(:any)',     'Buyer\Shop::Detail/$1');
 	$routes->post ('Shop/SellerReplySubmit',     'Buyer\Shop::SellerReplySubmit');
+    $routes->post ('Shop/SellerReplyDelete',     'Buyer\Shop::SellerReplyDelete');
+    $routes->post ('Shop/SellerReplyUpdate',     'Buyer\Shop::SellerReplyUpdate');
     $routes->post ('Contract',        'Buyer\Contract::Contract');
     $routes->get ('MyPage/Info',            'Buyer\MyPage::Info');
     $routes->get ('MyPage/ConfirmPassword',    'Buyer\MyPage::ConfirmPassword');
@@ -184,6 +186,8 @@ $routes->group('Seller',  function ($routes){
     $routes->get ($group_name.'/ItemDelete', 'Seller\Item::ItemDelete');
     $routes->post ('ContractUpdate',           'Seller::ContractUpdate');
     $routes->get ('MyPage/downloadFileNew',           'Seller\MyPage::downloadFileNew');
+    $routes->post ('MyPage/PwUpdate',           'Seller\MyPage::PasswordCheck');
+    $routes->post ('MyPage/ChangePassword',           'Seller\MyPage::ChangePassword');
     $routes->post ('Delivery/Submit',      'Seller\Delivery::DeliverySubmit');
     $routes->get ('DeliveryStatus',      'Seller\Delivery::Status');
     $routes->post ('Delivery/invoice',      'Seller\Delivery::invoice');

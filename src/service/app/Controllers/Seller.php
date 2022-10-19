@@ -4,14 +4,17 @@ namespace App\Controllers;
 use App\Models\Seller\SellerModel;
 use App\Models\Auth\SignInModel;
 use App\Models\Buyer\MyPageModel;
+use App\Models\CS\QuestionsModel;
+
 class Seller extends BaseController
 {
-
+    private $questions_model;
     private $seller_model;
 	private $sigin_model;
     private $mypage_model;
     public function __construct()
     { //{{{
+        $this->questions_model = new QuestionsModel;
         $this->mypage_model = new MyPageModel;
         $this->seller_model = new SellerModel;
 	    $this->sigin_model = new SignInModel;
@@ -24,6 +27,8 @@ class Seller extends BaseController
         $completionContract = $this->seller_model->getCompletionContract($uuid);
         $contractList = $this->seller_model->getContract($uuid);
         $disabledCount = $this->seller_model->getDisabledCount($uuid);
+        $questions = $this->seller_model->getQuestionsList();
+        $product_reply = $this->seller_model->getProductreplyList();
 
         $data = array(
             "totalSales" => $totalSales
@@ -31,6 +36,7 @@ class Seller extends BaseController
        ,"completionContract" =>  $completionContract
        ,"contractList" =>  $contractList
        ,"disabledCount" =>  $disabledCount
+        ,"questions" =>  $questions
         );
 	    $_SESSION["disabledCount"] = $this->sigin_model->getWorkerCount();
 
@@ -53,7 +59,7 @@ class Seller extends BaseController
         $data_cnt = $this->seller_model->getContractCount($uuid);
         $data = array(
             "data" => $data["data"],
-            "data_cnt" => $data_cnt,
+            "data_cnt" => $data_cnt
     );
         echo view("Common/Header.html");
         echo view('Seller/Contract.html',$data);
@@ -61,7 +67,9 @@ class Seller extends BaseController
     } // }}}
 
     public function ContractUpdate(){
+        $uuid = $_SESSION['login_info']['uuid'];
         $result = $this->mypage_model->ContractStatus($_POST);
+        $_SESSION["totalSales"] = $this->sigin_model->getTotalSales($uuid);
         echo "
         <script>
            alert('최신화되었습니다');
@@ -69,5 +77,6 @@ class Seller extends BaseController
         </script>
         ";
     }
+
 
 }

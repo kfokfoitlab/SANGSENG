@@ -29,7 +29,7 @@ if($employ != 0){
 $base = 1149000;
 $levy = $base * $employ *12; //부담금
 ?>
-<div class="flex-grow-1">
+<div class="flex-grow-1 pb-5">
   <section class="shop-list">
     <div class="auto-container">
       <div class="w-100 py-5 mb-5">
@@ -43,47 +43,83 @@ $levy = $base * $employ *12; //부담금
           <th>감면액</th>
           <tbody>
           <tr>
-          <?php
+            <?php
           if(is_array($ranking) && count($ranking)){
+          $ret = array();
+            if ($_SESSION['login_info']['type'] == 'buyer') {
             foreach($ranking as $item){
-              $product_price = number_format($item["product_price"]);
-              $result_price = $item['reduction'] *$base;
-              $reduction_money = 0;
-              if($result_price > $levy){
+            $product_price = number_format($item["product_price"]);
+            $result_price = $item['reduction'] *$base;
+            $reduction_money = 0;
+            if($result_price > $levy ){
             $reduction_money = $levy*0.6;
-              }else if($result_price >$item["product_price"]*0.5){
-            $reduction_money = $item["product_price"]*0.5 * 12;
-              }else{
-            $reduction_money = $result_price * 12;
-             }
-            if($reduction_money > $item['product_price']*0.5){
-            $reduction_money = $item['product_price']*0.5;
+            }else if($result_price >$item["product_price"]*0.5){
+            $reduction_money = $item["product_price"]*0.5 *12;
+            }else{
+            $reduction_money = $result_price *12;
             }
-          ?>
+            if($reduction_money > $item['product_price']*0.5){
+            $reduction_money = (int)$item['product_price']*0.5;
+            }
+            $reduction_money = (int)$reduction_money;
+            if($_SESSION['login_info']['type'] == 'buyer'){
+            $item['reduction_money'] = $reduction_money;
+            $ret[$item['reduction_money']] = $item;
+            }
+            krsort($ret);
+            }
+            foreach($ret as $item){
+            ?>
             <td>
               <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>">
 
             </td>
             <td>
-              <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$reduction_money?>"><span
-                class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h3>
+              <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>"><span
+                      class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h3>
               <!--              <p class="mt-2 sub-info"><?=$item['product_detail']?></p>-->
             </td>
             <td>
               <p><?=$item['product_quantity']?></p>
             </td>
             <td>
-              <p><?=$product_price?>원</p>
+              <p><?=number_format($item['product_price'])?>원</p>
 
             </td>
             <td>
-              <p><?=number_format($reduction_money)?>원</p>
+              <p><?=number_format($item['reduction_money'])?>원</p>
             </td>
           </tr>
           <?php
-                }
               }
-          ?>
+              }else{
+               foreach($ranking as $item){
+            ?>
+          <tr>
+            <td>
+              <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>"
+                   alt="기업로고">
+            </td>
+            <td>
+              <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>"><span
+                      class="text-primary"><?=$item["company_name"]?></span> / <?=$item["product_name"]?></a></h3>
+              <!--                <p class="sub-info"><?=$item["product_detail"]?></p>-->
+            </td>
+            <td>
+              <p><?=$item["product_quantity"]?></p>
+            </td>
+            <td>
+              <p><?=number_format($item["product_price"])?>원</p>
+            </td>
+            <td>
+              <p><?=number_format($item["reduction_money"])?>원</p>
+            </td>
+          </tr>
+          <?php
+            }
+            }
+            }
+            ?>
           </tbody>
         </table>
 
@@ -122,11 +158,17 @@ $levy = $base * $employ *12; //부담금
             </thead>
             <tbody>
             <?php
-          if(is_array($list)&& count($list)){
-          foreach($list as $item){
-           $product_price = number_format($item["product_price"]);
-             $result_price = $item['reduction'] *$base;
-             $reduction_money = 0;
+
+          if(is_array($list)&& count($list) > 0){
+            if($_GET["p_n"]!=""){
+            $i=($_GET["p_n"]-1)*10+1;
+            }
+            $ret = array();
+            if ($_SESSION['login_info']['type'] == 'buyer') {
+            foreach($list as $item){
+            $product_price = number_format($item["product_price"]);
+            $result_price = $item['reduction'] *$base;
+            $reduction_money = 0;
             if($result_price > $levy ){
             $reduction_money = $levy*0.6;
             }else if($result_price >$item["product_price"]*0.5){
@@ -134,40 +176,100 @@ $levy = $base * $employ *12; //부담금
             }else{
             $reduction_money = $result_price *12;
             }
-            $reduction_money = (int)$reduction_money;
             if($reduction_money > $item['product_price']*0.5){
             $reduction_money = (int)$item['product_price']*0.5;
             }
-          ?>
+            $reduction_money = (int)$reduction_money;
+            if($_SESSION['login_info']['type'] == 'buyer'){
+            $item['reduction_money'] = $reduction_money;
+            $ret[$item['reduction_money']] = $item;
+            }
+            krsort($ret);
+            }
+            foreach($ret as $item){
+            ?>
             <tr>
               <td>
                 <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>"
                      alt="기업로고">
               </td>
               <td>
-                <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$reduction_money?>"><span
-                  class="text-primary"><?=$item["company_name"]?></span> / <?=$item["product_name"]?></a></h3>
+                <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>"><span
+                        class="text-primary"><?=$item["company_name"]?></span> / <?=$item["product_name"]?></a></h3>
                 <!--                <p class="sub-info"><?=$item["product_detail"]?></p>-->
               </td>
               <td>
                 <p><?=$item["product_quantity"]?></p>
               </td>
               <td>
-                <p><?=$product_price?>원</p>
+                <p><?=number_format($item["product_price"])?>원</p>
               </td>
               <td>
-                <p><?=number_format($reduction_money)?>원</p>
+                <p><?=number_format($item["reduction_money"])?>원</p>
               </td>
             </tr>
             <?php
-                }
               }
+              }else{
+               foreach($list as $item){
+            ?>
+            <tr>
+              <td>
+                <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>"
+                     alt="기업로고">
+              </td>
+              <td>
+                <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>"><span
+                        class="text-primary"><?=$item["company_name"]?></span> / <?=$item["product_name"]?></a></h3>
+                <!--                <p class="sub-info"><?=$item["product_detail"]?></p>-->
+              </td>
+              <td>
+                <p><?=$item["product_quantity"]?></p>
+              </td>
+              <td>
+                <p><?=number_format($item["product_price"])?>원</p>
+              </td>
+              <td>
+                <p><?=number_format($item["reduction_money"])?>원</p>
+              </td>
+            </tr>
+            <?php
+            }
+            }
+            }
             ?>
             </tbody>
-
           </table>
-
         </div>
+        <?php
+            if(!is_array($list)){
+            ?>
+        <h2 class="text-center fw-bold my-5">등록된 상품이 없습니다</h2>
+        <?php
+             }
+              ?>
       </div>
+      <div class="float-start"><div class="dataTables_info" id="datatables_info" role="status" aria-live="polite"></div></div>
+      <ul style="float: right" class="pagination">
+        <li class="paginate_button page-item previous disabled" id="datatables_previous">
+          <?php
+         $value = $_GET["value"];
+         $data_page_num = ($data_page_total_cnt/10) + 1;
+         for($i=1;$i<=$data_page_num;$i++){
+              if($_GET["p_n"]==$i){?>
+        <li class="paginate_button page-item active">
+          <?php }else{ ?>
+        <li class="paginate_button page-item">
+          <?php } ?>
+          <a href="javascript:nextPage(<?=$value?>,<?=$i?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a></li>
+        <?php }?>
+      </ul>
+    </div>
   </section>
 </div>
+<script>
+
+  function nextPage(value,p_n){
+    location.href = '/Buyer/Shop/List?value='+value+'&p_n='+p_n;
+  }
+</script>

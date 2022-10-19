@@ -56,27 +56,8 @@ class SellerModel extends CommonModel
             return null;
         }
     }
-    public function getProductList($uuid,$page_query,$limit){
-        $limit = "";
-        if($limit){
-            $limit = "limit ".$limit;
-        }
-        $l_start = $page_query["length"] * ($page_query["page"] - 1);
-        $l_end = $page_query["length"];
-        $limit_query = "limit ".$l_start.", ".$l_end;
-
-        $data = [];
-        // total
-        $query = "
-            select
-                count(*)
-            from
-                seller_product
-            where register_id ='".$uuid."'
-        ";
-        $data["count"] = $this->rodb->simple_query($query);
+    public function getProductList($uuid){
         $where_query = "";
-
         if($_GET["search_A"] != ""){
             $where_query = $where_query." and product_name like '%".$_GET["search_A"]."%'";
         }
@@ -95,16 +76,28 @@ class SellerModel extends CommonModel
             $where_query = $where_query." ";
         }
 
-        $data["data"] = [];
+        $data = [];
         $query = "
             select
                 *
             from
               seller_product  
-            where register_id ='".$uuid."'".$where_query." ".$limit_query."       
+            where del_yn != 'Y' and register_id ='".$uuid."'".$where_query." 
         ";
-       // echo $query;
-      //  $query = $query." order by register_date  desc";
+
+        $data_cnt = [];
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $data_cnt[] = $row;
+        }
+        $data["count"] = count($data_cnt);
+        $page_start = 0;
+        if($_GET["p_n"] != ""){
+            $page_start = ($_GET["p_n"] - 1)*10;
+        }
+        $query = $query." order by register_date desc";
+        $query = $query." limit ".$page_start.", 10";
+
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
             $data["data"][] = $row;
@@ -319,4 +312,41 @@ class SellerModel extends CommonModel
         return $disabledCount;
     }
 
+    public function getQuestionsList(){
+        $uuid = $_SESSION['login_info']['uuid'];
+        $questions =[];
+        $query = "
+            select
+            *
+            from
+             questions_board          
+            where user_uuid = '".$uuid."'
+            order by update_date desc
+            limit 4        
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $questions[] = $row;
+        }
+        return $questions;
+    }
+
+    public function getProductreplyList(){
+        $uuid = $_SESSION['login_info']['uuid'];
+        $questions =[];
+        $query = "
+            select
+            *
+            from
+             seller_product_reply          
+            where user_uuid = '".$uuid."'
+            order by update_date desc
+            limit 4        
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $questions[] = $row;
+        }
+        return $questions;
+    }
 }
