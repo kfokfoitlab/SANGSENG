@@ -333,20 +333,61 @@ class SellerModel extends CommonModel
 
     public function getProductreplyList(){
         $uuid = $_SESSION['login_info']['uuid'];
-        $questions =[];
+	    $product_reply =[];
         $query = "
             select
             *
             from
-             seller_product_reply          
-            where user_uuid = '".$uuid."'
+             seller_product
+            where register_id = '".$uuid."'
+            and del_yn='N'
             order by update_date desc
             limit 4        
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
-            $questions[] = $row;
+	        $product_reply["data"][] = $row;
         }
-        return $questions;
+	    foreach($product_reply["data"] as $item){
+		    $product_reply["replyCount"][] = $this->SellerReplyCount($item["product_no"]);
+	    }
+		
+        return $product_reply;
     }
+	
+	public function getNoticeList(){
+		$notice_list =[];
+		$query = "
+            select
+            *
+            from
+             notice_board
+            where del_yn='N'
+            order by register_date desc
+            limit 7
+        ";
+		$this->rodb->query($query);
+		while($row = $this->rodb->next_row()){
+			$notice_list[] = $row;
+		}
+		
+		return $notice_list;
+	}
+	
+	public function SellerReplyCount($data){
+		$product_no = $data;
+		
+		$query = "
+            select
+                count(*)
+            from
+                seller_product_reply
+            where
+                product_no = '".$product_no."'
+                and reply_step = 1
+            limit 1
+        ";
+		
+		return $this->rodb->simple_query($query);
+	}
 }

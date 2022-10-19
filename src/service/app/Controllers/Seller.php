@@ -28,7 +28,8 @@ class Seller extends BaseController
         $contractList = $this->seller_model->getContract($uuid);
         $disabledCount = $this->seller_model->getDisabledCount($uuid);
         $questions = $this->seller_model->getQuestionsList();
-        $product_reply = $this->seller_model->getProductreplyList();
+	    $product_reply = $this->seller_model->getProductreplyList();
+	    $notice_list = $this->seller_model->getNoticeList();
 
         $data = array(
             "totalSales" => $totalSales
@@ -37,6 +38,8 @@ class Seller extends BaseController
        ,"contractList" =>  $contractList
        ,"disabledCount" =>  $disabledCount
         ,"questions" =>  $questions
+	        ,"product_reply" => $product_reply
+	        ,"notice_list" => $notice_list
         );
 	    $_SESSION["disabledCount"] = $this->sigin_model->getWorkerCount();
 
