@@ -79,14 +79,9 @@
           <button class="btn btn-sm btn-primary px-3" onclick="Product_Search();">검색</button>
         </div>
         <div class="d-flex justify-content-between align-items-center mt-5 pt-3 border-top border-2">
-          <?php
-          $count = 0;
-          if(is_array($data)){
-          $count = count($data);
-          ?>
-          <span>상품목록 (총 <strong><?=$count?></strong>개)</span>
-        <?php
-        }?>
+
+          <span>상품목록 (총 <strong><?=$data_page_total_cnt?></strong>개)</span>
+
           <div class="d-flex">
             <!-- <select class="form-select form-select-sm me-2" aria-label="Default select">
                <option value="all" selected>전체</option>
@@ -179,8 +174,8 @@
             ?>
           </tbody>
         </table>
-      <?php if($data_page_total_cnt == 0){ echo"<div class='text-center'><span>등록된 상품이 없습니다</span></div>"; }?>
-</div>
+      <?php if($data_page_total_cnt == 0){ echo"<div class='text-center'><span>등록된 상품이 없습니다</span>"; }?>
+
 </div>
 <div class="float-start"><div class="dataTables_info" id="datatables_info" role="status" aria-live="polite"></div></div>
 <ul style="float: right" class="pagination">
