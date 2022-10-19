@@ -132,50 +132,73 @@ $end_date = date("Y-m-d", $timestamp);
           <div class="row mb-3">
             <div class="col-6">
               <p class="mb-1 fw-bold">대표 이미지</p>
-              <p class="mb-1">기존파일 : <?=$item['representative_image']?></p>
-              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['representative_image']?>','대표이미지<?=substr($item['representative_image'],-4)?>');">기존파일
-                다운로드
+              <p class="mb-1">기존파일 : <?=$data['representative_image_ori']?></p>
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["representative_image"]?>','<?=$data["representative_image_ori"]?>');">기존파일
+              다운로드
               </button>
             </div>
             <div class="col-6">
-              <img style="width: 200px; height: 200px;" src="" alt="">
+              <?php
+                if($data['representative_image'] != ""){
+                ?>
+              <img style="width: 200px; height: 200px;"src="/uploads/<?=$data["representative_image"]?>" alt="">
+              <?php
+              }
+              ?>
             </div>
           </div>
           <div class="row mb-3">
             <div class="col-6">
               <p class="mb-1 fw-bold">추가 이미지 01 (선택사항)</p>
-              <p class="mb-1">기존파일 : <?=$item['product_image1']?></p>
-              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['product_image1']?>','추가이미지01<?=substr($item['product_image1'],-4)?>');">기존파일
+              <p class="mb-1">기존파일 : <?=$data['product_image1_ori']?></p>
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["product_image1"]?>','<?=$data["product_image1_ori"]?>');">기존파일
                 다운로드
               </button>
             </div>
             <div class="col-6">
-              <img style="width: 200px; height: 200px;" src="" alt="">
+              <?php
+                if($data['product_image1'] != ""){
+                ?>
+              <img style="width: 200px; height: 200px;"  alt=""src="/uploads/<?=$data["product_image1"]?>">
+              <?php
+              }
+              ?>
             </div>
           </div>
           <div class="row mb-3">
             <div class="col-6">
               <p class="mb-1 fw-bold">추가 이미지 02 (선택사항)</p>
-              <p class="mb-1">기존파일 : <?=$item['product_image2']?></p>
-              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['product_image1']?>','추가이미지01<?=substr($item['product_image1'],-4)?>');">기존파일
+              <p class="mb-1">기존파일 : <?=$data['product_image2_ori']?></p>
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["product_image2_ori"]?>','<?=$data["product_image2_ori"]?>');">기존파일
                 다운로드
               </button>
             </div>
             <div class="col-6">
-              <img style="width: 200px; height: 200px;" src="" alt="">
+              <?php
+                if($data['product_image2'] != ""){
+                ?>
+              <img style="width: 200px; height: 200px;" alt="" src="/uploads/<?=$data["product_image2"]?>">
+              <?php
+              }
+              ?>
             </div>
           </div>
           <div class="row">
             <div class="col-6">
               <p class="mb-1 fw-bold">상품상세 이미지 (선택사항)</p>
-              <p class="mb-1">기존파일 : <?=$item['detail_img']?></p>
-              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['detail_img']?>','상세이미지<?=substr($item['detail_img'],-4)?>');">기존파일
+              <p class="mb-1">기존파일 : <?=$data['detail_img_ori']?></p>
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["detail_img"]?>','<?=$data["detail_img_ori"]?>');">기존파일
                 다운로드
               </button>
             </div>
             <div class="col-6">
-              <img style="width: 200px; height: 200px;" src="" alt="">
-            </div>
+              <?php
+                if($data['detail_img'] != ""){
+                ?>
+              <img style="width: 200px; height: 200px;" alt="" src="/uploads/<?=$data["detail_img"]?>">
+              <?php
+              }
+              ?>
           </div>
         </div>
       </div>
@@ -188,4 +211,13 @@ $end_date = date("Y-m-d", $timestamp);
   </div>
 
 </section>
+<script>
 
+function downloadFileNew(fileName,fileNameOri){
+if(fileName == ""){
+alert("등록된 파일이 없습니다");
+}else {
+location.href = "/<?=_CONTROLLER?>/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+}
+};
+</script>

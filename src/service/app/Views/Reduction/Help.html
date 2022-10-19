@@ -53,12 +53,18 @@
               <td>
                 <p class="fw-bold mb-2">지급증빙서류</p>
                 <form method="post" id ="fileForm"  action ="/Reduction/Help/ProvisionUpload"  enctype="multipart/form-data">
-                  <input type="hidden" name ="cn" value="<?=$_GET['cn']?>">
+                  <input type="hidden" name ="cn" id ="cn" value="<?=$_GET['cn']?>">
+                  <?php
+                  if($_GET['cn'] != ""){
+                  ?>
                   <label for="provision_file" class="btn btn-outline-success btn-sm fw-normal">파일 선택</label>
                   <input type="file" id="provision_file" name="provision_file" class="d-none">
                   <button type="button" onclick="file_check();" class="btn btn-success btn-sm fw-normal">등록</button>
                   <p class="upload-text mt-1">: <span class="upload-name">선택된 파일이 없습니다.</span></p>
                   <input type="hidden" name ="contract_no" value="<?=$workflow['contract_no']?>">
+                  <?php
+                  }
+                  ?>
                 </form>
               </td>
               <td>
@@ -159,7 +165,7 @@
  })
 
  function file_check(){
-   if($("#provision_file").val() ==""){
+   if($("#provision_file").val() =="" ){
      alert("파일을 선택해주세요");
    }else{
      $("#fileForm").submit();
@@ -167,40 +173,52 @@
  }
 
   function Contract_Detail(workflow_id){
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
-      }
-    };
-    fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_id + '?offset=%2B09%3A00', options)
-            .then(response => response.json())
-            .then(response => /*console.log(response)*/{
-              if(response['download_url'] == ""){
-                window.open(response['playing_url']);
-              }else{
-                window.open(response['download_url']);
-              }
-            })
-            .catch(err => console.error(err));
+   if($("#cn").val() == ""){
+     alert("계약서를 먼저 선택해주세요");
+   }else {
+     const options = {
+       method: 'GET',
+       headers: {
+         accept: 'application/json',
+         Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+       }
+     };
+     fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_id + '?offset=%2B09%3A00', options)
+             .then(response => response.json())
+             .then(response => /*console.log(response)*/ {
+               if (response['download_url'] == "") {
+                 window.open(response['playing_url']);
+               } else {
+                 window.open(response['download_url']);
+               }
+             })
+             .catch(err => console.error(err));
+   }
   }
 
   function downloadFileNew(fileName,fileNameOri){
-    if(fileName == ""){
-      alert("등록된 파일이 없습니다");
+    if($("#cn").val() == "") {
+      alert("계약서를 먼저 선택해주세요");
     }else {
-      location.href = "/Reduction/Help/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+      if (fileName == "") {
+        alert("등록된 파일이 없습니다");
+      } else {
+        location.href = "/Reduction/Help/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+      }
     }
   };
 
  function uploadCheck(fileName,fileNameOri){
-   if(fileName != ""){
-     location.href = "/Reduction/Help/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
-   }else if($('#provision_file').val() == ""){
-     alert("파일을 먼저 등록해주세요");
-   }else{
-     alert("등록된 파일이 없습니다.");
+   if($("#cn").val() == "") {
+     alert("계약서를 먼저 선택해주세요");
+   }else {
+     if (fileName != "") {
+       location.href = "/Reduction/Help/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+     } else if ($('#provision_file').val() == "") {
+       alert("파일을 먼저 등록해주세요");
+     } else {
+       alert("등록된 파일이 없습니다.");
+     }
    }
  }
 </script>

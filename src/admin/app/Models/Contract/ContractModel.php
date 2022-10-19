@@ -10,7 +10,7 @@ class ContractModel extends CommonModel
     { // {{{
         $items = array();
 
-        $common_query = " 1 AND del_yn != 'Y' ";
+        $common_query = " 1 ";
 
         // total records -------------------------------- {{{
         $query = "
@@ -401,7 +401,8 @@ class ContractModel extends CommonModel
                 update
                     contract_condition
                 set
-                    del_yn = 'Y'
+                del_yn = 'Y'
+                ,contract_status = '8'
                 where 1=1
                   AND idx = ".$data["idx"]."
             ";
