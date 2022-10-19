@@ -124,7 +124,7 @@ class BuyerModel extends CommonModel
               ,product_name = '".$data["product_name"]."'
               ,product_price = '".$data["product_price"]."'
               ,buyer_company = '".$data["buyer_company"]."'
-              ,product_quantity = '".$data["product_quantity"]."'
+              ,product_quantity = '".$product_quantity."'
               ,reduction_money = '".$reduction_money."'
               ,product_no = '".$data["product_no"]."'       
               ,register_date ='".date("Y-m-d")."'
@@ -264,8 +264,10 @@ class BuyerModel extends CommonModel
             $list["data"][]= $row;
 
         }
-        foreach($list["data"] as $item){
-            $list["replyCount"][] = $this->SellerReplyCount($item["product_no"]);
+        if(!empty($list['data'])) {
+            foreach ($list["data"] as $item) {
+                $list["replyCount"][] = $this->SellerReplyCount($item["product_no"]);
+            }
         }
         return $list;
     }

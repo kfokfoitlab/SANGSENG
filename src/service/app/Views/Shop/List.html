@@ -29,7 +29,7 @@ if($employ != 0){
 $base = 1149000;
 $levy = $base * $employ *12; //부담금
 ?>
-  <div class="flex-grow-1 pb-5">
+<div class="flex-grow-1 pb-5">
   <section class="shop-list">
     <div class="auto-container">
       <div class="w-100 py-5 mb-5">
@@ -43,7 +43,7 @@ $levy = $base * $employ *12; //부담금
           <th>감면액</th>
           <tbody>
           <tr>
-          <?php
+            <?php
           if(is_array($ranking) && count($ranking)){
            $ret = array();
             foreach($ranking as $item){
@@ -52,11 +52,11 @@ $levy = $base * $employ *12; //부담금
               $reduction_money = 0;
               if($result_price > $levy){
             $reduction_money = $levy*0.6;
-              }else if($result_price >$item["product_price"]*0.5){
+            }else if($result_price >$item["product_price"]*0.5){
             $reduction_money = $item["product_price"]*0.5 * 12;
-              }else{
+            }else{
             $reduction_money = $result_price * 12;
-             }
+            }
             if($reduction_money > $item['product_price']*0.5){
             $reduction_money = $item['product_price']*0.5;
             }
@@ -64,17 +64,18 @@ $levy = $base * $employ *12; //부담금
             $item['reduction_money'] = $reduction_money;
             $ret[$item['reduction_money']] = $item;
             }
+            }
             krsort($ret);
             foreach($ret as $item){
-            }
-          ?>
+
+            ?>
             <td>
               <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>">
 
             </td>
             <td>
               <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>"><span
-                class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h3>
+                      class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h3>
               <!--              <p class="mt-2 sub-info"><?=$item['product_detail']?></p>-->
             </td>
             <td>
@@ -135,11 +136,11 @@ $levy = $base * $employ *12; //부담금
             if($_GET["p_n"]!=""){
             $i=($_GET["p_n"]-1)*10+1;
             }
-          $ret = array();
-          foreach($list as $item){
-           $product_price = number_format($item["product_price"]);
-             $result_price = $item['reduction'] *$base;
-             $reduction_money = 0;
+            $ret = array();
+            foreach($list as $item){
+            $product_price = number_format($item["product_price"]);
+            $result_price = $item['reduction'] *$base;
+            $reduction_money = 0;
             if($result_price > $levy ){
             $reduction_money = $levy*0.6;
             }else if($result_price >$item["product_price"]*0.5){
@@ -147,18 +148,18 @@ $levy = $base * $employ *12; //부담금
             }else{
             $reduction_money = $result_price *12;
             }
-            $reduction_money = (int)$reduction_money;
             if($reduction_money > $item['product_price']*0.5){
             $reduction_money = (int)$item['product_price']*0.5;
             }
+            $reduction_money = (int)$reduction_money;
             if($_SESSION['login_info']['type'] == 'buyer'){
             $item['reduction_money'] = $reduction_money;
             $ret[$item['reduction_money']] = $item;
             }
+            }
             krsort($ret);
             foreach($ret as $item){
-          }
-          ?>
+            ?>
             <tr>
               <td>
                 <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>"
@@ -166,7 +167,7 @@ $levy = $base * $employ *12; //부담금
               </td>
               <td>
                 <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>"><span
-                  class="text-primary"><?=$item["company_name"]?></span> / <?=$item["product_name"]?></a></h3>
+                        class="text-primary"><?=$item["company_name"]?></span> / <?=$item["product_name"]?></a></h3>
                 <!--                <p class="sub-info"><?=$item["product_detail"]?></p>-->
               </td>
               <td>
@@ -182,12 +183,11 @@ $levy = $base * $employ *12; //부담금
             <?php
               }
               }
-
             ?>
             </tbody>
 
           </table>
-      </div>
+        </div>
         <?php
             if(!is_array($list)){
             ?>
