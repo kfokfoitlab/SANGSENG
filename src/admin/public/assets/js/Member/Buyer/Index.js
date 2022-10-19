@@ -46,13 +46,13 @@ $(document).ready(function(){
                     switch(data){
                         case "0":
                         case "1":
-                            html = "<span class='badge bg-info'>심사중</span>";
+                            html = "<span class='badge bg-primary'>심사중</span>";
                             break;
                         case "5":
-                            html = "<span class='badge bg-primary'>승인</span>";
+                            html = "<span class='badge bg-success'>승인</span>";
                             break;
                         case "7":
-                            html = "<span class='badge bg-danger'>등록거절</span>";
+                            html = "<span class='badge bg-danger'>거절</span>";
                             break;
                         case "9":
                             html = "<span class='badge bg-dark'>탈퇴</span>";
@@ -65,10 +65,10 @@ $(document).ready(function(){
             ,{title: "진행상황변경", data: "idx", visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){
                     let html = "";
-                    html += "<input class='btn btn-info btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",1)' value='심사중'>";
+                    html += "<input class='btn btn-primary btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",1)' value='심사중'>";
                     html += "<input class='btn btn-success btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",5)' value='승인'>";
                     html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",7)' value='거절'>";
-                    html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",9)' value='탈퇴'>";
+                    html += "<input class='btn btn-dark btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",9)' value='탈퇴'>";
 
                     return html;
                 }
