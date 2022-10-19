@@ -79,8 +79,14 @@
           <button class="btn btn-sm btn-primary px-3" onclick="Product_Search();">검색</button>
         </div>
         <div class="d-flex justify-content-between align-items-center mt-5 pt-3 border-top border-2">
-          <span>상품목록 (총 <strong><?=count($data)?></strong>개)</span>
-
+          <?php
+          $count = 0;
+          if(is_array($data)){
+          $count = count($data);
+          ?>
+          <span>상품목록 (총 <strong><?=$count?></strong>개)</span>
+        <?php
+        }?>
           <div class="d-flex">
             <!-- <select class="form-select form-select-sm me-2" aria-label="Default select">
                <option value="all" selected>전체</option>
