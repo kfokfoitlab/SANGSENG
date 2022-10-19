@@ -279,21 +279,25 @@ function contract_update(field_name,field_value) {
 }
 
 function contractView(workflow_id){
-    const options = {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-            Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
-        }
-    };
-    fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_id + '?offset=%2B09%3A00', options)
-        .then(response => response.json())
-        .then(response => /*console.log(response)*/{
-            if(response['download_url'] == ""){
-                window.open(response['playing_url']);
-            }else{
-                window.open(response['download_url']);
+    if(workflow_id == "" || workflow_id == null){
+        alert("아직 계약서가 전송되지 않았습니다.")
+    }else {
+        const options = {
+            method: 'GET',
+            headers: {
+                accept: 'application/json',
+                Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
             }
-        })
-        .catch(err => console.error(err));
+        };
+        fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_id + '?offset=%2B09%3A00', options)
+            .then(response => response.json())
+            .then(response => /*console.log(response)*/ {
+                if (response['download_url'] == "") {
+                    window.open(response['playing_url']);
+                } else {
+                    window.open(response['download_url']);
+                }
+            })
+            .catch(err => console.error(err));
+    }
 }
