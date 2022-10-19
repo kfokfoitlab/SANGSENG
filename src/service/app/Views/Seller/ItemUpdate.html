@@ -20,11 +20,6 @@
         ?>
         <form name="myForm" method="post" action="/Seller/Item/ItemUpdateSubmit" enctype="multipart/form-data">
         <input type="hidden"  value="<?=$item['product_no']?>" name = "product_no">
-          <input type="hidden" value="<?=$item['representative_image']?>" name="representative_image_ori_name">
-          <input type="hidden" value="<?=$item['product_image1']?>" name="product_image1_ori_name">
-          <input type="hidden" value="<?=$item['product_image2']?>" name="product_image2_ori_name">
-          <input type="hidden" value="<?=$item['detail_img']?>" name="detail_img">
-
           <div class="px-3">
             <div class="row mb-4 align-items-center">
               <div class="col-2">
@@ -149,10 +144,12 @@
                     <div class="col-6 ms-4 px-4 py-3">
                       <label for="representative-img" class="form-label">대표 이미지</label>
                       <input id="representative-img" name="representative_image" class="form-control product-img-input mb-2"
-                           value ="" type="file" accept="image/*" />기존파일 : <?=$item['representative_image']?>
-                      <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['representative_image']?>','대표이미지<?=substr($item['representative_image'],-4)?>');">기존파일
+                           type="file" accept="image/*" />기존파일 : <?=$item['representative_image_ori']?>
+                      <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$item["representative_image"]?>','<?=$item["representative_image_ori"]?>');">기존파일
                         다운로드
                       </button>
+                      <input type="hidden" name="representative_image" value='<?=$item["representative_image"]?>'>
+                      <input type="hidden" name="representative_image_ori" value='<?=$item["representative_image_ori"]?>'>
                     </div>
                   </li>
                   <!-- 추가이미지 -->
@@ -172,11 +169,13 @@
                     </div>
                     <div class="col-6 ms-4 px-4 py-3">
                       <label for="product-img1" class="form-label text-secondary">추가 이미지 01<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
-                      <input id="product-img1" value ="" name="product_image1" class="form-control product-img-input mb-2" type="file"
-                             accept="image/*"/>기존파일 : <?=$item['product_image1']?>
-                      <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['product_image1']?>','추가이미지01<?=substr($item['product_image1'],-4)?>');">기존파일
+                      <input id="product-img1"  name="product_image1" class="form-control product-img-input mb-2" type="file"
+                             accept="image/*"/>기존파일 : <?=$item['product_image1_ori']?>
+                      <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$item["product_image1"]?>','<?=$item["product_image1_ori"]?>');">기존파일
                         다운로드
                       </button>
+                      <input type="hidden" name="product_image1" value='<?=$item["product_image1"]?>'>
+                      <input type="hidden" name="product_image1_ori" value='<?=$item["product_image1"]?>'>
                     </div>
                   </li>
                   <li class="row">
@@ -195,11 +194,13 @@
                     </div>
                     <div class="col-6 ms-4 px-4 py-3">
                       <label for="product-img2" class="form-label text-secondary">추가 이미지 02<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
-                      <input id="product-img2" name="product_image2" value ="" class="form-control product-img-input mb-2" type="file"
-                             accept="image/*"/>기존파일 : <?=$item['product_image2']?>
-                      <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['product_image2']?>','추가이미지02<?=substr($item['product_image2'],-4)?>');">기존파일
-                        다운로드
+                      <input id="product-img2" name="product_image2" class="form-control product-img-input mb-2" type="file"
+                             accept="image/*"/>기존파일 : <?=$item['product_image2_ori']?>
+                      <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$item["product_image2"]?>','<?=$item["product_image2_ori"]?>');">기존파일
+                      다운로드
                       </button>
+                      <input type="hidden" name="product_image2" value='<?=$item["product_image2"]?>'>
+                      <input type="hidden" name="product_image2_ori" value='<?=$item["product_image2_ori"]?>'>
                     </div>
                   </li>
                 </ul>
@@ -229,10 +230,12 @@
             <div class="col-6 ms-4 px-4 py-3">
               <label for="detail-img" class="form-label text-secondary">상품상세 이미지<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
               <input id="detail-img" name="detail_img" class="form-control product-img-input mb-2" type="file"
-                     accept="image/*"/>기존파일 : <?=$item['detail_img']?>
-              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['detail_img']?>','상세이미지<?=substr($item['detail_img'],-4)?>');">기존파일
-                다운로드
+                     accept="image/*"/>기존파일 : <?=$item['detail_img_ori']?>
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$item["detail_img"]?>','<?=$item["detail_img_ori"]?>');">기존파일
+              다운로드
               </button>
+              <input type="hidden" name="detail_img" value='<?=$item["detail_img"]?>'>
+              <input type="hidden" name="detail_img_ori" value='<?=$item["detail_img_ori"]?>'>
             </div>
             </li>
         <?php
@@ -282,7 +285,7 @@
 		if(fileName == ""){
 			alert("등록된 파일이 없습니다");
 		}else {
-			location.href = "/Download/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+          location.href = "/Seller/MyPage/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
 		}
 	};
 

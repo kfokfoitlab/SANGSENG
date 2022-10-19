@@ -164,60 +164,45 @@ class ProductModel extends CommonModel
 
     public function Update($files, $data)
     { //{{{
-      /*  $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG');
-        $upload_face_ori = "upload_face";
-        $upload_face = $data["upload_face_ori_name"];
-        $upload_card = $data["upload_card_ori_name"];
-        if($files["upload_face"]["name"] != "") {
-            $upload_face = uniqid() . "." . pathinfo($files["upload_face"]["name"], PATHINFO_EXTENSION);
-            $this->uploadFileNew($files, $upload_face, $allowed_ext, $upload_face_ori);
+        $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG');
+
+        if($files["representative_image"]["name"] != ""){
+            $representative_ori = $files["representative_image"]["name"];
+            $upload_representative_ori = "representative_image";
+            $upload_representative = uniqid().".".pathinfo($files["representative_image"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_representative,$allowed_ext,$upload_representative_ori);
+        }else{
+            $representative_ori = $data["representative_image"];
+            $upload_representative = $data["representative_image"];
         }
-        $upload_card_ori = "upload_card";
-        if($files["upload_face"]["name"] != "") {
-            $upload_card = uniqid() . "." . pathinfo($files["upload_card"]["name"], PATHINFO_EXTENSION);
-            $this->uploadFileNew($files, $upload_card, $allowed_ext, $upload_card_ori);
+        if($files["product_image1"]["name"] != ""){
+            $product_image1_ori = $files["product_image1"]["name"];
+            $upload_image1_ori = "product_image1";
+            $upload_image1 = uniqid().".".pathinfo($files["product_image1"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_image1,$allowed_ext,$upload_image1_ori);
+        }else{
+            $product_image1_ori = $data["product_image1"];
+            $upload_image1 = $data["product_image1"];
+        }
+        if($files["product_image2"]["name"] != ""){
+            $product_image2_ori = $files["product_image2"]["name"];
+            $upload_image2_ori = "product_image2";
+            $upload_image2 = uniqid().".".pathinfo($files["product_image2"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_image2,$allowed_ext,$upload_image2_ori);
+        }else{
+            $product_image2_ori = $data["product_image2"];
+            $upload_image2 = $data["product_image2"];
+        }
+        if($files["detail_img"]["name"] != ""){
+            $detail_img_ori = $files["detail_img"]["name"];
+            $upload_detail_image_ori = "detail_img";
+            $upload_detail_image = uniqid().".".pathinfo($files["detail_img"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_detail_image,$allowed_ext,$upload_detail_image_ori);
+        }else{
+            $detail_img_ori = $data["detail_img"];
+            $upload_detail_image = $data["detail_img"];
         }
 
-        // profile image upload
-        $file = $files["representative_image"];
-        if($file["error"] == 0){
-            // 기존 파일 있으면 업데이트
-            $query = "
-                select
-                    profile_img_uuid
-                from
-                    ".$this->table_name."
-                where
-                    idx = '".$data["idx"]."'
-                limit 1
-            ";
-            $origin_representative_image_img = $this->rodb->simple_query($query);
-            $new_profile_img_uuid = $this->uploadFiles($file, $origin_representative_image_img);
-        }
-        else {
-            $profile_img_uuid = ",profile_img_uuid = null";
-        }
-
-        // welfare card upload
-        $file = $files["welfare_img"];
-        if($file["error"] == 0){
-            // 기존 파일 있으면 업데이트
-            $query = "
-                select
-                    welfare_card_uuid
-                from
-                    ".$this->table_name."
-                where
-                    uuid = '".$data["uuid"]."'
-                limit 1
-            ";
-            $origin_welfare_card_uuid = $this->rodb->simple_query($query);
-            $new_welfare_card_uuid = $this->uploadFiles($file, $origin_welfare_card_uuid);
-            $welfare_card_uuid = ",welfare_card_uuid = '".$new_welfare_card_uuid."'";
-        }
-        else {
-            $welfare_card_uuid = ",welfare_card_uuid = null";
-        }*/
 
         $query = "
             update
@@ -234,6 +219,14 @@ class ProductModel extends CommonModel
                 ,product_detail = '".$data["product_detail"]."'
                 ,product_ranking = '".$data["product_ranking"]."'    
                 ,product_detail = '".$data["product_detail"]."'    
+                ,representative_image = '".$upload_representative."'
+                ,product_image1 = '".$upload_image1."'
+                ,product_image2 = '".$upload_image2."'
+                ,detail_img = '".$upload_detail_image."'
+                ,representative_image_ori = '".$representative_ori."'
+                ,product_image1_ori = '".$product_image1_ori."'
+                ,product_image2_ori = '".$product_image2_ori."'
+                ,detail_img_ori = '".$detail_img_ori."'
                 ,update_id  = '관리자'      
                 ,update_date = '".date("Y-m-d H:i:s")."'
             where

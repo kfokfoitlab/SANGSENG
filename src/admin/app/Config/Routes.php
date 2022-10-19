@@ -98,6 +98,7 @@ $routes->group('Contract', ['namespace' => 'App\Controllers\Contract'], static f
 $routes->group('Product', ['namespace' => 'App\Controllers\Product'], static function ($routes) {
     // 전체 목록
     $group_name = "Lists";
+    $routes->get ($group_name.'/downloadFileNew',            $group_name.'::downloadFileNew');
     $routes->get ($group_name.'/',                  $group_name.'::Index');
     $routes->post($group_name.'/getList',           $group_name.'::getList');
     $routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
