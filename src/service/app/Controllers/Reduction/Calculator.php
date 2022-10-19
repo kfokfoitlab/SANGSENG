@@ -19,9 +19,9 @@ class Calculator extends BaseController
 
     public function index()
     {
+
         echo view("Common/Header.html");
         echo view('Reduction/Calculator.html');
         echo view("Common/Footer.html");
     }
-
 }

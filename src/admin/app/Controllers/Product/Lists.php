@@ -162,5 +162,8 @@ class Lists extends Base
 	public function StatusComment(){
 		echo view(_CONTROLLER.'/StatusComment.html');
 	}
+    public function downloadFileNew(){
+        $this->model->downloadFileNew();
+    }
 
 }

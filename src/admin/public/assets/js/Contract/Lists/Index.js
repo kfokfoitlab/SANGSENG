@@ -68,6 +68,9 @@ $(document).ready(function(){
                         case "7":
                             html = "<span id ='check' class='badge bg-danger'>반려</span>";
                             break;
+                        case "8":
+                            html = "<span  id ='check' class='badge bg-dark'>삭제</span>";
+                            break;
                         case "9":
                             html = "<span  id ='check' class='badge bg-dark'>계약취소</span>";
                             break;

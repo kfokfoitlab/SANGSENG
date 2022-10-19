@@ -169,56 +169,64 @@ $end_date = date("Y-m-d", $timestamp);
             <div class="col-6">
               <label for="representative-img" class="form-label">대표 이미지</label>
               <input id="representative-img" name="representative_image" class="form-control product-img-input mb-2"
-                     value ="" type="file" accept="image/*" />기존파일 : <?=$item['representative_image']?>
+                     value ="" type="file" accept="image/*" />기존파일 : <?=$data['representative_image_ori']?>
               <br/>
-              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['representative_image']?>','대표이미지<?=substr($item['representative_image'],-4)?>');">기존파일
-                다운로드
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["representative_image"]?>','<?=$data["representative_image_ori"]?>');">기존파일
+              다운로드
               </button>
+              <input type="hidden" name="representative_image" value='<?=$data["representative_image"]?>'>
+              <input type="hidden" name="representative_image_ori" value='<?=$data["representative_image_ori"]?>'>
             </div>
             <div class="col-6">
-              <div class="preview-bg-img bg-light border rounded" style="background-image: url('/uploads/<?=$item['representative_image']?>')"></div>
+              <div class="preview-bg-img bg-light border rounded" style="background-image: url('/uploads/<?=$data['representative_image']?>')"></div>
             </div>
           </div>
           <div class="row mb-4">
             <div class="col-6">
               <label for="product-img1" class="form-label text-secondary">추가 이미지 01<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
               <input id="product-img1" value ="" name="product_image1" class="form-control product-img-input mb-2" type="file"
-                     accept="image/*"/>기존파일 : <?=$item['product_image1']?>
+                     accept="image/*"/>기존파일 : <?=$data['product_image1_ori']?>
               <br/>
-              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['product_image1']?>','추가이미지01<?=substr($item['product_image1'],-4)?>');">기존파일
-                다운로드
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["product_image1"]?>','<?=$data["product_image1_ori"]?>');">기존파일
+              다운로드
               </button>
+              <input type="hidden" name="product_image1" value='<?=$data["product_image1"]?>'>
+              <input type="hidden" name="product_image1_ori" value='<?=$data["product_image1_ori"]?>'>
             </div>
             <div class="col-6">
-              <div class="preview-bg-img border bg-light border rounded" style="background-image: url('/uploads/<?=$item['product_image1']?>')"></div>
+              <div class="preview-bg-img border bg-light border rounded" style="background-image: url('/uploads/<?=$data['product_image1']?>')"></div>
             </div>
           </div>
           <div class="row mb-4">
             <div class="col-6">
               <label for="product-img2" class="form-label text-secondary">추가 이미지 02<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
               <input id="product-img2" name="product_image2" value ="" class="form-control product-img-input mb-2" type="file"
-                     accept="image/*"/>기존파일 : <?=$item['product_image2']?>
+                     accept="image/*"/>기존파일 : <?=$data['product_image2_ori']?>
               <br/>
-              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['product_image2']?>','추가이미지02<?=substr($item['product_image2'],-4)?>');">기존파일
-                다운로드
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["product_image_ori"]?>','<?=$data["product_image2_ori"]?>');">기존파일
+              다운로드
               </button>
+              <input type="hidden" name="product_image2" value='<?=$data["product_image2"]?>'>
+              <input type="hidden" name="product_image2_ori" value='<?=$data["product_image2_ori"]?>'>
             </div>
             <div class="col-6">
-              <div class="preview-bg-img border bg-light border rounded" style="background-image: url('/uploads/<?=$item['product_image2']?>')"></div>
+              <div class="preview-bg-img border bg-light border rounded" style="background-image: url('/uploads/<?=$data['product_image2']?>')"></div>
             </div>
           </div>
           <div class="row">
             <div class="col-6">
               <label for="detail-img" class="form-label text-secondary">상품상세 이미지<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
               <input id="detail-img" name="detail_img" class="form-control product-img-input mb-2" type="file"
-                     accept="image/*"/>기존파일 : <?=$item['detail_img']?>
+                     accept="image/*"/>기존파일 : <?=$data['detail_img_ori']?>
               <br/>
-              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button" onclick="downloadFileNew('<?=$item['detail_img']?>','상세이미지<?=substr($item['detail_img'],-4)?>');">기존파일
-                다운로드
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["detail_img"]?>','<?=$data["detail_img_ori"]?>');">기존파일
+              다운로드
               </button>
+              <input type="hidden" name="detail_img" value='<?=$data["detail_img"]?>'>
+              <input type="hidden" name="detail_img_ori" value='<?=$data["detail_img_ori"]?>'>
             </div>
             <div class="col-6">
-              <div class="preview-bg-img border bg-light border rounded" style="background-image: url('/uploads/<?=$item['detail_img']?>')"></div>
+              <div class="preview-bg-img border bg-light border rounded" style="background-image: url('/uploads/<?=$data['detail_img']?>')"></div>
             </div>
           </div>
         </div>
@@ -263,4 +271,12 @@ $end_date = date("Y-m-d", $timestamp);
 			}
 		})
 	})
+
+    function downloadFileNew(fileName,fileNameOri){
+      if(fileName == ""){
+        alert("등록된 파일이 없습니다");
+      }else {
+        location.href = "/<?=_CONTROLLER?>/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+      }
+    };
 </script>

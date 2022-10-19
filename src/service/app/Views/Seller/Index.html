@@ -97,7 +97,7 @@
                     aria-controls="product"
                     aria-selected="false"
                   >
-                    상품문의
+                    상품리뷰
                   </button>
                   <span class="new-badge product-new-badge">N</span>
                 </li>
@@ -154,26 +154,25 @@
                   aria-labelledby="product-tab"
                 >
                   <ul>
+                  <?php
+                    if(is_array($product_reply)&& count($product_reply) > 0){
+                      $index=0;
+                      foreach($product_reply["data"] as $item){
+                  ?>
                     <li>
-                      <a class="d-flex justify-content-between new" href="">
-                        <span>상품명[댓글수]</span><span class="flex-shrink-0 text-secondary">22-08-01</span>
+                      <a class="d-flex justify-content-between new" href="/Buyer/Shop/Detail/<?=$item['product_no']?>">
+                        <span style="color: black"><?=$item["product_name"]?><b style="color: darkorange">(<?=$product_reply["replyCount"][$index]?>)</b></span><span class="flex-shrink-0 text-secondary"><?=substr($item["register_date"],0,10)?></span>
                       </a>
                     </li>
-                    <li>
-                      <a class="d-flex justify-content-between" href="">
-                        <span>상품명[2]</span><span class="flex-shrink-0 text-secondary">22-08-01</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="d-flex justify-content-between" href="">
-                        <span>상품명[1]</span><span class="flex-shrink-0 text-secondary">22-08-01</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="d-flex justify-content-between" href="">
-                        <span>상품명[0]</span><span class="flex-shrink-0 text-secondary">22-08-01</span>
-                      </a>
-                    </li>
+                    <?php
+                      $index++;
+                      }
+                    }else{
+                  ?>
+                    <p>등록된 게시물이 없습니다</p>
+                    <?php
+                  }
+                  ?>
                   </ul>
                 </div>
                 <div
@@ -230,8 +229,19 @@
             </div>
             <div class="card-body">
               <ul>
-                <li><a href="">[공지사항]공지사항공지사항공지사항</a></li>
-                <li><a href="">[공지사항]공지사항공지사항공지사항공지사항공지사항공지사항</a></li>
+                <?php
+                   if(is_array($notice_list)&& count($notice_list) > 0){
+                    foreach($notice_list as $item){
+                ?>
+                <li><a href="/CS/Notice/Detail?idx=<?=$item['idx']?>">[공지사항]<?=$item["title"]?></a><span style="float: right"><?=substr($item["register_date"],0,10)?></span></li>
+                <?php
+                    }
+                  }else{
+                  ?>
+                <p>등록된 게시물이 없습니다</p>
+                <?php
+                  }
+                  ?>
               </ul>
             </div>
           </div>
