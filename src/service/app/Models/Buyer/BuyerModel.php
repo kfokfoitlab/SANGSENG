@@ -161,7 +161,7 @@ class BuyerModel extends CommonModel
             where status ='5'
            $where
            order by 
-               register_date desc
+               product_price desc
             limit 5;
            
         ";

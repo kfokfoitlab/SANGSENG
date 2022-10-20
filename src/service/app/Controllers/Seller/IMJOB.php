@@ -78,7 +78,7 @@
 				echo "
                 <script>
                     alert('근로자정보가 수정되었습니다.');
-					window.location.replace('/Seller/IMJOB/List');
+					window.location.replace('/Seller/IMJOB/List?p_n=".$_POST["p_n"]."');
                 </script>
             ";
 			}else{

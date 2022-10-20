@@ -9,6 +9,8 @@
         <h4 class="fw-bold pb-3 border-bottom border-2">장애인 근로자 정보</h4>
         <form id="info_form" method="post" action="/<?=_CONTROLLER?>/updateWorker" enctype="multipart/form-data">
           <input type="hidden" name="idx" value="<?=$data['idx']?>">
+          <input type="hidden" name="p_n" value="<?=$_GET['p_n']?>">
+
           <div class="d-flex py-5">
             <div class="me-5">
               <?php
