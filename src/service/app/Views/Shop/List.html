@@ -71,7 +71,7 @@ $levy = $base * $employ *12; //부담금
             foreach($ret as $item){
             ?>
             <td>
-              <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>">
+              <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>" alt="<?=$item['product_name']?>">
 
             </td>
             <td>
@@ -98,7 +98,7 @@ $levy = $base * $employ *12; //부담금
           <tr>
             <td>
               <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>"
-                   alt="기업로고">
+                   alt="<?=$item['product_name']?>">
             </td>
             <td>
               <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>"><span
@@ -191,7 +191,7 @@ $levy = $base * $employ *12; //부담금
             <tr>
               <td>
                 <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>"
-                     alt="기업로고">
+                     alt="<?=$item['product_name']?>">
               </td>
               <td>
                 <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>"><span
@@ -216,7 +216,7 @@ $levy = $base * $employ *12; //부담금
             <tr>
               <td>
                 <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>"
-                     alt="기업로고">
+                     alt="<?=$item['product_name']?>">
               </td>
               <td>
                 <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>"><span

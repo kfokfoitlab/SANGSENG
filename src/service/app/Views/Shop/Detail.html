@@ -184,18 +184,18 @@
           <div class="detail-left">
             <div>
               <div class="p-3 border w-100 d-flex align-items-center preview-img-big" style="height: 384px">
-                <img src="/uploads/<?=$data['representative_image']?>" alt="상품 이미지" class="mh-100">
+                <img src="/uploads/<?=$data['representative_image']?>" alt="<?=$data['product_name']?>" class="mh-100">
               </div>
               <ul class="d-flex mt-3 list-preview">
                 <li class="preview-img-small border p-2">
-                  <img class="mh-100" src="/uploads/<?=$data['representative_image']?>" alt="상품 상세이미지1">
+                  <img class="mh-100" src="/uploads/<?=$data['representative_image']?>" alt="<?=$data['product_name']?>">
                 </li>
 
                 <?php
               if( ! empty($data['product_image1']) ) {
               ?>
                 <li class="preview-img-small border p-2">
-                  <img class="mh-100" src="/uploads/<?=$data['product_image1']?>" alt="상품 상세이미지2">
+                  <img class="mh-100" src="/uploads/<?=$data['product_image1']?>" alt="<?=$data['product_name']?>-02">
                 </li>
                 <?php
               }
@@ -205,7 +205,7 @@
               if( ! empty($data['product_image2']) ) {
               ?>
                 <li class="preview-img-small border p-2">
-                  <img class="mh-100" src="/uploads/<?=$data['product_image2']?>" alt="상품 상세이미지3">
+                  <img class="mh-100" src="/uploads/<?=$data['product_image2']?>" alt="<?=$data['product_name']?>-03">
                 </li>
                 <?php
               }
@@ -320,7 +320,7 @@
             <?php
             if( ! empty($data['detail_img']) ) {
             ?>
-            <img src="/uploads/<?=$data['detail_img']?>" alt="상품상세정보">
+            <img src="/uploads/<?=$data['detail_img']?>" alt="<?=$data['product_name']?> 상세정보">
             <?php
             } else {
             ?>
@@ -338,7 +338,7 @@
             <?php
             if( ! empty($data['seller_information']) ) {
             ?>
-            <img src="/uploads/<?=$data['seller_information']?>" alt="기업상세정보">
+            <img src="/uploads/<?=$data['seller_information']?>" alt="<?=$data['company_name']?> 기업상세정보">
             <?php
             } else {
             ?>

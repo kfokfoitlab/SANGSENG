@@ -80,7 +80,7 @@
           <input type="hidden" name="product_quantity" id ="product_quantity" value= "<?=$item['product_quantity']?>">
           <tr>
               <td>
-                <img src="/uploads/<?=$item['representative_image']?>" alt="기업로고" style="width: 100px;">
+                <img src="/uploads/<?=$item['representative_image']?>" alt="<?=$item['product_name']?>">
               </td>
               <td>
                 <h4><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['cart_reduction_money']?>"><span class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h4>
