@@ -17,7 +17,6 @@ $employ = 0;
 }else{
 $employ =  floor($workers*$classification);
 }
-
 if($employ > 0){
 $ratio = $disabled/$employ; //의무고용인원충족비율
 }else{
@@ -51,23 +50,25 @@ $total = $base * $employ*12 ;
 $total = $total + ($total*0.1);
 $total_money = $total; // 납부금액
 }
+//echo $total_money;
 $reduction_money = $data['ReductionMoney']['reduction_money'];
 $buyer_reduction = $_SESSION['ReductionMoney']['buyer_reduction'];
 $Remainder = $total -$buyer_reduction;
 
 if($buyer_reduction !="" && $total_money > 0){
 $limit = ($buyer_reduction /$total_money)*100;
+
 if((int)$limit >= 60 && (int)$limit >= 0){
 $buyer_reduction = $total_money*60/100;
 $Remainder = 0;
-}else{
-$total_money = 0;
 }
 }
 if($total_money > 0){
 $Remainder_money = $Remainder;
 $reduction_money =  $_SESSION['ReductionMoney']['reduction_money'];
 $buyer_reduction =  $buyer_reduction;
+$total_money = $total_money;
+
 }else{
 $Remainder_money = 0;
 $reduction_money =  0;

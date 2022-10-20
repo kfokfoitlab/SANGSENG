@@ -90,7 +90,11 @@ class MyPage extends BaseController
         $pwdCheck =  $this->mypage_model->pwdCheck($password);
         if($pwdCheck == 1){
             $result = $this->mypage_model->updateMyInfo($_FILES,$_POST);
+
             if($result == "1") {
+                $_SESSION["buyer_info"] = $this->sigin_model->getBuyerinfo();
+                $_SESSION["Contract"]=  $this->sigin_model->getContractList();
+                $_SESSION["ReductionMoney"]= $this->sigin_model->BuyerReduction();
                 echo "
                 <script>
                     alert('회원님의 정보가 변경 되었습니다.');
