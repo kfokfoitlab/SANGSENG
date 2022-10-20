@@ -77,5 +77,5 @@ class Contract extends BaseController
             ";
         }
         die();
-    } // }}}
+    }
 }

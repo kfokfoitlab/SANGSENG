@@ -29,7 +29,7 @@ class MyPage extends BaseController
     }
     public function Contract()
     { // {{{
-        $uuid = $_SESSION['login_info']['uuid'];
+         $uuid = $_SESSION['login_info']['uuid'];
             $data = $this->mypage_model->getContractList($uuid);
             $data = array(
                 "data" => $data["data"]

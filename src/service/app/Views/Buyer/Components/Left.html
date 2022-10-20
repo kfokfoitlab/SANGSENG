@@ -1,25 +1,29 @@
 <!-- 구매자 메뉴-->
 <?php
 $workers = $_SESSION['buyer_info']['workers'];
+
 $severely_disabled = $_SESSION['buyer_info']['severely_disabled'];
+
 $mild_disabled = $_SESSION['buyer_info']['mild_disabled'];
+
 $classification = 0;
 if($_SESSION['buyer_info']['classification'] == 1){ //기업구분에 따른 의무고용율
 $classification = 0.031;
 }else{
 $classification = 0.034;
 }
-$disabled = $severely_disabled + ($mild_disabled*2);
+$disabled = ($severely_disabled*2)+ $mild_disabled*2;
 if($workers<50){
 $employ = 0;
 }else{
 $employ =  floor($workers*$classification);
 }
-if($employ != 0){
-  $ratio = $disabled/$employ; //의무고용인원충족비율
+if($employ > 0){
+$ratio = $disabled/$employ; //의무고용인원충족비율
 }else{
-  $ratio = 0;
+$ratio = 0;
 }
+
 
 $base = 0;     //부담금기초
 if($workers<100){
@@ -39,30 +43,37 @@ $base = 1608600;
 }else{
 $base = 1914400;
 }
-
+if($employ == $disabled){
+$total_money = 0;
+}else{
 $employ = $employ-$disabled;
 $total = $base * $employ*12 ;
-//echo $total;
 $total = $total + ($total*0.1);
 $total_money = $total; // 납부금액
-//echo $total_money;
-$Expectation =$_SESSION['Expectation']['Expectation'];
-$Expectation_money = number_format($Expectation);
-
+}
 $reduction_money = $data['ReductionMoney']['reduction_money'];
 $buyer_reduction = $_SESSION['ReductionMoney']['buyer_reduction'];
 $Remainder = $total -$buyer_reduction;
-if($buyer_reduction !=""){
+
+if($buyer_reduction !="" && $total_money > 0){
 $limit = ($buyer_reduction /$total_money)*100;
-$limit = (int)($limit);
-if((int)$limit >= 60){
-$buyer_reduction = $total*60/100;
+if((int)$limit >= 60 && (int)$limit >= 0){
+$buyer_reduction = $total_money*60/100;
 $Remainder = 0;
+}else{
+$total_money = 0;
 }
 }
+if($total_money > 0){
 $Remainder_money = $Remainder;
 $reduction_money =  $_SESSION['ReductionMoney']['reduction_money'];
 $buyer_reduction =  $buyer_reduction;
+}else{
+$Remainder_money = 0;
+$reduction_money =  0;
+$buyer_reduction = 0;
+$total_money = 0;
+}
 
 
 ?>
@@ -70,7 +81,7 @@ $buyer_reduction =  $buyer_reduction;
   if($_SESSION["login_info"]["type"] == "buyer"){
   ?>
 <div
-  class="left-fixed-box buyer-left-box bg-dark py-4 px-3 text-white">
+        class="left-fixed-box buyer-left-box bg-dark py-4 px-3 text-white">
   <h2 class="visually-hidden">감면액 및 계약리스트</h2>
   <div class="mb-4 pb-3 reduction-box">
     <h3 class="h6 mb-3">예상 납부금액</h3>
@@ -97,7 +108,7 @@ $buyer_reduction =  $buyer_reduction;
     } else {
     ?>
     <ul class="buyer-contract-list p-0">
-    <?php
+      <?php
     foreach($_SESSION["Contract"] as $item){
     $contract_regdt = $item["contract_regdt"];
     $timestamp = strtotime($contract_regdt);
@@ -105,20 +116,20 @@ $buyer_reduction =  $buyer_reduction;
     $product_price = number_format($item["product_price"]);
     ?>
       <li class="p-2 bg-white text-dark mb-3" onclick="contractView(<?=$item["workflow_id"]?>);">
-        <h3 class="text-center"><?=$item["company_name"]?></h3>
-        <div class="d-flex flex-column align-items-center mb-2">
-          <div class="left-item-img d-flex align-items-center justify-content-center border">
-            <img class="mh-100" src="/uploads/<?=$item['representative_image']?>" alt="상품이미지">
-          </div>
-          <h4 class="mt-1"><?=$item["product_name"]?></h4>
+      <h3 class="text-center"><?=$item["company_name"]?></h3>
+      <div class="d-flex flex-column align-items-center mb-2">
+        <div class="left-item-img d-flex align-items-center justify-content-center border">
+          <img class="mh-100" src="/uploads/<?=$item['representative_image']?>" alt="상품이미지">
         </div>
-        <div class="text-end">
-          <p class="m-0"><?=$product_price?>원</p>
-          <p class="m-0"><?=$contract_regdt?></p>
-          <p class="m-0"><?=$item["product_quantity"]?></p>
-        </div>
+        <h4 class="mt-1"><?=$item["product_name"]?></h4>
+      </div>
+      <div class="text-end">
+        <p class="m-0"><?=$product_price?>원</p>
+        <p class="m-0"><?=$contract_regdt?></p>
+        <p class="m-0"><?=$item["product_quantity"]?></p>
+      </div>
       </li>
-    <?php
+      <?php
     }
     ?>
     </ul>
