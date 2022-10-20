@@ -189,6 +189,7 @@ class SignInModel extends CommonModel
         join seller_product b on a.product_no = b.product_no
         where a.buyer_uuid = '".$uuid."'
         and contract_status = '2'
+        and a.del_yn != 'Y'
         limit 4;
         ";
         $this->rodb->query($query);
