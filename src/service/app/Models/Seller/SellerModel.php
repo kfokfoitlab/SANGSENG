@@ -348,10 +348,11 @@ class SellerModel extends CommonModel
         while($row = $this->rodb->next_row()){
 	        $product_reply["data"][] = $row;
         }
+        if(! empty($product_reply["data"])){
 	    foreach($product_reply["data"] as $item){
 		    $product_reply["replyCount"][] = $this->SellerReplyCount($item["product_no"]);
-	    }
-		
+	      }
+        }
         return $product_reply;
     }
 	
