@@ -149,8 +149,16 @@ class BuyerModel extends CommonModel
     public function RecommendationList($value){
         $where = "";
 
-        if($value != ""){
-            $where = "  and product_category = $value";
+
+        if($value != "" && $value !='all'){
+            $where = " and product_category =$value";
+        }
+        if($value == 'all'){
+            $where = "";
+        }
+        if($_GET["search_v"] != ""){
+            $where = $where." and (product_name like '%".$_GET["search_v"]."%'
+             or company_name like '%".$_GET["search_v"]."%')";
         }
         $ranking = [];
         $query = "
@@ -165,13 +173,16 @@ class BuyerModel extends CommonModel
             limit 5;
            
         ";
+
         $this->rodb->query($query);
+
         while($row = $this->rodb->next_row()){
             $ranking["data"][]= $row;
-
         }
-        foreach($ranking["data"] as $item){
-            $ranking["replyCount"][] = $this->SellerReplyCount($item["product_no"]);
+        if(!empty($ranking['data'])) {
+            foreach ($ranking["data"] as $item) {
+                $ranking["replyCount"][] = $this->SellerReplyCount($item["product_no"]);
+            }
         }
         return $ranking;
 
@@ -231,6 +242,14 @@ class BuyerModel extends CommonModel
     }
 
     public function CategoryList($value){
+        $category = "";
+        if($value != "" && $value !='all'){
+            $category = " and product_category =$value";
+        }
+        if($value == 'all'){
+            $category = "";
+        }
+
         $list = [];
         $query = "
             select
@@ -240,7 +259,7 @@ class BuyerModel extends CommonModel
             where 1=1
               and status ='5'
               and del_yn !='Y'
-                and product_category = $value
+                 $category
            
         ";
         if($_GET["search_v"] != ""){
@@ -262,7 +281,6 @@ class BuyerModel extends CommonModel
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
             $list["data"][]= $row;
-
         }
         if(!empty($list['data'])) {
             foreach ($list["data"] as $item) {

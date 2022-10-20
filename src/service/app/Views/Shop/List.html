@@ -122,7 +122,13 @@ $levy = $base * $employ *12; //부담금
             ?>
           </tbody>
         </table>
-
+        <?php
+            if(!is_array($ranking)){
+            ?>
+        <h2 class="text-center fw-bold my-5">등록된 상품이 없습니다</h2>
+        <?php
+             }
+              ?>
       </div>
 
       <div class="px-3 mb-5">
