@@ -26,22 +26,25 @@ class Seller extends BaseController
         $expectationSales = $this->seller_model->getexpectationSales($uuid);
         $completionContract = $this->seller_model->getCompletionContract($uuid);
         $contractList = $this->seller_model->getContract($uuid);
-        $disabledCount = $this->seller_model->getDisabledCount($uuid);
+       // $disabledCount = $this->seller_model->getDisabledCount($uuid);
         $questions = $this->seller_model->getQuestionsList();
 	    $product_reply = $this->seller_model->getProductreplyList();
 	    $notice_list = $this->seller_model->getNoticeList();
-
+        $_SESSION["totalSales"] = $this->sigin_model->getTotalSales($uuid);
+        $_SESSION["expectationSales"] = $this->sigin_model->getexpectationSales($uuid);
+        $_SESSION["completionContract"] = $this->sigin_model->getCompletionContract($uuid);
+        $_SESSION["disabledCount"] = $this->sigin_model->getWorkerCount();
+        $_SESSION["sellerinfo"] = $this->sigin_model->Sellerinfo();
         $data = array(
             "totalSales" => $totalSales
         ,"expectationSales" => $expectationSales
        ,"completionContract" =>  $completionContract
        ,"contractList" =>  $contractList
-       ,"disabledCount" =>  $disabledCount
+     //  ,"disabledCount" =>  $disabledCount
         ,"questions" =>  $questions
 	        ,"product_reply" => $product_reply
 	        ,"notice_list" => $notice_list
         );
-	    $_SESSION["disabledCount"] = $this->sigin_model->getWorkerCount();
 
         echo view("Common/Header.html");
         echo view('Seller/Index.html', $data);

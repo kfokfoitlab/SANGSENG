@@ -8,9 +8,8 @@ $total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCoun
 >
   <div class="text-center mb-3">
     <div class="d-flex justify-content-center align-items-center rounded-circle border mx-auto mb-3 overflow-hidden bg-white" style="width: 150px; height: 150px;">
-      <img src="/uploads/<?=$_SESSION['sellerinfo']['seller_logo']?>" alt="로고" />
-    </div>
-    <h2 class="mb-4"><a class="h5 text-white" href="/Seller"><?=$_SESSION["login_info"]['company_name']?></a></h2>
+      <img src="/uploads/<?=$_SESSION['sellerinfo']['seller_logo']?>" alt="<?=$_SESSION['login_info']['company_name']?> 로고" />     </div>
+    <h2 class="mb-4"><a class="h5 text-white" href="/Seller"><?=$_SESSION["sellerinfo"]['company_name']?></a></h2>
   </div>
   <div class="mb-3">
     <h3 class="text-white">매출액</h3>

@@ -280,7 +280,7 @@ class SignInModel extends CommonModel
                 count(*) as worker_cnt,count(case when disability_degree=1 then 1 end) as degree_1_cnt,
                 count(case when disability_degree=2 then 1 end) as degree_2_cnt
             from ".$table_name." where 1=1
-			 and company_code= '".$seller_data["company_code"]."'
+			 and register_id= '".$seller_data["uuid"]."'
 			 and (del_yn != 'Y' or del_yn is null)
 			 and (status = 5)
         ";
