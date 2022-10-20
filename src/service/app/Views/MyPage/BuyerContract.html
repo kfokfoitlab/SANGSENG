@@ -11,7 +11,7 @@
       ?>
       <h3 class="mt-5 mb-4 h4 fw-bold text-center">계약현황</h3>
       <form name="myForm" method="GET" action="/Buyer/MyPage/Contract" >
-        <table class="w-100 bg-light search-table">
+        <table class="w-100 bg-light search-table" id ="BuyercontractTbl">
           <tbody>
           <tr>
             <th>상품명</th>
@@ -57,7 +57,18 @@
           <button class="btn btn-outline-secondary" type="reset">초기화</button>
         </div>
       </form>
+
+
+
+
       <div class="mt-4 pb-3 text-end border-bottom border-2">
+          <button type="button" class=" btn btn-success flex-shrink-0 fw-normal" onclick="excelFileExport();">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+              </svg>
+              엑셀다운
+          </button>
         <button class="btn btn-warning" onclick="contract_update()">계약상태 최신화</button>
 <!--        <button class="btn btn-warning" onclick="nameCheck()">알림확인</button>-->
 
@@ -274,7 +285,14 @@ function contract_update(){
           .catch(err => console.error(err));
 }
 
-function nameCheck(){
-      alert("ddd");
-}
+
+  function excelFileExport() {
+      var wb = XLSX.utils.table_to_book(document.getElementById('BuyercontractTbl'), {
+          sheet: "sheet1",
+          raw: true
+      });
+      let today = new Date();
+      XLSX.writeFile(wb, ('계약리스트'+ today.getFullYear() + today.getMonth() + today.getDate()
+          + today.getHours() + today.getMinutes() + today.getSeconds() +'.xlsx'));
+  }
 </script>

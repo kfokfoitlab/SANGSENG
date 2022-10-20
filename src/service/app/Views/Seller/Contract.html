@@ -81,12 +81,14 @@
             </select>-->
 
 
+<!--
             <select class="form-select form-select-sm me-2" aria-label="Default select">
               <option value="20" selected>20개씩</option>
               <option value="50">50개씩</option>
               <option value="100">100개씩</option>
               <option value="200">200개씩</option>
             </select>
+-->
 
             <button type="button" class="me-2 btn btn-sm btn-success flex-shrink-0 fw-normal" onclick="excelFileExport();">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
@@ -100,7 +102,7 @@
           </div>
         </div>
 
-        <table id ="contractTbl" class="contract-list-table table table-striped text-center mt-5">
+        <table id ="SellercontractTbl" class="contract-list-table table table-striped text-center mt-5">
           <thead>
           <tr>
             <th>No.</th>
@@ -311,7 +313,7 @@
 
 
   function excelFileExport() {
-    var wb = XLSX.utils.table_to_book(document.getElementById('contractTbl'), {
+    var wb = XLSX.utils.table_to_book(document.getElementById('SellercontractTbl'), {
       sheet: "sheet1",
       raw: true
     });
