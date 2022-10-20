@@ -1,19 +1,21 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\Management\Company\ApplicationModel;
-use App\Models\CompanyModel;
+use App\Models\Auth\SignInModel;
+
 use App\Models\DatabaseModel;
 use App\Models\Buyer\BuyerModel;
 class Buyer extends BaseController
 {
-    private $model;
+    private $sigin_model;
     private $database_model;
     private $buyer_model;
     public function __construct()
     { //{{{
         $this->buyer_model = new BuyerModel;
         $this->database_model = new DatabaseModel;
+        $this->sigin_model = new SignInModel;
+
     } //}}}
 
     public function index()
@@ -25,6 +27,7 @@ class Buyer extends BaseController
         $reduction =  $this->buyer_model->ReductionMoney();
         $buyer_reduction =  $this->buyer_model->BuyerReduction();
         $notification_del = $this->buyer_model->NotificationDel();
+        $_SESSION["Contract"]= $this->sigin_model->getContractList();
         $data = array(
             "data" => $data["data"],
             "reduction" => $reduction,

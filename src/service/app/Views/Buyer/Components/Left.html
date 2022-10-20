@@ -5,19 +5,19 @@ $workers = $_SESSION['buyer_info']['workers'];
 $severely_disabled = $_SESSION['buyer_info']['severely_disabled'];
 
 $mild_disabled = $_SESSION['buyer_info']['mild_disabled'];
-
 $classification = 0;
 if($_SESSION['buyer_info']['classification'] == 1){ //기업구분에 따른 의무고용율
 $classification = 0.031;
 }else{
 $classification = 0.034;
 }
-$disabled = ($severely_disabled*2)+ $mild_disabled*2;
+$disabled = ($severely_disabled*2)+ $mild_disabled;
 if($workers<50){
 $employ = 0;
 }else{
 $employ =  floor($workers*$classification);
 }
+
 if($employ > 0){
 $ratio = $disabled/$employ; //의무고용인원충족비율
 }else{
