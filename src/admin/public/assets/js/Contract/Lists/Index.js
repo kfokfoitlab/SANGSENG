@@ -221,7 +221,7 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
 								{order: 3, email: buyer_email, name: buyer_email}
             ],
             field_list: [{name: 'buyer_uuid', value: buyer_uuid}, {name: 'seller_uuid', value: seller_uuid},
-							{name: 'updateType', value: 'all'}],
+							{name: 'updateType', value: 'all'},{name:'buyer_company',value: buyer_company},{name:'seller_company',value: seller_company}],
             workflow_name: buyer_company +" 기업과" + seller_company + " 기업의 계약서" ,
             template_id: 9
         })

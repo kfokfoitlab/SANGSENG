@@ -40,6 +40,7 @@ class SellerDeliveryModel extends CommonModel
         $delivery_status = '1';
         $delivery_no = date("YmdHis");
         $dcount = $data['count'];
+
         $delivery_predicted =$data['delivery_predicted'];
         $contract_date = $data['register_date'];
         $query = "
