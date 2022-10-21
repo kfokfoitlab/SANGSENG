@@ -80,7 +80,7 @@
         <?php
         $cnt = 0;
         if(is_array($delivery)){
-        $cnt = count($delivery);
+        $cnt = $delivery['count'];
         }
         ?>
         <form name="invoiceForm" id="invoiceForm" method="post" action="/Seller/Delivery/invoice">
@@ -267,60 +267,5 @@
         location.href = "/Seller/DeliveryStatus/?cn=" + contract_no;
       })
     })
-
-
-
-
-
-
-
-    /*  let count = $('#cnt').val();
-
-      function delivery(){
-        if(confirm("배송을 시작하시겠습니까?")){
-          $('#delivery_predicted').val($('#delivery_date').val());
-          $('#deliveryForm').submit();
-        }else{
-          return false;
-        }
-      }*/
-  /*
-    function add_row() {
-      count++;
-      alert(count);
-      var my_tbody = document.getElementById('my-tbody');
-      // var row = my_tbody.insertRow(0); // 상단에 추가
-      var row = my_tbody.insertRow( my_tbody.rows.length ); // 하단에 추가
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      var cell3 = row.insertCell(2);
-      var cell4 = row.insertCell(3);
-      var cell5 = row.insertCell(4);
-      var cell6 = row.insertCell(5);
-      var cell7 = row.insertCell(6);
-      var cell8 = row.insertCell(7);
-      var cell9 = row.insertCell(8);
-      cell1.innerHTML = '<td></td>';
-      cell2.innerHTML = '<td> <input class="form-control" id ="delivery_date" name="delivery_date" type="date"></td>';
-      cell3.innerHTML = '<td></td>';
-      cell4.innerHTML = '<td></td>';
-      cell5.innerHTML = '<td></td>';
-      cell6.innerHTML = '<td> <div><label for="addInvoide" class="m-0 form-label btn btn-outline-dark btn-sm fw-normal">송장등록</label>\n' +
-              '<input class="d-none" type="file" name ="invoice_file" id="addInvoide">\</div></td>';
-      cell7.innerHTML = '<td><button class="btn btn-outline-dark btn-sm fw-normal">송장확인</button></td>';
-      cell8.innerHTML = '<td><button class="btn btn-success btn-sm fw-normal" onclick="delivery();">배송시작</button></td>';
-      cell9.innerHTML = '<td><button class="btn btn-success btn-sm fw-normal" onclick="delete_row();">제거</button></td>';
-      document.getElementById('count').value = count;
-      //$('#delivery_predicted').val($('#predicted').val());
-     // document.getElementById('delivery_predicted').value = document.getElementById('predicted').value;
-    }
-
-    function delete_row() {
-      var my_tbody = document.getElementById('my-tbody');
-      if (my_tbody.rows.length < 1) return;
-      // my_tbody.deleteRow(0); // 상단부터 삭제
-      my_tbody.deleteRow( my_tbody.rows.length-1 ); // 하단부터 삭제
-    }*/
-
 
   </script>

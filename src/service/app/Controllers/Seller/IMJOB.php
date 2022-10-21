@@ -57,7 +57,7 @@
 				echo "
                 <script>
                     alert('근로자가 등록되었습니다.');
-					window.location.replace('/Seller/IMJOB/List');
+					window.location.replace('/Seller/IMJOB/List?p_n=1');
                 </script>
             ";
 			}else{
