@@ -44,16 +44,16 @@ echo doctype("html5");
   <!-- Preloader -->
   <div class="preloader"></div>
 
-  <div class="fixed-top py-2 bg-white">
+  <div class="fixed-top py-2" style="background: #0056B9;">
     <div class="auto-container">
       <div class="d-flex justify-content-between py-1">
-        <a href="/assets/download/연계고용안내.pdf" download class="btn py-0" tabindex=1>장애인 연계고용 제도</a>
+        <a href="/assets/download/연계고용안내.pdf" download class="btn py-0 text-white" tabindex=1>장애인 연계고용 제도</a>
         <ul class="list-unstyled d-flex justify-content-center">
           <!--            <li class=""><button class="btn py-0" tabindex=2>이용방법</button></li>-->
-          <li class=""><a href="/Reduction/Calculator" class="btn py-0" tabindex=3>고용부담금계산기</a></li>
-          <li class=""><a href="javascript:costCalMove()" class="btn py-0" tabindex=4>제조원가계산기</a></li>
-          <li class=""><a href="/Reduction/Help" class="btn py-0" tabindex=5>감면신청도우미</a></li>
-          <li class=""><a href="/CS/Notice" class="btn py-0" tabindex=6>고객센터</a></li>
+          <li class=""><a href="/Reduction/Calculator" class="btn py-0 text-white" tabindex=3>고용부담금계산기</a></li>
+          <li class=""><a href="javascript:costCalMove()" class="btn py-0 text-white" tabindex=4>제조원가계산기</a></li>
+          <li class=""><a href="/Reduction/Help" class="btn py-0 text-white" tabindex=5>감면신청도우미</a></li>
+          <li class=""><a href="/CS/Notice" class="btn py-0 text-white" tabindex=6>고객센터</a></li>
           <? echo <?=$_SESSION["login_info"]["type"]?>
         </ul>
       </div>
@@ -129,7 +129,7 @@ echo doctype("html5");
             ?>
             <div class="dropdown dashboard-option">
               <a class="dropdown-toggle" role="button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="name text-white"><?=$_SESSION["login_info"]["company_name"]?></span> <span class='small text-white-50'>님</span>
+                <span class="name text-black"><?=$_SESSION["login_info"]["company_name"]?></span> <span class='small text-black-50'>님</span>
               </a>
 
               <ul class="dropdown-menu p-2 ps-0" style="">
@@ -158,7 +158,7 @@ echo doctype("html5");
               ?>
             <div class="dropdown dashboard-option">
               <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="name text-white"><?=$_SESSION["login_info"]["company_name"]?></span> <span class='small text-white-50'>님</span>
+                <span class="name text-black"><?=$_SESSION["login_info"]["company_name"]?></span> <span class='small text-black-50'>님</span>
               </a>
               <ul class="dropdown-menu p-2 ps-0" style="">
                 <li>
