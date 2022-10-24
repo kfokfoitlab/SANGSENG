@@ -44,6 +44,13 @@ $levy = $base * $employ *12; //부담금
           <tbody>
           <tr>
             <?php
+
+            function product_compare_data($a, $b){
+              if ($a['sort_num'] == $b['sort_num']){
+                return 0;
+              }
+              return ($a['sort_num'] < $b['sort_num']) ? 1 : -1;
+            }
           if(is_array($ranking) && count($ranking)){
           $ret = array();
             if ($_SESSION['login_info']['type'] == 'buyer') {
@@ -66,11 +73,12 @@ $levy = $base * $employ *12; //부담금
                   $reduction_money = (int)$reduction_money;
                 if($_SESSION['login_info']['type'] == 'buyer'){
                   $item['reduction_money'] = $reduction_money;
-                  $ret[$item['reduction_money']] = $item;
+                  $item['sort_num'] = $reduction_money/$item['product_price'];
+                  $ret[] = $item;
                 }
+              usort($ret,'product_compare_data');
+              }
 
-              rsort($ret);
-            }
             foreach($ret as $item){
             ?>
             <td>
@@ -195,11 +203,12 @@ $levy = $base * $employ *12; //부담금
 
               if($_SESSION['login_info']['type'] == 'buyer'){
                 $item['reduction_money'] = $reduction_money;
-                $ret[$item['reduction_money']] = $item;
+                $item['sort_num'] = $reduction_money/$item['product_price'];
+                $ret[] = $item;
               }
-
-              rsort($ret);
+              usort($ret,'product_compare_data');
             }
+
             foreach($ret as $item){
             ?>
             <tr>
