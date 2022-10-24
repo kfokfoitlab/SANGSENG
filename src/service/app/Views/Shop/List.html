@@ -44,30 +44,41 @@ $levy = $base * $employ *12; //부담금
           <tbody>
           <tr>
             <?php
+
+            function product_compare_data($a, $b){
+              if ($a['sort_num'] == $b['sort_num']){
+                return 0;
+              }
+              return ($a['sort_num'] < $b['sort_num']) ? 1 : -1;
+            }
           if(is_array($ranking) && count($ranking)){
           $ret = array();
             if ($_SESSION['login_info']['type'] == 'buyer') {
-            foreach($ranking as $item){
-            $product_price = number_format($item["product_price"]);
-            $result_price = $item['reduction'] *$base;
-            $reduction_money = 0;
-            if($result_price > $levy ){
-            $reduction_money = $levy*0.6;
-            }else if($result_price >$item["product_price"]*0.5){
-            $reduction_money = $item["product_price"]*0.5 *12;
-            }else{
-            $reduction_money = $result_price *12;
-            }
-            if($reduction_money > $item['product_price']*0.5){
-            $reduction_money = (int)$item['product_price']*0.5;
-            }
-            $reduction_money = (int)$reduction_money;
-            if($_SESSION['login_info']['type'] == 'buyer'){
-            $item['reduction_money'] = $reduction_money;
-            $ret[$item['reduction_money']] = $item;
-            }
-            krsort($ret);
-            }
+              foreach($ranking as $item){
+                $product_price = number_format($item["product_price"]);
+                $result_price = $item['reduction'] *$base;
+                $reduction_money = 0;
+
+                if($result_price > $levy ){
+                  $reduction_money = $levy*0.6;
+                }else if($result_price >$item["product_price"]*0.5){
+                  $reduction_money = $item["product_price"]*0.5 *12;
+                }else{
+                  $reduction_money = $result_price *12;
+                }
+
+                if($reduction_money > $item['product_price']*0.5){
+                  $reduction_money = (int)$item['product_price']*0.5;
+                }
+                  $reduction_money = (int)$reduction_money;
+                if($_SESSION['login_info']['type'] == 'buyer'){
+                  $item['reduction_money'] = $reduction_money;
+                  $item['sort_num'] = $reduction_money/$item['product_price'];
+                  $ret[] = $item;
+                }
+              usort($ret,'product_compare_data');
+              }
+
             foreach($ret as $item){
             ?>
             <td>
@@ -167,31 +178,37 @@ $levy = $base * $employ *12; //부담금
 
           if(is_array($list)&& count($list) > 0){
             if($_GET["p_n"]!=""){
-            $i=($_GET["p_n"]-1)*10+1;
+              $i=($_GET["p_n"]-1)*10+1;
             }
             $ret = array();
             if ($_SESSION['login_info']['type'] == 'buyer') {
             foreach($list as $item){
-            $product_price = number_format($item["product_price"]);
-            $result_price = $item['reduction'] *$base;
-            $reduction_money = 0;
-            if($result_price > $levy ){
-            $reduction_money = $levy*0.6;
-            }else if($result_price >$item["product_price"]*0.5){
-            $reduction_money = $item["product_price"]*0.5 *12;
-            }else{
-            $reduction_money = $result_price *12;
+              $product_price = number_format($item["product_price"]);
+              $result_price = $item['reduction'] *$base;
+              $reduction_money = 0;
+
+              if($result_price > $levy ){
+                $reduction_money = $levy*0.6;
+              }else if($result_price >$item["product_price"]*0.5){
+                $reduction_money = $item["product_price"]*0.5 *12;
+              }else{
+                $reduction_money = $result_price *12;
+              }
+
+              if($reduction_money > $item['product_price']*0.5){
+                $reduction_money = (int)$item['product_price']*0.5;
+              }
+
+              $reduction_money = (int)$reduction_money;
+
+              if($_SESSION['login_info']['type'] == 'buyer'){
+                $item['reduction_money'] = $reduction_money;
+                $item['sort_num'] = $reduction_money/$item['product_price'];
+                $ret[] = $item;
+              }
+              usort($ret,'product_compare_data');
             }
-            if($reduction_money > $item['product_price']*0.5){
-            $reduction_money = (int)$item['product_price']*0.5;
-            }
-            $reduction_money = (int)$reduction_money;
-            if($_SESSION['login_info']['type'] == 'buyer'){
-            $item['reduction_money'] = $reduction_money;
-            $ret[$item['reduction_money']] = $item;
-            }
-            krsort($ret);
-            }
+
             foreach($ret as $item){
             ?>
             <tr>

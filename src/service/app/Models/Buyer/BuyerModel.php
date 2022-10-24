@@ -169,7 +169,7 @@ class BuyerModel extends CommonModel
             where status ='5'
            $where
            order by 
-               product_price desc
+               register_date asc
             limit 5;
            
         ";
@@ -276,7 +276,7 @@ class BuyerModel extends CommonModel
         if($_GET["p_n"] != ""){
             $page_start = ($_GET["p_n"] - 1)*10;
         }
-        $query = $query." order by product_price desc,reduction desc";
+        $query = $query." order by register_date asc";
         $query = $query." limit ".$page_start.", 10";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
@@ -396,7 +396,7 @@ class BuyerModel extends CommonModel
             from
                 contract_condition
             where
-                product_no = $product_no
+                product_no = '".$product_no."'
                 and buyer_uuid = '".$user_uuid."'
                 and contract_status = '5'
 				and del_yn = 'n'
@@ -416,8 +416,9 @@ class BuyerModel extends CommonModel
             from
                 seller_product_reply
             where
-                product_no = $product_no
+                product_no = '".$product_no."'
                 and user_uuid = '".$user_uuid."'
+                and reply_step = 1
 				and del_yn = 'n'
             limit 1
         ";
@@ -436,7 +437,7 @@ class BuyerModel extends CommonModel
             from
                 seller_product_reply
             where
-                product_no = $product_no
+                product_no = '".$product_no."'
                 and user_uuid = '" . $user_uuid . "'
                 and reply_no = '" . $_POST["reply_no"] . "'
 				and del_yn = 'n'
@@ -449,7 +450,7 @@ class BuyerModel extends CommonModel
             from
                 seller_product
             where
-                product_no = $product_no
+                product_no = '".$product_no."'
                 and register_id = '" . $user_uuid . "'
             limit 1
             ";
@@ -486,6 +487,7 @@ class BuyerModel extends CommonModel
             where
                 product_no = '".$product_no."'
                 and reply_step=1
+                
                 and del_yn = 'n'
         ";
 

@@ -189,7 +189,7 @@
       </form>
     </div>
     <form name="statusForm" id="statusForm" method="post" action="/Seller/ContractUpdate">
-      <input type="hidden" name ="workflow_id" id="workflow_id" value="0">
+      <input type="hidden" name ="workflow_id" id="workflow_id_form" value="0">
       <input type="hidden" name ="complete_reduction" id="complete_reduction" value="0">
       <input type="hidden" name ="uuid" id = "uuid" value="<?=$_SESSION['login_info']['uuid']?>">
     </form>
@@ -246,7 +246,7 @@
                 })
                 workflow = response['workflow_id'];
                 $('#complete_reduction').val(complete_reduction);
-                $('#workflow_id').val(workflow);
+                $('#workflow_id_form').val(workflow);
                 $("#statusForm").submit();
               })
               .catch(err => console.error(err));

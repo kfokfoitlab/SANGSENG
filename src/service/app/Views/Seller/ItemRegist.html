@@ -2,6 +2,15 @@
   // Left Menu
   require(__DIR__.'/Components/Left.html');
   ?>
+
+<script>
+  function replaceMoney(money){
+		var money = money.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		$('#product_price').val(money);
+		money = money.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		$('#product_price1').val(money);
+  }
+</script>
 <div class="flex-grow-1 bg-light">
   <section class="pt-5 layout-pb-120 item-update">
     <div class="auto-container">
@@ -11,6 +20,7 @@
           <input type="hidden" name = "seller_sales" value="<?=$data['seller_sales']?>">
           <input type="hidden" name = "mild_disabled" value="<?=$data['mild_disabled']?>">
           <input type="hidden" name = "severely_disabled" value="<?=$data['severely_disabled']?>">
+          <input type="hidden" name="product_price" id="product_price" value="">
           <div class="px-3">
             <div class="row mb-4 align-items-center">
               <div class="col-2">
@@ -115,8 +125,8 @@
                            placeholder="100Box(250,000매)"/>
                   </div>
                   <div class="col-6">
-                    <input class="add-price form-control" type="text" name="product_price" placeholder="1200000(숫자만 입력)"
-                           oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')"/>
+                    <input class="add-price form-control" type="text" name="product_price1" id="product_price1" placeholder="1200000(숫자만 입력)"
+                           oninput="replaceMoney(this.value)"/>
                   </div>
                 </div>
               </div>
