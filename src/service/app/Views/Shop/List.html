@@ -177,43 +177,33 @@ $levy = $base * $employ *12; //부담금
               $reduction_money = (int)$reduction_money;
 
               $item['reduction_money'] = $reduction_money;
-              $item['sort_num'] = $reduction_money/$item['product_price'];
               $ret[] = $item;
 
-              usort($ret,'product_compare_data');
             }
 
-            $list_start_num = 0;
-            if($_GET["p_n"] != ""){
-              $list_start_num = ($_GET["p_n"]-1)*10;
-            }
-            $limit_num = 0;
-            for($i=$list_start_num;$i<$data_page_total_cnt;$i++){
-              if($limit_num == 10){
-                break;
-              }
+            foreach($ret as $item){
             ?>
             <tr>
               <td>
-                <img class="preview-img-small" src="/uploads/<?=$ret[$i]['representative_image']?>"
-                     alt="<?=$ret[$i]['product_name']?>">
+                <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>"
+                     alt="<?=$item['product_name']?>">
               </td>
               <td>
-                <h3><a href="/Buyer/Shop/Detail/<?=$ret[$i]['product_no']?>?rm=<?=$ret[$i]['reduction_money']?>"><span
-                        class="text-primary"><?=$ret[$i]["company_name"]?></span> / <?=$ret[$i]["product_name"]?></a></h3>
+                <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>"><span
+                        class="text-primary"><?=$item["company_name"]?></span> / <?=$item["product_name"]?></a></h3>
                 <!--                <p class="sub-info"><?=$item["product_detail"]?></p>-->
               </td>
               <td>
-                <p><?=$ret[$i]["product_quantity"]?></p>
+                <p><?=$item["product_quantity"]?></p>
               </td>
               <td>
-                <p><?=number_format($ret[$i]["product_price"])?>원</p>
+                <p><?=number_format($item["product_price"])?>원</p>
               </td>
               <td>
-                <p><?=number_format($ret[$i]["reduction_money"])?>원</p>
+                <p><?=number_format($item["reduction_money"])?>원</p>
               </td>
             </tr>
-            <?php $limit_num++;
+            <?php
               }
             }
             ?>
