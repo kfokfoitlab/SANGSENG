@@ -53,7 +53,6 @@ $levy = $base * $employ *12; //부담금
             }
           if(is_array($ranking) && count($ranking)){
           $ret = array();
-            if ($_SESSION['login_info']['type'] == 'buyer') {
               foreach($ranking as $item){
                 $product_price = number_format($item["product_price"]);
                 $result_price = $item['reduction'] *$base;
@@ -70,16 +69,19 @@ $levy = $base * $employ *12; //부담금
                 if($reduction_money > $item['product_price']*0.5){
                   $reduction_money = (int)$item['product_price']*0.5;
                 }
-                  $reduction_money = (int)$reduction_money;
-                if($_SESSION['login_info']['type'] == 'buyer'){
-                  $item['reduction_money'] = $reduction_money;
-                  $item['sort_num'] = $reduction_money/$item['product_price'];
-                  $ret[] = $item;
-                }
+
+                $reduction_money = (int)$reduction_money;
+                $item['reduction_money'] = $reduction_money;
+                $item['sort_num'] = $reduction_money/$item['product_price'];
+                $ret[] = $item;
               usort($ret,'product_compare_data');
               }
 
+            $index = 0;
             foreach($ret as $item){
+              if($index == 5){
+                break;
+              }
             ?>
             <td>
               <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>" alt="<?=$item['product_name']?>">
@@ -101,34 +103,8 @@ $levy = $base * $employ *12; //부담금
               <p><?=number_format($item['reduction_money'])?>원</p>
             </td>
           </tr>
-          <?php
+          <?php $index++;
               }
-              }else{
-               foreach($ranking as $item){
-            ?>
-          <tr>
-            <td>
-              <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>"
-                   alt="<?=$item['product_name']?>">
-            </td>
-            <td>
-              <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>"><span
-                      class="text-primary"><?=$item["company_name"]?></span> / <?=$item["product_name"]?></a></h3>
-              <!--                <p class="sub-info"><?=$item["product_detail"]?></p>-->
-            </td>
-            <td>
-              <p><?=$item["product_quantity"]?></p>
-            </td>
-            <td>
-              <p><?=number_format($item["product_price"])?>원</p>
-            </td>
-            <td>
-              <p><?=number_format($item["reduction_money"])?>원</p>
-            </td>
-          </tr>
-          <?php
-            }
-            }
             }
             ?>
           </tbody>
@@ -181,7 +157,6 @@ $levy = $base * $employ *12; //부담금
               $i=($_GET["p_n"]-1)*10+1;
             }
             $ret = array();
-            if ($_SESSION['login_info']['type'] == 'buyer') {
             foreach($list as $item){
               $product_price = number_format($item["product_price"]);
               $result_price = $item['reduction'] *$base;
@@ -201,64 +176,45 @@ $levy = $base * $employ *12; //부담금
 
               $reduction_money = (int)$reduction_money;
 
-              if($_SESSION['login_info']['type'] == 'buyer'){
-                $item['reduction_money'] = $reduction_money;
-                $item['sort_num'] = $reduction_money/$item['product_price'];
-                $ret[] = $item;
-              }
+              $item['reduction_money'] = $reduction_money;
+              $item['sort_num'] = $reduction_money/$item['product_price'];
+              $ret[] = $item;
+
               usort($ret,'product_compare_data');
             }
 
-            foreach($ret as $item){
-            ?>
-            <tr>
-              <td>
-                <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>"
-                     alt="<?=$item['product_name']?>">
-              </td>
-              <td>
-                <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>"><span
-                        class="text-primary"><?=$item["company_name"]?></span> / <?=$item["product_name"]?></a></h3>
-                <!--                <p class="sub-info"><?=$item["product_detail"]?></p>-->
-              </td>
-              <td>
-                <p><?=$item["product_quantity"]?></p>
-              </td>
-              <td>
-                <p><?=number_format($item["product_price"])?>원</p>
-              </td>
-              <td>
-                <p><?=number_format($item["reduction_money"])?>원</p>
-              </td>
-            </tr>
-            <?php
+            $list_start_num = 0;
+            if($_GET["p_n"] != ""){
+              $list_start_num = ($_GET["p_n"]-1)*10;
+            }
+            $limit_num = 0;
+            for($i=$list_start_num;$i<$data_page_total_cnt;$i++){
+              if($limit_num == 10){
+                break;
               }
-              }else{
-               foreach($list as $item){
             ?>
             <tr>
               <td>
-                <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>"
-                     alt="<?=$item['product_name']?>">
+                <img class="preview-img-small" src="/uploads/<?=$ret[$i]['representative_image']?>"
+                     alt="<?=$ret[$i]['product_name']?>">
               </td>
               <td>
-                <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>"><span
-                        class="text-primary"><?=$item["company_name"]?></span> / <?=$item["product_name"]?></a></h3>
+                <h3><a href="/Buyer/Shop/Detail/<?=$ret[$i]['product_no']?>?rm=<?=$ret[$i]['reduction_money']?>"><span
+                        class="text-primary"><?=$ret[$i]["company_name"]?></span> / <?=$ret[$i]["product_name"]?></a></h3>
                 <!--                <p class="sub-info"><?=$item["product_detail"]?></p>-->
               </td>
               <td>
-                <p><?=$item["product_quantity"]?></p>
+                <p><?=$ret[$i]["product_quantity"]?></p>
               </td>
               <td>
-                <p><?=number_format($item["product_price"])?>원</p>
+                <p><?=number_format($ret[$i]["product_price"])?>원</p>
               </td>
               <td>
-                <p><?=number_format($item["reduction_money"])?>원</p>
+                <p><?=number_format($ret[$i]["reduction_money"])?>원</p>
               </td>
             </tr>
-            <?php
-            }
-            }
+            <?php $limit_num++;
+              }
             }
             ?>
             </tbody>
@@ -277,7 +233,11 @@ $levy = $base * $employ *12; //부담금
         <li class="paginate_button page-item previous disabled" id="datatables_previous">
           <?php
          $value = $_GET["value"];
-         $data_page_num = ($data_page_total_cnt/10) + 1;
+         if($data_page_total_cnt%10 != 0){
+           $data_page_num = ($data_page_total_cnt/10) + 1;
+         }else{
+           $data_page_num = ($data_page_total_cnt/10);
+         }
          for($i=1;$i<=$data_page_num;$i++){
               if($_GET["p_n"]==$i){?>
         <li class="paginate_button page-item active">

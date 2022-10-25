@@ -170,7 +170,6 @@ class BuyerModel extends CommonModel
            $where
            order by 
                register_date asc
-            limit 5;
            
         ";
 
@@ -277,7 +276,7 @@ class BuyerModel extends CommonModel
             $page_start = ($_GET["p_n"] - 1)*10;
         }
         $query = $query." order by register_date asc";
-        $query = $query." limit ".$page_start.", 10";
+/*        $query = $query." limit ".$page_start.", 10";*/
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
             $list["data"][]= $row;
