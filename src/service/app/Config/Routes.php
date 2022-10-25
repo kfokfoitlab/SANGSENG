@@ -164,6 +164,7 @@ $routes->group('Buyer', function($routes){
     $routes->get ('MyPage/Cart',           'Buyer\MyPage::Cart');
     $routes->post ('MyPage/CartDel',           'Buyer\MyPage::CartDel');
     $routes->get ('MyPage/Contract',           'Buyer\MyPage::Contract');
+    $routes->post ('MyPage/Contract/Sequence',           'Buyer\MyPage::Sequence');
     $routes->post ('MyPage/ContractUpdate',           'Buyer\MyPage::ContractUpdate');
     $routes->post ('MyPage/BuyerUpdateSubmit',           'Buyer\MyPage::BuyerUpdateSubmit');
     $routes->post ('MyPage/downloadFileNew',           'Buyer\MyPage::downloadFileNew');
@@ -176,6 +177,8 @@ $routes->group('Buyer', function($routes){
 $routes->group('Seller',  function ($routes){
     $group_name = "Item";
     $routes->get ( '/',                     'Seller::index');
+
+    $routes->post ( 'Contract/Sequence',       'Seller::Sequence');
     $routes->get ( 'Contract',       'Seller::Contract');
     $routes->get ($group_name.'/ItemUpdate/(:any)', 'Seller\Item::ItemUpdate/$1');
     $routes->get ($group_name.'/ItemRegist','Seller\Item::ItemRegist');

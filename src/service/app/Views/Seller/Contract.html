@@ -97,7 +97,6 @@
               </svg>
               엑셀다운
             </button>
-
             <button class="btn btn-sm btn-warning flex-shrink-0 px-3" onclick="contract_update();">계약상태 최신화</button>
           </div>
         </div>
@@ -163,7 +162,7 @@
           ?>
           <tr>
             <td><?=$i?></td>
-            <td><?=$status?></td>
+            <td title=<?=$status?>><?=$status?><?php if($item["workflow_id"] != ""){?><span id="sellerTurn_<?=$item['workflow_id']?>" class="text-warning"></span><?php } ?></td>
             <td class="text-start"><?=$item["product_name"]?></td>
             <td><?=$item["buyer_company"]?></td>
             <td class="text-end"><?=$item["product_quantity"]?></td>
@@ -191,11 +190,21 @@
     <form name="statusForm" id="statusForm" method="post" action="/Seller/ContractUpdate">
       <input type="hidden" name ="workflow_id" id="workflow_id_form" value="0">
       <input type="hidden" name ="complete_reduction" id="complete_reduction" value="0">
+      <input type="hidden" name ="product_quantity" id="product_quantity" value="">
       <input type="hidden" name ="uuid" id = "uuid" value="<?=$_SESSION['login_info']['uuid']?>">
     </form>
   </section>
 </div>
 <script>
+  $(document).ready(function(){
+    seller_sequence();
+  });
+
+  function seller_turn(workflow_id){
+    if(workflow_id != ""){
+      $('#sellerTurn_'+workflow_id).text(' 내차례');
+    }
+  }
 
   function Contract_Detail(workflow_id){
     const options = {
@@ -217,9 +226,6 @@
             .catch(err => console.error(err));
   }
 
-
-
-
   function Contract_reduction(workflow_id){
     const options = {
       method: 'GET',
@@ -232,6 +238,7 @@
     var contract_reduction = 0;
     var complete_reduction = 0;
     var workflow = "";
+    var product_quantity = "";
     for(var i = 0; i<workflow_id.length;i++) {
       workflow_key = workflow_id[i];
       fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_key + '?offset=%2B09%3A00', options)
@@ -239,13 +246,16 @@
               .then(response => {
                 $.each(response['field_list'], function (idx, row) {
                   if (response['field_list'][idx].name == "Contract_Cost") {
-                    console.log(response);
                     contract_reduction = response['field_list'][idx].value;
                     complete_reduction = parseInt(contract_reduction.replace(/,/g,""));
+                  }
+                  if (response['field_list'][idx].name == "Contract_EA") {
+                    product_quantity = response['field_list'][idx].value;
                   }
                 })
                 workflow = response['workflow_id'];
                 $('#complete_reduction').val(complete_reduction);
+                $('#product_quantity').val(product_quantity);
                 $('#workflow_id_form').val(workflow);
                 $("#statusForm").submit();
               })
@@ -281,6 +291,30 @@
     sdk.auth('esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE=');
     sdk.resendCompleteWorkflow({workflowId:workflow_id})
             .then(res => console.log(res))
+            .catch(err => console.error(err));
+  }
+
+  function seller_sequence(){
+    var uuid = $("#uuid").val();
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+      }
+    };
+
+    fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=9&field_name=seller_uuid&field_value='+uuid+'', options)
+            .then(response => response.json())
+            .then(response => {
+              var j = 0;
+              for(var i =0; i <response['workflow_list'].length; i++){
+                if(response['workflow_list'][i]['order'] == 2){
+                  seller_turn(response['workflow_list'][i]['workflow_id']);
+                  j++;
+                }
+              }
+            })
             .catch(err => console.error(err));
   }
 
