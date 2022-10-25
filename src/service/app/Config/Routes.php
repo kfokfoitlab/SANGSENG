@@ -66,7 +66,8 @@ $routes->group('Auth', function($routes){
     $routes->post('SignUpBuyerStep2',    'Auth::SignUpBuyerStep2');
     $routes->post('SignUpBuyerSubmit',    'Auth::SignUpBuyerSubmit');
     $routes->get ('SignUpBuyerComplete/(:any)', 'Auth::SignUpBuyerComplete/$1');
-
+    $routes->post('BuyerEmailCheck',    'Auth::BuyerEmailCheck');
+    $routes->post('SellerEmailCheck',    'Auth::SellerEmailCheck');
     $routes->get ('SignUpSellerSLA',      'Auth::SignUpSellerSLA');
     $routes->post('SignUpSeller',         'Auth::SignUpSeller');
     $routes->post('SignUpSellerSubmit',    'Auth::SignUpSellerSubmit');

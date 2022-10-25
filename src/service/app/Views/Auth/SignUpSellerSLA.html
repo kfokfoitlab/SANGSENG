@@ -77,11 +77,11 @@
             </div>
             <div class="float-end">
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="sbs_n" name="sbs" value="n" required>
+                <input class="form-check-input" type="radio" id="sbs_n" name="sbs" value="N" required>
                 <label class="form-check-label" for="sbs_n">동의안함</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="sbs_y" name="sbs" value="y" required>
+                <input class="form-check-input" type="radio" id="sbs_y" name="sbs" value="Y" required>
                 <label class="form-check-label" for="sbs_y">동의함</label>
               </div>
             </div>
@@ -138,7 +138,7 @@ $(document).ready(function(){
     const chk = $(this).prop("checked");
     if(chk == true){
       $(".default-form input:checkbox").prop("checked", true);
-      $(".default-form input:radio[value='y']").prop("checked", true);
+      $(".default-form input:radio[value='Y']").prop("checked", true);
     }
   });
 });

@@ -49,11 +49,10 @@
 
           <form name="form-submit" method="post" action="/Auth/SignUpSellerSubmit" enctype="multipart/form-data">
             <input type="hidden" name="sbs" value="<?=$sbs?>">
-            <input type="hidden" name="ads" value="<?=$ads?>">
-
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="이메일주소 필수입력">이메일주소(로그인 시 아이디로 사용됩니다)</a></label>
-              <input type="email" name="email" placeholder="이메일주소를 입력해 주세요" title="이메일주소 입력" tabindex=100 required>
+              <button type="button"class="btn btn-style-one" name="idCheck" id="idCheck" onclick="sellerDoubleCheck();">중복체크</button>
+              <input type="email" id="email" name="email" placeholder="이메일주소를 입력해 주세요" title="이메일주소 입력" tabindex=100 required>
             </div>
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="비밀번호 필수입력">비밀번호</a></label>
@@ -156,3 +155,32 @@
     </div>
   </div>
 </section>
+<script>
+  function sellerDoubleCheck(){
+    var email = $("#email").val();
+    var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+    if(reg_email.test(email)){
+      $.ajax({
+        url:'/Auth/SellerEmailCheck',
+        type:'post',
+        data:{email:email},
+        success:function(cnt){
+          if(cnt == 0){
+            alert("사용 가능한 이메일 입니다.")
+          }else{
+            alert("이미 가입된 기업입니다");
+            $("#email").val('')
+          }
+        },
+        error:function(){
+          alert("에러가 발생했습니다.");
+        }
+      });
+    }else{
+      alert("올바른 이메일 형식이 아닙니다.");
+      $("#email").val('')
+    }
+  }
+
+
+</script>

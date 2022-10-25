@@ -45,7 +45,7 @@ class SignUpCompanyModel extends CommonModel
         // status == 0:가입신청, 1:심사중, 5:승인,7:거절, 9: 탈퇴
         $status = '1';
         $del_yn = 'N';
-        $receive_yn  = (@$data["ads"] == "y")? 'Y' : 'N';
+        $receive_yn  = (@$data["sbs"] == "Y")? 'Y' : 'N';
         $salt = $data["password"];
         $query = "
             insert into
