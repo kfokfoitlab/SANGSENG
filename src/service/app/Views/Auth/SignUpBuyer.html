@@ -48,12 +48,12 @@
 
           <form name="form-submit" method="post" action="/Auth/SignUpBuyerSubmit" enctype="multipart/form-data">
             <input type="hidden" name="sbs" value="<?=$sbs?>">
-            <input type="hidden" name="ads" value="<?=$ads?>">
-
             <div class="form-group">
-              <label class="my-2"><sup class="text-danger">*</sup><a title="이메일주소 필수입력">이메일주소(로그인 시 아이디로 사용됩니다)</a></label>
-              <input type="email" name="email" placeholder="이메일주소를 입력해 주세요" title="이메일주소 입력" tabindex=100 required>
+              <label class="my-2"><sup class="text-danger">*</sup><a title="이메일주소 필수입력">이메일주소(로그인 시 아이디로 사용됩니다)</a> </label>
+              <button type="button"class="btn btn-style-one" name="idCheck" id="idCheck" onclick="buyerDoubleCheck();">중복체크</button>
+              <input type="email" id="email" name="email" placeholder="이메일주소를 입력해 주세요" title="이메일주소 입력" tabindex=100 required>
             </div>
+
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="비밀번호 필수입력">비밀번호(영문+숫자+특수문자 조합 8자 이상)</a></label>
               <input type="password" name="password" placeholder="영문+숫자+특수문자 조합 8자 이상" title="비밀번호 입력" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,32}$" autoComplete="off" tabindex=100 required>
@@ -104,23 +104,6 @@
               <label class="my-2"><sup class="text-danger">*</sup><a title="담당자 이름 필수입력">주소</a></label>
               <input type="text" name="address" placeholder="주소를 입력해주세요" title="담당자 이름 입력" tabindex=100 required>
             </div>
-           <!-- <label class="my-2"><sup class="text-danger">*</sup><a title="주소">주소</a></label>
-            <div class="row">
-              <div class="col-8 col-lg-4 pe-0">
-                <div class="form-group">
-                  <input type="text" class="modal-search-post" id="post_code" name="post_code" placeholder="우편번호" title="우편번호 검색" tabindex=100 readonly>
-                </div>
-              </div>
-              <div class="col-4">
-                <button type="button" class="btn btn-primary modal-search-post" tabindex=100>우편번호 검색</button>
-              </div>
-            </div>
-            <div class="form-group">
-              <input type="text" id="address_road" name="address" class="my-2" placeholder="주소" title="주소" tabindex=100 readonly>
-              <input type="text" id="address_detail" name="address_detail" class="my-2" placeholder="상세주소" title="상세주소" tabindex=100>
-              <input type="hidden" name="coordinate_x" id="coordinate_x">
-              <input type="hidden" name="coordinate_y" id="coordinate_y">
-            </div>-->
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="상시 근로자 수 필수입력">상시 근로자 수 </a></label>
               <input type="text" name="workers" id = "workers" placeholder="숫자만 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="상시 근로자 수 입력" tabindex=100 required>
@@ -167,3 +150,33 @@
     </div>
   </div>
 </section>
+<script>
+
+  function buyerDoubleCheck(){
+    var email = $("#email").val();
+    var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+    if(reg_email.test(email)){
+      $.ajax({
+        url:'/Auth/BuyerEmailCheck',
+        type:'post',
+        data:{email:email},
+        success:function(cnt){
+          if(cnt == 0){
+            alert("사용 가능한 이메일 입니다.")
+          }else{
+            $("#email").val('')
+            alert("이미 가입된 기업입니다");
+
+          }
+        },
+        error:function(){
+          alert("에러가 발생했습니다.");
+        }
+      });
+    }else{
+      alert("올바른 이메일 형식이 아닙니다.");
+      $("#email").val('')
+    }
+  };
+
+</script>

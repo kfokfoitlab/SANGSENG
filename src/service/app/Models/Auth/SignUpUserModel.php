@@ -35,7 +35,7 @@ class SignUpUserModel extends CommonModel
         // status == 0:가입신청, 1:심사중, 5:승인,7:거절, 9: 탈퇴	
         $status = '1';
         $del_yn = 'N';
-        $receive_yn  = (@$data["ads"] == "y")? 'Y' : 'N';
+        $receive_yn  = (@$data["sbs"] == "Y")? 'Y' : 'N';
         if($data['tax_rate'] == null){
             $data['tax_rate'] = 10;
         }
@@ -82,17 +82,28 @@ class SignUpUserModel extends CommonModel
 
     } //}}}
 
-    public function dupCheck($email, $table_name = "buyer_company")
-    { //{{{
+    public function buyerCheck($email){
         $query = "
             select
                 count(*)
             from
-                ".$table_name."
+                buyer_company
             where
                 email = '".$email."'
             limit 1
         ";
         return $this->rodb->simple_query($query);
-    } //}}}
+    }
+    public function sellerCheck($email){
+        $query = "
+            select
+                count(*)
+            from
+                seller_company
+            where
+                email = '".$email."'
+            limit 1
+        ";
+        return $this->rodb->simple_query($query);
+    }
 }
