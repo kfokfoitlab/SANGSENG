@@ -61,7 +61,6 @@ class MyPageModel extends CommonModel
 
  public function pwdCheck($password){
      $uuid = $_SESSION["login_info"]["uuid"];
-     $password = $_POST['password'];
      $query = "
 
         select
@@ -129,6 +128,20 @@ class MyPageModel extends CommonModel
     public function ContractStatus($data){
         $workflow_id = $data["workflow_id"];
         $complete_reduction = $data["complete_reduction"];
+        $product_quantity = $data["product_quantity"];
+        $pworkflow_id = $data["pworkflow_id"];
+
+        if($pworkflow_id != ""){
+            $playing_query = "
+                update
+                    contract_condition
+                set
+                    contract_status =2
+                where 
+                    workflow_id = '".$pworkflow_id."'
+            ";
+            $this->wrdb->update($playing_query);
+        }
         $uuid = $data['uuid'];
         $whereQuery = "";
         if($workflow_id != ""){
@@ -222,9 +235,10 @@ class MyPageModel extends CommonModel
                 set
                     product_price = $complete_reduction,
                     contract_status =5,
+                    product_quantity = '".$product_quantity."',
                     reduction_money = $reduction_money
                 where 
-                    workflow_id = $workflow_id
+                    workflow_id = '".$workflow_id."'
             ";
                 $this->wrdb->update($reduction_query);
             return 1;
@@ -233,59 +247,6 @@ class MyPageModel extends CommonModel
         }
     }
 
-    public function test($data){
-        $workflow_id = $data["workflow_id"];
-        $complete_reduction = $data["complete_reduction"];
-        $uuid = $data['uuid'];
-        $whereQuery = "";
-        if($workflow_id != ""){
-            $whereQuery = " AND workflow_id in (".$workflow_id.")";
-            $query = "
-                update
-                    contract_condition
-                set
-                    contract_status =5
-                where 1=1
-                  $whereQuery
-            ";
-            //     echo $query;
-            $this->wrdb->update($query);
-            if($this){
-                $query = "
-                    select
-                        *
-                    from
-                        seller_company a
-                            left join contract_condition b on (a.uuid = b.seller_uuid)
-                    where
-                            b.workflow_id = ".$workflow_id."
-                    limit 1
-                ";
-                $this->rodb->query($query);
-                $row = $this->rodb->next_row();
-
-                $mild_disabled = $row["mild_disabled"];
-                $severely_disabled = $row["severely_disabled"];
-                $seller_sales = $row["seller_sales"];
-                $contribution =  $complete_reduction/$seller_sales;
-                $workers = $mild_disabled+($severely_disabled*2);
-                $reduction =$contribution*$workers;
-
-                $reduction_query = "
-                update
-                    buyer_company
-                set
-                   reduction_money = $reduction
-                where 1=1
-                    and  uuid = '".$uuid."'
-            ";
-                $this->wrdb->update($reduction_query);
-            }
-            return 1;
-        }else{
-            return null;
-        }
-    }
     public function getContractList($uuid){
         $data = [];
         $query = "
@@ -313,14 +274,12 @@ class MyPageModel extends CommonModel
         }
         $query = "
             select
-               *,a.idx as 'cidx',a.product_price as contract_price
+               *,idx as 'cidx',product_price as contract_price
             from
-              contract_condition a
-            join seller_product b 
-            on a.product_no = b.product_no
-            where a.del_yn != 'Y' AND buyer_uuid ='".$uuid."'".$where_query."
+              contract_condition 
+            where del_yn != 'Y' AND buyer_uuid ='".$uuid."'".$where_query."
            order by 
-               a.idx desc    
+               idx desc    
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){

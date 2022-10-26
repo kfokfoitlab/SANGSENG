@@ -176,8 +176,7 @@ class Auth extends BaseController
 
         $data = array(
              "sbs" => $_POST["sbs"]
-            ,"ads" => $_POST["ads"]
-        );
+       );
 
         echo view("Common/Header.html");
         echo view('Auth/SignUpBuyer.html', $data);

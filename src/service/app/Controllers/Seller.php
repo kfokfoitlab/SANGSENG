@@ -26,7 +26,6 @@ class Seller extends BaseController
         $expectationSales = $this->seller_model->getexpectationSales($uuid);
         $completionContract = $this->seller_model->getCompletionContract($uuid);
         $contractList = $this->seller_model->getContract($uuid);
-       // $disabledCount = $this->seller_model->getDisabledCount($uuid);
         $questions = $this->seller_model->getQuestionsList();
 	    $product_reply = $this->seller_model->getProductreplyList();
 	    $notice_list = $this->seller_model->getNoticeList();
@@ -40,7 +39,6 @@ class Seller extends BaseController
         ,"expectationSales" => $expectationSales
        ,"completionContract" =>  $completionContract
        ,"contractList" =>  $contractList
-     //  ,"disabledCount" =>  $disabledCount
         ,"questions" =>  $questions
 	        ,"product_reply" => $product_reply
 	        ,"notice_list" => $notice_list
@@ -83,6 +81,4 @@ class Seller extends BaseController
         </script>
         ";
     }
-
-
 }

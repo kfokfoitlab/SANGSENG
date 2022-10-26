@@ -60,7 +60,7 @@ class BuyerModel extends CommonModel
 
     public function contract_Check($data){
         $uuid = $_SESSION['login_info']['uuid'];
-        $product_no = $_POST['product_no'];
+        $product_no = $data['product_no'];
 
         $query = "
             select
@@ -70,6 +70,7 @@ class BuyerModel extends CommonModel
             where
                 product_no = $product_no
                 and buyer_uuid = '".$uuid."'
+                and contract_status in('1','2')  
         ";
         return $this->rodb->simple_query($query);
     }
