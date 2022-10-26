@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 use App\Models\dbClasses\dbModel;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+
 use function mkdir;
 class CommonModel extends dbModel
 {
@@ -398,30 +400,37 @@ class CommonModel extends dbModel
 		}
 	}
 
-    public function zip_downloadFileNew(){
-        $file_path = ROOTPATH."/public/uploads/";
-        $sales_file = $_GET["sales_file"];
-        $workers_file = $_GET["workers_file"];
-        $seller_business_license = $_GET["seller_business_license"];
-//압축할 파일명
-        $file_names = array($sales_file,$workers_file,$seller_business_license);
-//다운로드되는 파일명
-        $file_name = "test.zip";
-        $this->createZipArchive();
-/*        $zip = new ZipArchive();
-        if ($zip->open($file_name, ZipArchive::CREATE) !== true){
-            exit("cannot open [".$file_name."]");
-        }
-        foreach($file_names as $files){
-            $zip->addFile($file_path.$files, $files);
-        }
-        $zip->close();*/
-        header("Content-type: application/zip");
-        header("Content-Disposition: attachment; filename=".$file_name);
-        header("Pragma: no-cache");
-        header("Expires: 0");
-        readfile($file_name);
-        unlink($file_name);
-    }
 
+    public function excelRead($files){
+        require_once('PhpOffice/Psr/autoloader.php');
+        require_once('PhpOffice/PhpSpreadsheet/autoloader.php');
+        $allowed_ext = array('Xlsx','xlsx');
+        if($files["excelupload"]["name"] != "") {
+            $excelupload_ori = $files["excelupload"]["name"];
+            $upload_excelupload_ori = "excelupload";
+            $upload_excelupload_image = uniqid() . "." . pathinfo($files["excelupload"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files, $upload_excelupload_image, $allowed_ext, $upload_excelupload_ori);
+        }
+        $inputFileName = ROOTPATH."/public/uploads/".$upload_excelupload_image;
+        $spreadsheet = IOFactory::load($inputFileName);
+
+
+
+        $Rows = $spreadsheet->getSheetByName('sheet1')->toArray(null, true, true, true);
+
+        $test =[];
+        for($i =2; $i <=3; $i++){
+            $test[] = $Rows[$i]['A'];
+            $test[] = $Rows[$i]['B'];
+            $test[] = $Rows[$i]['C'];
+            $test[] = $Rows[$i]['D'];
+            $test[] = $Rows[$i]['F'];
+        }
+
+        print_r($test);
+
+      /*  foreach($Rows as $row){
+               print_r($row['B']);
+        }*/
+    }
 }

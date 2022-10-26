@@ -205,6 +205,7 @@ $routes->group('Seller',  function ($routes){
     $routes->post ($group_name.'/reg_worker',           'Seller\IMJOB::reg_worker');
     $routes->get ($group_name.'/IMJOBView',           'Seller\IMJOB::IMJOBView');
     $routes->get ($group_name.'/downloadFileNew',           'Seller\IMJOB::downloadFileNew');
+    $routes->post ($group_name.'/ExcelUpload',           'Seller\IMJOB::ExcelUpload');
     $routes->post ($group_name.'/updateWorker',           'Seller\IMJOB::updateWorker');
     $routes->get ($group_name.'/deleteWorker',           'Seller\IMJOB::deleteWorker');
     $routes->get ('MyPage/Info',                'Seller\MyPage::Info');

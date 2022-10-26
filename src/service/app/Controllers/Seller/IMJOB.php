@@ -127,5 +127,9 @@
 		public function downloadFileNew(){
 			$this->imjob_model->downloadFileNew();
 		}
+
+        public function ExcelUpload(){
+          $result = $this->imjob_model->excelRead($_FILES);
+        }
 	}
   ?>
