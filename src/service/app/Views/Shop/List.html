@@ -47,7 +47,7 @@ $levy = $base * $employ *12; //부담금
 
             function product_compare_data($a, $b){
               if ($a['sort_num'] == $b['sort_num']){
-                return 0;
+                return ($a['register_date'] < $b['register_date']) ? 1 : -1;
               }
               return ($a['sort_num'] < $b['sort_num']) ? 1 : -1;
             }

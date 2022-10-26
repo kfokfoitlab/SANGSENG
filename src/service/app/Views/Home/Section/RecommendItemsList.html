@@ -31,21 +31,43 @@ $levy = $base * $employ *12; //부담금
       <div class="tab active-tab" id="tab1">
         <div class="row">
           <?php
+
+          function product_compare_data($a, $b){
+            if ($a['sort_num'] == $b['sort_num']){
+              return ($a['register_date'] < $b['register_date']) ? 1 : -1;
+            }
+            return ($a['sort_num'] < $b['sort_num']) ? 1 : -1;
+          }
+
           if(is_array($data) && count($data) > 0){
-            foreach($data as $item){
-          $product_price = number_format($item["product_price"]);
-          $result_price = $item['reduction'] *$base;
-          $reduction_money = 0;
-          if($result_price > $levy){
-          $reduction_money = $levy*0.6;
-          }else if($result_price >$item["product_price"]*0.5){
-          $reduction_money = $item["product_price"]*0.5 * 12;
-          }else{
-          $reduction_money = $result_price * 12;
+          $ret = array();
+          foreach($data as $item){
+            $product_price = number_format($item["product_price"]);
+            $result_price = $item['reduction'] *$base;
+            $reduction_money = 0;
+            if($result_price > $levy){
+            $reduction_money = $levy*0.6;
+            }else if($result_price >$item["product_price"]*0.5){
+            $reduction_money = $item["product_price"]*0.5 * 12;
+            }else{
+            $reduction_money = $result_price * 12;
+            }
+            if($reduction_money > $item['product_price']*0.5){
+            $reduction_money = $item['product_price']*0.5;
+            }
+
+            $reduction_money = (int)$reduction_money;
+            $item['reduction_money'] = $reduction_money;
+            $item['sort_num'] = $reduction_money/$item['product_price'];
+            $ret[] = $item;
+            usort($ret,'product_compare_data');
           }
-          if($reduction_money > $item['product_price']*0.5){
-          $reduction_money = $item['product_price']*0.5;
-          }
+          $index = 0;
+          foreach($ret as $item){
+            if($index == 5){
+              break;
+            }
+
           ?>
           <!-- Job Block -->
           <div class="job-block col-sm-12">
@@ -69,7 +91,7 @@ $levy = $base * $employ *12; //부담금
               </div>
             </div>
           </div>
-          <?php
+          <?php $index++;
                 }
               }
             ?>

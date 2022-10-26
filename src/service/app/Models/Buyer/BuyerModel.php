@@ -149,8 +149,32 @@ class BuyerModel extends CommonModel
 
     public function RecommendationList($value){
         $where = "";
-
-
+		$interest_info = array();
+		$URL_CHECK = _CONTROLLER;
+	
+	    if($URL_CHECK = "HOME" or $URL_CHECK = "BUYER"){
+		    $buyer_info = $this->Buyer_info($_SESSION['login_info']['uuid']);
+			if($buyer_info["interest_office"] == "Y") {
+				$interest_info[] = 1;
+			}
+			if($buyer_info["interest_daily"] == "Y"){
+				$interest_info[] = 2;
+			}
+			if($buyer_info["interest_computerized"] == "Y"){
+				$interest_info[] = 3;
+			}
+		    if($buyer_info["interest_food"] == "Y"){
+			    $interest_info[] = 4;
+		    }
+		    if($buyer_info["interest_cleaning"] == "Y"){
+			    $interest_info[] = 5;
+		    }
+			if(count($interest_info)>0) {
+				$where = " and product_category IN (" . implode(',', $interest_info) . ")";
+			}
+	    }
+		
+		
         if($value != "" && $value !='all'){
             $where = " and product_category =$value";
         }
@@ -161,6 +185,7 @@ class BuyerModel extends CommonModel
             $where = $where." and (product_name like '%".$_GET["search_v"]."%'
              or company_name like '%".$_GET["search_v"]."%')";
         }
+		
         $ranking = [];
         $query = "
             select
