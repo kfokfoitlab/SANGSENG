@@ -26,20 +26,21 @@
           $interest_computerized = "";
           $interest_food = "";
           $interest_cleaning = "";
+          $interest ="";
           if($data["interest_office"] == 'Y'){
-          $interest_office = "사무용품,";
+          $interest = $interest."사무용품,";
           }
           if($data["interest_daily"] == 'Y'){
-          $interest_daily = "생활용품";
+          $interest = $interest."생활용품,";
           }
           if($data["interest_computerized"] == 'Y'){
-          $interest_computerized = "전산용품,";
+          $interest = $interest."전산용품,";
           }
           if($data["interest_food"] == 'Y'){
-          $interest_food = "식음료,";
+          $interest = $interest."식음료,";
           }
           if($data["interest_cleaning"] == 'Y'){
-          $interest_cleaning = "청소용품";
+          $interest = $interest."청소용품,";
           }
 
           ?>
@@ -95,7 +96,7 @@
             </tr>
             <tr>
               <td class="th">관심상품</td>
-              <td><?=$interest_office?><?=$interest_daily ?><?=$interest_computerized ?><?=$interest_food?><?=$interest_cleaning?></td>
+              <td><?=substr($interest,0,-1)?></td>
             </tr>
             <tr>
               <td class="th">상태</td>
