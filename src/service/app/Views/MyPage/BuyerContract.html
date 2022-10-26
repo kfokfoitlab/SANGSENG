@@ -11,7 +11,7 @@
       ?>
       <h3 class="mt-5 mb-4 h4 fw-bold text-center">계약현황</h3>
       <form name="myForm" method="GET" action="/Buyer/MyPage/Contract" >
-        <table class="w-100 bg-light search-table" id ="BuyercontractTbl">
+        <table class="w-100 bg-light search-table" >
           <tbody>
           <tr>
             <th>상품명</th>
@@ -75,7 +75,7 @@
 -->
 
       </div>
-      <table class="table table-striped text-center mt-5 result-table">
+      <table class="table table-striped text-center mt-5 result-table" id ="BuyercontractTbl">
           <thead>
           <tr>
             <th>No.</th>
@@ -84,7 +84,7 @@
             <th>상품수량</th>
             <th>계약금액</th>
             <th>감면금액</th>
-            <th>계약서조회</th>
+            <th id ="test3333" >계약서조회</th>
             <th>계약서전송</th>
           </tr>
           </thead>
@@ -321,7 +321,6 @@ function contract_update(){
             var workflow_id = [];
             var pworkflow_id = [];
             var j = 0;
-            console.log(response);
             for(var i =0; i <response['workflow_list'].length; i++){
 
               if(response['workflow_list'][i]['status'] == "Complete"){
@@ -332,13 +331,19 @@ function contract_update(){
                     pworkflow_id[j] = response['workflow_list'][i]['workflow_id'];
                 }
               }
-             // Contract_reduction(workflow_id,pworkflow_id);
+            Contract_reduction(workflow_id,pworkflow_id);
           })
           .catch(err => console.error(err));
 }
 
 
   function excelFileExport() {
+      var table = document.getElementById('BuyercontractTbl');
+      for(let j =1; j<=2; j++) {
+          for (let i = 0; i < table.rows.length; i++) {
+              table.rows[i].deleteCell(-1);
+          }
+      }
       var wb = XLSX.utils.table_to_book(document.getElementById('BuyercontractTbl'), {
           sheet: "sheet1",
           raw: true
@@ -346,5 +351,6 @@ function contract_update(){
       let today = new Date();
       XLSX.writeFile(wb, ('계약리스트'+ today.getFullYear() + today.getMonth() + today.getDate()
           + today.getHours() + today.getMinutes() + today.getSeconds() +'.xlsx'));
+        window.location.reload();
   }
 </script>
