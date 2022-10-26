@@ -162,7 +162,7 @@
           ?>
           <tr>
             <td><?=$i?></td>
-            <td title=<?=$status?>><?=$status?><?php if($item["workflow_id"] != ""){?><span id="sellerTurn_<?=$item['workflow_id']?>" class="text-warning"></span><?php } ?></td>
+            <td title=<?=$status?>><?=$status?><?php if($item["workflow_id"] != ""&& $item['contract_status'] != 5){?><span id="sellerTurn_<?=$item['workflow_id']?>" class="text-warning"></span><?php } ?></td>
             <td class="text-start"><?=$item["product_name"]?></td>
             <td><?=$item["buyer_company"]?></td>
             <td class="text-end"><?=$item["product_quantity"]?></td>
@@ -347,6 +347,14 @@
 
 
   function excelFileExport() {
+
+    var table = document.getElementById('SellercontractTbl');
+    for(let j =1; j<=2; j++) {
+      for (let i = 0; i < table.rows.length; i++) {
+        table.rows[i].deleteCell(-1);
+      }
+    }
+
     var wb = XLSX.utils.table_to_book(document.getElementById('SellercontractTbl'), {
       sheet: "sheet1",
       raw: true
@@ -354,5 +362,7 @@
     let today = new Date();
     XLSX.writeFile(wb, ('계약리스트'+ today.getFullYear() + today.getMonth() + today.getDate()
             + today.getHours() + today.getMinutes() + today.getSeconds() +'.xlsx'));
+    window.location.reload();
+
   }
 </script>

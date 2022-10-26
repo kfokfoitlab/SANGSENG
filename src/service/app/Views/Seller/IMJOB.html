@@ -171,6 +171,14 @@
 
 
   function excelFileExport() {
+
+    var table = document.getElementById('imjobTbl');
+    for(let j =1; j<=2; j++) {
+      for (let i = 0; i < table.rows.length; i++) {
+        table.rows[i].deleteCell(-1);
+      }
+    }
+
     var wb = XLSX.utils.table_to_book(document.getElementById('imjobTbl'), {
       sheet: "sheet1",
       raw: true
@@ -178,6 +186,8 @@
     let today = new Date();
     XLSX.writeFile(wb, ('근로자리스트'+ today.getFullYear() + today.getMonth() + today.getDate()
             + today.getHours() + today.getMinutes() + today.getSeconds() +'.xlsx'));
+    window.location.reload();
+
   }
 
 </script>
