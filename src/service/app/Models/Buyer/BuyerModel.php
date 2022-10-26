@@ -169,8 +169,8 @@ class BuyerModel extends CommonModel
 		    if($buyer_info["interest_cleaning"] == "Y"){
 			    $interest_info[] = 5;
 		    }
-			if($buyer_info != "") {
-				//$where = " and product_category IN (" . implode(',', $interest_info) . ")";
+			if(count($interest_info)>0) {
+				$where = " and product_category IN (" . implode(',', $interest_info) . ")";
 			}
 	    }
 		
