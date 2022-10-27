@@ -139,6 +139,7 @@ $routes->group('IMJOB', ['namespace' => 'App\Controllers\IMJOB'], static functio
     $routes->get ($group_name.'/downloadFileNew',            $group_name.'::downloadFileNew');
     $routes->post ($group_name.'/updateWorker',           $group_name.'::updateWorker');
     $routes->get ($group_name.'/deleteWorker',           $group_name.'::deleteWorker');
+    $routes->post ($group_name.'/Workersform',           $group_name.'::Workersform');
 });
 
 // 이력서

@@ -264,5 +264,30 @@
 			move_uploaded_file($file_tmp_name,$target_dir_admin.$fileName);
 			copy($target_dir_admin.$fileName,$target_dir.$fileName);
 		}
-		
+
+        public function regFormUpload($files){
+            $allowed_ext = array('Xlsx','xlsx');
+            if($files["register_file"]["name"] != ""){
+                $register_file_ori = $files["register_file"]["name"];
+                $upload_register_file_ori = "register_file";
+                $upload_register_file_image = uniqid().".".pathinfo($files["register_file"]["name"], PATHINFO_EXTENSION);
+                $this->uploadFileNew($files,$upload_register_file_image,$allowed_ext,$upload_register_file_ori);
+            }
+            $query = "
+            insert into
+                workers_excel
+            set
+                 register_date = '".date("Y-m-d H:i:s")."'
+                ,register_file = '".$upload_register_file_image."'
+                ,register_file_ori = '".$register_file_ori."'
+                
+        ";
+            $idx = $this->wrdb->insert($query);
+            if($idx){
+                return 1;
+            }
+            else {
+                return null;
+            }
+        }
 	}
