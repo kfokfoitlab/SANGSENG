@@ -139,7 +139,7 @@
             <td><?=$i?></td>
             <td title=<?=$status?>><?=$status?><?php if($item["workflow_id"] != "" && $item['contract_status'] != 5){?><span id="buyerTurn_<?=$item['workflow_id']?>" class="text-warning"></span><?php } ?></td>
             <td title=<?=$item["product_name"]?>><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>"><?=$item["product_name"]?></a> </td>
-            <td class="text-end" title=<?=$item["product_quantity"]?>><?=$item["product_quantity"]?></td>
+            <td title=<?=$item["product_quantity"]?>><?=$item["product_quantity"]?></td>
             <td class="text-end" title=<?=$item["product_price"]?>><?=number_format($item["contract_price"])?>원</td>
             <td class="text-end" title="25,000,000"><?=number_format($item["reduction_money"])?>원</td>
 
