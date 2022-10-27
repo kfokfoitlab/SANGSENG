@@ -400,6 +400,23 @@ class CommonModel extends dbModel
 		}
 	}
 
+    public function getRegExcel(){
+        $excel = [];
+        $query = "
+            select
+                *
+            from
+                workers_excel
+         order by register_date desc
+            limit 1
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()) {
+            $excel = $row;
+        }
+        return $excel;
+    }
+
 
     public function excelRead($files){
         require_once('PhpOffice/Psr/autoloader.php');
@@ -413,24 +430,18 @@ class CommonModel extends dbModel
         }
         $inputFileName = ROOTPATH."/public/uploads/".$upload_excelupload_image;
         $spreadsheet = IOFactory::load($inputFileName);
-
-
-
-        $Rows = $spreadsheet->getSheetByName('sheet1')->toArray(null, true, true, true);
-
+        $Rows = $spreadsheet->getSheetByName('Sheet1')->toArray(null, true, true, true);
         $test =[];
-        for($i =2; $i <=3; $i++){
-            $test[] = $Rows[$i]['A'];
-            $test[] = $Rows[$i]['B'];
-            $test[] = $Rows[$i]['C'];
-            $test[] = $Rows[$i]['D'];
-            $test[] = $Rows[$i]['F'];
-        }
-
-        print_r($test);
-
-      /*  foreach($Rows as $row){
-               print_r($row['B']);
-        }*/
+        $data = [];
+        for($i =6; $i <=count($Rows); $i++){
+            $test[$i]["name"] = $Rows[$i]['A'];;
+            $test[$i]["sdate"] = $Rows[$i]['B'];
+            $test[$i]["edate"] = $Rows[$i]['C'];
+            $test[$i]["birth"] = $Rows[$i]['D'];
+            $test[$i]["status"] = $Rows[$i]['E'];
+            $test[$i]["dis"] = $Rows[$i]['F'];
+            $data[] = $test[$i];
+         }
+        return $data;
     }
 }
