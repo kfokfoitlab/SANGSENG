@@ -377,13 +377,13 @@
                       <span class="text-secondary"><?=substr($item["register_date"],0,16)?></span>
                       <?php if($item['user_uuid'] == $_SESSION['login_info']['uuid']){ ?>
                       <button class="btn-sm btn-danger" onclick="replyDelete('<?=$item['idx']?>','<?=$item['reply_no']?>',<?=$item['reply_step']?>)" style="float: right;">삭제</button>
-                      <button class="btn-sm btn-secondary" id="reply_ud_cancel_<?=$item['idx']?>" onclick="replyUpdateCancel('<?=$item['idx']?>','<?=$item['reply_content']?>')" style="float: right;margin-right: 1px;display: none">취소</button>
-                      <button class="btn-sm btn-warning" onclick="replyUpdate('<?=$item['idx']?>')" style="float: right;margin-right: 1px">수정</button>
+                      <button class="btn-sm btn-secondary me-1" id="reply_ud_cancel_<?=$item['idx']?>" onclick="replyUpdateCancel('<?=$item['idx']?>','<?=$item['reply_content']?>')" style="float: right;margin-right: 1px;display: none">취소</button>
+                      <button class="btn-sm btn-warning text-white me-1" onclick="replyUpdate('<?=$item['idx']?>')" style="float: right;margin-right: 1px">수정</button>
 
                       <?php } ?>
                     </div>
                     <div class="mb-2">
-                      <input style="background-color: white" value="<?=$item['reply_content']?>"
+                      <input class="bg-white w-100" value="<?=$item['reply_content']?>"
                              name="reply_content_ud_<?=$item['idx']?>" id="reply_content_ud_<?=$item["idx"]?>" disabled>
                     </div>
                     <!--                    <div>
@@ -412,12 +412,12 @@
                         <span class="text-secondary"><?=substr($item_re["register_date"],0,16)?></span>
                         <?php if($item_re['user_uuid'] == $_SESSION['login_info']['uuid']){ ?>
                         <button class="btn-sm btn-danger" onclick="replyDelete('<?=$item_re['idx']?>','<?=$item_re['reply_no']?>',<?=$item_re['reply_step']?>)" style="float: right;">삭제</button>
-                        <button class="btn-sm btn-secondary" id="reply_ud_cancel_<?=$item_re['idx']?>" onclick="replyUpdateCancel('<?=$item_re['idx']?>','<?=$item_re['reply_content']?>')" style="float: right;margin-right: 1px;display: none" >취소</button>
-                        <button class="btn-sm btn-warning" onclick="replyUpdate('<?=$item_re['idx']?>')" style="float: right;margin-right: 1px">수정</button>
+                        <button class="btn-sm btn-secondary me-1" id="reply_ud_cancel_<?=$item_re['idx']?>" onclick="replyUpdateCancel('<?=$item_re['idx']?>','<?=$item_re['reply_content']?>')" style="float: right;margin-right: 1px;display: none" >취소</button>
+                        <button class="btn-sm btn-warning text-white me-1" onclick="replyUpdate('<?=$item_re['idx']?>')" style="float: right;margin-right: 1px">수정</button>
                         <?php } ?>
                       </div>
                       <div class="mb-2">
-                        <input style="background-color: white" value="<?=$item_re['reply_content']?>"
+                        <input class="bg-white w-100" value="<?=$item_re['reply_content']?>"
                                name="reply_content_ud_<?=$item_re['idx']?>" id="reply_content_ud_<?=$item_re["idx"]?>"disabled>
                       </div>
                       <!--                     <div>
