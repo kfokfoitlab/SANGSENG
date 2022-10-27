@@ -129,7 +129,25 @@
 		}
 
         public function ExcelUpload(){
-          $result = $this->imjob_model->excelRead($_FILES);
+          $data = $this->imjob_model->excelRead($_FILES);
+
+            $data = array(
+                "data" => $data
+            );
+            echo view("Common/Header.html");
+            echo view('Seller/IMJOBRegist.html',$data);
+            echo view("Common/Footer.html");
+        }
+
+        public function IMJOBRegist(){
+            $excel = $this->imjob_model->getRegExcel();
+            $data = array(
+                "excel" => $excel
+            );
+            echo view("Common/Header.html");
+            echo view('Seller/IMJOBRegist.html',$data);
+            echo view("Common/Footer.html");
+
         }
 	}
   ?>

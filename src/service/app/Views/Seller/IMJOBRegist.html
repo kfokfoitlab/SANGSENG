@@ -1,0 +1,58 @@
+<?php
+  // Left Menu
+  require(__DIR__.'/Components/Left.html');
+?>
+<div class="flex-grow-1">
+    <section class="py-5 imjob-list">
+            <div class="auto-container">
+                <button class="btn btn-outline-secondary btn-sm my-2 fw-normal" type="button"  onclick="downloadFileNew('<?=$excel["register_file"]?>','<?=$excel["register_file_ori"]?>');">양식다운로드</button>
+            </div>
+        <form id ="excelupload" method="post" action="/Seller/IMJOB/ExcelUpload" enctype="multipart/form-data" >
+            <input type="file" name ="excelupload"><br>
+            <input type="submit" value="확인">
+        </form>
+
+            <table class="table table-striped text-center mt-5 imjob-list-table" id ="imjobTbl">
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>이름</th>
+                    <th>생년월일</th>
+                    <th>계약 시작일</th>
+                    <th>계약 종료일</th>
+                    <th>근무상태</th>
+                    <th>장애유형</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                 if(is_array($data) && count($data) > 0){
+                $i = 1;
+                foreach($data as $item){
+                ?>
+                <tr>
+                    <td><?=$i?></td>
+                    <td><?=$item['name']?></td>
+                    <td><?=$item['birth']?></td>
+                    <td><?=$item['sdate']?></td>
+                    <td><?=$item['edate']?></td>
+                    <td><?=$item['status']?></td>
+                    <td><?=$item['dis']?></td>
+                <?php
+                $i++;
+                }
+                }
+                ?>
+                </tbody>
+            </table>
+</section>
+</div>
+<script>
+    function downloadFileNew(fileName,fileNameOri){
+        if(fileName == ""){
+            alert("등록된 파일이 없습니다");
+        }else {
+            location.href = "/Seller/IMJOB/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+        }
+    };
+</script>
