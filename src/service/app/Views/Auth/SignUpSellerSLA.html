@@ -139,6 +139,9 @@ $(document).ready(function(){
     if(chk == true){
       $(".default-form input:checkbox").prop("checked", true);
       $(".default-form input:radio[value='Y']").prop("checked", true);
+    }else{
+        $(".default-form input:checkbox").prop("checked", false);
+        $(".default-form input:radio[value='Y']").prop("checked", false);
     }
   });
 });

@@ -479,7 +479,13 @@ class CommonModel extends dbModel
                 $disability_degree = '2';
             }
             $sdate= date("Y-m-d", strtotime($Rows[$i]['B']));
-            $edate= date("Y-m-d", strtotime($Rows[$i]['C']));
+           // $edate= date("Y-m-d", strtotime($Rows[$i]['C']));
+            if($Rows[$i]['C'] != ""){
+                $edate= date("Y-m-d", strtotime($Rows[$i]['C']));
+            }else{
+                $edate= "";
+            }
+
             $query = "
             insert into
                 seller_company_worker
