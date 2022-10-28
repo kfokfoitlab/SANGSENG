@@ -73,21 +73,28 @@ $(document).ready(function(){
                     return html;
                 }
             }
-					,{title: "ID/PW찾기", data: {"user_phone":"user_phone","search_type":"search_type"},visible: true, className: "text-nowrap",
+					,{title: "ID/PW찾기", data: {"idx":"idx","search_type":"search_type","company_type":"company_type","register_id":"register_id"},visible: true, className: "text-nowrap",
 							"render": function( data, type, row, meta ,data1){
+								var company_type = data['company_type'];
+								var register_id = data['register_id'];
+								var idx = data['idx'];
 								let html = "";
-								html += "<a";
-								html += "   class='button btn-secondary btn-sm m-1'";
-								html += "   href='/"+_CONTROLLER+"/searchId?user_phone="+data['user_phone']+"&type=buyer' target='_self'" +
-												"onclick=\"window.open(this.href, '_blank', 'width=500,height=330,toolbars=no,scrollbars=no'); return false;\">";
-								html += "구매기업";
-								html += "</a>";
-								html += "<a";
-								html += "   class='button btn-secondary btn-sm m-1'";
-								html += "   href='/"+_CONTROLLER+"/searchId?user_phone="+data['user_phone']+"&type=seller' target='_self'" +
+								if(company_type == 'buyer') {
+									html += "<a";
+									html += "   class='button btn-secondary btn-sm m-1'";
+									html += "   href='/" + _CONTROLLER + "/searchId?rgd="+register_id+"&idx="+idx+" 'target='_self'" +
 										"onclick=\"window.open(this.href, '_blank', 'width=500,height=330,toolbars=no,scrollbars=no'); return false;\">";
-								html += "판매기업";
-								html += "</a>";
+									html += "구매기업";
+									html += "</a>";
+								}
+								if(company_type == 'seller') {
+									html += "<a";
+									html += "   class='button btn-secondary btn-sm m-1'";
+									html += "   href='/" + _CONTROLLER + "/searchId?rgd="+register_id+"&idx="+idx+" 'target='_self'" +
+										"onclick=\"window.open(this.href, '_blank', 'width=500,height=330,toolbars=no,scrollbars=no'); return false;\">";
+									html += "판매기업";
+									html += "</a>";
+								}
 								return html;
 							}
 						}
