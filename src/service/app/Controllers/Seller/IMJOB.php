@@ -149,5 +149,25 @@
             echo view("Common/Footer.html");
 
         }
+        public function WorkersReg(){
+            $result = $this->imjob_model->WorkersReg($_FILES);
+
+            if($result == "1") {
+                $_SESSION["disabledCount"] = $this->sigin_model->getWorkerCount();
+                echo "
+                <script>
+                    alert('정상적으로 일괄등록 되었습니다.');
+					window.location.replace('/Seller/IMJOB/List?p_n=1');
+                </script>
+            ";
+            }else{
+                echo "
+                <script>
+                    alert('오류가 발생했습니다.다시 시도해주세요');
+					history.back(-1);
+                </script>
+            ";
+            }
+        }
 	}
   ?>

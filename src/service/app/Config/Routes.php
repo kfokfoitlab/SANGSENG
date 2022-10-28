@@ -209,6 +209,8 @@ $routes->group('Seller',  function ($routes){
     $routes->post ($group_name.'/updateWorker',           'Seller\IMJOB::updateWorker');
     $routes->get ($group_name.'/deleteWorker',           'Seller\IMJOB::deleteWorker');
     $routes->get ($group_name.'/IMJOBRegist',           'Seller\IMJOB::IMJOBRegist');
+    $routes->post ($group_name.'/WorkersReg',           'Seller\IMJOB::WorkersReg');
+
     $routes->get ('MyPage/Info',                'Seller\MyPage::Info');
 	$routes->post ('MyPage/InfoUpdate',                'Seller\MyPage::InfoUpdate');
     $routes->get ('MyPage/ConfirmPassword',     'Seller\MyPage::ConfirmPassword');

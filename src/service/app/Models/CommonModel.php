@@ -444,4 +444,65 @@ class CommonModel extends dbModel
          }
         return $data;
     }
-}
+
+    public function WorkersReg($files)
+    {
+        require_once('PhpOffice/Psr/autoloader.php');
+        require_once('PhpOffice/PhpSpreadsheet/autoloader.php');
+        $allowed_ext = array('Xlsx', 'xlsx');
+        if ($files["register_file"]["name"] != "") {
+            $register_file_ori = $files["register_file"]["name"];
+            $upload_register_file_ori = "register_file";
+            $upload_register_file_image = uniqid() . "." . pathinfo($files["register_file"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files, $upload_register_file_image, $allowed_ext, $upload_register_file_ori);
+        }
+        $inputFileName = ROOTPATH . "/public/uploads/" . $upload_register_file_image;
+        $spreadsheet = IOFactory::load($inputFileName);
+        $Rows = $spreadsheet->getSheetByName('Sheet1')->toArray(null, true, true, true);
+        $seller_uuid = $_SESSION["login_info"]["uuid"];
+        $seller_data = $this->getSellerInfo($seller_uuid);
+        for ($i = 6; $i <= count($Rows); $i++) {
+            $working_status = "";
+            if ($Rows[$i]['E'] == "근무") {
+                $working_status = '1';
+            }
+            if ($Rows[$i]['E'] == "퇴직") {
+                $working_status = '2';
+            }
+            if ($Rows[$i]['E'] == "휴직") {
+                $working_status = '3';
+            }
+            $disability_degree = "";
+            if ($Rows[$i]['F'] == "중증") {
+                $disability_degree = '1';
+            }if ($Rows[$i]['F'] == "경증") {
+                $disability_degree = '2';
+            }
+            $sdate= date("Y-m-d", strtotime($Rows[$i]['B']));
+            $edate= date("Y-m-d", strtotime($Rows[$i]['C']));
+            $query = "
+            insert into
+                seller_company_worker
+            set
+                 status = '5'
+                ,company_name = '".$seller_data["company_name"]."'
+				,company_code = '".$seller_data["company_code"]."'
+				,worker_name = '".$Rows[$i]['A']."'
+				,worker_term_start = '".$sdate."'
+				,worker_term_end = '".$edate."'
+				,worker_birth = '".$Rows[$i]['D']."'
+				,working_status = '".$working_status."'
+				,disability_degree = '".$disability_degree."'
+                ,register_date = '".date("Y-m-d H:i:s")."'
+                ,register_id = '".$seller_uuid."'
+        ";
+            $idx = $this->wrdb->insert($query);
+              }
+          if($idx){
+              return "1";
+          }
+          else {
+              return null;
+          }
+        }
+    }

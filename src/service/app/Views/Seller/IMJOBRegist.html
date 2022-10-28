@@ -8,11 +8,19 @@
                 <button class="btn btn-outline-secondary btn-sm my-2 fw-normal" type="button"  onclick="downloadFileNew('<?=$excel["register_file"]?>','<?=$excel["register_file_ori"]?>');">양식다운로드</button>
             </div>
         <form id ="excelupload" method="post" action="/Seller/IMJOB/ExcelUpload" enctype="multipart/form-data" >
-            <input type="file" name ="excelupload"><br>
-            <input type="submit" value="확인">
+            <input type="file" id ="excel_upload" name ="excelupload"><br>
+            <input type="button" onclick="fileCheck();" value="확인하기">
         </form>
 
-            <table class="table table-striped text-center mt-5 imjob-list-table" id ="imjobTbl">
+        <form id ="fileForm" method="post" action="/Seller/IMJOB/WorkersReg" enctype="multipart/form-data" >
+        <div class="mt-4 pb-3 text-end border-bottom border-2">
+            <input type="file" id ="register_file" name ="register_file">
+            <button type="button" class=" btn btn-success" onclick="register_upload();">
+                업로드
+            </button>
+        </div>
+        </form>
+        <table class="table table-striped text-center mt-5 imjob-list-table" id ="imjobTbl">
                 <thead>
                 <tr>
                     <th>No.</th>
@@ -55,4 +63,19 @@
             location.href = "/Seller/IMJOB/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
         }
     };
+
+    function fileCheck(){
+        if($("#excel_upload").val() == ""){
+            alert("파일을 등록해주세요");
+        }else{
+            $("#excelupload").submit();
+        }
+    }
+    function register_upload(){
+        if($("#register_file").val() == ""){
+            alert("파일을 등록해주세요");
+        }else{
+            $("#fileForm").submit();
+        }
+    }
 </script>
