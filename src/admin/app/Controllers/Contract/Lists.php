@@ -107,12 +107,8 @@ class Lists extends Base
 
     public function contractSubmit(){
 
-        $data = array(
-            "idx" => $_GET["idx"]
-        ,"status" => $_GET["status"]
-        ,"workflow_id" => $_GET["workflow_id"]
-        );
-        $result = $this->model->contractSubmit($data);
+
+        $result = $this->model->contractSubmit($_GET);
         if($result == 1){
             echo "
             <script>

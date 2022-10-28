@@ -60,6 +60,7 @@ class MyPageModel extends CommonModel
  }
 
  public function pwdCheck($password){
+     $password = $_POST['password'];
      $uuid = $_SESSION["login_info"]["uuid"];
      $query = "
 

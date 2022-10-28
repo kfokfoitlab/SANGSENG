@@ -148,8 +148,8 @@ class MyPage extends BaseController
 
     public function ChangePassword()
     { // {{{
-        $uuid = $_SESSION["login_info"]["uuid"];
-        $result = $this->mypage_model->pwdCheck($uuid);
+        $password = $_POST["password"];
+        $result = $this->mypage_model->pwdCheck($password);
 
         if($result == 1){
             echo "
