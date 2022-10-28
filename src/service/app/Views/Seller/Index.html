@@ -189,7 +189,7 @@
                     <li>
                       <a class="d-flex justify-content-between new" href="/CS/Questions/Detail?idx=<?=$item['idx']?>">
                         <span class="flex-shrink-0 flex-grow-0"><?=$item['title']?></span>
-                        <span class="flex-shrink-0 flex-grow-0 text-secondary text-center"><?=substr($item["register_date"],0,10)?></span>
+                        <span class="flex-shrink-0 flex-grow-0 text-center"><?=substr($item["register_date"],0,10)?></span>
                         <?php if($item["board_status"]==1){ ?>
                         <span class="badge bg-info flex-shrink-0 flex-grow-0">답변대기</span>
                         <?php

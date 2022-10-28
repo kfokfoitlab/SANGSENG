@@ -21222,7 +21222,7 @@ Seller/Index
   top: 7px;
   right: 8px;
   border-radius: 50%;
-  background: #1d53ff;
+  background: #f85252;
   color: #fff;
   font-weight: bold;
   font-size: 12px;
@@ -21233,14 +21233,11 @@ Seller/Index
 }
 .seller-mypage .tab-content a {
   padding: 0 5px;
-  color: #444;
+  color: #777;
+  font-weight: 700;
 }
 .seller-mypage .tab-content a.new {
-  color: #0067ff;
-  font-weight: bold;
-}
-.seller-mypage .tab-content a:hover {
-  font-weight: bold;
+  color: #f85252;
 }
 .seller-mypage .tab-content a span {
   overflow: hidden;
