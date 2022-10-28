@@ -340,7 +340,7 @@ class SellerModel extends CommonModel
             from
              seller_product
             where register_id = '".$uuid."'
-            and del_yn='N'
+            and del_yn='n'
             order by update_date desc
             limit 4        
         ";
@@ -350,7 +350,7 @@ class SellerModel extends CommonModel
         }
         if(! empty($product_reply["data"])){
 	    foreach($product_reply["data"] as $item){
-		    $product_reply["replyCount"][] = $this->SellerReplyCount($item["product_no"]);
+		    $product_reply["replyCount"][]= $this->SellerReplyCount($item["product_no"]);
 	      }
         }
         return $product_reply;
@@ -377,16 +377,17 @@ class SellerModel extends CommonModel
 	
 	public function SellerReplyCount($data){
 		$product_no = $data;
-		
+
 		$query = "
             select
-                count(*)
+                count(*) as reply_cnt
             from
                 seller_product_reply
             where
                 product_no = '".$product_no."'
                 and reply_step = 1
-            limit 1
+                and del_yn ='n'
+           
         ";
 		
 		return $this->rodb->simple_query($query);
