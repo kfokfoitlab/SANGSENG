@@ -15,7 +15,7 @@
 
   <script>
 		function resetPw() {
-			if(confirm("비밀번호를 초기화 시키겠습니까?(가입회원 핸드폰 번호로 초기화)")) {
+			if(confirm("비밀번호를 초기화 시키겠습니까?(가입회원 핸드폰 번호+a!로 초기화)")) {
 				$.ajax({
 					url: "/Member/ForgotInfo/resetPw",
 					type: "post",
@@ -30,10 +30,10 @@
 </head>
 <body class="text-center">
 <form method="post" action="/Member/ForgotInfo/resetPw" id="myform" name="myform">
-  <input type="hidden" name="uuid" value="<?=$uuid?>">
-  <input type="hidden" name="email" value="<?=$email?>">
-  <input type="hidden" name="phone" value="<?=$phone?>">
-  <input type="hidden" name="type" value="<?=$_GET['type']?>">
+  <input type="hidden" name="uuid" value="<?=$register_id?>">
+  <input type="hidden" name="email" value="<?=$user_id?>">
+  <input type="hidden" name="phone" value="<?=$user_phone?>">
+  <input type="hidden" name="type" value="<?=$company_type?>">
   <br>
   <h1 class="display-5">ID/PW 찾기</h1>
   <hr><br>
@@ -44,12 +44,16 @@
   </div>
   <?php }else{?>
   <div>
-    <span class="badge badge-light" style="font-size: 20px;">ID : <?=$email?></span>
+    <span class="badge badge-light" style="font-size: 20px;">ID : <?=$user_id?></span>
   </div><br>
+  <?php
+  if($search_type == '2'){
+  ?>
   <input type="button" class="btn btn-danger" onclick="resetPw()" value="비밀번호 초기화">
-  <?php }?>
+  <?php }}?>
   <div id="resetPw">
   </div>
+
 </form>
 </body>
 </html>
