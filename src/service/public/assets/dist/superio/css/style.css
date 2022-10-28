@@ -20816,6 +20816,9 @@ Left Box
   line-height: 1.2;
   color: #777;
 }
+.seller-left-box .accordion-body {
+  padding: 1rem 0.8rem;
+}
 .seller-left-box .accordion h3 {
   margin: 0;
   font-size: 24px;
@@ -21243,6 +21246,13 @@ Seller/Index
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.seller-mypage .tab-content a span:nth-child(1) {
+  width: 160px;
+}
+.seller-mypage .tab-content a span:nth-child(2) {
+  width: 95px;
+  font-size: 0.8rem;
 }
 .seller-mypage .card-board .card-body li {
   margin-bottom: 0.25rem;
