@@ -46,7 +46,13 @@
                 </thead>
 
                 <tbody>
-
+                <?php
+                if(!is_array($data)){
+                ?>
+                <h2 class="text-center fw-bold my-5">등록 전 파일을 선택해 리스트를 확인해주세요</h2>
+                <?php
+                }
+                ?>
                 <?php
                  if(is_array($data) && count($data) > 0){
                 $i = 1;
@@ -64,7 +70,6 @@
                     <td><?=$item['status']?></td>
                     <td><?=$item['dis']?></td>
                 <?php
-
                 $i++;
                 }
                 }
