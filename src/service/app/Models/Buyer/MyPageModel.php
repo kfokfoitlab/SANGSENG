@@ -255,7 +255,7 @@ class MyPageModel extends CommonModel
                 count(*)
             from
                 contract_condition
-            where del_yn != 'Y' AND seller_uuid ='".$uuid."'
+            where del_yn != 'Y' AND buyer_uuid ='".$uuid."'
         ";
         $data["count"] = $this->rodb->simple_query($query);
         $data["data"] = [];
