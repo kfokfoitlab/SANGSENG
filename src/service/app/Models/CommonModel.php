@@ -407,7 +407,7 @@ class CommonModel extends dbModel
                 *
             from
                 workers_excel
-         order by register_date desc
+         order by idx desc
             limit 1
         ";
         $this->rodb->query($query);
@@ -459,6 +459,9 @@ class CommonModel extends dbModel
         $seller_uuid = $_SESSION["login_info"]["uuid"];
         $seller_data = $this->getSellerInfo($seller_uuid);
         for ($i = 6; $i <= count($Rows); $i++) {
+            if($Rows[$i]['A'] == "" || $Rows[$i]['B'] == "" || $Rows[$i]['D'] == ""|| $Rows[$i]['E'] == ""|| $Rows[$i]['F'] == ""){
+                return 3;
+            }
             $working_status = "";
             if ($Rows[$i]['E'] == "근무") {
                 $working_status = '1';

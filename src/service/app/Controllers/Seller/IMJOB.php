@@ -139,9 +139,16 @@
         }
 
         public function IMJOBRegist(){
+            if(! empty($_FILES)){
+                $data = $this->imjob_model->excelRead($_FILES);
+            }
+
             $excel = $this->imjob_model->getRegExcel();
+
             $data = array(
-                "excel" => $excel
+                "excel" => $excel,
+                "data" => $data
+
             );
             echo view("Common/Header.html");
             echo view('Seller/IMJOBRegist.html',$data);
@@ -150,6 +157,15 @@
         }
         public function WorkersReg(){
             $result = $this->imjob_model->WorkersReg($_POST);
+
+            if($result == 3){
+                echo "
+                <script>
+                    alert('빈 값이 존재합니다 다시 등록해주세요.');
+					window.location.replace('/Seller/IMJOB/IMJOBRegist');
+                </script>
+            ";
+            }
 
             if($result == "1") {
                 $_SESSION["disabledCount"] = $this->sigin_model->getWorkerCount();

@@ -7,9 +7,10 @@
             <div class="auto-container">
                 <button class="btn btn-outline-secondary btn-sm my-2 fw-normal" type="button"  onclick="downloadFileNew('<?=$excel["register_file"]?>','<?=$excel["register_file_ori"]?>');">양식다운로드</button>
             </div>
-        <form id ="excelupload" method="post" action="/Seller/IMJOB/ExcelUpload" enctype="multipart/form-data" >
-            <input type="file" id ="excel_upload" name ="excelupload" value=""><br>
-            <input type="button" onclick="fileCheck('<?=$excel["register_file_ori"]?>');" value="확인하기">
+        <form id ="excelupload" method="post" action="/Seller/IMJOB/IMJOBRegist" enctype="multipart/form-data" >
+            <input type="file" id ="excel_upload" name ="excelupload" ><br>
+            <input type="hidden" id ="file_name" value="<?=$excel['register_file_ori']?>">
+            <input type="button" onclick="fileCheck();" value="확인하기">
         </form>
 
         <?php
@@ -25,7 +26,7 @@
         <form id ="fileForm" method="post" action="/Seller/IMJOB/WorkersReg" >
         <div class="mt-4 pb-3 text-end border-bottom border-2">
            <input type="hidden" id = "register_file" name ="register_file" value="<?=$register_file?>">
-            <button type="button" class=" btn btn-success" onclick="register_upload('<?=$excel["register_file_ori"]?>');">
+            <button type="button" class=" btn btn-success" onclick="register_upload();">
                 등록
             </button>
         </div>
@@ -82,11 +83,15 @@
         }
     };
 
-    function fileCheck(file_name){
-        if($("#excel_upload").val() != file_name){
+    function fileCheck(){
+        //alert($("#excel_upload").val());
+/*        var upload = $("#excel_upload").val();
+        var upload_name = upload.substr(12);
+
+        if(upload_name != file_name){
             alert("등록 양식의 파일명과 다릅니다. 양식을 다운로드 해주세요");
             return false;
-        }
+        }*/
         if ($("#excel_upload").val() == "") {
             alert("파일을 등록해주세요");
         } else {
@@ -95,15 +100,18 @@
 
     }
     function register_upload(file_name){
-        if($("#register_file").val() != file_name) {
+        /*var upload = $("#register_file").val();
+        var upload_name = upload.substr(12);
+        var file_name = $("#file_name").val();
+        if(upload_name != file_name) {
             alert("등록 양식의 파일과 다릅니다.");
-        }else{
+        }else{*/
             if ($("#register_file").val() == "") {
-                alert("파일을 등록해주세요");
+                alert("등록 전 확인버튼을 눌러서 리스트를 확인 해주세요");
             } else {
                 $("#fileForm").submit();
             }
-        }
+
     }
 
 </script>
