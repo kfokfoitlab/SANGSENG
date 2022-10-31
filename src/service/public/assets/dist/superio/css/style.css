@@ -20869,6 +20869,7 @@ Shop/List
 }
 .shop-list td:nth-child(3) {
   width: 18%;
+  text-align: center;
 }
 .shop-list td:nth-child(4) {
   width: 16%;
@@ -21137,6 +21138,7 @@ MyPage/BuyerCart
 .buyer-cart td:nth-child(3) {
   width: 230px;
   font-size: 0.9rem;
+  text-align: center;
 }
 .buyer-cart td:nth-child(4) {
   width: 150px;

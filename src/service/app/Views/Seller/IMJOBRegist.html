@@ -3,83 +3,96 @@
   require(__DIR__.'/Components/Left.html');
 ?>
 <div class="flex-grow-1">
-    <section class="py-5 imjob-list">
-            <div class="auto-container">
-                <button class="btn btn-outline-secondary btn-sm my-2 fw-normal" type="button"  onclick="downloadFileNew('<?=$excel["register_file"]?>','<?=$excel["register_file_ori"]?>');">양식다운로드</button>
+  <section class="py-5 imjob-regist-all">
+    <div class="auto-container">
+      <h3 class="h4 fw-bold text-center mb-5 pb-4 border-bottom">장애인 근로자 일괄 등록</h3>
+      <div class="d-flex align-items-center justify-content-end">
+        <div class="me-2">
+          <button class="btn btn-outline-success btn-sm my-2 fw-normal" type="button"  onclick="downloadFileNew('<?=$excel["register_file"]?>','<?=$excel["register_file_ori"]?>');">
+          양식다운로드
+          </button>
+        </div>
+        <div class="me-2">
+          <form id="excelupload" method="post" action="/Seller/IMJOB/IMJOBRegist" enctype="multipart/form-data" >
+            <div class="position-relative">
+              <label class="form-control form-control-sm border-dark" for="excel_upload" style="width: 300px;">파일선택</label>
+              <input type="file" id="excel_upload" name="excelupload" class="d-none">
+              <input type="hidden" id="file_name" value="<?=$excel['register_file_ori']?>">
+              <input type="button" onclick="fileCheck();" class="btn btn-dark btn-sm fw-normal position-absolute top-0 end-0" value="확인하기">
             </div>
-        <form id ="excelupload" method="post" action="/Seller/IMJOB/IMJOBRegist" enctype="multipart/form-data" >
-            <input type="file" id ="excel_upload" name ="excelupload" ><br>
-            <input type="hidden" id ="file_name" value="<?=$excel['register_file_ori']?>">
-            <input type="button" onclick="fileCheck();" value="확인하기">
-        </form>
-
+          </form>
+        </div>
         <?php
-          if(is_array($data) && count($data) > 0){
+        if(is_array($data) && count($data) > 0){
          foreach($data as $item){
-         $register_file = "";
-        if($item['file'] != ""){
-        $register_file = $item['file'];
-        }
-        }
+           $register_file = "";
+           if($item['file'] != ""){
+            $register_file = $item['file'];
+            }
+          }
         }
         ?>
-        <form id ="fileForm" method="post" action="/Seller/IMJOB/WorkersReg" >
-        <div class="mt-4 pb-3 text-end border-bottom border-2">
-           <input type="hidden" id = "register_file" name ="register_file" value="<?=$register_file?>">
-            <button type="button" class=" btn btn-success" onclick="register_upload();">
+        <div>
+          <form id ="fileForm" method="post" action="/Seller/IMJOB/WorkersReg" >
+             <input type="hidden" id = "register_file" name ="register_file" value="<?=$register_file?>">
+             <button type="button" class=" btn btn-primary btn-sm fw-normal" onclick="register_upload();">
                 등록
-            </button>
+             </button>
+          </form>
         </div>
-        </form>
-        <form id ="dataCheck">
-        <table class="table table-striped text-center mt-5 imjob-list-table" id ="imjobTbl">
-                <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>이름</th>
-                    <th>생년월일</th>
-                    <th>계약 시작일</th>
-                    <th>계약 종료일</th>
-                    <th>근무상태</th>
-                    <th>장애유형</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <?php
-                if(!is_array($data)){
-                ?>
-                <h2 class="text-center fw-bold my-5">등록 전 파일을 선택해 리스트를 확인해주세요</h2>
-                <?php
-                }
-                ?>
-                <?php
-                 if(is_array($data) && count($data) > 0){
-                $i = 1;
-                foreach($data as $item){
-                if($i == count($data)){
-                break;
-                }
-                ?>
-                <tr>
-                    <td><?=$i?></td>
-                    <td><?=$item['name']?></td>
-                    <td><?=$item['birth']?></td>
-                    <td><?=$item['sdate']?></td>
-                    <td><?=$item['edate']?></td>
-                    <td><?=$item['status']?></td>
-                    <td><?=$item['dis']?></td>
-                <?php
-                $i++;
-                }
-                }
-                ?>
-                </tbody>
-            </table>
-        </form>
-</section>
+      </div>
+      <form id ="dataCheck">
+        <table class="table table-striped text-center mt-4 imjob-list-table" id ="imjobTbl">
+          <thead>
+          <tr>
+              <th>No.</th>
+              <th>이름</th>
+              <th>생년월일</th>
+              <th>계약 시작일</th>
+              <th>계약 종료일</th>
+              <th>근무상태</th>
+              <th>장애유형</th>
+          </tr>
+          </thead>
+          <tbody>
+          <?php
+          if(is_array($data) && count($data) > 0){
+            $i = 1;
+            foreach($data as $item){
+              if($i == count($data)){
+              break;
+              }
+          ?>
+          <tr>
+            <td><?=$i?></td>
+            <td><?=$item['name']?></td>
+            <td><?=$item['birth']?></td>
+            <td><?=$item['sdate']?></td>
+            <td><?=$item['edate']?></td>
+            <td><?=$item['status']?></td>
+            <td><?=$item['dis']?></td>
+          </tr>
+          <?php
+            $i++;
+            }
+          } else {
+          ?>
+          <tr>
+            <td class="fw-normal h5 py-4 text-secondary" colspan="7">등록 전 파일을 선택해 리스트를 확인해주세요</td>
+          </tr>
+          <?php
+          }
+          ?>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </section>
 </div>
 <script>
+	document.getElementById("excel_upload").onchange = function () {
+		document.querySelector("label[for='excel_upload']").textContent = this.value.replace("C:\\fakepath\\", "");
+	};
     function downloadFileNew(fileName,fileNameOri){
         if(fileName == ""){
             alert("등록된 파일이 없습니다");
