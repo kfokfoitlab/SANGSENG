@@ -44,21 +44,22 @@ class MyPage extends BaseController
         $result = $this->mypage_model->ContractStatus($_POST);
         if($result == 1 ){
             $_SESSION["Contract"]= $this->sigin_model->getContractList();
+            $_SESSION["ReductionMoney"]= $this->sigin_model->BuyerReduction();
             echo "
-        <script>
-        alert('최신화되었습니다');
-        location.href = '/Buyer/MyPage/Contract';
-</script>
-        ";
-        }else{
-            echo "
-        <script>
-        alert('최신상태 입니다.');
-        location.href = '/Buyer/MyPage/Contract';
-</script>
-        ";
-        }
-    } // }}}
+                    <script>
+                    alert('최신화되었습니다');
+                    location.href = '/Buyer/MyPage/Contract';
+                    </script>
+                ";
+                }else{
+                    echo "
+                    <script>
+                    alert('최신상태 입니다.');
+                    location.href = '/Buyer/MyPage/Contract';
+                    </script>
+                ";
+            }
+        } // }}}
 
     public function Info()
     { // {{{
