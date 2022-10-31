@@ -442,21 +442,18 @@ class CommonModel extends dbModel
             $test[$i]["dis"] = $Rows[$i]['F'];
             $data[] = $test[$i];
          }
+        $data[]['file'] = $upload_excelupload_image;
         return $data;
     }
 
-    public function WorkersReg($files)
+    public function WorkersReg($data)
     {
         require_once('PhpOffice/Psr/autoloader.php');
         require_once('PhpOffice/PhpSpreadsheet/autoloader.php');
-        $allowed_ext = array('Xlsx', 'xlsx');
-        if ($files["register_file"]["name"] != "") {
-            $register_file_ori = $files["register_file"]["name"];
-            $upload_register_file_ori = "register_file";
-            $upload_register_file_image = uniqid() . "." . pathinfo($files["register_file"]["name"], PATHINFO_EXTENSION);
-            $this->uploadFileNew($files, $upload_register_file_image, $allowed_ext, $upload_register_file_ori);
-        }
-        $inputFileName = ROOTPATH . "/public/uploads/" . $upload_register_file_image;
+
+            $register_file = $data['register_file'];
+
+        $inputFileName = ROOTPATH . "/public/uploads/" . $register_file;
         $spreadsheet = IOFactory::load($inputFileName);
         $Rows = $spreadsheet->getSheetByName('Sheet1')->toArray(null, true, true, true);
         $seller_uuid = $_SESSION["login_info"]["uuid"];

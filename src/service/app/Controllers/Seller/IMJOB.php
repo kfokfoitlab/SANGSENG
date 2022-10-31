@@ -130,7 +130,6 @@
 
         public function ExcelUpload(){
           $data = $this->imjob_model->excelRead($_FILES);
-
             $data = array(
                 "data" => $data
             );
@@ -150,7 +149,7 @@
 
         }
         public function WorkersReg(){
-            $result = $this->imjob_model->WorkersReg($_FILES);
+            $result = $this->imjob_model->WorkersReg($_POST);
 
             if($result == "1") {
                 $_SESSION["disabledCount"] = $this->sigin_model->getWorkerCount();

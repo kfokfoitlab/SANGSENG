@@ -8,18 +8,29 @@
                 <button class="btn btn-outline-secondary btn-sm my-2 fw-normal" type="button"  onclick="downloadFileNew('<?=$excel["register_file"]?>','<?=$excel["register_file_ori"]?>');">양식다운로드</button>
             </div>
         <form id ="excelupload" method="post" action="/Seller/IMJOB/ExcelUpload" enctype="multipart/form-data" >
-            <input type="file" id ="excel_upload" name ="excelupload"><br>
-            <input type="button" onclick="fileCheck();" value="확인하기">
+            <input type="file" id ="excel_upload" name ="excelupload" value=""><br>
+            <input type="button" onclick="fileCheck('<?=$excel["register_file_ori"]?>');" value="확인하기">
         </form>
 
-        <form id ="fileForm" method="post" action="/Seller/IMJOB/WorkersReg" enctype="multipart/form-data" >
+        <?php
+          if(is_array($data) && count($data) > 0){
+         foreach($data as $item){
+         $register_file = "";
+        if($item['file'] != ""){
+        $register_file = $item['file'];
+        }
+        }
+        }
+        ?>
+        <form id ="fileForm" method="post" action="/Seller/IMJOB/WorkersReg" >
         <div class="mt-4 pb-3 text-end border-bottom border-2">
-            <input type="file" id ="register_file" name ="register_file">
-            <button type="button" class=" btn btn-success" onclick="register_upload();">
-                업로드
+           <input type="hidden" id = "register_file" name ="register_file" value="<?=$register_file?>">
+            <button type="button" class=" btn btn-success" onclick="register_upload('<?=$excel["register_file_ori"]?>');">
+                등록
             </button>
         </div>
         </form>
+        <form id ="dataCheck">
         <table class="table table-striped text-center mt-5 imjob-list-table" id ="imjobTbl">
                 <thead>
                 <tr>
@@ -32,11 +43,16 @@
                     <th>장애유형</th>
                 </tr>
                 </thead>
+
                 <tbody>
+
                 <?php
                  if(is_array($data) && count($data) > 0){
                 $i = 1;
                 foreach($data as $item){
+                if($i == count($data)){
+                break;
+                }
                 ?>
                 <tr>
                     <td><?=$i?></td>
@@ -47,12 +63,14 @@
                     <td><?=$item['status']?></td>
                     <td><?=$item['dis']?></td>
                 <?php
+
                 $i++;
                 }
                 }
                 ?>
                 </tbody>
             </table>
+        </form>
 </section>
 </div>
 <script>
@@ -64,18 +82,28 @@
         }
     };
 
-    function fileCheck(){
-        if($("#excel_upload").val() == ""){
+    function fileCheck(file_name){
+        if($("#excel_upload").val() != file_name){
+            alert("등록 양식의 파일명과 다릅니다. 양식을 다운로드 해주세요");
+            return false;
+        }
+        if ($("#excel_upload").val() == "") {
             alert("파일을 등록해주세요");
-        }else{
+        } else {
             $("#excelupload").submit();
         }
+
     }
-    function register_upload(){
-        if($("#register_file").val() == ""){
-            alert("파일을 등록해주세요");
+    function register_upload(file_name){
+        if($("#register_file").val() != file_name) {
+            alert("등록 양식의 파일과 다릅니다.");
         }else{
-            $("#fileForm").submit();
+            if ($("#register_file").val() == "") {
+                alert("파일을 등록해주세요");
+            } else {
+                $("#fileForm").submit();
+            }
         }
     }
+
 </script>
