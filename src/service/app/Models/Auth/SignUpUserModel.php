@@ -81,6 +81,38 @@ class SignUpUserModel extends CommonModel
         }
 
     } //}}}
+    public function dupCheck($email)
+    {
+        $query = "
+			SELECT
+				count(*) 
+			FROM
+				seller_company
+			WHERE
+				email = '" . $email. "'
+				limit 1
+			";
+//			echo $query;
+        $seller = $this->rodb->simple_query($query);
+        if ($seller != 0) {
+            return 1;
+        }
+            $query = "
+			SELECT
+				count(*)
+			FROM
+				buyer_company
+			WHERE
+				email = '" . $email . "'
+				limit 1
+			";
+        $buyer = $this->rodb->simple_query($query);
+        if ($buyer != 0) {
+                return 2;
+            }
+        return 3;
+    }
+
 
     public function buyerCheck($email){
         $query = "

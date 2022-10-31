@@ -269,7 +269,8 @@ class SellerModel extends CommonModel
             from
               contract_condition          
             where seller_uuid = '".$uuid."'
-              and  contract_status = 2             
+              and  contract_status = 2 
+              and del_yn !='Y'            
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){

@@ -512,7 +512,6 @@ class BuyerModel extends CommonModel
             where
                 product_no = '".$product_no."'
                 and reply_step=1
-                
                 and del_yn = 'n'
         ";
 

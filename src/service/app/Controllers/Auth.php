@@ -218,15 +218,14 @@ class Auth extends BaseController
 
     public function SignUpBuyerSubmit()
     { //{{{
-        $dup_check = $this->user_model->buyerCheck($_POST["email"]);
-        if($dup_check){
+        $dup_check = $this->user_model->dupCheck($_POST["email"]);
+        if($dup_check != 3){
             echo "
                 <script>
                     alert('이미 가입된 기업입니다.');
                     window.location.replace('/Auth/SignUp');
                 </script>
             ";
-
             die();
         }
         $uuid = $this->user_model->Register($_FILES, $_POST);
@@ -302,21 +301,29 @@ class Auth extends BaseController
     } // }}}
 
     public function BuyerEmailCheck(){
-        $buyer_check = $this->user_model->buyerCheck($_POST["email"]);
-        return $buyer_check;
+        $buyer_check = $this->user_model->dupCheck($_POST["email"]);
+        if($buyer_check == 3){
+            echo 3;
+        }else{
+            echo 1;
+        }
     }
 
     public function SellerEmailCheck(){
-        $sellerCheck = $this->user_model->sellerCheck($_POST["email"]);
-        return $sellerCheck;
+        $sellerCheck = $this->user_model->dupCheck($_POST["email"]);
+        if($sellerCheck == 3){
+            echo 3;
+        }else{
+            echo 1;
+        }
     }
 
 
     public function SignUpSellerSubmit()
     { //{{{
 
-        $dup_check = $this->user_model->sellerCheck($_POST["email"]);
-        if($dup_check){
+        $dup_check = $this->user_model->dupCheck($_POST["email"]);
+        if($dup_check != 3){
             echo "
                 <script>
                     alert('이미 가입된 기업입니다.');

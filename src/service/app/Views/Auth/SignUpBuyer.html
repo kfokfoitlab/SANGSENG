@@ -160,8 +160,8 @@
         url:'/Auth/BuyerEmailCheck',
         type:'post',
         data:{email:email},
-        success:function(cnt){
-          if(cnt == 0){
+        success:function(result){
+          if(result == 3){
             alert("사용 가능한 이메일 입니다.")
           }else{
             $("#email").val('')
