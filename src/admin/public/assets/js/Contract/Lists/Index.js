@@ -218,7 +218,6 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
             recipient_list: [
                 {order: 1, email: buyer_email, name: buyer_name},
                 {order: 2, email: seller_email, name: seller_name},
-				{order: 3, email: buyer_email, name: buyer_name}
             ],
             field_list: [{name: 'buyer_uuid', value: buyer_uuid}, {name: 'seller_uuid', value: seller_uuid},
 							{name: 'updateType', value: 'all'},{name:'buyer_company',value: buyer_company},{name:'seller_company',value: seller_company}],
