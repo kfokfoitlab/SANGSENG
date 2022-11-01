@@ -188,6 +188,25 @@ class SellerModel extends CommonModel
             $data["data"][] = $row;
 
         }
+
+        $query = "
+            select
+         *
+            from
+              contract_condition 
+            where contract_status =2 
+              and del_yn != 'Y'
+                AND seller_uuid ='".$uuid."'".$where_query."
+           order by 
+               idx desc
+           
+           
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $data["playing"][] = $row;
+
+        }
         return $data;
     }
 

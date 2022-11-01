@@ -12,6 +12,7 @@
             <div
               class="card-header d-flex justify-content-between align-items-center"
             >
+              <input type="hidden" id ="uuid" value="<?=$_SESSION['login_info']['uuid']?>">
               <h3 class="card-title">계약</h3>
               <a href="/Seller/Contract" class="more-btn">+more</a>
             </div>
@@ -84,7 +85,9 @@
                   >
                     계약문의
                   </button>
-                  <span class="new-badge contract-new-badge">N</span>
+                  <div id ="new_badge" style="display: none">
+                  <span  class="new-badge contract-new-badge">N</span>
+                  </div>
                 </li>
                 <li class="nav-item flex-grow-1 position-relative" role="presentation">
                   <button
@@ -143,27 +146,19 @@
                   aria-labelledby="contract-tab"
                 >
                   <ul>
+                    <?php
+                    if(is_array($data)&& count($data) > 0){
+                    foreach($data["playing"] as $item){
+                    ?>
                     <li>
-                      <a class="d-flex justify-content-between new" href="">
-                        <span>(구매기업)상품명</span><span class="flex-shrink-0 text-secondary">22-08-01</span>
+                      <a id ="turn_<?=$item['workflow_id']?>" class="d-flex justify-content-between" href="/Seller/Contract">
+                        <span>(<?=$item['buyer_company']?>) <?=$item['product_name']?></span><span class="flex-shrink-0 text-secondary"><?=substr($item["register_date"],0,10)?></span>
                       </a>
                     </li>
-                    <li>
-                      <a class="d-flex justify-content-between" href="">
-                        <span>(구매기업)상품명</span><span class="flex-shrink-0 text-secondary">22-08-01</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="d-flex justify-content-between" href="">
-                        <span>(구매기업)상품명</span><span class="flex-shrink-0 text-secondary">22-08-01</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="d-flex justify-content-between" href="">
-                        <span>(구매기업)상품명</span><span
-                        class="flex-shrink-0 text-secondary">22-08-01</span>
-                      </a>
-                    </li>
+                    <?php
+                    }
+                    }
+                    ?>
                   </ul>
                 </div>
                 <div
@@ -313,6 +308,18 @@
 </div>
 
 <script>
+  $(document).ready(function(){
+    seller_sequence();
+  });
+
+  function seller_turn(workflow_id){
+    if(workflow_id != ""){
+      $('#turn_'+workflow_id).attr('class','d-flex justify-content-between new');
+      $("#new_badge").css('display','block');
+    }
+
+  }
+
   const tabButtons = document.querySelectorAll('.question-answer .nav-link');
 	let tabLink = document.querySelector('.question-answer .more-btn');
 	tabButtons.forEach(button => {
@@ -332,5 +339,30 @@
       }
     })
   })
+
+  function seller_sequence(){
+    var uuid = $("#uuid").val();
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+      }
+    };
+
+    fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=9&field_name=seller_uuid&field_value='+uuid+'', options)
+            .then(response => response.json())
+            .then(response => {
+              var j = 0;
+              for(var i =0; i <response['workflow_list'].length; i++){
+                if(response['workflow_list'][i]['order'] == 2){
+                  seller_turn(response['workflow_list'][i]['workflow_id']);
+                  j++;
+                }
+              }
+            })
+            .catch(err => console.error(err));
+  }
+
 
 </script>

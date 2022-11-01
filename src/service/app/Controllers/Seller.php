@@ -29,6 +29,7 @@ class Seller extends BaseController
         $questions = $this->seller_model->getQuestionsList();
 	    $product_reply = $this->seller_model->getProductreplyList();
 	    $notice_list = $this->seller_model->getNoticeList();
+        $data = $this->seller_model->getContractList($uuid);
         $_SESSION["totalSales"] = $this->sigin_model->getTotalSales($uuid);
         $_SESSION["expectationSales"] = $this->sigin_model->getexpectationSales($uuid);
         $_SESSION["completionContract"] = $this->sigin_model->getCompletionContract($uuid);
@@ -42,6 +43,7 @@ class Seller extends BaseController
         ,"questions" =>  $questions
 	        ,"product_reply" => $product_reply
 	        ,"notice_list" => $notice_list
+        ,"data" => $data
         );
 
         echo view("Common/Header.html");

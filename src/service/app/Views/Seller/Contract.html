@@ -69,7 +69,13 @@
       </form>
 
         <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-2">
-          <span>계약목록 (총 <strong><?=count($data)?></strong>개)</span>
+          <?php
+          $count = 0;
+          if(is_array($data)){
+          $count = count($data);
+          }
+          ?>
+          <span>계약목록 (총 <strong><?=$count?></strong>개)</span>
 
 
           <div class="d-flex">
