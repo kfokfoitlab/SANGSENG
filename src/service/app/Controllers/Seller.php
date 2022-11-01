@@ -30,6 +30,8 @@ class Seller extends BaseController
 	    $product_reply = $this->seller_model->getProductreplyList();
 	    $notice_list = $this->seller_model->getNoticeList();
         $data = $this->seller_model->getContractList($uuid);
+        $seller_info = $this->seller_model->getSellerInfo($uuid);
+        $delivery =  $this->seller_model->getDelivery($uuid);
         $_SESSION["totalSales"] = $this->sigin_model->getTotalSales($uuid);
         $_SESSION["expectationSales"] = $this->sigin_model->getexpectationSales($uuid);
         $_SESSION["completionContract"] = $this->sigin_model->getCompletionContract($uuid);
@@ -37,13 +39,15 @@ class Seller extends BaseController
         $_SESSION["sellerinfo"] = $this->sigin_model->Sellerinfo();
         $data = array(
             "totalSales" => $totalSales
-        ,"expectationSales" => $expectationSales
-       ,"completionContract" =>  $completionContract
-       ,"contractList" =>  $contractList
-        ,"questions" =>  $questions
-	        ,"product_reply" => $product_reply
-	        ,"notice_list" => $notice_list
-        ,"data" => $data
+            ,"expectationSales" => $expectationSales
+            ,"completionContract" =>  $completionContract
+            ,"contractList" =>  $contractList
+            ,"questions" =>  $questions
+            ,"product_reply" => $product_reply
+            ,"notice_list" => $notice_list
+            ,"data" => $data
+            ,"seller_info" => $seller_info
+            ,"delivery" => $delivery
         );
 
         echo view("Common/Header.html");

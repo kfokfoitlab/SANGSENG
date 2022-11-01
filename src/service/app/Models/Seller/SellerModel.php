@@ -56,6 +56,39 @@ class SellerModel extends CommonModel
             return null;
         }
     }
+
+    public function getDelivery($uuid){
+        $delivery = [];
+        $query = "
+            select 
+                count(*) as complete
+            from
+                delivery
+            where
+                seller_uuid = '".$uuid."'
+            and delivery_status = 5
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()) {
+            $delivery["complete"] = $row;
+        }
+
+        $query = "
+            select
+                count(*) as playing
+            from
+                delivery
+            where
+                seller_uuid = '".$uuid."'
+            and delivery_status = 3
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()) {
+            $delivery["playing"]= $row;
+        }
+        return $delivery;
+    }
+
     public function getProductList($uuid){
         $where_query = "";
         if($_GET["search_A"] != ""){
@@ -254,7 +287,7 @@ class SellerModel extends CommonModel
             from
               contract_condition 
             where seller_uuid = '".$uuid."'
-              and (contract_status = 2 or contract_status = 5)
+              and  contract_status = 5
 
                      
         ";

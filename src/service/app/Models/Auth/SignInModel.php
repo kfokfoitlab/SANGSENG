@@ -215,9 +215,7 @@ class SignInModel extends CommonModel
             from
               contract_condition 
             where seller_uuid = '$uuid'
-              and (contract_status = 2 or contract_status = 5)
-
-                     
+              and contract_status = 5                   
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
