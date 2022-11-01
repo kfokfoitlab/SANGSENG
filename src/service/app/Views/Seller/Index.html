@@ -10,13 +10,13 @@
         <div class="card-wrapper">
           <div class="card card-icon card-icon01">
             <div
-              class="card-header d-flex justify-content-between align-items-center"
+                    class="card-header d-flex justify-content-between align-items-center"
             >
               <input type="hidden" id ="uuid" value="<?=$_SESSION['login_info']['uuid']?>">
               <h3 class="card-title">계약</h3>
             </div>
             <div class="card-body d-flex flex-column justify-content-center">
-              <div class="d-flex justify-content-between mb-3">
+              <div class="d-flex justify-content-between">
                 <p class="card-text">계약 진행중</p>
                 <a href="/Seller/Contract"><p class="text-end"><strong><?=$contractList['count']?></strong>건</p></a>
               </div>
@@ -24,8 +24,8 @@
                 <p class="card-text">계약 완료</p>
                 <a href="/Seller/Contract"><p class="text-end"><strong><?=$completionContract['count']?></strong>건</p></a>
               </div>
-              <div class="d-flex justify-content-between mb-3">
-              <p class="card-text">배송 진행중</p>
+              <div class="d-flex justify-content-between ">
+                <p class="card-text">배송 진행중</p>
                 <a href="/Seller/DeliveryStatus"><p class="text-end"><strong><?=$delivery['playing']['playing']?></strong>건</p></a>
               </div>
               <div class="d-flex justify-content-between mb-3">
@@ -38,7 +38,7 @@
         <div class="card-wrapper">
           <div class="card card-icon card-icon02">
             <div
-              class="card-header d-flex justify-content-between align-items-center">
+                    class="card-header d-flex justify-content-between align-items-center">
               <h3 class="card-title">매출</h3>
               <a href="/Seller/Statistics/SalesAnalysis" class="more-btn">+more</a>
             </div>
@@ -57,7 +57,7 @@
         <div class="card-wrapper">
           <div class="card card-icon card-icon03">
             <div
-              class="card-header d-flex justify-content-between align-items-center"
+                    class="card-header d-flex justify-content-between align-items-center"
             >
               <h3 class="card-title">인재</h3>
               <a href="/Seller/IMJOB/List" class="more-btn">+more</a>
@@ -72,7 +72,7 @@
         <div class="card-wrapper">
           <div class="card question-answer">
             <div
-              class="card-header d-flex justify-content-between align-items-center"
+                    class="card-header d-flex justify-content-between align-items-center"
             >
               <h3 class="card-title">문의사항</h3>
               <a href="/CS/Notice" class="more-btn">+more</a>
@@ -81,31 +81,31 @@
               <ul class="nav nav-tabs flex-nowrap" id="qnaTab" role="tablist">
                 <li class="nav-item flex-grow-1 position-relative" role="presentation">
                   <button
-                    class="nav-link w-100 active"
-                    id="contract-tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#contract"
-                    type="button"
-                    role="tab"
-                    aria-controls="contract"
-                    aria-selected="true"
+                          class="nav-link w-100 active"
+                          id="contract-tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#contract"
+                          type="button"
+                          role="tab"
+                          aria-controls="contract"
+                          aria-selected="true"
                   >
                     계약문의
                   </button>
                   <div id ="new_badge" style="display: none">
-                  <span  class="new-badge contract-new-badge">N</span>
+                    <span  class="new-badge contract-new-badge">N</span>
                   </div>
                 </li>
                 <li class="nav-item flex-grow-1 position-relative" role="presentation">
                   <button
-                    class="nav-link w-100"
-                    id="product-tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#product"
-                    type="button"
-                    role="tab"
-                    aria-controls="product"
-                    aria-selected="false"
+                          class="nav-link w-100"
+                          id="product-tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#product"
+                          type="button"
+                          role="tab"
+                          aria-controls="product"
+                          aria-selected="false"
                   >
                     상품리뷰
                   </button>
@@ -122,14 +122,14 @@
                 </li>
                 <li class="nav-item flex-grow-1 position-relative" role="presentation">
                   <button
-                    class="nav-link w-100"
-                    id="extra-tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#extra"
-                    type="button"
-                    role="tab"
-                    aria-controls="extra"
-                    aria-selected="false"
+                          class="nav-link w-100"
+                          id="extra-tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#extra"
+                          type="button"
+                          role="tab"
+                          aria-controls="extra"
+                          aria-selected="false"
                   >
                     1:1 문의
                   </button>
@@ -147,10 +147,10 @@
               </ul>
               <div class="tab-content mt-2">
                 <div
-                  class="tab-pane fade show active"
-                  id="contract"
-                  role="tabpanel"
-                  aria-labelledby="contract-tab"
+                        class="tab-pane fade show active"
+                        id="contract"
+                        role="tabpanel"
+                        aria-labelledby="contract-tab"
                 >
                   <ul>
                     <?php
@@ -173,17 +173,17 @@
                   </ul>
                 </div>
                 <div
-                  class="tab-pane fade"
-                  id="product"
-                  role="tabpanel"
-                  aria-labelledby="product-tab"
+                        class="tab-pane fade"
+                        id="product"
+                        role="tabpanel"
+                        aria-labelledby="product-tab"
                 >
                   <ul>
-                  <?php
+                    <?php
                     if(is_array($product_reply)&& count($product_reply) > 0){
-                      $index=0;
-                      foreach($product_reply["data"] as $item){
-                  ?>
+                    $index=0;
+                    foreach($product_reply["data"] as $item){
+                    ?>
                     <li>
                       <a class="d-flex justify-content-between new" href="/Buyer/Shop/Detail/<?=$item['product_no']?>">
                         <span style="color: black"><?=$item["product_name"]?><b style="color: darkorange">(<?=$product_reply["replyCount"][$index]?>)</b></span><span class="flex-shrink-0 text-secondary"><?=substr($item["register_date"],0,10)?></span>
@@ -201,10 +201,10 @@
                   </ul>
                 </div>
                 <div
-                  class="tab-pane fade"
-                  id="extra"
-                  role="tabpanel"
-                  aria-labelledby="extra-tab"
+                        class="tab-pane fade"
+                        id="extra"
+                        role="tabpanel"
+                        aria-labelledby="extra-tab"
                 >
                   <?php
                    if(is_array($questions)&& count($questions) > 0){
@@ -220,22 +220,22 @@
                         }else{
                         ?>
                         <a class="d-flex justify-content-between" href="/CS/Questions/Detail?idx=<?=$item['idx']?>">
-                        <?php
+                          <?php
                         }
                         ?>
-                        <span class="flex-shrink-0 flex-grow-0"><?=$item['title']?></span>
-                        <span class="flex-shrink-0 flex-grow-0 text-center"><?=substr($item["register_date"],0,10)?></span>
-                        <?php if($item["board_status"]==1){ ?>
-                        <span class="badge bg-info flex-shrink-0 flex-grow-0">답변대기</span>
-                        <?php
+                          <span class="flex-shrink-0 flex-grow-0"><?=$item['title']?></span>
+                          <span class="flex-shrink-0 flex-grow-0 text-center"><?=substr($item["register_date"],0,10)?></span>
+                          <?php if($item["board_status"]==1){ ?>
+                          <span class="badge bg-info flex-shrink-0 flex-grow-0">답변대기</span>
+                          <?php
                          }
                          if($item["board_status"]==2){
                           ?>
-                        <span class="badge bg-success">답변완료</span>
-                        <?php
+                          <span class="badge bg-success">답변완료</span>
+                          <?php
                         }
                         ?>
-                      </a>
+                        </a>
                     </li>
                   </ul>
                   <?php
@@ -254,7 +254,7 @@
         <div class="card-wrapper">
           <div class="card card-board">
             <div
-              class="card-header d-flex justify-content-between align-items-center"
+                    class="card-header d-flex justify-content-between align-items-center"
             >
               <h3 class="card-title">공지사항</h3>
               <a href="/CS/Notice" class="more-btn">+more</a>
@@ -263,7 +263,7 @@
               <ul>
                 <?php
                    if(is_array($notice_list)&& count($notice_list) > 0){
-                    foreach($notice_list as $item){
+                foreach($notice_list as $item){
                 ?>
                 <li><a href="/CS/Notice/Detail?idx=<?=$item['idx']?>">[공지사항]<?=$item["title"]?></a><span style="float: right"><?=substr($item["register_date"],0,10)?></span></li>
                 <?php
@@ -281,10 +281,10 @@
         <div class="card-wrapper my-info-card">
           <div class="card card-board">
             <div
-              class="card-header d-flex justify-content-between align-items-center"
+                    class="card-header d-flex justify-content-between align-items-center"
             >
               <h3 class="card-title">나의정보 관리</h3>
-<!--              <a href="#" class="more-btn">+more</a>-->
+              <!--              <a href="#" class="more-btn">+more</a>-->
             </div>
             <div class="card-body">
               <ul class="row mt-4">
@@ -332,21 +332,21 @@
   }
 
   const tabButtons = document.querySelectorAll('.question-answer .nav-link');
-	let tabLink = document.querySelector('.question-answer .more-btn');
-	tabButtons.forEach(button => {
-		button.addEventListener('click', function() {
+  let tabLink = document.querySelector('.question-answer .more-btn');
+  tabButtons.forEach(button => {
+    button.addEventListener('click', function() {
       switch (this.id) {
         case 'contract-tab':
-					tabLink.href = '/Seller/Contract';
-					break;
-				case 'product-tab':
-					tabLink.href = '/Seller/Item/ItemList';
-					break;
-				case 'extra-tab':
-					tabLink.href = '/CS/Questions';
-					break;
+          tabLink.href = '/Seller/Contract';
+          break;
+        case 'product-tab':
+          tabLink.href = '/Seller/Item/ItemList';
+          break;
+        case 'extra-tab':
+          tabLink.href = '/CS/Questions';
+          break;
         default:
-					break;
+          break;
       }
     })
   })
