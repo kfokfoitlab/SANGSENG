@@ -82,13 +82,16 @@ $levy = $base * $employ *12; //부담금
               if($index == 5){
                 break;
               }
+            $rdm = $item['reduction_money'];
+            $slice = substr($rdm,0,-1);
+            $slice = $slice.'0';
             ?>
             <td>
               <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>" alt="<?=$item['product_name']?>">
 
             </td>
             <td>
-              <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>"><span
+              <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$slice?>"><span
                       class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h3>
               <!--              <p class="mt-2 sub-info"><?=$item['product_detail']?></p>-->
             </td>
@@ -100,7 +103,7 @@ $levy = $base * $employ *12; //부담금
 
             </td>
             <td>
-              <p><?=number_format($item['reduction_money'])?>원</p>
+              <p><?=number_format($slice)?>원</p>
             </td>
           </tr>
           <?php $index++;
@@ -182,6 +185,9 @@ $levy = $base * $employ *12; //부담금
             }
 
             foreach($ret as $item){
+            $rdm = $item['reduction_money'];
+            $slice = substr($rdm,0,-1);
+            $slice = $slice.'0';
             ?>
             <tr>
               <td>
@@ -189,7 +195,7 @@ $levy = $base * $employ *12; //부담금
                      alt="<?=$item['product_name']?>">
               </td>
               <td>
-                <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>"><span
+                <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$slice?>"><span
                         class="text-primary"><?=$item["company_name"]?></span> / <?=$item["product_name"]?></a></h3>
                 <!--                <p class="sub-info"><?=$item["product_detail"]?></p>-->
               </td>
@@ -200,7 +206,7 @@ $levy = $base * $employ *12; //부담금
                 <p><?=number_format($item["product_price"])?>원</p>
               </td>
               <td>
-                <p><?=number_format($item["reduction_money"])?>원</p>
+                <p><?=number_format($slice)?>원</p>
               </td>
             </tr>
             <?php

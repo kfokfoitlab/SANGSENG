@@ -70,7 +70,6 @@ class Item extends BaseController
 
     public function ItemSubmit()
     { // {{{
-        header("Content-Type:text/html;charset=UTF-8");
         $result = $this->item_model->Register($_FILES, $_POST);
 
         if($result == "1") {

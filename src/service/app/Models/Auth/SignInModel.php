@@ -5,13 +5,7 @@ use App\Models\CommonModel;
 class SignInModel extends CommonModel
 {
     public function SignIn($email, $password,$company_type)
-    { // {{{
-
-      /*  helper("specialchars");
-        $user_id = specialchars($user_id);
-
-        $check_email=preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i", $user_id);*/
-        // type 1 판매기업
+    {
         if($company_type==1) {
             return $this->SignInUser($email, $password);
         }
@@ -149,10 +143,9 @@ class SignInModel extends CommonModel
         $uuid = $_SESSION["login_info"]["uuid"];
         $Expectation =[];
         $query = "       
-        select sum(b.product_price) as Expectation
-        from contract_condition a
-        join seller_product b on a.seller_uuid = b.register_id
-        where a.buyer_uuid = '".$uuid."'
+        select sum(product_price) as Expectation
+        from contract_condition 
+        where buyer_uuid = '".$uuid."'
         and contract_status = 1
         ";
         $this->rodb->query($query);
@@ -184,12 +177,11 @@ class SignInModel extends CommonModel
         $uuid = $_SESSION["login_info"]["uuid"];
         $contract = [];
         $query = "       
-        select *,a.register_date as 'contract_regdt' 
-        from contract_condition a
-        join seller_product b on a.product_no = b.product_no
-        where a.buyer_uuid = '".$uuid."'
+        select *,register_date as 'contract_regdt' 
+        from contract_condition 
+        where buyer_uuid = '".$uuid."'
         and contract_status = '2'
-        and a.del_yn != 'Y'
+        and del_yn != 'Y'
         limit 4;
         ";
         $this->rodb->query($query);
@@ -202,11 +194,10 @@ class SignInModel extends CommonModel
         $sales =[];
         $query = "
             select
-              sum(a.product_price) as 'price'
+              sum(product_price) as 'price'
             from
-              contract_condition a
-            join seller_product b on a.product_no = b.product_no
-            where a.seller_uuid = '$uuid'
+              contract_condition 
+            where seller_uuid = '".$uuid."'
             and contract_status = 5
                      
         ";
@@ -220,11 +211,10 @@ class SignInModel extends CommonModel
         $expectationSales =[];
         $query = "
             select
-              sum(b.product_price) as 'price'
+              sum(product_price) as 'price'
             from
-              contract_condition a
-            join seller_product b on a.seller_uuid = b.register_id
-            where a.seller_uuid = '$uuid'
+              contract_condition 
+            where seller_uuid = '$uuid'
               and (contract_status = 2 or contract_status = 5)
 
                      
@@ -242,7 +232,7 @@ class SignInModel extends CommonModel
              count(*) as'count'
             from
               contract_condition          
-            where seller_uuid = '$uuid'
+            where seller_uuid = '".$uuid."'
               and  contract_status = 5             
         ";
         $this->rodb->query($query);
@@ -261,7 +251,7 @@ class SignInModel extends CommonModel
              company_name
             from
               seller_company          
-            where uuid = '$uuid'            
+            where uuid = '".$uuid."'            
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
