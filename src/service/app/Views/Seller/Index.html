@@ -147,7 +147,7 @@
                 >
                   <ul>
                     <?php
-                    if(is_array($data)&& count($data) > 0){
+                    if(is_array($data["playing"])&& count($data["playing"]) > 0){
                     foreach($data["playing"] as $item){
                     ?>
                     <li>
@@ -157,6 +157,10 @@
                     </li>
                     <?php
                     }
+                    }else{
+                    ?>
+                    <p>진행중인 계약이 없습니다</p>
+                    <?php
                     }
                     ?>
                   </ul>
