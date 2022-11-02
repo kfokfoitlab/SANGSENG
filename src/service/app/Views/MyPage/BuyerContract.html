@@ -190,6 +190,7 @@
     <form name="statusForm" id="statusForm" method="post" action="/Buyer/MyPage/ContractUpdate">
        <input type="hidden" name ="workflow_id" id="workflow_id" value="0">
         <input type="hidden" name ="pworkflow_id" id="pworkflow_id" value="0">
+        <input type="hidden" name ="point" id="point" value="0">
         <input type="hidden" name ="complete_reduction" id="complete_reduction" value="0">
        <input type="hidden" name ="product_quantity" id="product_quantity" value="">
        <input type="hidden" name ="uuid" id = "uuid" value="<?=$_SESSION['login_info']['uuid']?>">
@@ -201,6 +202,7 @@
 
     $(document).ready(function(){
         buyer_sequence();
+
     });
 
     function Buyer_turn(workflow_id){
@@ -247,31 +249,37 @@
       var complete_reduction = 0;
       var workflow = "";
       var product_quantity ="";
+      var point = 0;
     for(var i = 0; i<workflow_id.length;i++) {
         workflow_key = workflow_id[i];
     fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_key + '?offset=%2B09%3A00', options)
             .then(response => response.json())
             .then(response => {
+
               $.each(response['field_list'], function (idx, row) {
                 if (response['field_list'][idx].name == "Contract_Cost") {
                     //console.log(response);
                     contract_reduction = response['field_list'][idx].value;
                     complete_reduction = parseInt(contract_reduction.replace(/,/g,""));
+                    point += complete_reduction*0.001;
 
                 }
                   if (response['field_list'][idx].name == "Contract_EA") {
                       product_quantity = response['field_list'][idx].value;
                   }
               })
+
                 workflow = response['workflow_id'];
                 $('#complete_reduction').val(complete_reduction);
                 $('#product_quantity').val(product_quantity);
                 $('#workflow_id').val(workflow);
                 $('#pworkflow_id').val(pworkflow_id);
+                $('#point').val(point);
                 $("#statusForm").submit();
             })
             .catch(err => console.error(err));
     }
+
   }
 
 
