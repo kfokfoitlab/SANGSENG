@@ -14,6 +14,25 @@
         // NAV
         require(__DIR__.'/Components/Nav.html');
       ?>
+
+      <ul class="row border w-100 justify-content-around align-items-center mb-4 mx-auto py-4 text-center bg-light buyer-contract-summary">
+        <li class="col-3 px-5 position-relative">
+          <p class="h5">장바구니</p>
+          <p><strong class="h4 fw-bold"><?=$data['cart']['cart']?></strong> 건</p>
+        </li>
+        <li class="col-3 px-5 position-relative">
+          <p class="h5">계약 진행중</p>
+          <p><strong class="h4 fw-bold"><?=$data['contract']['contract']?></strong> 건</p>
+        </li>
+        <li class="col-3 px-5 position-relative">
+          <p class="h5">배송 진행중</span></p>
+          <p><strong class="h4 fw-bold"><?=$data['delivery']['delivery']?></strong> 건</p>
+        </li>
+        <li class="col-3 px-5">
+          <p class="h5">포인트</p>
+          <p><strong class="h4 fw-bold"><?=number_format($data['point'])?></strong> Point</p>
+        </li>
+      </ul>
       <h3 class="mt-5 h4 fw-bold text-center">나의정보 수정</h3>
       <div class="default-form border rounded my-4 p-4">
         <div class="form-inner">

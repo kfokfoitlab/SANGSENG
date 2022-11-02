@@ -56,6 +56,40 @@ class MyPageModel extends CommonModel
      while($row = $this->rodb->next_row()){
          $data= $row;
      }
+
+     $delivery_query = "
+            select
+               count(*) delivery
+            from
+              delivery 
+            where del_yn != 'Y' AND buyer_uuid ='".$uuid."'
+ 
+        ";
+     $this->rodb->query($delivery_query);
+     $data['delivery']= $this->rodb->next_row();
+
+     $contract_query = "
+            select
+               count(*) contract
+            from
+              contract_condition 
+            where del_yn != 'Y' AND buyer_uuid ='".$uuid."' and contract_status ='2'
+ 
+        ";
+     $this->rodb->query($contract_query);
+     $data['contract']= $this->rodb->next_row();
+
+     $cart_query = "
+            select
+               count(*) cart
+            from
+              buyer_cart 
+            where del_yn != 'Y' AND buyer_id ='".$uuid."' 
+ 
+        ";
+     $this->rodb->query($cart_query);
+     $data['cart']= $this->rodb->next_row();
+
      return $data;
  }
 
@@ -131,7 +165,7 @@ class MyPageModel extends CommonModel
         $complete_reduction = $data["complete_reduction"];
         $product_quantity = $data["product_quantity"];
         $pworkflow_id = $data["pworkflow_id"];
-
+        $uuid = $_SESSION['login_info']['uuid'];
         if($pworkflow_id != ""){
             $playing_query = "
                 update
@@ -143,28 +177,27 @@ class MyPageModel extends CommonModel
             ";
             $this->wrdb->update($playing_query);
         }
-        $uuid = $data['uuid'];
-        $whereQuery = "";
         if($workflow_id != ""){
-                $query = "
-                    select
-                        *
-                    from
-                        seller_company a
-                            left join contract_condition b on (a.uuid = b.seller_uuid)
-                    where
-                            b.workflow_id = ".$workflow_id."
-                    limit 1
-                ";
-                $this->rodb->query($query);
-                $seller = $this->rodb->next_row();
+            $query = "
+                select
+                    *
+                from
+                    seller_company a
+                        left join contract_condition b on (a.uuid = b.seller_uuid)
+                where
+                        b.workflow_id = ".$workflow_id."
+                limit 1
+            ";
+            $this->rodb->query($query);
+            $seller = $this->rodb->next_row();
 
-                $mild_disabled = $seller["mild_disabled"];
-                $severely_disabled = $seller["severely_disabled"];
-                $seller_sales = $seller["seller_sales"];
-                $contribution =  $complete_reduction/$seller_sales;
-                $seller_workers = $mild_disabled+($severely_disabled*2);
-                $reduction =$contribution*$seller_workers;
+            $mild_disabled = $seller["mild_disabled"];
+            $severely_disabled = $seller["severely_disabled"];
+            $seller_sales = $seller["seller_sales"];
+            $contribution =  $complete_reduction/$seller_sales;
+            $seller_workers = $mild_disabled+($severely_disabled*2);
+            $reduction =$contribution*$seller_workers;
+
             $query = "
                     select
                         *
@@ -178,7 +211,6 @@ class MyPageModel extends CommonModel
             $this->rodb->query($query);
             $buyer = $this->rodb->next_row();
 
-
             $buyer_workers = $buyer["workers"]; //상시근로자
             $classification = 0;
             if($buyer['classification'] == 1){ //기업구분에 따른 의무고용율
@@ -186,7 +218,6 @@ class MyPageModel extends CommonModel
             }else{
                 $classification = 0.034;
             }
-
             $employ = 0; //의무고용인원
             if($buyer_workers<50){
                 $employ = 0;
@@ -230,6 +261,8 @@ class MyPageModel extends CommonModel
                 $reduction_money = $result_price * 12;
             }
             $reduction_money = (int)$reduction_money;
+            $point = $data["point"];
+
                 $reduction_query = "
                 update
                     contract_condition
@@ -242,60 +275,21 @@ class MyPageModel extends CommonModel
                     workflow_id = '".$workflow_id."'
             ";
                 $this->wrdb->update($reduction_query);
+
+                $point_query = "
+                    update
+                        buyer_company
+                    set
+                        point = '".$point."'
+                    where 
+                        uuid = '".$uuid."'
+                ";
+                $this->wrdb->update($point_query);
             return 1;
         }else{
             return null;
         }
     }
-
-    public function getContractCount($uuid){
-        $count = [];
-        $query = "
-            select
-               count(*) as playing
-            from
-              contract_condition 
-            where del_yn != 'Y' AND buyer_uuid ='".$uuid."' and contract_status = 2
- 
-        ";
-        $this->rodb->query($query);
-        $count['playing'] = $this->rodb->next_row();
-        $query = "
-            select
-               count(*) as complete
-            from
-              contract_condition 
-            where del_yn != 'Y' AND buyer_uuid ='".$uuid."' and contract_status =5
- 
-        ";
-        $this->rodb->query($query);
-        $count['complete'] = $this->rodb->next_row();
-
-
-        $query = "
-            select
-               sum(product_price) as price
-            from
-              contract_condition 
-            where del_yn != 'Y' AND buyer_uuid ='".$uuid."' and contract_status =5
- 
-        ";
-        $this->rodb->query($query);
-        $count['price'] = $this->rodb->next_row();
-
-        $query = "
-            select
-               sum(reduction_money) as reduction
-            from
-              contract_condition 
-            where del_yn != 'Y' AND buyer_uuid ='".$uuid."' and contract_status =5
- 
-        ";
-        $this->rodb->query($query);
-        $count['reduction'] = $this->rodb->next_row();
-        return $count;
-    }
-
 
     public function getContractList($uuid){
         $data = [];
