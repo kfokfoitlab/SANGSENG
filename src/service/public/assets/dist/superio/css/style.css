@@ -20951,14 +20951,18 @@ Shop/Detail
   line-height: 1.2;
   color: #777;
 }
-.shop-detail .total-price h2 {
+.shop-detail .contract-price {
+  font-size: 1.2rem;
+}
+.shop-detail .contract-price p {
   font-weight: bold;
 }
-.shop-detail .total-price span {
-  font-size: 1.2rem;
-  font-weight: normal;
+.shop-detail .contract-point p {
+  font-size: 1rem;
 }
-
+.shop-detail .contract-percentage {
+  font-size: 0.8rem;
+}
 .shop-detail .detail-info .nav-link {
   color: #777;
 }
