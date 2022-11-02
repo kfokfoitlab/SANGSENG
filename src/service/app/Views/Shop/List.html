@@ -35,6 +35,7 @@ $levy = $base * $employ *12; //부담금
       <div class="w-100 py-5 mb-5" id ="buyer_ranking" style="display: none">
         <h2 class="text-center mb-3 fw-bold">추천상품</h2>
         <input type="hidden" id ="login_type" value="<?=$_SESSION['login_info']['type']?>">
+        <input type="hidden" id ="p_n" value="<?=$_GET['p_n']?>">
         <table class="table border-top border-bottom border-2">
           <th>상품사진</th>
           <th>회사명/상품명</th>
@@ -93,7 +94,6 @@ $levy = $base * $employ *12; //부담금
             <td>
               <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$slice_rdm?>"><span
                       class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h3>
-              <!--              <p class="mt-2 sub-info"><?=$item['product_detail']?></p>-->
             </td>
             <td>
               <p><?=$item['product_quantity']?></p>
@@ -120,18 +120,8 @@ $levy = $base * $employ *12; //부담금
              }
               ?>
       </div>
-
       <div class="px-3 mb-5">
         <div class="order-items d-flex justify-content-end mb-4">
-          <!--
-                    <span class="px-3 active">인기상품순</span>
-                    <span class="px-3">높은감면액순</span>
-                    <span class="px-3">낮은감면액순</span>
-                    <span class="px-3">높은가격순</span>
-                    <span class="px-3">낮은가격순</span>
-                  </div>
-          -->
-
           <table class="table">
             <thead>
             <tr>
@@ -255,6 +245,9 @@ $levy = $base * $employ *12; //부담금
      $("#buyer_rdm").css('display','block')
    }else{
      $(".buyer_rdm_").css('display','none')
+   }
+   if($("#p_n").val() > 1){
+     $("#buyer_ranking").css('display','none');
    }
   });
   function nextPage(value,p_n){
