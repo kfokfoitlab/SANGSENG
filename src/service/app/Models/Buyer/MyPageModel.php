@@ -248,6 +248,55 @@ class MyPageModel extends CommonModel
         }
     }
 
+    public function getContractCount($uuid){
+        $count = [];
+        $query = "
+            select
+               count(*) as playing
+            from
+              contract_condition 
+            where del_yn != 'Y' AND buyer_uuid ='".$uuid."' and contract_status = 2
+ 
+        ";
+        $this->rodb->query($query);
+        $count['playing'] = $this->rodb->next_row();
+        $query = "
+            select
+               count(*) as complete
+            from
+              contract_condition 
+            where del_yn != 'Y' AND buyer_uuid ='".$uuid."' and contract_status =5
+ 
+        ";
+        $this->rodb->query($query);
+        $count['complete'] = $this->rodb->next_row();
+
+
+        $query = "
+            select
+               sum(product_price) as price
+            from
+              contract_condition 
+            where del_yn != 'Y' AND buyer_uuid ='".$uuid."' and contract_status =5
+ 
+        ";
+        $this->rodb->query($query);
+        $count['price'] = $this->rodb->next_row();
+
+        $query = "
+            select
+               sum(reduction_money) as reduction
+            from
+              contract_condition 
+            where del_yn != 'Y' AND buyer_uuid ='".$uuid."' and contract_status =5
+ 
+        ";
+        $this->rodb->query($query);
+        $count['reduction'] = $this->rodb->next_row();
+        return $count;
+    }
+
+
     public function getContractList($uuid){
         $data = [];
         $query = "
@@ -273,6 +322,12 @@ class MyPageModel extends CommonModel
                 $where_query = $where_query." and contract_status=5";
             }
         }
+        if($_GET["search_C"] != "all" && $_GET["search_C"] != ""){
+            $where_query = $where_query." and product_category = '".$_GET["search_C"]."'";
+        }else{
+            $where_query = $where_query." ";
+        }
+
         $query = "
             select
                *,idx as 'cidx',product_price as contract_price

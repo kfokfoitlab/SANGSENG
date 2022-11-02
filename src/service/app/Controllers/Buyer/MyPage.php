@@ -30,9 +30,12 @@ class MyPage extends BaseController
     public function Contract()
     { // {{{
          $uuid = $_SESSION['login_info']['uuid'];
-            $data = $this->mypage_model->getContractList($uuid);
-            $data = array(
+         $data = $this->mypage_model->getContractList($uuid);
+         $count = $this->mypage_model->getContractCount($uuid);
+
+        $data = array(
                 "data" => $data["data"]
+               ,"count" => $count
             );
             echo view("Common/Header.html");
             echo view('MyPage/BuyerContract.html',$data);
