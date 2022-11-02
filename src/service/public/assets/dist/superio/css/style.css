@@ -20998,6 +20998,16 @@ MyPage/BuyerContract
 ====================================================================
 
 ***/
+.buyer-contract  .buyer-contract-summary li.position-relative::after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 1px;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background-color: #dee2e6;
+}
 .buyer-contract .search-table {
   border-top: 2px solid #ECEDF2;
   border-bottom: 2px solid #ECEDF2;
