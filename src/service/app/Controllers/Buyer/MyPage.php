@@ -31,11 +31,15 @@ class MyPage extends BaseController
     { // {{{
          $uuid = $_SESSION['login_info']['uuid'];
          $data = $this->mypage_model->getContractList($uuid);
-         $count = $this->mypage_model->getContractCount($uuid);
+       //  $count = $this->mypage_model->getContractCount($uuid);
 
         $data = array(
                 "data" => $data["data"]
-               ,"count" => $count
+                ,"playing" => $data["playing"]
+                ,"complete" => $data["complete"]
+                ,"price" => $data["price"]
+                ,"reduction" => $data["reduction"]
+             // ,"count" => $count
             );
             echo view("Common/Header.html");
             echo view('MyPage/BuyerContract.html',$data);

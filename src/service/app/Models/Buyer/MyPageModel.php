@@ -342,6 +342,50 @@ class MyPageModel extends CommonModel
             $data["data"][] = $row;
 
         }
+        $query = "
+            select
+               count(*) as playing
+            from
+              contract_condition 
+            where del_yn != 'Y' AND buyer_uuid ='".$uuid."' and contract_status = 2 ".$where_query."
+ 
+        ";
+        $this->rodb->query($query);
+        $data['playing']= $this->rodb->next_row();
+        $query = "
+            select
+               count(*) as complete
+            from
+              contract_condition 
+            where del_yn != 'Y' AND buyer_uuid ='".$uuid."' and contract_status =5 ".$where_query."
+ 
+        ";
+        $this->rodb->query($query);
+        $data['complete'] = $this->rodb->next_row();
+
+
+        $query = "
+            select
+               sum(product_price) as price
+            from
+              contract_condition 
+            where del_yn != 'Y' AND buyer_uuid ='".$uuid."' and contract_status =5 ".$where_query."
+ 
+        ";
+        $this->rodb->query($query);
+        $data['price'] = $this->rodb->next_row();
+
+        $query = "
+            select
+               sum(reduction_money) as reduction
+            from
+              contract_condition 
+            where del_yn != 'Y' AND buyer_uuid ='".$uuid."' and contract_status =5 ".$where_query."
+ 
+        ";
+        $this->rodb->query($query);
+        $data['reduction'] = $this->rodb->next_row();
+
         return $data;
     }
     public function CartDel($idx){

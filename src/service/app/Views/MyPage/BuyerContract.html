@@ -14,19 +14,19 @@
       <ul class="row border w-100 justify-content-around align-items-center mb-4 mx-auto py-4 text-center bg-light buyer-contract-summary">
         <li class="col-2 px-5 position-relative">
           <p class="h5">진행중</p>
-          <p><strong class="h4 fw-bold"><?=$count['playing']['playing']?></strong>건</p>
+          <p><strong class="h4 fw-bold"><?=$playing['playing']?></strong>건</p>
         </li>
         <li class="col-2 px-5 position-relative">
           <p class="h5">계약완료</p>
-          <p><strong class="h4 fw-bold"><?=$count['complete']['complete']?></strong>건</p>
+          <p><strong class="h4 fw-bold"><?=$complete['complete']?></strong>건</p>
         </li>
         <li class="col-4 px-5 position-relative">
           <p class="h5">계약금액</span></p>
-          <p><strong class="h4 fw-bold"><?=number_format($count['price']['price'])?></strong>원</p>
+          <p><strong class="h4 fw-bold"><?=number_format($price['price'])?></strong>원</p>
         </li>
         <li class="col-4 px-5">
           <p class="h5">감면금액</p>
-          <p><strong class="h4 fw-bold"><?=number_format($count['reduction']['reduction'])?></strong>원</p>
+          <p><strong class="h4 fw-bold"><?=number_format($reduction['reduction'])?></strong>원</p>
         </li>
       </ul>
 
