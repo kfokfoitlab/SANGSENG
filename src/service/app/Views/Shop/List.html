@@ -32,9 +32,9 @@ $levy = $base * $employ *12; //부담금
 <div class="flex-grow-1 pb-5">
   <section class="shop-list">
     <div class="auto-container">
-      <div class="w-100 py-5 mb-5">
+      <div class="w-100 py-5 mb-5" id ="buyer_ranking" style="display: none">
         <h2 class="text-center mb-3 fw-bold">추천상품</h2>
-
+        <input type="hidden" id ="login_type" value="<?=$_SESSION['login_info']['type']?>">
         <table class="table border-top border-bottom border-2">
           <th>상품사진</th>
           <th>회사명/상품명</th>
@@ -147,7 +147,7 @@ $levy = $base * $employ *12; //부담금
               <th>
                 계약금액
               </th>
-              <th>
+              <th id ="buyer_rdm" style="display: none">
                 감면액
               </th>
             </tr>
@@ -156,6 +156,7 @@ $levy = $base * $employ *12; //부담금
             <?php
 
           if(is_array($list)&& count($list) > 0){
+
             if($_GET["p_n"]!=""){
               $i=($_GET["p_n"]-1)*10+1;
             }
@@ -205,11 +206,12 @@ $levy = $base * $employ *12; //부담금
               <td>
                 <p><?=number_format($item["product_price"])?>원</p>
               </td>
-              <td>
-                <p><?=number_format($slice_rdm)?>원</p>
+              <td class ="buyer_rdm_">
+                <p ><?=number_format($slice_rdm)?>원</p>
               </td>
             </tr>
             <?php
+
               }
             }
             ?>
@@ -247,7 +249,14 @@ $levy = $base * $employ *12; //부담금
   </section>
 </div>
 <script>
-
+  $(document).ready(function(){
+   if($("#login_type").val() == 'buyer'){
+     $("#buyer_ranking").css('display','block');
+     $("#buyer_rdm").css('display','block')
+   }else{
+     $(".buyer_rdm_").css('display','none')
+   }
+  });
   function nextPage(value,p_n){
     location.href = '/Buyer/Shop/List?value='+value+'&p_n='+p_n;
   }
