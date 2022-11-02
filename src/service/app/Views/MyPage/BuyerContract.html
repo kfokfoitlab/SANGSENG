@@ -61,12 +61,12 @@
             <th>카테고리</th>
             <td>
               <select name ="search_C" class="form-select" aria-label="Default select example">
-                <option selected>전체</option>
-                <option value="1">사무용품</option>
-                <option value="2">생활용품</option>
-                <option value="3">전산용품</option>
-                <option value="4">식음료</option>
-                <option value="5">청소용품</option>
+                <option value="all" <?php if($_GET["search_C"] == "all"){ echo "selected";}?>>전체</option>
+                <option value="1" <?php if($_GET["search_C"] == "1"){ echo "selected";}?>>사무용품</option>
+                <option value="2" <?php if($_GET["search_C"] == "2"){ echo "selected";}?>>생활용품</option>
+                <option value="3" <?php if($_GET["search_C"] == "3"){ echo "selected";}?>>전산용품</option>
+                <option value="4" <?php if($_GET["search_C"] == "4"){ echo "selected";}?>>식음료</option>
+                <option value="5" <?php if($_GET["search_C"] == "5"){ echo "selected";}?>>청소용품</option>
               </select>
             </td>
           </tr>

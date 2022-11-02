@@ -311,7 +311,7 @@ class MyPageModel extends CommonModel
         $where_query = "";
 
         if($_GET["search_A"] != ""){
-            $where_query = $where_query." and a.product_name like '%".$_GET["search_A"]."%'";
+            $where_query = $where_query." and product_name like '%".$_GET["search_A"]."%'";
         }
         if($_GET["search_B"] != "all" && $_GET["search_B"] != ""){
             if($_GET["search_B"] == "1"){
