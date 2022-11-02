@@ -239,34 +239,58 @@
               </div>
             </div>
 
-            <div class="mt-5 pt-4 text-end border-top total-price">
-              <h2 class="mb-2"><span>계약금액&nbsp;</span><?=number_format($data["product_price"])?>원</h2>
+            <div class="mt-5 pt-4 border-top text-end total-price">
+              <div class="w-100 row justify-content-end contract-price mb-2">
+                <p class="col-2 text-start">계약금액</p>
+                <p class="col-3 px-0 text-end"><?=number_format($data["product_price"])?> 원</p>
+              </div>
               <?php
-          if($_GET['rm'] != ""){
-          ?>
-              <h2><span>감면액&nbsp;</span><?=number_format($_GET['rm'])?>원</h2>
+              if($_GET['rm'] != ""){
+              ?>
+              <div class="w-100 row justify-content-end contract-price mb-0 align-items-center">
+                <p class="col-2 text-start">감면액</p>
+                <p class="col-3 px-0 text-end"><?=number_format($_GET['rm'])?> 원</p>
+              </div>
+              <div class="w-100 row justify-content-end mb-2">
+                <p class="col-5 px-0 text-end text-danger contract-percentage fw-normal">
+                계약금액의 <span class="fw-bold">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
+                  </svg>30.4%</span> 감면
+                </p>
+              </div>
               <?php
-            }
-            if($_GET['rm'] == ""){
-            ?>
-              <h2><span>감면액&nbsp;</span>0원</h2>
+              }
+              if($_GET['rm'] == ""){
+              ?>
+              <div class="w-100 row justify-content-end contract-price">
+                <p class="col-2 text-start">감면액</p>
+                <p class="col-3 px-0 text-end">0 원</p>
+              </div>
               <?php
-            }
-            ?>
+              }
+              ?>
+              <div class="w-100 row justify-content-end contract-point">
+                <p class="col-2 text-primary fw-bold text-start">적립포인트</p>
+                <p class="col-3 px-0 text-end text-primary fw-bold">9,240 point</p>
+              </div>
             </div>
+            <?php
+            if($_SESSION["login_info"]["type"] == "buyer" || $_SESSION["login"] != "success"){
+            ?>
+            <div class="mt-5 text-end">
+              <button onclick='myCart()' class="btn btn-secondary btn-lg me-2">장바구니</button>
+              <button onclick='contract()' class="btn btn-danger btn-lg">계약하기</button>
+            </div>
+            <?php
+            }
+            ?>
           </div>
+
         </div>
+
       </form>
-      <?php
-        if($_SESSION["login_info"]["type"] == "buyer" || $_SESSION["login"] != "success"){
-        ?>
-      <div class="mt-4 text-end">
-        <button onclick='myCart()' class="btn btn-secondary btn-lg">장바구니</button>
-        <button onclick='contract()' class="btn btn-danger btn-lg">계약하기</button>
-      </div>
-      <?php
-          }
-          ?>
+
       <div class="detail-info">
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
