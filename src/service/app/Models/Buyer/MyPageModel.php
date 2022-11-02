@@ -90,6 +90,17 @@ class MyPageModel extends CommonModel
      $this->rodb->query($cart_query);
      $data['cart']= $this->rodb->next_row();
 
+     $point_query = "
+            select
+               sum(buyer_point) as point
+            from
+              contract_condition 
+            where del_yn != 'Y' AND buyer_uuid ='".$uuid."' and contract_status ='5'
+ 
+        ";
+     $this->rodb->query($point_query);
+     $data['point']= $this->rodb->next_row();
+
      return $data;
  }
 
@@ -261,7 +272,7 @@ class MyPageModel extends CommonModel
                 $reduction_money = $result_price * 12;
             }
             $reduction_money = (int)$reduction_money;
-            $point = $data["point"];
+            $point = $complete_reduction*0.001;
 
                 $reduction_query = "
                 update
@@ -270,12 +281,13 @@ class MyPageModel extends CommonModel
                     product_price = $complete_reduction,
                     contract_status =5,
                     product_quantity = '".$product_quantity."',
+                    buyer_point = '".$point."',
                     reduction_money = $reduction_money
                 where 
                     workflow_id = '".$workflow_id."'
             ";
                 $this->wrdb->update($reduction_query);
-
+/*
                 $point_query = "
                     update
                         buyer_company
@@ -284,7 +296,7 @@ class MyPageModel extends CommonModel
                     where 
                         uuid = '".$uuid."'
                 ";
-                $this->wrdb->update($point_query);
+                $this->wrdb->update($point_query);*/
             return 1;
         }else{
             return null;
