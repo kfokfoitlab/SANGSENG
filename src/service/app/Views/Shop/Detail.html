@@ -170,6 +170,7 @@
         <p class="mb-3"><?=$data["product_detail"]?></p>
       </div>
       <form name="myForm" method="POST" action="">
+        <input type="hidden" id="login_type" value="<?=$_SESSION['login_info']['type']?>">
         <input type ="hidden" id="session" value="<?=$_SESSION['login']?>">
         <input type="hidden" name="product_no" id="product_no" value="<?=$data['product_no']?>">
         <input type="hidden" name="product_name" value="<?=$data['product_name']?>">
@@ -238,15 +239,19 @@
                 <label for="delivery01" class="selector-item_label px-2 py-1 me-2"><?=$delivery_cycle?></label>
               </div>
             </div>
+            <?php
+            $reduction_per = ($_GET['rm']/$data['product_price'])*100;
+            $reduction_per = round($reduction_per,1);
+            ?>
+
 
             <div class="mt-5 pt-4 border-top text-end total-price">
               <div class="w-100 row justify-content-end contract-price mb-2">
                 <p class="col-2 text-start">계약금액</p>
                 <p class="col-3 px-0 text-end"><?=number_format($data["product_price"])?> 원</p>
               </div>
-              <?php
-              if($_GET['rm'] != ""){
-              ?>
+
+              <div id="reduction_point" style="display: none">
               <div class="w-100 row justify-content-end contract-price mb-0 align-items-center">
                 <p class="col-2 text-start">감면액</p>
                 <p class="col-3 px-0 text-end"><?=number_format($_GET['rm'])?> 원</p>
@@ -256,27 +261,18 @@
                 계약금액의 <span class="fw-bold">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
-                  </svg>30.4%</span> 감면
+                  </svg><?=$reduction_per?>%</span> 감면
                 </p>
               </div>
-              <?php
-              }
-              if($_GET['rm'] == ""){
-              ?>
-              <div class="w-100 row justify-content-end contract-price">
-                <p class="col-2 text-start">감면액</p>
-                <p class="col-3 px-0 text-end">0 원</p>
-              </div>
-              <?php
-              }
-              ?>
+
               <div class="w-100 row justify-content-end contract-point">
                 <p class="col-2 text-primary fw-bold text-start">적립포인트</p>
-                <p class="col-3 px-0 text-end text-primary fw-bold">9,240 point</p>
+                <p class="col-3 px-0 text-end text-primary fw-bold"><?=number_format($data['product_price']*0.01)?></p>
               </div>
             </div>
+            </div>
             <?php
-            if($_SESSION["login_info"]["type"] == "buyer" || $_SESSION["login"] != "success"){
+            if($_SESSION["login_info"]["type"] == "buyer"){
             ?>
             <div class="mt-5 text-end">
               <button onclick='myCart()' class="btn btn-secondary btn-lg me-2">장바구니</button>
@@ -495,6 +491,17 @@
   </div>
 </div>
 <script>
+  $(document).ready(function(){
+    if($("#login_type").val() == 'buyer'){
+      $("#reduction_point").css('display','block');
+    }else{
+      $("#reduction_point").css('display','none');
+    }
+  });
+
+
+
+
   function myCart() {
     var session = $("#session").val();
     if(session === "success") {
@@ -515,52 +522,8 @@
 
   }
 
-  function contractCheck(){
 
-    const options = {method: 'GET', headers: {Accept: 'application/json', Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='}};
 
-    fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=6&field_name=테스트&field_value=테스트', options)
-            .then(response => response.json())
-            .then(response => console.log(response))
-            .catch(err => console.error(err));
-    /*var sign = {
-      "header": {
-        "request_code": "5008Q",
-        "api_name" : "start api",
-        "session_id" : "",
-        "version": "1.1.60",
-      },
-      "body": {
-        "comp_id": "naver0socialimpactork",
-        "field_list":[{
-          "doc_uid" :"6",
-          "field_name" :"field_name",
-          "field_value" :"field_value"
-        }]
-      }
-    };
-    $.ajax({
-      url: "https://docs.esignon.net/api/naver0socialimpactork/search",
-      dataType: 'JSON',
-      type: "post",
-      data: JSON.stringify(sign),
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-        /!*xhr.setRequestHeader("Seller-Agent", "esignonapi");*!/
-        xhr.setRequestHeader("Authorization", "esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE=");
-      },
-      success: function (result) {
-        if (result) {
-          console.log(JSON.stringify(result));
-        } else {
-          alert("전송 실패했습니다.");
-        }
-      },
-      error: function (xhr, ajaxSettings, thrownError) {
-        alert(thrownError);
-      }
-    });*/
-  }
   let img = document.querySelector('.preview-img-big img');
   $('.preview-img-small').on('click', function(e){
     if(e.target.src) {

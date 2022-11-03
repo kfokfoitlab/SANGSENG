@@ -137,19 +137,60 @@
       <?php if($data_page_total_cnt == 0){ echo"<div class='text-center'><span>등록된 근로자가 없습니다</span></div>"; }?>
 
       <div class="float-start"><div class="dataTables_info" id="datatables_info" role="status" aria-live="polite">(총 <?=$data_page_total_cnt?> 개의 데이터)</div></div>
-      <ul style="float: right" class="pagination">
-        <li class="paginate_button page-item previous disabled" id="datatables_previous">
+    <ul style="float: right" class="pagination">
+      <li class="paginate_button page-item previous disabled" id="datatables_previous">
         <?php
-         $data_page_num = ($data_page_total_cnt/10) + 1;
-         for($i=1;$i<=$data_page_num;$i++){
+          $page = $_GET["p_n"];
+          $page_per_record = 10;
+          $block_ct = 5;
+          $list = 10;
+          $block_num = ceil($page/$block_ct); // 현재 페이지 블록 구하기
+          $block_start = (($block_num - 1) * $block_ct) + 1; // 블록의 시작번호
+          $block_end = $block_start + $block_ct - 1; //블록 마지막 번호
+          $total_page = ceil($data_page_total_cnt / $list); // 페이징한 페이지 수 구하기
+          if($block_end > $total_page){
+          $block_end = $total_page;
+          }
+        $total_block = ceil($total_page/$block_ct);
+        $start_num = ($page-1) * $list;
+        if($_GET["p_n"]>1){?>
+      <li class="paginate_button page-item"> <a href="javascript:nextPage(1)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">처음으로</a></li>
+      <?php }?>
+      <?php
+        if($page <= 1){
+        ?>
+      <?php
+        }else{
+        $pre = $page-1;
+        ?>
+      <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$pre?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">이전</a></li>
+      <?php
+        }
+        ?>
+      <?php
+         for($i= $block_start; $i<=$block_end;$i++){
               if($_GET["p_n"]==$i){?>
-                <li class="paginate_button page-item active">
+      <li class="paginate_button page-item active">
         <?php }else{ ?>
-                <li class="paginate_button page-item">
+      <li class="paginate_button page-item">
         <?php } ?>
-          <a href="javascript:nextPage(<?=$i?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a></li>
-        <?php }?>
-      </ul>
+        <a href="javascript:nextPage(<?=$i?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a>
+      </li>
+      <?php }?>
+      <?php
+        if($block_num >= $total_block){
+      }else{
+      $next_page = $page+1;
+      ?>
+      <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$next_page?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">다음</a></li>
+      <?php
+        }
+        ?>
+      <?php
+        if($_GET["p_n"]>=1 && $_GET["p_n"] != $total_page){?>
+      <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$total_page?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">마지막</a></li>
+      <?php }?>
+    </ul>
     </div>
   </section>
 </div>

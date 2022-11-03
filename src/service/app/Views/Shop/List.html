@@ -60,29 +60,29 @@ $levy = $base * $employ *12; //부담금
                 $reduction_money = 0;
 
                 if($result_price > $levy ){
-                  $reduction_money = $levy*0.6;
-                }else if($result_price >$item["product_price"]*0.5){
-                  $reduction_money = $item["product_price"]*0.5 *12;
-                }else{
-                  $reduction_money = $result_price *12;
-                }
+            $reduction_money = $levy*0.6;
+            }else if($result_price >$item["product_price"]*0.5){
+            $reduction_money = $item["product_price"]*0.5 *12;
+            }else{
+            $reduction_money = $result_price *12;
+            }
 
-                if($reduction_money > $item['product_price']*0.5){
-                  $reduction_money = (int)$item['product_price']*0.5;
-                }
+            if($reduction_money > $item['product_price']*0.5){
+            $reduction_money = (int)$item['product_price']*0.5;
+            }
 
-                $reduction_money = (int)$reduction_money;
-                $item['reduction_money'] = $reduction_money;
-                $item['sort_num'] = $reduction_money/$item['product_price'];
-                $ret[] = $item;
-              usort($ret,'product_compare_data');
-              }
+            $reduction_money = (int)$reduction_money;
+            $item['reduction_money'] = $reduction_money;
+            $item['sort_num'] = $reduction_money/$item['product_price'];
+            $ret[] = $item;
+            usort($ret,'product_compare_data');
+            }
 
             $index = 0;
             foreach($ret as $item){
-              if($index == 5){
-                break;
-              }
+            if($index == 5){
+            break;
+            }
             $rdm = $item['reduction_money'];
             $slice = substr($rdm,0,-1);
             $slice_rdm = $slice.'0';
@@ -148,30 +148,30 @@ $levy = $base * $employ *12; //부담금
           if(is_array($list)&& count($list) > 0){
 
             if($_GET["p_n"]!=""){
-              $i=($_GET["p_n"]-1)*10+1;
+            $i=($_GET["p_n"]-1)*10+1;
             }
             $ret = array();
             foreach($list as $item){
-              $product_price = number_format($item["product_price"]);
-              $result_price = $item['reduction'] *$base;
-              $reduction_money = 0;
+            $product_price = number_format($item["product_price"]);
+            $result_price = $item['reduction'] *$base;
+            $reduction_money = 0;
 
-              if($result_price > $levy ){
-                $reduction_money = $levy*0.6;
-              }else if($result_price >$item["product_price"]*0.5){
-                $reduction_money = $item["product_price"]*0.5 *12;
-              }else{
-                $reduction_money = $result_price *12;
-              }
+            if($result_price > $levy ){
+            $reduction_money = $levy*0.6;
+            }else if($result_price >$item["product_price"]*0.5){
+            $reduction_money = $item["product_price"]*0.5 *12;
+            }else{
+            $reduction_money = $result_price *12;
+            }
 
-              if($reduction_money > $item['product_price']*0.5){
-                $reduction_money = (int)$item['product_price']*0.5;
-              }
+            if($reduction_money > $item['product_price']*0.5){
+            $reduction_money = (int)$item['product_price']*0.5;
+            }
 
-              $reduction_money = (int)$reduction_money;
+            $reduction_money = (int)$reduction_money;
 
-              $item['reduction_money'] = $reduction_money;
-              $ret[] = $item;
+            $item['reduction_money'] = $reduction_money;
+            $ret[] = $item;
 
             }
 
@@ -209,7 +209,7 @@ $levy = $base * $employ *12; //부담금
           </table>
         </div>
         <?php
-            if(!is_array($list)){
+            if($data_page_total_cnt == 0){
             ?>
         <h2 class="text-center fw-bold my-5">등록된 상품이 없습니다</h2>
         <?php
@@ -220,19 +220,56 @@ $levy = $base * $employ *12; //부담금
       <ul style="float: right" class="pagination">
         <li class="paginate_button page-item previous disabled" id="datatables_previous">
           <?php
-         $value = $_GET["value"];
-         if($data_page_total_cnt%10 != 0){
-           $data_page_num = ($data_page_total_cnt/10) + 1;
-         }else{
-           $data_page_num = ($data_page_total_cnt/10);
-         }
-         for($i=1;$i<=$data_page_num;$i++){
+          $value = $_GET["value"];
+          $page = $_GET["p_n"];
+          $page_per_record = 10;
+          $block_ct = 5;
+          $list = 10;
+          $block_num = ceil($page/$block_ct);
+          $block_start = (($block_num - 1) * $block_ct) + 1;
+          $block_end = $block_start + $block_ct - 1;
+          $total_page = ceil($data_page_total_cnt / $list);
+          if($block_end > $total_page){
+          $block_end = $total_page;
+          }
+          $total_block = ceil($total_page/$block_ct);
+          $start_num = ($page-1) * $list;
+        if($_GET["p_n"]>1){?>
+        <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$value?>,1)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">처음으로</a></li>
+        <?php }?>
+        <?php
+        if($page <= 1){
+        ?>
+        <?php
+        }else{
+        $pre = $page-1;
+        ?>
+        <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$value?>,<?=$pre?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">이전</a></li>
+        <?php
+        }
+        ?>
+        <?php
+         for($i= $block_start; $i<=$block_end;$i++){
               if($_GET["p_n"]==$i){?>
         <li class="paginate_button page-item active">
-          <?php }else{ ?>
+        <?php }else{ ?>
         <li class="paginate_button page-item">
-          <?php } ?>
-          <a href="javascript:nextPage(<?=$value?>,<?=$i?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a></li>
+        <?php } ?>
+        <a href="javascript:nextPage(<?=$value?>,<?=$i?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a>
+        </li>
+        <?php }?>
+        <?php
+        if($block_num >= $total_block){
+        }else{
+        $next_page = $page+1;
+        ?>
+        <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$value?>,<?=$next_page?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">다음</a></li>
+        <?php
+        }
+        ?>
+        <?php
+        if($_GET["p_n"]>=1 && $_GET["p_n"] != $total_page){?>
+        <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$value?>,<?=$total_page?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">마지막</a></li>
         <?php }?>
       </ul>
     </div>
@@ -240,15 +277,12 @@ $levy = $base * $employ *12; //부담금
 </div>
 <script>
   $(document).ready(function(){
-   if($("#login_type").val() == 'buyer'){
-     $("#buyer_ranking").css('display','block');
-     $("#buyer_rdm").css('display','block')
-   }else{
-     $(".buyer_rdm_").css('display','none')
-   }
-   if($("#p_n").val() > 1){
-     $("#buyer_ranking").css('display','none');
-   }
+    if($("#login_type").val() == 'buyer'){
+      $("#buyer_ranking").css('display','block');
+      $("#buyer_rdm").css('display','block')
+    }else{
+      $(".buyer_rdm_").css('display','none')
+    }
   });
   function nextPage(value,p_n){
     location.href = '/Buyer/Shop/List?value='+value+'&p_n='+p_n;

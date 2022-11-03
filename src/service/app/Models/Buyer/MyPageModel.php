@@ -105,7 +105,6 @@ class MyPageModel extends CommonModel
  }
 
  public function pwdCheck($password){
-     $password = $_POST['password'];
      $uuid = $_SESSION["login_info"]["uuid"];
      $query = "
 
@@ -272,7 +271,7 @@ class MyPageModel extends CommonModel
                 $reduction_money = $result_price * 12;
             }
             $reduction_money = (int)$reduction_money;
-            $point = $complete_reduction*0.001;
+            $point = $complete_reduction*0.01;
 
                 $reduction_query = "
                 update
@@ -340,9 +339,14 @@ class MyPageModel extends CommonModel
             from
               contract_condition 
             where del_yn != 'Y' AND buyer_uuid ='".$uuid."'".$where_query."
-           order by 
-               idx desc    
         ";
+        $page_start = 0;
+        if($_GET["p_n"] != ""){
+            $page_start = ($_GET["p_n"] - 1)*10;
+        }
+        $query = $query." order by idx desc";
+        $query = $query." limit ".$page_start.", 10";
+
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
             $data["data"][] = $row;

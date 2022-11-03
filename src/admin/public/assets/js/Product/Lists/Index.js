@@ -168,5 +168,4 @@ $(document).ready(function(){
 });
 function statusUpdate(idx,status){
     location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
-    console.log(`ids, status : ${idx, status}`)
 }
