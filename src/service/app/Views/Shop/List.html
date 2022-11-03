@@ -220,6 +220,7 @@ $levy = $base * $employ *12; //부담금
       <ul style="float: right" class="pagination">
         <li class="paginate_button page-item previous disabled" id="datatables_previous">
           <?php
+          if($data_page_total_cnt > 0){
           $value = $_GET["value"];
           $page = $_GET["p_n"];
           $page_per_record = 10;
@@ -270,7 +271,7 @@ $levy = $base * $employ *12; //부담금
         <?php
         if($_GET["p_n"]>=1 && $_GET["p_n"] != $total_page){?>
         <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$value?>,<?=$total_page?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">마지막</a></li>
-        <?php }?>
+        <?php }}?>
       </ul>
     </div>
   </section>
