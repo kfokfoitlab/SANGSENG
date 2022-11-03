@@ -10,7 +10,7 @@
   const navLinks = document.querySelectorAll('.cs-nav a');
   navLinks.forEach((nav) => {
 		const hrefText = nav.getAttribute('href');
-		if (window.location.pathname.indexOf(hrefText) === 0) {
+		if (window.location.pathname.indexOf(hrefText) >= 0) {
 			nav.classList.add('on')
 		} else {
 			nav.classList.remove('on')
