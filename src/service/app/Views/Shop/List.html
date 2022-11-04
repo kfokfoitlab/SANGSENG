@@ -80,18 +80,15 @@ $levy = $base * $employ *12; //부담금
           $slice = substr($rdm,0,-1);
           $slice_rdm = $slice.'0';
           ?>
-          <div class="col p-3">
+          <div class="col p-2 recommend-item-box" title="<?=$item['company_name']?> / <?=$item['product_name']?>">
             <div class="border">
               <a class="d-block p-0" href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$slice_rdm?>">
                 <div class="recommend-img">
                   <img src="/uploads/<?=$item['representative_image']?>" alt="<?=$item['product_name']?>">
                 </div>
-                <div class="p-2">
-                  <p class="recommend-company"><?=$item['company_name']?></p>
-                  <p class="recommend-item-info">
-                    <span class="recommend-item fw-bold"><?=$item['product_name']?></span> /
-                    <span class="recommend-item-quantity"><?=$item['product_quantity']?></span>
-                  </p>
+                <div class="px-2 py-3">
+                  <p class="recommend-company mb-1"><?=$item['company_name']?></p>
+                  <p class="recommend-item fw-bold"><?=$item['product_name']?></p>
 
                   <div class="recommend-item-number">
                     <div class="d-flex justify-content-between mt-2 recommend-item-price">
@@ -191,8 +188,8 @@ $levy = $base * $employ *12; //부담금
               <td>
                 <h3>
                   <a class="d-block" href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$slice_rdm?>">
-                    <span class="text-start fw-bold company-name" title="<?=$item['company_name']?>"><?=$item["company_name"]?></span>
-                    <span class="text-start mt-1 product-name" title="<?=$item['product_name']?>"><?=$item["product_name"]?></span>
+                    <span class="text-start company-name" title="<?=$item['company_name']?>"><?=$item["company_name"]?></span>
+                    <span class="text-start fw-bold mt-1 product-name" title="<?=$item['product_name']?>"><?=$item["product_name"]?></span>
                   </a>
                 </h3>
                 <!--                <p class="sub-info"><?=$item["product_detail"]?></p>-->
