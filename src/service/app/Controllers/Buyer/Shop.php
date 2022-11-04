@@ -46,8 +46,6 @@ class Shop extends BaseController
             "data_page_total_cnt" => $list["count"],
             "rankingReplyCount" => $ranking["replyCount"]
         );
-
-
         echo view("Common/Header.html");
         echo view('Shop/List.html',$data);
         echo view("Common/Footer.html");
