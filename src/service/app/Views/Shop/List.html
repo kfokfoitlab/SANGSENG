@@ -36,91 +36,91 @@ $levy = $base * $employ *12; //부담금
         <h2 class="text-center mb-3 fw-bold">추천상품</h2>
         <input type="hidden" id ="login_type" value="<?=$_SESSION['login_info']['type']?>">
         <input type="hidden" id ="p_n" value="<?=$_GET['p_n']?>">
-        <table class="table border-top border-bottom border-2">
-          <th>상품사진</th>
-          <th>회사명/상품명</th>
-          <th>상품수량</th>
-          <th>계약금액</th>
-          <th>감면액</th>
-          <tbody>
-          <tr>
-            <?php
 
-            function product_compare_data($a, $b){
-              if ($a['sort_num'] == $b['sort_num']){
-                return ($a['register_date'] < $b['register_date']) ? 1 : -1;
-              }
-              return ($a['sort_num'] < $b['sort_num']) ? 1 : -1;
+        <div class="row recommend-item-list">
+          <?php
+          function product_compare_data($a, $b){
+            if ($a['sort_num'] == $b['sort_num']){
+              return ($a['register_date'] < $b['register_date']) ? 1 : -1;
             }
+            return ($a['sort_num'] < $b['sort_num']) ? 1 : -1;
+          }
           if(is_array($ranking) && count($ranking)){
           $ret = array();
-              foreach($ranking as $item){
-                $product_price = number_format($item["product_price"]);
-                $result_price = $item['reduction'] *$base;
-                $reduction_money = 0;
+            foreach($ranking as $item){
+              $product_price = number_format($item["product_price"]);
+              $result_price = $item['reduction'] *$base;
+              $reduction_money = 0;
 
-                if($result_price > $levy ){
-            $reduction_money = $levy*0.6;
-            }else if($result_price >$item["product_price"]*0.5){
-            $reduction_money = $item["product_price"]*0.5 *12;
-            }else{
-            $reduction_money = $result_price *12;
-            }
+              if($result_price > $levy ){
+          $reduction_money = $levy*0.6;
+          }else if($result_price >$item["product_price"]*0.5){
+          $reduction_money = $item["product_price"]*0.5 *12;
+          }else{
+          $reduction_money = $result_price *12;
+          }
 
-            if($reduction_money > $item['product_price']*0.5){
-            $reduction_money = (int)$item['product_price']*0.5;
-            }
+          if($reduction_money > $item['product_price']*0.5){
+          $reduction_money = (int)$item['product_price']*0.5;
+          }
 
-            $reduction_money = (int)$reduction_money;
-            $item['reduction_money'] = $reduction_money;
-            $item['sort_num'] = $reduction_money/$item['product_price'];
-            $ret[] = $item;
-            usort($ret,'product_compare_data');
-            }
+          $reduction_money = (int)$reduction_money;
+          $item['reduction_money'] = $reduction_money;
+          $item['sort_num'] = $reduction_money/$item['product_price'];
+          $ret[] = $item;
+          usort($ret,'product_compare_data');
+          }
 
-            $index = 0;
-            foreach($ret as $item){
-            if($index == 5){
-            break;
-            }
-            $rdm = $item['reduction_money'];
-            $slice = substr($rdm,0,-1);
-            $slice_rdm = $slice.'0';
-            ?>
-            <td>
-              <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>" alt="<?=$item['product_name']?>">
+          $index = 0;
+          foreach($ret as $item){
+          if($index == 5){
+          break;
+          }
+          $rdm = $item['reduction_money'];
+          $slice = substr($rdm,0,-1);
+          $slice_rdm = $slice.'0';
+          ?>
+          <div class="col p-2 recommend-item-box" title="<?=$item['company_name']?> / <?=$item['product_name']?>">
+            <div class="border">
+              <a class="d-block p-0" href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$slice_rdm?>">
+                <div class="recommend-img">
+                  <img src="/uploads/<?=$item['representative_image']?>" alt="<?=$item['product_name']?>">
+                </div>
+                <div class="px-2 py-3">
+                  <p class="recommend-company mb-1"><?=$item['company_name']?></p>
+                  <p class="recommend-item fw-bold"><?=$item['product_name']?></p>
 
-            </td>
-            <td>
-              <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$slice_rdm?>"><span
-                      class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h3>
-            </td>
-            <td>
-              <p><?=$item['product_quantity']?></p>
-            </td>
-            <td>
-              <p><?=number_format($item['product_price'])?>원</p>
-
-            </td>
-            <td>
-              <p><?=number_format($slice_rdm)?>원</p>
-            </td>
-          </tr>
+                  <div class="recommend-item-number">
+                    <div class="d-flex justify-content-between mt-2 recommend-item-price">
+                      <span>계약금액</span>
+                      <p class="fw-bold"><?=number_format($item['product_price'])?>원</p>
+                    </div>
+                    <div class="d-flex justify-content-between recommend-item-rdm">
+                      <span>감면액</span>
+                      <p class="fw-bold"><?=number_format($slice_rdm)?>원</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
           <?php $index++;
               }
             }
             ?>
-          </tbody>
-        </table>
+        </div>
         <?php
-            if(!is_array($ranking)){
-            ?>
+          if(!is_array($ranking)){
+        ?>
         <h2 class="text-center fw-bold my-5">등록된 상품이 없습니다</h2>
         <?php
-             }
-              ?>
+          }
+        ?>
+
+
       </div>
-      <div class="px-3 pt-5 mt-5 mb-5">
+
+      <div class="pt-5 mt-5 mb-5">
         <div class="order-items d-flex justify-content-end mb-4">
           <table class="table">
             <thead>
@@ -186,18 +186,22 @@ $levy = $base * $employ *12; //부담금
                      alt="<?=$item['product_name']?>">
               </td>
               <td>
-                <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$slice_rdm?>"><span
-                        class="text-primary"><?=$item["company_name"]?></span> / <?=$item["product_name"]?></a></h3>
+                <h3>
+                  <a class="d-block" href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$slice_rdm?>">
+                    <span class="text-start company-name" title="<?=$item['company_name']?>"><?=$item["company_name"]?></span>
+                    <span class="text-start fw-bold mt-1 product-name" title="<?=$item['product_name']?>"><?=$item["product_name"]?></span>
+                  </a>
+                </h3>
                 <!--                <p class="sub-info"><?=$item["product_detail"]?></p>-->
               </td>
               <td>
                 <p><?=$item["product_quantity"]?></p>
               </td>
               <td>
-                <p><?=number_format($item["product_price"])?>원</p>
+                <p class="fw-bold"><?=number_format($item["product_price"])?>원</p>
               </td>
-              <td class ="buyer_rdm_">
-                <p ><?=number_format($slice_rdm)?>원</p>
+              <td class="buyer_rdm_">
+                <p class="fw-bold"><?=number_format($slice_rdm)?>원</p>
               </td>
             </tr>
             <?php

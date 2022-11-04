@@ -29,7 +29,7 @@ $levy = $base * $employ *12; //부담금
     <div class="tabs-content">
       <!--Tab-->
       <div class="tab active-tab" id="tab1">
-        <div class="row">
+        <div class="row recommend-item-list">
           <?php
 
           function product_compare_data($a, $b){
@@ -70,25 +70,28 @@ $levy = $base * $employ *12; //부담금
 
           ?>
           <!-- Job Block -->
-          <div class="job-block col-sm-12">
-            <div class="inner-box">
-              <div class="content d-flex align-items-center">
-                <div class="me-4">
-                  <!-- img src="/Image/<?=$item["company_img_uuid"]?>" style="width:126px;" alt="기업로고" -->
-
+          <div class="col p-2 recommend-item-box" title="<?=$item['company_name']?> / <?=$item['product_name']?>">
+            <div class="border">
+              <a class="d-block p-0" href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$slice_rdm?>">
+                <div class="recommend-img">
                   <img src="/uploads/<?=$item['representative_image']?>" alt="<?=$item['product_name']?>">
                 </div>
-                <div class="content-detail">
-                  <h3><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$reduction_money?>" tabindex=1500><span
-                  class="text-secondary"><?=$item["company_name"]?></span> <?=$item["product_name"]?></a></h3>
-                  <ul class="job-info">
-                    <li>계약금액: <span class="fw-bold"><span class="mask-pay"><?=$item["product_price"]?></span>원</span></li>
-                    <li>판매수량: <span class="fw-bold"><?=$item["product_quantity"]?></span></li>
-                    <li>판매기간: <span class="fw-bold"><?=$item["product_start"]?> ~ <?=$item["product_end"]?></span></li>
-                    <li class="description"><?=$item["product_detail"]?></li>
-                  </ul>
+                <div class="px-2 py-3">
+                  <p class="recommend-company mb-1"><?=$item['company_name']?></p>
+                  <p class="recommend-item fw-bold"><?=$item['product_name']?></p>
+
+                  <div class="recommend-item-number">
+                    <div class="d-flex justify-content-between mt-2 recommend-item-price">
+                      <span>계약금액</span>
+                      <p class="fw-bold"><?=number_format($item['product_price'])?>원</p>
+                    </div>
+                    <div class="d-flex justify-content-between recommend-item-rdm d-none">
+                      <span>감면액</span>
+                      <p class="fw-bold"><?=number_format($slice_rdm)?>원</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
           <?php $index++;
