@@ -78,7 +78,7 @@ class Seller extends BaseController
 
     public function ContractUpdate(){
         $uuid = $_SESSION['login_info']['uuid'];
-        $result = $this->mypage_model->ContractStatus($_POST);
+        $result = $this->mypage_model->sellerContractStatus($_POST);
         $_SESSION["totalSales"] = $this->sigin_model->getTotalSales($uuid);
         echo "
         <script>

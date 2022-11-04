@@ -46,7 +46,7 @@ class MyPage extends BaseController
     public function ContractUpdate()
     { // {{{
 
-        $result = $this->mypage_model->ContractStatus($_POST);
+        $result = $this->mypage_model->buyerContractStatus($_POST);
         if($result == 1 ){
             $_SESSION["Contract"]= $this->sigin_model->getContractList();
             $_SESSION["ReductionMoney"]= $this->sigin_model->BuyerReduction();

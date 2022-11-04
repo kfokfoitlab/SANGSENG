@@ -35,6 +35,7 @@
 				,worker_birth = '".$data["worker_birth"]."'
 				,working_status = '".$data["working_status"]."'
 				,disability_degree = '".$data["disability_degree"]."'
+				,del_yn = 'N'
 				,upload_face = '".$upload_face."'
 				,upload_card = '".$upload_card."'
 				,upload_face_ori = '".$files["upload_face"]["name"]."'

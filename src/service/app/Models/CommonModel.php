@@ -498,6 +498,7 @@ class CommonModel extends dbModel
 				,worker_term_start = '".$sdate."'
 				,worker_term_end = '".$edate."'
 				,worker_birth = '".$Rows[$i]['D']."'
+				,del_yn ='N'
 				,working_status = '".$working_status."'
 				,disability_degree = '".$disability_degree."'
                 ,register_date = '".date("Y-m-d H:i:s")."'

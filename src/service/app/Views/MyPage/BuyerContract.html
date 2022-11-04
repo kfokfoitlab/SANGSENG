@@ -256,7 +256,7 @@
 
               $.each(response['field_list'], function (idx, row) {
                 if (response['field_list'][idx].name == "Contract_Cost") {
-                    //console.log(response);
+                   // console.log(response);
                     contract_reduction = response['field_list'][idx].value;
                     complete_reduction = parseInt(contract_reduction.replace(/,/g,""));
                 }
@@ -345,7 +345,6 @@ function contract_update(){
             var pworkflow_id = [];
             var j = 0;
             for(var i =0; i <response['workflow_list'].length; i++){
-
               if(response['workflow_list'][i]['status'] == "Complete"){
                 workflow_id[j] = response['workflow_list'][i]['workflow_id'];
                 j++;

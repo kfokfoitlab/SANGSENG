@@ -8,20 +8,14 @@
       <form name="form-searchbar">
 
         <div class="row gx-3">
-          <div class="col-lg-2">
-            <label>약관 검색</label>
-            <input type="text" class="form-control form-control-sm search" id="search-number" placeholder="">
-          </div>
-          <div class="col-lg-2">
-            <label>등록자 검색</label>
-            <input type="text" class="form-control form-control-sm search" id="search-company" placeholder="">
-          </div>
+
           <div class="col-lg-1">
             <label>적용상태</label>
             <select class="form-control form-control-sm filter" id="search-recommended">
-              <option value="">전체</option>
-              <option value="1">적용</option>
-              <option value="2">비적용</option>
+              <option value="" selected>전체</option>
+              <option value="1">신규등록</option>
+              <option value="2">사용</option>
+              <option value="3">미사용</option>
             </select>
           </div>
           <div class="col-lg-2">

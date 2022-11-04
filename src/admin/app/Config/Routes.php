@@ -228,22 +228,28 @@ $routes->group('Terms', ['namespace' => 'App\Controllers\Terms'], static functio
     $group_name = "ServiceLevelAgreement";
     $routes->get ($group_name.'/',                  $group_name.'::Index');
     $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
+    $routes->post($group_name.'/Register',      $group_name.'::Register');
 
     $group_name = "TermsOfService";
     $routes->get ($group_name.'/',                  $group_name.'::Index');
     $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
+    $routes->post($group_name.'/Register',      $group_name.'::Register');
 
     $group_name = "PrivacyPolicy";
     $routes->get ($group_name.'/',                  $group_name.'::Index');
     $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
+    $routes->post($group_name.'/Register',      $group_name.'::Register');
 
     $group_name = "Subscribe";
     $routes->get ($group_name.'/',                  $group_name.'::Index');
     $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
+    $routes->post($group_name.'/Register',      $group_name.'::Register');
 
     $group_name = "AdditionalService";
     $routes->get ($group_name.'/',                  $group_name.'::Index');
     $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
+    $routes->post($group_name.'/Register',      $group_name.'::Register');
+
 });
 
 // 약관히스토리
@@ -252,6 +258,10 @@ $routes->group('TermsHistory', ['namespace' => 'App\Controllers\TermsHistory'], 
     $group_name = "Lists";
     $routes->get ($group_name.'/',                  $group_name.'::Index');
     $routes->get ($group_name.'/Detail',            $group_name.'::Detail');
+    $routes->post($group_name.'/getList',           $group_name.'::getList');
+    $routes->get($group_name.'/statusUpdate',           $group_name.'::statusUpdate');
+    $routes->get($group_name.'/Update',               $group_name.'::Update');
+    $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
 
 });
 
