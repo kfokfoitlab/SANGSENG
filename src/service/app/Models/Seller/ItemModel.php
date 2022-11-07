@@ -72,6 +72,8 @@ class ItemModel extends CommonModel
         $contribution = number_format($contribution,4);
         $workers = $mild_disabled+($severely_disabled*2);
         $reduction = $contribution * $workers;
+        $product_name = addslashes($data['product_name']);
+        $product_detail = addslashes($data['product_detail']);
         $query = "
           insert into
               ".$table_name."
@@ -79,14 +81,14 @@ class ItemModel extends CommonModel
                product_no = '".$product_no."'
               ,status = '".$status."'
               ,product_category = '".$data["product_category"]."'
-              ,product_name = '".$data["product_name"]."'
+              ,product_name = '".$product_name."'
               ,product_price = '".$data["product_price"]."'
               ,product_quantity = '".$data["product_quantity"]."'          
               ,product_start = '".$data["product_start"]."'
               ,product_end = '".$data["product_end"]."'
               ,product_surtax = '".$data["product_surtax"]."'
               ,delivery_cycle = '".$data["delivery_cycle"]."'
-              ,product_detail = '".$data["product_detail"]."'
+              ,product_detail = '".$product_detail."'
               ,representative_image = '".$upload_representative."'
               ,product_image1 = '".$upload_image1."'
               ,product_image2 = '".$upload_image2."'
@@ -212,7 +214,8 @@ public function ItemUpdateSubmit($files, $data){
         $detail_img_ori = $data["detail_img"];
         $upload_detail_image = $data["detail_img"];
     }
-
+    $product_name = addslashes($data['product_name']);
+    $product_detail = addslashes($data['product_detail']);
     $product_no = $data["product_no"];
     $status = 3;
     $query = "
@@ -220,14 +223,14 @@ public function ItemUpdateSubmit($files, $data){
                 seller_product
             set
                  product_category = '".$data["product_category"]."'
-                ,product_name = '".$data["product_name"]."'
+                ,product_name = '".$product_name."'
                  ,product_price = '".$data["product_price"]."'
                 ,product_quantity= '".$data["product_quantity"]."'
                  ,product_start= '".$data["product_start"]."'
                 ,product_end = '".$data["product_end"]."'
                 ,product_surtax = '".$data["product_surtax"]."'
                 ,delivery_cycle = '".$data["delivery_cycle"]."'
-                ,product_detail = '".$data["product_detail"]."'
+                ,product_detail = '".$product_detail."'
                 ,status = '".$status."'
                 ,representative_image = '".$upload_representative."'
                 ,product_image1 = '".$upload_image1."'

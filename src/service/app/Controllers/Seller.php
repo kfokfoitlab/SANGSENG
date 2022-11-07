@@ -22,7 +22,6 @@ class Seller extends BaseController
     public function index()
     {
         $uuid = $_SESSION['login_info']["uuid"];
-        $totalSales = $this->seller_model->getTotalSales($uuid);
         $expectationSales = $this->seller_model->getexpectationSales($uuid);
         $completionContract = $this->seller_model->getCompletionContract($uuid);
         $contractList = $this->seller_model->getContract($uuid);
@@ -38,8 +37,7 @@ class Seller extends BaseController
         $_SESSION["disabledCount"] = $this->sigin_model->getWorkerCount();
         $_SESSION["sellerinfo"] = $this->sigin_model->Sellerinfo();
         $data = array(
-            "totalSales" => $totalSales
-            ,"expectationSales" => $expectationSales
+            "expectationSales" => $expectationSales
             ,"completionContract" =>  $completionContract
             ,"contractList" =>  $contractList
             ,"questions" =>  $questions
