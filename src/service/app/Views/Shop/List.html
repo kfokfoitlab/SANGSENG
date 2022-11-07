@@ -225,6 +225,9 @@ $levy = $base * $employ *12; //부담금
         <li class="paginate_button page-item previous disabled" id="datatables_previous">
           <?php
           if($data_page_total_cnt > 0){
+          if($_GET['search_v'] != ""){
+          $search_v = $_GET['search_v'];
+          }
           $value = $_GET["value"];
           $page = $_GET["p_n"];
           $page_per_record = 10;
@@ -240,7 +243,7 @@ $levy = $base * $employ *12; //부담금
           $total_block = ceil($total_page/$block_ct);
           $start_num = ($page-1) * $list;
         if($_GET["p_n"]>1){?>
-        <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$value?>,1)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">처음으로</a></li>
+        <li class="paginate_button page-item"> <a href="javascript:nextPage('<?=$value?>',1,'<?=$search_v?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">처음으로</a></li>
         <?php }?>
         <?php
         if($page <= 1){
@@ -249,7 +252,7 @@ $levy = $base * $employ *12; //부담금
         }else{
         $pre = $page-1;
         ?>
-        <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$value?>,<?=$pre?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">이전</a></li>
+        <li class="paginate_button page-item"> <a href="javascript:nextPage('<?=$value?>',<?=$pre?>,'<?=$search_v?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">이전</a></li>
         <?php
         }
         ?>
@@ -260,7 +263,7 @@ $levy = $base * $employ *12; //부담금
         <?php }else{ ?>
         <li class="paginate_button page-item">
         <?php } ?>
-        <a href="javascript:nextPage(<?=$value?>,<?=$i?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a>
+        <a href="javascript:nextPage('<?=$value?>',<?=$i?>,'<?=$search_v?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a>
         </li>
         <?php }?>
         <?php
@@ -268,13 +271,13 @@ $levy = $base * $employ *12; //부담금
         }else{
         $next_page = $page+1;
         ?>
-        <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$value?>,<?=$next_page?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">다음</a></li>
+        <li class="paginate_button page-item"> <a href="javascript:nextPage('<?=$value?>',<?=$next_page?>,'<?=$search_v?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">다음</a></li>
         <?php
         }
         ?>
         <?php
         if($_GET["p_n"]>=1 && $_GET["p_n"] != $total_page){?>
-        <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$value?>,<?=$total_page?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">마지막</a></li>
+        <li class="paginate_button page-item"> <a href="javascript:nextPage('<?=$value?>',<?=$total_page?>,'<?=$search_v?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">마지막</a></li>
         <?php }}?>
       </ul>
     </div>
@@ -289,7 +292,11 @@ $levy = $base * $employ *12; //부담금
       $(".buyer_rdm_").css('display','none')
     }
   });
-  function nextPage(value,p_n){
-    location.href = '/Buyer/Shop/List?value='+value+'&p_n='+p_n;
+  function nextPage(value,p_n,search_v){
+    if(search_v != ""){
+      location.href = '/Buyer/Shop/List?value='+value+'&p_n='+p_n+'&search_v='+search_v;
+    }else{
+      location.href = '/Buyer/Shop/List?value='+value+'&p_n='+p_n;
+    }
   }
 </script>
