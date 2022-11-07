@@ -144,7 +144,7 @@ class SellerModel extends CommonModel
         $query = "
             select
                 count(*) as product_cnt,
-                count(case when status =1 then 1 end) as status1,
+                count(case when (status =1 or status =3) then 1 end) as status1,
                 count(case when status=5 then 1 end) as status5,
                 count(case when status=9 then 1 end) as status9
             from seller_product where 1=1
