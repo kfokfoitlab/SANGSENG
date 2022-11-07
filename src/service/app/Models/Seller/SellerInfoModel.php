@@ -160,7 +160,7 @@ class SellerInfoModel extends CommonModel
             $contribution = $product_info["product_price"]/$data["seller_sales"];
             $workers = $mild_disabled+($severely_disabled*2);
             $reduction = $contribution * $workers;
-            $reduction = round($reduction,4);
+            $reduction = number_format($reduction,4);
             $query = "
             update
                seller_product
