@@ -195,6 +195,8 @@ class BuyerModel extends CommonModel
             from
               seller_product
             where status ='5'
+            and now() < date_add(product_end,interval 1 day)
+
            $where
            order by 
                register_date desc
@@ -286,6 +288,7 @@ class BuyerModel extends CommonModel
             where 1=1
               and status ='5'
               and del_yn !='Y'
+            and now() < date_add(product_end,interval 1 day)
                  $category
            
         ";
