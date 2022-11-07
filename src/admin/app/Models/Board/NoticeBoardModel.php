@@ -124,7 +124,10 @@
 			}
             $title = addslashes($data['title']);
             $content = addslashes($data['content']);
-			$query = "
+            $content = str_replace("\r\n", "<br>", $content);
+            $title = str_replace("\r\n", "<br>", $title);
+
+            $query = "
             insert into
                 ".$table_name."
             set
@@ -177,6 +180,7 @@
 			    delete_date = '".date("Y-m-d H:i:s")."'
                 ,delete_id = 'admin'
 				,del_yn = 'Y'
+				,board_status = '2'
 			WHERE
 				idx = ".$data["idx"]."
 			LIMIT 1
@@ -218,6 +222,8 @@
             }
             $title = addslashes($data['title']);
             $content = addslashes($data['content']);
+            $content = str_replace("\r\n", "<br>", $content);
+            $title = str_replace("\r\n", "<br>", $title);
 			$query = "
             update
                 ".$table_name."

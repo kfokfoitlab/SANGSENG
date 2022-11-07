@@ -74,6 +74,7 @@ class ItemModel extends CommonModel
         $reduction = $contribution * $workers;
         $product_name = addslashes($data['product_name']);
         $product_detail = addslashes($data['product_detail']);
+        $product_detail = str_replace("\r\n", "<br>", $product_detail);
         $query = "
           insert into
               ".$table_name."
@@ -216,6 +217,7 @@ public function ItemUpdateSubmit($files, $data){
     }
     $product_name = addslashes($data['product_name']);
     $product_detail = addslashes($data['product_detail']);
+    $product_detail = str_replace("\r\n", "<br>", $product_detail);
     $product_no = $data["product_no"];
     $status = 3;
     $query = "
