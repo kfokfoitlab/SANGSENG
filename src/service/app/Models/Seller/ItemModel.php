@@ -69,9 +69,9 @@ class ItemModel extends CommonModel
 
 
         $contribution = $data["product_price"]/$data["seller_sales"];
+        $contribution = number_format($contribution,4);
         $workers = $mild_disabled+($severely_disabled*2);
         $reduction = $contribution * $workers;
-        $reduction = number_format($reduction,4);
         $query = "
           insert into
               ".$table_name."
@@ -168,10 +168,10 @@ public function ItemUpdateSubmit($files, $data){
     }
 
     $contribution = $data["product_price"]/$seller_info["seller_sales"];
+    $contribution = number_format($contribution,4);
     $workers = $mild_disabled+($severely_disabled*2);
     $reduction = $contribution * $workers;
-    $reduction = number_format($reduction,4);
-   // $reduction = substr($reduction,'.',3);
+
 
 
     $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG');

@@ -156,11 +156,10 @@ class SellerInfoModel extends CommonModel
         $this->rodb->query($product_query);
         while($row = $this->rodb->next_row()){
             $product_info= $row;
-
             $contribution = $product_info["product_price"]/$data["seller_sales"];
+            $contribution = number_format($contribution,4);
             $workers = $mild_disabled+($severely_disabled*2);
             $reduction = $contribution * $workers;
-            $reduction = number_format($reduction,4);
             $query = "
             update
                seller_product
