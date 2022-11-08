@@ -296,7 +296,7 @@ class MyPageModel extends CommonModel
          else if($ratio > 0){
              $base = 1608600;
          }else{
-             $base = 1914400;
+             $base = 1914440;
          }
 
          $levy = $base * $employ *12; //부담금
@@ -457,7 +457,7 @@ class MyPageModel extends CommonModel
             else if($ratio > 0){
                 $base = 1608600;
             }else{
-                $base = 1914400;
+                $base = 1914440;
             }
 
             $levy = $base * $employ *12; //부담금

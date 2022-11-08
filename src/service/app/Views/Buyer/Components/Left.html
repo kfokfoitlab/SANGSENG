@@ -3,7 +3,10 @@
 $workers = $_SESSION['buyer_info']['workers'];
 
 $severely_disabled = $_SESSION['buyer_info']['severely_disabled'];
-
+$tax_rate = $_SESSION['buyer_info']['tax_rate'];
+if($tax_rate >0){
+$tax_rate = $tax_rate*0.01;
+}
 $mild_disabled = $_SESSION['buyer_info']['mild_disabled'];
 $classification = 0;
 if($_SESSION['buyer_info']['classification'] == 1){ //기업구분에 따른 의무고용율
@@ -40,14 +43,14 @@ $base = 1378800;
 else if($ratio > 0){
 $base = 1608600;
 }else{
-$base = 1914400;
+$base = 1914440;
 }
 if($employ == $disabled){
 $total_money = 0;
 }else{
 $employ = $employ-$disabled;
 $total = $base * $employ*12 ;
-$total = $total + ($total*0.1);
+$total = $total + ($total*$tax_rate);
 $total_money = $total; // 납부금액
 }
 //echo $total_money;
