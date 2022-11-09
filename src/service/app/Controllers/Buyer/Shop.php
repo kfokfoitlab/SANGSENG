@@ -36,13 +36,11 @@ class Shop extends BaseController
         $uuid = $_SESSION["login_info"]["uuid"];
         $ranking = $this->buyer_model->RecommendationList($value);
         $list = $this->buyer_model->CategoryList($value);
-        $buyer_info = $this->buyer_model->Buyer_info($uuid);
         $data_page_total_cnt = count($list);
         $data = array(
             "ranking" => $ranking["data"],
             "list" => $list["data"],
             "listReplyCount" => $list["replyCount"],
-            "buyer_info" => $buyer_info,
             "data_page_total_cnt" => $list["count"],
             "rankingReplyCount" => $ranking["replyCount"]
         );

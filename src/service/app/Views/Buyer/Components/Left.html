@@ -54,7 +54,6 @@ $total = $total + ($total*$tax_rate);
 $total_money = $total; // 납부금액
 }
 //echo $total_money;
-$reduction_money = $data['ReductionMoney']['reduction_money'];
 $buyer_reduction = $_SESSION['ReductionMoney']['buyer_reduction'];
 $Remainder = $total -$buyer_reduction;
 if($buyer_reduction !="" && $total_money > 0){
@@ -66,12 +65,10 @@ $Remainder = 0;
 }
 if($total_money > 0){
 $Remainder_money = $Remainder;
-$reduction_money =  $_SESSION['ReductionMoney']['reduction_money'];
 $buyer_reduction =  $buyer_reduction;
 $total_money = $total_money;
 }else{
 $Remainder_money = 0;
-$reduction_money =  0;
 $buyer_reduction = 0;
 $total_money = 0;
 }
