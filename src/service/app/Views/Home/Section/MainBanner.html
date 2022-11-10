@@ -1,0 +1,153 @@
+<link
+    rel="stylesheet"
+    href="/assets/dist/swiper/css/swiper-bundle.min.css"
+/>
+
+<style>
+  .swiper {
+    width: 100vw;
+    height: 500px;
+  }
+
+  .swiper-slide {
+    width: 100vw;
+    border: 1px solid red;
+    text-align: center;
+    font-size: 2rem;
+    background: #fff;
+  }
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .swiper-horizontal>.swiper-scrollbar, .swiper-scrollbar.swiper-scrollbar-horizontal {
+    width: 100px;
+    left: 50%;
+    bottom: 20px;
+    margin-left: -50px;
+  }
+  .swiper-pagination-current {
+    margin-right: 60px;
+  }
+  .swiper-pagination-total {
+    margin-left: 60px;
+  }
+</style>
+<section>
+  <div class="main-banner position-relative">
+    <!-- Slider main container -->
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" style="background: lightsalmon">
+          <div class="row mt-5">
+            <div class="col-6">
+              <?php
+              $reduction_money = "";
+              if($reduction['reduction_money'] != null){
+              $reduction_money = $reduction['reduction_money'];
+              }
+              else{
+              $reduction_money = 0;
+              }
+              ?>
+              <p class="banner-sub-title">2022년 상생몰 예상 총 감면금액</p>
+              <p class="banner-main-title">
+                <span class="main-banner-counter"><?=$reduction_money?></span>원
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide" style="background: lightgoldenrodyellow">
+          <div class="row mt-5">
+            <div class="col-6">
+              <p class="banner-sub-title">더 나은 미래를 꿈꾸는 행복파트너</p>
+              <p class="banner-main-title">
+                상생몰과 함께하세요
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide" style="background: lightblue">
+          <div class="row mt-5">
+            <div class="col-6">
+              <p class="banner-sub-title">연계고용 부담금 감면제도를 통해</p>
+              <p class="banner-main-title">
+                확실한 소비 확실한 행복
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-scrollbar"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+    <!-- Job Search Form -->
+    <div class="row mt-5 position-absolute" style="top: 145px; left: 140px; z-index: 1">
+      <div class="job-search-form col-5">
+        <form name="form-search" method="GET" action="/Buyer/Shop/List">
+          <input type="hidden" name="p_n" value="1">
+          <div class="row">
+            <!-- Form Group -->
+            <div class="form-group col-7">
+              <span class="icon flaticon-search-1"></span>
+              <input type="text" name="search_v" placeholder="상품명 또는 회사명으로 검색" tabindex=101 title="상품명으로 검색">
+            </div>
+            <!-- Form Group -->
+            <div class="form-group col-3 category">
+              <span class="icon flaticon-briefcase"></span>
+              <select class="" name="value" tabindex=103 title="직무 유형">
+                <option value="all">전체</option>
+                <option value="1">사무용품</option>
+                <option value="2">생활용품</option>
+                <option value="3">전산용품</option>
+                <option value="4">식음료</option>
+                <option value="5">청소용품</option>
+              </select>
+            </div>
+
+            <!-- Form Group -->
+            <div class="form-group col-2 text-right">
+              <button type="submit" class="btn theme-btn btn-style-two" tabindex=104>상품 검색</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- Job Search Form -->
+  <script src="/assets/dist/swiper/js/swiper-bundle.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>-->
+<script>
+	const swiper = new Swiper(".mySwiper", {
+		scrollbar: {
+			el: ".swiper-scrollbar",
+			hide: false,
+		},
+		pagination: {
+			el: ".swiper-pagination",
+			type: "fraction",
+      formatFractionCurrent: function(number) {
+				return '0' + number;
+      },
+      formatFractionTotal: function(number) {
+				return '0' + number;
+      },
+			renderFraction: function(currentClass, totalClass) {
+				return `<span class="${currentClass}"></span> <span class="${totalClass}"></span>`
+      }
+		},
+		autoplay: {
+			delay: 3000,
+			disableOnInteraction: false,
+    },
+		effect: "fade",
+	});
+</script>
+
+
+
