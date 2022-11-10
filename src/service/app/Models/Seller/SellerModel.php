@@ -88,6 +88,42 @@ class SellerModel extends CommonModel
         }
         return $delivery;
     }
+    public function getExcelData($uuid){
+        $excel = [];
+        $where_query = "";
+        if($_GET["search_A"] != ""){
+            $where_query = $where_query." and product_name like '%".$_GET["search_A"]."%'";
+        }
+        if($_GET["search_B"] != "all" && $_GET["search_B"] != ""){
+            if($_GET["search_B"] == "1"){
+                $where_query = $where_query." and status=1";
+            }elseif ($_GET["search_B"] == "5"){
+                $where_query = $where_query." and status=5";
+            }elseif ($_GET["search_B"] == "9"){
+                $where_query = $where_query." and status=9";
+            }
+        }
+        if($_GET["search_C"] != "all" && $_GET["search_C"] != ""){
+            $where_query = $where_query." and product_category = '".$_GET["search_C"]."'";
+        }else{
+            $where_query = $where_query." ";
+        }
+        $query = "
+            select
+                *
+            from
+              seller_product  
+            where del_yn != 'Y' and register_id ='".$uuid."'".$where_query." 
+        ";
+        $query = $query." order by register_date desc";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $excel[] = $row;
+        }
+        return $excel;
+    }
+
+
 
     public function getProductList($uuid){
         $where_query = "";
@@ -135,6 +171,7 @@ class SellerModel extends CommonModel
         while($row = $this->rodb->next_row()){
             $data["data"][] = $row;
         }
+
         return $data;
     }
 

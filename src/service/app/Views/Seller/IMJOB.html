@@ -195,6 +195,68 @@
     </div>
   </section>
 </div>
+<div style="display:none;">
+<table class="table table-striped text-center mt-5 imjob-list-table" id ="excel_imjob">
+  <thead>
+  <tr>
+    <th>No.</th>
+    <th>이름</th>
+    <th>생년월일</th>
+    <th>계약 시작일</th>
+    <th>계약 종료일</th>
+    <th>근무상태</th>
+    <th style="width: auto">장애유형</th>
+    <th>복지카드</th>
+    <th>진행상황</th>
+  </tr>
+  </thead>
+  <tbody>
+  <?php
+        $i=1;
+        foreach($excel as $item){
+        $working_status="";
+        if($item["working_status"] == 1){
+          $working_status="근무";
+        }else if($item["working_status"] == 2){
+          $working_status="퇴직";
+        }else if($item["working_status"] == 3){
+          $working_status="휴직";
+        }
+        $disability_degree="";
+        if($item["disability_degree"] == 1){
+          $disability_degree="중증";
+        }else if($item["disability_degree"] == 2){
+          $disability_degree="경증";
+        }
+        $upload_card="없음";
+        if($item["upload_card"] != ""){
+          $upload_card="있음";
+        }
+        ?>
+  <tr>
+    <td><?=$i?></td>
+    <td><?=$item["worker_name"]?></td>
+    <td><?=$item["worker_birth"]?></td>
+    <td><?=$item["worker_term_start"]?></td>
+    <td><?=$item["worker_term_end"]?></td>
+    <td><?=$working_status?></td>
+    <td><?=$disability_degree?></td>
+    <td><?=$upload_card?></td>
+    <?php if($item["status"] == 5){?>
+    <td><span class="text-success">승인완료</span></td>
+    <?php }elseif($item["status"] == 1){ ?>
+    <td><span class="text-primary">승인대기</span></td>
+    <?php }elseif($item["status"] == 7){ ?>
+    <td><span class="text-danger">반려</span></td>
+    <?php } ?>
+  <?php
+          $i++;
+          }
+        ?>
+  </tbody>
+</table>
+</div>
+
 <script>
   function deleteWorker(idx){
 		location.href = '/Seller/IMJOB/deleteWorker?idx='+idx
@@ -212,23 +274,13 @@
 
 
   function excelFileExport() {
-
-    var table = document.getElementById('imjobTbl');
-    for(let j =1; j<=2; j++) {
-      for (let i = 0; i < table.rows.length; i++) {
-        table.rows[i].deleteCell(-1);
-      }
-    }
-
-    var wb = XLSX.utils.table_to_book(document.getElementById('imjobTbl'), {
+    var wb = XLSX.utils.table_to_book(document.getElementById('excel_imjob'), {
       sheet: "sheet1",
       raw: true
     });
     let today = new Date();
     XLSX.writeFile(wb, ('근로자리스트'+ today.getFullYear() + today.getMonth() + today.getDate()
             + today.getHours() + today.getMinutes() + today.getSeconds() +'.xlsx'));
-    window.location.reload();
-
   }
 
 </script>
