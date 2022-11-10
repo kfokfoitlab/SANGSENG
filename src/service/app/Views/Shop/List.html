@@ -6,29 +6,6 @@
   require APPPATH.'/Views/Seller/Components/Left.html';
   }
 ?>
-<?php
-$workers = $buyer_info["workers"]; //상시근로자
-$classification = 0;
-if($buyer_info['classification'] == 1){ //기업구분에 따른 의무고용율
-$classification = 0.031;
-}else{
-$classification = 0.034;
-}
-
-$employ = 0; //의무고용인원
-if($workers<50){
-$employ = 0;
-}else{
-$employ = (int)($workers*$classification);
-}
-if($employ != 0){
-  $ratio = ($buyer_info['mild_disabled']+($buyer_info['severely_disabled']*2))/$employ; //의무고용인원충족비율
-}else{
-  $ratio = 0;
-}
-$base = 1149000;
-$levy = $base * $employ *12; //부담금
-?>
 <div class="flex-grow-1 pb-5">
   <section class="shop-list">
     <div class="auto-container">
@@ -46,14 +23,17 @@ $levy = $base * $employ *12; //부담금
             return ($a['sort_num'] < $b['sort_num']) ? 1 : -1;
           }
           if(is_array($ranking) && count($ranking)){
+          $base = 1149000;
+          $levy =  $base *12;
           $ret = array();
             foreach($ranking as $item){
+            $comparison = $item['reduction']*$levy;
               $product_price = number_format($item["product_price"]);
               $result_price = $item['reduction'] *$base;
               $reduction_money = 0;
 
-              if($result_price > $levy ){
-          $reduction_money = $levy*0.6;
+              if($result_price > $comparison ){
+          $reduction_money = $comparison*0.6;
           }else if($result_price >$item["product_price"]*0.5){
           $reduction_money = $item["product_price"]*0.5 *12;
           }else{
@@ -146,18 +126,20 @@ $levy = $base * $employ *12; //부담금
             <?php
 
           if(is_array($list)&& count($list) > 0){
-
+            $base = 1149000;
+            $levy =  $base *12;
             if($_GET["p_n"]!=""){
             $i=($_GET["p_n"]-1)*10+1;
             }
             $ret = array();
             foreach($list as $item){
+            $comparison = $item['reduction']*$levy;
             $product_price = number_format($item["product_price"]);
             $result_price = $item['reduction'] *$base;
             $reduction_money = 0;
 
-            if($result_price > $levy ){
-            $reduction_money = $levy*0.6;
+            if($result_price > $comparison ){
+            $reduction_money = $comparison*0.6;
             }else if($result_price >$item["product_price"]*0.5){
             $reduction_money = $item["product_price"]*0.5 *12;
             }else{

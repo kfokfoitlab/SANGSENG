@@ -29,12 +29,14 @@
 		public function List()
 		{ // {{{
 			$data = $this->imjob_model->getWorkerList();
-			$data_cnt = $this->imjob_model->getWorkerCount();
+            $excel = $this->imjob_model->getExcelData();
+            $data_cnt = $this->imjob_model->getWorkerCount();
 			$data_page_total_cnt = count($data);
 			$data = array(
 				"data" => $data["data"],
 				"data_cnt" => $data_cnt,
-				"data_page_total_cnt" => $data["count"]
+                "excel" => $excel,
+                "data_page_total_cnt" => $data["count"]
 			);
 			$_SESSION["disabledCount"]  = $data_cnt;
 			echo view("Common/Header.html");

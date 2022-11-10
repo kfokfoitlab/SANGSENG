@@ -69,9 +69,12 @@ class ItemModel extends CommonModel
 
 
         $contribution = $data["product_price"]/$data["seller_sales"];
-        $contribution = number_format($contribution,4);
+        $contribution = explode('.',$contribution);
+        $contribution = substr($contribution[1],0,4);
+        $contribution = $contribution[0].'.'.$contribution;
         $workers = $mild_disabled+($severely_disabled*2);
         $reduction = $contribution * $workers;
+
         $product_name = addslashes($data['product_name']);
         $product_detail = addslashes($data['product_detail']);
         $product_detail = str_replace("\r\n", "<br>", $product_detail);
@@ -171,7 +174,9 @@ public function ItemUpdateSubmit($files, $data){
     }
 
     $contribution = $data["product_price"]/$seller_info["seller_sales"];
-    $contribution = number_format($contribution,4);
+    $contribution = explode('.',$contribution);
+    $contribution = substr($contribution[1],0,4);
+    $contribution = $contribution[0].'.'.$contribution;
     $workers = $mild_disabled+($severely_disabled*2);
     $reduction = $contribution * $workers;
 

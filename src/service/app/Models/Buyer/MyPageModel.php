@@ -246,60 +246,14 @@ class MyPageModel extends CommonModel
          $severely_disabled = $seller_severely_disabled["severely_disabled"];
          $seller_sales = $seller_info["seller_sales"];
          $contribution =  $complete_reduction/$seller_sales;
-         $seller_workers = $mild_disabled+($severely_disabled*2);
-         $reduction =$contribution*$seller_workers;
+         $contribution = explode('.',$contribution);
+         $contribution = substr($contribution[1],0,4);
+         $contribution = $contribution[0].'.'.$contribution;
+         $workers = $mild_disabled+($severely_disabled*2);
+         $reduction = $contribution * $workers;
 
-         $query = "
-                    select
-                        *
-                    from
-                        buyer_company a
-                            left join contract_condition b on (a.uuid = b.buyer_uuid)
-                    where
-                            b.workflow_id = '".$workflow_id."'
-                    limit 1
-                ";
-         $this->rodb->query($query);
-         $buyer = $this->rodb->next_row();
-
-         $buyer_workers = $buyer["workers"]; //상시근로자
-         $classification = 0;
-         if($buyer['classification'] == 1){ //기업구분에 따른 의무고용율
-             $classification = 0.031;
-         }else{
-             $classification = 0.034;
-         }
-         $employ = 0; //의무고용인원
-         if($buyer_workers<50){
-             $employ = 0;
-         }else{
-             $employ = (int)($buyer_workers*$classification);
-         }
-         if($employ != 0){
-             $ratio = ($buyer['mild_disabled']+($buyer['severely_disabled']*2))/$employ; //의무고용인원충족비율
-         }else{
-             $ratio = 0;
-         }
-         $base = 0;     //부담금기초
-         if($buyer_workers<100){
-             $base = 0;
-         }
-         if($ratio >= 0.75){
-             $base = 1149000;
-         }
-         else if($ratio >= 0.5){
-             $base = 1217940;
-         }
-         else if($ratio >= 0.25){
-             $base = 1378800;
-         }
-         else if($ratio > 0){
-             $base = 1608600;
-         }else{
-             $base = 1914440;
-         }
-
-         $levy = $base * $employ *12; //부담금
+         $base = 1914440;
+         $levy = $reduction* $base  *12; //감면액
          $result_price = $reduction *$base;
          $reduction_money = 0;
          if($result_price > $levy ){
@@ -407,60 +361,14 @@ class MyPageModel extends CommonModel
             $severely_disabled = $seller_severely_disabled["severely_disabled"];
             $seller_sales = $seller_info["seller_sales"];
             $contribution =  $complete_reduction/$seller_sales;
-            $seller_workers = $mild_disabled+($severely_disabled*2);
-            $reduction =$contribution*$seller_workers;
+            $contribution = explode('.',$contribution);
+            $contribution = substr($contribution[1],0,4);
+            $contribution = $contribution[0].'.'.$contribution;
+            $workers = $mild_disabled+($severely_disabled*2);
+            $reduction = $contribution * $workers;
 
-            $query = "
-                    select
-                        *
-                    from
-                        buyer_company a
-                            left join contract_condition b on (a.uuid = b.buyer_uuid)
-                    where
-                            b.workflow_id = ".$workflow_id."
-                    limit 1
-                ";
-            $this->rodb->query($query);
-            $buyer = $this->rodb->next_row();
-
-            $buyer_workers = $buyer["workers"]; //상시근로자
-            $classification = 0;
-            if($buyer['classification'] == 1){ //기업구분에 따른 의무고용율
-                $classification = 0.031;
-            }else{
-                $classification = 0.034;
-            }
-            $employ = 0; //의무고용인원
-            if($buyer_workers<50){
-                $employ = 0;
-            }else{
-                $employ = (int)($buyer_workers*$classification);
-            }
-            if($employ != 0){
-                $ratio = ($buyer['mild_disabled']+($buyer['severely_disabled']*2))/$employ; //의무고용인원충족비율
-            }else{
-                $ratio = 0;
-            }
-            $base = 0;     //부담금기초
-            if($buyer_workers<100){
-                $base = 0;
-            }
-            if($ratio >= 0.75){
-                $base = 1149000;
-            }
-            else if($ratio >= 0.5){
-                $base = 1217940;
-            }
-            else if($ratio >= 0.25){
-                $base = 1378800;
-            }
-            else if($ratio > 0){
-                $base = 1608600;
-            }else{
-                $base = 1914440;
-            }
-
-            $levy = $base * $employ *12; //부담금
+            $base = 1914440;
+            $levy = $reduction*$base *12; //부담금
             $result_price = $reduction *$base;
             $reduction_money = 0;
             if($result_price > $levy ){

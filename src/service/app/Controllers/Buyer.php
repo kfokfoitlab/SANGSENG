@@ -28,6 +28,7 @@ class Buyer extends BaseController
         $buyer_reduction =  $this->buyer_model->BuyerReduction();
         $notification_del = $this->buyer_model->NotificationDel();
         $_SESSION["Contract"]= $this->sigin_model->getContractList();
+        $_SESSION["ReductionMoney"]= $this->sigin_model->BuyerReduction();
         $data = array(
             "data" => $data["data"],
             "reduction" => $reduction,

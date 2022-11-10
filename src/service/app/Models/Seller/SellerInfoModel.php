@@ -157,7 +157,9 @@ class SellerInfoModel extends CommonModel
         while($row = $this->rodb->next_row()){
             $product_info= $row;
             $contribution = $product_info["product_price"]/$data["seller_sales"];
-            $contribution = number_format($contribution,4);
+            $contribution = explode('.',$contribution);
+            $contribution = substr($contribution[1],0,4);
+            $contribution = $contribution[0].'.'.$contribution;
             $workers = $mild_disabled+($severely_disabled*2);
             $reduction = $contribution * $workers;
             $query = "

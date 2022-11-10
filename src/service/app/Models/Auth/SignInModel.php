@@ -164,6 +164,7 @@ class SignInModel extends CommonModel
             from
                 contract_condition
             where 1=1
+            and contract_status = '5'
             and   buyer_uuid = '".$uuid."'          
         ";
         $this->rodb->query($query);

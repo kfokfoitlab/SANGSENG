@@ -36,19 +36,21 @@ class Item extends BaseController
     { // {{{
 
         $page = (@$_GET["page"])?$_GET["page"] : 1;
-        $this->item_per_page = (@$_GET["length"])?$_GET["length"]:$this->item_per_page;
+        /*$this->item_per_page = (@$_GET["length"])?$_GET["length"]:$this->item_per_page;
 
         $page_query = array(
         "page" => $page
         ,"length" => $this->item_per_page
-        );
+        );*/
 
         $uuid = $_SESSION['login_info']['uuid'];
         $data = $this->seller_model->getProductList($uuid);
+        $excel = $this->seller_model->getExcelData($uuid);
         $data_cnt = $this->seller_model->getProductCount($uuid);
         $data_page_total_cnt = count($data);
         $data = array(
             "data" => $data["data"],
+            "excel" => $excel,
             "data_cnt" => $data_cnt,
             "data_page_total_cnt" => $data["count"]
         );
