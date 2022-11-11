@@ -9,7 +9,10 @@
 <div class="flex-grow-1 pb-5">
   <section class="shop-list">
     <div class="auto-container">
-      <div class="w-100 py-5 mb-5" id ="buyer_ranking" style="display: none">
+
+      <?php
+      if($_SESSION['login_info']['type'] == 'buyer'){
+      ?>
         <h2 class="text-center mb-3 fw-bold">추천상품</h2>
         <input type="hidden" id ="login_type" value="<?=$_SESSION['login_info']['type']?>">
         <input type="hidden" id ="p_n" value="<?=$_GET['p_n']?>">
@@ -95,10 +98,8 @@
         <h2 class="text-center fw-bold my-5">등록된 상품이 없습니다</h2>
         <?php
           }
+          }
         ?>
-
-
-      </div>
 
       <div class="pt-5 mt-5 mb-5">
         <div class="order-items d-flex justify-content-end mb-4">
@@ -117,9 +118,15 @@
               <th>
                 계약금액
               </th>
-              <th id ="buyer_rdm" style="display: none">
+              <?php
+              if($_SESSION['login_info']['type'] == 'buyer'){
+                ?>
+              <th>
                 감면액
               </th>
+              <?php
+              }
+              ?>
             </tr>
             </thead>
             <tbody>
@@ -182,9 +189,15 @@
               <td>
                 <p class="fw-bold"><?=number_format($item["product_price"])?>원</p>
               </td>
+              <?php
+              if($_SESSION['login_info']['type'] == 'buyer'){
+                ?>
               <td class="buyer_rdm_">
                 <p class="fw-bold"><?=number_format($slice_rdm)?>원</p>
               </td>
+              <?php
+              }
+              ?>
             </tr>
             <?php
 
@@ -266,14 +279,7 @@
   </section>
 </div>
 <script>
-  $(document).ready(function(){
-    if($("#login_type").val() == 'buyer'){
-      $("#buyer_ranking").css('display','block');
-      $("#buyer_rdm").css('display','block')
-    }else{
-      $(".buyer_rdm_").css('display','none')
-    }
-  });
+
   function nextPage(value,p_n,search_v){
     if(search_v != ""){
       location.href = '/Buyer/Shop/List?value='+value+'&p_n='+p_n+'&search_v='+search_v;

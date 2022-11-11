@@ -199,7 +199,7 @@ class BuyerModel extends CommonModel
 
            $where
            order by 
-               register_date desc
+               register_date asc
            
         ";
 
