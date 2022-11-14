@@ -199,8 +199,8 @@ class BuyerModel extends CommonModel
 
            $where
            order by 
-               register_date asc
-           
+              reduction desc, register_date asc
+           limit 5
         ";
 
         $this->rodb->query($query);
@@ -290,6 +290,7 @@ class BuyerModel extends CommonModel
               and del_yn !='Y'
             and now() < date_add(product_end,interval 1 day)
                  $category
+            
            
         ";
         if($_GET["search_v"] != ""){
@@ -306,7 +307,7 @@ class BuyerModel extends CommonModel
         if($_GET["p_n"] != ""){
             $page_start = ($_GET["p_n"] - 1)*10;
         }
-        $query = $query." order by register_date desc";
+        $query = $query." order by reduction desc, register_date asc";
         $query = $query." limit ".$page_start.", 10";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){

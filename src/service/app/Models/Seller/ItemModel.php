@@ -71,10 +71,18 @@ class ItemModel extends CommonModel
         $contribution = $data["product_price"]/$data["seller_sales"];
         $contribution = explode('.',$contribution);
         $contribution = substr($contribution[1],0,4);
-        $contribution = $contribution[0].'.'.$contribution;
-        $workers = $mild_disabled+($severely_disabled*2);
-        $reduction = $contribution * $workers;
+        $reduction = $contribution[0].'.'.$contribution; // 감면비율 소수점4째자리
+        $workers = $mild_disabled+($severely_disabled*2);  // 장애인근로자 수
 
+        $base = 1149000;   //기본금액
+        $reduction_money = $reduction*($workers*12)*$base; // (수급비율*근로자)*기본금*12개월
+        if($reduction_money > $data["product_price"]*0.5) {
+            $reduction_money = $data["product_price"] * 0.5;  // 감면액이 상품가격의 50%가 넘으면 50%로 표시
+        }
+        $reduction_money = (int)$reduction_money;
+        $reduction_money = (int)$reduction_money;
+        $slice = substr($reduction_money,0,-1);
+        $reduction_money = $slice.'0';
         $product_name = addslashes($data['product_name']);
         $product_detail = addslashes($data['product_detail']);
         $product_detail = str_replace("\r\n", "<br>", $product_detail);
@@ -102,6 +110,7 @@ class ItemModel extends CommonModel
               ,product_image2_ori = '".$product_image2_ori."'
               ,detail_img_ori = '".$detail_img_ori."'
               ,reduction = '".$reduction."'
+              ,reduction_money = '".$reduction_money."'
               ,register_date = '".date("Y-m-d H:i:s")."'
               ,register_id = '".$uuid."'
               ,company_name = '".$company_name."'
@@ -176,10 +185,17 @@ public function ItemUpdateSubmit($files, $data){
     $contribution = $data["product_price"]/$seller_info["seller_sales"];
     $contribution = explode('.',$contribution);
     $contribution = substr($contribution[1],0,4);
-    $contribution = $contribution[0].'.'.$contribution;
-    $workers = $mild_disabled+($severely_disabled*2);
-    $reduction = $contribution * $workers;
+    $reduction = $contribution[0].'.'.$contribution; // 감면비율 소수점4째자리
+    $workers = $mild_disabled+($severely_disabled*2);  // 장애인근로자 수
 
+    $base = 1149000;   //기본금액
+    $reduction_money = $reduction*($workers*12)*$base; // (수급비율*근로자)*기본금*12개월
+    if($reduction_money > $data["product_price"]*0.5) {
+        $reduction_money = $data["product_price"] * 0.5;  // 감면액이 상품가격의 50%가 넘으면 50%로 표시
+    }
+    $reduction_money = (int)$reduction_money;
+    $slice = substr($reduction_money,0,-1);
+    $reduction_money = $slice.'0';
 
 
     $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG');
@@ -249,6 +265,7 @@ public function ItemUpdateSubmit($files, $data){
                 ,detail_img_ori = '".$detail_img_ori."'
                 ,update_id  = '".$uuid."'      
                 ,reduction  = '".$reduction."'  
+                ,reduction_money = '".$reduction_money."'
                 ,update_date = '".date("Y-m-d H:i:s")."'
             where
                 register_id = '".$uuid."'

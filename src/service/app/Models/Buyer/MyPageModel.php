@@ -248,28 +248,18 @@ class MyPageModel extends CommonModel
          $contribution =  $complete_reduction/$seller_sales;
          $contribution = explode('.',$contribution);
          $contribution = substr($contribution[1],0,4);
-         $contribution = $contribution[0].'.'.$contribution;
-         $workers = $mild_disabled+($severely_disabled*2);
-         $reduction = $contribution * $workers;
+         $reduction = $contribution[0].'.'.$contribution; // 감면비율 소수점4째자리
+         $workers = $mild_disabled+($severely_disabled*2);  // 장애인근로자 수
 
-         $base = 1914440;
-         $levy = $reduction* $base  *12; //감면액
-         $result_price = $reduction *$base;
-         $reduction_money = 0;
-         if($result_price > $levy ){
-             $reduction_money = $levy*0.6;
-         }else if($result_price >$complete_reduction*0.5){
-             $reduction_money = $complete_reduction*0.5 * 12;
-         }else if($complete_reduction < $reduction_money){
-             $reduction_money = $complete_reduction /2;
-         }else{
-             $reduction_money = $result_price * 12;
+         $base = 1149000;   //기본금액
+         $reduction_money = $reduction*($workers*12)*$base; // (수급비율*근로자)*기본금*12개월
+         if($reduction_money > $data["product_price"]*0.5) {
+             $reduction_money = $data["product_price"] * 0.5;  // 감면액이 상품가격의 50%가 넘으면 50%로 표시
          }
          $reduction_money = (int)$reduction_money;
-         $point = $complete_reduction*0.01;
-
          $slice = substr($reduction_money,0,-1);
          $reduction_money = $slice.'0';
+         $point = $complete_reduction*0.01;
 
          $reduction_query = "
                 update
@@ -363,24 +353,17 @@ class MyPageModel extends CommonModel
             $contribution =  $complete_reduction/$seller_sales;
             $contribution = explode('.',$contribution);
             $contribution = substr($contribution[1],0,4);
-            $contribution = $contribution[0].'.'.$contribution;
-            $workers = $mild_disabled+($severely_disabled*2);
-            $reduction = $contribution * $workers;
+            $reduction = $contribution[0].'.'.$contribution; // 감면비율 소수점4째자리
+            $workers = $mild_disabled+($severely_disabled*2);  // 장애인근로자 수
 
-            $base = 1914440;
-            $levy = $reduction*$base *12; //부담금
-            $result_price = $reduction *$base;
-            $reduction_money = 0;
-            if($result_price > $levy ){
-                $reduction_money = $levy*0.6;
-            }else if($result_price >$complete_reduction*0.5){
-                $reduction_money = $complete_reduction*0.5 * 12;
-            }else if($complete_reduction < $reduction_money){
-                $reduction_money = $complete_reduction /2;
-            }else{
-                $reduction_money = $result_price * 12;
+            $base = 1149000;   //기본금액
+            $reduction_money = $reduction*($workers*12)*$base; // (수급비율*근로자)*기본금*12개월
+            if($reduction_money > $data["product_price"]*0.5) {
+                $reduction_money = $data["product_price"] * 0.5;  // 감면액이 상품가격의 50%가 넘으면 50%로 표시
             }
             $reduction_money = (int)$reduction_money;
+            $slice = substr($reduction_money,0,-1);
+            $reduction_money = $slice.'0';
             $point = $complete_reduction*0.01;
 
                 $reduction_query = "
