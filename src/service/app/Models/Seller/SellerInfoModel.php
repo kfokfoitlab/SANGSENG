@@ -148,7 +148,6 @@ class SellerInfoModel extends CommonModel
         $severely_disabled_cnt = $this->rodb->next_row();
         $severely_disabled = $severely_disabled_cnt["severely_disabled_cnt"];
 
-        $product_info =[];
         $product_query = "
 			SELECT * FROM seller_product
 			WHERE register_id='".$uuid."'
