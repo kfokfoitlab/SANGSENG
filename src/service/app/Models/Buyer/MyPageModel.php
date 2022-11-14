@@ -379,16 +379,7 @@ class MyPageModel extends CommonModel
                     workflow_id = '".$workflow_id."'
             ";
                 $this->wrdb->update($reduction_query);
-/*
-                $point_query = "
-                    update
-                        buyer_company
-                    set
-                        point = '".$point."'
-                    where 
-                        uuid = '".$uuid."'
-                ";
-                $this->wrdb->update($point_query);*/
+
             return 1;
         }else{
             return null;
