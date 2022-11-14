@@ -253,8 +253,8 @@ class MyPageModel extends CommonModel
 
          $base = 1149000;   //기본금액
          $reduction_money = $reduction*($workers*12)*$base; // (수급비율*근로자)*기본금*12개월
-         if($reduction_money > $data["product_price"]*0.5) {
-             $reduction_money = $data["product_price"] * 0.5;  // 감면액이 상품가격의 50%가 넘으면 50%로 표시
+         if($reduction_money > $complete_reduction*0.5) {
+             $reduction_money = $complete_reduction * 0.5;  // 감면액이 상품가격의 50%가 넘으면 50%로 표시
          }
          $reduction_money = (int)$reduction_money;
          $slice = substr($reduction_money,0,-1);
@@ -358,8 +358,8 @@ class MyPageModel extends CommonModel
 
             $base = 1149000;   //기본금액
             $reduction_money = $reduction*($workers*12)*$base; // (수급비율*근로자)*기본금*12개월
-            if($reduction_money > $data["product_price"]*0.5) {
-                $reduction_money = $data["product_price"] * 0.5;  // 감면액이 상품가격의 50%가 넘으면 50%로 표시
+            if($reduction_money > $complete_reduction*0.5) {
+                $reduction_money = $complete_reduction * 0.5;  // 감면액이 상품가격의 50%가 넘으면 50%로 표시
             }
             $reduction_money = (int)$reduction_money;
             $slice = substr($reduction_money,0,-1);
