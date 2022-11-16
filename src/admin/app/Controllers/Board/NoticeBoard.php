@@ -18,7 +18,6 @@
 		
 		public function Index()
 		{ //{{{
-            phpinfo();
 
             $data = array(
 				"page_name" => $this->page_name
