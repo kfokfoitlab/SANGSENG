@@ -125,7 +125,7 @@ class Lists extends Base
         }else{
             echo "
             <script>
-                alert('실패패.');
+                alert('실패.');
                window.location.replace('/"._CONTROLLER."/Detail/".$_POST["idx"]."');
             </script>
         ";

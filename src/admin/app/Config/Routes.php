@@ -305,6 +305,9 @@ $routes->group('Video', ['namespace' => 'App\Controllers\Video'], static functio
 	$group_name = "Lists";
 	$routes->get ($group_name.'/',                  $group_name.'::Index');
 	$routes->get ($group_name.'/VideoRegister',           $group_name.'::Register');
+    $routes->post ($group_name.'/videoRegisterSubmit',           $group_name.'::videoRegisterSubmit');
+
+
 	
 });
 /*

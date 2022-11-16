@@ -3,47 +3,41 @@
     <div class="auto-container">
       <div class="bg-white p-5">
         <h4 class="fw-bold mb-4 pb-3 border-bottom border-2">홍보영상 등록</h4>
-        <form id="reg_form" method="post" action="/<?=_CONTROLLER?>/noticeRegisterSubmit" enctype="multipart/form-data">
-          <input type="hidden" name="idx" value="<?=$data['idx']?>">
-
-          <div class="row mb-3 align-items-center">
-            <span class="col-2 fw-bold">영상 노출여부</span>
-            <div class="col-10 d-flex">
-              <label class="form-check-label me-3" for="flexCheck01">
-                <input class="form-check-input" type="radio" value="1" id="flexCheck01" name="board_status" checked>
-                노출
-              </label>
-              <label class="form-check-label me-3" for="flexCheck02">
-                <input class="form-check-input" type="radio" value="2" id="flexCheck02" name="board_status">
-                미노출
-              </label>
-            </div>
-          </div>
+        <form id="reg_form" method="post" action="/<?=_CONTROLLER?>/videoRegisterSubmit" enctype="multipart/form-data">
 
           <div class="row mb-3 align-items-center">
             <div class="col-2">
               <label for="title" class="form-label m-0 fw-bold">제목</label>
             </div>
             <div class="col-10">
-              <input type="text" class="form-control" id="title" name="title" value="">
+              <input type="text" class="form-control" id="title" name="video_title" value="" >
             </div>
           </div>
 
           <div class="row mb-3 align-items-center">
             <div class="col-2">
-              <label for="upload_file" class="form-label m-0 fw-bold">영상 첨부</label>
+              <label for="main_video" class="form-label m-0 fw-bold">메인영상</label>
             </div>
             <div class="col-10">
-              <input class="form-control" type="file" id="upload_file" name="upload_file" value="">
+              <input class="form-control" type="file" id="main_video" name="main_video" accept="video/*" >
             </div>
           </div>
 
           <div class="row mb-3 align-items-center">
             <div class="col-2">
-              <label for="title" class="form-label m-0 fw-bold">영상 순서</label>
+              <label for="sub_video1" class="form-label m-0 fw-bold">서브영상1</label>
             </div>
             <div class="col-10">
-              <input type="text" class="form-control" id="" name="" value="">
+              <input class="form-control" type="file" id="sub_video1" name="sub_video1" accept="video/*">
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <div class="col-2">
+              <label for="sub_video2" class="form-label m-0 fw-bold">서브영상2</label>
+            </div>
+            <div class="col-10">
+              <input class="form-control" type="file" id="sub_video2" name="sub_video2" accept="video/*">
             </div>
           </div>
 
@@ -51,7 +45,7 @@
             <span class="col-2 fw-bold">영상 상세내용</span>
             <div class="col-10">
               <label class="visually-hidden" for="content">공지내용</label>
-              <textarea class="form-control" style="height: 300px;resize: none;" id="content" name="content"
+              <textarea class="form-control" style="height: 300px;resize: none;" id="content" name="video_comment"
                         value=""></textarea>
             </div>
           </div>
@@ -73,11 +67,7 @@
 <script>
 
 	function validation() {
-		if (!$('input:radio[name="board_status"]').is(':checked')) {
-			$("#flexCheck01").addClass("is-invalid");
-			$("#flexCheck01").focus();
-			return false;
-		} else if ($("#title").val() == "") {
+		if ($("#title").val() == "") {
 			$("#title").addClass("is-invalid");
 			$("#title").focus();
 			return false;
@@ -85,7 +75,9 @@
 			$("#content").addClass("is-invalid");
 			$("#content").focus();
 			return false;
-		} else {
+		}else if($("#mail_video1").val() == "" ||$("#sub_video1").val() == ""||$("#sub_video2").val() == ""){
+            alert("모든 영상을 등록해주세요");
+        }else {
 			return true;
 		}
 	}

@@ -67,31 +67,7 @@ $(document).ready(function(){
                     return html;
                 }
             }
-            /*
-            ,{title: "상태", data: "status", visible: true, className: "text-nowrap",
-                "render": function( data, type, row, meta ){
-                    let html = "";
 
-                    switch(data){
-                        case "0":
-                        case "1":
-                            html = "<span class='badge bg-info'>심사중</span>";
-                            break;
-                        case "5":
-                            html = "<span class='badge bg-primary'>등록완료</span>";
-                            break;
-                        case "7":
-                            html = "<span class='badge bg-danger'>등록거절</span>";
-                            break;
-                        case "9":
-                            html = "<span class='badge bg-dark'>탈퇴</span>";
-                            break;
-                    }
-
-                    return html;
-                }
-            }
-            */
             ,{title: "등록일시", data: "register_date", visible: true}
             ,{title: "상세보기", data: "uuid", visible: true, orderable: false, className: "text-center noExport",
                 "render": function( data, type, row, meta ){
