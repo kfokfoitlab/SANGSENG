@@ -1,11 +1,21 @@
 <!-- 구매자 메뉴-->
 <?php
+if($_SESSION['login_info']['type'] != 'buyer' || $_SESSION['login'] != 'success'){
+echo "
+<script>
+  alert('로그인을 해주세요.');
+  location.href = '/Auth/SignIn';
+</script>
+";
+}
+?>
+<?php
 $workers = $_SESSION['buyer_info']['workers'];
 
 $severely_disabled = $_SESSION['buyer_info']['severely_disabled'];
 $tax_rate = $_SESSION['buyer_info']['tax_rate'];
 if($tax_rate >0){
-$tax_rate = $tax_rate*0.01;
+$cal_tax_rate = $tax_rate*0.01;
 }
 $mild_disabled = $_SESSION['buyer_info']['mild_disabled'];
 $classification = 0;
@@ -50,46 +60,51 @@ $total_money = 0;
 }else{
 $employ = $employ-$disabled;
 $total = $base * $employ*12 ;
-$total = $total + ($total*$tax_rate);
+$total = $total + ($total*$cal_tax_rate);
 $total_money = $total; // 납부금액
 }
-//echo $total_money;
 $buyer_reduction = $_SESSION['ReductionMoney']['buyer_reduction'];
 $Remainder = $total -$buyer_reduction;
 if($buyer_reduction !="" && $total_money > 0){
 $limit = ($buyer_reduction /$total_money)*100;
-if((int)$limit >= 60 && (int)$limit >= 0){
+if($limit >= 60){
 $buyer_reduction = $total_money*60/100;
-$Remainder = 0;
 }
 }
+
 if($total_money > 0){
 $Remainder_money = $Remainder;
 $buyer_reduction =  $buyer_reduction;
 $total_money = $total_money;
+$max_reduction = $total_money*0.6;
 }else{
 $Remainder_money = 0;
 $buyer_reduction = 0;
 $total_money = 0;
 }
 ?>
-<?php
-  if($_SESSION["login_info"]["type"] == "buyer"){
-  ?>
+
 <div
         class="left-fixed-box buyer-left-box bg-dark py-4 px-3 text-white">
   <h2 class="visually-hidden">감면액 및 계약리스트</h2>
   <div class="mb-4 pb-3 reduction-box">
     <h3 class="h6 mb-3">예상 납부금액</h3>
+    <p class="mb-3 text-white-50" style="font-size: 14px;">* 법인세 <span class="text-warning"><?=$tax_rate?>%</span>적용</p>
     <p class="text-end m-0 text-white fw-bold"><?=number_format($total_money)?>원</p>
   </div>
   <div class="mb-4 pb-3 reduction-box">
     <h3 class="h6 mb-1">기대 감면금액</h3>
-    <p class="mb-3 text-white-50" style="font-size: 14px;">* 납부금액의 <span class="text-warning">60%</span>까지 감면받을 수 있습니다.</p>
+    <p class="mb-3 text-white-50" style="font-size: 14px;"><span class="text-warning"><?=number_format($max_reduction)?>원</span>까지 감면받을 수 있습니다.</p>
     <p class="text-end m-0 text-white fw-bold"><?=number_format($buyer_reduction)?>원</p>
   </div>
   <div class="mb-4 border-bottom-0 reduction-box">
-    <h3 class="h6 mb-3">남은 감면금액</h3>
+    <h3 class="h6 mb-3">감면 후 납부금액</h3>
+    <p class="mb-3 text-white-50" style="font-size: 14px;">* 남은 감면 한도 <span class="text-warning"><?=number_format($max_reduction- $buyer_reduction)?>원</span></p>
+    <?php
+    if($max_reduction >= $Remainder_money){
+    $Remainder_money = $max_reduction;
+    }
+    ?>
     <p class="text-end m-0 text-white fw-bold"><?=number_format($Remainder_money)?>원</p>
   </div>
 
@@ -133,9 +148,7 @@ $total_money = 0;
     ?>
   </div>
 </div>
-<?php
-}
-?>
+
 <script>
   function contractView(workflow_id){
     const options = {

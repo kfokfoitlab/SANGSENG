@@ -1,5 +1,14 @@
 <!-- 판매자 메뉴-->
-
+<?php
+if($_SESSION['login_info']['type'] != 'seller'|| $_SESSION['login'] != 'success'){
+echo "
+<script>
+alert('로그인을 해주세요.');
+location.href = '/Auth/SignIn';
+</script>
+";
+}
+?>
 <?php
 $total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCount"]['mild_disabled'];
 ?>
