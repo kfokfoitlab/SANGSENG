@@ -327,6 +327,7 @@ class CommonModel extends dbModel
 	} //}}}
 	
 	public function uploadFileNEW($files,$fileName,$allowed_ext,$fileName_ori){
+        ini_set('memory_limit','-1');
 		$error = $files["$fileName_ori"]['error'];
 		$name = $files["$fileName_ori"]['name'];
 		$exploded_file = explode(".",$name);
