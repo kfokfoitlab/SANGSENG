@@ -123,13 +123,13 @@
                 <p class="text-small">※ 구매기업과 판매기업의 사용자등록증 자동 추가</p>
               </td>
               <td>
-                <button class="btn btn-outline-secondary btn-sm"onclick="downloadFileNew('<?=$seller_info["seller_business_license"]?>','<?=$seller_info["seller_business_license_ori"]?>');" >다운로드</button>
-                <input type="hidden" name="seller_business_license" value='<?=$data["seller_business_license"]?>'>
-                <input type="hidden" name="seller_business_license_ori" value='<?=$data["seller_business_license_ori"]?>'>
-                <br><br><br>
                 <button class="btn btn-outline-secondary btn-sm"onclick="downloadFileNew('<?=$buyer_info["buyer_documents"]?>','<?=$buyer_info["buyer_documents_ori"]?>');" >다운로드</button>
                 <input type="hidden" name="buyer_documents" value='<?=$data["buyer_documents"]?>'>
                 <input type="hidden" name="buyer_documents_ori" value='<?=$data["buyer_documents_ori"]?>'>
+                <br><br><br>
+                <button class="btn btn-outline-secondary btn-sm"onclick="downloadFileNew('<?=$seller_info["seller_business_license"]?>','<?=$seller_info["seller_business_license_ori"]?>');" >다운로드</button>
+                <input type="hidden" name="seller_business_license" value='<?=$data["seller_business_license"]?>'>
+                <input type="hidden" name="seller_business_license_ori" value='<?=$data["seller_business_license_ori"]?>'>
               </td>
               <td>
                 <p>2022.08.30</p>
