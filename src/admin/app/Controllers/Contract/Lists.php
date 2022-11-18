@@ -157,12 +157,21 @@ class Lists extends Base
 	public function ContractUpdate()
 	{ // {{{
 		$this->model->ContractStatus($_POST);
-		echo "
+        if($this == 1) {
+            echo "
         <script>
         alert('최신화되었습니다.');
         location.href = '/Contract/Lists';
 		</script>
         ";
+        }else{
+            echo "
+        <script>
+        alert('오류가 발생했습니다.');
+        location.href = '/Contract/Lists';
+		</script>
+        ";
+        }
 	} // }}}
 	
 	public function ContractDelete()

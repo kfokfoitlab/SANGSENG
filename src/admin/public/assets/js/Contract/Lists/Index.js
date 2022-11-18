@@ -75,18 +75,6 @@ $(document).ready(function(){
                             html = "<span  id ='check' class='badge bg-dark'>계약취소</span>";
                             break;
                     }
-/*
-                    html = "<span class='badge bg-info'>승인대기</span>";
-
-                            html = "<button onclick='statusCheck(\""+uuid+"\");' class='badge bg-primary'>진행중</button>";
-
-                            html = "<button class='badge bg-success'>계약완료</button>";
-
-                            html = "<span class='badge bg-danger'>반려</span>";
-
-                            html = "<span class='badge bg-dark'>계약취소</span>";*/
-
-
                     return html;
                 }
             }
@@ -102,43 +90,26 @@ $(document).ready(function(){
                     var buyer_company = data['buyer_company'];
                     var seller_company = data['seller_company'];
                     var seller_uuid = data['seller_uuid'];
-										var contract_status = data['contract_status'];
+                    var contract_status = data['contract_status'];
                     let html = "";
-/*										if(contract_status == 2 || contract_status == 5 ){
-											html += "<input class='btn btn-info btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='playingAlert()' value='승인대기'>";
-										}else {
-											html += "<input class='btn btn-info btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data["idx"]+",1)' value='승인대기'>";
-										}*/
-									if(contract_status != 2 && contract_status != 5) {
-										html += "<input class='btn btn-warning btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='contract_email(" + data['idx'] + ",2,\"" + buyer_email + "\",\"" + seller_email + "\",\"" + uuid + "\",\"" + buyer_name + "\",\"" + seller_name + "\",\"" + seller_uuid + "\",\"" + buyer_uuid + "\",\"" + buyer_company + "\",\"" + seller_company + "\")' value='계약서 전송'>";
-									}else {
-										html += "<input class='btn btn-secondary btn-sm m-1' style='font-size: 12px;color: white' type='button' value='전송완료'>";
-									}
- /*                   html += "<input class='btn btn-success btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data["idx"]+",5)' value='계약완료'>";
-                   html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data["idx"]+",7)' value='반려'>";
-                    html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data["idx"]+",9)' value='계약취소'>";*/
-
-                    return html;
+                    if(contract_status == 1) {
+                        html += "<input class='btn btn-warning btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='contract_email(" + data['idx'] + ",2,\"" + buyer_email + "\",\"" + seller_email + "\",\"" + uuid + "\",\"" + buyer_name + "\",\"" + seller_name + "\",\"" + seller_uuid + "\",\"" + buyer_uuid + "\",\"" + buyer_company + "\",\"" + seller_company + "\")' value='계약서 전송'>";
+                    }else if(contract_status == 8){
+                        html += "<input class='btn btn-dark btn-sm m-1' style='font-size: 12px;color: white' type='button' value='삭제처리'>";
+                    }else{
+                        html += "<input class='btn btn-secondary btn-sm m-1' style='font-size: 12px;color: white' type='button' value='전송완료'>";
+                    }
+                      return html;
+                    }
                 }
-            }/*,{title: "알림 전송", data: {"buyer_uuid":"buyer_uuid","seller_uuid":"seller_uuid"},
-                visible: true, className: "text-nowrap",
-                "render": function( data, type, row, meta ){
-                    var buyer_uuid = data['buyer_uuid'];
-                    var seller_uuid = data['seller_uuid'];
-                    let html = "";
-                        html += "<input class='btn btn-warning btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='Notification(\"" + seller_uuid + "\",\"" + buyer_uuid + "\")' value='알림 전송'>";
-
-                    return html;
+            ,{title: "삭제", data: "idx", visible: true, className: "text-nowrap",
+            "render": function( data, type, row, meta ){
+                let html = "";
+                    html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='contractDelete(" + data + ")' value='삭제'>";
+                return html;
                 }
-            }*/
-						,{title: "삭제", data: "idx", visible: true, className: "text-nowrap",
-						"render": function( data, type, row, meta ){
-							let html = "";
-								html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='contractDelete(" + data + ")' value='삭제'>";
-							return html;
-						}
-					},
-            {title: "계약서 조회", data: "workflow_id", visible: true, className: "text-nowrap",
+            }
+            ,{title: "계약서 조회", data: "workflow_id", visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){
                     let html = "";
                     html += "<input type = 'button' class='btn btn-warning btn-sm m-2' style='font-size: 12px;color: white' onClick='contractView(" + data + ")' value='조회'>";
@@ -168,17 +139,6 @@ $(document).ready(function(){
     };
 
     dt = $.dataTables($("#datatables"), dt_option);
-
-    /*
-    $("#datatables tbody").on("dblclick", "tr", function()
-    { // {{{
-        $(this).find("a").get(0).click();
-    }); // }}}
-    */
-
-
-    // }}}
-
 });
 
 function statusUpdate(idx,status){
@@ -192,17 +152,7 @@ function contractDelete(idx){
 		return false;
 	}
 }
-/*
-function Notification(seller_uuid,buyer_uuid){
-    location.href = "/Buyer/Notification?buyer_uuid=" + buyer_uuid;
-    location.href = "/Seller/Notification?seller_uuid=" + seller_uuid;
-    return false;
-}
-*/
 
-function playingAlert(){
-	alert('이미 진행중인 계약입니다');
-}
 
 function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,seller_name,seller_uuid,buyer_uuid,buyer_company,seller_company){
     const options = {
@@ -225,18 +175,52 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
             template_id: 9
         })
     };
-// workflowid response로 받아서 계약서 insert할때 넣기(key값)
      fetch('https://docs.esignon.net/api/v3/workflows/start?offset=%2B09%3A00', options)
         .then(response => response.json())
         .then(response => location.href = "/"+_CONTROLLER+"/contractSubmit?idx="+idx+"&status="+status+"&workflow_id="+response["workflow_id"])
 				 .then(response => console.log(response))
         .catch(err => console.error(err));
 
-    /* let text = response.text();
-    alert(text);*/
+}
+function Contract_reduction(workflow_id,pworkflow_id) {
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+        }
+    };
+    var workflow_key = "";
+    var contract_reduction = 0;
+    var complete_reduction = 0;
+    var workflow = "";
+    var product_quantity = "";
+    for (var i = 0; i < workflow_id.length; i++) {
+        workflow_key = workflow_id[i];
+        fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_key + '?offset=%2B09%3A00', options)
+            .then(response => response.json())
+            .then(response => {
 
- //   location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
+                $.each(response['field_list'], function (idx, row) {
+                    if (response['field_list'][idx].name == "Contract_Cost") {
+                        // console.log(response);
+                        contract_reduction = response['field_list'][idx].value;
+                        complete_reduction = parseInt(contract_reduction.replace(/,/g, ""));
+                    }
+                    if (response['field_list'][idx].name == "Contract_EA") {
+                        product_quantity = response['field_list'][idx].value;
+                    }
+                })
 
+                workflow = response['workflow_id'];
+                $('#complete_reduction').val(complete_reduction);
+                $('#product_quantity').val(product_quantity);
+                $('#workflow_id').val(workflow);
+                $('#pworkflow_id').val(pworkflow_id);
+                $("#statusForm").submit();
+            })
+            .catch(err => console.error(err));
+    }
 }
 
 function contract_update(field_name,field_value) {
@@ -250,32 +234,22 @@ function contract_update(field_name,field_value) {
 		}
 	};
 
-	fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=6&field_name='+field_name+'&field_value='+field_value+'', options)
+	fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=9&field_name='+field_name+'&field_value='+field_value+'', options)
 			.then(response => response.json())
 			.then(response => {
-				var j = 0;
-				var workflow_id = [];
-				for(var i =0; i <response['workflow_list'].length; i++){
-					if(response['workflow_list'][i]['status'] == "Complete"){
-						workflow_id[j] = response['workflow_list'][i]['workflow_id'];
-						$('#workflow_id').val(workflow_id);
-						$('#contract_status').val(5);
-						j++;
-					}
-				}
-				$("#statusForm").submit();
-
-				j = 0;
-				for(var i =0; i <response['workflow_list'].length; i++){
-					if(response['workflow_list'][i]['status'] == "Playing"){
-						workflow_id[j] = response['workflow_list'][i]['workflow_id'];
-						$('#workflow_id').val(workflow_id);
-						$('#contract_status').val(2);
-						j++;
-					}
-				}
-				$("#statusForm").submit();
-
+                var workflow_id = [];
+                var pworkflow_id = [];
+                var j = 0;
+                for(var i =0; i <response['workflow_list'].length; i++){
+                    if(response['workflow_list'][i]['status'] == "Complete"){
+                        workflow_id[j] = response['workflow_list'][i]['workflow_id'];
+                        j++;
+                    }
+                    if(response['workflow_list'][i]['status'] == "Playing") {
+                        pworkflow_id[j] = response['workflow_list'][i]['workflow_id'];
+                    }
+                }
+                Contract_reduction(workflow_id,pworkflow_id);
 			})
 			.catch(err => console.error(err));
 }

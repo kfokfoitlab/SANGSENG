@@ -70,6 +70,7 @@ $buyer_reduction = $buyer_reduction+($buyer_reduction*$cal_tax_rate);
 }
 $Remainder_money = $total_money -$buyer_reduction; // 납부금액 - 감면금액
 $max_reduction = $total*0.6*(1+$cal_tax_rate); // 감면금액의 60%
+$limit_reduction = $max_reduction- $buyer_reduction;
 if($total_money <= 0){
 $Remainder_money = 0;
 $buyer_reduction = 0;
@@ -92,9 +93,14 @@ $total_money = 0;
   </div>
   <div class="mb-4 border-bottom-0 reduction-box">
     <h3 class="h6 mb-3">감면 후 납부금액</h3>
-    <p class="mb-3 text-white-50" style="font-size: 14px;">* 남은 감면 한도 <span class="text-warning"><?=number_format($max_reduction- $buyer_reduction)?>원</span></p>
     <?php
-    if($max_reduction <= $Remainder_money){
+    if($limit_reduction <= 0){
+    $limit_reduction = 0;
+    }
+    ?>
+    <p class="mb-3 text-white-50" style="font-size: 14px;">* 남은 감면 한도 <span class="text-warning"><?=number_format($limit_reduction)?>원</span></p>
+    <?php
+    if($max_reduction >= $Remainder_money){
     $Remainder_money = $max_reduction;
     }
     ?>

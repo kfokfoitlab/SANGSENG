@@ -207,7 +207,7 @@ class MyPageModel extends CommonModel
                 seller_company_worker 
                 where
                         register_id = '".$seller_uuid['seller_uuid']."'
-                       and disability_degree ='1'
+                       and disability_degree ='2'
                        and status ='5'
                        and del_yn !='Y'
                 limit 1
@@ -222,7 +222,7 @@ class MyPageModel extends CommonModel
                 seller_company_worker 
                 where
                     register_id = '".$seller_uuid['seller_uuid']."'
-                     and disability_degree ='2'
+                     and disability_degree ='1'
                        and status ='5'
                        and del_yn !='Y'
                 limit 1
@@ -283,10 +283,10 @@ class MyPageModel extends CommonModel
 
 
     public function sellerContractStatus($data){
-        $workflow_id = $data["workflow_id"];
+        $workflow_id = $data["seller_workflow_id"];
         $complete_reduction = $data["complete_reduction"];
         $product_quantity = $data["product_quantity"];
-        $pworkflow_id = $data["pworkflow_id"];
+        $pworkflow_id = $data["seller_pworkflow_id"];
         $uuid = $_SESSION['login_info']['uuid'];
         if($pworkflow_id != ""){
             $playing_query = "
@@ -308,7 +308,7 @@ class MyPageModel extends CommonModel
                         
                 where
                         register_id ='".$uuid."'
-                        and disability_degree ='1'
+                        and disability_degree ='2'
                         and status ='5'
                         and del_yn !='Y'
                 limit 1
@@ -325,7 +325,7 @@ class MyPageModel extends CommonModel
                         
                 where
                         register_id = '".$uuid."'
-                         and disability_degree ='2'
+                         and disability_degree ='1'
                          and status ='5'
                          and del_yn !='Y'
                 limit 1
