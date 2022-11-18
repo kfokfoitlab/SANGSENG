@@ -2984,7 +2984,7 @@ Contact Section
   top: 100% !important;
   left: auto !important;
   right: 0 !important;
-  min-width: 250px;
+  min-width: 109px;
   margin-top: 8px;
   background: #FFFFFF;
   border: 1px solid #ECEDF2;
@@ -3029,18 +3029,20 @@ Contact Section
   position: relative;
   display: block;
   color: #202124;
-  font-size: 0.9em;
+  font-size: 14px;
   line-height: 28px;
-  margin-left: 20px;
-  margin-top: 4px;
+  margin-left: 5px;
+  margin-top: 0px;
+  font-weight: normal;
 }
 
 .dashboard-option .dropdown-menu li a {
   position: relative;
   display: flex;
+  justify-content: end;
   align-items: center;
   padding: 10px;
-  line-height: 30px;
+  line-height: 10px;
   font-weight: 400;
   font-size: 0.9em;
   color: #696969;
@@ -5456,8 +5458,7 @@ Main Header
   transition: all 300ms ease;
 }
 .main-header .logo img {
-  width: 106px;
-  padding-top: 5px;
+  width: 84px;
 }
 
 .main-header .menu-box {
@@ -5535,6 +5536,7 @@ Main Header
 
 .main-menu .navigation > li > a > span {
   position: relative;
+  font-size: 18px;
 }
 
 .main-menu .navigation > li > ul {
@@ -5717,10 +5719,24 @@ Main Header
 }
 
 .main-header .outer-box .btn-box a {
-  margin-left: 20px;
-  min-width: 140px;
-  font-size: 1em;
-  font-weight: 600;
+  min-width: 150px;
+  font-size: 18px;
+  font-weight: 400;
+  color: #121212;
+}
+.main-header .outer-box .btn-box a .login-split {
+  position: relative;
+  padding-right: 10px;
+  margin-right: 10px;
+}
+.main-header .outer-box .btn-box a .login-split::after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 15px;
+  background: #e9e9e9;
+  top: 4px;
+  right: -2px;
 }
 
 .main-header .menu-btn {
@@ -5796,7 +5812,6 @@ Header Style Two
 }
 
 .header-style-two .main-menu {
-  margin-left: auto;
   margin-right: 15px;
 }
 
@@ -6421,10 +6436,6 @@ Product Section
   padding: 100px 0;
 }
 
-.job-section.alternate {
-  padding: 20px 0 70px;
-  background-color: #F3F7FB;
-}
 
 .job-section .tab-buttons {
   justify-content: center;
@@ -8684,76 +8695,76 @@ Owl Carousel Dots
 /*==========================
 Owl Carousel Default Nav
 ===========================*/
-.owl-carousel.no-arrows .owl-nav {
-  display: none;
-}
+/*.owl-carousel.no-arrows .owl-nav {*/
+/*  display: none;*/
+/*}*/
 
-.owl-carousel.no-dots .owl-dots {
-  display: none;
-}
+/*.owl-carousel.no-dots .owl-dots {*/
+/*  display: none;*/
+/*}*/
 
-.default-nav .owl-nav {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 100%;
-  margin-top: -25px;
-  transition: all 500ms ease;
-}
+/*.default-nav .owl-nav {*/
+/*  position: absolute;*/
+/*  left: 0;*/
+/*  top: 50%;*/
+/*  width: 100%;*/
+/*  margin-top: -25px;*/
+/*  transition: all 500ms ease;*/
+/*}*/
 
-.default-nav .owl-next,
-.default-nav .owl-prev {
-  position: absolute;
-  left: -80px;
-  top: 0;
-  height: 50px;
-  width: 50px;
-  color: #021f4a;
-  background: #ffffff;
-  font-size: 20px;
-  text-align: center;
-  line-height: 50px;
-  border-radius: 50%;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-  transition: all 500ms ease;
-}
+/*.default-nav .owl-next,*/
+/*.default-nav .owl-prev {*/
+/*  position: absolute;*/
+/*  left: -80px;*/
+/*  top: 0;*/
+/*  height: 50px;*/
+/*  width: 50px;*/
+/*  color: #021f4a;*/
+/*  background: #ffffff;*/
+/*  font-size: 20px;*/
+/*  text-align: center;*/
+/*  line-height: 50px;*/
+/*  border-radius: 50%;*/
+/*  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);*/
+/*  transition: all 500ms ease;*/
+/*}*/
 
-.default-nav .owl-next {
-  left: auto;
-  right: -80px;
-}
+/*.default-nav .owl-next {*/
+/*  left: auto;*/
+/*  right: -80px;*/
+/*}*/
 
-.default-nav .owl-next:hover,
-.default-nav .owl-prev:hover {
-  color: #ffffff;
-  background-color: #021f4a;
-}
+/*.default-nav .owl-next:hover,*/
+/*.default-nav .owl-prev:hover {*/
+/*  color: #ffffff;*/
+/*  background-color: #021f4a;*/
+/*}*/
 
-/*== Owl Dots ===*/
-.default-nav .owl-dots {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+/*!*== Owl Dots ===*!*/
+/*.default-nav .owl-dots {*/
+/*  position: absolute;*/
+/*  !*bottom: 0;*!*/
+/*  width: 100%;*/
+/*  text-align: center;*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*}*/
 
-.default-nav .owl-dot {
-  position: relative;
-  height: 14px;
-  width: 14px;
-  border: 2px solid #b9c1d0;
-  border-radius: 50%;
-  margin: 0 8px;
-  transition: all 300ms ease;
-}
+/*.default-nav .owl-dot {*/
+/*  position: relative;*/
+/*  height: 14px;*/
+/*  width: 14px;*/
+/*  border: 2px solid #b9c1d0;*/
+/*  border-radius: 50%;*/
+/*  margin: 0 8px;*/
+/*  transition: all 300ms ease;*/
+/*}*/
 
-.default-nav .owl-dot.active,
-.default-nav .owl-dot:hover {
-  background: #b9c1d0;
-}
+/*.default-nav .owl-dot.active,*/
+/*.default-nav .owl-dot:hover {*/
+/*  background: #b9c1d0;*/
+/*}*/
 
 /*** 
 
@@ -14204,110 +14215,110 @@ TNC Section
   margin-bottom: 24px;
 }
 
-.job-search-form {
-  position: relative;
-  background: #FFFFFF;
-  border: 1px solid #ECEDF2;
-  box-shadow: 0px 7px 18px rgba(64, 79, 104, 0.05);
-  border-radius: 10px;
-  min-width: 740px;
-  margin-bottom: 22px;
-}
+/*.job-search-form {*/
+/*  position: relative;*/
+/*  background: #FFFFFF;*/
+/*  border: 1px solid #ECEDF2;*/
+/*  box-shadow: 0px 7px 18px rgba(64, 79, 104, 0.05);*/
+/*  border-radius: 10px;*/
+/*  min-width: 740px;*/
+/*  margin-bottom: 22px;*/
+/*}*/
 
-.job-search-form form {
-  background: #ffffff;
-  padding: 20px 20px;
-  padding-left: 30px;
-  border-radius: 10px;
-}
+/*.job-search-form form {*/
+/*  background: #ffffff;*/
+/*  padding: 20px 20px;*/
+/*  padding-left: 30px;*/
+/*  border-radius: 10px;*/
+/*}*/
 
-.job-search-form .form-group {
-  position: relative;
-  text-align: left;
-  margin-bottom: 0;
-}
+/*.job-search-form .form-group {*/
+/*  position: relative;*/
+/*  text-align: left;*/
+/*  margin-bottom: 0;*/
+/*}*/
 
-.job-search-form .form-group .icon {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  margin-top: -15px;
-  width: 30px;
-  text-align: center;
-  line-height: 30px;
-  font-size: 24px;
-  color: #5c6770;
-  background: transparent;
-  z-index: 9;
-}
+/*.job-search-form .form-group .icon {*/
+/*  position: absolute;*/
+/*  left: 15px;*/
+/*  top: 50%;*/
+/*  margin-top: -15px;*/
+/*  width: 30px;*/
+/*  text-align: center;*/
+/*  line-height: 30px;*/
+/*  font-size: 24px;*/
+/*  color: #5c6770;*/
+/*  background: transparent;*/
+/*  z-index: 9;*/
+/*}*/
 
-.job-search-form .form-group.category {
-  border-left: 1px solid #e6e6e6;
-}
+/*.job-search-form .form-group.category {*/
+/*  border-left: 1px solid #e6e6e6;*/
+/*}*/
 
-.job-search-form .form-group:first-child {
-  border-right: 1px solid #e6e6e6;
-}
+/*.job-search-form .form-group:first-child {*/
+/*  border-right: 1px solid #e6e6e6;*/
+/*}*/
 
-.job-search-form .ui-selectmenu-button.ui-button,
-.job-search-form .chosen-container-single .chosen-single,
-.job-search-form .form-group input,
-.job-search-form .form-group select,
-.job-search-form .form-group textarea {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 60px;
-  font-size: 0.9em;
-  color: #696969;
-  line-height: 30px;
-  font-weight: 400;
-  background: #ffffff;
-  padding: 15px 0px;
-  padding-left: 40px;
-  border: 0;
-  border-radius: 0;
-  transition: all 300ms ease;
-}
+/*.job-search-form .ui-selectmenu-button.ui-button,*/
+/*.job-search-form .chosen-container-single .chosen-single,*/
+/*.job-search-form .form-group input,*/
+/*.job-search-form .form-group select,*/
+/*.job-search-form .form-group textarea {*/
+/*  position: relative;*/
+/*  display: block;*/
+/*  width: 100%;*/
+/*  height: 60px;*/
+/*  font-size: 0.9em;*/
+/*  color: #696969;*/
+/*  line-height: 30px;*/
+/*  font-weight: 400;*/
+/*  background: #ffffff;*/
+/*  padding: 15px 0px;*/
+/*  padding-left: 40px;*/
+/*  border: 0;*/
+/*  border-radius: 0;*/
+/*  transition: all 300ms ease;*/
+/*}*/
 
-.job-search-form .chosen-container-multi .chosen-choices,
-.job-search-form .chosen-container.chosen-with-drop .chosen-drop {
-  background: #ffffff;
-}
+/*.job-search-form .chosen-container-multi .chosen-choices,*/
+/*.job-search-form .chosen-container.chosen-with-drop .chosen-drop {*/
+/*  background: #ffffff;*/
+/*}*/
 
-.job-search-form .chosen-container-single .chosen-single {
-  padding-left: 40px;
-  border: 1px solid #ffffff !important;
-  border-bottom: 0 !important;
-  border-radius: 8px;
-}
+/*.job-search-form .chosen-container-single .chosen-single {*/
+/*  padding-left: 40px;*/
+/*  border: 1px solid #ffffff !important;*/
+/*  border-bottom: 0 !important;*/
+/*  border-radius: 8px;*/
+/*}*/
 
-.job-search-form .chosen-container-single .chosen-drop {
-  /*    border: 1px solid #ffffff !important;
-border-top: 0 !important;*/
-}
+/*.job-search-form .chosen-container-single .chosen-drop {*/
+/*  !*    border: 1px solid #ffffff !important;*/
+/*border-top: 0 !important;*!*/
+/*}*/
 
-.job-search-form .chosen-container-active .chosen-single {
-  /*    border: 1px solid #dddddd !important;
-border-bottom: 0 !important;*/
-}
+/*.job-search-form .chosen-container-active .chosen-single {*/
+/*  !*    border: 1px solid #dddddd !important;*/
+/*border-bottom: 0 !important;*!*/
+/*}*/
 
-.job-search-form .chosen-container-active .chosen-drop {
-  border: 1px solid #ECEDF2 !important;
-  box-shadow: 0px 6px 15px rgba(64, 79, 104, 0.05);
-  border-radius: 8px !important;
-  padding-top: 10px !important;
-}
+/*.job-search-form .chosen-container-active .chosen-drop {*/
+/*  border: 1px solid #ECEDF2 !important;*/
+/*  box-shadow: 0px 6px 15px rgba(64, 79, 104, 0.05);*/
+/*  border-radius: 8px !important;*/
+/*  padding-top: 10px !important;*/
+/*}*/
 
-.job-search-form .form-group.btn-box {
-  text-align: right;
-}
+/*.job-search-form .form-group.btn-box {*/
+/*  text-align: right;*/
+/*}*/
 
-.job-search-form .form-group .theme-btn {
-  width: 100%;
-  min-width: auto;
-  height: 60px;
-}
+/*.job-search-form .form-group .theme-btn {*/
+/*  width: 100%;*/
+/*  min-width: auto;*/
+/*  height: 60px;*/
+/*}*/
 
 /* Product Search Form */
 .job-search-form.style-two,
@@ -20459,110 +20470,110 @@ Banner Section
   font-size: 0.9em;
 }
 
-.job-search-form {
-  position: relative;
-  background: #FFFFFF;
-  border: 1px solid #ECEDF2;
-  box-shadow: 0px 7px 18px rgba(64, 79, 104, 0.05);
-  border-radius: 10px;
-  min-width: 740px;
-  margin-bottom: 22px;
-}
+/*.job-search-form {*/
+/*  position: relative;*/
+/*  background: #FFFFFF;*/
+/*  border: 1px solid #ECEDF2;*/
+/*  box-shadow: 0px 7px 18px rgba(64, 79, 104, 0.05);*/
+/*  border-radius: 10px;*/
+/*  min-width: 740px;*/
+/*  margin-bottom: 22px;*/
+/*}*/
 
-.job-search-form form {
-  background: #ffffff;
-  padding: 20px 20px;
-  padding-left: 30px;
-  border-radius: 10px;
-}
+/*.job-search-form form {*/
+/*  background: #ffffff;*/
+/*  padding: 20px 20px;*/
+/*  padding-left: 30px;*/
+/*  border-radius: 10px;*/
+/*}*/
 
-.job-search-form .form-group {
-  position: relative;
-  text-align: left;
-  margin-bottom: 0;
-}
+/*.job-search-form .form-group {*/
+/*  position: relative;*/
+/*  text-align: left;*/
+/*  margin-bottom: 0;*/
+/*}*/
 
-.job-search-form .form-group .icon {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  margin-top: -15px;
-  width: 30px;
-  text-align: center;
-  line-height: 30px;
-  font-size: 24px;
-  color: #5c6770;
-  background: transparent;
-  z-index: 9;
-}
+/*.job-search-form .form-group .icon {*/
+/*  position: absolute;*/
+/*  left: 15px;*/
+/*  top: 50%;*/
+/*  margin-top: -15px;*/
+/*  width: 30px;*/
+/*  text-align: center;*/
+/*  line-height: 30px;*/
+/*  font-size: 24px;*/
+/*  color: #5c6770;*/
+/*  background: transparent;*/
+/*  z-index: 9;*/
+/*}*/
 
-.job-search-form .form-group.category {
-  border-left: 1px solid #e6e6e6;
-}
+/*.job-search-form .form-group.category {*/
+/*  border-left: 1px solid #e6e6e6;*/
+/*}*/
 
-.job-search-form .form-group:first-child {
-  border-right: 1px solid #e6e6e6;
-}
+/*.job-search-form .form-group:first-child {*/
+/*  border-right: 1px solid #e6e6e6;*/
+/*}*/
 
-.job-search-form .ui-selectmenu-button.ui-button,
-.job-search-form .chosen-container-single .chosen-single,
-.job-search-form .form-group input,
-.job-search-form .form-group select,
-.job-search-form .form-group textarea {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 60px;
-  font-size: 1em;
-  color: #888888;
-  line-height: 30px;
-  font-weight: 500;
-  background: #ffffff;
-  padding: 15px 0px;
-  padding-left: 40px;
-  border: 0;
-  border-radius: 0;
-  transition: all 300ms ease;
-}
+/*.job-search-form .ui-selectmenu-button.ui-button,*/
+/*.job-search-form .chosen-container-single .chosen-single,*/
+/*.job-search-form .form-group input,*/
+/*.job-search-form .form-group select,*/
+/*.job-search-form .form-group textarea {*/
+/*  position: relative;*/
+/*  display: block;*/
+/*  width: 100%;*/
+/*  height: 60px;*/
+/*  font-size: 1em;*/
+/*  color: #888888;*/
+/*  line-height: 30px;*/
+/*  font-weight: 500;*/
+/*  background: #ffffff;*/
+/*  padding: 15px 0px;*/
+/*  padding-left: 40px;*/
+/*  border: 0;*/
+/*  border-radius: 0;*/
+/*  transition: all 300ms ease;*/
+/*}*/
 
-.job-search-form .chosen-container-multi .chosen-choices,
-.job-search-form .chosen-container.chosen-with-drop .chosen-drop {
-  background: #ffffff;
-}
+/*.job-search-form .chosen-container-multi .chosen-choices,*/
+/*.job-search-form .chosen-container.chosen-with-drop .chosen-drop {*/
+/*  background: #ffffff;*/
+/*}*/
 
-.job-search-form .chosen-container-single .chosen-single {
-  padding-left: 40px;
-  border: 1px solid #ffffff !important;
-  border-bottom: 0 !important;
-  border-radius: 8px;
-}
+/*.job-search-form .chosen-container-single .chosen-single {*/
+/*  padding-left: 40px;*/
+/*  border: 1px solid #ffffff !important;*/
+/*  border-bottom: 0 !important;*/
+/*  border-radius: 8px;*/
+/*}*/
 
-.job-search-form .chosen-container-single .chosen-drop {
-  /*    border: 1px solid #ffffff !important;
-border-top: 0 !important;*/
-}
+/*.job-search-form .chosen-container-single .chosen-drop {*/
+/*  !*    border: 1px solid #ffffff !important;*/
+/*border-top: 0 !important;*!*/
+/*}*/
 
-.job-search-form .chosen-container-active .chosen-single {
-  /*    border: 1px solid #dddddd !important;
-border-bottom: 0 !important;*/
-}
+/*.job-search-form .chosen-container-active .chosen-single {*/
+/*  !*    border: 1px solid #dddddd !important;*/
+/*border-bottom: 0 !important;*!*/
+/*}*/
 
-.job-search-form .chosen-container-active .chosen-drop {
-  border: 1px solid #ECEDF2 !important;
-  box-shadow: 0px 6px 15px rgba(64, 79, 104, 0.05);
-  border-radius: 8px !important;
-  padding-top: 10px !important;
-}
+/*.job-search-form .chosen-container-active .chosen-drop {*/
+/*  border: 1px solid #ECEDF2 !important;*/
+/*  box-shadow: 0px 6px 15px rgba(64, 79, 104, 0.05);*/
+/*  border-radius: 8px !important;*/
+/*  padding-top: 10px !important;*/
+/*}*/
 
-.job-search-form .form-group.btn-box {
-  text-align: right;
-}
+/*.job-search-form .form-group.btn-box {*/
+/*  text-align: right;*/
+/*}*/
 
-.job-search-form .form-group .theme-btn {
-  width: 100%;
-  min-width: auto;
-  height: 60px;
-}
+/*.job-search-form .form-group .theme-btn {*/
+/*  width: 100%;*/
+/*  min-width: auto;*/
+/*  height: 60px;*/
+/*}*/
 
 /* Product Search Form */
 .job-search-form.style-two,
@@ -21917,10 +21928,396 @@ Sales/salesAnalysis
 /***
 
 ====================================================================
-Home, Shop/List - 추천상품
+Home Sections
 ====================================================================
 
 ***/
+/* 섹션별 타이틀 */
+.main-section-title {
+  margin-bottom: 60px;
+}
+.main-section-title span {
+  position: relative;
+  font-size: 14px;
+  font-weight: 700;
+  color: #121212;
+  z-index: 0;
+}
+.main-section-title h2 {
+  margin-top: 5px;
+  font-size: 28px;
+  color: #121212;
+  font-weight: 700;
+}
+.main-section-title span::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+}
+/* 메인배너 */
+/*.main-banner-carousel {*/
+/*  max-width: 1920px;*/
+/*}*/
+.main-banner-carousel[data-main-banner-autoplay-status="Y"] .play {
+  display: none;
+}
+.main-banner-carousel[data-main-banner-autoplay-status="N"] .stop {
+  display: none;
+}
+.main-banner-carousel .banner-carousel {
+  width: calc(100vw - 17px);
+  overflow: hidden;
+}
+.main-banner-carousel .slide-item {
+  width: 100%;
+  height: 736px;
+}
+.main-banner-carousel .default-nav .owl-next, .default-nav .owl-prev {
+  left: 0;
+  z-index: 1;
+}
+.main-banner-carousel .default-nav .owl-next {
+  left: 90%;
+}
+.main-banner-carousel .default-nav .owl-dots {
+  display: flex;
+  align-items: center;
+  counter-reset: slides-num; /* Initialize counter. */
+  position: absolute;
+  top: 198px;
+  left: 384px;
+  margin-left: 20px;
+}
+.main-banner-carousel .default-nav .owl-dots::after {
+  content: '0' counter(slides-num); /* get total number of items - more info on http://www.sitepoint.com/a-little-known-way-to-replace-some-scripts-with-css-counters/ */
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  /*vertical-align: middle;*/
+  padding-left: 10px;
+  color: #fff;
+}
+.main-banner-carousel .default-nav .owl-dot {
+  display: inline-block;
+  counter-increment: slides-num; /* Increment counter */
+}
+.main-banner-carousel .default-nav .owl-dot {
+  height: 1px;
+  width: 20px;
+  background: #858585;
+  transition: all 300ms ease;
+}
+.main-banner-carousel .default-nav .owl-dot.active,
+.main-banner-carousel .default-nav .owl-dot:hover {
+  background: #fff;
+}
+.main-banner-carousel .owl-dot.active:before {
+  content: '0' counter(slides-num);
+  /* Use the same counter to get current item. */
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 12px;
+  font-weight: 700;
+  position: absolute;
+  left: -20px;
+  top: 0px;
+  color: #fff;
+}
+.main-banner-carousel .main-banner-box {
+  position: absolute;
+  top: 284px;
+  left: 384px;
+}
+.main-banner-carousel .main-banner-sub-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+.main-banner-carousel .main-banner-title {
+  color: #fff;
+  font-size: 60px;
+  font-weight: bolder;
+}
+.main-banner-carousel .main-banner-control {
+  position: absolute;
+  top: 196px;
+  left: 518px;
+  z-index: 1;
+}
+.main-banner-carousel .main-banner-control img {
+  width: 5px;
+}
+.main-banner-carousel .owl-nav {
+  position: absolute;
+  top: 196px;
+  left: 557px;
+  width: 55px;
+  display: flex;
+  justify-content: space-between;
+}
+.main-banner-carousel .owl-prev img,
+.main-banner-carousel .owl-next img {
+  width: 12px;
+}
+.main-banner-carousel .job-search-form input[name="search_v"]:focus,
+.main-banner-carousel .job-search-form input:focus-visible {
+  outline: none !important;
+}
+.main-banner-carousel .job-search-box {
+  top: 430px;
+  left: 384px;
+  z-index: 1
+}
+.main-banner-carousel .job-search-box .job-search-form {
+  width: 448px;
+  height: 60px;
+  padding: 0 20px;
+  border-radius: 5px;
+}
+.main-banner-carousel .job-search-tags li {
+  font-size: 12px;
+}
+.job-search-box input:-webkit-autofill,
+.job-search-box input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+/* 인포 배너 */
+.main-info-menu {
+  padding: 60px 0 75px;
+}
+.main-info-menu li {
+  width: 286px;
+  border-radius: 8px;
+}
+.main-info-menu li:nth-child(1) {
+  background: 200px center / 64px url('/assets/images/main/main_info01.png') no-repeat #F9F9F9
+}
+.main-info-menu li:nth-child(2) {
+  background: 200px center / 64px url('/assets/images/main/main_info02.png') no-repeat #F9F9F9
+}
+.main-info-menu li:nth-child(3) {
+  background: 200px center / 64px url('/assets/images/main/main_info03.png') no-repeat #F9F9F9
+}
+.main-info-menu li:nth-child(4) {
+  background: 200px center / 64px url('/assets/images/main/main_info04.png') no-repeat #F9F9F9
+}
+.main-info-menu li a {
+  display: block;
+  padding: 20px 0 18px 21px;
+}
+.main-info-menu li p {
+  font-size: 16px;
+  color: #000;
+}
+.main-info-menu li span {
+  font-size: 12px;
+  color: #707070;
+  font-weight: 300;
+}
+
+/* 추천상품 */
+.main-recommend-section .main-section-title span::after {
+  background: #B9D8FF;
+}
+.main-recommend-section {padding: 75px 0;}
+.recommend-carousel .owl-item:not(.center) {
+  opacity: 0.5;
+}
+.recommend-carousel .owl-item .recommend-text-box {
+  display: none;
+}
+.recommend-carousel .owl-item.center .recommend-text-box {
+  display: block;
+  width: 352px;
+  padding: 56px 32px 0;
+}
+.recommend-carousel .owl-stage {
+  margin-left: -176px;
+}
+.recommend-company {
+  font-size: 14px;
+  color: #a4a4a4;
+}
+.recommend-item {
+  font-size: 20px;
+  color: #181818;
+}
+.recommend-item-price span,
+.recommend-item-price p {
+  color: #121212;
+}
+.recommend-item-rdm span,
+.recommend-item-rdm p {
+  color: #2E68DC;
+}
+.recommend-item-price span,
+.recommend-item-rdm span {
+  font-size: 14px;
+}
+.recommend-item-price p,
+.recommend-item-rdm p {
+  font-size: 24px;
+}
+.recommend-item-number {
+  margin-top: 33px;
+}
+.recommend-carousel .owl-stage-outer {
+  height: 352px;
+}
+.recommend-carousel .owl-prev img,
+.recommend-carousel .owl-next img {
+  width: 30px;
+}
+.recommend-carousel .owl-nav {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 80px;
+  bottom: 0;
+  left: calc(50% + 32px);
+}
+
+/* 새로 들어온 상품 */
+.main-newItem-section {
+  padding: 75px 0;
+}
+.main-newItem-section .main-section-title span::after {
+  background: #AADCA3;
+}
+.new-item-carousel .owl-nav {
+  position: absolute;
+  display: flex;
+  width: 80px;
+  justify-content: space-between;
+  top: -93px;
+  right: 0;
+}
+.new-item-carousel .owl-prev img, .new-item-carousel .owl-next img {
+  width: 22px;
+}
+.new-item-carousel .owl-prev img {
+  opacity: 0.3
+}
+.main-newItem-scroll {
+  height: 4px;
+  background: #F2F2F2
+}
+.main-newItem-scroll-active {
+  background: #121212;
+  transition: 0.5s;
+}
+.new-item-box-img img {
+  background: #ccc;
+}
+.new-item-box-img span {
+  top: 20px;
+  left: 20px;
+  padding: 0 14px;
+  background: #3BAF2A;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 2px;
+}
+.new-item-box-title {
+  margin-bottom: 50px;
+}
+.new-item-box-title span {
+  font-size: 14px;
+  color: #A4A4A4;
+}
+.new-item-box-title p {
+  font-size: 16px;
+  color: #121212;
+  font-weight: bold;
+}
+.new-item-box-price p:last-child {
+  color: #2E68DC;
+}
+.new-item-box-price span {
+  font-size: 16px;
+  font-weight: 500;
+}
+.new-item-box-price strong {
+  font-size: 20px;
+}
+
+/* 광고 배너 */
+.ad-banner-section {
+  padding: 75px 0;
+}
+.ad-banner01 {
+  height: 200px;
+  padding-left: 68px;
+  background: 95% url('/assets/images/main/ad_banner_bg01.png') no-repeat #F9F9F9;
+}
+.ad-banner01 p {
+  font-size: 20px;
+  color: #555555;
+  margin-bottom: 10px;
+}
+.ad-banner01 strong {
+  font-size: 28px;
+  color: #121212;
+}
+.ad-banner01 strong span {
+  color: #005DFF;
+}
+
+/* 상생 TV */
+.main-adVideo-section {
+  padding: 75px 0;
+}
+.main-adVideo-section .main-section-title span::after {
+  background: #FFEF85;
+}
+
+/* 공지사항 슬라이드 */
+.main-notice-section {
+  margin-top: 75px;
+  height: 100px;
+}
+.notice-content h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+.notice-content h2::after {
+  content: '';
+  width: 1px;
+  height: 16px;
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  margin-top: -8px;
+  background: #e9e9e9;
+}
+.main-notice-section .owl-nav {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 61px;
+  justify-content: space-between;
+}
+.main-notice-section .owl-prev img, .main-notice-section .owl-next img {
+  width: 13px;
+}
+.notice-carousel a {
+  color: #121212;
+}
+
+
+
+
+
+
+
+  /* 추천상품 (카테고리별 리스트)*/
 .recommend-item-list .recommend-item-box {
   flex: 0 0 20%;
   width: 20%;
@@ -21952,7 +22349,6 @@ Home, Shop/List - 추천상품
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-
 .recommend-item-list .recommend-item-number span {
   font-size: 0.85rem;
   color: #444;
@@ -21962,4 +22358,12 @@ Home, Shop/List - 추천상품
 }
 .recommend-item-list .recommend-item-rdm p {
   color: #f85252;
+}
+
+/*marin-info-top*/
+
+.marin-info-top li a {
+  padding: 0 8px;
+  font-size: 14px;
+  color: #989898;
 }

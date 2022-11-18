@@ -10,9 +10,43 @@
     font-weight: bold;
     font-style: normal;
 }
+@font-face {
+  font-family: 'Noto Sans KR', sans-serif;
+  src: url('/assets/fonts/notosansKR/NotoSansKR-Thin.otf') format('otf');
+  font-weight: 100;
+}
+@font-face {
+  font-family: 'Noto Sans KR', sans-serif;
+  src: url('/assets/fonts/notosansKR/NotoSansKR-Light.otf') format('otf');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'Noto Sans KR', sans-serif;
+  src: url('/assets/fonts/notosansKR/NotoSansKR-Regular.otf') format('otf');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Noto Sans KR', sans-serif;
+  src: url('/assets/fonts/notosansKR/NotoSansKR-Medium.otf') format('otf');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Noto Sans KR', sans-serif;
+  src: url('/assets/fonts/notosansKR/NotoSansKR-Bold.otf') format('otf');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Noto Sans KR', sans-serif;
+  src: url('/assets/fonts/notosansKR/NotoSansKR-Black.otf') format('otf');
+  font-weight: 900;
+  font-style: normal;
+}
 
 html, body {
-    font-family: 'KoddiUDOnGothic';
+    font-family: 'Noto Sans KR';
     font-size: 18px;
     font-weight: 500;
 }
