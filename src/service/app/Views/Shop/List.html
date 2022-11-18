@@ -89,8 +89,8 @@
             </tr>
             </thead>
             <tbody>
-            <?php
 
+            <?php
           if(is_array($list)&& count($list) > 0){
             if($_GET["p_n"]!=""){
             $i=($_GET["p_n"]-1)*10+1;
@@ -98,10 +98,13 @@
             $ret = array();
             foreach($list as $item){
             ?>
-            <tr>
+
+            <tr id = "<?=$item['idx']?>">
               <td>
+                <a class="d-block" href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>">
                 <img class="preview-img-small" src="/uploads/<?=$item['representative_image']?>"
                      alt="<?=$item['product_name']?>">
+                </a>
               </td>
               <td>
                 <h3>
@@ -110,7 +113,6 @@
                     <span class="text-start fw-bold mt-1 product-name" title="<?=$item['product_name']?>"><?=$item["product_name"]?></span>
                   </a>
                 </h3>
-                <!--                <p class="sub-info"><?=$item["product_detail"]?></p>-->
               </td>
               <td>
                 <p><?=$item["product_quantity"]?></p>
@@ -123,6 +125,7 @@
                 ?>
               <td class="buyer_rdm_">
                 <p class="fw-bold"><?=number_format($item['reduction_money'])?>원</p>
+                dd
               </td>
               <?php
               }
