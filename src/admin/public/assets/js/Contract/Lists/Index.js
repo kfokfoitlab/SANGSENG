@@ -79,7 +79,7 @@ $(document).ready(function(){
                 }
             }
             ,{title: "계약서 전송", data: {"idx":"idx","buyer_email":"buyer_email","seller_email":"seller_email","uuid":"uuid","buyer_name":"buyer_name","seller_name":"seller_name","buyer_uuid":"buyer_uuid","seller_uuid":"seller_uuid","buyer_company":"buyer_company","seller_company":"seller_company",
-						"contract_status":"contract_status"}, visible: true, className: "text-nowrap",
+						"contract_status":"contract_status","product_name":"product_name"}, visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){
                     var buyer_email = data['buyer_email'];
                     var seller_email = data['seller_email'];
@@ -91,9 +91,10 @@ $(document).ready(function(){
                     var seller_company = data['seller_company'];
                     var seller_uuid = data['seller_uuid'];
                     var contract_status = data['contract_status'];
+                    var product_name = data['product_name'];
                     let html = "";
                     if(contract_status == 1) {
-                        html += "<input class='btn btn-warning btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='contract_email(" + data['idx'] + ",2,\"" + buyer_email + "\",\"" + seller_email + "\",\"" + uuid + "\",\"" + buyer_name + "\",\"" + seller_name + "\",\"" + seller_uuid + "\",\"" + buyer_uuid + "\",\"" + buyer_company + "\",\"" + seller_company + "\")' value='계약서 전송'>";
+                        html += "<input class='btn btn-warning btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='contract_email(" + data['idx'] + ",2,\"" + buyer_email + "\",\"" + seller_email + "\",\"" + uuid + "\",\"" + buyer_name + "\",\"" + seller_name + "\",\"" + seller_uuid + "\",\"" + buyer_uuid + "\",\"" + buyer_company + "\",\"" + seller_company + "\",\"" + product_name + "\")' value='계약서 전송'>";
                     }else if(contract_status == 8){
                         html += "<input class='btn btn-dark btn-sm m-1' style='font-size: 12px;color: white' type='button' value='삭제처리'>";
                     }else{
@@ -154,7 +155,7 @@ function contractDelete(idx){
 }
 
 
-function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,seller_name,seller_uuid,buyer_uuid,buyer_company,seller_company){
+function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,seller_name,seller_uuid,buyer_uuid,buyer_company,seller_company,product_name){
     const options = {
         method: 'POST',
         headers: {
@@ -170,7 +171,7 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
                 {order: 2, email: seller_email, name: seller_name},
             ],
             field_list: [{name: 'buyer_uuid', value: buyer_uuid}, {name: 'seller_uuid', value: seller_uuid},
-							{name: 'updateType', value: 'all'},{name:'buyer_company',value: buyer_company},{name:'seller_company',value: seller_company}],
+							{name: 'updateType', value: 'all'},{name:'buyer_company',value: buyer_company},{name:'seller_company',value: seller_company},{name:'Contract_Name',value:product_name}],
             workflow_name: buyer_company +" 기업과" + seller_company + " 기업의 계약서" ,
             template_id: 9
         })

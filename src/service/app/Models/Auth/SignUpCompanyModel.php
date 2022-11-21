@@ -26,14 +26,14 @@ class SignUpCompanyModel extends CommonModel
     { //{{{
         $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG','JPG','PDF');
         if($files["seller_business_license"]["name"] != ""){
-            $seller_business_license_ori = $files["seller_business_license"]["name"];
+            $seller_business_license_ori =  str_replace('&','＆', $files["seller_business_license"]["name"]);
             $upload_seller_business_license_ori = "seller_business_license";
             $upload_seller_business_license_image = uniqid().".".pathinfo($files["seller_business_license"]["name"], PATHINFO_EXTENSION);
             $this->uploadFileNew($files,$upload_seller_business_license_image,$allowed_ext,$upload_seller_business_license_ori);
         }
 
         if($files["seller_documents"]["name"] != ""){
-            $seller_documents_ori = $files["seller_documents"]["name"];
+            $seller_documents_ori =  str_replace('&','＆', $files["seller_documents"]["name"]);
             $upload_seller_documents_ori = "seller_documents";
             $upload_seller_documents_image = uniqid().".".pathinfo($files["seller_documents"]["name"], PATHINFO_EXTENSION);
             $this->uploadFileNew($files,$upload_seller_documents_image,$allowed_ext,$upload_seller_documents_ori);
