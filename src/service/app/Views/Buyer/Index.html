@@ -2,15 +2,28 @@
   // Left Menu
   require(__DIR__.'/Components/Left.html');
 ?>
-<div class="flex-grow-1">
+<div class="flex-grow-1" style="width: calc(100% - 250px)">
   <?php
   // Banner Secction
-  require APPPATH . '/Views/Home/Section/Banner.html';
+  require APPPATH . '/Views/Home/Section/MainBanner.html';
+
+  // Info Menu
+  require APPPATH . '/Views/Home/Section/InfoMenu.html';
+
+  // RecommendItemsList Secction
+  require APPPATH . '/Views/Home/Section/RecommendItemsList.html';
+
+  // 새로운 상품 Section
+  require APPPATH . '/Views/Home/Section/NewItemList.html';
+
+  // 광고 배너 Section
+  require APPPATH . '/Views/Home/Section/AdBanner.html';
 
   // Banner Secction
   require APPPATH . '/Views/Home/Section/Advertisement.html';
 
-  // RecommendItemsList Secction
-  require APPPATH . '/Views/Home/Section/RecommendItemsList.html';
+  // 공지사항 Section
+  require APPPATH . '/Views/Home/Section/NoticeBanner.html';
+
   ?>
 </div>

@@ -192,8 +192,9 @@
 			$('.main-banner-carousel').attr('data-main-banner-autoplay-status', 'Y');
 		}
 		$('.banner-carousel').owlCarousel({
+			singleItem: true,
 			animateOut: 'fadeOut',
-		    animateIn: 'fadeIn',
+			animateIn: 'fadeIn',
 			loop:true,
 			margin:0,
 			items:1,
@@ -250,14 +251,14 @@
 		const activeWidth = 100 / dotArray.length
 		$('.main-newItem-scroll-active').css({'width': activeWidth + '%', 'left': 0, 'transition': 'all 0.5s'})
 		
-		newItemOwl.on('mousewheel', '.owl-stage', function (e) {
-			if (e.originalEvent.deltaY > 0) {
-				newItemOwl.trigger('next.owl');
-			} else {
-				newItemOwl.trigger('prev.owl');
-			}
-			e.preventDefault();
-		});
+		// newItemOwl.on('mousewheel', '.owl-stage', function (e) {
+		// 	if (e.originalEvent.deltaY > 0) {
+		// 		newItemOwl.trigger('next.owl');
+		// 	} else {
+		// 		newItemOwl.trigger('prev.owl');
+		// 	}
+		// 	e.preventDefault();
+		// });
 		
 		newItemOwl.on('changed.owl.carousel', function(event) {
 			if(event.page.index === 0 ) {

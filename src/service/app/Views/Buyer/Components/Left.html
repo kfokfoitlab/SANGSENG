@@ -78,42 +78,44 @@ $total_money = 0;
 }
 ?>
 
-<div
-        class="left-fixed-box buyer-left-box bg-dark py-4 px-3 text-white">
-  <h2 class="visually-hidden">감면액 및 계약리스트</h2>
-  <div class="mb-4 pb-3 reduction-box">
-    <h3 class="h6 mb-3">예상 납부금액</h3>
-    <p class="mb-3 text-white-50" style="font-size: 14px;">* 법인세 <span class="text-warning"><?=$tax_rate?>%</span>적용</p>
-    <p class="text-end m-0 text-white fw-bold"><?=number_format($total_money)?>원</p>
+<div class="left-fixed-box buyer-left-box py-4 px-3 text-white">
+  <h2 class="mb-4"><span class="fw-bold">회사명</span>님의<br/>감면금액 계산기</h2>
+
+  <div class="mb-3 pb-3 reduction-box">
+    <h3 class="mb-1"><span>고용 부담금 납부금액</span></h3>
+    <p class="sub-text mb-2">* 법인세 <span class="yellow-text"><?=$tax_rate?>%</span>적용</p>
+    <p class="m-0 text-white fw-bold"><?=number_format($total_money)?>원</p>
   </div>
   <div class="mb-4 pb-3 reduction-box">
-    <h3 class="h6 mb-1">기대 감면금액</h3>
-    <p class="mb-3 text-white-50" style="font-size: 14px;"><span class="text-warning"><?=number_format($max_reduction)?>원</span>까지 감면받을 수 있습니다.</p>
-    <p class="text-end m-0 text-white fw-bold"><?=number_format($buyer_reduction)?>원</p>
+    <h3 class="mb-1"><span>기대 감면금액</span></h3>
+    <p class="sub-text mb-2">* <span class="yellow-text"><?=number_format($max_reduction)?>원</span>까지 감면받을 수 있습니다.</p>
+    <p class="m-0 text-white fw-bold"><?=number_format($buyer_reduction)?>원</p>
   </div>
   <div class="mb-4 border-bottom-0 reduction-box">
-    <h3 class="h6 mb-3">감면 후 납부금액</h3>
+    <h3 class="mb-1"><span>감면 후 납부금액</span></h3>
     <?php
     if($limit_reduction <= 0){
     $limit_reduction = 0;
     }
     ?>
-    <p class="mb-3 text-white-50" style="font-size: 14px;">* 남은 감면 한도 <span class="text-warning"><?=number_format($limit_reduction)?>원</span></p>
+    <p class="sub-text mb-2">* <span class="yellow-text"><?=number_format($limit_reduction)?>원</span>까지 감면 받을 수 있습니다.</p>
     <?php
     if($max_reduction >= $Remainder_money){
     $Remainder_money = $max_reduction;
     }
     ?>
-    <p class="text-end m-0 text-white fw-bold"><?=number_format($Remainder_money)?>원</p>
+    <p class="m-0 text-white fw-bold"><?=number_format($Remainder_money)?>원</p>
   </div>
 
-  <div class="mt-4">
+  <div class="mt-5">
+    <h2 class="mb-3"><span class="fw-bold">회사명</span>님의<br/>진행 계약 현황 &#10095;</h2>
     <?php
     if(!$_SESSION["Contract"]) {
     ?>
-    <div class="pt-3" style="border-top: 1px dashed #6c757d;">
-      <p class="text-white" style="font-size: 0.8rem;">* 현재 진행중인 계약이 없습니다.</p>
+    <div class="pt-2">
+      <p class="text-white" style="font-size: 14px;">* 현재 진행중인 계약이 없습니다.</p>
     </div>
+
     <?php
     } else {
     ?>
@@ -125,18 +127,11 @@ $total_money = 0;
     $contract_regdt = date("Y-m-d", $timestamp);
     $product_price = number_format($item["product_price"]);
     ?>
-      <li class="p-2 bg-white text-dark mb-3" onclick="contractView(<?=$item["workflow_id"]?>);">
-      <h3 class="text-center"><?=$item["company_name"]?></h3>
-      <div class="d-flex flex-column align-items-center mb-2">
-        <div class="left-item-img d-flex align-items-center justify-content-center border">
-          <img class="mh-100" src="/uploads/<?=$item['representative_image']?>" alt="<?=$item['product_name']?>">        </div>
-        <h4 class="mt-1"><?=$item["product_name"]?></h4>
-      </div>
-      <div class="text-end">
-        <p class="m-0"><?=$product_price?>원</p>
-        <p class="m-0"><?=$contract_regdt?></p>
-        <p class="m-0"><?=$item["product_quantity"]?></p>
-      </div>
+      <li class="mb-3 pb-3" onclick="contractView(<?=$item["workflow_id"]?>);">
+        <h4 class="mb-2 text-start"><?=$item["product_name"]?></h4>
+        <p class="m-0"><span>계약금액</span><?=$product_price?>원</p>
+        <p class="m-0"><span>계약일자</span><?=$contract_regdt?></p>
+        <p class="m-0"><span>수량</span><?=$item["product_quantity"]?></p>
       </li>
       <?php
     }
