@@ -25,10 +25,12 @@ class SignUpUserModel extends CommonModel
     public function Register($files, $data, $table_name = "buyer_company")
     { //{{{
         $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG','JPG','PDF');
-        $buyer_documents_ori = $files["buyer_documents"]["name"];
+
+        $buyer_documents_ori =  str_replace('&','＆', $files["buyer_documents"]["name"]);
         $upload_buyer_documents_ori = "buyer_documents";
         $upload_buyer_documents_image = uniqid().".".pathinfo($files["buyer_documents"]["name"], PATHINFO_EXTENSION);
         $this->uploadFileNew($files,$upload_buyer_documents_image,$allowed_ext,$upload_buyer_documents_ori);
+
 
         helper(["uuid_v4", "specialchars"]);
         $uuid = gen_uuid_v4();

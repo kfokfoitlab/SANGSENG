@@ -139,7 +139,7 @@ class MyPageModel extends CommonModel
          $buyer_documents_ori = $data["buyer_documents_ori"];
          $upload_buyer_documents_image = $data["buyer_documents"];
      }
-
+  $buyer_documents_ori = str_replace('&','＆', $files["buyer_documents"]["name"]);
      $query = "
             update
                 buyer_company
