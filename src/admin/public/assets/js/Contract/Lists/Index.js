@@ -156,7 +156,6 @@ function contractDelete(idx){
 
 
 function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,seller_name,seller_uuid,buyer_uuid,buyer_company,seller_company,product_name){
-
     const options = {
         method: 'POST',
         headers: {
