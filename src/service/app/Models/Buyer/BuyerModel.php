@@ -149,6 +149,27 @@ class BuyerModel extends CommonModel
         }
     }
 
+    public function NewProductList(){
+        $new_product = [];
+        $query = "
+            select
+                *
+            from
+              seller_product
+            where status ='5'
+            and del_yn != 'Y'
+           order by 
+               register_date desc
+           limit 9
+        ";
+
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $new_product[]= $row;
+        }
+        return $new_product;
+    }
+
     public function RecommendationList($value){
         $where = "";
 		$interest_info = array();

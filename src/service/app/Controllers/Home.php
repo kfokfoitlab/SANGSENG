@@ -20,13 +20,14 @@ class Home extends BaseController
 
     public function index()
     {
-
         $value = $_GET["value"];
         $ranking = $this->buyer_model->RecommendationList($value);
+        $new_product = $this->buyer_model->NewProductList();
         $reduction =  $this->buyer_model->ReductionMoney();
         $data = array(
             "data" => $ranking["data"],
-            "reduction" => $reduction
+            "reduction" => $reduction,
+            "new_product" => $new_product
         );
 
         echo view("Common/Header.html");
