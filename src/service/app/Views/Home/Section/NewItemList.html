@@ -25,10 +25,16 @@
                 <span>계약금액</span>
                 <strong><?=number_format($item['product_price'])?>원</strong>
               </p>
+              <?php
+              if($_SESSION['login_info']['type'] == 'buyer'){
+              ?>
               <p class="d-flex justify-content-between">
                 <span>감면액</span>
                 <strong><?=number_format($item['reduction_money'])?>원</strong>
               </p>
+              <?php
+              }
+              ?>
             </div>
           </div>
         </a>
