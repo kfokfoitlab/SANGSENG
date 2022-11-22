@@ -161,8 +161,7 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: ' esignon Qh1KbrAu8M8FIFfXzqmPKOwMNfdTthAnNB7PY/ND7jj5NVL2P8wavB+g3BUfkTw1lqQY7Eoy9zuBuIXAct5x5/GvqEaUJvQ3VgzvuvHSTceoSVLDlPKxDvWmDsEODspX'
-        },
+            Authorization: 'Qh1KbrAu8M8FIFfXzqmPKOwMNfdTthAnNB7PY/ND7jj5NVL2P8wavB+g3BUfkTw1lqQY7Eoy9zuBuIXAct5x5/GvqEaUJvQ3VgzvuvHSTceoSVLDlPKxDvWmDsEODspX'        },
         body: JSON.stringify({
             language: 'ko',
             is_preview: false,
@@ -172,7 +171,7 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
             ],
             field_list: [{name: 'buyer_uuid', value: buyer_uuid}, {name: 'seller_uuid', value: seller_uuid},
 							{name: 'updateType', value: 'all'},{name:'buyer_company',value: buyer_company},{name:'seller_company',value: seller_company},{name:'Contract_Name',value:product_name}],
-            workflow_name: buyer_company +" 기업과" + seller_company + " 기업의 계약서" ,
+            workflow_name: buyer_company +" 기업과 " + seller_company + " 기업의 계약서" ,
             template_id: 9
         })
     };
