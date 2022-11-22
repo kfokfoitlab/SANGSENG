@@ -26,14 +26,18 @@ class Buyer extends BaseController
         $data = $this->buyer_model->RecommendationList($value);
         $reduction =  $this->buyer_model->ReductionMoney();
         $buyer_reduction =  $this->buyer_model->BuyerReduction();
+        $new_product = $this->buyer_model->NewProductList();
         $notification_del = $this->buyer_model->NotificationDel();
         $_SESSION["Contract"]= $this->sigin_model->getContractList();
         $_SESSION["ReductionMoney"]= $this->sigin_model->BuyerReduction();
+
         $data = array(
             "data" => $data["data"],
             "reduction" => $reduction,
             "buyer_reduction" => $buyer_reduction,
-            "buyer_info" => $buyer_info
+            "buyer_info" => $buyer_info,
+            "new_product" => $new_product
+
         );
         echo view("Common/Header.html");
         echo view('Buyer/Index.html', $data);
