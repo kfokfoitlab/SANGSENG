@@ -221,7 +221,7 @@ class BuyerModel extends CommonModel
            $where
            order by 
               reduction desc, register_date asc
-           limit 5
+           limit 6
         ";
 
         $this->rodb->query($query);
