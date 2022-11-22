@@ -174,8 +174,8 @@ class BuyerModel extends CommonModel
         $where = "";
 		$interest_info = array();
 		$URL_CHECK = _CONTROLLER;
-	
-	    if($URL_CHECK = "HOME" or $URL_CHECK = "Buyer"){
+
+	    if($URL_CHECK == "Home" or $URL_CHECK == "Buyer/Shop"){
 		    $buyer_info = $this->Buyer_info($_SESSION['login_info']['uuid']);
 			if($buyer_info["interest_office"] == "Y") {
 				$interest_info[] = 1;
@@ -196,7 +196,11 @@ class BuyerModel extends CommonModel
 				$where = " and product_category IN (" . implode(',', $interest_info) . ")";
 			}
 	    }
-		
+        if( $URL_CHECK == "Buyer/Shop"){
+            $limit = 5;
+        }else{
+            $limit = 6;
+        }
 		
         if($value != "" && $value !='all'){
             $where = " and product_category =$value";
@@ -221,7 +225,7 @@ class BuyerModel extends CommonModel
            $where
            order by 
               reduction desc, register_date asc
-           limit 6
+           limit $limit
         ";
 
         $this->rodb->query($query);
