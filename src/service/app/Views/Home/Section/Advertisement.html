@@ -1,11 +1,11 @@
 <section class="main-adVideo-section">
   <div class="auto-container">
     <div class="main-section-title">
-      <p><span>상생몰 MIDEA</span></p>
+      <p><span>상생몰 MEDIA</span></p>
       <h2>상생 TV</h2>
     </div>
     <div class="d-flex justify-content-center">
-      <div class="me-3" style="width: 950px; height: 534px;">
+      <div class="me-3" style="width: 948px; height: 532px;">
         <video preload="metadata" controls src="/uploads/ninemila_shampoo_salmon.mp4" muted id="video_main" poster="/uploads/ninemila_shampoo_salmon.png" style="width: 100%;height: 100%;"></video>
       </div>
 
@@ -14,10 +14,10 @@
           <img id="video_1" src="/uploads/ninemila_shampoo_salmon.png" class="w-100 h-100">
         </div>
         <div class="bg-black" style="width: 300px; height: 169px;">
-          <img id="video_2" src="/uploads/ninemila_shampoo_yeast.png" class="w-100 h-100 opacity-50">
+          <img id="video_2" src="/uploads/ninemila_shampoo_yeast.png" class="w-100 h-100" style="opacity: 0.5;">
         </div>
         <div class="bg-black" style="width: 300px; height: 169px;">
-          <img id="video_3" src="/uploads/nuyahaus_items.png" class="w-100 h-100 opacity-50">
+          <img id="video_3" src="/uploads/nuyahaus_items.png" class="w-100 h-100" style="opacity: 0.5;">
         </div>
       </div>
     </div>
@@ -47,27 +47,27 @@
 		if(video_num == 1) {
 			$('#video_main')[0].src = '/uploads/ninemila_shampoo_salmon.mp4';
 			$('#video_main')[0].play();
-			$('#video_1 img').css({opacity: '1'})
-			$('#video_2 img').css({opacity: '0.5'})
-			$('#video_3 img').css({opacity: '0.5'})
+			$('#video_1').css({opacity: '1'})
+			$('#video_2').css({opacity: '0.5'})
+			$('#video_3').css({opacity: '0.5'})
 			$('#video_main').on("ended",function (){
 				video_play(2);
 			});
 		}else if(video_num == 2) {
 			$('#video_main')[0].src = '/uploads/ninemila_shampoo_yeast.mp4';
 			$('#video_main')[0].play();
-			$('#video_2 img').css({opacity: '1'})
-			$('#video_1 img').css({opacity: '0.5'})
-			$('#video_3 img').css({opacity: '0.5'})
+			$('#video_2').css({opacity: '1'})
+			$('#video_1').css({opacity: '0.5'})
+			$('#video_3').css({opacity: '0.5'})
 			$('#video_main').on("ended",function (){
 				video_play(3);
 			});
 		}else if(video_num == 3){
 			$('#video_main')[0].src = '/uploads/nuyahaus_items.mp4';
 			$('#video_main')[0].play();
-			$('#video_3 img').css({opacity: '1'})
-			$('#video_2 img').css({opacity: '0.5'})
-			$('#video_1 img').css({opacity: '0.5'})
+			$('#video_3').css({opacity: '1'})
+			$('#video_2').css({opacity: '0.5'})
+			$('#video_1').css({opacity: '0.5'})
 			$('#video_main').on("ended",function (){
 				video_play(1);
 			});

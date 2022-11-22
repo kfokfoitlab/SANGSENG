@@ -4,43 +4,39 @@
       <p><span>상생몰 Pick</span></p>
       <h2>상생몰 추천상품</h2>
     </div>
-    <div class="recommend-carousel owl-carousel owl-theme">
+    <div class="recommend-item-carousel owl-carousel owl-theme">
       <?php
         if(is_array($data) && count($data) > 0){
           foreach($data as $item){
       ?>
       <div class="recommend-item-box" title="<?=$item['company_name']?> / <?=$item['product_name']?>">
-        <div class="">
-          <div class="d-flex p-0">
-            <div class="recommend-img">
-              <a class="d-block p-0" href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>">
-                <img style="width: 352px; height: 352px; background: #ccc" src="/uploads/<?=$item['representative_image']?>" alt="<?=$item['product_name']?>">
-              </a>
+        <a class="d-block p-0" href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>">
+          <div class="position-relative recommend-item-box-img">
+            <img style="width: 100%; height: 400px; background: #ccc" src="/uploads/<?=$item['representative_image']?>" alt="<?=$item['product_name']?>">
+          </div>
+          <div class="recommend-item-box-info">
+            <div class="recommend-item-box-title">
+              <span><?=$item['company_name']?></span>
+              <p><?=$item['product_name']?></p>
             </div>
-            <div class="recommend-text-box">
-              <p class="recommend-company mb-1"><?=$item['company_name']?></p>
-              <a class="d-block p-0" href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>">
-                <p class="recommend-item fw-bold"><?=$item['product_name']?></p>
-              </a>
-              <div class="recommend-item-number">
-                <div class="d-flex justify-content-between recommend-item-price">
-                  <span>계약금액</span>
-                  <p class="fw-bold"><?=number_format($item['product_price'])?>원</p>
-                </div>
-                <?php
-                if($_SESSION['login_info']['type'] == 'buyer'){
-                ?>
-                <div class="d-flex justify-content-between recommend-item-rdm">
-                  <span>감면액</span>
-                  <p class="fw-bold"><?=number_format($item['reduction_money'])?>원</p>
-                </div>
-                <?php
-                }
-                ?>
-              </div>
+            <div class="recommend-item-box-price">
+              <p class="d-flex justify-content-between mb-2">
+                <span>계약금액</span>
+                <strong><?=number_format($item['product_price'])?>원</strong>
+              </p>
+              <?php
+              if($_SESSION['login_info']['type'] == 'buyer'){
+              ?>
+              <p class="d-flex justify-content-between">
+                <span>감면액</span>
+                <strong><?=number_format($item['reduction_money'])?>원</strong>
+              </p>
+              <?php
+              }
+              ?>
             </div>
           </div>
-        </div>
+        </a>
       </div>
       <?php
           }

@@ -223,56 +223,54 @@
 		
 	}
 	
-	if ($('.recommend-carousel').length) {
-		$('.recommend-carousel').owlCarousel({
-			center: true,
-			items:2,
-			loop:true,
+	if ($('.recommend-item-carousel').length) {
+		const recommendOwl = $('.recommend-item-carousel')
+		recommendOwl.owlCarousel({
+			items:3,
 			margin:32,
+			dots: true,
 			nav: true,
-			autoWidth:true,
-			navText: [ '<img src="/assets/images/icons/recm_prev.png"/>', '<img src="/assets/images/icons/recm_next.png"/>' ],
+			slideBy: 1,
+			navText: [ '<img src="/assets/images/icons/angle_prev.png"/>', '<img src="/assets/images/icons/angle_next.png"/>' ],
+		})
+		
+		recommendOwl.on('changed.owl.carousel', function(event) {
+			if(event.item.index === 0 ) {
+				$('.recommend-item-carousel .owl-prev img').css({'opacity': '0.3'})
+			} else {
+				$('.recommend-item-carousel .owl-prev img').css({'opacity': '1'})
+			}
+			if(event.item.index === event.page.size ) {
+				$('.recommend-item-carousel .owl-next img').css({'opacity': '0.3'})
+			} else {
+				$('.recommend-item-carousel .owl-next img').css({'opacity': '1'})
+			}
 		})
 	}
 	
 	if ($('.new-item-carousel').length) {
 		const newItemOwl = $('.new-item-carousel')
 		newItemOwl.owlCarousel({
-			items:3,
+			items:4,
 			margin:32,
 			dots: true,
 			nav: true,
-			slideBy: 3,
+			slideBy: 1,
 			mouseDrag: true,
+			smartSpeed: 1000,
 			navText: [ '<img src="/assets/images/icons/angle_prev.png"/>', '<img src="/assets/images/icons/angle_next.png"/>' ],
 		})
-		
-		const dotArray = Array.from($('.new-item-carousel .owl-dot'));
-		const activeWidth = 100 / dotArray.length
-		$('.main-newItem-scroll-active').css({'width': activeWidth + '%', 'left': 0, 'transition': 'all 0.5s'})
-		
-		// newItemOwl.on('mousewheel', '.owl-stage', function (e) {
-		// 	if (e.originalEvent.deltaY > 0) {
-		// 		newItemOwl.trigger('next.owl');
-		// 	} else {
-		// 		newItemOwl.trigger('prev.owl');
-		// 	}
-		// 	e.preventDefault();
-		// });
-		
 		newItemOwl.on('changed.owl.carousel', function(event) {
-			if(event.page.index === 0 ) {
+			if(event.item.index === 0 ) {
 				$('.new-item-carousel .owl-prev img').css({'opacity': '0.3'})
 			} else {
 				$('.new-item-carousel .owl-prev img').css({'opacity': '1'})
 			}
-			if(event.page.index === 2 ) {
+			if(event.item.index === event.page.size ) {
 				$('.new-item-carousel .owl-next img').css({'opacity': '0.3'})
 			} else {
 				$('.new-item-carousel .owl-next img').css({'opacity': '1'})
 			}
-			const activeIndex = dotArray.findIndex((dot) => dot.classList.contains('active') === true)
-			$('.main-newItem-scroll-active').animate({left: activeIndex * activeWidth + '%'}, 500)
 		})
 		
 	}
@@ -282,7 +280,12 @@
 			center: true,
 			items:1,
 			loop:true,
+			autoplay: true,
 			nav: true,
+			autoplayTimeout: 5000,
+			smartSpeed: 500,
+			animateOut: 'slideOutUp',
+			animateIn: 'slideInUp',
 			navText: [ '<img src="/assets/images/icons/angle_prev.png"/>', '<img src="/assets/images/icons/angle_next.png"/>' ],
 		})
 	}
