@@ -160,7 +160,7 @@ class BuyerModel extends CommonModel
             and del_yn != 'Y'
            order by 
                register_date desc
-           limit 9
+           limit 8
         ";
 
         $this->rodb->query($query);
