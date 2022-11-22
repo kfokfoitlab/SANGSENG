@@ -161,7 +161,7 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: 'esignon Qh1KbrAu8M8FIFfXzqmPKOwMNfdTthAnNB7PY/ND7jj5NVL2P8wavB+g3BUfkTw1lqQY7Eoy9zuBuIXAct5x5/GvqEaUJvQ3VgzvuvHSTceoSVLDlPKxDvWmDsEODspX'
+            Authorization: 'esignon mgjv4YvW5hJwZet8rc43lk6PzONAcr7q//EZ3V8MkNs5U8dE8qw4amjpNMtaCupRi645Rz2K9/T4N1ylBhHzFI2tn0C/h7VLu5CHAa75N+GtMtKi1qAovYx7PKgNI1PokB4o1mlEK5s='
         },
         body: JSON.stringify({
             language: 'ko',
@@ -179,7 +179,7 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
     fetch('https://docs.esignon.net/api/v3/workflows/start?offset=%2B09%3A00', options)
         .then(response => response.json())
         .then(response => location.href = "/"+_CONTROLLER+"/contractSubmit?idx="+idx+"&status="+status+"&workflow_id="+response["workflow_id"])
-				 .then(response => console.log(response))
+		//.then(response => console.log(response))
         .catch(err => console.error(err));
 
 }
