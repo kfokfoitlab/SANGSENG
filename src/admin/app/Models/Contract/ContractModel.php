@@ -336,7 +336,7 @@ class ContractModel extends CommonModel
                 contract_condition
             set
               	 workflow_id = '".$data["workflow_id"]."',
-                 contract_status = ".$data["status"]."
+                 contract_status = '".$data["status"]."'
             where
                  idx = ".$data["idx"];
                   $this->wrdb->update($query);
