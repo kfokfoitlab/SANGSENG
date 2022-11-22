@@ -188,7 +188,7 @@ function Contract_reduction(workflow_id,pworkflow_id) {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+            Authorization: 'esignon mgjv4YvW5hJwZet8rc43lk6PzONAcr7q//EZ3V8MkNs5U8dE8qw4amjpNMtaCupRi645Rz2K9/T4N1ylBhHzFI2tn0C/h7VLu5CHAa75N+GtMtKi1qAovYx7PKgNI1PokB4o1mlEK5s='
         }
     };
     var workflow_key = "";
@@ -231,7 +231,7 @@ function contract_update(field_name,field_value) {
 		method: 'GET',
 		headers: {
 			accept: 'application/json',
-			Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+			Authorization: 'esignon mgjv4YvW5hJwZet8rc43lk6PzONAcr7q//EZ3V8MkNs5U8dE8qw4amjpNMtaCupRi645Rz2K9/T4N1ylBhHzFI2tn0C/h7VLu5CHAa75N+GtMtKi1qAovYx7PKgNI1PokB4o1mlEK5s='
 		}
 	};
 
@@ -263,7 +263,7 @@ function contractView(workflow_id){
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+                Authorization: 'esignon mgjv4YvW5hJwZet8rc43lk6PzONAcr7q//EZ3V8MkNs5U8dE8qw4amjpNMtaCupRi645Rz2K9/T4N1ylBhHzFI2tn0C/h7VLu5CHAa75N+GtMtKi1qAovYx7PKgNI1PokB4o1mlEK5s='
             }
         };
         fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_id + '?offset=%2B09%3A00', options)
