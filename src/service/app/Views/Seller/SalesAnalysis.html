@@ -130,9 +130,9 @@
   function drawStuff() {
     var arr = []
     arr = <?php echo json_encode($static_list)?>;
-    var chartData =[['상품명(계약)', '금액(원)']];
+    var chartData =[['', '금액(원)',{ role: 'annotation' }]];
     for(var i = 0; i <arr.length;i++) {
-      chartData.push([arr[i]['product_name'] + ' ' + '(' + arr[i]['contract_count']   + '건'+')',  parseInt(arr[i]['product_price'])])
+      chartData.push([arr[i]['product_name'] + ' ' + '(' + arr[i]['contract_count']   + '건'+')',  parseInt(arr[i]['product_price']).toLocaleString(),arr[i]['product_name']])
 
     }
 
@@ -146,44 +146,22 @@
       width:1200,
       height:500,
       legend: {position: 'none'},
+      bars : 'horizontal',
       bar : {
         groupWidth : '50%' // 그래프 너비 설정 %
       },
-      vAxis: {minValue:0},
-      hAxis: {
-        title: '상품명(계약 건)',
+      axes: {
+        x: {
+          0: {
+            textPosition : 'none'
+          }
+        }
       }
     };
-    var chart2 = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
+    var chart2 =  new google.charts.Bar(document.getElementById('chart_div2'));
     chart2.draw(data, options);
   };
- /* function drawStuff() {
-    var arr = []
-    arr = <?php echo json_encode($static_list)?>;
-    var chartData =[['', '']];
-    for(var i = 0; i <arr.length;i++) {
-      chartData.push([arr[i]['product_name'] + ' ' + '(' + arr[i]['contract_count']   + '건'+')',  parseInt(arr[i]['product_price'])])
-    }
-      var data = new google.visualization.arrayToDataTable(
-        chartData
-      );
-      var options = {
-        title: 'Chess opening moves',
-        width: 900,
-        legend: {position: 'none'},
-        bars: 'horizontal',
-        axes: {
-          x: {
-            0: {side: 'top', label: '계약금액(원)'},
-            // Top x-axis.
-          }
-        },
-        bar: {groupWidth: "90%"}
-      };
 
-      var chart = new google.charts.Bar(document.getElementById('top_x_div'));
-      chart.draw(data, options);
-  };*/
   google.charts.load('current', {packages: ['corechart', 'bar']});
   google.charts.setOnLoadCallback(drawBasic);
   function drawBasic() {
