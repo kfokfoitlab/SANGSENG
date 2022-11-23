@@ -246,7 +246,6 @@
     var complete_reduction = 0;
     var workflow = "";
     var product_quantity = "";
-    alert(workflow_id);
     for(var i = 0; i<workflow_id.length;i++) {
       workflow_key = workflow_id[i];
       fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_key + '?offset=%2B09%3A00', options)
