@@ -218,7 +218,7 @@ function Contract_reduction(workflow_id,pworkflow_id) {
                 $('#product_quantity').val(product_quantity);
                 $('#workflow_id').val(workflow);
                 $('#pworkflow_id').val(pworkflow_id);
-                $("#statusForm").submit();
+              //  $("#statusForm").submit();
             })
             .catch(err => console.error(err));
     }
@@ -241,13 +241,15 @@ function contract_update(field_name,field_value) {
                 var workflow_id = [];
                 var pworkflow_id = [];
                 var j = 0;
+                var k = 0;
                 for(var i =0; i <response['workflow_list'].length; i++){
                     if(response['workflow_list'][i]['status'] == "Complete"){
                         workflow_id[j] = response['workflow_list'][i]['workflow_id'];
                         j++;
                     }
                     if(response['workflow_list'][i]['status'] == "Playing") {
-                        pworkflow_id[j] = response['workflow_list'][i]['workflow_id'];
+                        pworkflow_id[k] = response['workflow_list'][i]['workflow_id'];
+                        k++;
                     }
                 }
                 Contract_reduction(workflow_id,pworkflow_id);

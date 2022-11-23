@@ -381,13 +381,17 @@ class ContractModel extends CommonModel
         $product_quantity = $data["product_quantity"];
         $pworkflow_id = $data["pworkflow_id"];
         if($pworkflow_id != ""){
+            $playing = explode(',',$pworkflow_id);
+            $where = "workflow_id in (";
+            $where = $where . @join(",", $playing);
+            $where = $where . ")";
             $playing_query = "
                 update
                     contract_condition
                 set
                     contract_status =2
                 where 
-                    workflow_id = '".$pworkflow_id."'
+                    $where
             ";
             $this->wrdb->update($playing_query);
         }
