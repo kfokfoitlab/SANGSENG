@@ -218,7 +218,7 @@ function Contract_reduction(workflow_id,pworkflow_id) {
                 $('#product_quantity').val(product_quantity);
                 $('#workflow_id').val(workflow);
                 $('#pworkflow_id').val(pworkflow_id);
-              //  $("#statusForm").submit();
+                $("#statusForm").submit();
             })
             .catch(err => console.error(err));
     }
