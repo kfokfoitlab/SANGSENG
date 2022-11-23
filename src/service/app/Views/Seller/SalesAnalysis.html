@@ -130,9 +130,9 @@
   function drawStuff() {
     var arr = []
     arr = <?php echo json_encode($static_list)?>;
-    var chartData =[['상품명(계약)', '금액(원)',{ role: 'annotation' }]];
+    var chartData =[['상품명(계약)', '금액(원)']];
     for(var i = 0; i <arr.length;i++) {
-      chartData.push([arr[i]['product_name'] + ' ' + '(' + arr[i]['contract_count']   + '건'+')',  parseInt(arr[i]['product_price']),arr[i]['product_name']])
+      chartData.push([arr[i]['product_name'] + ' ' + '(' + arr[i]['contract_count']   + '건'+')',  parseInt(arr[i]['product_price'])])
 
     }
 
@@ -147,7 +147,7 @@
       height:500,
       legend: {position: 'none'},
       bar : {
-        groupWidth : '10%' // 그래프 너비 설정 %
+        groupWidth : '50%' // 그래프 너비 설정 %
       },
       vAxis: {minValue:0},
       hAxis: {
