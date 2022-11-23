@@ -226,21 +226,21 @@
 	if ($('.recommend-item-carousel').length) {
 		const recommendOwl = $('.recommend-item-carousel')
 		recommendOwl.owlCarousel({
-			items:3,
+			items:2,
+			loop: false,
 			margin:32,
-			dots: true,
+			dots: false,
 			nav: true,
 			slideBy: 1,
-			navText: [ '<img src="/assets/images/icons/angle_prev.png"/>', '<img src="/assets/images/icons/angle_next.png"/>' ],
+			navText: [ '<img src="/assets/images/icons/angle_prev_white.png"/>', '<img src="/assets/images/icons/angle_next_white.png"/>' ],
 		})
-		
 		recommendOwl.on('changed.owl.carousel', function(event) {
 			if(event.item.index === 0 ) {
 				$('.recommend-item-carousel .owl-prev img').css({'opacity': '0.3'})
 			} else {
 				$('.recommend-item-carousel .owl-prev img').css({'opacity': '1'})
 			}
-			if(event.item.index === event.page.size ) {
+			if(event.item.index === 4 ) {
 				$('.recommend-item-carousel .owl-next img').css({'opacity': '0.3'})
 			} else {
 				$('.recommend-item-carousel .owl-next img').css({'opacity': '1'})

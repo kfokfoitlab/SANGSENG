@@ -1,9 +1,13 @@
 <section class="main-recommend-section">
   <div class="auto-container">
-    <div class="main-section-title">
-      <p><span>상생몰 Pick</span></p>
-      <h2>상생몰 추천상품</h2>
+    <div class="position-relative">
+      <div class="main-section-title">
+        <p><span>상생몰 Pick</span></p>
+        <h2>상생몰<br/>추천상품</h2>
+        <p class="sub-des">우리 회사에 잘 맞는 상품을<br>맞춤형으로 확인하세요!</p>
+      </div>
     </div>
+
     <div class="recommend-item-carousel owl-carousel owl-theme">
       <?php
         if(is_array($data) && count($data) > 0){
@@ -18,22 +22,6 @@
             <div class="recommend-item-box-title">
               <span><?=$item['company_name']?></span>
               <p><?=$item['product_name']?></p>
-            </div>
-            <div class="recommend-item-box-price">
-              <p class="d-flex justify-content-between mb-2">
-                <span>계약금액</span>
-                <strong><?=number_format($item['product_price'])?>원</strong>
-              </p>
-              <?php
-              if($_SESSION['login_info']['type'] == 'buyer'){
-              ?>
-              <p class="d-flex justify-content-between">
-                <span>감면액</span>
-                <strong><?=number_format($item['reduction_money'])?>원</strong>
-              </p>
-              <?php
-              }
-              ?>
             </div>
           </div>
         </a>
