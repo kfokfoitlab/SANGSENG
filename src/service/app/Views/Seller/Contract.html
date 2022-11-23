@@ -246,7 +246,7 @@
     var complete_reduction = 0;
     var workflow = "";
     var product_quantity = "";
-
+    alert(workflow_id);
     for(var i = 0; i<workflow_id.length;i++) {
       workflow_key = workflow_id[i];
       fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_key + '?offset=%2B09%3A00', options)
@@ -262,12 +262,12 @@
                     product_quantity = response['field_list'][idx].value;
                   }
                 })
+                workflow = response['workflow_id'];
                 $('#complete_reduction').val(complete_reduction);
                 $('#product_quantity').val(product_quantity);
-                $('#seller_workflow_id').val(workflow_id);
+                $('#seller_workflow_id').val(workflow);
                 $('#seller_pworkflow_id').val(pworkflow_id);
-
-                   $("#statusForm").submit();
+                $("#statusForm").submit();
               })
               .catch(err => console.error(err));
     }
@@ -344,15 +344,18 @@
               var workflow_id = [];
               var pworkflow_id = [];
               var j = 0;
+              var k = 0;
               for(var i =0; i <response['workflow_list'].length; i++){
                 if(response['workflow_list'][i]['status'] == "Complete"){
                   workflow_id[j] = response['workflow_list'][i]['workflow_id'];
                   j++;
                 }
                 if(response['workflow_list'][i]['status'] == "Playing") {
-                  pworkflow_id[j] = response['workflow_list'][i]['workflow_id'];
+                  pworkflow_id[k] = response['workflow_list'][i]['workflow_id'];
+                  k++;
                 }
               }
+
               Contract_reduction(workflow_id,pworkflow_id);
             })
             .catch(err => console.error(err));

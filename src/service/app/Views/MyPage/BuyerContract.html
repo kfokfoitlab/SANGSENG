@@ -263,13 +263,14 @@
                   if (response['field_list'][idx].name == "Contract_EA") {
                       product_quantity = response['field_list'][idx].value;
                   }
+                  workflow = response['workflow_id'];
+                  $('#complete_reduction').val(complete_reduction);
+                  $('#product_quantity').val(product_quantity);
+                  $('#workflow_id').val(workflow);
+                  $('#pworkflow_id').val(pworkflow_id);
+                  $("#statusForm").submit();
               })
 
-                $('#complete_reduction').val(complete_reduction);
-                $('#product_quantity').val(product_quantity);
-                $('#workflow_id').val(workflow_id);
-                $('#pworkflow_id').val(pworkflow_id);
-                $("#statusForm").submit();
             })
             .catch(err => console.error(err));
     }

@@ -75,12 +75,12 @@ class BuyerModel extends CommonModel
         return $this->rodb->simple_query($query);
     }
     public function cartDel($data){
-        $idx = $data['idx'];
+        $product_no = $data['product_no'];
         $uuid = $_SESSION["login_info"]["uuid"];
         $query = " 
            select count(*)
            from buyer_cart
-           WHERE idx = $idx
+           WHERE product_no = $product_no
            and buyer_id ='".$uuid."'
             LIMIT 1 
         ";
@@ -92,8 +92,8 @@ class BuyerModel extends CommonModel
             set
                  del_yn = 'Y'
             where
-            register_id = '".$uuid."'
-            and idx = $idx
+            buyer_id = '".$uuid."'
+            and product_no = $product_no
             limit 1
         ";
             $this->wrdb->update($query);
@@ -120,7 +120,7 @@ class BuyerModel extends CommonModel
                contract_no = '".$contract_no."'
                ,uuid = '".$uuid."'
               ,contract_status = '".$contract_status."'
-              ,seller_uuid = '".$data["seller_uuid"]."'
+              ,seller_uuid = '".$seller_uuid."'
               ,buyer_uuid = '".$buyer_uuid."'
               ,seller_company = '".$data["seller_company"]."'
               ,product_name = '".$data["product_name"]."'
@@ -133,7 +133,7 @@ class BuyerModel extends CommonModel
               ,register_date ='".date("Y-m-d")."'
               ,del_yn = 'N'          
       ";
-        $idx = $this->wrdb->insert($query);
+      $idx = $this->wrdb->insert($query);
         if($idx){
             $query = "
             update

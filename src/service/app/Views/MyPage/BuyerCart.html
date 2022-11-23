@@ -21,22 +21,7 @@
           }
           ?>
           <p>상품목록 (총 <span><?=$count?></span>개)</p>
-      <!--    <div class="d-flex">
-            <select class="form-select form-select-sm me-3" aria-label="Default select example">
-              <option selected>최근등록일순</option>
-              <option value="1">낮은가격순</option>
-              <option value="2">높은가격순</option>
-              <option value="3">전체</option>
-            </select>
-            <select class="form-select form-select-sm" aria-label="Default select example">
-              <option selected>20개씩</option>
-              <option value="1">50개씩</option>
-              <option value="2">100개씩</option>
-              <option value="3">200개씩</option>
-            </select>
-          </div>-->
         </div>
-
         <table class="table">
           <thead>
           <tr>
@@ -60,7 +45,7 @@
             </th>
           </tr>
           </thead>
-          <form name="myForm" method="post" action="/Buyer/Contract">
+          <form name="contractForm" method="post" action="/Buyer/Contract">
           <tbody>
           <?php
           if(is_array($data)){
@@ -69,13 +54,14 @@
          $cart_reduction_money = number_format($item["cart_reduction_money"]);
         ?>
           <input type="hidden" name="product_no" id ="product_no" value="<?=$item['product_no']?>">
-          <input type="hidden" name="seller_uuid" id ="seller_uuid" value= "<?=$item['seller_uuid']?>">
+          <input type="hidden" name="seller_uuid" id ="seller_uuid" value= "<?=$item['seller_id']?>">
           <input type="hidden" name="company_name" id ="company_name" value="<?=$item['company_name']?>">
           <input type="hidden" name="reduction_money" id ="reduction_money" value="<?=$item['cart_reduction_money']?>">
           <input type="hidden" name="product_price" id ="product_price" value= "<?=$item['product_price']?>">
           <input type="hidden" name="product_name" id ="product_name" value= "<?=$item['product_name']?>">
           <input type="hidden" name="buyer_company" id ="buyer_company"  value="<?=$_SESSION['login_info']['company_name']?>">
           <input type="hidden" name="seller_company" id ="seller_company" value= "<?=$item['company_name']?>">
+          <input type="hidden" name="product_no" id ="product_no" value= "<?=$item['product_no']?>">
           <input type="hidden" name="idx" id ="idx" value= "<?=$item['idx']?>">
           <input type="hidden" name="product_quantity" id ="product_quantity" value= "<?=$item['product_quantity']?>">
           <input type="hidden" name="product_category" id ="product_category" value= "<?=$item['product_category']?>">
@@ -113,7 +99,7 @@
 </div>
 <script>
   function contract(){
-    document.myForm.submit();
+    document.contractForm.submit();
   };
 
   function cart_del(idx){

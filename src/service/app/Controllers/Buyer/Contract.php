@@ -47,7 +47,7 @@ class Contract extends BaseController
     public function Contract()
     { // {{{
         $contract_Check = $this->buyer_model->contract_Check($_POST);
-        if($contract_Check){
+        /*if($contract_Check){
             echo "
                 <script>
                     alert('이미 계약중인 상품입니다.');
@@ -56,8 +56,7 @@ class Contract extends BaseController
             ";
 
             die();
-        }
-
+        }*/
         $cart_del = $this->buyer_model->cartDel($_POST);
         $result = $this->buyer_model->contract($_POST);
         if($result == "1") {

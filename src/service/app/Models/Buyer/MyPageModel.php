@@ -7,17 +7,6 @@ class MyPageModel extends CommonModel
 {
 
  public function getCartList($uuid){
-/*     $data = [];
-     // total
-     $query = "
-            select
-                count(*) as 'count'
-            from
-                buyer_cart
-            where buyer_id = '".$uuid."'
-            and del_yn != 'Y'
-        ";
-     $data["count"] = $this->rodb->simple_query($query);*/
      $data = [];
      $query = "
   
@@ -175,15 +164,19 @@ class MyPageModel extends CommonModel
      $complete_reduction = $data["complete_reduction"];
      $product_quantity = $data["product_quantity"];
      $pworkflow_id = $data["pworkflow_id"];
-     $uuid = $_SESSION['login_info']['uuid'];
      if($pworkflow_id != ""){
+         $playing = explode(',',$pworkflow_id);
+         $where = "workflow_id in (";
+         $where = $where . @join(",", $playing);
+         $where = $where . ")";
+
          $playing_query = "
                 update
                     contract_condition
                 set
                     contract_status =2
                 where 
-                    workflow_id = '".$pworkflow_id."'
+                   $where
             ";
          $this->wrdb->update($playing_query);
      }
@@ -265,11 +258,11 @@ class MyPageModel extends CommonModel
                 update
                     contract_condition
                 set
-                    product_price = $complete_reduction,
+                    product_price = '".$complete_reduction."',
                     contract_status =5,
                     product_quantity = '".$product_quantity."',
                     buyer_point = '".$point."',
-                    reduction_money = $reduction_money
+                    reduction_money =  '".$reduction_money."'
                 where 
                     workflow_id = '".$workflow_id."'
             ";
@@ -289,13 +282,17 @@ class MyPageModel extends CommonModel
         $pworkflow_id = $data["seller_pworkflow_id"];
         $uuid = $_SESSION['login_info']['uuid'];
         if($pworkflow_id != ""){
+            $playing = explode(',',$pworkflow_id);
+            $where = "workflow_id in (";
+            $where = $where . @join(",", $playing);
+            $where = $where . ")";
             $playing_query = "
                 update
                     contract_condition
                 set
                     contract_status =2
                 where 
-                    workflow_id = '".$pworkflow_id."'
+                    $where
             ";
             $this->wrdb->update($playing_query);
         }
@@ -367,19 +364,18 @@ class MyPageModel extends CommonModel
             $point = $complete_reduction*0.01;
 
                 $reduction_query = "
-                update
+                  update
                     contract_condition
                 set
-                    product_price = $complete_reduction,
+                    product_price = '".$complete_reduction."',
                     contract_status =5,
                     product_quantity = '".$product_quantity."',
                     buyer_point = '".$point."',
-                    reduction_money = $reduction_money
+                    reduction_money =  '".$reduction_money."'
                 where 
                     workflow_id = '".$workflow_id."'
             ";
                 $this->wrdb->update($reduction_query);
-
             return 1;
         }else{
             return null;
