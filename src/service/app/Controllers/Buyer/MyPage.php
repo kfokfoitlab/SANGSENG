@@ -131,7 +131,7 @@ class MyPage extends BaseController
             echo "
                 <script>
                     alert('삭제되었습니다.');
-					window.location.replace('/Buyer');
+					window.location.replace('/Buyer/MyPage/Cart');
                 </script>
             ";
         }else{
