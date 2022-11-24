@@ -456,6 +456,14 @@ class BuyerModel extends CommonModel
       ";
         $idx = $this->wrdb->insert($query);
         if($idx){
+            $query = "
+        	UPDATE
+			seller_product SET
+			reply_date = '".date("Y-m-d H:i:s")."'
+			WHERE
+			 product_no = '".$product_no."'
+		";
+            $this->wrdb->update($query);
             return 1;
         }else{
             return null;
@@ -588,14 +596,25 @@ class BuyerModel extends CommonModel
 			WHERE
 			    ".$WhereQuery."
 		";
-
         $result = $this->wrdb->update($query);
-        return $result;
+        if($result){
+            $query = "
+        	UPDATE
+			seller_product SET
+			reply_date = null
+			WHERE
+			 product_no = '".$data['product_no']."'
+		";
+            $this->wrdb->update($query);
+            return 1;
+        }else{
+            return null;
+        }
+
     }
 
     public function SellerReplyUpdate($data){
         $user_uuid = $_SESSION['login_info']['uuid'];
-
         $query = "
 			UPDATE
 			seller_product_reply SET
@@ -605,8 +624,19 @@ class BuyerModel extends CommonModel
 			WHERE
 			    idx = ".$data["idx"]."
 		";
-
         $result = $this->wrdb->update($query);
-        return $result;
+        if($result){
+            $query = "
+        	UPDATE
+			seller_product SET
+			reply_date = '".date("Y-m-d H:i:s")."'
+			WHERE
+			 product_no = '".$data['product_no']."'
+		";
+            $this->wrdb->update($query);
+            return 1;
+        }else{
+            return null;
+        }
     }
 }

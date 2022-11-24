@@ -269,6 +269,7 @@ class SellerModel extends CommonModel
                 AND seller_uuid ='".$uuid."'".$where_query."
            order by 
                idx desc
+               limit 4
            
            
         ";
@@ -430,8 +431,9 @@ class SellerModel extends CommonModel
             from
              seller_product
             where register_id = '".$uuid."'
-            and del_yn='n'
-            order by update_date desc
+            and del_yn != 'Y'
+            and reply_date != ''
+            order by reply_date desc
             limit 4        
         ";
         $this->rodb->query($query);
@@ -461,7 +463,6 @@ class SellerModel extends CommonModel
 		while($row = $this->rodb->next_row()){
 			$notice_list[] = $row;
 		}
-		
 		return $notice_list;
 	}
 	

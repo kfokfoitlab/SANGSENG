@@ -84,7 +84,8 @@
       var data = {
         "idx": idx,
         "reply_no": reply_no,
-        "reply_step": reply_step
+        "reply_step": reply_step,
+        "product_no": $('#product_no').val(),
       }
 
       $.ajax({
@@ -117,7 +118,8 @@
       if (confirm("수정하시겠습니까?")) {
         var data = {
           "idx": idx,
-          "reply_content": reply_content
+          "reply_content": reply_content,
+          "product_no": $('#product_no').val()
         }
 
         $.ajax({
