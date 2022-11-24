@@ -79,8 +79,7 @@ $total_money = 0;
 ?>
 
 <div class="left-fixed-box buyer-left-box py-4 px-3 text-white">
-  <h2 class="mb-4"><span class="fw-bold">회사명</span>님의<br/>감면금액 계산기</h2>
-
+  <h2 class="mb-4"><span class="fw-bold"><?=$_SESSION['buyer_info']['company_name']?></span>님의<br/>감면금액 계산기</h2>
   <div class="mb-3 pb-3 reduction-box">
     <h3 class="mb-1"><span>고용 부담금 납부금액</span></h3>
     <p class="sub-text mb-2">* 법인세 <span class="yellow-text"><?=$tax_rate?>%</span>적용</p>
@@ -88,7 +87,7 @@ $total_money = 0;
   </div>
   <div class="mb-4 pb-3 reduction-box">
     <h3 class="mb-1"><span>기대 감면금액</span></h3>
-    <p class="sub-text mb-2">* <span class="yellow-text"><?=number_format($max_reduction)?>원</span>까지 감면받을 수 있습니다.</p>
+    <p class="sub-text mb-2">* <span class="yellow-text"><?=number_format($max_reduction)?>원</span>까지 감면 받을 수 있습니다.</p>
     <p class="m-0 text-white fw-bold text-end"><?=number_format($buyer_reduction)?>원</p>
   </div>
   <div class="mb-4 border-bottom-0 reduction-box">
@@ -98,7 +97,7 @@ $total_money = 0;
     $limit_reduction = 0;
     }
     ?>
-    <p class="sub-text mb-2">* <span class="yellow-text"><?=number_format($limit_reduction)?>원</span>까지 감면 받을 수 있습니다.</p>
+    <p class="sub-text mb-2">* 남은 감면 한도 <span class="yellow-text"><?=number_format($limit_reduction)?>원</span></p>
     <?php
     if($max_reduction >= $Remainder_money){
     $Remainder_money = $max_reduction;
@@ -108,7 +107,7 @@ $total_money = 0;
   </div>
 
   <div class="mt-5">
-    <h2 class="mb-3"><span class="fw-bold">회사명</span>님의<br/>진행 계약 현황 &#10095;</h2>
+    <h2 class="mb-3"><span class="fw-bold"><?=$_SESSION['buyer_info']['company_name']?></span>님의<br/>진행 계약 현황 &#10095;</h2>
     <?php
     if(!$_SESSION["Contract"]) {
     ?>

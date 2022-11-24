@@ -118,14 +118,14 @@ echo doctype("html5");
             </ul>
           </nav>
           <script>
+						const url = window.location.search;
 						const GNBLinks = document.querySelectorAll('#navbar li a');
-						GNBLinks.forEach((nav) => {
-							const hrefText = nav.getAttribute('href').replace(/\&.*/,'');
-							if (window.location.href.indexOf(hrefText) > 0) {
+						GNBLinks.forEach((nav, i) => {
+							if(url.includes(`value=${i+1}`)) {
 								nav.classList.add('on')
-							} else {
+              } else {
 								nav.classList.remove('on')
-							}
+              }
 						})
           </script>
           <!-- Main Menu End-->

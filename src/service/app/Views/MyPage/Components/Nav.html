@@ -1,11 +1,11 @@
 <nav class="d-flex justify-content-between align-items-center px-2 pb-3 border-bottom border-2 buyer-mypage-nav">
   <h2 class="mb-0 h5 fw-bold">마이페이지</h2>
   <ul class="d-flex buyer-nav">
-    <li><a class="text-secondary" href="/Buyer/MyPage/Info">기업정보 관리</a></li>
-    <li><a class="text-secondary" href="/Buyer/MyPage/ConfirmPassword">비밀번호변경</a></li>
-    <li><a class="text-secondary" href="/Buyer/MyPage/Cart">장바구니</a></li>
-    <li><a class="text-secondary" href="/Buyer/MyPage/Contract"><!--href="/Buyer/MyPage/Contract">-->계약현황</a></li>
-    <li><a class="text-secondary" href="/Buyer/DeliveryStatus">배송조회</a></li>
+    <li><a href="/Buyer/MyPage/Info">기업정보 관리</a></li>
+    <li><a href="/Buyer/MyPage/ConfirmPassword">비밀번호변경</a></li>
+    <li><a href="/Buyer/MyPage/Cart">장바구니</a></li>
+    <li><a href="/Buyer/MyPage/Contract"><!--href="/Buyer/MyPage/Contract">-->계약현황</a></li>
+    <li><a href="/Buyer/DeliveryStatus">배송조회</a></li>
   </ul>
   <input type="hidden" name ="uuid" id = "uuid" value="<?=$_SESSION['login_info']['uuid']?>">
 </nav>
