@@ -23,7 +23,7 @@
             if(is_array($static_list) && count($static_list) > 0){
           ?>
           <div class="p-3 my-5 border">
-            <div id="chart_div2" style="width: 900px; height: 500px;"></div>
+            <div id="chart_div2" style="width: 900px; height: auto"></div>
           </div>
           <div class="w-100 p-3">
             <table class="table table-bordered table-sm table-striped">
@@ -137,6 +137,7 @@
     }
 
     console.log(chartData)
+		const rowNumb = chartData.length
     var data = new google.visualization.arrayToDataTable(
             chartData
     );
@@ -144,7 +145,7 @@
     var options = {
       title: '',
       width:1200,
-      height:500,
+      height: rowNumb * 50,
       legend: {position: 'none'},
       bars : 'horizontal',
       bar : {
