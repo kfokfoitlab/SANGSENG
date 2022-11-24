@@ -13,7 +13,7 @@
       <?php
       if($_SESSION['login_info']['type'] == 'buyer'){
       ?>
-        <h2 class="text-center mb-3 fw-bold">추천상품</h2>
+        <h2 class="text-center mt-5 pt-3 mb-3 fw-bold">추천상품</h2>
         <input type="hidden" id ="login_type" value="<?=$_SESSION['login_info']['type']?>">
         <input type="hidden" id ="p_n" value="<?=$_GET['p_n']?>">
 
@@ -24,7 +24,7 @@
           ?>
           <div class="col p-2 recommend-item-box" title="<?=$item['company_name']?> / <?=$item['product_name']?>">
             <div class="border">
-              <a class="d-block p-0" href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>">
+              <a class="d-block p-0" href="/Buyer/Shop/Detail/<?=$item['product_no']?>?value=<?=$_GET['value']?>">
                 <div class="recommend-img">
                   <img src="/uploads/<?=$item['representative_image']?>" alt="<?=$item['product_name']?>">
                 </div>
@@ -106,7 +106,7 @@
               </td>
               <td>
                 <h3>
-                  <a class="d-block" href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>">
+                  <a class="d-block p-0" href="/Buyer/Shop/Detail/<?=$item['product_no']?>?value=<?=$_GET['value']?>">
                     <span class="text-start company-name" title="<?=$item['company_name']?>"><?=$item["company_name"]?></span>
                     <span class="text-start fw-bold mt-1 product-name" title="<?=$item['product_name']?>"><?=$item["product_name"]?></span>
                   </a>

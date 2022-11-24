@@ -82,7 +82,7 @@ class MyPage extends BaseController
         $data = $this->mypage_model->getCartList($uuid);
 
         $data = array(
-            "data" => $data["data"]
+            "data" => $data
             ,"cnt" => $data["count"]
         );
         echo view("Common/Header.html");
@@ -125,7 +125,7 @@ class MyPage extends BaseController
     }
 
     public function CartDel(){
-        $idx = $_POST["idx"];
+        $idx = $_GET["idx"];
         $result =  $this->mypage_model->CartDel($idx);
         if($result == "1") {
             echo "

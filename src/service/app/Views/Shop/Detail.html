@@ -179,10 +179,11 @@
         <input type="hidden" name="product_price" id ="product_price" value= "<?=$data['product_price']?>">
         <input type="hidden" name="seller_company" id ="seller_company" value= "<?=$data['company_name']?>">
         <input type="hidden" name="idx" id ="idx" value= "<?=$data['idx']?>">
-        <input type="hidden" name="reduction_money" id ="reduction_money" value= "<?=$_GET['rm']?>">
+        <input type="hidden" name="reduction_money" id ="reduction_money" value= "<?=$data['reduction_money']?>">
         <input type="hidden" name="ctype" id ="ctype" value= "detail">
         <input type="hidden" name="product_quantity" id ="product_quantity" value= "<?=$data['product_quantity']?>">
         <input type="hidden" name="product_category" id ="product_category" value= "<?=$data['product_category']?>">
+        <input type="hidden" name="representative_image" id ="representative_image" value= "<?=$data['representative_image']?>">
         <div class="d-flex pt-4 pb-5 mb-4">
           <div class="detail-left">
             <div>
@@ -241,7 +242,7 @@
               </div>
             </div>
             <?php
-            $reduction_per = ($_GET['rm']/$data['product_price'])*100;
+            $reduction_per = ($data['reduction_money']/$data['product_price'])*100;
             $reduction_per = round($reduction_per,1);
             ?>
             <div class="mt-5 pt-4 border-top text-end total-price">
@@ -253,7 +254,7 @@
               <div id="reduction_point" style="display: none">
               <div class="w-100 row justify-content-end contract-price mb-0 align-items-center">
                 <p class="col-2 text-start">감면액</p>
-                <p class="col-3 px-0 text-end"><?=number_format($_GET['rm'])?> 원</p>
+                <p class="col-3 px-0 text-end"><?=number_format($data['reduction_money'])?> 원</p>
               </div>
               <div class="w-100 row justify-content-end mb-2">
                 <p class="col-5 px-0 text-end text-danger contract-percentage fw-normal">
@@ -274,8 +275,8 @@
             if($_SESSION["login_info"]["type"] == "buyer"){
             ?>
             <div class="mt-5 text-end">
-              <button onclick='myCart()' class="btn btn-secondary btn-lg me-2">장바구니</button>
-              <button onclick='contract()' class="btn btn-danger btn-lg">계약하기</button>
+              <button type="button" onclick='myCart()' class="btn btn-secondary btn-lg me-2">장바구니</button>
+              <button type="button" onclick='contract(<?=$data['product_no']?>)' class="btn btn-danger btn-lg">계약하기</button>
             </div>
             <?php
             }
@@ -510,11 +511,11 @@
       alert("로그인 후 이용해주세요");
     }
   }
-  function contract(){
+  function contract(product_no){
     var session = $("#session").val();
     if(session == "success") {
-      document.myForm.action='/Buyer/Contract';
-      document.myForm.submit();
+      var ctype = "detail"
+      location.href = "/Buyer/Contract?product_no="+product_no+"&ctype=" + ctype;
     }else{
       alert("로그인 후 이용해주세요");
     }

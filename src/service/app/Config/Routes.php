@@ -153,7 +153,7 @@ $routes->group('Buyer', function($routes){
 	$routes->post ('Shop/SellerReplySubmit',     'Buyer\Shop::SellerReplySubmit');
     $routes->post ('Shop/SellerReplyDelete',     'Buyer\Shop::SellerReplyDelete');
     $routes->post ('Shop/SellerReplyUpdate',     'Buyer\Shop::SellerReplyUpdate');
-    $routes->post ('Contract',        'Buyer\Contract::Contract');
+    $routes->get ('Contract',        'Buyer\Contract::Contract');
     $routes->get ('MyPage/Info',            'Buyer\MyPage::Info');
     $routes->get ('MyPage/ConfirmPassword',    'Buyer\MyPage::ConfirmPassword');
     $routes->get ('MyPage/downloadFileNew',  'Buyer\MyPage::downloadFileNew');
@@ -162,7 +162,7 @@ $routes->group('Buyer', function($routes){
     $routes->post ('MyPage/BuyerPwdSubmit', 'Buyer\MyPage::BuyerPwdSubmit');
     $routes->post ('Shop/Cart',            'Buyer\Shop::Cart');
     $routes->get ('MyPage/Cart',           'Buyer\MyPage::Cart');
-    $routes->post ('MyPage/CartDel',           'Buyer\MyPage::CartDel');
+    $routes->get ('MyPage/CartDel',           'Buyer\MyPage::CartDel');
     $routes->get ('MyPage/Contract',           'Buyer\MyPage::Contract');
     $routes->post ('MyPage/Contract/Sequence',           'Buyer\MyPage::Sequence');
     $routes->post ('MyPage/ContractUpdate',           'Buyer\MyPage::ContractUpdate');

@@ -81,7 +81,7 @@ class BuyerModel extends CommonModel
            select count(*)
            from buyer_cart
            WHERE product_no = $product_no
-           and buyer_id ='".$uuid."'
+           and buyer_uuid ='".$uuid."'
             LIMIT 1 
         ";
         $cart_del = $this->rodb->simple_query($query);
@@ -92,7 +92,7 @@ class BuyerModel extends CommonModel
             set
                  del_yn = 'Y'
             where
-            buyer_id = '".$uuid."'
+            buyer_uuid = '".$uuid."'
             and product_no = $product_no
             limit 1
         ";
@@ -104,46 +104,55 @@ class BuyerModel extends CommonModel
     }
 
     public function contract($data){
+        $uuid = $_SESSION['login_info']['uuid'];
+        $product_no = $data['product_no'];
+        $product_info_query = "
+                    select
+                        *
+                    from
+                        buyer_cart
+                    where
+                         buyer_uuid ='".$uuid."'
+                         and product_no  ='".$product_no."'
+                    limit 1
+                ";
+        $this->rodb->query($product_info_query);
+        $product_info = $this->rodb->next_row();
         helper(["uuid_v4", "specialchars"]);
         $uuid = gen_uuid_v4();
         $contract_no = date("YmdHis");
         $contract_status = "1";
-        $seller_uuid = $data['seller_uuid'];
-        $buyer_uuid = $_SESSION['login_info']['uuid'];
-        $reduction_money = $data['reduction_money'];
-        $product_quantity = $data['product_quantity'];
-        $product_category = $data['product_category'];
-        $query = "
+        $insert_query = "
           insert into
               contract_condition
           set
                contract_no = '".$contract_no."'
                ,uuid = '".$uuid."'
               ,contract_status = '".$contract_status."'
-              ,seller_uuid = '".$seller_uuid."'
-              ,buyer_uuid = '".$buyer_uuid."'
-              ,seller_company = '".$data["seller_company"]."'
-              ,product_name = '".$data["product_name"]."'
-              ,product_price = '".$data["product_price"]."'
-              ,buyer_company = '".$data["buyer_company"]."'
-              ,product_quantity = '".$product_quantity."'
-              ,reduction_money = '".$reduction_money."'
-              ,product_category = '".$product_category."'
-              ,product_no = '".$data["product_no"]."'       
+              ,seller_uuid = '".$product_info["seller_uuid"]."'
+              ,buyer_uuid = '".$product_info["buyer_uuid"]."'
+              ,seller_company = '".$product_info["seller_company"]."'
+              ,product_name = '".$product_info["cart_product_name"]."'
+              ,product_price = '".$product_info["cart_product_price"]."'
+              ,buyer_company = '".$_SESSION["login_info"]['company_name']."'
+              ,product_quantity = '".$product_info["product_quantity"]."'
+              ,reduction_money = '".$product_info["cart_reduction_money"]."'
+              ,product_category = '".$product_info["product_category"]."'
+              ,product_no = '".$product_no."'       
               ,register_date ='".date("Y-m-d")."'
               ,del_yn = 'N'          
       ";
-      $idx = $this->wrdb->insert($query);
+      $idx = $this->wrdb->insert($insert_query);
         if($idx){
             $query = "
             update
                 seller_company
             set
                 seller_notification = '1'
-            where uuid ='".$seller_uuid."'
+            where uuid ='".$product_info["seller_uuid"]."'
         ";
             $this->wrdb->update($query);
-            return 1;
+            return "1";
         }else{
             return null;
         }
@@ -375,7 +384,7 @@ class BuyerModel extends CommonModel
                 buyer_cart
             where
                 product_no = $product_no
-                and buyer_id = '".$uuid."'
+                and buyer_uuid = '".$uuid."'
                 and del_yn ='N'
             limit 1
         ";
@@ -384,22 +393,33 @@ class BuyerModel extends CommonModel
 
     public function CartInsert($data){
         $product_no = $data["product_no"];
-        $buyer_id = $_SESSION['login_info']['uuid'];
-        $seller_id = $data["seller_uuid"];
+        $buyer_uuid = $_SESSION['login_info']['uuid'];
+        $seller_uuid = $data["seller_uuid"];
         $reduction_money =$data['reduction_money'];
         $seller_company = $data["seller_company"];
+        $cart_product_price = $data['product_price'];
+        $representative_image = $data['representative_image'];
+        $product_name = $data['product_name'];
+        $product_quantity = $data['product_quantity'];
+        $product_category = $data['product_category'];
+
         $query = "
           insert into
                buyer_cart
           set
                product_no = '".$product_no."'
-               ,buyer_id = '".$buyer_id."' 
-               ,seller_id = '".$seller_id."' 
-               ,seller_company = '".$seller_company."' 
+               ,buyer_uuid = '".$buyer_uuid."' 
+               ,seller_uuid = '".$seller_uuid."' 
+               ,seller_company = '".$seller_company."'
+               ,cart_product_price = '".$cart_product_price."' 
                ,cart_reduction_money = '".$reduction_money."' 
-              ,register_date = '".date("Y-m-d H:i:s")."'
-              ,register_id = '".$buyer_id."' 
-              ,del_yn = 'N'          
+               ,cart_product_name = '".$product_name."'
+               ,product_quantity = '".$product_quantity."'
+               ,product_category = '".$product_category."'
+               ,representative_image = '".$representative_image."' 
+               ,register_date = '".date("Y-m-d H:i:s")."'
+               ,register_id = '".$buyer_uuid."' 
+               ,del_yn = 'N'          
       ";
         $idx = $this->wrdb->insert($query);
         if($idx){

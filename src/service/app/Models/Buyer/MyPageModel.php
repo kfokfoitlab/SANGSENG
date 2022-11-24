@@ -11,19 +11,17 @@ class MyPageModel extends CommonModel
      $query = "
   
         select
-           *,a.idx as 'productidx'
+           *
         from 
-            buyer_cart a 
-                join seller_product b on a.product_no  = b.product_no
+            buyer_cart 
         where
-            a.buyer_id = '".$uuid."'
-            and a.del_yn != 'Y'
-           
+            buyer_uuid = '".$uuid."'
+            and del_yn != 'Y'
         ";
      //echo $query;
      $this->rodb->query($query);
      while($row = $this->rodb->next_row()){
-         $data["data"][]= $row;
+         $data[]= $row;
 
      }
      return $data;
@@ -73,7 +71,7 @@ class MyPageModel extends CommonModel
                count(*) cart
             from
               buyer_cart 
-            where del_yn != 'Y' AND buyer_id ='".$uuid."' 
+            where del_yn != 'Y' AND buyer_uuid ='".$uuid."' 
  
         ";
      $this->rodb->query($cart_query);
