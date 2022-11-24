@@ -21053,6 +21053,9 @@ MyPage/Nav
   right: -0.5rem;
   background-color: #ccc;
 }
+.buyer-mypage-nav a {
+  color: #777;
+}
 .buyer-mypage-nav a:hover,
 .buyer-mypage-nav a.on {
   font-weight: bold;
@@ -21641,9 +21644,11 @@ CS
   right: -0.5rem;
   background-color: #ccc;
 }
+.cs-nav a {
+  color: #9e9e9e;
+}
 .cs-nav a:hover,
 .cs-nav a.on {
-  font-weight: bold;
   color: #444;
 }
 /* FAQ */
@@ -21995,9 +22000,9 @@ Home Sections
   z-index: -1;
 }
 /* 메인배너 */
-/*.main-banner-carousel {*/
-/*  max-width: 1920px;*/
-/*}*/
+.main-banner-carousel .banner-carousel {
+  width: 100%;
+}
 .main-banner-carousel[data-main-banner-autoplay-status="Y"] .play {
   display: none;
 }
@@ -22148,6 +22153,7 @@ Home Sections
 }
 .main-info-menu li p {
   font-size: 16px;
+  font-weight: 700;
   color: #000;
 }
 .main-info-menu li span {
