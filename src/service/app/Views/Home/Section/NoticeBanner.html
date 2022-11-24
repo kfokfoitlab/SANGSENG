@@ -6,12 +6,23 @@
       </div>
       <div class="col-9">
         <div class="notice-carousel owl-carousel owl-theme">
+          <?php
+          if(is_array($notice_list)&& count($notice_list) > 0){
+          foreach($notice_list as $item){
+          ?>
           <div>
-            <a href="">공지사항제목</a>
+            <a href="/CS/Notice/Detail?idx=<?=$item['idx']?>"><?=$item["title"]?></a>
           </div>
-          <div>
-            <a href="">공지사항제목2</a>
-          </div>
+          <?php
+          }
+          ?>
+          <?php
+          }else{
+          ?>
+          <h2>등록된 공지사항이 없습니다.</h2>
+          <?php
+          }
+          ?>
         </div>
       </div>
       <div class="col-1">
