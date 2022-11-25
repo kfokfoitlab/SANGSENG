@@ -188,10 +188,10 @@
 	if ($('.banner-carousel').length) {
 		function mainCarousel__onTranslated() {
 			$('.main-banner-carousel > .owl-carousel').trigger('play.owl.autoplay');
-			
 			$('.main-banner-carousel').attr('data-main-banner-autoplay-status', 'Y');
 		}
-		$('.banner-carousel').owlCarousel({
+		const mainCarousel = $('.banner-carousel');
+		mainCarousel.owlCarousel({
 			singleItem: true,
 			animateOut: 'fadeOut',
 			animateIn: 'fadeIn',
@@ -1215,45 +1215,39 @@
 		const numb = document.querySelector('.main-banner-counter');
 		countUp(numb)
 		
-		const leftBox = $('.left-fixed-box');
-		const leftToggleBtn = $('.left-toggle-btn')
-		let leftBoxOffset;
-
-		const getCookieValue = (name) => (
-			document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
-		)
-		// document.cookie = 'leftToggle=';
-		let cookieValue;
+		// const leftBox = $('.left-fixed-box');
+		// const leftToggleBtn = $('.left-toggle-btn')
+		// let leftBoxOffset;
+		//
+		// const getCookieValue = (name) => (
+		// 	document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
+		// )
+		// let cookieValue;
+		// console.log(typeof cookieValue)
 		// console.log(cookieValue)
-		// document.cookie = 'leftToggle=false';
-		// cookieValue = getCookieValue('leftToggle');
-		console.log(typeof cookieValue)
-		console.log(cookieValue)
-		
-		if(cookieValue === undefined) {
-			document.cookie = 'leftToggle=show';
-		} else if(getCookieValue('leftToggle') === 'show') {
-			leftBox.css({left: '0px', marginLeft: '0px'});
-		} else if(getCookieValue('leftToggle') === 'hide') {
-			leftBox.css({left: '-250px', marginLeft: '-250px'});
-		}
-		
-		
-		leftToggleBtn.on('click', function() {
-			leftBoxOffset = leftBox.offset().left
-			cookieValue = getCookieValue('leftToggle');
-			
-			if(cookieValue === 'show') {
-				leftBox.animate({left: '-250px', marginLeft: '-250px'});
-				document.cookie = 'leftToggle=hide';
-				console.log(cookieValue)
-			} else if(cookieValue === 'hide') {
-				leftBox.animate({left: '0px', marginLeft: '0px'});
-				document.cookie = 'leftToggle=show';
-				console.log(cookieValue)
-			}
-		})
-		
+		//
+		// if(cookieValue === undefined) {
+		// 	document.cookie = 'leftToggle=show';
+		// } else if(getCookieValue('leftToggle') === 'show') {
+		// 	leftBox.css({left: '0px', marginLeft: '0px'});
+		// } else if(getCookieValue('leftToggle') === 'hide') {
+		// 	leftBox.css({left: '-250px', marginLeft: '-250px'});
+		// }
+		//
+		// leftToggleBtn.on('click', function() {
+		// 	leftBoxOffset = leftBox.offset().left
+		// 	cookieValue = getCookieValue('leftToggle');
+		//
+		// 	if(cookieValue === 'show') {
+		// 		leftBox.animate({left: '-250px', marginLeft: '-250px'});
+		// 		document.cookie = 'leftToggle=hide';
+		// 		console.log(cookieValue)
+		// 	} else if(cookieValue === 'hide') {
+		// 		leftBox.animate({left: '0px', marginLeft: '0px'});
+		// 		document.cookie = 'leftToggle=show';
+		// 		console.log(cookieValue)
+		// 	}
+		// })
 		
 	});
 

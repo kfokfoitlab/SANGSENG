@@ -198,9 +198,15 @@ $total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCoun
     } else {
       nav.classList.remove('on')
     }
-    if(window.location.pathname == '/Seller/Item/ItemUpdate') {
-      document.querySelector('a[href="/Seller/Item/ItemList"]').classList.add('on')
-    }
+		if(window.location.pathname.includes('/Seller/IMJOB/IMJOBView')) {
+			document.querySelector('a[href="/Seller/IMJOB/List?p_n=1"]').classList.add('on')
+		}
+		if(window.location.pathname.includes('/Seller/Item/ItemUpdate')) {
+			document.querySelector('a[href="/Seller/Item/ItemList?p_n=1"]').classList.add('on')
+		}
+		if(window.location.pathname.includes('/Seller/DeliveryStatus')) {
+			document.querySelector('a[href="/Seller/DeliveryStatus"]').classList.add('on')
+		}
   })
 
   switch (true) {

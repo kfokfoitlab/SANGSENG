@@ -382,7 +382,7 @@
                 <button class="btn btn-dark btn-sm fw-normal flex-shrink-0 px-3" onclick="sellerReplySubmit(1);">등록</button>
               </div>
               <?php if(count($reply_data)){ ?>
-              <ul>
+              <ul class="comment-lists">
                 <?php foreach($reply_data as $item){ ?>
                 <li>
                   <?php if($item["reply_step"] == 1){
@@ -409,9 +409,14 @@
                       <input class="bg-white w-100" value="<?=$item['reply_content']?>"
                              name="reply_content_ud_<?=$item['idx']?>" id="reply_content_ud_<?=$item["idx"]?>" disabled>
                     </div>
-                    <!--                    <div>
-                                          <button class="btn btn-dark btn-sm py-0 fw-normal">답글</button>
-                                        </div>-->
+
+                    <?php if(@$_SESSION["login"] == "success" && ($data["seller_uuid"] == $_SESSION['login_info']['uuid']
+                  || $item['user_uuid'] == $_SESSION['login_info']['uuid'])){ ?>
+                    <div class="mb-2">
+                      <button class="toggle-reply-btn badge bg-secondary fw-normal" data-target-id="reply_panel_<?=$item["reply_no"]?>">답글</button>
+                    </div>
+                    <?php } ?>
+
                   </div>
                   <?php  foreach($reply_data as $item_re) {?>
                   <?php if($item_re["reply_no"] == $item["reply_no"] && $item_re["reply_step"] != 1){
@@ -452,28 +457,30 @@
                   <?php } ?>
                   <?php if(@$_SESSION["login"] == "success" && ($data["seller_uuid"] == $_SESSION['login_info']['uuid']
                   || $item['user_uuid'] == $_SESSION['login_info']['uuid'])){ ?>
-                  <div class="product-review-writing d-flex p-2 border-bottom bg-light">
-                    <div>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
-                      </svg>
-                    </div>
-                    <div class="ms-3 flex-grow-1">
-                      <div class="mb-2">
-                        <?php
-
-                          if($_SESSION['login_info']['type'] == "buyer" ){
-                            $user_type = "<span class='badge bg-warning fw-normal'>구매기업</span>";
-                        }elseif($_SESSION['login_info']['type'] == "seller" ){
-                        $user_type = "<span class='badge bg-danger fw-normal'>판매기업</span>";
-                        }
-                        ?>
-                        <?=$user_type?>
-                        <strong class="me-2"><?=$_SESSION['login_info']['company_name']?></strong>
+                  <div class="product-review-writing p-2 border-bottom bg-light" id="reply_panel_<?=$item["reply_no"]?>">
+                    <div class="d-flex">
+                      <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
+                        </svg>
                       </div>
-                      <div class="d-flex">
-                        <input type="text" name="reply_content_<?=$item['reply_no']?>" id="reply_content_<?=$item["reply_no"]?>" class="w-100 px-3 py-2 bg-light border rounded-3 me-2 bg-white" placeholder="답변을 등록해주세요.">
-                        <button class="btn btn-dark btn-sm fw-normal flex-shrink-0 px-3" onclick="sellerReplySubmit(2,'<?=$item["reply_no"]?>');">등록</button>
+                      <div class="ms-3 flex-grow-1">
+                        <div class="mb-2">
+                          <?php
+
+                            if($_SESSION['login_info']['type'] == "buyer" ){
+                              $user_type = "<span class='badge bg-warning fw-normal'>구매기업</span>";
+                          }elseif($_SESSION['login_info']['type'] == "seller" ){
+                          $user_type = "<span class='badge bg-danger fw-normal'>판매기업</span>";
+                          }
+                          ?>
+                          <?=$user_type?>
+                          <strong class="me-2"><?=$_SESSION['login_info']['company_name']?></strong>
+                        </div>
+                        <div class="d-flex">
+                          <input type="text" name="reply_content_<?=$item['reply_no']?>" id="reply_content_<?=$item["reply_no"]?>" class="w-100 px-3 py-2 bg-light border rounded-3 me-2 bg-white" placeholder="답변을 등록해주세요.">
+                          <button class="btn btn-dark btn-sm fw-normal flex-shrink-0 px-3" onclick="sellerReplySubmit(2,'<?=$item["reply_no"]?>');">등록</button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -499,6 +506,23 @@
     }else{
       $("#reduction_point").css('display','none');
     }
+
+		const commentReply = $('.toggle-reply-btn').attr('data-target-id');
+		$('#'+commentReply).hide();
+
+		$('.toggle-reply-btn').on('click', function() {
+			const btnTarget = $(this).attr('data-target-id');
+			$('#'+btnTarget).toggle();
+    })
+
+
+    const commentLists =  $('.comment-lists')
+		$('.toggle-reply-btn').on('click', function() {
+			const list = $(this).parent().parent();
+			const index = list.index();
+			let reviewWriting = $('.comment-lists li['+index+'] .product-review-writing');
+			reviewWriting.css({border: '1px solid red'});
+    })
   });
 
 

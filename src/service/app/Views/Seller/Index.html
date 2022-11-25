@@ -15,40 +15,43 @@
               <input type="hidden" id ="uuid" value="<?=$_SESSION['login_info']['uuid']?>">
               <h3 class="card-title">계약</h3>
             </div>
-            <div class="card-body d-flex flex-column justify-content-center">
-              <div class="d-flex justify-content-between">
-                <p class="card-text">계약 진행중</p>
-                <a href="/Seller/Contract"><p class="text-end"><strong><?=$contractList['count']?></strong>건</p></a>
+            <div class="card-body d-flex flex-column">
+              <div class="pb-4 border-bottom">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <p class="card-text">계약 진행중</p>
+                  <a class="p-0" href="/Seller/Contract"><p class="text-end"><strong><?=$contractList['count']?></strong>건</p></a>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p class="card-text">계약 완료</p>
+                  <a class="p-0" href="/Seller/Contract"><p class="text-end"><strong><?=$completionContract['count']?></strong>건</p></a>
+                </div>
               </div>
-              <div class="d-flex justify-content-between mb-3">
-                <p class="card-text">계약 완료</p>
-                <a href="/Seller/Contract"><p class="text-end"><strong><?=$completionContract['count']?></strong>건</p></a>
-              </div>
-              <div class="d-flex justify-content-between ">
-                <p class="card-text">배송 진행중</p>
-                <a href="/Seller/DeliveryStatus"><p class="text-end"><strong><?=$delivery['playing']['playing']?></strong>건</p></a>
-              </div>
-              <div class="d-flex justify-content-between mb-3">
-                <p class="card-text">배송 완료</p>
-                <a href="/Seller/DeliveryStatus"> <p class="text-end"><strong><?=$delivery['complete']['complete']?></strong>건</p></a>
+              <div class="pt-4">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <p class="card-text">배송 진행중</p>
+                  <a class="p-0" href="/Seller/DeliveryStatus"><p class="text-end"><strong><?=$delivery['playing']['playing']?></strong>건</p></a>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p class="card-text">배송 완료</p>
+                  <a class="p-0" href="/Seller/DeliveryStatus"> <p class="text-end"><strong><?=$delivery['complete']['complete']?></strong>건</p></a>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="card-wrapper">
           <div class="card card-icon card-icon02">
-            <div
-                    class="card-header d-flex justify-content-between align-items-center">
+            <div class="card-header d-flex justify-content-between align-items-center">
               <h3 class="card-title">매출</h3>
               <a href="/Seller/Statistics/SalesAnalysis" class="more-btn">+more</a>
             </div>
-            <div class="card-body d-flex flex-column justify-content-center">
-              <div class="mb-2">
-                <p class="card-text mb-1">예산 매출액</p>
+            <div class="card-body d-flex flex-column">
+              <div class="pb-3">
+                <p class="card-text mb-2">예산 매출액</p>
                 <p class="text-end"><strong><?=number_format($seller_info['seller_sales'])?></strong>원</p>
               </div>
-              <div>
-                <p class="card-text mb-1">결산 매출액</p>
+              <div class="pt-3">
+                <p class="card-text mb-2">결산 매출액</p>
                 <p class="text-end"><strong><?=number_format($expectationSales['price'])?></strong>원</p>
               </div>
             </div>
@@ -56,16 +59,16 @@
         </div>
         <div class="card-wrapper">
           <div class="card card-icon card-icon03">
-            <div
-                    class="card-header d-flex justify-content-between align-items-center"
-            >
+            <div class="card-header d-flex justify-content-between align-items-center">
               <h3 class="card-title">인재</h3>
               <a href="/Seller/IMJOB/List" class="more-btn">+more</a>
             </div>
-            <div class="card-body d-flex flex-column justify-content-center">
-              <p class="card-text mb-2"><b>장애인 근로자 수 : <?=$_SESSION["disabledCount"]['worker_cnt']?>명</b></p>
-              <p class="card-text mb-1 ps-3">- 중증 장애인 수 <strong><?=$_SESSION["disabledCount"]['degree_1_cnt']?></strong>명</p>
-              <p class="card-text ps-3">- 경증 장애인 수 <strong><?=$_SESSION["disabledCount"]['degree_2_cnt']?></strong>명</p>
+            <div class="card-body d-flex flex-column">
+              <p class="card-text mb-4 text-center">장애인 근로자 수 <strong><?=$_SESSION["disabledCount"]['worker_cnt']?></strong>명</p>
+              <div class="text-end">
+                <p class="card-text d-flex justify-content-between mb-2"><span>중증 장애인 수</span> <span><?=$_SESSION["disabledCount"]['degree_1_cnt']?>명</span></p>
+                <p class="card-text d-flex justify-content-between"><span>경증 장애인 수</span> <span><?=$_SESSION["disabledCount"]['degree_2_cnt']?>명</span></p>
+              </div>
             </div>
           </div>
         </div>
@@ -166,7 +169,7 @@
                     }
                     }else{
                     ?>
-                    <p>진행중인 계약이 없습니다</p>
+                    <li class="mt-3 ps-3">진행중인 계약이 없습니다.</li>
                     <?php
                     }
                     ?>
@@ -194,7 +197,7 @@
                       }
                     }else{
                   ?>
-                    <p>등록된 게시물이 없습니다</p>
+                    <li class="mt-3 ps-3">등록된 게시물이 없습니다</li>
                     <?php
                   }
                   ?>
@@ -242,7 +245,7 @@
                   }
                   }else{
                   ?>
-                  <p>등록된 게시물이 없습니다</p>
+                  <li class="mt-3 ps-3">등록된 게시물이 없습니다</li>
                   <?php
                   }
                   ?>
@@ -265,12 +268,15 @@
                    if(is_array($notice_list)&& count($notice_list) > 0){
                 foreach($notice_list as $item){
                 ?>
-                <li><a href="/CS/Notice/Detail?idx=<?=$item['idx']?>">[공지사항]<?=$item["title"]?></a><span style="float: right"><?=substr($item["register_date"],0,10)?></span></li>
+                <li class="d-flex align-items-center">
+                  <a class="flex-grow-1 p-0 text-truncate" href="/CS/Notice/Detail?idx=<?=$item['idx']?>"><?=$item["title"]?></a>
+                  <span class="flex-shrink-0"><?=substr($item["register_date"],0,10)?></span>
+                </li>
                 <?php
                     }
                   }else{
                   ?>
-                <p>등록된 게시물이 없습니다</p>
+                <li class="mt-3 ps-3">등록된 게시물이 없습니다</li>
                 <?php
                   }
                   ?>

@@ -21033,6 +21033,10 @@ Shop/Detail
 .shop-detail .nav-tabs .nav-link.active {
   font-weight: bold;
 }
+.shop-detail .toggle-reply-btn:hover {
+  font-weight: normal;
+  filter: brightness(1.2);
+}
 /***
 
 ====================================================================
@@ -21257,7 +21261,7 @@ Seller/Index
   min-width: 414px;
 }
 .seller-mypage .card {
-  height: 100%;
+  height: 335px;
 }
 .seller-mypage h3 {
   margin: 0;
@@ -21272,7 +21276,7 @@ Seller/Index
 }
 .seller-mypage .card-icon .card-body {
   min-height: 170px;
-  padding: 1.2rem 40px 1.2rem 30%;
+  padding: 40px;
 }
 .seller-mypage .more-btn {
   color: #777;
@@ -21281,15 +21285,15 @@ Seller/Index
 .seller-mypage .more-btn:hover {
   font-weight: bold;
 }
-.seller-mypage .card-icon01 .card-body {
-  background: 30px center / 14% url("/assets/images/resource/icons/assignment.svg") no-repeat;
-}
-.seller-mypage .card-icon02 .card-body {
-  background: 30px center / 17% url("/assets/images/resource/icons/piggy-bank.svg") no-repeat;
-}
-.seller-mypage .card-icon03 .card-body {
-  background: 30px center / 17% url("/assets/images/resource/icons/people.svg") no-repeat;
-}
+/*.seller-mypage .card-icon01 .card-body {*/
+/*  background: 30px center / 14% url("/assets/images/resource/icons/assignment.svg") no-repeat;*/
+/*}*/
+/*.seller-mypage .card-icon02 .card-body {*/
+/*  background: 30px center / 17% url("/assets/images/resource/icons/piggy-bank.svg") no-repeat;*/
+/*}*/
+/*.seller-mypage .card-icon03 .card-body {*/
+/*  background: 30px center / 17% url("/assets/images/resource/icons/people.svg") no-repeat;*/
+/*}*/
 .seller-mypage .question-answer button {
   padding-top: 60px;
   color: #444;
@@ -22000,6 +22004,9 @@ Home Sections
   z-index: -1;
 }
 /* 메인배너 */
+.main-banner-carousel .owl-carousel:not(.owl-loaded){
+  opacity: 0;
+}
 .main-banner-carousel .banner-carousel {
   width: 100%;
 }
@@ -22010,8 +22017,7 @@ Home Sections
   display: none;
 }
 .main-banner-carousel .banner-carousel {
-  /*width: calc(100vw - 17px);*/
-  /*overflow: hidden;*/
+  display: block;
 }
 .main-banner-carousel .slide-item {
   width: 100%;
@@ -22465,8 +22471,26 @@ Home Sections
 
 /*marin-info-top*/
 
-.marin-info-top li a {
+.main-info-top li a {
   padding: 0 8px;
   font-size: 14px;
   color: #989898;
+}
+
+/* 구매기업 배송조회 */
+.buyer-delivery-status #contract_select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: 99% center / 33px url("/assets/images/icons/angle-down.svg") no-repeat;
+  cursor: pointer;
+}
+
+/* 판매기업 배송조회 */
+.contract-list #contract_select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: 99% center / 33px url("/assets/images/icons/angle-down.svg") no-repeat;
+  cursor: pointer;
 }
