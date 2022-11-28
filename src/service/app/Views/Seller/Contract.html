@@ -36,10 +36,10 @@
                   <input name ="search_A" type="text" class="form-control form-control-sm"
                   <?php if($_GET["search_A"] != ""){ echo "value='".$_GET["search_A"]."'";}?>/>
                 </div>
-               <!-- <div class="d-flex align-items-center">
-                  <label class="form-label me-1 mb-0 col-form-label-sm flex-shrink-0" for="">상품명</label>
-                  <input type="text" class="form-control form-control-sm"/>
-                </div>-->
+                <!-- <div class="d-flex align-items-center">
+                   <label class="form-label me-1 mb-0 col-form-label-sm flex-shrink-0" for="">상품명</label>
+                   <input type="text" class="form-control form-control-sm"/>
+                 </div>-->
               </div>
             </td>
           </tr>
@@ -68,138 +68,135 @@
         </div>
       </form>
 
-        <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-2">
-          <?php
+      <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-2">
+        <?php
           $count = 0;
           if(is_array($data)){
           $count = count($data);
           }
           ?>
-          <span>계약목록 (총 <strong><?=$count?></strong>개)</span>
+        <span>계약목록 (총 <strong><?=$count?></strong>개)</span>
 
 
-          <div class="d-flex">
-<!--           <select class="form-select form-select-sm me-2" aria-label="Default select">
-              <option value="all" selected>전체</option>
-              <option value="recent">최근 계약일순</option>
-              <option value="low">낮은 가격순</option>
-              <option value="high">높은 가격순</option>
-            </select>-->
+        <div class="d-flex">
+          <!--           <select class="form-select form-select-sm me-2" aria-label="Default select">
+                        <option value="all" selected>전체</option>
+                        <option value="recent">최근 계약일순</option>
+                        <option value="low">낮은 가격순</option>
+                        <option value="high">높은 가격순</option>
+                      </select>-->
 
 
-<!--
-            <select class="form-select form-select-sm me-2" aria-label="Default select">
-              <option value="20" selected>20개씩</option>
-              <option value="50">50개씩</option>
-              <option value="100">100개씩</option>
-              <option value="200">200개씩</option>
-            </select>
--->
+          <!--
+                      <select class="form-select form-select-sm me-2" aria-label="Default select">
+                        <option value="20" selected>20개씩</option>
+                        <option value="50">50개씩</option>
+                        <option value="100">100개씩</option>
+                        <option value="200">200개씩</option>
+                      </select>
+          -->
 
-            <button type="button" class="me-2 btn btn-sm btn-success flex-shrink-0 fw-normal" onclick="excelFileExport();">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-              </svg>
-              엑셀다운
-            </button>
-            <button class="btn btn-sm btn-warning flex-shrink-0 px-3" onclick="contract_update();">계약상태 최신화</button>
-          </div>
+          <button type="button" class="me-2 btn btn-sm btn-success flex-shrink-0 fw-normal" onclick="excelFileExport();">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+            </svg>
+            엑셀다운
+          </button>
+          <button class="btn btn-sm btn-warning flex-shrink-0 px-3" onclick="contract_update();">계약상태 최신화</button>
         </div>
+      </div>
 
-        <table id ="SellercontractTbl" class="contract-list-table table table-striped text-center mt-5">
-          <thead>
-          <tr>
-            <th>No.</th>
-            <th>계약상태</th>
-            <th>상품명</th>
-            <th>구매기업</th>
-            <th>상품수량</th>
-            <th>계약금액</th>
-            <th>계약서조회</th>
-            <th>계약서 전송받기</th>
-          </tr>
-          </thead>
-          <tbody>
-          <?php
+      <table id ="SellercontractTbl" class="contract-list-table table table-striped text-center mt-5">
+        <thead>
+        <tr>
+          <th>No.</th>
+          <th>계약상태</th>
+          <th>상품명</th>
+          <th>구매기업</th>
+          <th>상품수량</th>
+          <th>계약금액</th>
+          <th>계약서조회</th>
+          <th>계약서 전송받기</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
           if(is_array($data) && count($data) > 0){
-          $i = 1;
-          foreach($data as $item){
-          $status = "";
-          if($item["contract_status"] == 1){
-          $status = "승인대기";
-          }else if($item["contract_status"] == 2){
-          $status = "진행중";
-          }else if($item["contract_status"] == 3){
-          $status = "구매기업 승인";
-          }else if($item["contract_status"] ==5){
-          $status = "계약완료";
-          }else if($item["contract_status"] == 7){
-          $status = "반려";
-          }
-          else if($item["contract_status"] == 9){
-          $status = "계약취소";
-          }
+        $i = 1;
+        foreach($data as $item){
+        $status = "";
+        if($item["contract_status"] == 1){
+        $status = "승인대기";
+        }else if($item["contract_status"] == 2){
+        $status = "진행중";
+        }else if($item["contract_status"] == 3){
+        $status = "구매기업 승인";
+        }else if($item["contract_status"] ==5){
+        $status = "계약완료";
+        }else if($item["contract_status"] == 7){
+        $status = "반려";
+        }
+        else if($item["contract_status"] == 9){
+        $status = "계약취소";
+        }
 
-          $delivery_cycle = "";
-          if($item["delivery_cycle"] == 1){
-          $delivery_cycle = "1번";
-          }else if($item["delivery_cycle"] == 2){
-          $delivery_cycle = "1주일에 한 번";
-          }else if($item["delivery_cycle"] == 3){
-          $delivery_cycle = "1달에 한 번";
-          }else if($item["delivery_cycle"] ==4){
-          $delivery_cycle = "2달에 한 번";
-          }else if($item["delivery_cycle"] == 5){
-          $delivery_cycle = "6달에 한 번";
-          }
-          $category = "";
-          if($item["product_category"] == 1){
-          $category = "사무용품";
-          }else if($item["product_category"] == 2){
-          $category = "생활용품";
-          }else if($item["product_category"] == 3){
-          $category = "전산용품";
-          }else if($item["product_category"] == 4){
-          $category = "식음료";
-          }else if($item["product_category"] == 5){
-          $category = "청소용품";
-          }
-          ?>
-          <tr>
-            <td><?=$i?></td>
-            <td title=<?=$status?>><?=$status?><?php if($item["workflow_id"] != ""&& $item['contract_status'] != 5){?><span id="sellerTurn_<?=$item['workflow_id']?>" class="text-warning"></span><?php } ?></td>
-            <td class="text-start"><?=$item["product_name"]?></td>
-            <td><?=$item["buyer_company"]?></td>
-            <td class="text-center"><?=$item["product_quantity"]?></td>
-            <td class="text-end"><?=number_format($item["contract_price"])?>원</td>
-            <td><button class="btn btn-primary btn-sm" onclick="Contract_Detail(<?=$item['workflow_id']?>)">계약서 조회</button></td>
-            <td>
-              <?php
+        $delivery_cycle = "";
+        if($item["delivery_cycle"] == 1){
+        $delivery_cycle = "1번";
+        }else if($item["delivery_cycle"] == 2){
+        $delivery_cycle = "1주일에 한 번";
+        }else if($item["delivery_cycle"] == 3){
+        $delivery_cycle = "1달에 한 번";
+        }else if($item["delivery_cycle"] ==4){
+        $delivery_cycle = "2달에 한 번";
+        }else if($item["delivery_cycle"] == 5){
+        $delivery_cycle = "6달에 한 번";
+        }
+        $category = "";
+        if($item["product_category"] == 1){
+        $category = "사무용품";
+        }else if($item["product_category"] == 2){
+        $category = "생활용품";
+        }else if($item["product_category"] == 3){
+        $category = "전산용품";
+        }else if($item["product_category"] == 4){
+        $category = "식음료";
+        }else if($item["product_category"] == 5){
+        $category = "청소용품";
+        }
+        ?>
+        <tr>
+          <td><?=$i?></td>
+          <td title=<?=$status?>><?=$status?><?php if($item["workflow_id"] != ""&& $item['contract_status'] != 5){?><span id="sellerTurn_<?=$item['workflow_id']?>" class="text-warning"></span><?php } ?></td>
+          <td class="text-start"><?=$item["product_name"]?></td>
+          <td><?=$item["buyer_company"]?></td>
+          <td class="text-center"><?=$item["product_quantity"]?></td>
+          <td class="text-end"><?=number_format($item["contract_price"])?>원</td>
+          <td><button class="btn btn-primary btn-sm" onclick="Contract_Detail(<?=$item['workflow_id']?>)">계약서 조회</button></td>
+          <td>
+            <?php
             if($item["contract_status"] == 2 || $item["contract_status"] == 5){
               ?>
-              <button class ="btn btn-success btn-sm" onclick="Contract_Return(<?=$item['workflow_id']?>,<?=$item['contract_status']?>);">이메일로 받기</button>
-              <?php
+            <button class ="btn btn-success btn-sm" onclick="Contract_Return(<?=$item['workflow_id']?>,<?=$item['contract_status']?>);">이메일로 받기</button>
+            <?php
             }
             ?>
-            </td>
-          </tr>
-          <?php
+          </td>
+        </tr>
+        <?php
           $i++;
           }
           }
           ?>
-          </tbody>
-        </table>
+        </tbody>
+      </table>
       </form>
     </div>
     <form name="statusForm" id="statusForm" method="post" action="/Seller/ContractUpdate">
-      <input type="hidden" name ="seller_workflow_id" id="seller_workflow_id" value="0">
+      <input type="hidden" name ="seller_workflow" id="seller_workflow" value="0">
       <input type="hidden" name ="seller_pworkflow_id" id="seller_pworkflow_id" value="0">
-      <input type="hidden" name ="complete_reduction" id="complete_reduction" value="0">
-      <input type="hidden" name ="product_quantity" id="product_quantity" value="">
-      <input type="hidden" name ="count" id="count" value="">
-      <input type="hidden" name ="w_length" id="w_length" value="">
+      <input type="hidden" name ="workflow_count" id="workflow_count" value="">
       <input type="hidden" name ="uuid" id = "uuid" value="<?=$_SESSION['login_info']['uuid']?>">
     </form>
   </section>
@@ -246,35 +243,54 @@
     var workflow_key = "";
     var contract_reduction = 0;
     var complete_reduction = 0;
-    var workflow = "";
+    var workflow = [];
+    var reduction = [];
     var product_quantity = "";
-    var count = 1;
-    var w_length = workflow_id.length;
+    var quantity = [];
+    var testList = new Array();
+    var x = 0;
     for(var i = 0; i<workflow_id.length;i++) {
       workflow_key = workflow_id[i];
       fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_key + '?offset=%2B09%3A00', options)
               .then(response => response.json())
               .then(response => {
+                workflow[x] = new Array(3);
                 $.each(response['field_list'], function (idx, row) {
                   if (response['field_list'][idx].name == "Contract_Cost") {
-                    // console.log(response);
                     contract_reduction = response['field_list'][idx].value;
                     complete_reduction = parseInt(contract_reduction.replace(/,/g,""));
+                    workflow[x][0] = complete_reduction;
                   }
                   if (response['field_list'][idx].name == "Contract_EA") {
                     product_quantity = response['field_list'][idx].value;
+                    workflow[x][1] = product_quantity;
                   }
                 })
-                workflow = response['workflow_id'];
-                $('#complete_reduction').val(complete_reduction);
-                $('#product_quantity').val(product_quantity);
-                $('#seller_workflow_id').val(workflow);
-                $('#seller_pworkflow_id').val(pworkflow_id);
-                $('#count').val(count);
-                $('#w_length').val(w_length);
-                $("#statusForm").submit();
-                count++;
-               // alert("카운트 = " +count  + " 길이 = " + w_length);
+                workflow[x][2] = response['workflow_id'];
+                var data = new Object();
+                data.complete_reduction = workflow[x][0];
+                data.product_quantity = workflow[x][1];
+                data.workflow_id  = workflow[x][2];
+                testList.push(data);
+
+                if (x == workflow_id.length-1) {
+                  var jsonData = JSON.stringify(testList);
+                  $.ajax({
+                    method: 'post',
+                    url: '/Seller/ContractUpdate',
+                    data: jsonData,
+                    contentType: "application/json",
+                    success:function(result){
+                      if(result != "") {
+                        alert("최신화 되었습니다.");
+                        location.reload();
+                      }else{
+                        alert("최신화 할 계약이 없습니다.");
+                      }
+                    }
+                  })
+                  }
+                x++;
               })
               .catch(err => console.error(err));
     }

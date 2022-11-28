@@ -79,20 +79,9 @@ class Seller extends BaseController
         $result = $this->mypage_model->sellerContractStatus($_POST);
         $_SESSION["totalSales"] = $this->sigin_model->getTotalSales($uuid);
         if($result == 1) {
-            echo "
-        <script>
-           alert('최신화되었습니다');
-          location.href = '/Seller/Contract';
-        </script>
-        ";
+            echo "1";
         }else{
-            echo "
-        <script>
-           alert('실패');
-          location.href = '/Seller/Contract';
-        </script>
-        ";
+            echo "2";
         }
-
     }
 }

@@ -6,9 +6,9 @@ use App\Models\CommonModel;
 class MyPageModel extends CommonModel
 {
 
- public function getCartList($uuid){
-     $data = [];
-     $query = "
+    public function getCartList($uuid){
+        $data = [];
+        $query = "
   
         select
            *
@@ -18,18 +18,18 @@ class MyPageModel extends CommonModel
             buyer_uuid = '".$uuid."'
             and del_yn != 'Y'
         ";
-     //echo $query;
-     $this->rodb->query($query);
-     while($row = $this->rodb->next_row()){
-         $data[]= $row;
+        //echo $query;
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $data[]= $row;
 
-     }
-     return $data;
- }
+        }
+        return $data;
+    }
 
- public function getMyInfo($uuid){
-     $data = [];
-     $query = "
+    public function getMyInfo($uuid){
+        $data = [];
+        $query = "
 
         select
             *
@@ -39,12 +39,12 @@ class MyPageModel extends CommonModel
             uuid = '".$uuid."'
            
         ";
-     $this->rodb->query($query);
-     while($row = $this->rodb->next_row()){
-         $data= $row;
-     }
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $data= $row;
+        }
 
-     $delivery_query = "
+        $delivery_query = "
             select
                count(*) delivery
             from
@@ -52,10 +52,10 @@ class MyPageModel extends CommonModel
             where del_yn != 'Y' AND buyer_uuid ='".$uuid."'
  
         ";
-     $this->rodb->query($delivery_query);
-     $data['delivery']= $this->rodb->next_row();
+        $this->rodb->query($delivery_query);
+        $data['delivery']= $this->rodb->next_row();
 
-     $contract_query = "
+        $contract_query = "
             select
                count(*) contract
             from
@@ -63,10 +63,10 @@ class MyPageModel extends CommonModel
             where del_yn != 'Y' AND buyer_uuid ='".$uuid."' and contract_status ='2'
  
         ";
-     $this->rodb->query($contract_query);
-     $data['contract']= $this->rodb->next_row();
+        $this->rodb->query($contract_query);
+        $data['contract']= $this->rodb->next_row();
 
-     $cart_query = "
+        $cart_query = "
             select
                count(*) cart
             from
@@ -74,10 +74,10 @@ class MyPageModel extends CommonModel
             where del_yn != 'Y' AND buyer_uuid ='".$uuid."' 
  
         ";
-     $this->rodb->query($cart_query);
-     $data['cart']= $this->rodb->next_row();
+        $this->rodb->query($cart_query);
+        $data['cart']= $this->rodb->next_row();
 
-     $point_query = "
+        $point_query = "
             select
                sum(buyer_point) as point
             from
@@ -85,15 +85,15 @@ class MyPageModel extends CommonModel
             where del_yn != 'Y' AND buyer_uuid ='".$uuid."' and contract_status ='5'
  
         ";
-     $this->rodb->query($point_query);
-     $data['point']= $this->rodb->next_row();
+        $this->rodb->query($point_query);
+        $data['point']= $this->rodb->next_row();
 
-     return $data;
- }
+        return $data;
+    }
 
- public function pwdCheck($password){
-     $uuid = $_SESSION["login_info"]["uuid"];
-     $query = "
+    public function pwdCheck($password){
+        $uuid = $_SESSION["login_info"]["uuid"];
+        $query = "
 
         select
             *
@@ -103,31 +103,31 @@ class MyPageModel extends CommonModel
             uuid = '".$uuid."'
        and  password = SHA2('".$password."', 256)          
         ";
-     $this->rodb->query($query);
-     $row = $this->rodb->next_row();
-    if(isset($row["idx"])){
-        return 1;
-    }else{
-        return null;
+        $this->rodb->query($query);
+        $row = $this->rodb->next_row();
+        if(isset($row["idx"])){
+            return 1;
+        }else{
+            return null;
+        }
     }
- }
 
 
- public function updateMyInfo($files,$data){
-    $uuid = $_SESSION["login_info"]["uuid"];
-     $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG','JPG','PDF');
+    public function updateMyInfo($files,$data){
+        $uuid = $_SESSION["login_info"]["uuid"];
+        $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG','JPG','PDF');
 
-     if($files["buyer_documents"]["name"] != ""){
-         $buyer_documents_ori = $files["buyer_documents"]["name"];
-         $upload_buyer_documents_ori = "buyer_documents";
-         $upload_buyer_documents_image = uniqid().".".pathinfo($files["buyer_documents"]["name"], PATHINFO_EXTENSION);
-         $this->uploadFileNew($files,$upload_buyer_documents_image,$allowed_ext,$upload_buyer_documents_ori);
-     }else{
-         $buyer_documents_ori = $data["buyer_documents_ori"];
-         $upload_buyer_documents_image = $data["buyer_documents"];
-     }
-  $buyer_documents_ori = str_replace('&','＆', $files["buyer_documents"]["name"]);
-     $query = "
+        if($files["buyer_documents"]["name"] != ""){
+            $buyer_documents_ori = $files["buyer_documents"]["name"];
+            $upload_buyer_documents_ori = "buyer_documents";
+            $upload_buyer_documents_image = uniqid().".".pathinfo($files["buyer_documents"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files,$upload_buyer_documents_image,$allowed_ext,$upload_buyer_documents_ori);
+        }else{
+            $buyer_documents_ori = $data["buyer_documents_ori"];
+            $upload_buyer_documents_image = $data["buyer_documents"];
+        }
+        $buyer_documents_ori = str_replace('&','＆', $files["buyer_documents"]["name"]);
+        $query = "
             update
                 buyer_company
             set
@@ -153,22 +153,22 @@ class MyPageModel extends CommonModel
                 uuid = '".$uuid."'
             limit 1
         ";
-     $this->wrdb->update($query);
-     return "1";
- }
+        $this->wrdb->update($query);
+        return "1";
+    }
 
- public function buyerContractStatus($data){
-     $workflow_id = $data["workflow_id"];
-     $complete_reduction = $data["complete_reduction"];
-     $product_quantity = $data["product_quantity"];
-     $pworkflow_id = $data["pworkflow_id"];
-     if($pworkflow_id != ""){
-         $playing = explode(',',$pworkflow_id);
-         $where = "workflow_id in (";
-         $where = $where . @join(",", $playing);
-         $where = $where . ")";
+    public function buyerContractStatus($data){
+        $workflow_id = $data["workflow_id"];
+        $complete_reduction = $data["complete_reduction"];
+        $product_quantity = $data["product_quantity"];
+        $pworkflow_id = $data["pworkflow_id"];
+        if($pworkflow_id != ""){
+            $playing = explode(',',$pworkflow_id);
+            $where = "workflow_id in (";
+            $where = $where . @join(",", $playing);
+            $where = $where . ")";
 
-         $playing_query = "
+            $playing_query = "
                 update
                     contract_condition
                 set
@@ -176,10 +176,10 @@ class MyPageModel extends CommonModel
                 where 
                    $where
             ";
-         $this->wrdb->update($playing_query);
-     }
-     if($workflow_id != ""){
-         $query = "
+            $this->wrdb->update($playing_query);
+        }
+        if($workflow_id != ""){
+            $query = "
                 select
                     *
                 from                 
@@ -188,10 +188,10 @@ class MyPageModel extends CommonModel
                         workflow_id ='".$workflow_id."'
                 limit 1
             ";
-         $this->rodb->query($query);
-         $seller_uuid = $this->rodb->next_row();
+            $this->rodb->query($query);
+            $seller_uuid = $this->rodb->next_row();
 
-         $mild_disabled_query = "
+            $mild_disabled_query = "
                 select
                     count(*) as mild_disabled
                 from                 
@@ -203,10 +203,10 @@ class MyPageModel extends CommonModel
                        and del_yn !='Y'
                 limit 1
             ";
-         $this->rodb->query($mild_disabled_query);
-         $seller_mild_disabled = $this->rodb->next_row();
+            $this->rodb->query($mild_disabled_query);
+            $seller_mild_disabled = $this->rodb->next_row();
 
-         $severely_disabled_query = "
+            $severely_disabled_query = "
                 select
                     count(*) as severely_disabled
                 from                 
@@ -218,10 +218,10 @@ class MyPageModel extends CommonModel
                        and del_yn !='Y'
                 limit 1
             ";
-         $this->rodb->query($severely_disabled_query);
-         $seller_severely_disabled = $this->rodb->next_row();
+            $this->rodb->query($severely_disabled_query);
+            $seller_severely_disabled = $this->rodb->next_row();
 
-         $seller_info_query = "
+            $seller_info_query = "
                 select
                     *
                 from                 
@@ -230,116 +230,8 @@ class MyPageModel extends CommonModel
                 uuid = '".$seller_uuid['seller_uuid']."'         
                 limit 1
             ";
-         $this->rodb->query($seller_info_query);
-         $seller_info = $this->rodb->next_row();
-
-         $mild_disabled = $seller_mild_disabled["mild_disabled"];
-         $severely_disabled = $seller_severely_disabled["severely_disabled"];
-         $seller_sales = $seller_info["seller_sales"];
-         $contribution =  $complete_reduction/$seller_sales;
-         $contribution = explode('.',$contribution);
-         $contribution = substr($contribution[1],0,4);
-         $supply = $contribution[0].'.'.$contribution; // 감면비율 소수점4째자리
-         $workers = $mild_disabled+($severely_disabled*2);  // 장애인근로자 수
-
-         $base = 1149000;   //기본금액
-         $reduction_money = $supply*($workers*12)*$base; // (수급비율*근로자)*기본금*12개월
-         if($reduction_money > $complete_reduction*0.5) {
-             $reduction_money = $complete_reduction * 0.5;  // 감면액이 상품가격의 50%가 넘으면 50%로 표시
-         }
-         $reduction_money = (int)$reduction_money;
-         $slice = substr($reduction_money,0,-1);
-         $reduction_money = $slice.'0';
-         $point = $complete_reduction*0.01;
-
-         $reduction_query = "
-                update
-                    contract_condition
-                set
-                    product_price = '".$complete_reduction."',
-                    contract_status =5,
-                    product_quantity = '".$product_quantity."',
-                    buyer_point = '".$point."',
-                    reduction_money =  '".$reduction_money."'
-                where 
-                    workflow_id = '".$workflow_id."'
-            ";
-         $this->wrdb->update($reduction_query);
-
-         return 1;
-     }else{
-         return null;
-     }
- }
-
-
-    public function sellerContractStatus($data){
-        $workflow_id = $data["seller_workflow_id"];
-        $complete_reduction = $data["complete_reduction"];
-        $product_quantity = $data["product_quantity"];
-        $pworkflow_id = $data["seller_pworkflow_id"];
-        $uuid = $_SESSION['login_info']['uuid'];
-        if($pworkflow_id != ""){
-            $playing = explode(',',$pworkflow_id);
-            $where = "workflow_id in (";
-            $where = $where . @join(",", $playing);
-            $where = $where . ")";
-            $playing_query = "
-                update
-                    contract_condition
-                set
-                    contract_status =2
-                where 
-                    $where
-            ";
-            $this->wrdb->update($playing_query);
-        }
-        if($workflow_id != ""){
-            $mild_disabled_query = "
-                select
-                    count(*) as mild_disabled
-                from
-                    seller_company_worker
-                        
-                where
-                        register_id ='".$uuid."'
-                        and disability_degree ='2'
-                        and status ='5'
-                        and del_yn !='Y'
-                limit 1
-            ";
-            $this->rodb->query($mild_disabled_query);
-            $seller_mild_disabled = $this->rodb->next_row();
-
-            $severely_disabled_query = "
-                select
-                    count(*) as severely_disabled
-                from
-                    seller_company_worker 
-                        
-                where
-                        register_id = '".$uuid."'
-                         and disability_degree ='1'
-                         and status ='5'
-                         and del_yn !='Y'
-                limit 1
-            ";
-            $this->rodb->query($severely_disabled_query);
-            $seller_severely_disabled = $this->rodb->next_row();
-
-            $seller_info_query = "
-                select
-                   *
-                from
-                    seller_company
-                        
-                where
-                        uuid = '".$uuid."'
-                limit 1
-            ";
             $this->rodb->query($seller_info_query);
             $seller_info = $this->rodb->next_row();
-
 
             $mild_disabled = $seller_mild_disabled["mild_disabled"];
             $severely_disabled = $seller_severely_disabled["severely_disabled"];
@@ -359,6 +251,116 @@ class MyPageModel extends CommonModel
             $slice = substr($reduction_money,0,-1);
             $reduction_money = $slice.'0';
             $point = $complete_reduction*0.01;
+
+            $reduction_query = "
+                update
+                    contract_condition
+                set
+                    product_price = '".$complete_reduction."',
+                    contract_status =5,
+                    product_quantity = '".$product_quantity."',
+                    buyer_point = '".$point."',
+                    reduction_money =  '".$reduction_money."'
+                where 
+                    workflow_id = '".$workflow_id."'
+            ";
+            $this->wrdb->update($reduction_query);
+
+            return 1;
+        }else{
+            return null;
+        }
+    }
+
+
+    public function sellerContractStatus($data){
+        $jsonInput  = file_get_contents('php://input');
+        var_dump($jsonInput);
+        $workflow = json_decode($jsonInput);
+        $pworkflow_id = $data["seller_pworkflow_id"];
+        $uuid = $_SESSION['login_info']['uuid'];
+        if($pworkflow_id != ""){
+            $playing = explode(',',$pworkflow_id);
+            $where = "workflow_id in (";
+            $where = $where . @join(",", $playing);
+            $where = $where . ")";
+            $playing_query = "
+                update
+                    contract_condition
+                set
+                    contract_status =2
+                where 
+                    $where
+            ";
+            $this->wrdb->update($playing_query);
+        }
+        if($workflow != ""){
+            for($i = 0; $i< count($workflow); $i++) {
+                $complete_reduction = $workflow[$i]->complete_reduction;
+                $product_quantity = $workflow[$i]->product_quantity;
+                $workflow_id = $workflow[$i]->workflow_id;
+                $mild_disabled_query = "
+                select
+                    count(*) as mild_disabled
+                from
+                    seller_company_worker
+                        
+                where
+                        register_id ='" . $uuid . "'
+                        and disability_degree ='2'
+                        and status ='5'
+                        and del_yn !='Y'
+                limit 1
+            ";
+                $this->rodb->query($mild_disabled_query);
+                $seller_mild_disabled = $this->rodb->next_row();
+
+                $severely_disabled_query = "
+                select
+                    count(*) as severely_disabled
+                from
+                    seller_company_worker 
+                        
+                where
+                        register_id = '" . $uuid . "'
+                         and disability_degree ='1'
+                         and status ='5'
+                         and del_yn !='Y'
+                limit 1
+            ";
+                $this->rodb->query($severely_disabled_query);
+                $seller_severely_disabled = $this->rodb->next_row();
+
+                $seller_info_query = "
+                select
+                   *
+                from
+                    seller_company
+                        
+                where
+                        uuid = '" . $uuid . "'
+                limit 1
+            ";
+                $this->rodb->query($seller_info_query);
+                $seller_info = $this->rodb->next_row();
+                $mild_disabled = $seller_mild_disabled["mild_disabled"];
+                $severely_disabled = $seller_severely_disabled["severely_disabled"];
+                $seller_sales = $seller_info["seller_sales"];
+                $contribution = $complete_reduction / $seller_sales;
+                $contribution = explode('.', $contribution);
+                $contribution = substr($contribution[1], 0, 4);
+                $supply = $contribution[0] . '.' . $contribution; // 감면비율 소수점4째자리
+                $workers = $mild_disabled + ($severely_disabled * 2);  // 장애인근로자 수
+
+                $base = 1149000;   //기본금액
+                $reduction_money = $supply * ($workers * 12) * $base; // (수급비율*근로자)*기본금*12개월
+                if ($reduction_money > $complete_reduction * 0.5) {
+                    $reduction_money = $complete_reduction * 0.5;  // 감면액이 상품가격의 50%가 넘으면 50%로 표시
+                }
+                $reduction_money = (int)$reduction_money;
+                $slice = substr($reduction_money, 0, -1);
+                $reduction_money = $slice . '0';
+                $point = $complete_reduction * 0.01;
                 $reduction_query = "
                   update
                     contract_condition
@@ -371,10 +373,9 @@ class MyPageModel extends CommonModel
                 where 
                     workflow_id = '".$workflow_id."'
             ";
-               $this->wrdb->update($reduction_query);
-           if($_POST['w_length'] == $_POST['count']){
+                $this->wrdb->update($reduction_query);
+            }
             return 1;
-           }
         }else{
             return null;
         }

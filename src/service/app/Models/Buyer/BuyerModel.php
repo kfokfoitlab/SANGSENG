@@ -104,16 +104,15 @@ class BuyerModel extends CommonModel
     }
 
     public function contract($data){
-        $uuid = $_SESSION['login_info']['uuid'];
+        $buyer_uuid = $_SESSION['login_info']['uuid'];
         $product_no = $data['product_no'];
         $product_info_query = "
                     select
                         *
                     from
-                        buyer_cart
+                        seller_product
                     where
-                         buyer_uuid ='".$uuid."'
-                         and product_no  ='".$product_no."'
+                         product_no  ='".$product_no."'
                     limit 1
                 ";
         $this->rodb->query($product_info_query);
@@ -129,14 +128,14 @@ class BuyerModel extends CommonModel
                contract_no = '".$contract_no."'
                ,uuid = '".$uuid."'
               ,contract_status = '".$contract_status."'
-              ,seller_uuid = '".$product_info["seller_uuid"]."'
-              ,buyer_uuid = '".$product_info["buyer_uuid"]."'
-              ,seller_company = '".$product_info["seller_company"]."'
-              ,product_name = '".$product_info["cart_product_name"]."'
-              ,product_price = '".$product_info["cart_product_price"]."'
+              ,seller_uuid = '".$product_info["register_id"]."'
+              ,buyer_uuid = '".$buyer_uuid."'
+              ,seller_company = '".$product_info["company_name"]."'
+              ,product_name = '".$product_info["product_name"]."'
+              ,product_price = '".$product_info["product_price"]."'
               ,buyer_company = '".$_SESSION["login_info"]['company_name']."'
               ,product_quantity = '".$product_info["product_quantity"]."'
-              ,reduction_money = '".$product_info["cart_reduction_money"]."'
+              ,reduction_money = '".$product_info["reduction_money"]."'
               ,product_category = '".$product_info["product_category"]."'
               ,product_no = '".$product_no."'       
               ,register_date ='".date("Y-m-d")."'
