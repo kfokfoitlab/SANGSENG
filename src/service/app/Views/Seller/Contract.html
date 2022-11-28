@@ -198,6 +198,8 @@
       <input type="hidden" name ="seller_pworkflow_id" id="seller_pworkflow_id" value="0">
       <input type="hidden" name ="complete_reduction" id="complete_reduction" value="0">
       <input type="hidden" name ="product_quantity" id="product_quantity" value="">
+      <input type="hidden" name ="count" id="count" value="">
+      <input type="hidden" name ="w_length" id="w_length" value="">
       <input type="hidden" name ="uuid" id = "uuid" value="<?=$_SESSION['login_info']['uuid']?>">
     </form>
   </section>
@@ -246,6 +248,8 @@
     var complete_reduction = 0;
     var workflow = "";
     var product_quantity = "";
+    var count = 1;
+    var w_length = workflow_id.length;
     for(var i = 0; i<workflow_id.length;i++) {
       workflow_key = workflow_id[i];
       fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_key + '?offset=%2B09%3A00', options)
@@ -266,7 +270,11 @@
                 $('#product_quantity').val(product_quantity);
                 $('#seller_workflow_id').val(workflow);
                 $('#seller_pworkflow_id').val(pworkflow_id);
+                $('#count').val(count);
+                $('#w_length').val(w_length);
                 $("#statusForm").submit();
+                count++;
+               // alert("카운트 = " +count  + " 길이 = " + w_length);
               })
               .catch(err => console.error(err));
     }

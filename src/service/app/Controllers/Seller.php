@@ -78,11 +78,21 @@ class Seller extends BaseController
         $uuid = $_SESSION['login_info']['uuid'];
         $result = $this->mypage_model->sellerContractStatus($_POST);
         $_SESSION["totalSales"] = $this->sigin_model->getTotalSales($uuid);
-        echo "
+        if($result == 1) {
+            echo "
         <script>
            alert('최신화되었습니다');
           location.href = '/Seller/Contract';
         </script>
         ";
+        }else{
+            echo "
+        <script>
+           alert('실패');
+          location.href = '/Seller/Contract';
+        </script>
+        ";
+        }
+
     }
 }

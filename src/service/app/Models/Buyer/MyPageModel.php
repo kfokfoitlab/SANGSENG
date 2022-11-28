@@ -311,7 +311,6 @@ class MyPageModel extends CommonModel
             $this->rodb->query($mild_disabled_query);
             $seller_mild_disabled = $this->rodb->next_row();
 
-
             $severely_disabled_query = "
                 select
                     count(*) as severely_disabled
@@ -360,7 +359,6 @@ class MyPageModel extends CommonModel
             $slice = substr($reduction_money,0,-1);
             $reduction_money = $slice.'0';
             $point = $complete_reduction*0.01;
-
                 $reduction_query = "
                   update
                     contract_condition
@@ -373,8 +371,10 @@ class MyPageModel extends CommonModel
                 where 
                     workflow_id = '".$workflow_id."'
             ";
-                $this->wrdb->update($reduction_query);
+               $this->wrdb->update($reduction_query);
+           if($_POST['w_length'] == $_POST['count']){
             return 1;
+           }
         }else{
             return null;
         }
