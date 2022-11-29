@@ -201,8 +201,6 @@
 			}
 			$query = $query." order by idx desc";
 			$query = $query." limit ".$page_start.",10";
-			//echo $query;
-			//echo $query;
 			$data["data"] = [];
 			$this->rodb->query($query);
 			while($row = $this->rodb->next_row()){

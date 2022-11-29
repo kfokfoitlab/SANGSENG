@@ -162,7 +162,7 @@ class MyPageModel extends CommonModel
         var_dump($jsonInput);
         $workflow = json_decode($jsonInput);
         $pworkflow_id =$workflow[0]->pworkflow_id;
-        if($pworkflow_id != ""){
+        if(count($pworkflow_id) > 0){
             $where = "workflow_id in (";
             $where = $where . @join(",", $pworkflow_id);
             $where = $where . ")";
@@ -279,7 +279,7 @@ class MyPageModel extends CommonModel
         $workflow = json_decode($jsonInput);
         $pworkflow_id =$workflow[0]->pworkflow_id;
         $uuid = $_SESSION['login_info']['uuid'];
-        if($pworkflow_id != ""){
+        if(count($pworkflow_id) > 0){
             $where = "workflow_id in (";
             $where = $where . @join(",", $pworkflow_id);
             $where = $where . ")";
