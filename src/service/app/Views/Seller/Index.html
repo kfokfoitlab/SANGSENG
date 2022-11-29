@@ -330,6 +330,7 @@
   });
 
   function seller_turn(workflow_id){
+    alert(workflow_id);
     if(workflow_id != ""){
       $('#turn_'+workflow_id).attr('class','d-flex justify-content-between new');
       $("#new_badge").css('display','block');
@@ -369,10 +370,10 @@
 
     fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=9&field_name=seller_uuid&field_value='+uuid+'', options)
             .then(response => response.json())
-            .then(response => {
+            .then(response => {console.log(response);
               var j = 0;
               for(var i =0; i <response['workflow_list'].length; i++){
-                if(response['workflow_list'][i]['order'] == 2){
+                if(response['workflow_list'][i]['order'] == 2 && response['workflow_list'][i]['status'] == "Playing"){
                   seller_turn(response['workflow_list'][i]['workflow_id']);
                   j++;
                 }
