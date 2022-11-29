@@ -376,14 +376,13 @@ class ContractModel extends CommonModel
     }
 	
 	public function ContractStatus($data){
-        $workflow_id = $data["workflow_id"];
-        $complete_reduction = $data["complete_reduction"];
-        $product_quantity = $data["product_quantity"];
-        $pworkflow_id = $data["pworkflow_id"];
+        $jsonInput  = file_get_contents('php://input');
+        var_dump($jsonInput);
+        $workflow = json_decode($jsonInput);
+        $pworkflow_id =$workflow[0]->pworkflow_id;
         if($pworkflow_id != ""){
-            $playing = explode(',',$pworkflow_id);
             $where = "workflow_id in (";
-            $where = $where . @join(",", $playing);
+            $where = $where . @join(",", $pworkflow_id);
             $where = $where . ")";
             $playing_query = "
                 update
@@ -395,94 +394,98 @@ class ContractModel extends CommonModel
             ";
             $this->wrdb->update($playing_query);
         }
-        if($workflow_id != ""){
-            $query = "
+        if($workflow != ""){
+            for($i = 0; $i< count($workflow); $i++) {
+                $complete_reduction = $workflow[$i]->complete_reduction;
+                $product_quantity = $workflow[$i]->product_quantity;
+                $workflow_id = $workflow[$i]->workflow_id;
+                $query = "
                 select
                     *
                 from                 
                 contract_condition 
                 where
-                        workflow_id ='".$workflow_id."'
+                        workflow_id ='" . $workflow_id . "'
                 limit 1
             ";
-            $this->rodb->query($query);
-            $seller_uuid = $this->rodb->next_row();
+                $this->rodb->query($query);
+                $seller_uuid = $this->rodb->next_row();
 
-            $mild_disabled_query = "
+                $mild_disabled_query = "
                 select
                     count(*) as mild_disabled
                 from                 
                 seller_company_worker 
                 where
-                        register_id = '".$seller_uuid['seller_uuid']."'
+                        register_id = '" . $seller_uuid['seller_uuid'] . "'
                        and disability_degree ='2'
                        and status ='5'
                        and del_yn !='Y'
                 limit 1
             ";
-            $this->rodb->query($mild_disabled_query);
-            $seller_mild_disabled = $this->rodb->next_row();
+                $this->rodb->query($mild_disabled_query);
+                $seller_mild_disabled = $this->rodb->next_row();
 
-            $severely_disabled_query = "
+                $severely_disabled_query = "
                 select
                     count(*) as severely_disabled
                 from                 
                 seller_company_worker 
                 where
-                    register_id = '".$seller_uuid['seller_uuid']."'
+                    register_id = '" . $seller_uuid['seller_uuid'] . "'
                      and disability_degree ='1'
                        and status ='5'
                        and del_yn !='Y'
                 limit 1
             ";
-            $this->rodb->query($severely_disabled_query);
-            $seller_severely_disabled = $this->rodb->next_row();
+                $this->rodb->query($severely_disabled_query);
+                $seller_severely_disabled = $this->rodb->next_row();
 
-            $seller_info_query = "
+                $seller_info_query = "
                 select
                     *
                 from                 
                 seller_company
                 where
-                uuid = '".$seller_uuid['seller_uuid']."'         
+                uuid = '" . $seller_uuid['seller_uuid'] . "'         
                 limit 1
             ";
-            $this->rodb->query($seller_info_query);
-            $seller_info = $this->rodb->next_row();
+                $this->rodb->query($seller_info_query);
+                $seller_info = $this->rodb->next_row();
 
-            $mild_disabled = $seller_mild_disabled["mild_disabled"];
-            $severely_disabled = $seller_severely_disabled["severely_disabled"];
-            $seller_sales = $seller_info["seller_sales"];
-            $contribution =  $complete_reduction/$seller_sales;
-            $contribution = explode('.',$contribution);
-            $contribution = substr($contribution[1],0,4);
-            $supply = $contribution[0].'.'.$contribution; // 감면비율 소수점4째자리
-            $workers = $mild_disabled+($severely_disabled*2);  // 장애인근로자 수
+                $mild_disabled = $seller_mild_disabled["mild_disabled"];
+                $severely_disabled = $seller_severely_disabled["severely_disabled"];
+                $seller_sales = $seller_info["seller_sales"];
+                $contribution = $complete_reduction / $seller_sales;
+                $contribution = explode('.', $contribution);
+                $contribution = substr($contribution[1], 0, 4);
+                $supply = $contribution[0] . '.' . $contribution; // 감면비율 소수점4째자리
+                $workers = $mild_disabled + ($severely_disabled * 2);  // 장애인근로자 수
 
-            $base = 1149000;   //기본금액
-            $reduction_money = $supply*($workers*12)*$base; // (수급비율*근로자)*기본금*12개월
-            if($reduction_money > $complete_reduction*0.5) {
-                $reduction_money = $complete_reduction * 0.5;  // 감면액이 상품가격의 50%가 넘으면 50%로 표시
-            }
-            $reduction_money = (int)$reduction_money;
-            $slice = substr($reduction_money,0,-1);
-            $reduction_money = $slice.'0';
-            $point = $complete_reduction*0.01;
+                $base = 1149000;   //기본금액
+                $reduction_money = $supply * ($workers * 12) * $base; // (수급비율*근로자)*기본금*12개월
+                if ($reduction_money > $complete_reduction * 0.5) {
+                    $reduction_money = $complete_reduction * 0.5;  // 감면액이 상품가격의 50%가 넘으면 50%로 표시
+                }
+                $reduction_money = (int)$reduction_money;
+                $slice = substr($reduction_money, 0, -1);
+                $reduction_money = $slice . '0';
+                $point = $complete_reduction * 0.01;
 
-            $reduction_query = "
+                $reduction_query = "
                 update
                     contract_condition
                 set
                     product_price = $complete_reduction,
                     contract_status =5,
-                    product_quantity = '".$product_quantity."',
-                    buyer_point = '".$point."',
+                    product_quantity = '" . $product_quantity . "',
+                    buyer_point = '" . $point . "',
                     reduction_money = $reduction_money
                 where 
-                    workflow_id = '".$workflow_id."'
+                    workflow_id = '" . $workflow_id . "'
             ";
-            $this->wrdb->update($reduction_query);
-
+                $this->wrdb->update($reduction_query);
+            }
             return 1;
         }else{
             return null;

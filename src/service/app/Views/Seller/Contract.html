@@ -233,66 +233,71 @@
   }
 
   function Contract_reduction(workflow_id,pworkflow_id){
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: 'esignon mgjv4YvW5hJwZet8rc43lk6PzONAcr7q//EZ3V8MkNs5U8dE8qw4amjpNMtaCupRi645Rz2K9/T4N1ylBhHzFI2tn0C/h7VLu5CHAa75N+GtMtKi1qAovYx7PKgNI1PokB4o1mlEK5s='
-      }
-    };
-    var workflow_key = "";
-    var contract_reduction = 0;
-    var complete_reduction = 0;
-    var workflow = [];
-    var reduction = [];
-    var product_quantity = "";
-    var quantity = [];
-    var testList = new Array();
-    var x = 0;
-    for(var i = 0; i<workflow_id.length;i++) {
-      workflow_key = workflow_id[i];
-      fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_key + '?offset=%2B09%3A00', options)
-              .then(response => response.json())
-              .then(response => {
-                workflow[x] = new Array(3);
-                $.each(response['field_list'], function (idx, row) {
-                  if (response['field_list'][idx].name == "Contract_Cost") {
-                    contract_reduction = response['field_list'][idx].value;
-                    complete_reduction = parseInt(contract_reduction.replace(/,/g,""));
-                    workflow[x][0] = complete_reduction;
-                  }
-                  if (response['field_list'][idx].name == "Contract_EA") {
-                    product_quantity = response['field_list'][idx].value;
-                    workflow[x][1] = product_quantity;
-                  }
-                })
-                workflow[x][2] = response['workflow_id'];
-                var data = new Object();
-                data.complete_reduction = workflow[x][0];
-                data.product_quantity = workflow[x][1];
-                data.workflow_id  = workflow[x][2];
-                testList.push(data);
-
-                if (x == workflow_id.length-1) {
-                  var jsonData = JSON.stringify(testList);
-                  $.ajax({
-                    method: 'post',
-                    url: '/Seller/ContractUpdate',
-                    data: jsonData,
-                    contentType: "application/json",
-                    success:function(result){
-                      if(result != "") {
-                        alert("최신화 되었습니다.");
-                        location.reload();
-                      }else{
-                        alert("최신화 할 계약이 없습니다.");
-                      }
+    if(workflow_id == ""){
+      alert("최신 상태입니다.");
+    }else {
+      const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'esignon mgjv4YvW5hJwZet8rc43lk6PzONAcr7q//EZ3V8MkNs5U8dE8qw4amjpNMtaCupRi645Rz2K9/T4N1ylBhHzFI2tn0C/h7VLu5CHAa75N+GtMtKi1qAovYx7PKgNI1PokB4o1mlEK5s='
+        }
+      };
+      var workflow_key = "";
+      var contract_reduction = 0;
+      var complete_reduction = 0;
+      var workflow = [];
+      var product_quantity = "";
+      var workList = new Array();
+      var x = 0;
+      for (var i = 0; i < workflow_id.length; i++) {
+        workflow_key = workflow_id[i];
+        fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_key + '?offset=%2B09%3A00', options)
+                .then(response => response.json())
+                .then(response => {
+                  workflow[x] = new Array(3);
+                  $.each(response['field_list'], function (idx, row) {
+                    if (response['field_list'][idx].name == "Contract_Cost") {
+                      contract_reduction = response['field_list'][idx].value;
+                      complete_reduction = parseInt(contract_reduction.replace(/,/g, ""));
+                      workflow[x][0] = complete_reduction;
+                    }
+                    if (response['field_list'][idx].name == "Contract_EA") {
+                      product_quantity = response['field_list'][idx].value;
+                      workflow[x][1] = product_quantity;
                     }
                   })
+                  workflow[x][2] = response['workflow_id'];
+                  var data = new Object();
+                  data.complete_reduction = workflow[x][0];
+                  data.product_quantity = workflow[x][1];
+                  data.workflow_id = workflow[x][2];
+                  data.pworkflow_id = pworkflow_id;
+                  workList.push(data);
+                  if (x == workflow_id.length - 1) {
+                    var jsonData = JSON.stringify(workList);
+                    $.ajax({
+                      method: 'post',
+                      url: '/Seller/ContractUpdate',
+                      data: jsonData,
+                      contentType: "application/json",
+                      success: function (result) {
+                        if (result != "") {
+                          alert("최신화 되었습니다.");
+                          location.reload();
+                        } else {
+                          alert("최신화 할 계약이 없습니다.");
+                        }
+                      },
+                      error: function () {
+                        alert("오류가 발생했습니다. 관리자에게 문의해주세요");
+                      }
+                    })
                   }
-                x++;
-              })
-              .catch(err => console.error(err));
+                  x++;
+                })
+                .catch(err => console.error(err));
+      }
     }
   }
 
@@ -363,7 +368,7 @@
 
     fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=9&field_name=seller_uuid&field_value='+uuid+'', options)
             .then(response => response.json())
-            .then(response => {
+            .then(response => {console.log(response)/*
               var workflow_id = [];
               var pworkflow_id = [];
               var j = 0;
@@ -379,7 +384,7 @@
                 }
               }
 
-              Contract_reduction(workflow_id,pworkflow_id);
+              Contract_reduction(workflow_id,pworkflow_id);*/
             })
             .catch(err => console.error(err));
   }

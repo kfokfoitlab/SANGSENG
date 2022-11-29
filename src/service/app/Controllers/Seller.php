@@ -78,10 +78,6 @@ class Seller extends BaseController
         $uuid = $_SESSION['login_info']['uuid'];
         $result = $this->mypage_model->sellerContractStatus($_POST);
         $_SESSION["totalSales"] = $this->sigin_model->getTotalSales($uuid);
-        if($result == 1) {
-            echo "1";
-        }else{
-            echo "2";
-        }
+
     }
 }

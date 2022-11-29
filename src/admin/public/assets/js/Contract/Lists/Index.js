@@ -194,31 +194,55 @@ function Contract_reduction(workflow_id,pworkflow_id) {
     var workflow_key = "";
     var contract_reduction = 0;
     var complete_reduction = 0;
-    var workflow = "";
+    var workflow = [];
     var product_quantity = "";
+    var workList = new Array();
+    var x = 0;
     for (var i = 0; i < workflow_id.length; i++) {
         workflow_key = workflow_id[i];
         fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_key + '?offset=%2B09%3A00', options)
             .then(response => response.json())
             .then(response => {
-
+                workflow[x] = new Array(3);
                 $.each(response['field_list'], function (idx, row) {
                     if (response['field_list'][idx].name == "Contract_Cost") {
-                        // console.log(response);
                         contract_reduction = response['field_list'][idx].value;
                         complete_reduction = parseInt(contract_reduction.replace(/,/g, ""));
+                        workflow[x][0] = complete_reduction;
                     }
                     if (response['field_list'][idx].name == "Contract_EA") {
                         product_quantity = response['field_list'][idx].value;
+                        workflow[x][1] = product_quantity;
                     }
                 })
-
-                workflow = response['workflow_id'];
-                $('#complete_reduction').val(complete_reduction);
-                $('#product_quantity').val(product_quantity);
-                $('#workflow_id').val(workflow);
-                $('#pworkflow_id').val(pworkflow_id);
-                $("#statusForm").submit();
+                workflow[x][2] = response['workflow_id'];
+                var data = new Object();
+                data.complete_reduction = workflow[x][0];
+                data.product_quantity = workflow[x][1];
+                data.workflow_id = workflow[x][2];
+                data.pworkflow_id = pworkflow_id;
+                workList.push(data);
+                if (x == workflow_id.length - 1) {
+                    var jsonData = JSON.stringify(workList);
+                    $.ajax({
+                        method: 'post',
+                        url: '/Contract/Lists/ContractUpdate',
+                        data: jsonData,
+                        contentType: "application/json",
+                        success: function (result) {
+                            if (result != "") {
+                                alert("최신화 되었습니다.");
+                                location.reload();
+                            } else {
+                                alert("최신화 할 계약이 없습니다.");
+                            }
+                        },
+                        error: function () {
+                            alert("오류가 발생했습니다. 관리자에게 문의해주세요");
+                        }
+                    })
+                }
+                x++;
             })
             .catch(err => console.error(err));
     }
