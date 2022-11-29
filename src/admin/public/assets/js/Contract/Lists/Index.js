@@ -79,7 +79,7 @@ $(document).ready(function(){
                 }
             }
             ,{title: "계약서 전송", data: {"idx":"idx","buyer_email":"buyer_email","seller_email":"seller_email","uuid":"uuid","buyer_name":"buyer_name","seller_name":"seller_name","buyer_uuid":"buyer_uuid","seller_uuid":"seller_uuid","buyer_company":"buyer_company","seller_company":"seller_company",
-						"contract_status":"contract_status","product_name":"product_name"}, visible: true, className: "text-nowrap",
+                    "contract_status":"contract_status","product_name":"product_name"}, visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){
                     var buyer_email = data['buyer_email'];
                     var seller_email = data['seller_email'];
@@ -100,14 +100,14 @@ $(document).ready(function(){
                     }else{
                         html += "<input class='btn btn-secondary btn-sm m-1' style='font-size: 12px;color: white' type='button' value='전송완료'>";
                     }
-                      return html;
-                    }
+                    return html;
                 }
+            }
             ,{title: "삭제", data: "idx", visible: true, className: "text-nowrap",
-            "render": function( data, type, row, meta ){
-                let html = "";
+                "render": function( data, type, row, meta ){
+                    let html = "";
                     html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='contractDelete(" + data + ")' value='삭제'>";
-                return html;
+                    return html;
                 }
             }
             ,{title: "계약서 조회", data: "workflow_id", visible: true, className: "text-nowrap",
@@ -117,7 +117,7 @@ $(document).ready(function(){
                     return html;
                 }
             }
-						
+
         ],
         "initComplete": function(settings, json)
         {
@@ -147,11 +147,11 @@ function statusUpdate(idx,status){
 }
 
 function contractDelete(idx){
-	if(confirm("삭제하시겠습니까?")) {
-		location.href = "/" + _CONTROLLER + "/ContractDelete?idx=" + idx;
-	}else {
-		return false;
-	}
+    if(confirm("삭제하시겠습니까?")) {
+        location.href = "/" + _CONTROLLER + "/ContractDelete?idx=" + idx;
+    }else {
+        return false;
+    }
 }
 
 
@@ -171,7 +171,7 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
                 {order: 2, email: seller_email, name: seller_name},
             ],
             field_list: [{name: 'buyer_uuid', value: buyer_uuid}, {name: 'seller_uuid', value: seller_uuid},
-							{name: 'updateType', value: 'all'},{name:'buyer_company',value: buyer_company},{name:'seller_company',value: seller_company},{name:'Contract_Name',value:product_name}],
+                {name: 'updateType', value: 'all'},{name:'buyer_company',value: buyer_company},{name:'seller_company',value: seller_company},{name:'Contract_Name',value:product_name}],
             workflow_name: buyer_company +" 기업과 " + seller_company + " 기업의 계약서" ,
             template_id: 9
         })
@@ -179,11 +179,11 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
     fetch('https://docs.esignon.net/api/v3/workflows/start?offset=%2B09%3A00', options)
         .then(response => response.json())
         .then(response => location.href = "/"+_CONTROLLER+"/contractSubmit?idx="+idx+"&status="+status+"&workflow_id="+response["workflow_id"])
-		//.then(response => console.log(response))
+        //.then(response => console.log(response))
         .catch(err => console.error(err));
 
 }
-function Contract_reduction(workflow_id,pworkflow_id) {
+function Contract_reduction(workflow_id,pworkflow_id,cworkflow_id) {
     const options = {
         method: 'GET',
         headers: {
@@ -221,12 +221,13 @@ function Contract_reduction(workflow_id,pworkflow_id) {
                 data.product_quantity = workflow[x][1];
                 data.workflow_id = workflow[x][2];
                 data.pworkflow_id = pworkflow_id;
+                data.cworkflow_id = cworkflow_id;
                 workList.push(data);
                 if (x == workflow_id.length - 1) {
                     var jsonData = JSON.stringify(workList);
                     $.ajax({
                         method: 'post',
-                        url: '/Contract/Lists/ContractUpdate',
+                        url: '/Buyer/MyPage/ContractUpdate',
                         data: jsonData,
                         contentType: "application/json",
                         success: function (result) {
@@ -249,36 +250,42 @@ function Contract_reduction(workflow_id,pworkflow_id) {
 }
 
 function contract_update(field_name,field_value) {
-	var field_name = field_name;
-	var field_value = field_value;
-	const options = {
-		method: 'GET',
-		headers: {
-			accept: 'application/json',
-			Authorization: 'esignon mgjv4YvW5hJwZet8rc43lk6PzONAcr7q//EZ3V8MkNs5U8dE8qw4amjpNMtaCupRi645Rz2K9/T4N1ylBhHzFI2tn0C/h7VLu5CHAa75N+GtMtKi1qAovYx7PKgNI1PokB4o1mlEK5s='
-		}
-	};
+    var field_name = field_name;
+    var field_value = field_value;
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'esignon mgjv4YvW5hJwZet8rc43lk6PzONAcr7q//EZ3V8MkNs5U8dE8qw4amjpNMtaCupRi645Rz2K9/T4N1ylBhHzFI2tn0C/h7VLu5CHAa75N+GtMtKi1qAovYx7PKgNI1PokB4o1mlEK5s='
+        }
+    };
 
-	fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=9&field_name='+field_name+'&field_value='+field_value+'', options)
-			.then(response => response.json())
-			.then(response => {
-                var workflow_id = [];
-                var pworkflow_id = [];
-                var j = 0;
-                var k = 0;
-                for(var i =0; i <response['workflow_list'].length; i++){
-                    if(response['workflow_list'][i]['status'] == "Complete"){
-                        workflow_id[j] = response['workflow_list'][i]['workflow_id'];
-                        j++;
-                    }
-                    if(response['workflow_list'][i]['status'] == "Playing") {
-                        pworkflow_id[k] = response['workflow_list'][i]['workflow_id'];
-                        k++;
-                    }
+    fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=9&field_name='+field_name+'&field_value='+field_value+'', options)
+        .then(response => response.json())
+        .then(response => {
+            var workflow_id = [];
+            var pworkflow_id = [];
+            var cworkflow_id = [];
+            var j = 0;
+            var k = 0;
+            var z = 0;
+            for(var i =0; i <response['workflow_list'].length; i++){
+                if(response['workflow_list'][i]['status'] == "Complete"){
+                    workflow_id[j] = response['workflow_list'][i]['workflow_id'];
+                    j++;
                 }
-                Contract_reduction(workflow_id,pworkflow_id);
-			})
-			.catch(err => console.error(err));
+                if(response['workflow_list'][i]['status'] == "Playing") {
+                    pworkflow_id[k] = response['workflow_list'][i]['workflow_id'];
+                    k++;
+                }
+                if(response['workflow_list'][i]['status'] == "Canceled"||response['workflow_list'][i]['status'] == "Disposal"||response['workflow_list'][i]['status'] == "Truncate") {
+                    cworkflow_id[z] = response['workflow_list'][i]['workflow_id'];
+                    z++;
+                }
+            }
+            Contract_reduction(workflow_id,pworkflow_id,cworkflow_id);
+        })
+        .catch(err => console.error(err));
 }
 
 function contractView(workflow_id){

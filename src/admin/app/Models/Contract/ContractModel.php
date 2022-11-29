@@ -380,6 +380,8 @@ class ContractModel extends CommonModel
         var_dump($jsonInput);
         $workflow = json_decode($jsonInput);
         $pworkflow_id =$workflow[0]->pworkflow_id;
+        $cworkflow_id =$workflow[0]->cworkflow_id;
+
         if($pworkflow_id != ""){
             $where = "workflow_id in (";
             $where = $where . @join(",", $pworkflow_id);
@@ -393,6 +395,21 @@ class ContractModel extends CommonModel
                     $where
             ";
             $this->wrdb->update($playing_query);
+        }
+        if(count($cworkflow_id) > 0){
+            $where = "workflow_id in (";
+            $where = $where . @join(",", $cworkflow_id);
+            $where = $where . ")";
+            $canceled_query = "
+                update
+                    contract_condition
+                set
+                    contract_status =9,
+                    del_yn = 'Y'
+                where 
+                   $where
+            ";
+            $this->wrdb->update($canceled_query);
         }
         if($workflow != ""){
             for($i = 0; $i< count($workflow); $i++) {

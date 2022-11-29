@@ -233,6 +233,9 @@ class SellerModel extends CommonModel
             }elseif ($_GET["search_B"] == "5"){
                 $where_query = $where_query." and contract_status=5";
             }
+            elseif ($_GET["search_B"] == "9"){
+                $where_query = $where_query." and contract_status=9";
+            }
         }
         $query = "
             select

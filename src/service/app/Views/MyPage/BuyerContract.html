@@ -64,6 +64,9 @@
               <label class="form-check-label" for="completed">
                 <input class="form-check-input" name="search_B" type="radio" value="5" id="completed" <?php if($_GET["search_B"] == "5"){ echo "checked";}?>/> 계약완료
               </label>
+                <label class="form-check-label" for="cancel">
+                    <input class="form-check-input" name="search_B" type="radio" value="9" id="cancel"/<?php if($_GET["search_B"] == "9"){ echo "checked";}?>> 계약취소
+                </label>
             </td>
           </tr>
           <tr>
@@ -228,16 +231,16 @@
         $pre = $page-1;
         ?>
             <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$pre?>,'<?=$search_A?>','<?=$search_B?>','<?=$search_C?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">이전</a></li>
-            <?php
+        <?php
         }
         ?>
-            <?php
+        <?php
          for($i= $block_start; $i<=$block_end;$i++){
               if($_GET["p_n"]==$i){?>
             <li class="paginate_button page-item active">
-                <?php }else{ ?>
+        <?php }else{ ?>
             <li class="paginate_button page-item">
-                <?php } ?>
+        <?php } ?>
                 <a href="javascript:nextPage(<?=$i?>,'<?=$search_A?>','<?=$search_B?>','<?=$search_C?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a>
             </li>
             <?php }?>
@@ -247,13 +250,13 @@
             $next_page = $page+1;
             ?>
             <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$next_page?>,'<?=$search_A?>','<?=$search_B?>','<?=$search_C?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">다음</a></li>
-            <?php
+        <?php
         }
         ?>
-            <?php
+        <?php
         if($_GET["p_n"]>=1 && $_GET["p_n"] != $total_page){?>
             <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$total_page?>,'<?=$search_A?>','<?=$search_B?>','<?=$search_C?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">마지막</a></li>
-            <?php }}?>
+        <?php }}?>
         </ul>
       </form>
     </div>
@@ -291,7 +294,7 @@
             .then(response => {
                 var j = 0;
                 for(var i =0; i <response['workflow_list'].length; i++){
-                    if(response['workflow_list'][i]['order'] == 1 || response['workflow_list'][i]['order'] == 3){
+                    if(response['workflow_list'][i]['status'] == "Playing" && response['workflow_list'][i]['order'] == 1 || response['workflow_list'][i]['order'] == 3){
                         Buyer_turn(response['workflow_list'][i]['workflow_id']);
                         j++;
                     }
@@ -301,7 +304,7 @@
     }
 
 
-  function Contract_reduction(workflow_id,pworkflow_id){
+  function Contract_reduction(workflow_id,pworkflow_id,cworkflow_id){
         if(workflow_id == ""){
             alert("최신상태 입니다.");
         }else {
@@ -342,8 +345,10 @@
                         data.product_quantity = workflow[x][1];
                         data.workflow_id = workflow[x][2];
                         data.pworkflow_id = pworkflow_id;
+                        data.cworkflow_id = cworkflow_id;
                         workList.push(data);
                         if (x == workflow_id.length - 1) {
+                            alert(JSON.stringify(data.cworkflow_id));
                             var jsonData = JSON.stringify(workList);
                             $.ajax({
                                 method: 'post',
@@ -381,7 +386,7 @@
     };
     fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_id + '?offset=%2B09%3A00', options)
             .then(response => response.json())
-            .then(response => /*console.log(response)*/{
+            .then(response => {
               if(response['download_url'] == ""){
                 window.open(response['playing_url']);
               }else{
@@ -436,17 +441,26 @@ function contract_update(){
           .then(response => {
             var workflow_id = [];
             var pworkflow_id = [];
+            var cworkflow_id = [];
             var j = 0;
+            var z = 0;
+            var x = 0;
             for(var i =0; i <response['workflow_list'].length; i++){
               if(response['workflow_list'][i]['status'] == "Complete"){
                 workflow_id[j] = response['workflow_list'][i]['workflow_id'];
                 j++;
               }
                 if(response['workflow_list'][i]['status'] == "Playing") {
-                    pworkflow_id[j] = response['workflow_list'][i]['workflow_id'];
+                    pworkflow_id[x] = response['workflow_list'][i]['workflow_id'];
+                    x++;
+                }
+                if(response['workflow_list'][i]['status'] == "Canceled"||response['workflow_list'][i]['status'] == "Disposal"||response['workflow_list'][i]['status'] == "Truncate") {
+                    cworkflow_id[z] = response['workflow_list'][i]['workflow_id'];
+                    z++;
                 }
               }
-            Contract_reduction(workflow_id,pworkflow_id);
+           // alert(cworkflow_id);
+           Contract_reduction(workflow_id,pworkflow_id,cworkflow_id);
           })
           .catch(err => console.error(err));
 }
