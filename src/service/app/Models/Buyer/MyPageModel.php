@@ -382,15 +382,7 @@ class MyPageModel extends CommonModel
 
     public function getContractList($uuid){
         $data = [];
-        $query = "
-            select
-                count(*)
-            from
-                contract_condition
-            where del_yn != 'Y' AND buyer_uuid ='".$uuid."'
-        ";
-        $data["count"] = $this->rodb->simple_query($query);
-        $data["data"] = [];
+
         $where_query = "";
 
         if($_GET["search_A"] != ""){
@@ -410,7 +402,15 @@ class MyPageModel extends CommonModel
         }else{
             $where_query = $where_query." ";
         }
-
+        $query = "
+            select
+                count(*)
+            from
+                contract_condition
+            where del_yn != 'Y' AND buyer_uuid ='".$uuid."'".$where_query."
+        ";
+        $data["count"] = $this->rodb->simple_query($query);
+        $data["data"] = [];
         $query = "
             select
                *,idx as 'cidx',product_price as contract_price

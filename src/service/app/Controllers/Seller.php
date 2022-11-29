@@ -67,7 +67,9 @@ class Seller extends BaseController
         $data_cnt = $this->seller_model->getContractCount($uuid);
         $data = array(
             "data" => $data["data"],
-            "data_cnt" => $data_cnt
+            "data_cnt" => $data_cnt,
+            "data_page_total_cnt" => $data["count"]
+
     );
         echo view("Common/Header.html");
         echo view('Seller/Contract.html',$data);

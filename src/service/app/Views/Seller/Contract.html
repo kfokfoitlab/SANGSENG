@@ -25,6 +25,7 @@
       </ul>
 
       <form name="myForm" method="get" action="/Seller/Contract" >
+        <input type="hidden" name="p_n" value="1">
         <table class="contract-search-table w-100 bg-light border-top border-bottom">
           <tbody>
           <tr class="border-bottom">
@@ -66,36 +67,10 @@
           <button class="btn btn-sm btn-outline-secondary me-3" type="reset">초기화</button>
           <button class="btn btn-sm btn-primary px-3" type="submit">검색</button>
         </div>
-      </form>
 
       <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-2">
-        <?php
-          $count = 0;
-          if(is_array($data)){
-          $count = count($data);
-          }
-          ?>
-        <span>계약목록 (총 <strong><?=$count?></strong>개)</span>
-
-
+        <span>계약목록 (총 <strong><?=$data_page_total_cnt?></strong>개)</span>
         <div class="d-flex">
-          <!--           <select class="form-select form-select-sm me-2" aria-label="Default select">
-                        <option value="all" selected>전체</option>
-                        <option value="recent">최근 계약일순</option>
-                        <option value="low">낮은 가격순</option>
-                        <option value="high">높은 가격순</option>
-                      </select>-->
-
-
-          <!--
-                      <select class="form-select form-select-sm me-2" aria-label="Default select">
-                        <option value="20" selected>20개씩</option>
-                        <option value="50">50개씩</option>
-                        <option value="100">100개씩</option>
-                        <option value="200">200개씩</option>
-                      </select>
-          -->
-
           <button type="button" class="me-2 btn btn-sm btn-success flex-shrink-0 fw-normal" onclick="excelFileExport();">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
               <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
@@ -103,7 +78,7 @@
             </svg>
             엑셀다운
           </button>
-          <button class="btn btn-sm btn-warning flex-shrink-0 px-3" onclick="contract_update();">계약상태 최신화</button>
+          <button type="button" class="btn btn-sm btn-warning flex-shrink-0 px-3" onclick="contract_update();">계약상태 최신화</button>
         </div>
       </div>
 
@@ -124,6 +99,9 @@
         <?php
           if(is_array($data) && count($data) > 0){
         $i = 1;
+        if($_GET["p_n"]!=""){
+        $i=($_GET["p_n"]-1)*10+1;
+        }
         foreach($data as $item){
         $status = "";
         if($item["contract_status"] == 1){
@@ -172,13 +150,13 @@
           <td class="text-start"><?=$item["product_name"]?></td>
           <td><?=$item["buyer_company"]?></td>
           <td class="text-center"><?=$item["product_quantity"]?></td>
-          <td class="text-end"><?=number_format($item["contract_price"])?>원</td>
-          <td><button class="btn btn-primary btn-sm" onclick="Contract_Detail(<?=$item['workflow_id']?>)">계약서 조회</button></td>
+          <td class="text-end"><?=number_format($item["product_price"])?>원</td>
+          <td><button type="button" class="btn btn-primary btn-sm" onclick="Contract_Detail(<?=$item['workflow_id']?>)">계약서 조회</button></td>
           <td>
             <?php
             if($item["contract_status"] == 2 || $item["contract_status"] == 5){
               ?>
-            <button class ="btn btn-success btn-sm" onclick="Contract_Return(<?=$item['workflow_id']?>,<?=$item['contract_status']?>);">이메일로 받기</button>
+            <button type="button" class ="btn btn-success btn-sm" onclick="Contract_Return(<?=$item['workflow_id']?>,<?=$item['contract_status']?>);">이메일로 받기</button>
             <?php
             }
             ?>
@@ -191,20 +169,81 @@
           ?>
         </tbody>
       </table>
+        <?php if($data_page_total_cnt == 0){ echo"<div class='text-center'><span>계약목록이 없습니다.</span>"; }?>
+
+        <div class="float-start">
+          <div class="dataTables_info" id="datatables_info" role="status" aria-live="polite"></div>
+        </div>
+        <ul style="float: right" class="pagination">
+          <li class="paginate_button page-item previous disabled" id="datatables_previous">
+            <?php
+          if($data_page_total_cnt > 0){
+            $page = $_GET["p_n"];
+            $search_A = $_GET['search_A'];
+            $search_B = $_GET['search_B'];
+            $page_per_record = 10;
+            $block_ct = 5;
+            $list = 10;
+            $block_num = ceil($page/$block_ct); // 현재 페이지 블록 구하기
+            $block_start = (($block_num - 1) * $block_ct) + 1; // 블록의 시작번호
+            $block_end = $block_start + $block_ct - 1; //블록 마지막 번호
+            $total_page = ceil($data_page_total_cnt / $list); // 페이징한 페이지 수 구하기
+            if($block_end > $total_page){
+            $block_end = $total_page;
+            }
+            $total_block = ceil($total_page/$block_ct);
+            $start_num = ($page-1) * $list;
+            if($_GET["p_n"]>1){?>
+          <li class="paginate_button page-item"> <a href="javascript:nextPage(1,'<?=$search_A?>','<?=$search_B?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">처음으로</a></li>
+          <?php }?>
+          <?php
+        if($page <= 1){
+        ?>
+          <?php
+        }else{
+        $pre = $page-1;
+        ?>
+          <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$pre?>,'<?=$search_A?>','<?=$search_B?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">이전</a></li>
+          <?php
+        }
+        ?>
+          <?php
+         for($i= $block_start; $i<=$block_end;$i++){
+              if($_GET["p_n"]==$i){?>
+          <li class="paginate_button page-item active">
+            <?php }else{ ?>
+          <li class="paginate_button page-item">
+            <?php } ?>
+            <a href="javascript:nextPage(<?=$i?>,'<?=$search_A?>','<?=$search_B?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a>
+          </li>
+          <?php }?>
+          <?php
+        if($block_num >= $total_block){
+          }else{
+          $next_page = $page+1;
+          ?>
+          <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$next_page?>,'<?=$search_A?>','<?=$search_B?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">다음</a></li>
+          <?php
+        }
+        ?>
+          <?php
+        if($_GET["p_n"]>=1 && $_GET["p_n"] != $total_page){?>
+          <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$total_page?>,'<?=$search_A?>','<?=$search_B?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">마지막</a></li>
+          <?php }}?>
+        </ul>
       </form>
     </div>
-    <form name="statusForm" id="statusForm" method="post" action="/Seller/ContractUpdate">
-      <input type="hidden" name ="seller_workflow" id="seller_workflow" value="0">
-      <input type="hidden" name ="seller_pworkflow_id" id="seller_pworkflow_id" value="0">
-      <input type="hidden" name ="workflow_count" id="workflow_count" value="">
-      <input type="hidden" name ="uuid" id = "uuid" value="<?=$_SESSION['login_info']['uuid']?>">
-    </form>
   </section>
 </div>
 <script>
   $(document).ready(function(){
     seller_sequence();
   });
+
+  function nextPage(p_n,a,b){
+    location.href = '/Seller/Contract?p_n='+p_n+'&search_A='+a+'&search_B='+b;
+  }
+
 
   function seller_turn(workflow_id){
     if(workflow_id != ""){

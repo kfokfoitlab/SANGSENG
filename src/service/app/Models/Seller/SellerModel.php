@@ -219,15 +219,7 @@ class SellerModel extends CommonModel
     public function getContractList($uuid){
         $data = [];
         // total
-        $query = "
-            select
-                count(*)
-            from
-                contract_condition
-            where (del_yn != 'Y' or del_yn is null) AND seller_uuid ='".$uuid."'
-        ";
-        $data["count"] = $this->rodb->simple_query($query);
-        $data["data"] = [];
+
         $where_query = "";
 
         if($_GET["search_A"] != ""){
@@ -244,15 +236,27 @@ class SellerModel extends CommonModel
         }
         $query = "
             select
-               *,idx as 'cidx',product_price as contract_price
+                count(*)
+            from
+                contract_condition
+            where (del_yn != 'Y' or del_yn is null) AND seller_uuid ='".$uuid."'".$where_query."
+        ";
+        $data["count"] = $this->rodb->simple_query($query);
+        $data["data"] = [];
+        $query = "
+            select
+               *
             from
               contract_condition 
             where (del_yn != 'Y' or del_yn is null) AND seller_uuid ='".$uuid."'".$where_query."
-           order by 
-               idx desc
-           
-           
         ";
+        $page_start = 0;
+        if($_GET["p_n"] != ""){
+            $page_start = ($_GET["p_n"] - 1)*10;
+        }
+        $query = $query." order by idx desc";
+        $query = $query." limit ".$page_start.", 10";
+
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
             $data["data"][] = $row;
