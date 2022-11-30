@@ -16,6 +16,7 @@ $(document).ready(function () {
 			, data: function (data) {
 				data.columns[1].search.value = $("#search-video-title").val();
 				data.columns[6].search.value = $("#search-status").val();
+
 			}
 		},
 		"order": [
