@@ -212,7 +212,6 @@ $routes->group('Database/Product', ['namespace' => 'App\Controllers\Database\Job
     $routes->post($group_name.'/UpdateSubmit',   $group_name.'::UpdateSubmit');
 
 });
-    $routes->get ($group_name.'/contractSubmit', $group_name.'::contractSubmit');
 // 환경 설정
 $routes->group('Configuration', ['namespace' => 'App\Controllers\Configuration'], static function ($routes) {
     // 승인 설정
@@ -307,7 +306,7 @@ $routes->group('Video', ['namespace' => 'App\Controllers\Video'], static functio
     $routes->post($group_name.'/getList',           $group_name.'::getList');
     $routes->get ($group_name.'/VideoRegister',           $group_name.'::Register');
     $routes->get($group_name.'/statusUpdate',           $group_name.'::statusUpdate');
-    $routes->post ($group_name.'/videoRegisterSubmit',           $group_name.'::videoRegisterSubmit');
+    $routes->post ($group_name.'/videoRegisterSubmit',            $group_name.'::videoRegisterSubmit');
 
 
 	
