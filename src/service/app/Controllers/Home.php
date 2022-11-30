@@ -27,12 +27,13 @@ class Home extends BaseController
         $new_product = $this->buyer_model->NewProductList();
         $reduction =  $this->buyer_model->ReductionMoney();
         $notice_list = $this->seller_model->getNoticeList();
+        $promotion_video = $this->seller_model->getPromotionVideo();
         $data = array(
             "data" => $ranking["data"],
             "reduction" => $reduction,
             "new_product" => $new_product,
+            "promotion_video" => $promotion_video,
             "notice_list" => $notice_list
-
         );
 
         echo view("Common/Header.html");

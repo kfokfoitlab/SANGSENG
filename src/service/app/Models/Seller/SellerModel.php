@@ -454,7 +454,23 @@ class SellerModel extends CommonModel
         }
         return $product_reply;
     }
-	
+
+    public function getPromotionVideo(){
+        $query = "
+            select
+            *
+            from
+             promotion_video
+            order by register_date desc
+            limit 1
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $promotion_video= $row;
+        }
+        return $promotion_video;
+    }
+
 	public function getNoticeList(){
 		$notice_list =[];
 		$query = "
