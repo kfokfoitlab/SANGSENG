@@ -5716,10 +5716,11 @@ Main Header
 .main-header .outer-box .btn-box {
   position: relative;
   display: flex;
+  justify-content: end;
+  min-width: 160px;
 }
 
 .main-header .outer-box .btn-box a {
-  min-width: 150px;
   font-size: 18px;
   font-weight: 400;
   color: #121212;
@@ -5727,7 +5728,6 @@ Main Header
 .main-header .outer-box .btn-box a .login-split {
   position: relative;
   padding-right: 10px;
-  margin-right: 10px;
 }
 .main-header .outer-box .btn-box a .login-split::after {
   content: '';
@@ -5735,7 +5735,7 @@ Main Header
   width: 1px;
   height: 15px;
   background: #e9e9e9;
-  top: 4px;
+  top: 6px;
   right: -2px;
 }
 
