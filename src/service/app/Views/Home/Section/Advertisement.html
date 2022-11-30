@@ -25,11 +25,12 @@
   </div>
 </section>
 <script>
-	$(document).ready(function () {
+  var main_video = $("#main_video").val();
+
+  $(document).ready(function () {
 		// $('#video_main').click(function (){
 		//   $('#video_main')[0].play();
 		// });
-      var main_video = $("#main_video").val();
 		$('#video_main')[0].src = '/uploads/'+main_video+'';
 		$('#video_main').on("ended",function () {
 			video_play(2);
@@ -47,7 +48,7 @@
 
 	function video_play(video_num){
 		if(video_num == 1) {
-			$('#video_main')[0].src = '/uploads/ninemila_shampoo_salmon.mp4';
+			$('#video_main')[0].src = '/uploads/'+main_video+'';
 			$('#video_main')[0].play();
 			$('#video_1').css({opacity: '1'})
 			$('#video_2').css({opacity: '0.5'})
