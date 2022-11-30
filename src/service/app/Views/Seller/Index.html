@@ -161,7 +161,7 @@
                     foreach($data["playing"] as $item){
                     ?>
                     <li>
-                      <a id ="turn_<?=$item['workflow_id']?>" class="d-flex justify-content-between" href="/Seller/Contract">
+                      <a id ="turn_<?=$item['workflow_id']?>" class="d-flex justify-content-between" href="/Seller/Contract?p_n=1">
                         <span>(<?=$item['buyer_company']?>) <?=$item['product_name']?></span><span class="flex-shrink-0 text-secondary"><?=substr($item["register_date"],0,10)?></span>
                       </a>
                     </li>
