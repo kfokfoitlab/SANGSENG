@@ -369,7 +369,8 @@ class CommonModel extends dbModel
 	}
 	
 	public function downloadFileNew(){
-		$target_Dir = ROOTPATH."/public/uploads/";
+        ini_set('memory_limit','-1');
+        $target_Dir = ROOTPATH."/public/uploads/";
 		$file = $_GET["fileName"];
 		$file_ori = $_GET["fileNameOri"];
 		$down = $target_Dir . $file;
