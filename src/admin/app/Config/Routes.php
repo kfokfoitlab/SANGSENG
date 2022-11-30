@@ -304,7 +304,9 @@ $routes->group('Video', ['namespace' => 'App\Controllers\Video'], static functio
 	// 전체 목록
 	$group_name = "Lists";
 	$routes->get ($group_name.'/',                  $group_name.'::Index');
-	$routes->get ($group_name.'/VideoRegister',           $group_name.'::Register');
+    $routes->post($group_name.'/getList',           $group_name.'::getList');
+    $routes->get ($group_name.'/VideoRegister',           $group_name.'::Register');
+    $routes->get($group_name.'/statusUpdate',           $group_name.'::statusUpdate');
     $routes->post ($group_name.'/videoRegisterSubmit',           $group_name.'::videoRegisterSubmit');
 
 

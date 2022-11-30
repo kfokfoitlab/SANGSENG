@@ -461,6 +461,8 @@ class SellerModel extends CommonModel
             *
             from
              promotion_video
+            where video_status = 2
+            and del_yn !='Y'
             order by register_date desc
             limit 1
         ";

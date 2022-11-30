@@ -10,7 +10,7 @@ class VideoModel extends CommonModel
     { // {{{
         $items = array();
 
-        $common_query = " 1 and del_yn != 'Y' ";
+        $common_query = " 1  ";
 
         // total records -------------------------------- {{{
         $query = "
@@ -174,19 +174,32 @@ class VideoModel extends CommonModel
 
     public function statusUpdate($data)
     {
-        $query = "
+        if($data['status'] == 9){
+            $query = "
 			UPDATE
 				".$this->table_name."
 			SET
-				board_status = ".$data["status"]."
+				video_status = ".$data["status"]."
+				,del_yn ='Y'
 			WHERE
 				idx = ".$data["idx"]."
 			LIMIT 1
 			";
-
+            $this->wrdb->update($query);
+            return 1;
+        }else{
+        $query = "
+			UPDATE
+				".$this->table_name."
+			SET
+				video_status = ".$data["status"]."
+			WHERE
+				idx = ".$data["idx"]."
+			LIMIT 1
+			";
         $this->wrdb->update($query);
-
         return 1;
+        }
     }
 
 

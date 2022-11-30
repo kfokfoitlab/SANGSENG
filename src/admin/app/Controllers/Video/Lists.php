@@ -24,11 +24,34 @@ class Lists extends Base
             "page_name" => $this->page_name
             //,"data" => $this->model->getList()
         );
-
         echo view('Common/Header.html');
         echo view(_CONTROLLER.'/Index.html', $data);
         echo script_tag("assets/js/"._CONTROLLER."/Index.js");
         echo view('Common/Footer.html');
+
+    } //}}}
+    public function getList()
+    { //{{{
+
+        $start = $_POST["start"];
+        $length = $_POST["length"];
+        $limit = array(
+            "start" => $start
+        ,"length" => $length
+        );
+
+        $result = $this->model->getListData($_POST);
+
+        $data = array(
+            "draw" => @$_POST["draw"]
+        ,"recordsTotal" => $result["records_total"]
+        ,"recordsFiltered" => $result["filtered_total"]
+        ,"data" => $result["data"]
+        );
+
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+
+        die();
 
     } //}}}
 
@@ -67,4 +90,28 @@ class Lists extends Base
 				";
         }
     } //}}}
+    public function statusUpdate()
+    {
+        $data = array(
+            "idx" => $_GET["idx"]
+        , "status" => $_GET["status"]
+        );
+        $this->model->statusUpdate($data);
+        if ($this == 1) {
+
+            echo "
+            <script>
+            alert('상태가 변경되었습니다');
+                history.back();
+            </script>
+       	 ";
+        }else{
+            echo "
+            <script>
+            alert('실패');
+                history.back();
+            </script>
+       	 ";
+        }
+    }
 }

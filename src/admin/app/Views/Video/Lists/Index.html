@@ -12,16 +12,18 @@
 
         <div class="row gx-3">
           <div class="col-lg-2">
-            <label>작성자 검색</label>
-            <input type="text" class="form-control form-control-sm search" id="search-company-name" placeholder="">
-          </div>
-          <div class="col-lg-2">
             <label>제목 검색</label>
-            <input type="text" class="form-control form-control-sm search" id="search-worker-name" placeholder="">
+            <input type="text" class="form-control form-control-sm search" id="search-video-title" placeholder="">
           </div>
-          <div class="col-lg-2">
-            <label>내용 검색</label>
-            <input type="text" class="form-control form-control-sm search" id="search-worker-name" placeholder="">
+          <div class="col-2">
+            <label>상태</label>
+            <select class="form-control form-control-sm filter" id="search-status">
+              <option value="" selected>전체</option>
+              <option value="1">신규영상</option>
+              <option value="2">사용중</option>
+              <option value="3">미사용</option>
+              <option value="9">삭제</option>
+            </select>
           </div>
         </div>
       </form>
