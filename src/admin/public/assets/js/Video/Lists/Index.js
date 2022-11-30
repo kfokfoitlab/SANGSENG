@@ -38,8 +38,7 @@ $(document).ready(function () {
 					return html;
 				}
 			}
-			, {
-				title: "사용여부", data: "video_status", orderable: false, visible: true, className: "text-center text-nowrap",
+			, {title: "사용여부", data: "video_status", orderable: false, visible: true, className: "text-center text-nowrap",
 				"render": function (data, type, row, meta) {
 					switch (data) {
 						case "1":
@@ -70,8 +69,7 @@ $(document).ready(function () {
 					return html;
 				}
 			}
-			, {
-				title: "삭제", data: "idx", visible: true,
+			, {title: "삭제", data: "idx", visible: true,
 				"render": function (data, type, row, meta, data1) {
 					let html = "";
 					html = "<button class='btn btn-outline-danger btn-sm m-1' onClick='statusUpdate(" + data + ",9)'>삭제</button>";
