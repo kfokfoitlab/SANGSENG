@@ -92,8 +92,12 @@ class ContractModel extends CommonModel
 
         // query
         $query = "
-            select
-                 *
+              select
+                 *,
+                 (select email from buyer_company where uuid=".$this->table_name.".buyer_uuid) as buyer_email
+                 ,(select email from seller_company where uuid=".$this->table_name.".seller_uuid) as seller_email
+                 , (select seller_name from seller_company where uuid=".$this->table_name.".seller_uuid)as seller_name
+                 ,(select buyer_name from buyer_company where uuid=".$this->table_name.".buyer_uuid) as buyer_name
             from
                 ".$this->table_name."
             where
