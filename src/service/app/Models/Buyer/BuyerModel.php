@@ -183,7 +183,7 @@ class BuyerModel extends CommonModel
 		$interest_info = array();
 		$URL_CHECK = _CONTROLLER;
 
-	    if($URL_CHECK == "Home" or $URL_CHECK == "Buyer/Shop"){
+	    if($URL_CHECK == "Home" or $URL_CHECK == "Buyer/Shop" or $URL_CHECK == 'Buyer'){
 		    $buyer_info = $this->Buyer_info($_SESSION['login_info']['uuid']);
 			if($buyer_info["interest_office"] == "Y") {
 				$interest_info[] = 1;
@@ -209,7 +209,6 @@ class BuyerModel extends CommonModel
         }else{
             $limit = 6;
         }
-		
         if($value != "" && $value !='all'){
             $where = " and product_category =$value";
         }
