@@ -378,7 +378,7 @@ class ContractModel extends CommonModel
         $pworkflow_id =$workflow[0]->pworkflow_id;
         $cworkflow_id =$workflow[0]->cworkflow_id;
 
-        if($pworkflow_id != ""){
+        if(count($pworkflow_id) > 0){
             $where = "workflow_id in (";
             $where = $where . @join(",", $pworkflow_id);
             $where = $where . ")";

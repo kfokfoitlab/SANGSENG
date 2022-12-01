@@ -227,7 +227,7 @@ function Contract_reduction(workflow_id,pworkflow_id,cworkflow_id) {
                     var jsonData = JSON.stringify(workList);
                     $.ajax({
                         method: 'post',
-                        url: '/Buyer/MyPage/ContractUpdate',
+                        url: '/Contract/Lists/ContractUpdate',
                         data: jsonData,
                         contentType: "application/json",
                         success: function (result) {
