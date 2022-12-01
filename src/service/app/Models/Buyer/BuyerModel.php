@@ -213,14 +213,19 @@ class BuyerModel extends CommonModel
         if($value != "" && $value !='all'){
             $where = " and product_category =$value";
         }
+        if($_GET['search_type'] == 's'){
+            $where = "";
+        }
+
         if($value == 'all'){
             $where = "";
         }
-        if($_GET["search_v"] != ""){
+        if($_GET["search_v"] != "" && $_GET['search_type'] != 's'){
             $where = $where." and (product_name like '%".$_GET["search_v"]."%'
              or company_name like '%".$_GET["search_v"]."%')";
         }
-		
+
+
         $ranking = [];
         $query = "
             select
