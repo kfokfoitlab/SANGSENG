@@ -93,7 +93,7 @@ class Auth extends BaseController
                             echo "
                          <script>
                             alert('새로운 계약서가 등록되었습니다.');
-                            window.location.replace('/Seller/Contract');
+                            window.location.replace('/Seller/Contract?p_n=1');
                         </script>
                       ";
                             break;
