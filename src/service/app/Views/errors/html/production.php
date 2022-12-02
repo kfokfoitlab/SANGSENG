@@ -16,7 +16,7 @@
 
         <h1 class="headline">Whoops!</h1>
 
-        <p class="lead">We seem to have hit a snag. Please try again later...</p>
+        <p class="lead">오류가 발생했습니다. 관리자에게 문의해주세요</p>
 
     </div>
 
