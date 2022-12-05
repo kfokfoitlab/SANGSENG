@@ -103,21 +103,6 @@
                          title="상시 근로자 수 입력" tabindex=100 required>
                 </div>
                 <div class="form-group">
-                  <label class="my-2"><sup class="text-danger">*</sup><a title="경증 장애인 근로자 수 필수입력">경증 장애인 근로자
-                    수</a></label>
-                  <input type="text" name="mild_disabled" value ="<?=$data['mild_disabled']?>"  placeholder="숫자만 입력"
-                         oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')"
-                         title="경증 장애인 근로자 수 입력" tabindex=100 required>
-                </div>
-                <div class="form-group">
-                  <label class="my-2"><sup class="text-danger">*</sup><a title="중증 장애인 근로자 수 필수입력">중증 장애인 근로자
-                    수</a></label>
-                  <input type="text" name="severely_disabled" value ="<?=$data['severely_disabled']?>" placeholder="숫자만 입력"
-                         oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')"
-                         title="중증 장애인 근로자 수 입력" tabindex=100 required>
-                </div>
-
-                <div class="form-group">
                   <label class="my-2"><a title="사업자등록증 첨부">사업자등록증 첨부</a></label>
                   <button class="btn btn-outline-secondary btn-sm my-2 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["seller_business_license"]?>','<?=$data["seller_business_license_ori"]?>');">기존파일 다운로드</button>
                   <input type="file" name="seller_business_license" class="form-control" placeholder="사업자등록증 첨부"

@@ -100,8 +100,6 @@ class SellerInfoModel extends CommonModel
                 ,company_code = '".$data["company_code"]."'
                 ,classification = '".$data["classification"]."'
                 ,seller_sales = '".$data['seller_sales']."'
-                ,severely_disabled = '".$data['severely_disabled']."'
-                ,mild_disabled = '".$data['mild_disabled']."'
                 ,update_date = '".date("Y-m-d H:i:s")."'
                 ,update_id = '".$uuid."'
                 ,seller_documents = '".$upload_seller_documents_image."'

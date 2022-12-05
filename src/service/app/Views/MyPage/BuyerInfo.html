@@ -36,7 +36,7 @@
       <h3 class="mt-5 h4 fw-bold text-center">나의정보 수정</h3>
       <div class="default-form border rounded my-4 p-4">
         <div class="form-inner">
-          <form name="myForm" method="post" action="/Buyer/MyPage/BuyerUpdateSubmit" enctype="multipart/form-data">
+          <form name="updateForm" id ="buyer_updateForm" method="post" action="/Buyer/MyPage/BuyerUpdateSubmit" enctype="multipart/form-data">
             <input type="hidden" name="sbs" value="<?=$sbs?>">
             <input type="hidden" name="ads" value="<?=$ads?>">
 
@@ -87,15 +87,15 @@
             </div>
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="상시 근로자 수 필수입력">상시 근로자 수 </a></label>
-              <input type="text" name="workers" value ="<?=$data['workers']?>" placeholder="숫자만 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="상시 근로자 수 입력" tabindex=100 required>
+              <input type="text" name="workers" id ="workers" value ="<?=$data['workers']?>" placeholder="숫자만 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="상시 근로자 수 입력" tabindex=100 required>
             </div>
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="경증 장애인 근로자 수 필수입력">경증 장애인 근로자 수</a></label>
-              <input type="text" name="mild_disabled" value ="<?=$data['mild_disabled']?>" placeholder="숫자만 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="경증 장애인 근로자 수 입력" tabindex=100 required>
+              <input type="text" name="mild_disabled" id ="mild_disabled" value ="<?=$data['mild_disabled']?>" placeholder="숫자만 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="경증 장애인 근로자 수 입력" tabindex=100 required>
             </div>
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="중증 장애인 근로자 수 필수입력">중증 장애인 근로자 수</a></label>
-              <input type="text" name="severely_disabled" value ="<?=$data['severely_disabled']?>" placeholder="숫자만 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="중증 장애인 근로자 수 입력" tabindex=100 required>
+              <input type="text" name="severely_disabled" id ="severely_disabled" value ="<?=$data['severely_disabled']?>" placeholder="숫자만 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="중증 장애인 근로자 수 입력" tabindex=100 required>
             </div>
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="적용 법인세율">적용 법인세율</a></label>
@@ -120,7 +120,7 @@
             </div>
             <div class="form-group mt-5 d-flex justify-content-center">
               <button type="button" onclick="history.back()" class="theme-btn btn-style-three py-3 me-3" tabindex=100>취소</button>
-              <button type="submit" class="theme-btn btn-style-one py-3" tabindex=100>수정</button>
+              <button type="button" class="theme-btn btn-style-one py-3" onclick="buyerInfoValidation();" tabindex=100>수정</button>
             </div>
           </form>
         </div>
@@ -140,4 +140,15 @@
     }
   };
 
+  function buyerInfoValidation(){
+    var workers_count = parseInt($("#workers").val());
+    var severely_disabled_count = parseInt($("#severely_disabled").val());
+    var mild_disabled_count = parseInt($("#mild_disabled").val());
+
+    if(workers_count < severely_disabled_count + mild_disabled_count){
+      alert("장애인 근로자 수가 상시 근로자 수 보다 많습니다.");
+    }else{
+      $("#buyer_updateForm").submit();
+    }
+  }
 </script>
