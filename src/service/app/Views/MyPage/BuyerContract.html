@@ -348,7 +348,6 @@
                         data.cworkflow_id = cworkflow_id;
                         workList.push(data);
                         if (x == workflow_id.length - 1) {
-                            alert(JSON.stringify(data.cworkflow_id));
                             var jsonData = JSON.stringify(workList);
                             $.ajax({
                                 method: 'post',
