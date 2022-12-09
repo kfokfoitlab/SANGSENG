@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="비밀번호 필수입력">현재 비밀번호</a></label>
-              <input type="password" name="password" placeholder="영문+숫자+특수문자 조합 6자 이상" title="영문+숫자+특수문자 조합 6자 이상 비밀번호 입력" tabindex=100 required>
+              <input type="password" name="password" id ="password" placeholder="영문+숫자+특수문자 조합 6자 이상" title="영문+숫자+특수문자 조합 6자 이상 비밀번호 입력" tabindex=100 required>
             </div>
 
             <div class="form-group">
@@ -141,6 +141,12 @@
   };
 
   function buyerInfoValidation(){
+
+    if($("#password").val() == ""){
+      alert("비밀번호를 입력해주세요");
+      return false;
+    }
+
     var workers_count = parseInt($("#workers").val());
     var severely_disabled_count = parseInt($("#severely_disabled").val());
     var mild_disabled_count = parseInt($("#mild_disabled").val());

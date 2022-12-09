@@ -104,7 +104,7 @@ class MyPage extends BaseController
             echo "
                 <script>
                     alert('비밀번호가 일치하지 않습니다.');
-					window.location.replace('/Buyer');
+					window.location.replace('/Buyer/MyPage/Info');
                 </script>
             ";
         }
