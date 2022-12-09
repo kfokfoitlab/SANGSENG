@@ -1,78 +1,79 @@
-<section className="main-adVideo-section">
-  <div className="auto-container">
-    <div className="main-section-title">
+<section class="main-adVideo-section">
+  <div class="auto-container">
+    <div class="main-section-title">
       <p><span>상생몰 MEDIA</span></p>
       <h2>상생 TV</h2>
     </div>
-    <div className="d-flex justify-content-center">
-      <div className="me-3" style="width: 948px; height: 532px;">
-        <video preload="metadata" controls src="/uploads/ninemila_shampoo_salmon.mp4" muted id="video_main"
-               poster="/uploads/ninemila_shampoo_salmon.png" style="width: 100%;height: 100%;"></video>
+<!--    <input type="hidden" id ='main_video' value="<?=$promotion_video['main_video']?>">
+    <input type="hidden" id ='sub_video1' value="<?=$promotion_video['sub_video1']?>">
+    <input type="hidden" id ='sub_video2' value="<?=$promotion_video['sub_video2']?>">-->
+    <div class="d-flex justify-content-center">
+      <div class="me-3" style="width: 948px; height: 532px;">
+        <video preload="metadata" controls src="/uploads/ninemila_shampoo_salmon.mp4" muted id="video_main" poster="/uploads/ninemila_shampoo_salmon.png" style="width: 100%;height: 100%;"></video>
       </div>
 
-      <div className="d-flex flex-column justify-content-between">
-        <div className="bg-black" style="width: 300px; height: 169px;">
-          <img id="video_1" src="/uploads/ninemila_shampoo_salmon.png" className="w-100 h-100">
+      <div class="d-flex flex-column justify-content-between">
+        <div class="bg-black" style="width: 300px; height: 169px;">
+          <img id="video_1" src="/uploads/ninemila_shampoo_salmon.png" class="w-100 h-100">
         </div>
-        <div className="bg-black" style="width: 300px; height: 169px;">
-          <img id="video_2" src="/uploads/ninemila_shampoo_yeast.png" className="w-100 h-100"
-               style="opacity: 0.5;">
+        <div class="bg-black" style="width: 300px; height: 169px;">
+          <img id="video_2" src="/uploads/ninemila_shampoo_yeast.png" class="w-100 h-100" style="opacity: 0.5;">
         </div>
-        <div className="bg-black" style="width: 300px; height: 169px;">
-          <img id="video_3" src="/uploads/nuyahaus_items.png" className="w-100 h-100" style="opacity: 0.5;">
+        <div class="bg-black" style="width: 300px; height: 169px;">
+          <img id="video_3" src="/uploads/nuyahaus_items.png" class="w-100 h-100" style="opacity: 0.5;">
         </div>
       </div>
     </div>
   </div>
 </section>
 <script>
+/*  var main_video = $("#main_video").val();
+  var sub_video1 = $("#sub_video1").val();
+  var sub_video2 = $("#sub_video2").val();*/
   $(document).ready(function () {
-    // $('#video_main').click(function (){
-    //   $('#video_main')[0].play();
-    // });
-    $('#video_main')[0].src = '/uploads/ninemila_shampoo_salmon.mp4';
-    $('#video_main').on("ended", function () {
-      video_play(2);
-    })
-    $('#video_1').click(function () {
-      video_play(1);
-    });
-    $('#video_2').click(function () {
-      video_play(2);
-    });
-    $('#video_3').click(function () {
-      video_play(3);
-    });
-  });
+		$('#video_main')[0].src ='/uploads/ninemila_shampoo_salmon.mp4';
+		$('#video_main').on("ended",function () {
+			video_play(2);
+		})
+		$('#video_1').click(function (){
+			video_play(1);
+		});
+		$('#video_2').click(function (){
+			video_play(2);
+		});
+		$('#video_3').click(function (){
+			video_play(3);
+		});
+	});
 
-  function video_play(video_num) {
-    if (video_num == 1) {
-      $('#video_main')[0].src = '/uploads/ninemila_shampoo_salmon.mp4';
-      $('#video_main')[0].play();
-      $('#video_1').css({opacity: '1'})
-      $('#video_2').css({opacity: '0.5'})
-      $('#video_3').css({opacity: '0.5'})
-      $('#video_main').on("ended", function () {
-        video_play(2);
-      });
-    } else if (video_num == 2) {
-      $('#video_main')[0].src = '/uploads/ninemila_shampoo_yeast.mp4';
-      $('#video_main')[0].play();
-      $('#video_2').css({opacity: '1'})
-      $('#video_1').css({opacity: '0.5'})
-      $('#video_3').css({opacity: '0.5'})
-      $('#video_main').on("ended", function () {
-        video_play(3);
-      });
-    } else if (video_num == 3) {
-      $('#video_main')[0].src = '/uploads/nuyahaus_items.mp4';
-      $('#video_main')[0].play();
-      $('#video_3').css({opacity: '1'})
-      $('#video_2').css({opacity: '0.5'})
-      $('#video_1').css({opacity: '0.5'})
-      $('#video_main').on("ended", function () {
-        video_play(1);
-      });
-    }
-  }
+	function video_play(video_num){
+		if(video_num == 1) {
+          $('#video_main')[0].src =  '/uploads/ninemila_shampoo_salmon.mp4';
+			$('#video_main')[0].play();
+			$('#video_1').css({opacity: '1'})
+			$('#video_2').css({opacity: '0.5'})
+			$('#video_3').css({opacity: '0.5'})
+			$('#video_main').on("ended",function (){
+				video_play(2);
+			});
+		}else if(video_num == 2) {
+			$('#video_main')[0].src =  '/uploads/ninemila_shampoo_yeast.mp4';
+			$('#video_main')[0].play();
+			$('#video_2').css({opacity: '1'})
+			$('#video_1').css({opacity: '0.5'})
+			$('#video_3').css({opacity: '0.5'})
+			$('#video_main').on("ended",function (){
+				video_play(3);
+			});
+		}else if(video_num == 3){
+			$('#video_main')[0].src = '/uploads/nuyahaus_items.mp4';
+			$('#video_main')[0].play();
+			$('#video_3').css({opacity: '1'})
+			$('#video_2').css({opacity: '0.5'})
+			$('#video_1').css({opacity: '0.5'})
+			$('#video_main').on("ended",function (){
+				video_play(1);
+			});
+		}
+	}
 </script>
