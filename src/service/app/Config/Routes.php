@@ -20,11 +20,43 @@ if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
  * Router Setup
  * --------------------------------------------------------------------
  */
+$mAgent = array("iPhone","iPod","Android","Blackberry",
+    "Opera Mini", "Windows ce", "Nokia", "sony" );
+$chkMobile = false;
+for($i=0; $i<sizeof($mAgent); $i++){
+    if(stripos( $_SERVER['HTTP_USER_AGENT'], $mAgent[$i] )){
+        $chkMobile = true;
+        break;
+    }
+}
+
+
+/*
+ * --------------------------------------------------------------------
+ * Router Setup
+ * --------------------------------------------------------------------
+ */
 $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
+if($chkMobile){
+    $routes->setDefaultNamespace('App\Controllers_m');
+    $routes->setDefaultController('Home');
+    $routes->setDefaultMethod('index');
+    $routes->setTranslateURIDashes(false);
+    $routes->set404Override();
+}
+
+
+/*$routes->setDefaultNamespace('App\Controllers');
+$routes->setDefaultController('Home');
+$routes->setDefaultMethod('index');
+$routes->setTranslateURIDashes(false);
+$routes->set404Override();*/
+
+
 // The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
@@ -60,7 +92,7 @@ $routes->group('Auth', function($routes){
     $routes->get ('ForgotMyId',         'Auth::ForgotMyId');
     $routes->get ('ForgotMyPass',       'Auth::ForgotMyPass');
     $routes->post ('ForgotSubmit',      'Auth::ForgotSubmit');
-
+    $routes->get ('List',               'Auth::List');
     $routes->get ('SignUpBuyerSLA',      'Auth::SignUpBuyerSLA');
     $routes->post('SignUpBuyer',         'Auth::SignUpBuyer');
     $routes->post('SignUpBuyerStep2',    'Auth::SignUpBuyerStep2');

@@ -1,0 +1,50 @@
+<section class="main-newItem-section">
+    <div class="auto-container">
+        <div class="main-section-title">
+            <p><span>상생몰 NEW</span></p>
+            <h2>새로 들어온 상품</h2>
+        </div>
+        <div class="new-item-carousel owl-carousel owl-theme">
+            <?php
+      if(is_array($new_product) && count($new_product) > 0){
+            foreach($new_product as $item){
+            ?>
+            <div class="new-item-box">
+                <a class="d-block p-0" href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>">
+                    <div class="position-relative new-item-box-img">
+                        <img src="/uploads/<?=$item['representative_image']?>" alt="<?=$item['product_name']?>" title="<?=$item['product_name']?>" style="width: 100%; height: 296px">
+                        <span class="position-absolute">NEW</span>
+                    </div>
+                    <div class="new-item-box-info">
+                        <div class="new-item-box-title">
+                            <span><?=$item['company_name']?></span>
+                            <p><?=$item['product_name']?></p>
+                        </div>
+                        <div class="new-item-box-price">
+                            <p class="d-flex justify-content-between mb-2">
+                                <span>계약금액</span>
+                                <strong><?=number_format($item['product_price'])?>원</strong>
+                            </p>
+                            <?php
+              if($_SESSION['login_info']['type'] == 'buyer'){
+              ?>
+                            <p class="d-flex justify-content-between">
+                                <span>감면액</span>
+                                <strong><?=number_format($item['reduction_money'])?>원</strong>
+                            </p>
+                            <?php
+              }
+              ?>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <?php
+      }
+      }
+      ?>
+        </div>
+    </div>
+</section>
+
+
