@@ -34,9 +34,9 @@ class Home extends BaseController
             "notice_list" => $notice_list
         );
 
-      //  echo view("Common/Header.html");
+        echo view("Mobile/Common/Header.html");
         echo view('Mobile/Home/Index.html');
-     //   echo view("Common/Footer.html");
+        echo view("Mobile/Common/Footer.html");
 
     }
 

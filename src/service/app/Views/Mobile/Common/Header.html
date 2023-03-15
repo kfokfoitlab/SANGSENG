@@ -1,0 +1,137 @@
+<?php
+helper("html");
+echo doctype("html5");
+?>
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>상생몰</title>
+  <meta charset='utf8' />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <link href="/assets/dist/superio/css/bootstrap.css" rel="stylesheet">
+<!--  <link href="/assets/dist/superio/css/style.css" rel="stylesheet">-->
+<!--  <link href="/assets/dist/superio/css/responsive.css" rel="stylesheet">-->
+<!--  <link href="/assets/dist/dropify-0.2.2/css/dropify.min.css" rel="stylesheet">-->
+  <link href="/assets/css/m_style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+  <link href="/assets/dist/iziModal/css/iziModal.min.css" rel="stylesheet" />
+
+  <!--  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>-->
+  <script src="/assets/dist/superio/js/jquery.js"></script>
+  <script src="/assets/dist/superio/js/popper.min.js"></script>
+  <script src="/assets/dist/superio/js/chosen.min.js"></script>
+  <script src="/assets/dist/superio/js/bootstrap.bundle.min.js"></script>
+  <!--  <script src="/vendor/twbs/bootstrap/dist/js/bootstrap.bundle.js"></script>-->
+  <script src="/assets/dist/superio/js/jquery.fancybox.js"></script>
+  <script src="/assets/dist/superio/js/jquery.modal.min.js"></script>
+  <script src="/assets/dist/dropify-0.2.2/js/dropify.min.js"></script>
+  <script defer src="/assets/dist/iziModal/js/iziModal.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script defer src="/assets/js/Mobile/script.js"></script>
+  <script>
+		const _CONTROLLER = '<?=@_CONTROLLER?>';
+		const _METHOD = '<?=@_METHOD?>';
+
+		function costCalMove(){
+			window.open('/Reduction/CostCal', '_blank', 'width=720,height=900,toolbars=no,scrollbars=no');
+		}
+  </script>
+
+<body>
+
+<!-- Preloader -->
+<div class="preloader"></div>
+
+  <!-- header-menu-wrapper -->
+  <div class="header-menu-wrapper">
+    <!-- Hamburger Btn-->
+    <input type="checkbox" id="btnHamburger" class="a11y-hidden">
+    <input type="checkbox" id="btnSearch" class="a11y-hidden">
+    <!-- Main Header-->
+    <header class="main-header d-flex justify-content-between align-items-center fixed-top bg-white">
+      <h1>
+        <a href="/">
+          <img src="/assets/m_images/logo.png" class="main-header-logo" alt="상생몰">
+        </a>
+      </h1>
+      <div class="d-flex align-items-center">
+        <label for="btnSearch" class="main-header-search"></label>
+        <label for="btnHamburger" class="main-header-menu"></label>
+      </div>
+    </header>
+    <!--End Main Header -->
+    <!-- Collapse Menu -->
+    <div class="m-menu-bg">
+      <section class="m-menu-content">
+        <div class="m-menu-sub m-menu-login">
+          <p class="welcome-msg">반가워요!</p>
+          <!-- Not Login -->
+          <p class="not-login-txt"><a href="">로그인 ></a></p>
+          <!-- Login -->
+          <p class="login-txt"><a href="">한국직업개발원</a> 님</p>
+
+          <!-- Login -->
+          <div class="login-box">
+            <p><a href="">마이페이지 ></a></p>
+          </div>
+        </div>
+        <div class="m-menu-sub m-menu-help">
+          <ul>
+            <li><a href="">고용부담금계산기</a></li>
+            <li><a href="">제조원가계산기</a></li>
+            <li><a href="">감면신청도우미</a></li>
+          </ul>
+        </div>
+        <div class="m-menu-sub m-menu-category">
+          <ul>
+            <li><a href="">사무용품</a></li>
+            <li><a href="">생활용품</a></li>
+            <li><a href="">전산용품</a></li>
+            <li><a href="">식음료</a></li>
+            <li><a href="">청소용품</a></li>
+          </ul>
+        </div>
+        <div class="m-menu-sub m-menu-info">
+          <ul>
+            <li><a href="">공지사항</a></li>
+            <li><a href="">FAQ</a></li>
+            <li><a href="">1:1 문의하기</a></li>
+          </ul>
+          <p><a href="">로그아웃</a></p>
+        </div>
+      </section>
+    </div>
+    <!-- //Collapse Menu -->
+    <!-- Collapse Search -->
+    <div class="m-search-bg">
+      <div class="m-search-content">
+        <div class="search-input-box">
+          <input type="text" class="search-input" placeholder="구매하실 상품을 검색해보세요.">
+          <button type="button">
+            <img src="/assets/m_images/icon_search.svg" alt="">
+          </button>
+        </div>
+        <ul class="m-search-category">
+          <li><a class="" href="#">사무용품</a></li>
+          <li><a class="" href="#">생활용품</a></li>
+          <li><a class="" href="#">전산용품</a></li>
+          <li><a class="" href="#">식음료</a></li>
+          <li><a class="" href="#">청소용품</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- //Collapse Search -->
+  </div>
+  <!-- //header-menu-wrapper -->

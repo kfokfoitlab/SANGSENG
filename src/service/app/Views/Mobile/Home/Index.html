@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<a href="/Auth/SignUp" class="" tabindex="15">회원가입</a>
-</body>
-</html>
+<div class="main-content">
+  <?php
+    require(__DIR__.'/Section/MainBanner.html');
+    require(__DIR__.'/Section/MainCollapse.html');
+    require(__DIR__.'/Section/RecommendedItems.html');
+    require(__DIR__.'/Section/NewItems.html');
+  ?>
+  <!-- banner -->
+  <div style="padding: 40px 20px;">
+    <img style="width: 100%; vertical-align: middle;" src="/assets/m_images/main_ad_banner01.png" alt="상생몰에서 계약하고 부담금 감면 받으세요!">
+  </div>
+  <?php
+    require(__DIR__.'/Section/MediaList.html');
+    require(__DIR__.'/Section/MainNotice.html');
+  ?>
+</div>

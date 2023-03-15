@@ -1,0 +1,71 @@
+<footer class="footer">
+  <div class="footer-info">
+    <ul>
+      <li><a href="">회사소개</a></li>
+      <li><a href="">공지사항</a></li>
+      <li><a href="">자주 묻는 질문</a></li>
+      <li><a href="">1:1 문의하기</a></li>
+    </ul>
+  </div>
+  <section class="footer-main">
+    <div class="footer-content-main">
+      <h1>(주)한국직업개발원</h1>
+      <p>서울특별시 성동구 상원12길 30 서울숲동진 IT타워 11층</p>
+      <p>대표이사: 백성욱</p>
+    </div>
+    <div class="footer-content-sub01">
+      <h2>운영시간 안내</h2>
+      <p>070-4373-5030</p>
+      <p>평일 09시~18시</p>
+      <p>주말 공휴일, 점심시간(12~13시 제외)</p>
+      <p>Fax 02-6007-1471 / kfosos@kfo.or.kr</p>
+    </div>
+    <div class="footer-content-sub02">
+      <a href="">사이트 이용약관</a>
+      <a href=""><strong>개인정보처리방침</strong></a>
+      <a href="">이메일 무단수집거부</a>
+      <a href="">책임한계 및 법적고시</a>
+    </div>
+    <p class="copyright">Copyright ⓒ 2022 KFO 한국직업개발원 All Right reserved</p>
+  </section>
+</footer>
+
+
+<script>
+  <!-- Header Script -->
+	const menuBg = document.querySelector('.m-menu-bg');
+	const btnHamburger = document.querySelector('#btnHamburger');
+	const searchBg = document.querySelector('.m-search-bg');
+	const btnSearch = document.querySelector('#btnSearch');
+
+	function bodyOverFlow(btn, type = 1) {
+		const winY = window.pageYOffset;
+		if(type === 1) {
+			btn.checked = false;
+			window.scrollTo(0, winY)
+			document.body.style.overflow = 'auto';
+		} else {
+			if(btn.checked === true) {
+				window.scrollTo(0, winY)
+				document.body.style.overflow = 'hidden';
+			} else {
+				window.scrollTo(0, winY)
+				document.body.style.overflow = 'auto';
+			}
+		}
+	}
+	menuBg.addEventListener('click', function() {
+		bodyOverFlow(btnHamburger, 1);
+	})
+	btnHamburger.addEventListener('click', function() {
+		bodyOverFlow(btnHamburger, 2)
+	})
+	searchBg.addEventListener('click', function() {
+		bodyOverFlow(btnSearch, 1);
+	})
+	btnSearch.addEventListener('click', function() {
+		bodyOverFlow(btnSearch, 2)
+	})
+</script>
+</body>
+</html>
