@@ -1240,8 +1240,65 @@ a {
   border: 1px solid var(--color-main);
   border-radius: 3px;
 }
-.auth_signUpUser .classification_radio input:checked label {
+.auth_signUpUser .classification_radio input:checked + label {
   font-weight: 700;
   color: #fff;
+  background: var(--color-main);
+}
+.auth_signUpUser .zipcode-input {
+  flex: 1 1 0;
+}
+.auth_signUpUser .zipcode-btn {
+  width: 96px;
+  height: 48px;
+  margin: 5px 0 0 16px;
+  text-align: center;
+  font: normal normal 700 14px/48px Pretendard;
+  color: #fff;
+  background: var(--color-main);
+  border-radius: 3px;
+}
+.auth_signUpUser .file-box .upload-name {
+  width: 100%;
+  flex: 1 1 0;
+  padding: 16px;
+  text-align: left;
+  font: normal normal 500 14px/16px Pretendard;
+  letter-spacing: 0px;
+  color: #121212;
+  border: 1px solid #D6D6D6;
+  border-radius: 3px;
+}
+.auth_signUpUser .file-box label[for='buyer_doc'] {
+  width: 96px;
+  height: 48px;
+  margin: 5px 0 0 16px;
+  text-align: center;
+  font: normal normal 700 14px/48px Pretendard;
+  color: #fff;
+  background: var(--color-main);
+  border-radius: 3px;
+}
+.auth_signUpUser .file-box #buyer_doc {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: polygon(0 0, 0 0, 0 0);
+}
+button[type='submit'] {
+  display: block;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  font: normal normal 500 14px/50px Pretendard;
+  letter-spacing: -0.21px;
+  color: #FFF;
+  background: #E6E6E6;
+  border: 0;
+  border-radius: 3px;
+}
+button[type='submit'].active {
   background: var(--color-main);
 }

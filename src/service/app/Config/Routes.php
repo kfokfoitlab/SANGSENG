@@ -94,9 +94,7 @@ $routes->group('Auth', function($routes){
     $routes->post ('ForgotSubmit',      'Auth::ForgotSubmit');
     $routes->get ('List',               'Auth::List');
     $routes->get ('SignUpBuyerSLA',      'Auth::SignUpBuyerSLA');
-    //    모바일 signUpBuyer 404, 임시로 get 설정
-    $routes->get('SignUpBuyer',         'Auth::SignUpBuyer');
-    //    $routes->post('SignUpBuyer',         'Auth::SignUpBuyer');
+    $routes->post('SignUpBuyer',         'Auth::SignUpBuyer');
     $routes->post('SignUpBuyerStep2',    'Auth::SignUpBuyerStep2');
     $routes->post('SignUpBuyerSubmit',    'Auth::SignUpBuyerSubmit');
     $routes->get ('SignUpBuyerComplete/(:any)', 'Auth::SignUpBuyerComplete/$1');

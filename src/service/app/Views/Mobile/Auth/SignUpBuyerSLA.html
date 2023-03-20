@@ -25,7 +25,7 @@
         <a data-izimodal-open="#modal_marketing"  href="#"target="_blank">자세히 보기</a>
       </li>
     </ul>
-    <button type="submit" class="agree-submit-btn" disabled>
+    <button type="button" class="agree-submit-btn" onclick="formSubmit()" disabled>
       다음
     </button>
   </form>
@@ -47,3 +47,8 @@
     <div style="white-space:pre-wrap;"><?=@$sbs?></div>
   </section>
 </div>
+<script>
+  function formSubmit() {
+    document.querySelector('#inputChkForm').submit();
+  }
+</script>

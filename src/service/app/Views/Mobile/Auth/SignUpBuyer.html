@@ -1,17 +1,3 @@
-<script>
-    $(function() {
-        $('#classificationCheck').hide();
-    });
-    function validationJoin(){
-        if(!$('input:radio[name="classification"]').is(':checked')){
-            $('#classificationCheck').show();
-            $('input:radio[name="classification"]:eq(1)').focus();
-            return false;
-        }else {
-            $('#classificationCheck').hide();
-        };
-    }
-</script>
 <section class="auth_signUpBuyer auth_signUpUser">
     <h2>기본정보를 입력해주세요.</h2>
     <div class="signup-progress-bar">
@@ -104,10 +90,10 @@
                     <label class="label">주소 <span class="asterisk-mark">*</span></label>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-                    <input type="text" placeholder="우편번호를 입력해주세요.">
-                    <a href="">우편번호</a>
+                    <input class="zipcode-input" type="text" placeholder="우편번호를 입력해주세요.">
+                    <a class="zipcode-btn" href="">우편번호</a>
                 </div>
-                <input type="text" name="address" placeholder="우편번호 선택 시 자동으로 입력됩니다." tabindex=100 required>
+                <input type="text" name="address" style="margin-top: 20px;" placeholder="우편번호 선택 시 자동으로 입력됩니다." tabindex=100 required>
             </div>
 
             <div class="form-group">
@@ -147,19 +133,40 @@
 
             <div class="form-group">
                 <div class="d-flex justify-content-between align-items-center">
-                    <label class="label">사업자등록증 첨부 <span class="asterisk-mark">*</span></label>
+                    <p class="label">사업자등록증 첨부 <span class="asterisk-mark">*</span></p>
                 </div>
-                <input type="file" name="buyer_documents" class="form-control" placeholder="사업자등록증 첨부" title="사업자등록증 첨부" tabindex=100 required>
+                <div class="file-box d-flex justify-content-between align-items-center">
+                    <input class="upload-name" placeholder="첨부파일을 선택해주세요." readonly required>
+                    <label for="buyer_doc">선택</label>
+                    <input type="file" id="buyer_doc" name="buyer_documents" class="" placeholder="사업자등록증 첨부" title="사업자등록증 첨부" tabindex=100 required>
+                </div>
+
             </div>
 
             <div class="form-group mt-5">
-                <button type="submit" class="theme-btn btn-style-one py-3 w-100" onclick="validationJoin()" tabindex=100>다음</button>
+                <button type="submit" class="" onclick="validationJoin()" tabindex=100>다음</button>
             </div>
         </form>
     </div>
 </section>
 <script>
-
+    $(function() {
+        $('#classificationCheck').hide();
+    });
+    function validationJoin(){
+        if(!$('input:radio[name="classification"]').is(':checked')){
+            $('#classificationCheck').show();
+            $('input:radio[name="classification"]:eq(1)').focus();
+            return false;
+        }else {
+            $('#classificationCheck').hide();
+        };
+    }
+    const fileInput = document.querySelector('#buyer_doc');
+    fileInput.addEventListener('change', function() {
+        let fileName = fileInput.value.replace(/c:\\fakepath\\/i, '');
+        document.querySelector('.upload-name').value = fileName;
+    })
     function buyerDoubleCheck(){
         var email = $("#email").val();
         var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
