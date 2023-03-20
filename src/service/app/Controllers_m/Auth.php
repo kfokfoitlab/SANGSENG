@@ -43,9 +43,9 @@ class Auth extends BaseController
             ,"remember_id" => $remember_id
         );*/
 
-        echo view("Common/Header.html");
-        echo view('Auth/SignIn.html');
-        echo view("Common/Footer.html");
+        echo view("Mobile/Common/Header.html");
+        echo view('Mobile/Auth/SignIn.html');
+        echo view("Mobile/Common/Footer.html");
 
     } // }}}
 
@@ -139,10 +139,9 @@ class Auth extends BaseController
 
     public function SignUp()
     { // {{{
-
-        echo view("Common/Header.html");
+		
+	    echo view('Mobile/Common/HeaderBack.html');
         echo view('Mobile/Auth/SignUp.html');
-        echo view("Common/Footer.html");
 
     } // }}}
 
@@ -179,10 +178,9 @@ class Auth extends BaseController
             ,"sbs" => $sbs["contents"]
             ,"ads" => $ads["contents"]
         );
-
-        echo view("Common/Header.html");
-        echo view('Auth/SignUpBuyerSLA.html', $data);
-        echo view("Common/Footer.html");
+	
+	    echo view('Mobile/Common/HeaderBack.html');
+	    echo view('Mobile/Auth/SignUpBuyerSLA.html', $data);
 
     } // }}}
 
@@ -193,11 +191,10 @@ class Auth extends BaseController
              "sbs" => $_POST["sbs"]
        );
 
-        echo view("Common/Header.html");
-        echo view('Auth/SignUpBuyer.html', $data);
+        echo view("Mobile/Common/HeaderBack.html");
+        echo view('Mobile/Auth/SignUpBuyer.html', $data);
         echo script_tag("/assets/js/"._CONTROLLER."/SignUpUser.js");
-        echo view("Common/Footer.html");
-        echo view("Modal/SearchPost.html"); 
+//        echo view("Modal/SearchPost.html");
 
     } // }}}
 
@@ -293,9 +290,8 @@ class Auth extends BaseController
             ,"ads" => $ads["contents"]
         );
 
-        echo view("Common/Header.html");
-        echo view('Auth/SignUpSellerSLA.html', $data);
-        echo view("Common/Footer.html");
+        echo view("Mobile/Common/HeaderBack.html");
+        echo view('Mobile/Auth/SignUpSellerSLA.html', $data);
 
     } // }}}
 

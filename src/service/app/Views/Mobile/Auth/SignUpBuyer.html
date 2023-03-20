@@ -1,0 +1,190 @@
+<script>
+    $(function() {
+        $('#classificationCheck').hide();
+    });
+    function validationJoin(){
+        if(!$('input:radio[name="classification"]').is(':checked')){
+            $('#classificationCheck').show();
+            $('input:radio[name="classification"]:eq(1)').focus();
+            return false;
+        }else {
+            $('#classificationCheck').hide();
+        };
+    }
+</script>
+<section class="auth_signUpBuyer auth_signUpUser">
+    <h2>기본정보를 입력해주세요.</h2>
+    <div class="signup-progress-bar">
+        <div class="signup-progress-current"></div>
+    </div>
+    <div>
+        <form name="form-submit" method="post" action="/Auth/SignUpBuyerSubmit" enctype="multipart/form-data">
+            <input type="hidden" name="sbs" value="<?=$sbs?>">
+            <div class="form-group">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label class="label">이메일 주소 <span class="asterisk-mark">*</span></label>
+                    <span class="alert-text">이미 가입한 이메일 입니다.</span>
+                </div>
+                <input type="email" id="email" name="email" placeholder="아이디로 사용할 이메일 주소를 입력해주세요." tabindex=100 required>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label class="label">비밀번호 <span class="asterisk-mark">*</span></label>
+                    <span class="alert-text">비밀번호 형식이 올바르지 않습니다.</span>
+                </div>
+                <input type="password" name="password" placeholder="영문+숫자+특수문자 조합 8자 이상 입력해주세요." pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,32}$" autoComplete="off" tabindex=100 required>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label class="label">비밀번호 확인 <span class="asterisk-mark">*</span></label>
+                    <span class="alert-text">비밀번호가 일치하지 않습니다.</span>
+                </div>
+                <input type="password" name="confirm_password" placeholder="영문+숫자+특수문자 조합 8자 이상 입력해주세요." pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,32}$" autoComplete="off" tabindex=100 required>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label class="label">담당자 이름 <span class="asterisk-mark">*</span></label>
+                </div>
+                <input type="text" name="buyer_name" placeholder="담당자 이름을 입력해주세요" tabindex=100 required>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label class="label">휴대폰번호 <span class="asterisk-mark">*</span></label>
+                    <span class="alert-text">휴대폰 번호 형식이 올바르지 않습니다.</span>
+                </div>
+                <input type="text" class="mask-phone" name="phone" placeholder="휴대폰 번호를 입력해주세요." tabindex=100 required>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label class="label">사업체명 <span class="asterisk-mark">*</span></label>
+                </div>
+                <input type="text" name="company_name" placeholder="사업체명을 입력해주세요" tabindex=100 required>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label class="label">사업자등록번호 <span class="asterisk-mark">*</span></label>
+                    <span class="alert-text">사업자등록번호 형식이 올바르지 않습니다.</span>
+                </div>
+                <input type="text" name="company_code" class="mask-business-number" placeholder="사업자등록번호를 숫자만 입력해주세요." tabindex=100 required>
+            </div>
+
+            <div class="form-group">
+                <p class="label">기업형태 <span class="asterisk-mark">*</span></p>
+                <div class="d-flex justify-content-between align-items-center classification_radio">
+                    <div>
+                        <input type="radio" id="classification01" name="classification" value="1" tabindex=100 required>
+                        <label class="me-2" for="classification01">민간기업</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="classification02" name="classification" value="2" tabindex=100>
+                        <label class="me-2" for="classification02">공공기관</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="classification03" name="classification" value="3" tabindex=100>
+                        <label for="classification03">국가/자치단체</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label class="label">팩스번호</label>
+                </div>
+                <input type="text" class="mask-phone" name="fax" placeholder="팩스번호를 숫자만 입력해주세요." tabindex=100>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label class="label">주소 <span class="asterisk-mark">*</span></label>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <input type="text" placeholder="우편번호를 입력해주세요.">
+                    <a href="">우편번호</a>
+                </div>
+                <input type="text" name="address" placeholder="우편번호 선택 시 자동으로 입력됩니다." tabindex=100 required>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label for="" class="label">상세주소</label>
+                </div>
+                <input type="text" placeholder="상세 주소를 입력해주세요.">
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label class="label">상시 근로자 수 <span class="asterisk-mark">*</span></label>
+                </div>
+                <input type="text" name="workers" id = "workers" placeholder="회사 내 상시 근로자 수를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="상시 근로자 수 입력" tabindex=100 required>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label class="label">경증 장애인 근로자 수 <span class="asterisk-mark">*</span></label>
+                </div>
+                <input type="text" name="mild_disabled" id = "mild_disabled" placeholder="회사 내 경증 장애인 근로자 수를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="경증 장애인 근로자 수 입력" tabindex=100 required>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label class="label">중증 장애인 근로자 수 <span class="asterisk-mark">*</span></label>
+                </div>
+                <input type="text" name="severely_disabled" id = "severely_disabled" placeholder="회사 내 중증 장애인 근로자 수를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="중증 장애인 근로자 수 입력" tabindex=100 required>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label class="label">적용 법인세율 <span class="asterisk-mark">*</span></label>
+                </div>
+                <input type="text" name="tax_rate" placeholder="적용중인 법인세율을 입력해주세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')" title="적용법인 세율 입력" tabindex=100 >
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label class="label">사업자등록증 첨부 <span class="asterisk-mark">*</span></label>
+                </div>
+                <input type="file" name="buyer_documents" class="form-control" placeholder="사업자등록증 첨부" title="사업자등록증 첨부" tabindex=100 required>
+            </div>
+
+            <div class="form-group mt-5">
+                <button type="submit" class="theme-btn btn-style-one py-3 w-100" onclick="validationJoin()" tabindex=100>다음</button>
+            </div>
+        </form>
+    </div>
+</section>
+<script>
+
+    function buyerDoubleCheck(){
+        var email = $("#email").val();
+        var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+        if(reg_email.test(email)){
+            $.ajax({
+                url:'/Auth/BuyerEmailCheck',
+                type:'post',
+                data:{email:email},
+                success:function(result){
+                    if(result == 3){
+                        alert("사용 가능한 이메일 입니다.")
+                    }else{
+                        $("#email").val('')
+                        alert("사용중인 이메일 입니다.");
+
+                    }
+                },
+                error:function(){
+                    alert("에러가 발생했습니다.");
+                }
+            });
+        }else{
+            alert("올바른 이메일 형식이 아닙니다.");
+            $("#email").val('')
+        }
+    };
+
+</script>

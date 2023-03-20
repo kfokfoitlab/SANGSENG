@@ -1,0 +1,50 @@
+<section class="auth_signUpSellerSLA auth_signUpSLA">
+  <h2>상생몰 이용약관에 동의해주세요.</h2>
+  <div class="signup-progress-bar">
+    <div class="signup-progress-current"></div>
+  </div>
+
+  <form action="" id="inputChkForm" class="input-chk-form">
+    <div>
+      <input type="checkbox" name="chk_all" id="chk_all" class="input-chk-all">
+      <label for="chk_all">모두 동의 (선택 정보 포함)</label>
+    </div>
+    <ul class="auth_signUpSellerSLA_form auth_signUpSLA_form">
+      <li class="d-flex justify-content-between align-items-center">
+        <input type="checkbox" name="termsService" id="termsService" class="input-chk" required>
+        <label for="termsService">사이트 이용약관 동의 (필수)</label>
+        <a data-izimodal-open="#modal_tos" href="#"target="_blank">자세히 보기</a>
+      </li>
+      <li class="d-flex justify-content-between align-items-center">
+        <input type="checkbox" name="termsPrivacy" id="termsPrivacy" class="input-chk" required>
+        <label for="termsPrivacy">개인정보취급방침 동의 (필수)</label>
+        <a data-izimodal-open="#modal_privacy" href="#"target="_blank">자세히 보기</a>
+      </li>
+      <li class="d-flex justify-content-between align-items-center">
+        <input type="checkbox" name="termsAd" id="termsAd" class="input-chk">
+        <label for="termsAd">광고성 정보 수신 동의 (선택)</label>
+        <a data-izimodal-open="#modal_marketing" href="#"target="_blank">자세히 보기</a>
+      </li>
+    </ul>
+    <button type="submit" class="agree-submit-btn" disabled>
+      다음
+    </button>
+  </form>
+</section>
+
+<!-- 이용약관 모달 -->
+<div id="modal_tos" class="join-modal join-modal-tos">
+  <section>
+    <div style="white-space:pre-wrap;"><?=@$tos?></div>
+  </section>
+</div>
+<div id="modal_privacy" class="join-modal join-modal-privacy">
+  <section>
+    <div style="white-space:pre-wrap;"><?=@$pps?></div>
+  </section>
+</div>
+<div id="modal_marketing" class="join-modal join-modal-marketing">
+  <section>
+    <div style="white-space:pre-wrap;"><?=@$sbs?></div>
+  </section>
+</div>
