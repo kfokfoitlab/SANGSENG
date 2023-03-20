@@ -5,34 +5,21 @@
   </div>
   <div class="swiper recommended-item-swiper">
     <div class="swiper-wrapper">
+      <?php
+        if(is_array($data) && count($data) > 0){
+      foreach($data as $item){
+      ?>
       <div class="swiper-slide">
-        <a href="">
+        <a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>">
           <img src="/assets/images/index-12/images/1.png" alt="">
-          <p class="recommend-item-company">위메이드 보호 작업장</p>
-          <p class="recommend-item-name">슬림형 데스크톱 CMF-S1ZM5VZ(10세대 i5 10500)(5대)슬림형 데스크톱 CMF-S1ZM5VZ(10세대 i5 10500)(5대)</p>
+          <p class="recommend-item-company"><?=$item['company_name']?></p>
+          <p class="recommend-item-name"><?=$item['product_name']?></p>
         </a>
       </div>
-      <div class="swiper-slide">
-        <a href="">
-          <img src="/assets/images/index-12/images/1.png" alt="">
-          <p class="recommend-item-company">위메이드 보호 작업장</p>
-          <p class="recommend-item-name">슬림형 데스크톱 CMF-S1ZM5VZ(10세대 i5 10500)(5대)</p>
-        </a>
-      </div>
-      <div class="swiper-slide">
-        <a href="">
-          <img src="/assets/images/index-12/images/1.png" alt="">
-          <p class="recommend-item-company">위메이드 보호 작업장</p>
-          <p class="recommend-item-name">슬림형 데스크톱 CMF-S1ZM5VZ(10세대 i5 10500)(5대)</p>
-        </a>
-      </div>
-      <div class="swiper-slide">
-        <a href="">
-          <img src="/assets/images/index-12/images/1.png" alt="">
-          <p class="recommend-item-company">위메이드 보호 작업장</p>
-          <p class="recommend-item-name">슬림형 데스크톱 CMF-S1ZM5VZ(10세대 i5 10500)(5대)</p>
-        </a>
-      </div>
+      <?php
+          }
+        }
+      ?>
     </div>
     <div class="swiper-scrollbar"></div>
   </div>

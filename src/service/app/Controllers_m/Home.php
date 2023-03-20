@@ -24,18 +24,20 @@ class Home extends BaseController
     {
         $value = $_GET["value"];
         $ranking = $this->buyer_model->RecommendationList($value);
+        $new_product = $this->buyer_model->NewProductList();
         $reduction =  $this->buyer_model->ReductionMoney();
         $notice_list = $this->seller_model->getNoticeList();
         $promotion_video = $this->seller_model->getPromotionVideo();
         $data = array(
             "data" => $ranking["data"],
             "reduction" => $reduction,
+            "new_product" => $new_product,
             "promotion_video" => $promotion_video,
             "notice_list" => $notice_list
         );
 
         echo view("Mobile/Common/Header.html");
-        echo view('Mobile/Home/Index.html');
+        echo view('Mobile/Home/Index.html',$data);
         echo view("Mobile/Common/Footer.html");
 
     }

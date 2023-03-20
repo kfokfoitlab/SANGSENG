@@ -1,50 +1,30 @@
 <section class="notice-list">
   <div class="title-box d-flex justify-content-between align-items-center">
     <h2 class="m-0">공지사항</h2>
-    <a href="">
+    <a href="/CS/Notice">
       <img src="/assets/m_images/icon_more_right.png" alt="공지사항 더보기 버튼" style="width: 7.13px">
     </a>
   </div>
   <ul class="notice-box">
+    <?php
+          if(is_array($notice_list)&& count($notice_list) > 0){
+    foreach($notice_list as $item){
+    ?>
     <li>
-      <a class="d-flex justify-content-between align-items-center"
-         href=""
-      >
-        <span>홈페이지 이용안내</span>
-        <span>23.02.22</span>
+      <a href="/CS/Notice/Detail?idx=<?=$item['idx']?>"></a>
+        <span><?=$item["title"]?></span>
+        <span><?=substr($item["register_date"],0,10)?></span>
       </a>
-    </li>
-    <li>
-      <a class="d-flex justify-content-between align-items-center"
-         href=""
-      >
-        <span>홈페이지 이용안내</span>
-        <span>23.02.22</span>
-      </a>
-    </li>
-    <li>
-      <a class="d-flex justify-content-between align-items-center"
-         href=""
-      >
-        <span>홈페이지 이용안내</span>
-        <span>23.02.22</span>
-      </a>
-    </li>
-    <li>
-      <a class="d-flex justify-content-between align-items-center"
-         href=""
-      >
-        <span>홈페이지 이용안내</span>
-        <span>23.02.22</span>
-      </a>
-    </li>
-    <li>
-      <a class="d-flex justify-content-between align-items-center"
-         href=""
-      >
-        <span>홈페이지 이용안내</span>
-        <span>23.02.22</span>
-      </a>
+      <?php
+          }
+          ?>
+      <?php
+          }else{
+          ?>
+      <h2>등록된 공지사항이 없습니다.</h2>
+      <?php
+          }
+          ?>
     </li>
   </ul>
 </section>

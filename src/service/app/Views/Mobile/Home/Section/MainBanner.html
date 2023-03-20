@@ -5,7 +5,17 @@
         <div class="main-img-box">
           <img src="/assets/m_images/main_banner01.png" alt="">
         </div>
-        <p class="mt-3 me-auto">2022년 상생몰 예상 총 감면금액<br><strong>188,221,016원</strong></p>
+        <p class="mt-3 me-auto">2022년 상생몰 예상 총 감면금액<br>
+          <?php
+            $reduction_money = "";
+            if($reduction['reduction_money'] != null){
+            $reduction_money = $reduction['reduction_money'];
+            }
+            else{
+            $reduction_money = 0;
+            }
+          ?>
+          <strong><?=number_format($reduction_money)?>원</strong></p>
       </div>
       <div class="swiper-slide flex-column" style="background: #49C767;">
         <div class="main-img-box">
