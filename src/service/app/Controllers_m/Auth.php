@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Controllers_m;
-use App\Models\Auth\SignInModel as Model;
-use App\Models\Auth\SignUpUserModel as UserModel;
-use App\Models\Auth\SignUpCompanyModel as CompanyModel;
-use App\Models\Auth\ForgotInfoModel as ForgotModel;
+use App\Models_m\Auth\SignInModel as Model;
+use App\Models_m\Auth\SignUpUserModel as UserModel;
+use App\Models_m\Auth\SignUpCompanyModel as CompanyModel;
+use App\Models_m\Auth\ForgotInfoModel as ForgotModel;
 use App\Models_m\DatabaseModel;
 use App\Models_m\Buyer\BuyerModel as BuyerModel;
 class Auth extends BaseController
@@ -193,40 +193,11 @@ class Auth extends BaseController
 
         echo view("Mobile/Common/HeaderBack.html");
         echo view('Mobile/Auth/SignUpBuyer.html', $data);
-        echo script_tag("/assets/js/"._CONTROLLER."/SignUpUser.js");
+        echo script_tag("/assets/js/Auth/SignUpUser.js");
 //        echo view("Modal/SearchPost.html");
 
     } // }}}
 
-    public function SignUpUserStep2()
-    { // {{{
-        $impairments = $this->database_model->getImpairmentAll();
-
-        $data = array(
-             "hidden" => array(
-                 "sbs" => $_POST["sbs"]
-                ,"ads" => $_POST["ads"]
-                ,"name" => $_POST["name"]
-                ,"email" => $_POST["email"]
-                ,"password" => $_POST["password"]
-                ,"phone" => $_POST["phone"]
-                ,"tel" => @$_POST["tel"]
-                ,"fax" => @$_POST["fax"]
-                ,"post_code" => $_POST["post_code"]
-                ,"address" => $_POST["address"]
-                ,"address_detail" => $_POST["address_detail"]
-                ,"coordinate_x" => $_POST["coordinate_x"]
-                ,"coordinate_y" => $_POST["coordinate_y"]
-            )
-            ,"impairments" => $impairments
-        );
-
-        echo view("Common/HeaderAuth.html");
-        echo view('Auth/SignUpUserStep2.html', $data);
-        echo script_tag("assets/js/"._CONTROLLER."/SignUpUser.js");
-        echo view("Common/FooterAuth.html");
-
-    } // }}}
 
     public function SignUpBuyerSubmit()
     { //{{{
@@ -438,5 +409,5 @@ class Auth extends BaseController
             ";
 		}
 	}
-	
+
 }
