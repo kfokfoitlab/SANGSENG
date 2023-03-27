@@ -186,6 +186,9 @@ class Auth extends BaseController
 
     public function SignUpBuyer()
     { // {{{
+    if($_POST["sbs"] != "Y"){
+        $_POST["sbs"] = "N";
+    }
 
         $data = array(
              "sbs" => $_POST["sbs"]
@@ -193,8 +196,9 @@ class Auth extends BaseController
 
         echo view("Mobile/Common/HeaderBack.html");
         echo view('Mobile/Auth/SignUpBuyer.html', $data);
-        echo script_tag("/assets/js/Auth/SignUpUser.js");
-//        echo view("Modal/SearchPost.html");
+        echo script_tag("assets/js/Auth/SignUpUser.js");
+        echo script_tag("assets/js/Auth/SignUpKeyUp.js");
+        echo view("Modal/SearchPost.html");
 
     } // }}}
 
@@ -206,6 +210,7 @@ class Auth extends BaseController
             echo "
                 <script>
                     alert('이미 가입된 기업입니다.');
+                    
                     window.location.replace('/Auth/SignUp');
                 </script>
             ";

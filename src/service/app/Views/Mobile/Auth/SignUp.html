@@ -1,18 +1,35 @@
 <section class="auth_signUp">
-  <h2>회원가입 유형 선택</h2>
-  <div>
-    <div class="join-buyer-box join-type-box">
-      <h3>구매기업</h3>
-      <p>
-        장애인 고용부담금 감면을 위한<br>연계고용제도 이용기업
-      </p>
+    <h2>회원가입 유형 선택</h2>
+    <input type="hidden" name="company_type" id="company_type" value="">
+    <div>
+        <div class="join-buyer-box join-type-box off on"  onclick="signUp_type(1)">
+            <h3>구매기업</h3>
+            <p>
+                장애인 고용부담금 감면을 위한<br>연계고용제도 이용기업
+            </p>
+        </div>
+        <div class="join-seller-box join-type-box off off"onclick="signUp_type(2)">
+            <h3>판매기업</h3>
+            <p>
+                장애인 직업재활시설<br>중증장애인 생산시설, 장애인 표준사업장
+            </p>
+        </div>
     </div>
-    <div class="join-seller-box join-type-box">
-      <h3>판매기업</h3>
-      <p>
-        장애인 직업재활시설<br>중증장애인 생산시설, 장애인 표준사업장
-      </p>
-    </div>
-  </div>
-  <a href="/Auth/SignUpBuyerSLA" class="p-0 join-btn" type="button">회원가입</a>
+    <a class="p-0 join-btn on" type="button" onclick="singupSubmit()">회원가입</a>
 </section>
+<script>
+    $(function() {
+        $("#company_type").val(1)
+    });
+    function singupSubmit(){
+        if($("#company_type").val() == 1){
+            location.href ="/Auth/SignUpBuyerSLA"
+        }else{
+            location.href ="/Auth/SignUpSellerSLA"
+        }
+    }
+    function signUp_type(val){
+        $("#company_type").val(val);
+    }
+
+</script>

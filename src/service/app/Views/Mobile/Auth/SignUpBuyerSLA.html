@@ -20,7 +20,7 @@
         <a data-izimodal-open="#modal_privacy" href="#"target="_blank">자세히 보기</a>
       </li>
       <li class="d-flex justify-content-between align-items-center">
-        <input type="checkbox" name="termsAd" id="termsAd" class="input-chk">
+        <input type="checkbox" name="sbs" id="termsAd" class="input-chk" value="">
         <label for="termsAd">광고성 정보 수신 동의 (선택)</label>
         <a data-izimodal-open="#modal_marketing"  href="#"target="_blank">자세히 보기</a>
       </li>
@@ -49,6 +49,11 @@
 </div>
 <script>
   function formSubmit() {
+    if($("#termsAd").is(":checked") == true){
+      $("#termsAd").val("Y")
+    }else{
+      $("#termsAd").val("N")
+    }
     document.querySelector('#inputChkForm').submit();
   }
 </script>
