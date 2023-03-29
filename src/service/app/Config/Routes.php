@@ -92,7 +92,6 @@ $routes->group('Auth', function($routes){
     $routes->get ('ForgotMyId',         'Auth::ForgotMyId');
     $routes->get ('ForgotMyPass',       'Auth::ForgotMyPass');
     $routes->post ('ForgotSubmit',      'Auth::ForgotSubmit');
-    $routes->get ('List',               'Auth::List');
     $routes->get ('SignUpBuyerSLA',      'Auth::SignUpBuyerSLA');
     $routes->post('SignUpBuyer',         'Auth::SignUpBuyer');
     $routes->post('SignUpBuyerStep2',    'Auth::SignUpBuyerStep2');

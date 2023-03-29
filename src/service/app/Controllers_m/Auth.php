@@ -69,6 +69,7 @@ class Auth extends BaseController
                          <script>
                             alert('배송현황이 변경되었습니다 확인해주세요.');
                             window.location.replace('/Buyer/DeliveryStatus');
+                          
                         </script>
                       ";
                             break;
@@ -196,7 +197,7 @@ class Auth extends BaseController
 
         echo view("Mobile/Common/HeaderBack.html");
         echo view('Mobile/Auth/SignUpBuyer.html', $data);
-        echo script_tag("assets/js/Auth/SignUpUser.js");
+        echo script_tag("assets/js/Auth/SignUpBuyer.js");
         echo script_tag("assets/js/Auth/SignUpKeyUp.js");
         echo view("Modal/SearchPost.html");
 
@@ -273,17 +274,21 @@ class Auth extends BaseController
 
     public function SignUpSeller()
     { // {{{
+        if($_POST["sbs"] != "Y"){
+            $_POST["sbs"] = "N";
+        }
 
         $data = array(
-             "sbs" => $_POST["sbs"]
-            ,"ads" => $_POST["ads"]
+            "sbs" => $_POST["sbs"]
         );
 
-        echo view("Common/Header.html");
-        echo view('Auth/SignUpSeller.html', $data);
-        echo script_tag("/assets/js/"._CONTROLLER."/SignUpCompany.js");
-        echo view("Common/Footer.html");
-        echo view("Modal/SearchPost.html"); 
+        echo view("Mobile/Common/HeaderBack.html");
+        echo view('Mobile/Auth/SignUpSeller.html', $data);
+        echo script_tag("assets/js/Auth/SignUpKeyUp.js");
+        echo script_tag("assets/js/Auth/SignUpSeller.js");
+
+        //       echo view("Modal/SearchPost.html");
+
 
     } // }}}
 

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $("#SignUpbuyerCheck").submit(function(){
+    $("#SignUpValidation").submit(function(){
         const file = $("#buyer_doc").val()
         const extension = file.split(".").pop()
         const extension_check =['jpg','jpeg','png','gif','pdf','PNG','JPG','PDF','BMP','bmp','GIF'];
@@ -7,7 +7,7 @@ $(document).ready(function(){
             alert("허용되지않은 파일 확장자입니다.")
             return false;
         }
-        if($("#emailCheck").val() != 1){
+        if($("#emailCheck").val() == 0){
             alert("이메일 중복체크를 해주세요");
             return false;
         }

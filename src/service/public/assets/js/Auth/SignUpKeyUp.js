@@ -6,18 +6,18 @@ $(document).ready(function(){
         const eng = password.search(/[a-z]/ig);
         const spe = password.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
         if(password.length < 8 || password.length > 20){
-            $("#pwd-text").text("비밀번호 형식이 올바르지 않습니다.")
+            $("#pwd-text").text("비밀번호 형식이 올바르지 않습니다.").css("color","red")
         }else if(password.search(/\s/) != -1){
-            $("#pwd-text").text("비밀번호 형식이 올바르지 않습니다.")
+            $("#pwd-text").text("비밀번호 형식이 올바르지 않습니다.").css("color","red")
         }else if(num < 0 || eng < 0 || spe < 0 ){
-            $("#pwd-text").text("비밀번호 형식이 올바르지 않습니다.")
+            $("#pwd-text").text("비밀번호 형식이 올바르지 않습니다.").css("color","red")
         }else {
             $("#pwd-text").text("사용가능한 비밀번호 입니다.").css("color","green")
         }
         if(password == confirm_password){
             $("#pwd-check").text("비밀번호가 일치합니다.").css("color","green")
         }else{
-            $("#pwd-check").text("비밀번호가 일치하지 않습니다.")
+            $("#pwd-check").text("비밀번호가 일치하지 않습니다.").css("color","red")
         }
     });
 
@@ -28,7 +28,7 @@ $(document).ready(function(){
         if(password == confirm_password){
             $("#pwd-check").text("비밀번호가 일치합니다.").css("color","green")
         }else{
-            $("#pwd-check").text("비밀번호가 일치하지 않습니다.")
+            $("#pwd-check").text("비밀번호가 일치하지 않습니다.").css("color","red")
         }
     })
 

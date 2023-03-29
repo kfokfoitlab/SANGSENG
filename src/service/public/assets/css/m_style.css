@@ -1173,6 +1173,10 @@ a {
   width: calc((100% / 4) * 2);
   background: var(--color-sub02);
 }
+.auth_signUpSeller .signup-progress-current {
+  width: calc((100% / 4) * 2);
+  background: var(--color-sub01);
+}
 .auth_signUpUser .form-group {
   margin-bottom: 30px;
 }
@@ -1279,6 +1283,29 @@ a {
   background: var(--color-main);
   border-radius: 3px;
 }
+
+.auth_signUpUser .file-box label[for='seller_documents'] {
+  width: 96px;
+  height: 48px;
+  margin: 5px 0 0 16px;
+  text-align: center;
+  font: normal normal 700 14px/48px Pretendard;
+  color: #fff;
+  background: var(--color-main);
+  border-radius: 3px;
+}
+
+.auth_signUpUser .file-box label[for='seller_business_license'] {
+  width: 96px;
+  height: 48px;
+  margin: 5px 0 0 16px;
+  text-align: center;
+  font: normal normal 700 14px/48px Pretendard;
+  color: #fff;
+  background: var(--color-main);
+  border-radius: 3px;
+}
+
 .auth_signUpUser .file-box #buyer_doc {
   position: absolute;
   width: 1px;
@@ -1287,6 +1314,25 @@ a {
   overflow: hidden;
   clip-path: polygon(0 0, 0 0, 0 0);
 }
+
+.auth_signUpUser .file-box #seller_business_license {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: polygon(0 0, 0 0, 0 0);
+}
+
+.auth_signUpUser .file-box #seller_documents {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: polygon(0 0, 0 0, 0 0);
+}
+
 button[type='submit'] {
   display: block;
   width: 100%;
