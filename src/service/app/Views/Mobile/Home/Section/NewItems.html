@@ -4,11 +4,19 @@
     <h2>새로 들어온 상품</h2>
   </div>
   <div class="new-items-wrapper">
-    <div class="new-items-top row">
       <?php
       if(is_array($new_product) && count($new_product) > 0){
+      $i = 1;
       foreach($new_product as $item){
+       if($i == 1){
       ?>
+  <div class="new-items-top row">
+      <?php
+        }
+      if($i == 5){
+      ?>
+      <div class="new-items-bottom row">
+          <?php } ?>
       <div class="new-item-box col-6">
         <a  href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>">
           <img src="/uploads/<?=$item['representative_image']?>" alt="<?=$item['product_name']?>" title="<?=$item['product_name']?>" alt="">
@@ -28,20 +36,23 @@
               <span>감면액</span>
               <strong><?=number_format($item['reduction_money'])?>원</strong>
             </p>
-            <?php
-              }
-              ?>
+              <?php } ?>
           </div>
         </a>
       </div>
-      <?php
-      }
-      }
-      ?>
+
+      <?php if($i == 4 || $i == 8){ ?>
     </div>
+      <?php
+       }
+       $i++;
+       }
+       }
+      ?>
+    <button class="new-items-more-btn">
+      더보기<span></span>
+    </button>
+
   </div>
-  <button class="new-items-more-btn">
-    더보기<span></span>
-  </button>
-  </div>
+
 </section>
