@@ -11,7 +11,7 @@
     foreach($notice_list as $item){
     ?>
     <li>
-      <a href="/CS/Notice/Detail?idx=<?=$item['idx']?>"></a>
+      <a class="d-flex justify-content-between align-items-center" href="/CS/Notice/Detail?idx=<?=$item['idx']?>">
         <span><?=$item["title"]?></span>
         <span><?=substr($item["register_date"],0,10)?></span>
       </a>
