@@ -117,30 +117,79 @@ echo doctype("html5");
             }
             ?>
           </div>
-          <nav class="nav main-menu">
-            <ul class="navigation" id="navbar">
+          <div class="all-dropdow-outer">
+            <nav class="nav main-menu">
+              <ul class="navigation" id="navbar">
+                <li>
+                  <a href="#" class="all-menu"><span>전체</span></a>
+                </li>
+                <li class="">
+                  <a href="/Buyer/Shop/List?value=1&p_n=1" tabindex=12> <span>사무용품</span> </a>
+                </li>
+                <li class="">
+                  <a href="/Buyer/Shop/List?value=2&p_n=1" tabindex=13> <span>생활용품</span> </a>
+                </li>
 
+                <li class="">
+                  <a href="/Buyer/Shop/List?value=3&p_n=1" tabindex=13> <span>전산용품</span> </a>
+                </li>
 
-              <li class="">
-                <a href="/Buyer/Shop/List?value=1&p_n=1" tabindex=12> <span>사무용품</span> </a>
-              </li>
-              <li class="">
-                <a href="/Buyer/Shop/List?value=2&p_n=1" tabindex=13> <span>생활용품</span> </a>
-              </li>
+                <li class="">
+                  <a href="/Buyer/Shop/List?value=4&p_n=1" tabindex=13> <span>식음료</span> </a>
+                </li>
 
-              <li class="">
-                <a href="/Buyer/Shop/List?value=3&p_n=1" tabindex=13> <span>전산용품</span> </a>
-              </li>
-
-              <li class="">
-                <a href="/Buyer/Shop/List?value=4&p_n=1" tabindex=13> <span>식음료</span> </a>
-              </li>
-
-              <li class="">
-                <a href="/Buyer/Shop/List?value=5&p_n=1" tabindex=13> <span>청소용품</span> </a>
-              </li>
-            </ul>
-          </nav>
+                <li class="">
+                  <a href="/Buyer/Shop/List?value=5&p_n=1" tabindex=13> <span>청소용품</span> </a>
+                </li>
+              </ul>
+            </nav>
+            <div class="all-dropdown">
+              <ul>
+                <li>
+                  <a href="#">사무용품</a>
+                  <ul>
+                    <li>
+                      <a href="#">사무용품1</a>
+                    </li>
+                    <li>
+                      <a href="#">사무용품2</a>
+                    </li>
+                    <li>
+                      <a href="#">사무용품3</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#">생활용품</a>
+                  <ul>
+                    <li>
+                      <a href="#">생활용품1</a>
+                    </li>
+                    <li>
+                      <a href="#">생활용품2</a>
+                    </li>
+                    <li>
+                      <a href="#">생활용품3</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#">전산용품</a>
+                  <ul>
+                    <li>
+                      <a href="#">전산용품1</a>
+                    </li>
+                    <li>
+                      <a href="#">전산용품2</a>
+                    </li>
+                    <li>
+                      <a href="#">전산용품3</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
       <script>
           const url = window.location.search;
           const GNBLinks = document.querySelectorAll('#navbar li a');
@@ -151,6 +200,12 @@ echo doctype("html5");
              nav.classList.remove('on')
           }
                     })
+      </script>
+      <script>
+        $('.all-menu').click(function (){
+          $('.all-dropdown').toggleClass('active')
+        })
+
       </script>
           <!-- Main Menu End-->
         </div>
