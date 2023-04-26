@@ -94,7 +94,7 @@ $routes->group('Contract', ['namespace' => 'App\Controllers\Contract'], static f
 	$routes->get ($group_name.'/ContractDelete', $group_name.'::ContractDelete');
 });
 
-// 구직
+// 상품
 $routes->group('Product', ['namespace' => 'App\Controllers\Product'], static function ($routes) {
     // 전체 목록
     $group_name = "Lists";
@@ -105,8 +105,13 @@ $routes->group('Product', ['namespace' => 'App\Controllers\Product'], static fun
     $routes->get ($group_name.'/Update/(:any)',     $group_name.'::Update/$1');
     $routes->get ($group_name.'/statusUpdate', $group_name.'::statusUpdate');
 	$routes->get ($group_name.'/StatusComment(:any)', $group_name.'::StatusComment$1');
-
     $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
+//카테고리 관리
+    $group_name = "Category";
+    $routes->get($group_name.'/',           $group_name.'::Index');
+    $routes->post($group_name.'/getList',           $group_name.'::getList');
+    $routes->get($group_name.'/CategoryRegister',           $group_name.'::CategoryRegister');
+    $routes->post($group_name.'/CategoryRegisterSubmit',    $group_name.'::CategoryRegisterSubmit');
 });
 
 // 배송
@@ -185,33 +190,6 @@ $routes->group('Database/Impairment', ['namespace' => 'App\Controllers\Database\
     $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
 });
 
-$routes->group('Database/Product', ['namespace' => 'App\Controllers\Database\Job'], static function ($routes) {
-    // 직무 유형
-    $group_name = "Profession";
-    $routes->get($group_name.'/',                $group_name.'::Index');
-    $routes->post($group_name.'/UpdateSubmit',   $group_name.'::UpdateSubmit');
-
-    // 고용 형태
-    $group_name = "EmploymentType";
-    $routes->get($group_name.'/',                $group_name.'::Index');
-    $routes->post($group_name.'/UpdateSubmit',   $group_name.'::UpdateSubmit');
-
-    // 근무 형태
-    $group_name = "WorkType";
-    $routes->get($group_name.'/',                $group_name.'::Index');
-    $routes->post($group_name.'/UpdateSubmit',   $group_name.'::UpdateSubmit');
-
-    // 경력 사항
-    $group_name = "Career";
-    $routes->get($group_name.'/',                $group_name.'::Index');
-    $routes->post($group_name.'/UpdateSubmit',   $group_name.'::UpdateSubmit');
-
-    // 복리 후생
-    $group_name = "Welfare";
-    $routes->get($group_name.'/',                $group_name.'::Index');
-    $routes->post($group_name.'/UpdateSubmit',   $group_name.'::UpdateSubmit');
-
-});
 // 환경 설정
 $routes->group('Configuration', ['namespace' => 'App\Controllers\Configuration'], static function ($routes) {
     // 승인 설정
@@ -281,7 +259,7 @@ $routes->group('Board', ['namespace' => 'App\Controllers\Board'], static functio
 	$routes->get ($group_name.'/',                  $group_name.'::Index');
 	$routes->post($group_name.'/getList',           $group_name.'::getList');
 	$routes->get($group_name.'/noticeRegister',           $group_name.'::noticeRegister');
-	$routes->post($group_name.'/noticeRegisterSubmit',           $group_name.'::noticeRegisterSubmit');
+	$routes->post($group_name.'/noticeRegisterSubmit',    $group_name.'::noticeRegisterSubmit');
 	$routes->get($group_name.'/statusUpdate',           $group_name.'::statusUpdate');
 	$routes->get ($group_name.'/noticeDetail',            $group_name.'::noticeDetail');
 	$routes->post ($group_name.'/noticeUpdate',            $group_name.'::noticeUpdate');

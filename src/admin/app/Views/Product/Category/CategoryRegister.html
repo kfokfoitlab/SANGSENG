@@ -1,0 +1,74 @@
+<div class="flex-grow-1 bg-light">
+    <section class="p-5 mb-5">
+        <div class="auto-container">
+            <div class="bg-white p-5">
+                <h4 class="fw-bold mb-4 pb-3 border-bottom border-2">카테고리 등록</h4>
+                <form id="reg_form" method="post" action="/<?=_CONTROLLER?>/CategoryRegisterSubmit">
+                    <input type="hidden" name="idx" value="<?=$data['idx']?>">
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-2">
+                            <label for="category_type1" class="form-label m-0 fw-bold">대분류</label>
+                        </div>
+                        <div class="col-10">
+                            <input type="text" class="form-control" id="category_type1" name="category_type1" value="">
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-2">
+                            <label for="category_type2" class="form-label m-0 fw-bold">중분류</label>
+                        </div>
+                        <div class="col-10">
+                            <input type="text" class="form-control" id="category_type2" name="category_type2" value="">
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-2">
+                            <label for="category_type3" class="form-label m-0 fw-bold">소분류</label>
+                        </div>
+                        <div class="col-10">
+                            <input type="text" class="form-control" id="category_type3" name="category_type3" value="">
+                        </div>
+                    </div>
+
+                    <div class="mt-5 d-flex justify-content-between">
+                        <div>
+                            <button class="btn btn-secondary" type="reset">되돌리기</button>
+                            <button class="btn btn-success" onclick="CategoryRegisterSubmit()" type="button">등록하기</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-dark" onclick="javascript:history.back()" type="button">목록보기</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+
+    function validation() {
+         if($("#category_type1").val() == "") {
+            $("#category_type1").addClass("is-invalid");
+            $("#category_type1").focus();
+            return false;
+        }else if($("#category_type2").val() == "") {
+            $("#category_type2").addClass("is-invalid");
+            $("#category_type2").focus();
+            return false;
+        }/*else if($("#category_type3").val() == "") {
+             $("#category_type3").addClass("is-invalid");
+             $("#category_type3").focus();
+             return false;
+        }*/else {
+            return true;
+        }
+    }
+
+    function CategoryRegisterSubmit() {
+        if (validation()) {
+            var form = $('#reg_form');
+            form.submit();
+        }
+    };
+
+</script>

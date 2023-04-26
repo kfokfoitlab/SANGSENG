@@ -35,6 +35,30 @@ echo doctype("html5");
   <script src="/assets/dist/dropify-0.2.2/js/dropify.min.js"></script>
 
   <script>
+
+/*
+      $.ajax({
+        type: 'post',
+        url: "/SessionCategory",
+        data: {
+          //"category_type1": category_type1
+        },
+        success: function (result){
+          var result = JSON.parse(result);
+          var nav_menu = "";
+          for(var i=0; i<result['data'].length; i++){
+            nav_menu = nav_menu + "<li class=''>";
+            nav_menu = nav_menu + "<a href='/Buyer/Shop/List?value=" + result['data'][i]['category_type2'] + "&p_n=1' tabindex=12>";
+            nav_menu = nav_menu + "<span>" + result['data'][i]['category_type2'] + "</span> </a>";
+            nav_menu = nav_menu + "</li>";
+          }
+          $('#navbar').html(nav_menu);
+        }
+      });
+*/
+
+
+
     const _CONTROLLER = '<?=@_CONTROLLER?>';
     const _METHOD = '<?=@_METHOD?>';
 
@@ -73,7 +97,8 @@ echo doctype("html5");
         <div class="nav-outer">
 
           <div class="logo-box">
-            <!-- brand --> <?php
+            <!-- brand -->
+            <?php
             if(@$_SESSION["login"] != "success"){
             ?>
             <h1 class="logo"><a href="/" tabindex=10><img src="/assets/images/logo.png" alt="상생몰로고"></a></h1>
@@ -92,13 +117,13 @@ echo doctype("html5");
             }
             ?>
           </div>
-
           <nav class="nav main-menu">
             <ul class="navigation" id="navbar">
+
+
               <li class="">
                 <a href="/Buyer/Shop/List?value=1&p_n=1" tabindex=12> <span>사무용품</span> </a>
               </li>
-
               <li class="">
                 <a href="/Buyer/Shop/List?value=2&p_n=1" tabindex=13> <span>생활용품</span> </a>
               </li>
@@ -114,20 +139,19 @@ echo doctype("html5");
               <li class="">
                 <a href="/Buyer/Shop/List?value=5&p_n=1" tabindex=13> <span>청소용품</span> </a>
               </li>
-
             </ul>
           </nav>
-          <script>
-						const url = window.location.search;
-						const GNBLinks = document.querySelectorAll('#navbar li a');
-						GNBLinks.forEach((nav, i) => {
-							if(url.includes(`value=${i+1}`)) {
-								nav.classList.add('on')
-              } else {
-								nav.classList.remove('on')
-              }
-						})
-          </script>
+      <script>
+          const url = window.location.search;
+          const GNBLinks = document.querySelectorAll('#navbar li a');
+          GNBLinks.forEach((nav, i) => {
+          if(url.includes(`value=${i+1}`)) {
+              nav.classList.add('on')
+          } else {
+             nav.classList.remove('on')
+          }
+                    })
+      </script>
           <!-- Main Menu End-->
         </div>
 

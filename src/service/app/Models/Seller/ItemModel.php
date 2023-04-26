@@ -93,6 +93,7 @@ class ItemModel extends CommonModel
                product_no = '".$product_no."'
               ,status = '".$status."'
               ,product_category = '".$data["product_category"]."'
+              ,product_category2 = '".$data["product_category2"]."'
               ,product_name = '".$product_name."'
               ,product_price = '".$data["product_price"]."'
               ,product_quantity = '".$data["product_quantity"]."'          
@@ -142,7 +143,44 @@ class ItemModel extends CommonModel
         return "1";
     }
 
-public function ItemUpdateSubmit($files, $data){
+    public function Category1($product_no){
+        $category_type =[];
+        $query = "
+            select
+                distinct category_type1
+            from
+              product_category  
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $category_type['category1'][]= $row;
+        }
+        $product_query = "
+            select
+                 product_category
+            from
+              seller_product 
+            where product_no = '".$product_no."'
+        ";
+        $this->rodb->query($product_query);
+        $product_info = $this->rodb->next_row();
+
+        $query = "
+            select
+                distinct category_type2
+            from
+              product_category  
+            where category_type1 = '".$product_info['product_category']."'
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $category_type['category2'][]= $row;
+        }
+        return $category_type;
+    }
+
+
+    public function ItemUpdateSubmit($files, $data){
 
     $uuid = $_SESSION["login_info"]["uuid"];
     $mild_disabled_count = "
@@ -248,6 +286,7 @@ public function ItemUpdateSubmit($files, $data){
                 seller_product
             set
                  product_category = '".$data["product_category"]."'
+                ,product_category2 = '".$data["product_category2"]."'
                 ,product_name = '".$product_name."'
                  ,product_price = '".$data["product_price"]."'
                 ,product_quantity= '".$data["product_quantity"]."'
@@ -280,7 +319,7 @@ public function ItemUpdateSubmit($files, $data){
 
 public function SellerInfo(){
     $uuid = $_SESSION["login_info"]["uuid"];
-    $data = [];
+    $sellerInfo = [];
     $query = "
             select
                *
@@ -291,9 +330,73 @@ public function SellerInfo(){
         ";
     $this->rodb->query($query);
     while($row = $this->rodb->next_row()){
-        $data = $row;
+        $sellerInfo = $row;
     }
-    return $data;
+    return $sellerInfo;
+}
+
+public function CategorySearch($data){
+    $category_type = [];
+    $query = "
+            select
+              DISTINCT category_type2
+            from
+              product_category        
+            where
+                category_type1 = '".$data["category_type1"]."'
+        ";
+    $this->rodb->query($query);
+    while($row = $this->rodb->next_row()){
+        $category_type[] = $row;
+    }
+    return $category_type;
+}
+
+    public function Category2(){
+        $category = [];
+        $query = "
+            select
+              DISTINCT category_type2
+            from
+              product_category        
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $category[] = $row;
+        }
+        return $category;
+    }
+
+    public function SessionCategory(){
+        //$_SESSION["category"]= [];
+        $category= [];
+        $query = "
+            select
+              DISTINCT category_type2
+            from
+              product_category        
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+          //  $_SESSION["category"][] =$row;
+            $category[] = $row;
+        }
+        return $category;
+    }
+
+public function Category(){
+    $category = [];
+    $query = "
+            select
+              DISTINCT category_type2
+            from
+              product_category        
+        ";
+    $this->rodb->query($query);
+    while($row = $this->rodb->next_row()){
+        $category[] = $row;
+    }
+    return $category;
 }
 
 }

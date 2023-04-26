@@ -61,9 +61,11 @@ class Item extends BaseController
     public function ItemRegist()
     { // {{{
 
-        $data = $this->item_model->SellerInfo();
+        $sellerInfo = $this->item_model->SellerInfo();
+        $category = $this->item_model->Category();
         $data = array(
-            "data" => $data
+            "sellerInfo" => $sellerInfo,
+            "category" =>$category
         );
         echo view("Common/Header.html");
         echo view('Seller/ItemRegist.html',$data);
@@ -96,9 +98,11 @@ class Item extends BaseController
     { // {{{
         $uuid = $_SESSION['login_info']['uuid'];
         $data = $this->seller_model->itemDetail($uuid,$product_no);
-
+        $category_type = $this->item_model->Category1($product_no);
         $data = array(
-            "data" => $data["data"]
+            "data" => $data,
+            "category_type1" => $category_type['category1'],
+            "category_type2" => $category_type['category2']
         );
         echo view("Common/Header.html");
         echo view('Seller/ItemUpdate.html',$data);
@@ -148,4 +152,14 @@ class Item extends BaseController
 	public function StatusComment(){
 		echo view('/Seller/StatusComment.html');
 	}
+
+    public function CategorySearch(){
+        $category_type = $this->item_model->CategorySearch($_POST);
+        $data = array(
+        "data" => $category_type
+        );
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+
+        die();
+    }
 }

@@ -1,21 +1,19 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\Management\Company\ApplicationModel;
-use App\Models\DatabaseModel;
+use App\Models\Seller\ItemModel;
 use App\Models\Buyer\BuyerModel;
 use App\Models\Seller\SellerModel;
 class Home extends BaseController
 {
-    private $database_model;
+    private $item_model;
     private $buyer_model;
     private $seller_model;
 
     public function __construct()
     { //{{{
         $this->buyer_model = new BuyerModel;
-        $this->application_model = new ApplicationModel;
-        $this->database_model = new DatabaseModel;
+        $this->item_model = new ItemModel;
         $this->seller_model = new SellerModel;
 
     } //}}}
@@ -33,11 +31,20 @@ class Home extends BaseController
             "reduction" => $reduction,
             "new_product" => $new_product,
             "promotion_video" => $promotion_video,
-            "notice_list" => $notice_list
+            "notice_list" => $notice_list,
+
         );
 
         echo view("Common/Header.html");
         echo view('Home/Index.html', $data);
         echo view("Common/Footer.html");
+    }
+    public function SessionCategory(){
+        $category = $this->item_model->SessionCategory();
+        $data = array(
+            "data" => $category
+        );
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
     }
 }

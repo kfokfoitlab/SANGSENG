@@ -301,7 +301,7 @@ class SellerModel extends CommonModel
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
-            $data["data"][] = $row;
+            $data= $row;
 
         }
         return $data;
@@ -493,7 +493,6 @@ class SellerModel extends CommonModel
 	
 	public function SellerReplyCount($data){
 		$product_no = $data;
-
 		$query = "
             select
                 count(*) as reply_cnt

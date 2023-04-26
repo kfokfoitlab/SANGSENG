@@ -72,6 +72,7 @@ $routes->set404Override();*/
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get ('/',                          'Home::index');
+$routes->post ('/SessionCategory',           'Home::SessionCategory');
 $routes->get ('/Image/(:any)',              'Image::getImage/$1');
 $routes->get ('/Image/(:any)/(:any)',       'Image::getImage/$1');
 
@@ -213,6 +214,7 @@ $routes->group('Seller',  function ($routes){
     $routes->get ( 'Contract',       'Seller::Contract');
     $routes->get ($group_name.'/ItemUpdate/(:any)', 'Seller\Item::ItemUpdate/$1');
     $routes->get ($group_name.'/ItemRegist','Seller\Item::ItemRegist');
+    $routes->post ($group_name.'/CategorySearch','Seller\Item::CategorySearch');
     $routes->get ($group_name.'/ItemList',   'Seller\Item::ItemList');
     $routes->post ($group_name.'/ItemList/Search',   'Seller\Item::Search');
     $routes->post ($group_name.'/ItemSubmit', 'Seller\Item::ItemSubmit');

@@ -122,11 +122,13 @@
             </div>
             <div class="">
               <p class="my-2"><a title="관심상품">관심상품</a></p>
-              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_office"> 사무용품</label>
-              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_daily"> 생활용품</label>
-              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_computerized"> 전산용품</label>
-              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_food"> 식음료</label>
-              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="Y" name="interest_cleaning"> 청소용품</label>
+              <?php
+                foreach($category as $item){
+                ?>
+              <label class="form-check-label me-1"><input class="form-check-input" type="checkbox" value="<?=$item['category_type2']?>" name="interest[]"><?=$item['category_type2']?></label>
+              <?php
+              }
+              ?>
             </div>
             <br>
             <div class="form-group">
@@ -137,7 +139,7 @@
               <button type="submit" class="theme-btn btn-style-one py-3 w-100" onclick="validationJoin()" tabindex=100>회원가입</button>
             </div>
           </form>
-
+          <!--validationJoin()-->
           <div class="bottom-box mt-5">
             <div class="text-end">
               <a tabindex=100>이미 회원이신가요?</a>

@@ -113,7 +113,6 @@
           <th>카테고리</th>
           <th>판매시작일</th>
           <th>판매종료일</th>
-       <!--   <th>복사</th>-->
         </tr>
         </thead>
         <tbody>
@@ -124,18 +123,6 @@
         $i=($_GET["p_n"]-1)*10+1;
         }
           foreach($data as $item){
-          $category = "";
-            if($item["product_category"] == 1){
-            $category = "사무용품";
-            }else if($item["product_category"] == 2){
-            $category = "생활용품";
-            }else if($item["product_category"] == 3){
-            $category = "전산용품";
-            }else if($item["product_category"] == 4){
-            $category = "식음료";
-            }else if($item["product_category"] == 5){
-            $category = "청소용품";
-            }
         $status = "";
         if($item["status"] == 1){
         $status = "승인대기";
@@ -155,10 +142,10 @@
         <tr>
           <td><?=$i?></td>
           <td><a class="fw-normal" href="/Seller/Item/ItemUpdate/<?=$item['product_no']?>"><?=$item["product_no"]?></a></td>
-          <td title="친환경중질지70gA4용지"><p><?=$item["product_name"]?></p></td>
+          <td title="<?=$item['product_name']?>"><p><?=$item["product_name"]?></p></td>
           <td><?=$product_price?>원</td>
           <td><?=$status?></td>
-          <td><?=$category?></td>
+          <td><?=$item["product_category2"]?></td>
           <td><?= substr($item["product_start"], 0, 10)?></td>
           <td><?=substr($item["product_end"], 0, 10)?></td>
         <!--  <td>
@@ -166,10 +153,10 @@
           </td>-->
         </tr>
         <?php
-        $i++;
-              }
+           $i++;
             }
-          ?>
+          }
+        ?>
         </tbody>
       </table>
       <?php if($data_page_total_cnt == 0){ echo"<div class='text-center'><span>등록된 상품이 없습니다</span>"; }?>

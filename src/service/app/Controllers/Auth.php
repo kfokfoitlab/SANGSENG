@@ -6,16 +6,16 @@ use App\Models\Auth\SignUpUserModel as UserModel;
 use App\Models\Auth\SignUpCompanyModel as CompanyModel;
 use App\Models\Auth\ForgotInfoModel as ForgotModel;
 use App\Models\DatabaseModel;
+use App\Models\Seller\ItemModel;
 
 class Auth extends BaseController
 {
-
     private $model;
     private $user_model;
     private $company_model;
 	private $forgotModel_model;
     private $database_model;
-	
+    private $item_model;
     public function __construct()
     { //{{{
         $this->model = new Model;
@@ -23,6 +23,7 @@ class Auth extends BaseController
         $this->company_model = new CompanyModel;
 	    $this->forgotModel_model = new ForgotModel;
         $this->database_model = new DatabaseModel;
+        $this->item_model = new ItemModel;
     } //}}}
 
     public function index()
@@ -173,9 +174,11 @@ class Auth extends BaseController
 
     public function SignUpBuyer()
     { // {{{
+        $category = $this->item_model->Category();
 
         $data = array(
-             "sbs" => $_POST["sbs"]
+             "sbs" => $_POST["sbs"],
+            "category" =>$category
        );
 
         echo view("Common/Header.html");

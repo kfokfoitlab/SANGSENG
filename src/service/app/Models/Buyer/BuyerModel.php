@@ -200,8 +200,10 @@ class BuyerModel extends CommonModel
 		    if($buyer_info["interest_cleaning"] == "Y"){
 			    $interest_info[] = 5;
 		    }
-			if(count($interest_info)>0) {
-				$where = " and product_category IN (" . implode(',', $interest_info) . ")";
+            $interest = $buyer_info['interest'];
+			if($interest != "") {
+              $interest = explode(',',$interest);
+                $where = " and product_category2 IN ('". implode("','",$interest) ."')";
 			}
 	    }
         if( $URL_CHECK == "Buyer/Shop"){
@@ -210,7 +212,7 @@ class BuyerModel extends CommonModel
             $limit = 6;
         }
         if($value != "" && $value !='all'){
-            $where = " and product_category =$value";
+            $where = $where." and product_category2 ='".$value."'";
         }
         if($_GET['search_type'] == 's'){
             $where = "";
@@ -310,7 +312,7 @@ class BuyerModel extends CommonModel
     public function CategoryList($value){
         $category = "";
         if($value != "" && $value !='all'){
-            $category = " and product_category =$value";
+            $category = " and product_category2 ='".$value."'";
         }
         if($value == 'all'){
             $category = "";

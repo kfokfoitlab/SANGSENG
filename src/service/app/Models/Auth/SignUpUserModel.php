@@ -30,8 +30,12 @@ class SignUpUserModel extends CommonModel
         $upload_buyer_documents_ori = "buyer_documents";
         $upload_buyer_documents_image = uniqid().".".pathinfo($files["buyer_documents"]["name"], PATHINFO_EXTENSION);
         $this->uploadFileNew($files,$upload_buyer_documents_image,$allowed_ext,$upload_buyer_documents_ori);
-
-
+        $interest = "";
+        if($data['interest'] != ""){
+            for($i = 0; $i<count($data['interest']); $i++){
+                $interest = implode(',',$data['interest']);
+            }
+        }
         helper(["uuid_v4", "specialchars"]);
         $uuid = gen_uuid_v4();
         // status == 0:가입신청, 1:심사중, 5:승인,7:거절, 9: 탈퇴	
@@ -61,11 +65,7 @@ class SignUpUserModel extends CommonModel
                 ,workers = '".$data['workers']."'
                 ,severely_disabled = '".$data['severely_disabled']."'
                 ,mild_disabled = '".$data['mild_disabled']."'
-                ,interest_office = '".$data["interest_office"]."'
-                ,interest_daily = '".$data["interest_daily"]."'
-                ,interest_computerized = '".$data["interest_computerized"]."'
-                ,interest_food = '".$data["interest_food"]."'       
-                ,interest_cleaning = '".$data["interest_cleaning"]."'            
+                ,interest = '".$interest."'
                 ,receive_yn = '".$receive_yn ."'
                 ,del_yn = '".$del_yn ."'
                 ,register_date = '".date("Y-m-d H:i:s")."'

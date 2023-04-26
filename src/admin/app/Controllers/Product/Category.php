@@ -2,12 +2,12 @@
 
 namespace App\Controllers\Product;
 use App\Controllers\BaseController as Base;
-use App\Models\Product\ProductModel as Model;
+use App\Models\Product\CategoryModel as Model;
 use App\Models\Database\DatabaseModel;
 
-class Lists extends Base
+class Category extends Base
 {
-    private $page_name = "상품관리 > 전체 목록";
+    private $page_name = "상품관리 > 카테고리";
     private $model;
     private $database_model;
 
@@ -19,16 +19,8 @@ class Lists extends Base
 
     public function Index()
     { //{{{
-
-        $job_category = $this->database_model->getJobAll();
-        $impairments = $this->database_model->getImpairmentAll();
-
         $data = array(
             "page_name" => $this->page_name
-        ,"job_category" => $job_category
-        ,"impairments" => $impairments
-
-            //,"data" => $this->model->getList()
         );
 
         echo view('Common/Header.html');
@@ -62,6 +54,34 @@ class Lists extends Base
         die();
 
     } //}}}
+    public function CategoryRegister()
+    { //{{{
+        echo view('Common/Header.html');
+        echo view(_CONTROLLER.'/CategoryRegister.html');
+        echo view('Common/Footer.html');
+    } //}}}
+
+    public function CategoryRegisterSubmit()
+    { //{{{
+
+        $result = $this->model->Register($_POST);
+
+        if($result == "1"){
+            echo "
+					<script>
+						alert('정상 등록되었습니다');
+						location.href = '/Product/Category';
+					</script>
+				";
+        }else{
+            echo "
+					<script>
+						alert('오류가 발생했습니다.다시 시도해주세요');
+					</script>
+				";
+        }
+    } //}}}
+
 
     public function Detail($idx)
     { //{{{
@@ -81,16 +101,7 @@ class Lists extends Base
 
     } //}}}
 
-    public function RecommendSubmit($type, $uuid)
-    { //{{{
 
-        $this->model->Recommend($type, $uuid);
-
-        echo 1;
-
-        die();
-
-    } //}}}
 
     public function Update($idx)
     { //{{{
@@ -130,41 +141,9 @@ class Lists extends Base
             </script>
         ";
         }
-     
+
         die();
 
     }
-
-    public function statusUpdate()
-    {
-        $data = array(
-            "idx" => $_GET["idx"]
-        ,"status" => $_GET["status"]
-        );
-        $this->model->statusUpdate($data);
-		if($_GET["status"] == 7){
-			echo "
-            <script>
-            	alert('반려되었습니다');
-                opener.location.reload();
-    			window.close();
-            </script>
-        ";
-		}else {
-			echo "
-            <script>
-                history.back();
-            </script>
-       	 ";
-		}
-    }
-	
-	public function StatusComment(){
-		echo view(_CONTROLLER.'/StatusComment.html');
-	}
-    public function downloadFileNew(){
-        $this->model->downloadFileNew();
-    }
-
 
 }
