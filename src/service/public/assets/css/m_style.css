@@ -1332,6 +1332,15 @@ a {
   overflow: hidden;
   clip-path: polygon(0 0, 0 0, 0 0);
 }
+.auth_signUpBuyer .email-chk {
+  background: #3BAF2A;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  font-weight: 200;
+  border-radius: 4px;
+  font-size: 12px;
+}
 
 button[type='submit'] {
   display: block;
