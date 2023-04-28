@@ -47,4 +47,13 @@ class Home extends BaseController
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
+
+    public function SessionCategory2(){
+        $category = $this->item_model->SessionCategory2($_POST);
+        $data = array(
+            "data" => $category
+        );
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
 }

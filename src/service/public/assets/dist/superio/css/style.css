@@ -5712,6 +5712,10 @@ Main Header
 .all-dropdown.active {
   display: block;
 }
+.all-dropdown ul#depth1 {
+  display: flex;
+  flex-direction: column;
+}
 .all-dropdown ul li a {
   background: #efefef;
   padding: 4px 0 4px 20px;

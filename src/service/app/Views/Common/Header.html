@@ -24,7 +24,7 @@ echo doctype("html5");
   <link href="/assets/dist/dropify-0.2.2/css/dropify.min.css" rel="stylesheet">
   <link href="/assets/css/style.css" rel="stylesheet">
 
-<!--  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>-->
+  <!--  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>-->
   <script src="/assets/dist/superio/js/jquery.js"></script>
   <script src="/assets/dist/superio/js/popper.min.js"></script>
   <script src="/assets/dist/superio/js/chosen.min.js"></script>
@@ -36,26 +36,26 @@ echo doctype("html5");
 
   <script>
 
-/*
-      $.ajax({
-        type: 'post',
-        url: "/SessionCategory",
-        data: {
-          //"category_type1": category_type1
-        },
-        success: function (result){
-          var result = JSON.parse(result);
-          var nav_menu = "";
-          for(var i=0; i<result['data'].length; i++){
-            nav_menu = nav_menu + "<li class=''>";
-            nav_menu = nav_menu + "<a href='/Buyer/Shop/List?value=" + result['data'][i]['category_type2'] + "&p_n=1' tabindex=12>";
-            nav_menu = nav_menu + "<span>" + result['data'][i]['category_type2'] + "</span> </a>";
-            nav_menu = nav_menu + "</li>";
-          }
-          $('#navbar').html(nav_menu);
-        }
-      });
-*/
+    /*
+          $.ajax({
+            type: 'post',
+            url: "/SessionCategory",
+            data: {
+              //"category_type1": category_type1
+            },
+            success: function (result){
+              var result = JSON.parse(result);
+              var nav_menu = "";
+              for(var i=0; i<result['data'].length; i++){
+                nav_menu = nav_menu + "<li class=''>";
+                nav_menu = nav_menu + "<a href='/Buyer/Shop/List?value=" + result['data'][i]['category_type2'] + "&p_n=1' tabindex=12>";
+                nav_menu = nav_menu + "<span>" + result['data'][i]['category_type2'] + "</span> </a>";
+                nav_menu = nav_menu + "</li>";
+              }
+              $('#navbar').html(nav_menu);
+            }
+          });
+    */
 
 
 
@@ -119,9 +119,9 @@ echo doctype("html5");
           </div>
           <div class="all-dropdow-outer">
             <nav class="nav main-menu">
-              <ul class="navigation" id="navbar">
+              <ul class="navigation" id="navbar" >
                 <li>
-                  <a href="#" class="all-menu"><span>전체</span></a>
+                  <a href="#" class="all-menu" ><span>전체</span></a>
                 </li>
                 <li class="">
                   <a href="/Buyer/Shop/List?value=1&p_n=1" tabindex=12> <span>사무용품</span> </a>
@@ -143,70 +143,76 @@ echo doctype("html5");
                 </li>
               </ul>
             </nav>
-            <div class="all-dropdown">
-              <ul>
-                <li>
-                  <a href="#">사무용품</a>
-                  <ul>
-                    <li>
-                      <a href="#">사무용품1</a>
-                    </li>
-                    <li>
-                      <a href="#">사무용품2</a>
-                    </li>
-                    <li>
-                      <a href="#">사무용품3</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#">생활용품</a>
-                  <ul>
-                    <li>
-                      <a href="#">생활용품1</a>
-                    </li>
-                    <li>
-                      <a href="#">생활용품2</a>
-                    </li>
-                    <li>
-                      <a href="#">생활용품3</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#">전산용품</a>
-                  <ul>
-                    <li>
-                      <a href="#">전산용품1</a>
-                    </li>
-                    <li>
-                      <a href="#">전산용품2</a>
-                    </li>
-                    <li>
-                      <a href="#">전산용품3</a>
-                    </li>
-                  </ul>
-                </li>
+            <div class="all-dropdown " >
+              <ul class ='depth1'>
+
               </ul>
             </div>
           </div>
-      <script>
-          const url = window.location.search;
-          const GNBLinks = document.querySelectorAll('#navbar li a');
-          GNBLinks.forEach((nav, i) => {
-          if(url.includes(`value=${i+1}`)) {
-              nav.classList.add('on')
-          } else {
-             nav.classList.remove('on')
-          }
-                    })
-      </script>
-      <script>
-        $('.all-menu').click(function (){
-          $('.all-dropdown').toggleClass('active')
-        })
+          <script>
+            const url = window.location.search;
+            const GNBLinks = document.querySelectorAll('#navbar li a');
+            GNBLinks.forEach((nav, i) => {
+              if(url.includes(`value=${i+1}`)) {
+                nav.classList.add('on')
+              } else {
+                nav.classList.remove('on')
+              }
+            })
+          </script>
+          <script>
 
-      </script>
+            function lowerCategory(v){
+              $.ajax({
+                type: 'post',
+                url: "/SessionCategory2",
+                data: {
+                  "category_type1": v
+                },
+                success: function (result){
+                  var result = JSON.parse(result);
+                  var nav_menu2 = "";
+
+                  for(var i=0; i<result['data'].length; i++){
+
+                   // nav_menu2 = nav_menu2 + "</li>";
+                    nav_menu2 = nav_menu2 + "<li class='' >";
+                    nav_menu2 = nav_menu2 + "<a href='/Buyer/Shop/List?value=" + result['data'][i]['category_type2'] + "&p_n=1' tabindex=12>";
+                    nav_menu2 = nav_menu2 + "<span>" + result['data'][i]['category_type2'] + "</span> </a>";
+                    nav_menu2 = nav_menu2 + "</li>";
+                  }
+                  nav_menu2 = nav_menu2 + "</ul>";
+                  nav_menu2 = nav_menu2 + "</li>";
+                  $('.depth2').html(nav_menu2);
+                }
+              });
+            }
+
+            $('.all-menu').click(function (){
+              $.ajax({
+                type: 'post',
+                url: "/SessionCategory",
+                data: {
+                  //"category_type1": category_type1
+                },
+                success: function (result){
+                  var result = JSON.parse(result);
+                  var nav_menu = "";
+                  var category_v = "";
+                  for(var i=0; i<result['data'].length; i++){
+                    category_v = result['data'][i]['category_type1'];
+                    nav_menu = nav_menu + "<li class='' >";
+                    nav_menu = nav_menu + "<a href='#' tabindex=12 onmouseover='lowerCategory("+'"'+category_v+'"'+");'>";
+                    nav_menu = nav_menu + "<span>" + result['data'][i]['category_type1'] + "</span> </a>";
+                    nav_menu = nav_menu + "<ul class='depth2' >";
+                  }
+                  $('.depth1').html(nav_menu);
+                }
+              });
+              $('.all-dropdown').toggleClass('active')
+            })
+
+          </script>
           <!-- Main Menu End-->
         </div>
 

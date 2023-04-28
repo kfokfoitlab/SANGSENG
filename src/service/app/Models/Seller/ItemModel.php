@@ -372,13 +372,29 @@ public function CategorySearch($data){
         $category= [];
         $query = "
             select
-              DISTINCT category_type2
+              DISTINCT category_type1
             from
               product_category        
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
-          //  $_SESSION["category"][] =$row;
+            $category[] = $row;
+        }
+        return $category;
+    }
+
+    public function SessionCategory2($data){
+        $category= [];
+        $category_type = $data['category_type1'];
+        $query = "
+            select
+              DISTINCT category_type2
+            from
+              product_category 
+            where  category_type1 = '".$data["category_type1"]."'
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
             $category[] = $row;
         }
         return $category;

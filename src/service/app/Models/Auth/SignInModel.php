@@ -47,14 +47,12 @@ class SignInModel extends CommonModel
             $_SESSION["Expectation"] = $this->ExpectationMoney();
             $_SESSION["Contract"]= $this->getContractList();
             $_SESSION["ReductionMoney"]= $this->BuyerReduction();
-            $_SESSION["category"]= $this->SessionCategory();
             return array(
                  "result" => "success"
                 ,"buyer_notification"=> $row["buyer_notification"]
             );
 
         }else{
-            $_SESSION["category"]= $this->SessionCategory();
             return array(
                  "result" => "failed"
                 ,"type" => "Invalid"
@@ -155,22 +153,6 @@ class SignInModel extends CommonModel
         }
         return $Expectation;
     }
-
-    public function SessionCategory(){
-        $category= [];
-        $query = "
-            select
-              DISTINCT category_type2
-            from
-              product_category        
-        ";
-        $this->rodb->query($query);
-        while($row = $this->rodb->next_row()){
-            $category[]= $row;
-        }
-        return $category;
-    }
-
 
     public function BuyerReduction(){
         $uuid = $_SESSION['login_info']['uuid'];

@@ -73,6 +73,7 @@ $routes->set404Override();*/
 // route since we don't have to scan directories.
 $routes->get ('/',                          'Home::index');
 $routes->post ('/SessionCategory',           'Home::SessionCategory');
+$routes->post ('/SessionCategory2',           'Home::SessionCategory2');
 $routes->get ('/Image/(:any)',              'Image::getImage/$1');
 $routes->get ('/Image/(:any)/(:any)',       'Image::getImage/$1');
 
