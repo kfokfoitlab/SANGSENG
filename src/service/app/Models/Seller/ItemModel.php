@@ -372,9 +372,10 @@ public function CategorySearch($data){
         $category= [];
         $query = "
             select
-              DISTINCT category_type1
+               category_type1,category_type2
             from
-              product_category        
+              product_category
+            order by category_type1 asc
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
