@@ -71,7 +71,7 @@ echo doctype("html5");
             $('.depth1').html(nav_menu);
           }
         });
-        $('.all-dropdown').toggleClass('active');
+        // $('.all-dropdown').toggleClass('active');
     });
 
     /*
@@ -158,8 +158,11 @@ echo doctype("html5");
           <div class="all-dropdow-outer">
             <nav class="nav main-menu">
               <ul class="navigation" id="navbar">
-                <li>
+                <li class="all-menu-outer">
                   <a href="#" class="all-menu"><span>전체</span></a>
+<!--                  <ul class ='depth1'>-->
+
+<!--                  </ul>-->
                 </li>
                 <li class="">
                   <a href="/Buyer/Shop/List?value=1&p_n=1" tabindex=12> <span>사무용품</span> </a>
@@ -243,9 +246,18 @@ echo doctype("html5");
             })
           </script>
           <script>
-       /*     $('.all-menu').click(function (){
-              $('.all-dropdown').toggleClass('active')
-            })*/
+          // $('.all-menu-outer').mouseenter(function (){
+          //     $('.all-dropdown').addClass('active')
+          // })
+
+          $('.all-menu-outer').mouseenter(function (){
+            $('.all-dropdown, .depth1').addClass('active')
+          })
+
+          $('.all-dropdown').mouseleave(function (){
+            $(this).removeClass('active')
+          })
+
 
           </script>
           <!-- Main Menu End-->
