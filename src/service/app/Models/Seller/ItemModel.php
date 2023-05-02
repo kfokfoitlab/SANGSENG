@@ -372,7 +372,7 @@ public function CategorySearch($data){
         $category= [];
         $query = "
             select
-               category_type1,category_type2
+              distinct category_type2 as category_type2, category_type1
             from
               product_category
             order by category_type1 asc

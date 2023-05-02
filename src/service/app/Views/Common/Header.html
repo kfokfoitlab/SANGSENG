@@ -57,9 +57,9 @@ echo doctype("html5");
                 nav_menu = nav_menu + "<ul class='' >";
                 for (var j = 0; j < result['data'].length; j++) {
                   if (category_v == result['data'][j]['category_type1']) {
-                    category_v2 = result['data'][j]['category_type2'];
+                     category_v2 = result['data'][j]['category_type2'];
                     nav_menu = nav_menu + "<li class='' >";
-                    nav_menu = nav_menu + "<a href='#' tabindex=12>";
+                    nav_menu = nav_menu + "<a href='/Buyer/Shop/List?value="+category_v2+"&p_n=1' tabindex=12>";
                     nav_menu = nav_menu + "<span>" + result['data'][j]['category_type2'] + "</span> </a>";
                     nav_menu = nav_menu + "</li>";
                   }
@@ -71,7 +71,7 @@ echo doctype("html5");
             $('.depth1').html(nav_menu);
           }
         });
-        // $('.all-dropdown').toggleClass('active');
+        // $('.all-dropdown').toggleClass('active');   /Buyer/Shop/List?value=1&p_n=1
     });
 
     /*
