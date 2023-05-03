@@ -29,9 +29,9 @@
               <div class="col-10">
                 <select name="product_category" id = "product_category"  class="form-select d-inline-block w-50"
                         aria-label="Default select example" onchange="category_type();" >
-                  <option value="">대분류</option>
+                  <option value="">대분류를 선택해주세요</option>
               <?php
-                  foreach($category1 as $item){
+                  foreach($category as $item){
                 ?>
                   <option value="<?=$item['category_type1']?>" ><?=$item['category_type1']?></option>
                   <?php
@@ -40,7 +40,7 @@
                 </select>
                 <select name="product_category2" id = "product_category2"  class="form-select d-inline-block w-50"
                         aria-label="Default select example"  >
-                  <option value="">중분류</option>
+                  <option value="">중분류를 선택해주세요</option>
                 </select>
               </div>
             </div>

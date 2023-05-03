@@ -54,10 +54,12 @@
                 <select name="product_category2" class="form-select d-inline-block w-50"
                         aria-label="Default select example" id="product_category2">
                   <?php
+
                   foreach($category_type2 as $item){
                   ?>
                   <option value="<?=$item['category_type2']?>" <?php if($data['product_category2']== $item['category_type2']){echo "selected";}?>><?=$item['category_type2']?></option>
                   <?php
+
                   }
                   ?>
                 </select>

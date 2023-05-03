@@ -62,7 +62,7 @@ class Item extends BaseController
     { // {{{
 
         $sellerInfo = $this->item_model->SellerInfo();
-        $category = $this->item_model->Category();
+        $category = $this->item_model->RegCategory();
         $data = array(
             "sellerInfo" => $sellerInfo,
             "category" =>$category
@@ -101,8 +101,8 @@ class Item extends BaseController
         $category_type = $this->item_model->Category1($product_no);
         $data = array(
             "data" => $data,
-            "category_type1" => $category_type['category1'],
-            "category_type2" => $category_type['category2']
+            "category_type1" => $category_type['category_type1'],
+            "category_type2" => $category_type['category_type2']
         );
         echo view("Common/Header.html");
         echo view('Seller/ItemUpdate.html',$data);

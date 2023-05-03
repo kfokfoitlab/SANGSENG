@@ -147,13 +147,13 @@ class ItemModel extends CommonModel
         $category_type =[];
         $query = "
             select
-                distinct category_type1
+                distinct category_type1 as category_type1
             from
               product_category  
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
-            $category_type['category1'][]= $row;
+            $category_type['category_type1'][]= $row;
         }
         $product_query = "
             select
@@ -167,14 +167,14 @@ class ItemModel extends CommonModel
 
         $query = "
             select
-                distinct category_type2
+                distinct category_type2 as category_type2
             from
               product_category  
             where category_type1 = '".$product_info['product_category']."'
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
-            $category_type['category2'][]= $row;
+            $category_type['category_type2'][] = $row;
         }
         return $category_type;
     }
@@ -352,11 +352,11 @@ public function CategorySearch($data){
     return $category_type;
 }
 
-    public function Category2(){
+    public function RegCategory(){
         $category = [];
         $query = "
             select
-              DISTINCT category_type2
+              DISTINCT category_type1 as category_type1
             from
               product_category        
         ";
