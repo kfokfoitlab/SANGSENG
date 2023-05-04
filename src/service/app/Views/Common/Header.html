@@ -257,7 +257,9 @@ echo doctype("html5");
           $('.all-dropdown').mouseleave(function (){
             $(this).removeClass('active')
           })
-
+          $('.main-info-top').mouseenter(function (){
+            $('.all-dropdown, .depth1').removeClass('active')
+          })
 
           </script>
           <!-- Main Menu End-->

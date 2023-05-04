@@ -5717,6 +5717,14 @@ Main Header
   flex-direction: column;
   position: relative;
 }
+.all-dropdown > ul > li > ul a {
+  background: pink;
+  white-space: nowrap;
+  width: auto;
+  padding: 4px 20px;
+  min-width: 150px;
+  text-align: center;
+}
 .all-dropdown ul > li > a {
   background: #efefef;
   padding: 4px 0 4px 20px;
