@@ -101,30 +101,46 @@ class Category extends Base
 
     } //}}}
 
-
-
-    public function Update($idx)
+    public function Delete()
     { //{{{
+        $idx = $_GET['idx'];
+        $result = $this->model->Delete($idx);
+        if ($result == "1") {
+            echo "
+                <script>
+                    alert('삭제되었습니다.');
+					window.location.replace('/Product/Category');
+                </script>
+            ";
+        } else {
+            echo "
+                <script>
+                    alert('오류가 발생했습니다. 관리자에게 문의해주세요');
+					history.back(-1);
+                </script>
+            ";
+        }
+    } //}}}
 
+    public function Update()
+    { //{{{
+        $idx = $_GET['idx'];
         $data = $this->model->Detail($idx);
 
         $data = array(
             "page_name" => $this->page_name
         ,"data" => $data
         );
-
         echo view('Common/HeaderSub.html');
         echo view(_CONTROLLER.'/Update.html', $data);
         echo script_tag("assets/js/"._CONTROLLER."/Update.js");
-        echo view("Modal/SearchPost.html");
         echo view('Common/Footer.html');
 
     } //}}}
 
     public function UpdateSubmit()
     { //{{{
-        $this->model->Update(@$_FILES, $_POST);
-
+        $this->model->Update($_POST);
         if($this == 1 ){
             echo "
             <script>
@@ -132,7 +148,6 @@ class Category extends Base
                 window.location.replace('/"._CONTROLLER."/Detail/".$_POST["idx"]."');
             </script>
         ";
-
         }else{
             echo "
             <script>
@@ -141,9 +156,7 @@ class Category extends Base
             </script>
         ";
         }
-
         die();
-
     }
 
 }

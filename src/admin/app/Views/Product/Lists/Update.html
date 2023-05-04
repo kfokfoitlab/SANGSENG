@@ -32,7 +32,7 @@ $end_date = date("Y-m-d", $timestamp);
           <td class="th">상품번호</td>
           <td colspan="3"><?=$data["product_no"]?></td>
         </tr>
-        <tr>
+      <!--  <tr>
           <td class="th">추천순위</td>
           <td colspan="3">
             <select class='form-select' name='product_ranking'>
@@ -49,20 +49,36 @@ $end_date = date("Y-m-d", $timestamp);
               <option value='10'  <?php if($data['product_ranking']==10){echo "selected";}?>>10</option>
             </select>
           </td>
-        </tr>
+        </tr>-->
         <tr>
           <td class="th">상품등록 회사</td>
           <td colspan="1"><?=$data["company_name"]?></td>
         </tr>
         <tr>
-          <td class="th">카테고리</td>
+          <td class="th">카테고리(대분류)</td>
           <td colspan="3">
-            <select name="product_category" id="" class="form-select">
-              <option value="1" <?php if($data['product_category']==1){echo "selected";}?>>사무용품</option>
-              <option value="2" <?php if($data['product_category']==2){echo "selected";}?>>생활용품</option>
-              <option value="3" <?php if($data['product_category']==3){echo "selected";}?>>전산용품</option>
-              <option value="4" <?php if($data['product_category']==4){echo "selected";}?>>식음료</option>
-              <option value="5" <?php if($data['product_category']==5){echo "selected";}?>>청소용품</option>
+            <select name="product_category" class="form-select" id="product_category"  onchange="category_type();">
+              <?php
+                  foreach($category_type1 as $item){
+                  ?>
+              <option value="<?=$item['category_type1']?>" <?php if($data['product_category']== $item['category_type1']){echo "selected";}?>><?=$item['category_type1']?></option>
+              <?php
+                  }
+                  ?>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="th">카테고리(중분류)</td>
+          <td colspan="3">
+            <select name="product_category2" class="form-select" id="product_category2"">
+              <?php
+                  foreach($category_type2 as $item){
+                  ?>
+              <option value="<?=$item['category_type2']?>" <?php if($data['product_category2']== $item['category_type2']){echo "selected";}?>><?=$item['category_type2']?></option>
+              <?php
+                  }
+                  ?>
             </select>
           </td>
         </tr>
@@ -279,4 +295,24 @@ $end_date = date("Y-m-d", $timestamp);
         location.href = "/<?=_CONTROLLER?>/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
       }
     };
+    function category_type(){
+      if($("#product_category").val() != ""){
+        var category_type1 = $("#product_category").val();
+        $.ajax({
+          type: 'post',
+          url: "/"+_CONTROLLER+"/CategorySearch",
+          data: {
+            "category_type1": category_type1
+          },
+          success: function (result){
+            var result = JSON.parse(result);
+            $("#product_category2").empty();
+            for(var i = 0; i<result['data'].length; i++){
+              var data = "<option value='"+result['data'][i]['category_type2']+"'>"+result['data'][i]['category_type2']+"</option>";
+              $("#product_category2").append(data);
+            }
+          }
+        });
+      }
+    }
 </script>

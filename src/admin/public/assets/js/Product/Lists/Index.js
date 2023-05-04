@@ -28,32 +28,8 @@ $(document).ready(function(){
             ,{title: "회사명", data: "company_name", visible: true, className: "text-nowrap"}
             ,{title: "상품번호", data: "product_no", visible: true, className: "text-nowrap"}
             ,{title: "상품명", data: "product_name", visible: true}
-            ,{title: "카테고리", data: "product_category", visible: true,
-                "render": function( data, type, row, meta ){
-                    let html = "";
-
-                    switch(data){
-                        case "1":
-                            html = "<span>사무용품</span>";
-                            break;
-                        case "2":
-                            html = "<span>생활용품</span>";
-                            break;
-                        case "3":
-                            html = "<span>전산용품</span>";
-                            break;
-                        case "4":
-                            html = "<span>식음료</span>";
-                            break;
-                        case "5":
-                            html = "<span>청소용품</span>";
-                            break;
-                    }
-
-                    return html;
-                }
-
-            }
+            ,{title: "카테고리(대분류)", data: "product_category", visible: true}
+            ,{title: "카테고리(중분류)", data: "product_category2", visible: true}
             ,{title: "가격", data: "product_price", visible: true,
                 "render": function( data, type, row, meta ) {
                     var html = "";
@@ -116,7 +92,6 @@ $(document).ready(function(){
                     return html;
                 }
             }
-            ,{title: "추천 순위", data: "product_ranking", visible: true, className: "text-nowrap"}
             ,{title: "상세보기", data: "idx", visible: true, orderable: false, className: "text-center noExport",
                 "render": function( data, type, row, meta ){
                     var html = "";

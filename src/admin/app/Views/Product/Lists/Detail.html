@@ -78,8 +78,12 @@ $end_date = date("Y-m-d", $timestamp);
                 <td colspan="3"><?=$data["company_name"]?></td>
               </tr>
               <tr>
-                <td class="th">카테고리</td>
-                <td colspan="3"><?=$category?></td>
+                <td class="th">카테고리(대분류)</td>
+                <td colspan="3"><?=$data["product_category"]?></td>
+              </tr>
+              <tr>
+                <td class="th">카테고리(중분류)</td>
+                <td colspan="3"><?=$data["product_category2"]?></td>
               </tr>
               <tr>
                 <td class="th">상품명</td>

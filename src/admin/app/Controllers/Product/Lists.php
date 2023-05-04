@@ -20,15 +20,11 @@ class Lists extends Base
     public function Index()
     { //{{{
 
-        $job_category = $this->database_model->getJobAll();
-        $impairments = $this->database_model->getImpairmentAll();
+        $category = $this->model->getCategoryList();
 
         $data = array(
             "page_name" => $this->page_name
-        ,"job_category" => $job_category
-        ,"impairments" => $impairments
-
-            //,"data" => $this->model->getList()
+            ,"category" => $category
         );
 
         echo view('Common/Header.html');
@@ -70,7 +66,8 @@ class Lists extends Base
 
         $data = array(
             "page_name" => $this->page_name
-        ,"data" => $item
+            ,"data" => $item
+
         );
 
         echo view('Common/HeaderSub.html');
@@ -91,21 +88,30 @@ class Lists extends Base
         die();
 
     } //}}}
+    public function CategorySearch(){
+        $category_type = $this->model->CategorySearch($_POST);
+        $data = array(
+            "data" => $category_type
+        );
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
+        die();
+    }
     public function Update($idx)
     { //{{{
 
         $data = $this->model->Detail($idx);
-
+        $category_type = $this->model->Category($idx);
         $data = array(
-            "page_name" => $this->page_name
+        "page_name" => $this->page_name
         ,"data" => $data
+        ,"category_type1" => $category_type['category_type1']
+        ,"category_type2" => $category_type['category_type2']
         );
 
         echo view('Common/HeaderSub.html');
         echo view(_CONTROLLER.'/Update.html', $data);
         echo script_tag("assets/js/"._CONTROLLER."/Update.js");
-        echo view("Modal/SearchPost.html");
         echo view('Common/Footer.html');
 
     } //}}}

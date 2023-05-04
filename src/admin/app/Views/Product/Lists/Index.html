@@ -20,6 +20,8 @@
           <label>상태</label>
           <select class="form-control form-control-sm filter" id="search-status">
             <option value="" selected>전체</option>
+
+
             <option value="1">승인대기</option>
             <option value="3">수정요청</option>
             <option value="5">승인</option>
@@ -32,11 +34,17 @@
           <label>카테고리</label>
           <select class="form-control form-control-sm filter" id="search-product_category">
             <option value="">전체</option>
-            <option value="1">사무용품</option>
+            <?php
+            foreach($category as $item){
+            ?>
+            <option value="<?=$item['category_type1']?>"><?=$item['category_type1']?></option>
+            <?php
+            }?>
+<!--            <option value="1">사무용품</option>
             <option value="2">생활용품</option>
             <option value="3">전산용품</option>
             <option value="4">식음료</option>
-            <option value="5">청소용품</option>
+            <option value="5">청소용품</option>-->
           </select>
         </div>
       </div>

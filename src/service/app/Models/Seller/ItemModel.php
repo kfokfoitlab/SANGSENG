@@ -150,6 +150,7 @@ class ItemModel extends CommonModel
                 distinct category_type1 as category_type1
             from
               product_category  
+             where del_yn ='N'
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
@@ -358,7 +359,8 @@ public function CategorySearch($data){
             select
               DISTINCT category_type1 as category_type1
             from
-              product_category        
+              product_category     
+             where del_yn ='N'
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
@@ -375,6 +377,7 @@ public function CategorySearch($data){
               distinct category_type2 as category_type2, category_type1
             from
               product_category
+            where del_yn = 'N'
             order by category_type1 asc
         ";
         $this->rodb->query($query);

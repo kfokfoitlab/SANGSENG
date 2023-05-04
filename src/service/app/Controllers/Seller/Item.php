@@ -135,7 +135,7 @@ class Item extends BaseController
         if ($result == "1") {
             echo "
                 <script>
-                    alert('관리자에게 삭제를 요청했습니다..');
+                    alert('관리자에게 삭제를 요청했습니다.');
 					window.location.replace('/Seller/Item/ItemList');
                 </script>
             ";

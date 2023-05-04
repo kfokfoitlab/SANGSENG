@@ -10,7 +10,7 @@ class CategoryModel extends CommonModel
     { // {{{
         $items = array();
 
-        $common_query = " 1 and del_yn != 'Y' ";
+        $common_query = " 1 ";
 
         // total records -------------------------------- {{{
         $query = "
@@ -115,6 +115,57 @@ class CategoryModel extends CommonModel
 
     } // }}}
 
+    public function Delete($idx){
+        $query = "
+            update
+                product_category
+            set
+                del_yn = 'Y'
+            where
+                idx = '".$idx."'
+        ";
+        $this->wrdb->update($query);
+        return "1";
+    }
+
+    public function Detail($idx)
+    { //{{{
+        $data = [];
+
+        $query = "
+            select
+                *
+            from
+                ".$this->table_name."
+            where
+                idx = '".$idx."'
+            limit
+                1
+        ";
+        $this->rodb->query($query);
+        $row = $this->rodb->next_row();
+        $data = $row;
+        return $data;
+    } //}}}
+    public function Update($data)
+    { //{{{
+
+        $query = "
+            update
+                " . $this->table_name . "
+          set
+                 category_type1 = '" . $data["category_type1"] . "'
+                ,category_type2 = '" . $data["category_type2"] . "'
+                ,category_type3 = '" . $data["category_type3"] . "'
+                ,update_date = '" . date("Y-m-d H:i:s") . "'
+            where
+                idx = '" . $data["idx"] . "'
+            limit 1
+        ";
+        $this->wrdb->update($query);
+        return 1;
+    }
+
     public function Register($data){
 
         $category_type1 = $data['category_type1'];
@@ -159,77 +210,5 @@ class CategoryModel extends CommonModel
         return 1;
     }
 
-    public function noticeDelete($data)
-    {
-        $query = "
-			UPDATE
-				".$this->table_name."
-			SET
-			    delete_date = '".date("Y-m-d H:i:s")."'
-                ,delete_id = 'admin'
-				,del_yn = 'Y'
-				,board_status = '2'
-			WHERE
-				idx = ".$data["idx"]."
-			LIMIT 1
-			";
-
-        $this->wrdb->update($query);
-
-        return 1;
-    }
-
-    public function getNoticeBoard($data){
-        $query = "
-			SELECT
-				*
-			FROM
-				".$this->table_name."
-			WHERE
-				idx = ".$data["idx"]."
-			LIMIT 1
-			";
-
-        $this->rodb->query($query);
-        $data = $this->rodb->next_row();
-
-        return $data;
-
-    }
-
-    public function noticeUpdate($data,$files, $table_name = "notice_board"){
-        $allowed_ext = array();
-        $upload_file_ori = "upload_file";
-        if($files["upload_file"]["name"] != "") {
-            $upload_file_ori_new = $files["upload_file"]["name"];
-            $upload_file = uniqid() . "." . pathinfo($files["upload_file"]["name"], PATHINFO_EXTENSION);
-            $this->uploadFileNew($files, $upload_file, $allowed_ext, $upload_file_ori);
-        }else{
-            $upload_file = $data["upload_file_ori_name"];
-            $upload_file_ori_new = $data["upload_face_ori"];
-        }
-        $title = addslashes($data['title']);
-        $content = addslashes($data['content']);
-        $content = str_replace("\r\n", "<br>", $content);
-        $title = str_replace("\r\n", "<br>", $title);
-        $query = "
-            update
-                ".$table_name."
-            set
-                board_status = '".$data["board_status"]."'
-                ,user_id = 'admin'
-                ,title = '".$title."'
-                ,content = '".$content."'
-                ,upload_file = '".$upload_file."'
-                ,upload_file_ori = '".$upload_file_ori_new."'
-                ,update_date = '".date("Y-m-d H:i:s")."'
-                ,update_id = 'admin'
-            where
-                idx = ".$data["idx"]."
-        ";
-        //echo $query;
-        $this->wrdb->update($query);
-        return "1";
-    }
 
 }

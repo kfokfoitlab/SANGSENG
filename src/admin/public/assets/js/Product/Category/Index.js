@@ -27,6 +27,22 @@ $(document).ready(function(){
             ,{title: "대분류", data: "category_type1", visible: true, className: "text-nowrap"}
             ,{title: "중분류", data: "category_type2", visible: true, className: "text-nowrap"}
             ,{title: "소분류", data: "category_type3", visible: true}
+            ,{title: "사용여부", data: "del_yn", visible: true,
+                "render": function( data, type, row, meta ){
+                    let html = "";
+
+                    switch(data){
+                        case "N":
+                            html = "<span class='badge bg-info'>사용</span>";
+                            break;
+                        case "Y":
+                            html = "<span class='badge bg-danger'>삭제</span>";
+                            break;
+                    }
+
+                    return html;
+                }
+            }
             ,{title: "상세보기", data: "idx", visible: true, orderable: false, className: "text-center noExport",
                 "render": function( data, type, row, meta ){
                     var html = "";

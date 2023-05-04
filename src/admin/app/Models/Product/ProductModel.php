@@ -126,7 +126,73 @@ class ProductModel extends CommonModel
 
 
     } // }}}
+    public function getCategoryList(){
+        $category_type =[];
+        $query = "
+            select
+                distinct category_type1 as category_type1
+            from
+              product_category
+            where del_yn ='N'
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $category_type[]= $row;
+        }
+        return $category_type;
+    }
 
+    public function Category($idx){
+        $category_type =[];
+        $query = "
+            select
+                distinct category_type1 as category_type1
+            from
+              product_category  
+            where del_yn ='N'
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $category_type['category_type1'][]= $row;
+        }
+        $product_query = "
+            select
+                 product_category
+            from
+              seller_product 
+            where idx = '".$idx."'
+        ";
+        $this->rodb->query($product_query);
+        $product_info = $this->rodb->next_row();
+        $query = "
+            select
+                distinct category_type2 as category_type2
+            from
+              product_category  
+            where category_type1 = '".$product_info['product_category']."'
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $category_type['category_type2'][] = $row;
+        }
+        return $category_type;
+    }
+    public function CategorySearch($data){
+        $category_type = [];
+        $query = "
+            select
+              DISTINCT category_type2
+            from
+              product_category        
+            where
+                category_type1 = '".$data["category_type1"]."'
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $category_type[] = $row;
+        }
+        return $category_type;
+    }
     public function Detail($idx)
     { //{{{
         $data = [];
@@ -144,21 +210,6 @@ class ProductModel extends CommonModel
         $this->rodb->query($query);
         $row = $this->rodb->next_row();
         $data = $row;
-
-        $query = "
-            select
-                *
-            from
-                resume
-            where
-                user_uuid = '".$row["user_uuid"]."' and
-                uuid = '".$row["resume_uuid"]."'
-            limit 1
-        ";
-        $this->rodb->query($query);
-        $row = $this->rodb->next_row();
-        $data["resume"] = $row;
-
         return $data;
     } //}}}
 
@@ -209,6 +260,7 @@ class ProductModel extends CommonModel
                 ".$this->table_name."
           set
                  product_category = '".$data["product_category"]."'
+                ,product_category2 = '".$data["product_category2"]."'
                 ,product_name = '".$data["product_name"]."'
                  ,product_price = '".$data["product_price"]."'
                 ,product_quantity= '".$data["product_quantity"]."'
@@ -216,8 +268,6 @@ class ProductModel extends CommonModel
                 ,product_end = '".$data["product_end"]."'
                 ,product_surtax = '".$data["product_surtax"]."'
                 ,delivery_cycle = '".$data["delivery_cycle"]."'
-                ,product_detail = '".$data["product_detail"]."'
-                ,product_ranking = '".$data["product_ranking"]."'    
                 ,product_detail = '".$data["product_detail"]."'    
                 ,representative_image = '".$upload_representative."'
                 ,product_image1 = '".$upload_image1."'

@@ -562,6 +562,13 @@ input:checked + .slider:before {
   margin-bottom: 20px;
 }
 
+.form-group input[name="search_v"]::placeholder {
+  transition: .3s;
+}
+.form-group input[name="search_v"]:focus::placeholder {
+  opacity: 0;
+}
+
 .default-form .form-group:last-child {
   margin-bottom: 0;
 }
