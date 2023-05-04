@@ -163,6 +163,23 @@ class CategoryModel extends CommonModel
             limit 1
         ";
         $this->wrdb->update($query);
+
+        $product_query = "
+            update
+                seller_product
+          set
+                 product_category = '" . $data["category_type1"] . "'
+                ,product_category2 = '" . $data["category_type2"] . "'
+                ,update_date = '" . date("Y-m-d H:i:s") . "'
+            where
+                product_category = '" . $data["old_category_type1"] . "'
+                and product_category2 = '" . $data["old_category_type2"] . "'
+            limit 1
+        ";
+        $this->wrdb->update($product_query);
+
+
+
         return 1;
     }
 

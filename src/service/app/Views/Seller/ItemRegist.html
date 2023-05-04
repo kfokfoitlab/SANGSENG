@@ -220,7 +220,7 @@
           var result = JSON.parse(result);
           $("#product_category2").empty();
           for(var i = 0; i<result['data'].length; i++){
-          var rdata = "<option value='"+result['data'][i]['category_type2']+"'>"+result['data'][i]['category_type2']+"</option>";
+            var rdata = "<option value='"+result['data'][i]['category_type2']+"'>"+result['data'][i]['category_type2']+"</option>";
              $("#product_category2").append(rdata);
           }
         }

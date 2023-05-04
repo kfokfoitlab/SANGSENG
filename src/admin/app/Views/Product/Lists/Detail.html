@@ -3,18 +3,6 @@
     <h2 class="content-title"> <?=$page_name?> 상세보기</h2>
 	</div>
 <?php
-$category ="";
-if($data["product_category"] == 1){
-$category = "사무용품";
-}else if($data["product_category"] == 2){
-$category = "생활용품";
-}else if($data["product_category"] == 3){
-$category = "전산용품";
-}else if($data["product_category"] == 4){
-$category = "식음료";
-}else if($data["product_category"] == 5){
-$category = "청소용품";
-}
 $product_price = number_format($data["product_price"]);
  $delivery_cycle = "";
           if($data["delivery_cycle"] == 1){
@@ -68,10 +56,6 @@ $end_date = date("Y-m-d", $timestamp);
                       ?></td>
 
                 <td colspan="2">comment: <?=$data["status_comment"]?></td>
-              </tr>
-              <tr>
-                <td class="th">추천순위</td>
-                <td colspan="3"><?=$data["product_ranking"]?></td>
               </tr>
               <tr>
                 <td class="th">상품등록 회사</td>

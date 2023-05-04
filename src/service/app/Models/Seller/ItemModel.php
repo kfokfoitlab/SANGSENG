@@ -370,7 +370,6 @@ public function CategorySearch($data){
     }
 
     public function SessionCategory(){
-        //$_SESSION["category"]= [];
         $category= [];
         $query = "
             select
@@ -378,7 +377,7 @@ public function CategorySearch($data){
             from
               product_category
             where del_yn = 'N'
-            order by category_type1 asc
+            order by sort1 asc, sort2 asc
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
