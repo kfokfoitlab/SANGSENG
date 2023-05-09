@@ -229,7 +229,7 @@ function Contract_reduction(workflow_id,pworkflow_id,cworkflow_id) {
                         method: 'post',
                         url: '/Contract/Lists/ContractUpdate',
                         data: jsonData,
-                        contentType: "application/json",
+                        contentType: "text",
                         success: function (result) {
                             if (result != "") {
                                 alert("최신화 되었습니다.");

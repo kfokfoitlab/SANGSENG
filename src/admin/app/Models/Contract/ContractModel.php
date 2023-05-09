@@ -427,8 +427,10 @@ class ContractModel extends CommonModel
             ";
                 $this->rodb->query($query);
                 $seller_uuid = $this->rodb->next_row();
+                if($seller_uuid != null) {
 
-                $mild_disabled_query = "
+
+                    $mild_disabled_query = "
                 select
                     count(*) as mild_disabled
                 from                 
@@ -440,10 +442,10 @@ class ContractModel extends CommonModel
                        and del_yn !='Y'
                 limit 1
             ";
-                $this->rodb->query($mild_disabled_query);
-                $seller_mild_disabled = $this->rodb->next_row();
+                    $this->rodb->query($mild_disabled_query);
+                    $seller_mild_disabled = $this->rodb->next_row();
 
-                $severely_disabled_query = "
+                    $severely_disabled_query = "
                 select
                     count(*) as severely_disabled
                 from                 
@@ -455,10 +457,10 @@ class ContractModel extends CommonModel
                        and del_yn !='Y'
                 limit 1
             ";
-                $this->rodb->query($severely_disabled_query);
-                $seller_severely_disabled = $this->rodb->next_row();
+                    $this->rodb->query($severely_disabled_query);
+                    $seller_severely_disabled = $this->rodb->next_row();
 
-                $seller_info_query = "
+                    $seller_info_query = "
                 select
                     *
                 from                 
@@ -467,29 +469,29 @@ class ContractModel extends CommonModel
                 uuid = '" . $seller_uuid['seller_uuid'] . "'         
                 limit 1
             ";
-                $this->rodb->query($seller_info_query);
-                $seller_info = $this->rodb->next_row();
+                    $this->rodb->query($seller_info_query);
+                    $seller_info = $this->rodb->next_row();
 
-                $mild_disabled = $seller_mild_disabled["mild_disabled"];
-                $severely_disabled = $seller_severely_disabled["severely_disabled"];
-                $seller_sales = $seller_info["seller_sales"];
-                $contribution = $complete_reduction / $seller_sales;
-                $contribution = explode('.', $contribution);
-                $contribution = substr($contribution[1], 0, 4);
-                $supply = $contribution[0] . '.' . $contribution; // 감면비율 소수점4째자리
-                $workers = $mild_disabled + ($severely_disabled * 2);  // 장애인근로자 수
+                    $mild_disabled = $seller_mild_disabled["mild_disabled"];
+                    $severely_disabled = $seller_severely_disabled["severely_disabled"];
+                    $seller_sales = $seller_info["seller_sales"];
+                    $contribution = $complete_reduction / $seller_sales;
+                    $contribution = explode('.', $contribution);
+                    $contribution = substr($contribution[1], 0, 4);
+                    $supply = $contribution[0] . '.' . $contribution; // 감면비율 소수점4째자리
+                    $workers = $mild_disabled + ($severely_disabled * 2);  // 장애인근로자 수
 
-                $base = 1149000;   //기본금액
-                $reduction_money = $supply * ($workers * 12) * $base; // (수급비율*근로자)*기본금*12개월
-                if ($reduction_money > $complete_reduction * 0.5) {
-                    $reduction_money = $complete_reduction * 0.5;  // 감면액이 상품가격의 50%가 넘으면 50%로 표시
-                }
-                $reduction_money = (int)$reduction_money;
-                $slice = substr($reduction_money, 0, -1);
-                $reduction_money = $slice . '0';
-                $point = $complete_reduction * 0.01;
+                    $base = 1149000;   //기본금액
+                    $reduction_money = $supply * ($workers * 12) * $base; // (수급비율*근로자)*기본금*12개월
+                    if ($reduction_money > $complete_reduction * 0.5) {
+                        $reduction_money = $complete_reduction * 0.5;  // 감면액이 상품가격의 50%가 넘으면 50%로 표시
+                    }
+                    $reduction_money = (int)$reduction_money;
+                    $slice = substr($reduction_money, 0, -1);
+                    $reduction_money = $slice . '0';
+                    $point = $complete_reduction * 0.01;
 
-                $reduction_query = "
+                    $reduction_query = "
                 update
                     contract_condition
                 set
@@ -501,11 +503,12 @@ class ContractModel extends CommonModel
                 where 
                     workflow_id = '" . $workflow_id . "'
             ";
-                $this->wrdb->update($reduction_query);
+                    $this->wrdb->update($reduction_query);
+                }
             }
-            return 1;
+            return "1";
         }else{
-            return null;
+            return "2";
         }
 	}
 	

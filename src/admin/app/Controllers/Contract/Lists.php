@@ -153,10 +153,10 @@ class Lists extends Base
         }
 
     }
-	
-	public function ContractUpdate()
-	{ // {{{
-		$this->model->ContractStatus($_POST);
+
+ /*   public function ContractUpdate()
+    { // {{{
+        $this->model->ContractStatus($_POST);
         if($this == 1) {
             echo "
         <script>
@@ -172,6 +172,15 @@ class Lists extends Base
 		</script>
         ";
         }
+    } // }}}*/
+
+
+	public function ContractUpdate()
+	{ // {{{
+        $result = $this->model->ContractStatus($_POST);
+        echo $result;
+        die();
+
 	} // }}}
 	
 	public function ContractDelete()

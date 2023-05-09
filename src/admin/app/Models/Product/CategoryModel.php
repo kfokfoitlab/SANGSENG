@@ -157,6 +157,8 @@ class CategoryModel extends CommonModel
                  category_type1 = '" . $data["category_type1"] . "'
                 ,category_type2 = '" . $data["category_type2"] . "'
                 ,category_type3 = '" . $data["category_type3"] . "'
+                ,sort1 = '" . $data["sort1"] . "'
+                ,sort2 = '" . $data["sort2"] . "'
                 ,update_date = '" . date("Y-m-d H:i:s") . "'
             where
                 idx = '" . $data["idx"] . "'
@@ -174,20 +176,17 @@ class CategoryModel extends CommonModel
             where
                 product_category = '" . $data["old_category_type1"] . "'
                 and product_category2 = '" . $data["old_category_type2"] . "'
-            limit 1
         ";
         $this->wrdb->update($product_query);
-
-
-
         return 1;
     }
 
     public function Register($data){
-
         $category_type1 = $data['category_type1'];
         $category_type2 = $data['category_type2'];
         $category_type3 = $data['category_type3'];
+        $sort1 = $data['sort1'];
+        $sort2 = $data['sort2'];
 
         $query = "
             insert into
@@ -196,10 +195,12 @@ class CategoryModel extends CommonModel
                 category_type1 ='".$category_type1."'
                 ,category_type2 = '".$category_type2."'
                 ,category_type3 = '".$category_type3."'
+                ,sort1 = '".$sort1."'
+                ,sort2 = '".$sort2."'
+               
                 ,register_date = '".date("Y-m-d H:i:s")."'
                 ,del_yn = 'N'
         ";
-       // echo $query;
         $idx = $this->wrdb->insert($query);
 
         if($idx){

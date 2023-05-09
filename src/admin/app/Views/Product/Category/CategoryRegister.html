@@ -6,28 +6,48 @@
                 <form id="reg_form" method="post" action="/<?=_CONTROLLER?>/CategoryRegisterSubmit">
                     <input type="hidden" name="idx" value="<?=$data['idx']?>">
                     <div class="row mb-3 align-items-center">
-                        <div class="col-2">
+                        <div class="col-1">
                             <label for="category_type1" class="form-label m-0 fw-bold">대분류</label>
                         </div>
-                        <div class="col-10">
+                        <div class="col-5">
                             <input type="text" class="form-control" id="category_type1" name="category_type1" value="">
                         </div>
+                        <div class="col-1">
+                            <label for="sort1" class="form-label m-0 fw-bold">대분류 정렬</label>
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="form-control" id="sort1" name="sort1" value="">
+                        </div>
                     </div>
                     <div class="row mb-3 align-items-center">
-                        <div class="col-2">
+                        <div class="col-1">
                             <label for="category_type2" class="form-label m-0 fw-bold">중분류</label>
                         </div>
-                        <div class="col-10">
+                        <div class="col-5">
                             <input type="text" class="form-control" id="category_type2" name="category_type2" value="">
+                        </div>
+
+                        <div class="col-1">
+                            <label for="sort2" class="form-label m-0 fw-bold">중분류 정렬</label>
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="form-control" id="sort2" name="sort2" value="">
                         </div>
                     </div>
                     <div class="row mb-3 align-items-center">
-                        <div class="col-2">
+                        <div class="col-1">
                             <label for="category_type3" class="form-label m-0 fw-bold">소분류</label>
                         </div>
-                        <div class="col-10">
+                        <div class="col-5">
                             <input type="text" class="form-control" id="category_type3" name="category_type3" value="">
                         </div>
+
+                 <!--       <div class="col-1">
+                            <label for="sort3" class="form-label m-0 fw-bold">소분류 정렬</label>
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="form-control" id="sort3" name="sort3" value="">
+                        </div>-->
                     </div>
 
                     <div class="mt-5 d-flex justify-content-between">

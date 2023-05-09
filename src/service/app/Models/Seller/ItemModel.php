@@ -373,7 +373,7 @@ public function CategorySearch($data){
         $category= [];
         $query = "
             select
-              distinct category_type2 as category_type2, category_type1
+             *
             from
               product_category
             where del_yn = 'N'
