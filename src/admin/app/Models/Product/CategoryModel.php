@@ -147,6 +147,73 @@ class CategoryModel extends CommonModel
         $data = $row;
         return $data;
     } //}}}
+
+    public function CategorySort(){
+        $data =[];
+        $query = "
+            select
+             distinct category_type1, sort1
+            from
+              ".$this->table_name."
+            order by sort1
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $data[] = $row;
+        }
+        return $data;
+    }
+
+    public function CategorySearch($data){
+        $category2 =[];
+        $query = "
+            select
+               category_type2,sort2
+            from
+              product_category        
+            where
+                category_type1 = '".$data["category_type1"]."'
+            order by sort2
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $category2[] = $row;
+        }
+        return $category2;
+    }
+
+    public function SortUpdate($data){
+        if($data["type"] == 1){
+            for($i = 1; $i <=$data['count']; $i++) {
+            $query = "
+            update
+                " . $this->table_name . "
+          set
+                sort1 = '" . $data["sort1_" . $i] . "'
+                ,update_date = '" . date("Y-m-d H:i:s") . "'
+            where
+                category_type1 = '" . $data["category_type1_" . $i] . "'
+        ";
+            $this->wrdb->update($query);
+          }
+            return 1;
+        }else{
+            for($i = 1; $i <=$data['count']; $i++) {
+            $query = "
+            update
+                " . $this->table_name . "
+               set
+                sort2 = '" . $data["sort2_" . $i] . "'
+                ,update_date = '" . date("Y-m-d H:i:s") . "'
+            where
+                category_type2 = '" . $data["category_type2_" . $i] . "'
+                ";
+                   $this->wrdb->update($query);
+            }
+            return 2;
+        }
+    }
+
     public function Update($data)
     { //{{{
 
@@ -158,7 +225,7 @@ class CategoryModel extends CommonModel
                 ,category_type2 = '" . $data["category_type2"] . "'
                 ,category_type3 = '" . $data["category_type3"] . "'
                 ,sort1 = '" . $data["sort1"] . "'
-                ,sort2 = '" . $data["sort2"] . "'
+                ,sort2 = '" .$data["sort2"] . "'
                 ,update_date = '" . date("Y-m-d H:i:s") . "'
             where
                 idx = '" . $data["idx"] . "'

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+
+    <title>ID/PW 찾기</title>
+
+</head>
+<body class="text-center">
+<form method="post" action="/<?=_CONTROLLER?>/SortUpdateSubmit" id="myform" name="myform">
+    <br>
+    <h1 class="display-5">카테고리 정렬</h1>
+    <hr><br>
+    <?php
+    if($type == 1){
+    ?>
+    <table class="table table-hover border detail-table">
+        <input type="hidden" name="count" value="<?=count($data)?>">
+        <input type="hidden" name="type" value="<?=$type?>">
+        <tbody>
+        <?php
+        $i = 1;
+        foreach($data as $item){
+        ?>
+        <tr>
+            <td class="th">대분류</td>
+            <td colspan="3">
+                <input type="text" class="form-control" name="category_type1_<?=$i?>" value="<?=$item['category_type1']?>" required>
+            </td>
+            <td class="th">대분류 정렬</td>
+            <td colspan="3">
+                <input type="text" class="form-control" name="sort1_<?=$i?>" value="<?=$item['sort1']?>" required>
+            </td>
+        </tr>
+        <?php
+        $i++;
+        }
+        ?>
+        </tbody>
+    </table>
+    <?php
+    }else{
+    ?>
+    <input type="hidden" id ="count" name="count" >
+    <input type="hidden" name="type" value="<?=$type?>">
+    <select class="form-control form-control-sm filter" id="product_category1" name="product_category1" onchange="getCategory2();">
+        <option value="">전체</option>
+    <?php
+    foreach($data as $item){
+    ?>
+        <option value="<?=$item['category_type1']?>" <?php if($_GET['value']== $item['category_type1']){echo "selected";}?> ><?=$item['category_type1']?></option>
+    <?php
+    }
+    }
+    ?>
+    </select>
+    <table class="table table-hover border detail-table">
+        <tbody id ="product_category2">
+
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">수정하기</button>
+</form>
+</body>
+</html>
+<script>
+
+    $(function() {
+        getCategory2();
+    });
+    function getCategory2(){
+        if($("#product_category1").val() != ""){
+            var category_type1 = $("#product_category1").val();
+            $.ajax({
+                type: 'post',
+                url: "/Product/Category/CategorySearch",
+                data: {
+                    "category_type1": category_type1
+                },
+                success: function (result){
+                    var result = JSON.parse(result);
+                    $("#product_category2").empty();
+                    var j = 1;
+                    for(var i = 0; i<result['data'].length; i++){
+                        var data = "<tr>"
+                        data += "<td class='th'>중분류";
+                        data += "<input type='text'class='form-control'  name ='category_type2_"+j+"' value='"+result['data'][i]['category_type2']+"' readonly>";
+                        data += "</td>"
+                        data += "<td class='th'>중분류 정렬";
+                        data += "<input type='text'class='form-control'  name ='sort2_"+j+"' value='"+result['data'][i]['sort2']+"'>";
+                        data += "</td>"
+                        data += "</tr>"
+                        $("#product_category2").append(data);
+                        j++;
+                    }
+                    $("#count").val(result['data'].length);
+                }
+            });
+        }
+    }
+</script>

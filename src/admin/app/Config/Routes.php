@@ -113,11 +113,14 @@ $routes->group('Product', ['namespace' => 'App\Controllers\Product'], static fun
     $routes->get($group_name.'/',           $group_name.'::Index');
     $routes->post($group_name.'/getList',           $group_name.'::getList');
     $routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
+    $routes->get ($group_name.'/Sorting',     $group_name.'::Sorting');
     $routes->get ($group_name.'/Delete',     $group_name.'::Delete');
     $routes->get ($group_name.'/Update',     $group_name.'::Update');
     $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
     $routes->get($group_name.'/CategoryRegister',           $group_name.'::CategoryRegister');
     $routes->post($group_name.'/CategoryRegisterSubmit',    $group_name.'::CategoryRegisterSubmit');
+    $routes->post($group_name.'/SortUpdateSubmit',    $group_name.'::SortUpdateSubmit');
+    $routes->post($group_name.'/CategorySearch',    $group_name.'::CategorySearch');
 });
 
 // 배송

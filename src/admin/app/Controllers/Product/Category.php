@@ -137,6 +137,65 @@ class Category extends Base
         echo view('Common/Footer.html');
 
     } //}}}
+    public function Sorting(){
+        $type = $_GET['type'];
+        $data = $this->model->CategorySort();
+        $data = array(
+        "data" => $data
+        ,"type" => $type
+        );
+        if($data != "") {
+            echo view(_CONTROLLER.'/Sorting.html', $data);
+        }else{
+            echo "
+            <script>
+                alert('오류가 발생했습니다. 관리자에게 문의해주세요.');
+                window.close();
+            </script>
+        ";
+        }
+    }
+
+    public function CategorySearch(){
+        $category2 = $this->model->CategorySearch($_POST);
+        $data = array(
+            "data" => $category2
+        );
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+
+        die();
+    }
+
+    public function SortUpdateSubmit(){
+        $result = $this->model->SortUpdate($_POST);
+        if($result == 1 ){
+            echo "
+            <script>
+                alert('수정하였습니다.');
+                window.location.replace('/Product/Category/Sorting?type=" . $_POST["type"] . "');
+                opener.location.reload();
+              //  history.back();
+              //  window.close();       
+            </script>
+        ";
+        }else if($result ==2){
+            echo "
+            <script>
+                alert('수정하였습니다.');
+               window.location.replace('/Product/Category/Sorting?type=" . $_POST["type"] . "&value=" . $_POST["product_category1"] ."'); 
+            </script>
+        ";
+        }
+        else{
+            echo "
+            <script>
+                alert('오류가 발생했습니다. 관리자에게 문의해주세요.');
+                window.close();
+            </script>
+        ";
+        }
+        die();
+    }
 
     public function UpdateSubmit()
     { //{{{
