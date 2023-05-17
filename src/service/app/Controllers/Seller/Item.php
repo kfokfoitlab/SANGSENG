@@ -116,7 +116,7 @@ class Item extends BaseController
             echo "
                 <script>
                     alert('수정사항을 관리자가 검토중입니다.');
-					window.location.replace('/Seller/Item/ItemList');
+					window.location.replace('/Seller/Item/ItemList?p_n=1');
                 </script>
             ";
         }else{
