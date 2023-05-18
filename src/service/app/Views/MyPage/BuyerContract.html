@@ -285,7 +285,7 @@
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                Authorization: 'esignon zSlgJ1hjV5rtSb0F4vo9vEYrgeB/g5Ht+4j7m1Rf/bTJAF/hMQJGf34qm6Hne7zss3MEuZkmPjQ7rV10CPllyoL9gRaZqcjZGop8JBBXLqnZzDQEO0cCvWqPhMuTPONOIh1evWS/xmc='
+                Authorization: 'esignon hoycj/zS2iBKwO95SuCOPiuOIR5uB/CaEuigxeSQUgcuxtrKGc29pDeTM7iwtxfXx+2A1xXaJH2mjtReQZYfVjw1e654SY1oMsDmC/FEmrCK25FyaIIlRVcHzMrV3LQ4'
             }
         };
 
@@ -312,7 +312,7 @@
                 method: 'GET',
                 headers: {
                     accept: 'application/json',
-                    Authorization: 'esignon zSlgJ1hjV5rtSb0F4vo9vEYrgeB/g5Ht+4j7m1Rf/bTJAF/hMQJGf34qm6Hne7zss3MEuZkmPjQ7rV10CPllyoL9gRaZqcjZGop8JBBXLqnZzDQEO0cCvWqPhMuTPONOIh1evWS/xmc='
+                    Authorization: 'esignon hoycj/zS2iBKwO95SuCOPiuOIR5uB/CaEuigxeSQUgcuxtrKGc29pDeTM7iwtxfXx+2A1xXaJH2mjtReQZYfVjw1e654SY1oMsDmC/FEmrCK25FyaIIlRVcHzMrV3LQ4'
                 }
             };
             var workflow_key = "";
@@ -380,7 +380,7 @@
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization: 'esignon zSlgJ1hjV5rtSb0F4vo9vEYrgeB/g5Ht+4j7m1Rf/bTJAF/hMQJGf34qm6Hne7zss3MEuZkmPjQ7rV10CPllyoL9gRaZqcjZGop8JBBXLqnZzDQEO0cCvWqPhMuTPONOIh1evWS/xmc='
+        Authorization: 'esignon hoycj/zS2iBKwO95SuCOPiuOIR5uB/CaEuigxeSQUgcuxtrKGc29pDeTM7iwtxfXx+2A1xXaJH2mjtReQZYfVjw1e654SY1oMsDmC/FEmrCK25FyaIIlRVcHzMrV3LQ4'
       }
     };
     fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_id + '?offset=%2B09%3A00', options)
@@ -408,7 +408,7 @@ function Contract_Return(workflow_id,status){
       method: 'POST',
       headers: {
         accept: 'application/json',
-        Authorization: 'esignon zSlgJ1hjV5rtSb0F4vo9vEYrgeB/g5Ht+4j7m1Rf/bTJAF/hMQJGf34qm6Hne7zss3MEuZkmPjQ7rV10CPllyoL9gRaZqcjZGop8JBBXLqnZzDQEO0cCvWqPhMuTPONOIh1evWS/xmc='
+        Authorization: 'esignon hoycj/zS2iBKwO95SuCOPiuOIR5uB/CaEuigxeSQUgcuxtrKGc29pDeTM7iwtxfXx+2A1xXaJH2mjtReQZYfVjw1e654SY1oMsDmC/FEmrCK25FyaIIlRVcHzMrV3LQ4'
       }
     };
     fetch('https://docs.esignon.net/api/v3/workflows/'+workflow_id+'/resend-playing', options)
@@ -419,7 +419,7 @@ function Contract_Return(workflow_id,status){
 
   function Contract_Complate(workflow_id){
     const sdk = require('api')('@esignon/v3.0#g604e4pl30t2t5s');
-    sdk.auth('esignon zSlgJ1hjV5rtSb0F4vo9vEYrgeB/g5Ht+4j7m1Rf/bTJAF/hMQJGf34qm6Hne7zss3MEuZkmPjQ7rV10CPllyoL9gRaZqcjZGop8JBBXLqnZzDQEO0cCvWqPhMuTPONOIh1evWS/xmc=');
+    sdk.auth('esignon hoycj/zS2iBKwO95SuCOPiuOIR5uB/CaEuigxeSQUgcuxtrKGc29pDeTM7iwtxfXx+2A1xXaJH2mjtReQZYfVjw1e654SY1oMsDmC/FEmrCK25FyaIIlRVcHzMrV3LQ4');
     sdk.resendCompleteWorkflow({workflowId:workflow_id})
             .then(res => console.log(res))
             .catch(err => console.error(err));
@@ -431,7 +431,7 @@ function contract_update(){
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'esignon zSlgJ1hjV5rtSb0F4vo9vEYrgeB/g5Ht+4j7m1Rf/bTJAF/hMQJGf34qm6Hne7zss3MEuZkmPjQ7rV10CPllyoL9gRaZqcjZGop8JBBXLqnZzDQEO0cCvWqPhMuTPONOIh1evWS/xmc='
+      Authorization: 'esignon hoycj/zS2iBKwO95SuCOPiuOIR5uB/CaEuigxeSQUgcuxtrKGc29pDeTM7iwtxfXx+2A1xXaJH2mjtReQZYfVjw1e654SY1oMsDmC/FEmrCK25FyaIIlRVcHzMrV3LQ4'
     }
   };
 

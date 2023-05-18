@@ -161,7 +161,7 @@ function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,sell
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: 'esignon zSlgJ1hjV5rtSb0F4vo9vEYrgeB/g5Ht+4j7m1Rf/bTJAF/hMQJGf34qm6Hne7zss3MEuZkmPjQ7rV10CPllyoL9gRaZqcjZGop8JBBXLqnZzDQEO0cCvWqPhMuTPONOIh1evWS/xmc='
+            Authorization: 'esignon hoycj/zS2iBKwO95SuCOPiuOIR5uB/CaEuigxeSQUgcuxtrKGc29pDeTM7iwtxfXx+2A1xXaJH2mjtReQZYfVjw1e654SY1oMsDmC/FEmrCK25FyaIIlRVcHzMrV3LQ4'
         },
         body: JSON.stringify({
             language: 'ko',
@@ -188,7 +188,7 @@ function Contract_reduction(workflow_id,pworkflow_id,cworkflow_id) {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'esignon zSlgJ1hjV5rtSb0F4vo9vEYrgeB/g5Ht+4j7m1Rf/bTJAF/hMQJGf34qm6Hne7zss3MEuZkmPjQ7rV10CPllyoL9gRaZqcjZGop8JBBXLqnZzDQEO0cCvWqPhMuTPONOIh1evWS/xmc='
+            Authorization: 'esignon hoycj/zS2iBKwO95SuCOPiuOIR5uB/CaEuigxeSQUgcuxtrKGc29pDeTM7iwtxfXx+2A1xXaJH2mjtReQZYfVjw1e654SY1oMsDmC/FEmrCK25FyaIIlRVcHzMrV3LQ4'
         }
     };
     var workflow_key = "";
@@ -256,7 +256,7 @@ function contract_update(field_name,field_value) {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'esignon zSlgJ1hjV5rtSb0F4vo9vEYrgeB/g5Ht+4j7m1Rf/bTJAF/hMQJGf34qm6Hne7zss3MEuZkmPjQ7rV10CPllyoL9gRaZqcjZGop8JBBXLqnZzDQEO0cCvWqPhMuTPONOIh1evWS/xmc='
+            Authorization: 'esignon hoycj/zS2iBKwO95SuCOPiuOIR5uB/CaEuigxeSQUgcuxtrKGc29pDeTM7iwtxfXx+2A1xXaJH2mjtReQZYfVjw1e654SY1oMsDmC/FEmrCK25FyaIIlRVcHzMrV3LQ4'
         }
     };
 
@@ -296,7 +296,7 @@ function contractView(workflow_id){
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                Authorization: 'esignon zSlgJ1hjV5rtSb0F4vo9vEYrgeB/g5Ht+4j7m1Rf/bTJAF/hMQJGf34qm6Hne7zss3MEuZkmPjQ7rV10CPllyoL9gRaZqcjZGop8JBBXLqnZzDQEO0cCvWqPhMuTPONOIh1evWS/xmc='
+                Authorization: 'esignon hoycj/zS2iBKwO95SuCOPiuOIR5uB/CaEuigxeSQUgcuxtrKGc29pDeTM7iwtxfXx+2A1xXaJH2mjtReQZYfVjw1e654SY1oMsDmC/FEmrCK25FyaIIlRVcHzMrV3LQ4'
             }
         };
         fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_id + '?offset=%2B09%3A00', options)
