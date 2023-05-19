@@ -222,7 +222,7 @@ class ItemModel extends CommonModel
         $seller_info = $row;
     }
 
-    $contribution = $data["product_price"]/$seller_info["seller_sales"];
+    $contribution = sprintf("%f",$data["product_price"]/$seller_info["seller_sales"]);
     $contribution = explode('.',$contribution);
     $contribution = substr($contribution[1],0,4);
     $supply = $contribution[0].'.'.$contribution; // 감면비율 소수점4째자리
