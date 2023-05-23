@@ -94,7 +94,7 @@ $(document).ready(function(){
                     var product_name = data['product_name'];
                     let html = "";
                     if(contract_status == 1) {
-                        html += "<input class='btn btn-warning btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='contract_email(" + data['idx'] + ",2,\"" + buyer_email + "\",\"" + seller_email + "\",\"" + uuid + "\",\"" + buyer_name + "\",\"" + seller_name + "\",\"" + seller_uuid + "\",\"" + buyer_uuid + "\",\"" + buyer_company + "\",\"" + seller_company + "\",\"" + product_name + "\")' value='계약서 전송'>";
+                        html += "<input id = 'double_check' class='btn btn-warning btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='contract_email(" + data['idx'] + ",2,\"" + buyer_email + "\",\"" + seller_email + "\",\"" + uuid + "\",\"" + buyer_name + "\",\"" + seller_name + "\",\"" + seller_uuid + "\",\"" + buyer_uuid + "\",\"" + buyer_company + "\",\"" + seller_company + "\",\"" + product_name + "\")' value='계약서 전송'>";
                     }else if(contract_status == 8){
                         html += "<input class='btn btn-dark btn-sm m-1' style='font-size: 12px;color: white' type='button' value='삭제처리'>";
                     }else{
@@ -156,6 +156,9 @@ function contractDelete(idx){
 
 
 function contract_email(idx,status,buyer_email,seller_email,uuid,buyer_name,seller_name,seller_uuid,buyer_uuid,buyer_company,seller_company,product_name){
+    $("#double_check").attr("disabled",true);
+
+
     const options = {
         method: 'POST',
         headers: {
