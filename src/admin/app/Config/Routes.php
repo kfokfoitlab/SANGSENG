@@ -115,6 +115,7 @@ $routes->group('Product', ['namespace' => 'App\Controllers\Product'], static fun
     $routes->get ($group_name.'/Detail/(:any)',     $group_name.'::Detail/$1');
     $routes->get ($group_name.'/Sorting',     $group_name.'::Sorting');
     $routes->get ($group_name.'/Delete',     $group_name.'::Delete');
+    $routes->get ($group_name.'/Restoration',     $group_name.'::Restoration');
     $routes->get ($group_name.'/Update',     $group_name.'::Update');
     $routes->post($group_name.'/UpdateSubmit',      $group_name.'::UpdateSubmit');
     $routes->get($group_name.'/CategoryRegister',           $group_name.'::CategoryRegister');

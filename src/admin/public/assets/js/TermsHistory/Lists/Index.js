@@ -8,8 +8,8 @@ $(document).ready(function(){
         "autoWidth": false,
         //"dom": 'lt<"float-left"i>p',
         //"dom": 'ltip',
-        "exportFilename": "KFO_장애인취업포털_인재목록",
-        "exportTitle": "인재목록",
+        "exportFilename": "KFO_장애인취업포털_약관목록",
+        "exportTitle": "약관목록",
         "ajax": {
             url: "/"+_CONTROLLER+"/getList"
             ,type: "POST"

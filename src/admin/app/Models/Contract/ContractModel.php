@@ -333,7 +333,7 @@ class ContractModel extends CommonModel
         if($result == 0){
             $query = "
             update
-                contract_condition
+                ".$this->table_name."
             set
               	 workflow_id = '".$data["workflow_id"]."',
                  contract_status = '".$data["status"]."'
@@ -478,13 +478,13 @@ class ContractModel extends CommonModel
                     $contribution = $complete_reduction / $seller_sales;
                     $contribution = explode('.', $contribution);
                     $contribution = substr($contribution[1], 0, 4);
-                    $supply = $contribution[0] . '.' . $contribution; // 감면비율 소수점4째자리
-                    $workers = $mild_disabled + ($severely_disabled * 2);  // 장애인근로자 수
+                    $supply = $contribution[0] . '.' . $contribution;
+                    $workers = $mild_disabled + ($severely_disabled * 2);
 
                     $base = 1149000;   //기본금액
-                    $reduction_money = $supply * ($workers * 12) * $base; // (수급비율*근로자)*기본금*12개월
+                    $reduction_money = $supply * ($workers * 12) * $base;
                     if ($reduction_money > $complete_reduction * 0.5) {
-                        $reduction_money = $complete_reduction * 0.5;  // 감면액이 상품가격의 50%가 넘으면 50%로 표시
+                        $reduction_money = $complete_reduction * 0.5;
                     }
                     $reduction_money = (int)$reduction_money;
                     $slice = substr($reduction_money, 0, -1);

@@ -63,6 +63,16 @@ class Category extends Base
 
     public function CategoryRegisterSubmit()
     { //{{{
+        $dup_check = $this->model->dupCheck($_POST);
+        if($dup_check == 1){
+            echo "
+                <script>
+                    alert('이미 등록된 중분류 입니다.');
+                    window.location.replace('/Product/Category/CategoryRegister');
+                </script>
+            ";
+            die();
+        }
 
         $result = $this->model->Register($_POST);
 
@@ -121,6 +131,26 @@ class Category extends Base
             ";
         }
     } //}}}
+
+    public function Restoration(){
+        $idx = $_GET['idx'];
+        $result = $this->model->Restoration($idx);
+        if ($result == "1") {
+            echo "
+                <script>
+                    alert('복구되었습니다.');
+					window.location.replace('/Product/Category');
+                </script>
+            ";
+        } else {
+            echo "
+                <script>
+                    alert('오류가 발생했습니다. 관리자에게 문의해주세요');
+					history.back(-1);
+                </script>
+            ";
+        }
+    }
 
     public function Update()
     { //{{{

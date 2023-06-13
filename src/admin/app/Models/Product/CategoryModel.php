@@ -128,6 +128,20 @@ class CategoryModel extends CommonModel
         return "1";
     }
 
+    public function Restoration($idx){
+        $query = "
+            update
+                product_category
+            set
+                del_yn = 'N'
+            where
+                idx = '".$idx."'
+        ";
+        $this->wrdb->update($query);
+        return "1";
+    }
+
+
     public function Detail($idx)
     { //{{{
         $data = [];
@@ -152,9 +166,11 @@ class CategoryModel extends CommonModel
         $data =[];
         $query = "
             select
-             distinct category_type1, sort1
+              category_type1, sort1
             from
               ".$this->table_name."
+              where del_yn = 'N'
+              group by category_type1
             order by sort1
         ";
         $this->rodb->query($query);
@@ -173,6 +189,7 @@ class CategoryModel extends CommonModel
               product_category        
             where
                 category_type1 = '".$data["category_type1"]."'
+                and del_yn ='N'
             order by sort2
         ";
         $this->rodb->query($query);
@@ -247,6 +264,26 @@ class CategoryModel extends CommonModel
         $this->wrdb->update($product_query);
         return 1;
     }
+
+    public function dupCheck($data)
+    {
+        $category_type2 = $data['category_type2'];
+        $query = "
+			SELECT
+				count(*) 
+			FROM
+				 ".$this->table_name."
+			WHERE
+				category_type2 = '" . $category_type2 . "'
+				and del_yn ='N'
+				limit 1
+			";
+        $category_dup = $this->rodb->simple_query($query);
+        if ($category_dup != 0) {
+            return 1;
+        }
+    }
+
 
     public function Register($data){
         $category_type1 = $data['category_type1'];

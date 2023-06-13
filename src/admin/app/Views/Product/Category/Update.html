@@ -45,7 +45,17 @@
             </div>
 
             <div class="card-footer border-top">
+                <?php
+                if($data['del_yn'] == 'N'){
+                ?>
                 <a href="/<?=_CONTROLLER?>/Delete?idx=<?=$data['idx']?>" class="btn btn-danger">삭제하기</a>
+                <?php
+                }else{
+                ?>
+                <a href="/<?=_CONTROLLER?>/Restoration?idx=<?=$data['idx']?>" class="btn btn-success">삭제 복구하기</a>
+                <?php
+                }
+                ?>
                 <button type="submit" class="btn btn-primary">수정하기</button>
             </div>
         </div>

@@ -13,6 +13,8 @@ class SignUpUserModel extends CommonModel
                 ".$table_name."
             where
                 category = '".$category."'
+                and terms_status = 2
+            order by use_date desc
             limit 1
         ";
         $this->rodb->query($query);

@@ -143,7 +143,7 @@ class TermsHistoryModel extends CommonModel
 			UPDATE
 				".$this->table_name."
 			SET
-			contents = '".$data['contents']."'
+			contents = '".addslashes($data["contents"])."'
 			,update_date = '".date("Y-m-d H:i:s")."'
 			WHERE
 				idx = ".$data["idx"]."
