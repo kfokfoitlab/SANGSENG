@@ -150,7 +150,7 @@ $routes->group('IMJOB', ['namespace' => 'App\Controllers\IMJOB'], static functio
     $routes->get ($group_name.'/',                  $group_name.'::Index');
     $routes->post($group_name.'/getList',           $group_name.'::getList');
     $routes->get ($group_name.'/Detail',     $group_name.'::Detail');
-    $routes->get ($group_name.'/statusUpdate',            $group_name.'::statusUpdate');
+    $routes->post ($group_name.'/statusUpdate',            $group_name.'::statusUpdate');
     $routes->get ($group_name.'/downloadFileNew',            $group_name.'::downloadFileNew');
     $routes->post ($group_name.'/updateWorker',           $group_name.'::updateWorker');
     $routes->get ($group_name.'/deleteWorker',           $group_name.'::deleteWorker');

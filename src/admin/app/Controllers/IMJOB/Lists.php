@@ -71,16 +71,13 @@
 		
 		public function statusUpdate()
 		{
-			$data = array(
-				"idx" => $_GET["idx"]
-			,"status" => $_GET["status"]
-			);
-			$this->model->statusUpdate($data);
-			echo "
-            <script>
-                history.back();
-            </script>
-        ";
+            $jsonInput  = file_get_contents('php://input');
+            var_dump($jsonInput);
+            $arr = explode('&',$jsonInput);
+            $idx = $arr[0];
+            $status = $arr[1];
+			$this->model->statusUpdate($idx,$status);
+			echo "1";
 		}
 		
 		public function downloadFileNew(){

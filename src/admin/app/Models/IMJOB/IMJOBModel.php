@@ -112,15 +112,15 @@
 			);
 		}
 		
-		public function statusUpdate($data)
+		public function statusUpdate($idx,$status)
 		{
 			$query = "
 			UPDATE
 				".$this->table_name."
 			SET
-				status = ".$data["status"]."
+				$status
 			WHERE
-				idx = ".$data["idx"]."
+				$idx
 			LIMIT 1
 			";
 			
