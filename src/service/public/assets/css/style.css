@@ -302,3 +302,4 @@ select:focus-visible {
     font-size: 0.5em;
     line-height: 1.2em;
 }
+.w-800 {width: 800px; margin: 0 auto;}
