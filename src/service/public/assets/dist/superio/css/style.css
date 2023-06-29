@@ -4674,7 +4674,7 @@ Main Footer
   display: block;
 }
 .qr-big-dim {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.35);
   position: fixed;
   width: 100%;
   height: 100%;
