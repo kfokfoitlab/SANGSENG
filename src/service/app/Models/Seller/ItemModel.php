@@ -6,7 +6,7 @@ use App\Models\CommonModel;
 class ItemModel extends CommonModel
 {
     public function Register($files, $data, $table_name = "seller_product"){
-        $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG');
+        $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG','JPG','GIF');
 
 
         if($files["representative_image"]["name"] != ""){
@@ -239,7 +239,7 @@ class ItemModel extends CommonModel
     $reduction = $reduction_money/$data['product_price'];
 
 
-    $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG');
+    $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG','JPG','GIF');
 
     if($files["representative_image"]["name"] != ""){
         $representative_ori = str_replace('&','＆', $files["representative_image"]["name"]);
