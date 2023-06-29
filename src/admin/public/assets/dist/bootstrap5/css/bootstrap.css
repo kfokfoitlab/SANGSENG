@@ -4088,6 +4088,7 @@ textarea.form-control-lg {
   flex-grow: 1;
   text-align: center;
 }
+.tab-content > .tab-pane.w-800 {width: 800px; margin: 0 auto;}
 
 .tab-content > .tab-pane {
   display: none;
