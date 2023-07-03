@@ -23,4 +23,28 @@
   require(__DIR__.'/Section/NoticeBanner.html');
 
   ?>
+
+  <div class="qr-floating" onclick="qrBig()">
+    <img src="/uploads/qrcode_600.png" alt="">
+  </div>
+  <div class="qr-big-wrap">
+    <div class="qr-big-dim" onclick="qrClose()"></div>
+    <div class="qr-big-img">
+      <div class="qr-close" onclick="qrClose()">X</div>
+      <img src="/uploads/qrcode_600.png" alt="">
+    </div>
+  </div>
 </div>
+<script>
+  //qr코드
+  function qrBig() {
+    $(this).click(function () {
+      $(".qr-big-wrap").show();
+    });
+  }
+  function qrClose() {
+    $(this).click(function () {
+      $(".qr-big-wrap").hide();
+    });
+  }
+</script>

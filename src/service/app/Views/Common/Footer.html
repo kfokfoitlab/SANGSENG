@@ -3,16 +3,6 @@
 
 <!-- Main Footer -->
 
-<div class="qr-floating" onclick="qrBig()">
-  <img src="/uploads/qrcode_600.png" alt="">
-</div>
-<div class="qr-big-wrap">
-  <div class="qr-big-dim" onclick="qrClose()"></div>
-  <div class="qr-big-img">
-    <div class="qr-close" onclick="qrClose()">X</div>
-    <img src="/uploads/qrcode_600.png" alt="">
-  </div>
-</div>
 <footer class="main-footer">
   <div class="border-top border-bottom bg-light">
     <div class="auto-container">
@@ -100,16 +90,3 @@
 <script src="/assets/js/Common.js"></script>
 <script src="/assets/js/xlsx.full.min.js"></script>
 <script src="/assets/js/FileSaver.min.js"></script>
-<script>
-  //qr코드
-  function qrBig() {
-    $(this).click(function () {
-      $(".qr-big-wrap").show();
-    });
-  }
-  function qrClose() {
-    $(this).click(function () {
-      $(".qr-big-wrap").hide();
-    });
-  }
-</script>
