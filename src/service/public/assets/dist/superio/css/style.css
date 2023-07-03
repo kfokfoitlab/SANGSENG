@@ -4647,6 +4647,71 @@ Main Footer
 ==================================================================
 
 ***/
+.qr-floating {
+  width: 80px;
+  height: 80px;
+  background: #fff;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  cursor: pointer;
+  z-index: 100;
+  padding: 10px;
+  border-radius: 4px;
+  box-sizing: content-box;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.qr-big-wrap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none;
+  z-index: 110;
+}
+.qr-big-wrap.active {
+  display: block;
+}
+.qr-big-dim {
+  background: rgba(0, 0, 0, 0.35);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.qr-big-img {
+  width: 360px;
+  height: 360px;
+  background: #fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  border-radius: 4px;
+  box-sizing: content-box;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.qr-big-img .qr-close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+  rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+  rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+
 .main-footer {
   position: relative;
   background-color: #ffffff;
@@ -5762,6 +5827,11 @@ Main Header
 }
 .all-dropdown > ul > li > ul a {
   background: pink;
+  white-space: nowrap;
+  width: auto;
+  padding: 4px 20px;
+  min-width: 150px;
+  text-align: center;
 }
 .all-dropdown > ul > li:hover ul {
   display: block;
@@ -7968,6 +8038,12 @@ Login Popup
   padding: 10px 20px;
   border-radius: 8px;
   transition: all 300ms ease;
+}
+.form-group input[name="search_v"]::placeholder {
+  transition: .3s;
+}
+.form-group input[name="search_v"]:focus::placeholder {
+  opacity: 0;
 }
 
 .login-from .form-group input[type="submit"],
