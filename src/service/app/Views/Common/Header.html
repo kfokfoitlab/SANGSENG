@@ -101,6 +101,10 @@ echo doctype("html5");
     */
 
 
+          $('.main-info-top').mouseenter(function (){
+            $('.all-dropdown, .depth1').removeClass('active')
+          })
+
 
     const _CONTROLLER = '<?=@_CONTROLLER?>';
     const _METHOD = '<?=@_METHOD?>';

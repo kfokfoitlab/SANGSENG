@@ -3,16 +3,6 @@
 
 <!-- Main Footer -->
 
-<div class="qr-floating" onclick="qrBig()">
-  <img src="/uploads/qrcode_600.png" alt="">
-</div>
-<div class="qr-big-wrap">
-  <div class="qr-big-dim" onclick="qrClose()"></div>
-  <div class="qr-big-img">
-    <div class="qr-close" onclick="qrClose()">X</div>
-    <img src="/uploads/qrcode_600.png" alt="">
-  </div>
-</div>
 <footer class="main-footer">
   <div class="border-top border-bottom bg-light">
     <div class="auto-container">
@@ -39,9 +29,9 @@
         <p>대표이사: 백성욱</p>
       </div>
       <div class="col-5">
-        <p class="mb-1 fs-6">고객센터 <strong class="fs-5">070-4373-5030</strong></p>
+        <p class="mb-1 fs-6">고객센터 <strong class="fs-5">02-6953-4309</strong></p>
         <p class="mb-1 fs-6">평일 9시 ~ 18시(12 ~ 13시 제외)</p>
-        <p class="fs-6">Fax 02-6007-1471 | <a class="text-dark" href="mailto:kfosos@kfo.or.kr" class="email">kfosos@kfo.or.kr</a>
+        <p class="fs-6">Fax 02-6007-1471 | <a class="text-dark" href="mailto:sangseng@kfo.or.kr" class="email">sangseng@kfo.or.kr</a>
         </p>
       </div>
       <div class="col-3">
@@ -100,16 +90,3 @@
 <script src="/assets/js/Common.js"></script>
 <script src="/assets/js/xlsx.full.min.js"></script>
 <script src="/assets/js/FileSaver.min.js"></script>
-<script>
-  //qr코드
-  function qrBig() {
-    $(this).click(function () {
-      $(".qr-big-wrap").show();
-    });
-  }
-  function qrClose() {
-    $(this).click(function () {
-      $(".qr-big-wrap").hide();
-    });
-  }
-</script>
