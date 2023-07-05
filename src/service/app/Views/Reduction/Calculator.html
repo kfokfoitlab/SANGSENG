@@ -126,7 +126,7 @@
         if (worker_add < 1) {
           // 한 명도 고용하지 않았을 때
           money_title01 = worker_cnt01;
-          money_base = 1914440;
+          money_base = 2010580;
           money_result = money_title01 * money_base; // 고용부담금(분납시)
           money_buga = (money_result * 12) * taxPercent / 100;
           // money_buga = money_buga + 5;
@@ -136,7 +136,7 @@
         } else if (Math.floor((worker_add / worker_cnt01) * 100) < 25) {
           // 의무고용인원의 1/4에 미달하는 인원일 때 (~25%) 소수점 내림
           money_title02 = Math.floor(worker_cnt01 - worker_add);
-          money_base = 1608600; //1509200; // 2022 -> 1,608,600
+          money_base = 1689800; //1509200; // 2022 -> 1,608,600
           money_result = money_title02 * money_base;
           money_buga = (money_result * 12) * taxPercent / 100;
           money_buga = Math.floor(money_buga / 10 * 10);
@@ -144,7 +144,7 @@
         } else if (Math.floor((worker_add / worker_cnt01) * 100) >= 25 && Math.floor((worker_add / worker_cnt01) * 100) < 50) {
           // 의무고용인원의 1/4이상 1/2에 미달하는 인원일 때 (25% ~ 50%)
           money_title03 = Math.floor(worker_cnt01 - worker_add);
-          money_base = 1378800; //1293600; // 2022 -> 1,378,800
+          money_base = 1448400; //1293600; // 2022 -> 1,378,800
           money_result = money_title03 * money_base;
           money_buga = (money_result * 12) * taxPercent / 100;
           // money_buga = money_buga + 5;
@@ -153,7 +153,7 @@
         } else if (Math.floor((worker_add / worker_cnt01) * 100) >= 50 && Math.floor((worker_add / worker_cnt01) * 100) < 75) {
           // 의무고용인원의 1/2이상 3/4에 미달하는 인원일 때 (50% ~ 75%)
           money_title04 = Math.floor(worker_cnt01 - worker_add);
-          money_base = 1217940; //1142680; // 2022 -> 1,217,940
+          money_base = 1279420; //1142680; // 2022 -> 1,217,940
           money_result = money_title04 * money_base;
           money_buga = (money_result * 12) * taxPercent / 100;
           // money_buga = money_buga + 5;
@@ -162,7 +162,7 @@
         } else if (Math.floor((worker_add / worker_cnt01) * 100) >= 75 && Math.floor((worker_add / worker_cnt01) * 100) < 100) {
           // 의무고용인원의 3/4 이상 고용한 경우 (75%~)
           money_title05 = Math.floor(worker_cnt01 - worker_add);
-          money_base = 1149000; //1078000; // 2022 -> 1,149,000
+          money_base = 1207000; //1078000; // 2022 -> 1,149,000
           money_result = money_title05 * money_base;
           money_buga = (money_result * 12) * taxPercent / 100;
           // money_buga = money_buga + 5;
