@@ -38,6 +38,7 @@ class Home extends BaseController
         echo view("Common/Header.html");
         echo view('Home/Index.html', $data);
         echo view("Common/Footer.html");
+        echo view("Modal/ModalProductForm.html");
     }
     public function SessionCategory(){
         $category = $this->item_model->SessionCategory();

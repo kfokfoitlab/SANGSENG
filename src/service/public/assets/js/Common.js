@@ -79,6 +79,24 @@ $(document).ready(function(){
         $("#modal-search-post").modal("show");
         $.daumPostcode();
     });
+    
+    // 상품추천폼
+        $(function (){
+            $("#modal_product_form").iziModal({
+                title: '개인정보 수집 및 이용동의',
+                headerColor: '#fff',
+                background: '#fff',
+                width: 544,
+                radius: 8,
+                closeButton: true,
+                transitionIn: 'fadeIn',
+                transitionOut: 'fadeOut',
+            });
+        })
+        $(document).on('click', '.trigger', function (event) {
+            event.preventDefault();
+            $('#modal').iziModal('open');
+        });
 
     // Mask 폰번호
     $(".mask-phone").mask('099-0009-0000');

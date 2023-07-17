@@ -1,0 +1,41 @@
+<section class="product-form-section">
+    <div class="product-form-title">
+        <h2>
+           <span>아직도 고민 중이세요?<br>
+            1:1 맞춤 상품 추천해 드릴게요</span>
+        </h2>
+    </div>
+    <div class="product-form-inner">
+        <div class="product-form-content">
+            <h5>신청자 정보</h5>
+            <div class="form-content-field">
+                <label>
+                    기업명 / 담당부서 <em>*</em>
+                    <input type="text" name="u_company" id="u_company" placeholder="기업명/담당부서를 입력해주세요">
+                </label>
+                <label>
+                    담당자 성함 <em>*</em>
+                    <input type="text" name="u_name" id="u_name" placeholder="담당자 성함을 입력해주세요">
+                </label>
+            </div>
+            <div class="form-content-field">
+                <label>
+                    담당자 연락처 <em>*</em>
+                    <input type="text" name="u_tel" id="u_tel" placeholder="담당자 연락처를 입력해주세요" maxlength="13"
+                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1').replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);">
+                </label>
+                <label>
+                    이메일 <em>*</em>
+                    <input type="email" name="email" id="email" placeholder="이메일을 입력해주세요">
+                </label>
+            </div>
+            <div class="form-content-chk">
+                <label>
+                    <input type="checkbox" name="info_agree" id="info_agree">개인정보 수집 및 이용동의
+                </label>
+                <a  data-iziModal-open="#modal_product_form" class="trigger" >[자세히보기]</a>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="free-advice" onclick="consulting_regi()">무료 상담신청 ></button>
+</section>
