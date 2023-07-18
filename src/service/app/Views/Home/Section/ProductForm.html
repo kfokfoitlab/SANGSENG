@@ -84,10 +84,22 @@
                     //alert(parseInt(result));
                     if (parseInt(result) == "1") {
                         alert('상담신청이 완료되었습니다.');
+                        $("#user_email").val('');
+                        $("#user_name").val('');
+                        $("#company_name_department").val('');
+                        $("#user_phone").val('');
                     }else if(parseInt(result) == "2"){
                         alert('이미 상담신청이 완료되었습니다.');
+                        $("#user_email").val('');
+                        $("#user_name").val('');
+                        $("#company_name_department").val('');
+                        $("#user_phone").val('');
                     } else {
                         alert('오류가 발생하였습니다\n다시 시도해주세요');
+                        $("#user_email").val('');
+                        $("#user_name").val('');
+                        $("#company_name_department").val('');
+                        $("#user_phone").val('');
                     }
 
                 },
