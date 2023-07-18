@@ -37,10 +37,10 @@ $(document).ready(function(){
                             html = "<span class='badge bg-primary'>대기</span>";
                             break;
                         case "2":
-                            html = "<span class='badge bg-success'>보류</span>";
+                            html = "<span class='badge bg-warning'>보류</span>";
                             break;
                         case "3":
-                            html = "<span class='badge bg-danger'>승인</span>";
+                            html = "<span class='badge bg-success'>승인</span>";
                             break;
                         case "9":
                             html = "<span class='badge bg-dark'>취소</span>";
@@ -53,7 +53,7 @@ $(document).ready(function(){
             ,{title: "진행상황변경", data: "idx", visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){
                     let html = "";
-                    html += "<input class='btn btn- btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",1)' value='대기'>";
+                    html += "<input class='btn btn-primary btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",1)' value='대기'>";
                     html += "<input class='btn btn-warning btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",2)' value='보류'>";
                     html += "<input class='btn btn-success btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",3)' value='승인'>";
                     html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",9)' value='취소'>";

@@ -46,13 +46,15 @@
     }
 
     function consulting_validation(){
+        var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+        var reg_phone = /^[0-9\b -]{0,13}$/;
         if($('#user_name').val() == ""){
             alert("이름을 입력해주세요");
             return false;
-        }else if($('#user_phone').val() == "" || $('#user_phone').val().length != 13){
+        }else if(!reg_phone.test($('#user_phone').val())){
             alert("전화번호를 정확히 입력해 주세요");
             return false;
-        }else if($('#user_email').val() == ""){
+        }else  if(!reg_email.test($("#user_email").val())){
             alert("이메일을 입력해 주세요");
             return false;
         }else if(!$('#info_agree').is(':checked')){
