@@ -53,7 +53,6 @@ $(document).ready(function(){
             ,{title: "진행상황변경", data: "idx", visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){
                     let html = "";
-                    html += "<input class='btn btn-primary btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",1)' value='대기'>";
                     html += "<input class='btn btn-warning btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",2)' value='보류'>";
                     html += "<input class='btn btn-success btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",3)' value='승인'>";
                     html += "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",9)' value='취소'>";
