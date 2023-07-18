@@ -43,7 +43,7 @@ $(document).ready(function(){
                             html = "<span class='badge bg-success'>승인</span>";
                             break;
                         case "9":
-                            html = "<span class='badge bg-dark'>취소</span>";
+                            html = "<span class='badge bg-danger'>취소</span>";
                             break;
                     }
 
