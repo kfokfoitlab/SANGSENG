@@ -411,7 +411,7 @@ public function CategorySearch($data){
 				 company_consulting
 			WHERE
 				user_phone = '" . $data['user_phone'] . "'
-				limit 1
+				and status in ('1','2') 
 			";
         $consulting_dup = $this->rodb->simple_query($dup_query);
         if ($consulting_dup != 0) {
@@ -426,6 +426,7 @@ public function CategorySearch($data){
                user_name = '".$data['user_name']."',
                user_phone = '".$data['user_phone']."',
                user_email = '".$data['user_email']."',
+               status = '1',
               register_date = '".date("Y-m-d H:i:s")."'
       ";
         $idx = $this->wrdb->insert($query);

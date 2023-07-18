@@ -1,0 +1,50 @@
+<section class="content-main">
+	<div class="content-header">
+    <h2 class="content-title"> <?=$page_name?> </h2>
+	</div>
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <form name="form-searchbar">
+
+      <div class="row gx-3">
+        <div class="col-lg-2">
+          <label>기업명/담당부서 검색</label>
+          <input type="text" class="form-control form-control-sm search" id="search-company" placeholder="">
+        </div>
+        <div class="col-lg-2">
+          <label>담당자 성함</label>
+          <input type="text" class="form-control form-control-sm search" id="search-user-name" placeholder="">
+        </div>
+        <div class="col-lg-1">
+          <label>상태</label>
+          <select class="form-control form-control-sm filter" id="search-status">
+            <option value="">전체</option>
+            <option value="1">대기</option>
+            <option value="2">보류</option>
+            <option value="3">완료</option>
+            <option value="9">취소</option>
+          </select>
+        </div>
+      </div>
+      </form>
+    </div>
+
+    <form name="statusForm" id="statusForm" method="post" action="/Contract/Lists/ContractUpdate">
+      <input type="hidden" name ="workflow_id" id="workflow_id" value="0">
+      <input type="hidden" name ="pworkflow_id" id="pworkflow_id" value="0">
+      <input type="hidden" name ="complete_reduction" id="complete_reduction" value="0">
+      <input type="hidden" name ="product_quantity" id="product_quantity" value="">
+    </form>
+
+    <div class="card-body">
+      <div class="">
+        <table class="table table-hover small" id="datatables">
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
