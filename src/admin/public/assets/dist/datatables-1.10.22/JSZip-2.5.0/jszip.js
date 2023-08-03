@@ -1721,7 +1721,7 @@ var support = _dereq_('./support');
 var nodeBuffer = _dereq_('./nodeBuffer');
 
 /**
- * The following functions come from pako, from pako/lib/utils/strings
+ * The following functions come from pako, from pako/PhpOffice/utils/strings
  * released under the MIT license, see pako https://github.com/nodeca/pako/
  */
 

@@ -52,7 +52,21 @@
           <div class="row mb-3">
             <label for="manager_name" class="col-form-label col-2 fw-bold">담당자 이름</label>
             <div class="col-10">
-              <input type="text" class="form-control" id="manager_name" name="manager_name" value="<?=$_SESSION['login_info']['seller_name']?>" readonly>
+              <?php
+              if($_SESSION['login_info']['type'] == 'buyer'){
+              ?>
+              <input type="text" class="form-control" id="manager_name" name="manager_name" value="<?=$_SESSION['login_info']['buyer_name']?>" readonly>
+              <?php
+              }
+              ?>
+              <?php
+              if($_SESSION['login_info']['type'] == 'seller'){
+              ?>
+              <input type="text" class="form-control"  name="manager_name" value="<?=$_SESSION['login_info']['seller_name']?>" readonly>
+
+              <?php
+              }
+              ?>
             </div>
           </div>
           <div class="row mb-3">

@@ -36,6 +36,7 @@ class StatisticsModel extends CommonModel
             where register_date >= '2022-01-01'
             and register_date <= '2022-12-31'
             and seller_uuid = '".$uuid."'
+            and contract_status = '5'
 
         ";
         $total = $this->rodb->simple_query($query);

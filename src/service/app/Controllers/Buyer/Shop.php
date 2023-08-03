@@ -2,18 +2,19 @@
 
 namespace App\Controllers\Buyer;
 use App\Controllers\BaseController;
-use App\Models\Management\Company\ApplicationModel;
-use App\Models\CompanyModel;
+use App\Models\Seller\ItemModel;
 use App\Models\DatabaseModel;
 use App\Models\Buyer\BuyerModel;
 class Shop extends BaseController
 {
     private $model;
+    private $item_model;
     private $database_model;
     private $buyer_model;
     public function __construct()
     { //{{{
         $this->buyer_model = new BuyerModel;
+        $this->item_model = new ItemModel;
         $this->database_model = new DatabaseModel;
     } //}}}
 
@@ -36,18 +37,16 @@ class Shop extends BaseController
         $uuid = $_SESSION["login_info"]["uuid"];
         $ranking = $this->buyer_model->RecommendationList($value);
         $list = $this->buyer_model->CategoryList($value);
-        $buyer_info = $this->buyer_model->Buyer_info($uuid);
         $data_page_total_cnt = count($list);
+
         $data = array(
             "ranking" => $ranking["data"],
             "list" => $list["data"],
             "listReplyCount" => $list["replyCount"],
-            "buyer_info" => $buyer_info,
             "data_page_total_cnt" => $list["count"],
-            "rankingReplyCount" => $ranking["replyCount"]
+            "rankingReplyCount" => $ranking["replyCount"],
+
         );
-
-
         echo view("Common/Header.html");
         echo view('Shop/List.html',$data);
         echo view("Common/Footer.html");
@@ -156,3 +155,4 @@ class Shop extends BaseController
         echo $result;
     }
 }
+

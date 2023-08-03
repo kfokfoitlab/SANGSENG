@@ -1,0 +1,135 @@
+<?php
+  // Left Menu
+  require(__DIR__.'/Components/Left.html');
+?>
+<div class="flex-grow-1">
+  <section class="py-5 imjob-regist-all">
+    <div class="auto-container">
+      <h3 class="h4 fw-bold text-center mb-5 pb-4 border-bottom">장애인 근로자 일괄 등록</h3>
+      <div class="d-flex align-items-center justify-content-end">
+        <div class="me-2">
+          <button class="btn btn-outline-success btn-sm my-2 fw-normal" type="button"  onclick="downloadFileNew('<?=$excel["register_file"]?>','<?=$excel["register_file_ori"]?>');">
+          양식다운로드
+          </button>
+        </div>
+        <div class="me-2">
+          <form id="excelupload" method="post" action="/Seller/IMJOB/IMJOBRegist" enctype="multipart/form-data" >
+            <div class="position-relative">
+              <label class="form-control form-control-sm border-dark" for="excel_upload" style="width: 300px;">파일선택</label>
+              <input type="file" id="excel_upload" name="excelupload" class="d-none">
+              <input type="hidden" id="file_name" value="<?=$excel['register_file_ori']?>">
+              <input type="button" onclick="fileCheck();" class="btn btn-dark btn-sm fw-normal position-absolute top-0 end-0" value="확인하기">
+            </div>
+          </form>
+        </div>
+        <?php
+        if(is_array($data) && count($data) > 0){
+         foreach($data as $item){
+           $register_file = "";
+           if($item['file'] != ""){
+            $register_file = $item['file'];
+            }
+          }
+        }
+        ?>
+        <div>
+          <form id ="fileForm" method="post" action="/Seller/IMJOB/WorkersReg" >
+             <input type="hidden" id = "register_file" name ="register_file" value="<?=$register_file?>">
+             <button type="button" class=" btn btn-primary btn-sm fw-normal" onclick="register_upload();">
+                등록
+             </button>
+          </form>
+        </div>
+      </div>
+      <form id ="dataCheck">
+        <table class="table table-striped text-center mt-4 imjob-list-table" id ="imjobTbl">
+          <thead>
+          <tr>
+              <th>No.</th>
+              <th>이름</th>
+              <th>생년월일</th>
+              <th>계약 시작일</th>
+              <th>계약 종료일</th>
+              <th>근무상태</th>
+              <th>장애유형</th>
+          </tr>
+          </thead>
+          <tbody>
+          <?php
+          if(is_array($data) && count($data) > 0){
+            $i = 1;
+            foreach($data as $item){
+              if($i == count($data)){
+              break;
+              }
+          ?>
+          <tr>
+            <td><?=$i?></td>
+            <td><?=$item['name']?></td>
+            <td><?=$item['birth']?></td>
+            <td><?=$item['sdate']?></td>
+            <td><?=$item['edate']?></td>
+            <td><?=$item['status']?></td>
+            <td><?=$item['dis']?></td>
+          </tr>
+          <?php
+            $i++;
+            }
+          } else {
+          ?>
+          <tr>
+            <td class="fw-normal h5 py-4 text-secondary" colspan="7">등록 전 파일을 선택해 리스트를 확인해주세요</td>
+          </tr>
+          <?php
+          }
+          ?>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </section>
+</div>
+<script>
+	document.getElementById("excel_upload").onchange = function () {
+		document.querySelector("label[for='excel_upload']").textContent = this.value.replace("C:\\fakepath\\", "");
+	};
+    function downloadFileNew(fileName,fileNameOri){
+        if(fileName == ""){
+            alert("등록된 파일이 없습니다");
+        }else {
+            location.href = "/Seller/IMJOB/downloadFileNew?fileName=" + fileName + "&fileNameOri=" + fileNameOri;
+        }
+    };
+
+    function fileCheck(){
+        //alert($("#excel_upload").val());
+/*        var upload = $("#excel_upload").val();
+        var upload_name = upload.substr(12);
+
+        if(upload_name != file_name){
+            alert("등록 양식의 파일명과 다릅니다. 양식을 다운로드 해주세요");
+            return false;
+        }*/
+        if ($("#excel_upload").val() == "") {
+            alert("파일을 등록해주세요");
+        } else {
+            $("#excelupload").submit();
+        }
+
+    }
+    function register_upload(file_name){
+        /*var upload = $("#register_file").val();
+        var upload_name = upload.substr(12);
+        var file_name = $("#file_name").val();
+        if(upload_name != file_name) {
+            alert("등록 양식의 파일과 다릅니다.");
+        }else{*/
+            if ($("#register_file").val() == "") {
+                alert("등록 전 확인버튼을 눌러서 리스트를 확인 해주세요");
+            } else {
+                $("#fileForm").submit();
+            }
+
+    }
+
+</script>

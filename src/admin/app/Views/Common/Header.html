@@ -73,6 +73,15 @@ echo script_tag("assets/js/Common.js");
         <span class="text">Dashboard</span>
       </a> 
     </li>
+    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Contract") !== false)?"active":""?>">
+    <a class="menu-link" href="#">
+      <i class="icon material-icons md-send"></i>
+      <span class="text">상담요청관리</span>
+    </a>
+    <div class="submenu">
+      <a href="/Consulting/Lists">전체 목록</a>
+    </div>
+    </li>
     <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Member") !== false)?"active":""?>"> 
       <a class="menu-link" href="#">
         <i class="icon material-icons md-person"></i>  
@@ -109,7 +118,9 @@ echo script_tag("assets/js/Common.js");
       </a> 
       <div class="submenu">
         <a href="/Product/Lists">전체 목록</a>
+        <a href="/Product/Category">카테고리 추가/삭제</a>
       </div>
+
     </li>
     <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Delivery") !== false)?"active":""?>">
     <a class="menu-link" href="#">
@@ -120,24 +131,6 @@ echo script_tag("assets/js/Common.js");
       <a href="/Delivery/Lists">전체 목록</a>
     </div>
     </li>
-<!--    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Employees") !== false)?"active":""?>">
-    <a class="menu-link" href="#">
-      <i class="icon material-icons md-face"></i>
-      <span class="text">근로자관리</span>
-    </a>
-    <div class="submenu">
-      <a href="/Employees/Lists">전체 목록</a>
-    </div>
-    </li>
-    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Resume") !== false)?"active":""?>"> 
-      <a class="menu-link" href="#">
-        <i class="icon material-icons md-face"></i>  
-        <span class="text">이력서관리</span> 
-      </a> 
-      <div class="submenu">
-        <a href="/Resume/Lists">전체 목록</a>
-      </div>
-    </li>-->
     <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Board") !== false)?"active":""?>">
     <a class="menu-link" href="#">
       <i class="icon material-icons md-bookmark_border"></i>
@@ -170,7 +163,7 @@ echo script_tag("assets/js/Common.js");
   </ul>
   <hr>
   <ul class="menu-aside">
-    <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Database") !== false)?"active":""?>"> 
+    <!--<li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Database") !== false)?"active":""?>">
       <a class="menu-link" href="#">
         <i class="icon material-icons md-storage"></i> 
         <span class="text">데이터베이스</span> 
@@ -186,7 +179,7 @@ echo script_tag("assets/js/Common.js");
         <a href="/Database/Job/Career">경력 사항</a>
         <a href="/Database/Job/Welfare">복리 후생</a>
       </div>
-    </li>
+    </li>-->
     <!-- 
     <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Configuration") !== false)?"active":""?>"> 
       <a class="menu-link" href="#">
@@ -201,7 +194,7 @@ echo script_tag("assets/js/Common.js");
     <li class="menu-item has-submenu <?=(strpos(_CONTROLLER, "Terms") !== false)?"active":""?>"> 
       <a class="menu-link" href="#">
         <i class="icon material-icons md-description"></i> 
-        <span class="text">약관 관리</span> 
+        <span class="text">약관 등록</span>
       </a>
       <div class="submenu">
         <a href="/Terms/TermsOfService">사이트 이용약관</a>

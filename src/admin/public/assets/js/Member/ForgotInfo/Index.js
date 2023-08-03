@@ -66,28 +66,35 @@ $(document).ready(function(){
             ,{title: "진행상황변경", data: "idx", visible: true, className: "text-nowrap",
                 "render": function( data, type, row, meta ){
                     let html = "";
-										html = "<input class='button btn-info btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",1)' value='대기'>";
-										html = html + "<input class='button btn-success btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",5)' value='완료'>";
-										html = html + "<input class='button btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",7)' value='반려'>";
+										html = "<input class='btn btn-info btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",1)' value='대기'>";
+										html = html + "<input class='btn btn-success btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",5)' value='완료'>";
+										html = html + "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",7)' value='반려'>";
 										
                     return html;
                 }
             }
-					,{title: "ID/PW찾기", data: {"user_phone":"user_phone","search_type":"search_type"},visible: true, className: "text-nowrap",
+					,{title: "ID/PW찾기", data: {"idx":"idx","search_type":"search_type","company_type":"company_type","register_id":"register_id"},visible: true, className: "text-nowrap",
 							"render": function( data, type, row, meta ,data1){
+								var company_type = data['company_type'];
+								var register_id = data['register_id'];
+								var idx = data['idx'];
 								let html = "";
-								html += "<a";
-								html += "   class='button btn-secondary btn-sm m-1'";
-								html += "   href='/"+_CONTROLLER+"/searchId?user_phone="+data['user_phone']+"&type=buyer' target='_self'" +
-												"onclick=\"window.open(this.href, '_blank', 'width=500,height=330,toolbars=no,scrollbars=no'); return false;\">";
-								html += "구매기업";
-								html += "</a>";
-								html += "<a";
-								html += "   class='button btn-secondary btn-sm m-1'";
-								html += "   href='/"+_CONTROLLER+"/searchId?user_phone="+data['user_phone']+"&type=seller' target='_self'" +
+								if(company_type == 'buyer') {
+									html += "<a";
+									html += "   class='button btn-secondary btn-sm m-1'";
+									html += "   href='/" + _CONTROLLER + "/searchId?rgd="+register_id+"&idx="+idx+" 'target='_self'" +
 										"onclick=\"window.open(this.href, '_blank', 'width=500,height=330,toolbars=no,scrollbars=no'); return false;\">";
-								html += "판매기업";
-								html += "</a>";
+									html += "구매기업";
+									html += "</a>";
+								}
+								if(company_type == 'seller') {
+									html += "<a";
+									html += "   class='button btn-secondary btn-sm m-1'";
+									html += "   href='/" + _CONTROLLER + "/searchId?rgd="+register_id+"&idx="+idx+" 'target='_self'" +
+										"onclick=\"window.open(this.href, '_blank', 'width=500,height=330,toolbars=no,scrollbars=no'); return false;\">";
+									html += "판매기업";
+									html += "</a>";
+								}
 								return html;
 							}
 						}

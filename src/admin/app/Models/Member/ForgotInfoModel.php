@@ -134,20 +134,14 @@
 		public function getCompanyEmail($data)
 		{
 			//echo $user_phone;
-			$table = "";
-			if($data["type"] == "seller" ) {
-				$table = "seller_company";
-			}elseif($data["type"] == "buyer" ){
-				$table = "buyer_company";
-			}
-			
 			$query = "
 			SELECT
 				*
 			FROM
-				".$table."
+				search_id_pw
 			WHERE
-				phone = '".$data["user_phone"]."'
+				register_id = '".$data["rgd"]."'
+				and idx = '".$data['idx']."'
 			LIMIT 1
 			";
 			
@@ -167,7 +161,7 @@
 				$table = "buyer_company";
 			}
 			
-			$resetPw = str_replace('-','',$data["phone"]);
+			$resetPw = str_replace('-','',$data["phone"].'a!');
 			$query = "
 			UPDATE
 			".$table."

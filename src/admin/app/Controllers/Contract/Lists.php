@@ -107,12 +107,8 @@ class Lists extends Base
 
     public function contractSubmit(){
 
-        $data = array(
-            "idx" => $_GET["idx"]
-        ,"status" => $_GET["status"]
-        ,"workflow_id" => $_GET["workflow_id"]
-        );
-        $result = $this->model->contractSubmit($data);
+
+        $result = $this->model->contractSubmit($_GET);
         if($result == 1){
             echo "
             <script>
@@ -157,16 +153,34 @@ class Lists extends Base
         }
 
     }
-	
-	public function ContractUpdate()
-	{ // {{{
-		$this->model->ContractStatus($_POST);
-		echo "
+
+ /*   public function ContractUpdate()
+    { // {{{
+        $this->model->ContractStatus($_POST);
+        if($this == 1) {
+            echo "
         <script>
         alert('최신화되었습니다.');
         location.href = '/Contract/Lists';
 		</script>
         ";
+        }else{
+            echo "
+        <script>
+        alert('오류가 발생했습니다.');
+        location.href = '/Contract/Lists';
+		</script>
+        ";
+        }
+    } // }}}*/
+
+
+	public function ContractUpdate()
+	{ // {{{
+        $result = $this->model->ContractStatus($_POST);
+        echo $result;
+        die();
+
 	} // }}}
 	
 	public function ContractDelete()

@@ -20,11 +20,43 @@ if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
  * Router Setup
  * --------------------------------------------------------------------
  */
+$mAgent = array("iPhone","iPod","Android","Blackberry",
+    "Opera Mini", "Windows ce", "Nokia", "sony" );
+$chkMobile = false;
+for($i=0; $i<sizeof($mAgent); $i++){
+    if(stripos( $_SERVER['HTTP_USER_AGENT'], $mAgent[$i] )){
+        $chkMobile = true;
+        break;
+    }
+}
+
+
+/*
+ * --------------------------------------------------------------------
+ * Router Setup
+ * --------------------------------------------------------------------
+ */
 $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
+if($chkMobile){
+    $routes->setDefaultNamespace('App\Controllers_m');
+    $routes->setDefaultController('Home');
+    $routes->setDefaultMethod('index');
+    $routes->setTranslateURIDashes(false);
+    $routes->set404Override();
+}
+
+
+/*$routes->setDefaultNamespace('App\Controllers');
+$routes->setDefaultController('Home');
+$routes->setDefaultMethod('index');
+$routes->setTranslateURIDashes(false);
+$routes->set404Override();*/
+
+
 // The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
@@ -40,6 +72,9 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get ('/',                          'Home::index');
+$routes->post ('/SessionCategory',           'Home::SessionCategory');
+$routes->post ('/SessionCategory2',           'Home::SessionCategory2');
+
 $routes->get ('/Image/(:any)',              'Image::getImage/$1');
 $routes->get ('/Image/(:any)/(:any)',       'Image::getImage/$1');
 
@@ -48,6 +83,11 @@ $routes->group('Chat', function($routes){
     $routes->get ('Room/(:any)',                            'Chat::Room/$1');
     $routes->post('Send',                                   'Chat::Send');
     $routes->get ('CreateChannel/(:any)/(:any)',          'Chat::CreateChannel/$1/$2');
+});
+
+$routes->group('Home', function($routes){
+    $routes->post('Consulting', 'Home::Consulting');
+
 });
 
 
@@ -60,13 +100,13 @@ $routes->group('Auth', function($routes){
     $routes->get ('ForgotMyId',         'Auth::ForgotMyId');
     $routes->get ('ForgotMyPass',       'Auth::ForgotMyPass');
     $routes->post ('ForgotSubmit',      'Auth::ForgotSubmit');
-
     $routes->get ('SignUpBuyerSLA',      'Auth::SignUpBuyerSLA');
     $routes->post('SignUpBuyer',         'Auth::SignUpBuyer');
     $routes->post('SignUpBuyerStep2',    'Auth::SignUpBuyerStep2');
     $routes->post('SignUpBuyerSubmit',    'Auth::SignUpBuyerSubmit');
     $routes->get ('SignUpBuyerComplete/(:any)', 'Auth::SignUpBuyerComplete/$1');
-
+    $routes->post('BuyerEmailCheck',    'Auth::BuyerEmailCheck');
+    $routes->post('SellerEmailCheck',    'Auth::SellerEmailCheck');
     $routes->get ('SignUpSellerSLA',      'Auth::SignUpSellerSLA');
     $routes->post('SignUpSeller',         'Auth::SignUpSeller');
     $routes->post('SignUpSellerSubmit',    'Auth::SignUpSellerSubmit');
@@ -152,7 +192,7 @@ $routes->group('Buyer', function($routes){
 	$routes->post ('Shop/SellerReplySubmit',     'Buyer\Shop::SellerReplySubmit');
     $routes->post ('Shop/SellerReplyDelete',     'Buyer\Shop::SellerReplyDelete');
     $routes->post ('Shop/SellerReplyUpdate',     'Buyer\Shop::SellerReplyUpdate');
-    $routes->post ('Contract',        'Buyer\Contract::Contract');
+    $routes->get ('Contract',        'Buyer\Contract::Contract');
     $routes->get ('MyPage/Info',            'Buyer\MyPage::Info');
     $routes->get ('MyPage/ConfirmPassword',    'Buyer\MyPage::ConfirmPassword');
     $routes->get ('MyPage/downloadFileNew',  'Buyer\MyPage::downloadFileNew');
@@ -161,8 +201,9 @@ $routes->group('Buyer', function($routes){
     $routes->post ('MyPage/BuyerPwdSubmit', 'Buyer\MyPage::BuyerPwdSubmit');
     $routes->post ('Shop/Cart',            'Buyer\Shop::Cart');
     $routes->get ('MyPage/Cart',           'Buyer\MyPage::Cart');
-    $routes->post ('MyPage/CartDel',           'Buyer\MyPage::CartDel');
+    $routes->get ('MyPage/CartDel',           'Buyer\MyPage::CartDel');
     $routes->get ('MyPage/Contract',           'Buyer\MyPage::Contract');
+    $routes->post ('MyPage/Contract/Sequence',           'Buyer\MyPage::Sequence');
     $routes->post ('MyPage/ContractUpdate',           'Buyer\MyPage::ContractUpdate');
     $routes->post ('MyPage/BuyerUpdateSubmit',           'Buyer\MyPage::BuyerUpdateSubmit');
     $routes->post ('MyPage/downloadFileNew',           'Buyer\MyPage::downloadFileNew');
@@ -175,9 +216,12 @@ $routes->group('Buyer', function($routes){
 $routes->group('Seller',  function ($routes){
     $group_name = "Item";
     $routes->get ( '/',                     'Seller::index');
+
+    $routes->post ( 'Contract/Sequence',       'Seller::Sequence');
     $routes->get ( 'Contract',       'Seller::Contract');
     $routes->get ($group_name.'/ItemUpdate/(:any)', 'Seller\Item::ItemUpdate/$1');
     $routes->get ($group_name.'/ItemRegist','Seller\Item::ItemRegist');
+    $routes->post ($group_name.'/CategorySearch','Seller\Item::CategorySearch');
     $routes->get ($group_name.'/ItemList',   'Seller\Item::ItemList');
     $routes->post ($group_name.'/ItemList/Search',   'Seller\Item::Search');
     $routes->post ($group_name.'/ItemSubmit', 'Seller\Item::ItemSubmit');
@@ -201,8 +245,13 @@ $routes->group('Seller',  function ($routes){
     $routes->post ($group_name.'/reg_worker',           'Seller\IMJOB::reg_worker');
     $routes->get ($group_name.'/IMJOBView',           'Seller\IMJOB::IMJOBView');
     $routes->get ($group_name.'/downloadFileNew',           'Seller\IMJOB::downloadFileNew');
+    $routes->post ($group_name.'/ExcelUpload',           'Seller\IMJOB::ExcelUpload');
     $routes->post ($group_name.'/updateWorker',           'Seller\IMJOB::updateWorker');
     $routes->get ($group_name.'/deleteWorker',           'Seller\IMJOB::deleteWorker');
+    $routes->get ($group_name.'/IMJOBRegist',           'Seller\IMJOB::IMJOBRegist');
+    $routes->post ($group_name.'/IMJOBRegist',           'Seller\IMJOB::IMJOBRegist');
+    $routes->post ($group_name.'/WorkersReg',           'Seller\IMJOB::WorkersReg');
+
     $routes->get ('MyPage/Info',                'Seller\MyPage::Info');
 	$routes->post ('MyPage/InfoUpdate',                'Seller\MyPage::InfoUpdate');
     $routes->get ('MyPage/ConfirmPassword',     'Seller\MyPage::ConfirmPassword');

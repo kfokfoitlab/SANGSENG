@@ -35,6 +35,7 @@
 				,worker_birth = '".$data["worker_birth"]."'
 				,working_status = '".$data["working_status"]."'
 				,disability_degree = '".$data["disability_degree"]."'
+				,del_yn = 'N'
 				,upload_face = '".$upload_face."'
 				,upload_card = '".$upload_card."'
 				,upload_face_ori = '".$files["upload_face"]["name"]."'
@@ -117,11 +118,50 @@
 			$this->wrdb->update($query);
 			return "1";
 		}
-		
+		public function getExcelData($table_name = "seller_company_worker"){
+            $seller_uuid = $_SESSION["login_info"]["uuid"];
+            $excel = [];
+            if($_GET["w_s1"] != ""){
+                $where[] = "working_status=1";
+            }if($_GET["w_s2"] != ""){
+                $where[] = "working_status=2";
+            }if($_GET["w_s3"] != ""){
+                $where[] = "working_status=3";
+            }
+            $where_query = "";
+            if($_GET["w_s1"] != "" || $_GET["w_s2"] != "" || $_GET["w_s3"] != "") {
+                $where_query = " and (" . @join(" or ", $where) . ")";
+            }
+            $query = "
+            select
+                *
+            from ".$table_name." where 1=1
+			 and register_id= '".$seller_uuid."'
+             and (del_yn != 'Y' or del_yn is null)".$where_query."
+
+        ";
+            if($_GET["search_v"] != ""){
+                $query = $query." and (worker_name like '%".$_GET["search_v"]."%'
+				 or worker_birth like '%".$_GET["search_v"]."%')";
+            }
+            if($_GET["search_status"] != ""){
+                $query = $query." and status = ".$_GET["search_status"];
+            }
+            $query = $query." order by idx desc";
+
+            $this->rodb->query($query);
+            while($row = $this->rodb->next_row()){
+                $excel[] = $row;
+            }
+            return $excel;
+        }
+
+
 		public function getWorkerList($table_name = "seller_company_worker"){
 			
 			$seller_uuid = $_SESSION["login_info"]["uuid"];
 			$seller_data = $this->getSellerInfo($seller_uuid);
+            $length = $_GET['length'];
 			
 			if($_GET["w_s1"] != ""){
 				$where[] = "working_status=1";
@@ -160,9 +200,7 @@
 				$page_start = ($_GET["p_n"] - 1)*10;
 			}
 			$query = $query." order by idx desc";
-			$query = $query." limit ".$page_start.", 10";
-			//echo $query;
-			//echo $query;
+			$query = $query." limit ".$page_start.",10";
 			$data["data"] = [];
 			$this->rodb->query($query);
 			while($row = $this->rodb->next_row()){

@@ -29,12 +29,14 @@
 		public function List()
 		{ // {{{
 			$data = $this->imjob_model->getWorkerList();
-			$data_cnt = $this->imjob_model->getWorkerCount();
+            $excel = $this->imjob_model->getExcelData();
+            $data_cnt = $this->imjob_model->getWorkerCount();
 			$data_page_total_cnt = count($data);
 			$data = array(
 				"data" => $data["data"],
 				"data_cnt" => $data_cnt,
-				"data_page_total_cnt" => $data["count"]
+                "excel" => $excel,
+                "data_page_total_cnt" => $data["count"]
 			);
 			$_SESSION["disabledCount"]  = $data_cnt;
 			echo view("Common/Header.html");
@@ -57,7 +59,7 @@
 				echo "
                 <script>
                     alert('근로자가 등록되었습니다.');
-					window.location.replace('/Seller/IMJOB/List');
+					window.location.replace('/Seller/IMJOB/List?p_n=1');
                 </script>
             ";
 			}else{
@@ -78,7 +80,7 @@
 				echo "
                 <script>
                     alert('근로자정보가 수정되었습니다.');
-					window.location.replace('/Seller/IMJOB/List');
+					window.location.replace('/Seller/IMJOB/List?p_n=".$_POST["p_n"]."');
                 </script>
             ";
 			}else{
@@ -127,5 +129,62 @@
 		public function downloadFileNew(){
 			$this->imjob_model->downloadFileNew();
 		}
+
+        public function ExcelUpload(){
+          $data = $this->imjob_model->excelRead($_FILES);
+            $data = array(
+                "data" => $data
+            );
+            echo view("Common/Header.html");
+            echo view('Seller/IMJOBRegist.html',$data);
+            echo view("Common/Footer.html");
+        }
+
+        public function IMJOBRegist(){
+            if(! empty($_FILES)){
+                $data = $this->imjob_model->excelRead($_FILES);
+            }
+
+            $excel = $this->imjob_model->getRegExcel();
+
+            $data = array(
+                "excel" => $excel,
+                "data" => $data
+
+            );
+            echo view("Common/Header.html");
+            echo view('Seller/IMJOBRegist.html',$data);
+            echo view("Common/Footer.html");
+
+        }
+        public function WorkersReg(){
+            $result = $this->imjob_model->WorkersReg($_POST);
+
+            if($result == 3){
+                echo "
+                <script>
+                    alert('빈 값이 존재합니다 다시 등록해주세요.');
+					window.location.replace('/Seller/IMJOB/IMJOBRegist');
+                </script>
+            ";
+            }
+
+            if($result == "1") {
+                $_SESSION["disabledCount"] = $this->sigin_model->getWorkerCount();
+                echo "
+                <script>
+                    alert('정상적으로 일괄등록 되었습니다.');
+					window.location.replace('/Seller/IMJOB/List?p_n=1');
+                </script>
+            ";
+            }else{
+                echo "
+                <script>
+                    alert('오류가 발생했습니다.다시 시도해주세요');
+					history.back(-1);
+                </script>
+            ";
+            }
+        }
 	}
   ?>

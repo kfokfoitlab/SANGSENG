@@ -10,37 +10,48 @@
         <div class="card-wrapper">
           <div class="card card-icon card-icon01">
             <div
-              class="card-header d-flex justify-content-between align-items-center"
+                    class="card-header d-flex justify-content-between align-items-center"
             >
+              <input type="hidden" id ="uuid" value="<?=$_SESSION['login_info']['uuid']?>">
               <h3 class="card-title">계약</h3>
-              <a href="/Seller/Contract" class="more-btn">+more</a>
             </div>
-            <div class="card-body d-flex flex-column justify-content-center">
-              <div class="d-flex justify-content-between mb-3">
-                <p class="card-text">계약 진행중</p>
-                <p class="text-end"><strong><?=$contractList['count']?></strong>건</p>
+            <div class="card-body d-flex flex-column">
+              <div class="pb-4 border-bottom">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <p class="card-text">계약 진행중</p>
+                  <a class="p-0" href="/Seller/Contract"><p class="text-end"><strong><?=$contractList['count']?></strong>건</p></a>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p class="card-text">계약 완료</p>
+                  <a class="p-0" href="/Seller/Contract"><p class="text-end"><strong><?=$completionContract['count']?></strong>건</p></a>
+                </div>
               </div>
-              <div class="d-flex justify-content-between">
-                <p class="card-text">계약 완료</p>
-                <p class="text-end"><strong><?=$completionContract['count']?></strong>건</p>
+              <div class="pt-4">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <p class="card-text">배송 진행중</p>
+                  <a class="p-0" href="/Seller/DeliveryStatus"><p class="text-end"><strong><?=$delivery['playing']['playing']?></strong>건</p></a>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p class="card-text">배송 완료</p>
+                  <a class="p-0" href="/Seller/DeliveryStatus"> <p class="text-end"><strong><?=$delivery['complete']['complete']?></strong>건</p></a>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="card-wrapper">
           <div class="card card-icon card-icon02">
-            <div
-              class="card-header d-flex justify-content-between align-items-center"
-            >
+            <div class="card-header d-flex justify-content-between align-items-center">
               <h3 class="card-title">매출</h3>
+              <a href="/Seller/Statistics/SalesAnalysis" class="more-btn">+more</a>
             </div>
-            <div class="card-body d-flex flex-column justify-content-center">
-              <div class="mb-2">
-                <p class="card-text mb-1">총 매출액</p>
-                <p class="text-end"><strong><?=number_format($totalSales['price'])?></strong>원</p>
+            <div class="card-body d-flex flex-column">
+              <div class="pb-3">
+                <p class="card-text mb-2">예산 매출액</p>
+                <p class="text-end"><strong><?=number_format($seller_info['seller_sales'])?></strong>원</p>
               </div>
-              <div>
-                <p class="card-text mb-1">예상 매출액</p>
+              <div class="pt-3">
+                <p class="card-text mb-2">결산 매출액</p>
                 <p class="text-end"><strong><?=number_format($expectationSales['price'])?></strong>원</p>
               </div>
             </div>
@@ -48,23 +59,23 @@
         </div>
         <div class="card-wrapper">
           <div class="card card-icon card-icon03">
-            <div
-              class="card-header d-flex justify-content-between align-items-center"
-            >
+            <div class="card-header d-flex justify-content-between align-items-center">
               <h3 class="card-title">인재</h3>
-              <a href="/Seller/IMJOB/List" class="more-btn">+more</a>
+              <a href="/Seller/IMJOB/List?p_n=1" class="more-btn">+more</a>
             </div>
-            <div class="card-body d-flex flex-column justify-content-center">
-              <p class="card-text mb-2"><b>장애인 근로자 수 : <?=$_SESSION["disabledCount"]['worker_cnt']?>명</b></p>
-              <p class="card-text mb-1 ps-3">- 중증 장애인 수 <strong><?=$_SESSION["disabledCount"]['degree_1_cnt']?></strong>명</p>
-              <p class="card-text ps-3">- 경증 장애인 수 <strong><?=$_SESSION["disabledCount"]['degree_2_cnt']?></strong>명</p>
+            <div class="card-body d-flex flex-column">
+              <p class="card-text mb-4 text-center">장애인 근로자 수 <strong><?=$_SESSION["disabledCount"]['worker_cnt']?></strong>명</p>
+              <div class="text-end">
+                <p class="card-text d-flex justify-content-between mb-2"><span>중증 장애인 수</span> <span><?=$_SESSION["disabledCount"]['degree_1_cnt']?>명</span></p>
+                <p class="card-text d-flex justify-content-between"><span>경증 장애인 수</span> <span><?=$_SESSION["disabledCount"]['degree_2_cnt']?>명</span></p>
+              </div>
             </div>
           </div>
         </div>
         <div class="card-wrapper">
           <div class="card question-answer">
             <div
-              class="card-header d-flex justify-content-between align-items-center"
+                    class="card-header d-flex justify-content-between align-items-center"
             >
               <h3 class="card-title">문의사항</h3>
               <a href="/CS/Notice" class="more-btn">+more</a>
@@ -73,92 +84,109 @@
               <ul class="nav nav-tabs flex-nowrap" id="qnaTab" role="tablist">
                 <li class="nav-item flex-grow-1 position-relative" role="presentation">
                   <button
-                    class="nav-link w-100 active"
-                    id="contract-tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#contract"
-                    type="button"
-                    role="tab"
-                    aria-controls="contract"
-                    aria-selected="true"
+                          class="nav-link w-100 active"
+                          id="contract-tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#contract"
+                          type="button"
+                          role="tab"
+                          aria-controls="contract"
+                          aria-selected="true"
                   >
                     계약문의
                   </button>
-                  <span class="new-badge contract-new-badge">N</span>
+                  <div id ="new_badge" style="display: none">
+                    <span  class="new-badge contract-new-badge">N</span>
+                  </div>
                 </li>
                 <li class="nav-item flex-grow-1 position-relative" role="presentation">
                   <button
-                    class="nav-link w-100"
-                    id="product-tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#product"
-                    type="button"
-                    role="tab"
-                    aria-controls="product"
-                    aria-selected="false"
+                          class="nav-link w-100"
+                          id="product-tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#product"
+                          type="button"
+                          role="tab"
+                          aria-controls="product"
+                          aria-selected="false"
                   >
                     상품리뷰
                   </button>
+                  <?php
+                    if(is_array($product_reply)&& count($product_reply) > 0){
+                  foreach($product_reply["data"] as $item){
+                  if($item['register_date'] == substr(date("Y-m-d H:i:s"),0,10)){
+                  ?>
                   <span class="new-badge product-new-badge">N</span>
+                  <?php
+                  }
+                  }
+                  }?>
                 </li>
                 <li class="nav-item flex-grow-1 position-relative" role="presentation">
                   <button
-                    class="nav-link w-100"
-                    id="extra-tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#extra"
-                    type="button"
-                    role="tab"
-                    aria-controls="extra"
-                    aria-selected="false"
+                          class="nav-link w-100"
+                          id="extra-tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#extra"
+                          type="button"
+                          role="tab"
+                          aria-controls="extra"
+                          aria-selected="false"
                   >
                     1:1 문의
                   </button>
+                  <?php
+                   if(is_array($questions)&& count($questions) > 0){
+                  foreach($questions as $item){
+                  if($item["board_status"]==2 && substr($item['update_date'],0,10) == substr(date("Y-m-d H:i:s"),0,10)){
+                  ?>
+                  <span class="new-badge product-new-badge">N</span>
+                  <?php
+                  }
+                  }
+                  }?>
                 </li>
               </ul>
               <div class="tab-content mt-2">
                 <div
-                  class="tab-pane fade show active"
-                  id="contract"
-                  role="tabpanel"
-                  aria-labelledby="contract-tab"
+                        class="tab-pane fade show active"
+                        id="contract"
+                        role="tabpanel"
+                        aria-labelledby="contract-tab"
                 >
                   <ul>
+                    <?php
+                    if(is_array($data["playing"])&& count($data["playing"]) > 0){
+                    foreach($data["playing"] as $item){
+                    ?>
                     <li>
-                      <a class="d-flex justify-content-between new" href="">
-                        <span>(구매기업)상품명</span><span class="flex-shrink-0 text-secondary">22-08-01</span>
+                      <a id ="turn_<?=$item['workflow_id']?>" class="d-flex justify-content-between" href="/Seller/Contract?p_n=1">
+                        <span>(<?=$item['buyer_company']?>) <?=$item['product_name']?></span><span class="flex-shrink-0 text-secondary"><?=substr($item["register_date"],0,10)?></span>
                       </a>
                     </li>
-                    <li>
-                      <a class="d-flex justify-content-between" href="">
-                        <span>(구매기업)상품명</span><span class="flex-shrink-0 text-secondary">22-08-01</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="d-flex justify-content-between" href="">
-                        <span>(구매기업)상품명</span><span class="flex-shrink-0 text-secondary">22-08-01</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="d-flex justify-content-between" href="">
-                        <span>(구매기업)상품명</span><span
-                        class="flex-shrink-0 text-secondary">22-08-01</span>
-                      </a>
-                    </li>
+                    <?php
+                    }
+                    }else{
+                    ?>
+                    <li class="mt-3 ps-3">진행중인 계약이 없습니다.</li>
+                    <?php
+                    }
+                    ?>
                   </ul>
                 </div>
                 <div
-                  class="tab-pane fade"
-                  id="product"
-                  role="tabpanel"
-                  aria-labelledby="product-tab"
+                        class="tab-pane fade"
+                        id="product"
+                        role="tabpanel"
+                        aria-labelledby="product-tab"
                 >
                   <ul>
-                  <?php
+                    <?php
                     if(is_array($product_reply)&& count($product_reply) > 0){
-                      $index=0;
-                      foreach($product_reply["data"] as $item){
-                  ?>
+                    $index=0;
+                    foreach($product_reply["data"] as $item){
+                    ?>
                     <li>
                       <a class="d-flex justify-content-between new" href="/Buyer/Shop/Detail/<?=$item['product_no']?>">
                         <span style="color: black"><?=$item["product_name"]?><b style="color: darkorange">(<?=$product_reply["replyCount"][$index]?>)</b></span><span class="flex-shrink-0 text-secondary"><?=substr($item["register_date"],0,10)?></span>
@@ -169,17 +197,17 @@
                       }
                     }else{
                   ?>
-                    <p>등록된 게시물이 없습니다</p>
+                    <li class="mt-3 ps-3">등록된 게시물이 없습니다</li>
                     <?php
                   }
                   ?>
                   </ul>
                 </div>
                 <div
-                  class="tab-pane fade"
-                  id="extra"
-                  role="tabpanel"
-                  aria-labelledby="extra-tab"
+                        class="tab-pane fade"
+                        id="extra"
+                        role="tabpanel"
+                        aria-labelledby="extra-tab"
                 >
                   <?php
                    if(is_array($questions)&& count($questions) > 0){
@@ -187,30 +215,37 @@
                   ?>
                   <ul>
                     <li>
-                      <a class="d-flex justify-content-between new" href="/CS/Questions/Detail?idx=<?=$item['idx']?>">
-                        <span><?=$item['title']?></span><span class="flex-shrink-0 text-secondary"><?=substr($item["register_date"],0,10)?></span>
-                        <?php if($item["board_status"]==1){ ?>
-                        <span class="badge bg-info">답변대기</span>
-                        <?php
-                         }
+                      <?php
                          if($item["board_status"]==2 && substr($item['update_date'],0,10) == substr(date("Y-m-d H:i:s"),0,10)){
-                          ?>
-                        <span class="badge bg-success">답변완료</span> New
+                      ?>
+                      <a class="d-flex justify-content-between new" href="/CS/Questions/Detail?idx=<?=$item['idx']?>">
                         <?php
-                         }if($item["board_status"]==2 && substr($item['update_date'],0,10) !=  substr(date("Y-m-d H:i:s"),0,10)){
-                          ?>
-                        <span class="badge bg-success">답변완료</span>
-                        <?php
+                        }else{
+                        ?>
+                        <a class="d-flex justify-content-between" href="/CS/Questions/Detail?idx=<?=$item['idx']?>">
+                          <?php
                         }
                         ?>
-                      </a>
+                          <span class="flex-shrink-0 flex-grow-0"><?=$item['title']?></span>
+                          <span class="flex-shrink-0 flex-grow-0 text-center"><?=substr($item["register_date"],0,10)?></span>
+                          <?php if($item["board_status"]==1){ ?>
+                          <span class="badge bg-info flex-shrink-0 flex-grow-0">답변대기</span>
+                          <?php
+                         }
+                         if($item["board_status"]==2){
+                          ?>
+                          <span class="badge bg-success">답변완료</span>
+                          <?php
+                        }
+                        ?>
+                        </a>
                     </li>
                   </ul>
                   <?php
                   }
                   }else{
                   ?>
-                  <p>등록된 게시물이 없습니다</p>
+                  <li class="mt-3 ps-3">등록된 게시물이 없습니다</li>
                   <?php
                   }
                   ?>
@@ -222,7 +257,7 @@
         <div class="card-wrapper">
           <div class="card card-board">
             <div
-              class="card-header d-flex justify-content-between align-items-center"
+                    class="card-header d-flex justify-content-between align-items-center"
             >
               <h3 class="card-title">공지사항</h3>
               <a href="/CS/Notice" class="more-btn">+more</a>
@@ -231,14 +266,17 @@
               <ul>
                 <?php
                    if(is_array($notice_list)&& count($notice_list) > 0){
-                    foreach($notice_list as $item){
+                foreach($notice_list as $item){
                 ?>
-                <li><a href="/CS/Notice/Detail?idx=<?=$item['idx']?>">[공지사항]<?=$item["title"]?></a><span style="float: right"><?=substr($item["register_date"],0,10)?></span></li>
+                <li class="d-flex align-items-center">
+                  <a class="flex-grow-1 p-0 text-truncate" href="/CS/Notice/Detail?idx=<?=$item['idx']?>"><?=$item["title"]?></a>
+                  <span class="flex-shrink-0"><?=substr($item["register_date"],0,10)?></span>
+                </li>
                 <?php
                     }
                   }else{
                   ?>
-                <p>등록된 게시물이 없습니다</p>
+                <li class="mt-3 ps-3">등록된 게시물이 없습니다</li>
                 <?php
                   }
                   ?>
@@ -249,10 +287,10 @@
         <div class="card-wrapper my-info-card">
           <div class="card card-board">
             <div
-              class="card-header d-flex justify-content-between align-items-center"
+                    class="card-header d-flex justify-content-between align-items-center"
             >
               <h3 class="card-title">나의정보 관리</h3>
-<!--              <a href="#" class="more-btn">+more</a>-->
+              <!--              <a href="#" class="more-btn">+more</a>-->
             </div>
             <div class="card-body">
               <ul class="row mt-4">
@@ -287,24 +325,61 @@
 </div>
 
 <script>
+  $(document).ready(function(){
+    seller_sequence();
+  });
+
+  function seller_turn(workflow_id){
+    if(workflow_id != ""){
+      $('#turn_'+workflow_id).attr('class','d-flex justify-content-between new');
+      $("#new_badge").css('display','block');
+    }
+
+  }
+
   const tabButtons = document.querySelectorAll('.question-answer .nav-link');
-	let tabLink = document.querySelector('.question-answer .more-btn');
-	tabButtons.forEach(button => {
-		button.addEventListener('click', function() {
+  let tabLink = document.querySelector('.question-answer .more-btn');
+  tabButtons.forEach(button => {
+    button.addEventListener('click', function() {
       switch (this.id) {
         case 'contract-tab':
-					tabLink.href = '/Seller/Contract';
-					break;
-				case 'product-tab':
-					tabLink.href = '/Seller/Item/ItemList';
-					break;
-				case 'extra-tab':
-					tabLink.href = '/CS/Questions';
-					break;
+          tabLink.href = '/Seller/Contract?p_n=1';
+          break;
+        case 'product-tab':
+          tabLink.href = '/Seller/Item/ItemList?p_n=1';
+          break;
+        case 'extra-tab':
+          tabLink.href = '/CS/Questions';
+          break;
         default:
-					break;
+          break;
       }
     })
   })
+
+  function seller_sequence(){
+    var uuid = $("#uuid").val();
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'esignon hoycj/zS2iBKwO95SuCOPiuOIR5uB/CaEuigxeSQUgcuxtrKGc29pDeTM7iwtxfXx+2A1xXaJH2mjtReQZYfVjw1e654SY1oMsDmC/FEmrCK25FyaIIlRVcHzMrV3LQ4'
+      }
+    };
+
+    fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=9&field_name=seller_uuid&field_value='+uuid+'', options)
+            .then(response => response.json())
+            .then(response => {console.log(response);
+              var j = 0;
+              for(var i =0; i <response['workflow_list'].length; i++){
+                if(response['workflow_list'][i]['order'] == 2 && response['workflow_list'][i]['status'] == "Playing"){
+                  seller_turn(response['workflow_list'][i]['workflow_id']);
+                  j++;
+                }
+              }
+            })
+            .catch(err => console.error(err));
+  }
+
 
 </script>

@@ -1,26 +1,39 @@
 <!-- 구매자 메뉴-->
 <?php
-$workers = $_SESSION['buyer_info']['workers'];
-$severely_disabled = $_SESSION['buyer_info']['severely_disabled'];
-$mild_disabled = $_SESSION['buyer_info']['mild_disabled'];
+if($_SESSION['login_info']['type'] != 'buyer' || $_SESSION['login'] != 'success'){
+echo "
+<script>
+  alert('로그인을 해주세요.');
+  location.href = '/Auth/SignIn';
+</script>
+";
+}
+?>
+<?php
+$workers = $_SESSION['buyer_info']['workers']; // 상시 근로자 수
+$severely_disabled = $_SESSION['buyer_info']['severely_disabled']; // 중증
+$mild_disabled = $_SESSION['buyer_info']['mild_disabled'];  //경증
+$tax_rate = $_SESSION['buyer_info']['tax_rate']; //법인세
+if($tax_rate >0){
+$cal_tax_rate = $tax_rate*0.01;
+}
 $classification = 0;
-if($_SESSION['buyer_info']['classification'] == 1){ //기업구분에 따른 의무고용율
+if($_SESSION['buyer_info']['classification'] == 1){ // 기업구분에 따른 의무고용율
 $classification = 0.031;
 }else{
 $classification = 0.034;
 }
-$disabled = $severely_disabled + ($mild_disabled*2);
+$disabled = ($severely_disabled*2)+ $mild_disabled; // 장애인 근로자 계산
 if($workers<50){
 $employ = 0;
 }else{
 $employ =  floor($workers*$classification);
 }
-if($employ != 0){
-  $ratio = $disabled/$employ; //의무고용인원충족비율
+if($employ > 0){
+$ratio = $disabled/$employ; //의무고용인원충족비율
 }else{
-  $ratio = 0;
+$ratio = 0;
 }
-
 $base = 0;     //부담금기초
 if($workers<100){
 $base = 0;
@@ -37,88 +50,89 @@ $base = 1378800;
 else if($ratio > 0){
 $base = 1608600;
 }else{
-$base = 1914400;
+$base = 1914440;
 }
-
+if($employ == $disabled){
+$total_money = 0;
+}else{
 $employ = $employ-$disabled;
-$total = $base * $employ*12 ;
-//echo $total;
-$total = $total + ($total*0.1);
-$total_money = $total; // 납부금액
-//echo $total_money;
-$Expectation =$_SESSION['Expectation']['Expectation'];
-$Expectation_money = number_format($Expectation);
-
-$reduction_money = $data['ReductionMoney']['reduction_money'];
-$buyer_reduction = $_SESSION['ReductionMoney']['buyer_reduction'];
-$Remainder = $total -$buyer_reduction;
-if($buyer_reduction !=""){
-$limit = ($buyer_reduction /$total_money)*100;
-$limit = (int)($limit);
-if((int)$limit >= 60){
-$buyer_reduction = $total*60/100;
-$Remainder = 0;
+$total = $base * $employ*12 ; // 법인세 적용 전 납부급액
+$total_money = $total + ($total*$cal_tax_rate); // 법인세 적용 후 납부금액
+}
+$buyer_reduction = $_SESSION['ReductionMoney']['buyer_reduction']; // 감면금액
+if($buyer_reduction !="" && $total_money > 0){
+$limit = ($buyer_reduction /$total)*100;
+if($limit >= 60){
+$buyer_reduction = ($total*0.6)+ ($total*0.6*$cal_tax_rate); // $cal_tax_rate = 법인세 *0.01
+}else{
+$buyer_reduction = $buyer_reduction+($buyer_reduction*$cal_tax_rate);
 }
 }
-$Remainder_money = $Remainder;
-$reduction_money =  $_SESSION['ReductionMoney']['reduction_money'];
-$buyer_reduction =  $buyer_reduction;
-
-
+$Remainder_money = $total_money -$buyer_reduction; // 납부금액 - 감면금액
+$max_reduction = $total*0.6*(1+$cal_tax_rate); // 감면금액의 60%
+$limit_reduction = $max_reduction- $buyer_reduction;
+if($total_money <= 0){
+$Remainder_money = 0;
+$buyer_reduction = 0;
+$total_money = 0;
+}
 ?>
-<?php
-  if($_SESSION["login_info"]["type"] == "buyer"){
-  ?>
-<div
-  class="left-fixed-box buyer-left-box bg-dark py-4 px-3 text-white">
-  <h2 class="visually-hidden">감면액 및 계약리스트</h2>
-  <div class="mb-4 pb-3 reduction-box">
-    <h3 class="h6 mb-3">예상 납부금액</h3>
-    <p class="text-end m-0 text-white fw-bold"><?=number_format($total_money)?>원</p>
+
+<div class="left-fixed-box buyer-left-box py-4 px-3 text-white">
+  <h2 class="mb-4"><span class="fw-bold"><?=$_SESSION['buyer_info']['company_name']?></span>님의<br/>감면금액 계산기</h2>
+  <div class="mb-3 pb-3 reduction-box">
+    <h3 class="mb-1"><span>고용 부담금 납부금액</span></h3>
+    <p class="sub-text mb-2">* 법인세 <span class="yellow-text"><?=$tax_rate?>%</span>적용</p>
+    <p class="m-0 text-white fw-bold text-end"><?=number_format($total_money)?>원</p>
   </div>
   <div class="mb-4 pb-3 reduction-box">
-    <h3 class="h6 mb-1">기대 감면금액</h3>
-    <p class="mb-3 text-white-50" style="font-size: 14px;">* 납부금액의 <span class="text-warning">60%</span>까지 감면받을 수 있습니다.</p>
-    <p class="text-end m-0 text-white fw-bold"><?=number_format($buyer_reduction)?>원</p>
+    <h3 class="mb-1"><span>기대 감면금액</span></h3>
+    <p class="sub-text mb-2">* <span class="yellow-text"><?=number_format($max_reduction)?>원</span>까지 감면 받을 수 있습니다.</p>
+    <p class="m-0 text-white fw-bold text-end"><?=number_format($buyer_reduction)?>원</p>
   </div>
   <div class="mb-4 border-bottom-0 reduction-box">
-    <h3 class="h6 mb-3">남은 감면금액</h3>
-    <p class="text-end m-0 text-white fw-bold"><?=number_format($Remainder_money)?>원</p>
+    <h3 class="mb-1"><span>감면 후 납부금액</span></h3>
+    <?php
+    if($limit_reduction <= 0){
+    $limit_reduction = 0;
+    }
+    ?>
+    <p class="sub-text mb-2">* 남은 감면 한도 <span class="yellow-text"><?=number_format($limit_reduction)?>원</span></p>
+    <?php
+    if($max_reduction >= $Remainder_money){
+    $Remainder_money = $max_reduction;
+    }
+    ?>
+    <p class="m-0 text-white fw-bold text-end"><?=number_format($Remainder_money)?>원</p>
   </div>
 
-  <div class="mt-4">
+  <div class="mt-5">
+    <h2 class="mb-3"><span class="fw-bold"><?=$_SESSION['buyer_info']['company_name']?></span>님의<br/>진행 계약 현황 &#10095;</h2>
     <?php
     if(!$_SESSION["Contract"]) {
     ?>
-    <div class="pt-3" style="border-top: 1px dashed #6c757d;">
-      <p class="text-white" style="font-size: 0.8rem;">* 현재 진행중인 계약이 없습니다.</p>
+    <div class="pt-2">
+      <p class="text-white" style="font-size: 14px;">* 현재 진행중인 계약이 없습니다.</p>
     </div>
+
     <?php
     } else {
     ?>
     <ul class="buyer-contract-list p-0">
-    <?php
+      <?php
     foreach($_SESSION["Contract"] as $item){
     $contract_regdt = $item["contract_regdt"];
     $timestamp = strtotime($contract_regdt);
     $contract_regdt = date("Y-m-d", $timestamp);
     $product_price = number_format($item["product_price"]);
     ?>
-      <li class="p-2 bg-white text-dark mb-3" onclick="contractView(<?=$item["workflow_id"]?>);">
-        <h3 class="text-center"><?=$item["company_name"]?></h3>
-        <div class="d-flex flex-column align-items-center mb-2">
-          <div class="left-item-img d-flex align-items-center justify-content-center border">
-            <img class="mh-100" src="/uploads/<?=$item['representative_image']?>" alt="상품이미지">
-          </div>
-          <h4 class="mt-1"><?=$item["product_name"]?></h4>
-        </div>
-        <div class="text-end">
-          <p class="m-0"><?=$product_price?>원</p>
-          <p class="m-0"><?=$contract_regdt?></p>
-          <p class="m-0"><?=$item["product_quantity"]?></p>
-        </div>
+      <li class="mb-3 pb-3" onclick="contractView(<?=$item["workflow_id"]?>);">
+        <h4 class="mb-2 text-start"><?=$item["product_name"]?></h4>
+        <p class="m-0"><span>계약금액</span><?=$product_price?>원</p>
+        <p class="m-0"><span>계약일자</span><?=$contract_regdt?></p>
+        <p class="m-0"><span>수량</span><?=$item["product_quantity"]?></p>
       </li>
-    <?php
+      <?php
     }
     ?>
     </ul>
@@ -127,16 +141,14 @@ $buyer_reduction =  $buyer_reduction;
     ?>
   </div>
 </div>
-<?php
-}
-?>
+
 <script>
   function contractView(workflow_id){
     const options = {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+        Authorization: 'esignon hoycj/zS2iBKwO95SuCOPiuOIR5uB/CaEuigxeSQUgcuxtrKGc29pDeTM7iwtxfXx+2A1xXaJH2mjtReQZYfVjw1e654SY1oMsDmC/FEmrCK25FyaIIlRVcHzMrV3LQ4'
       }
     };
     fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_id + '?offset=%2B09%3A00', options)

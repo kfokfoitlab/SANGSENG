@@ -29,6 +29,26 @@ class AdditionalService extends Base
 
     } //}}}
 
+    public function Register(){
+        $result = $this->model->Register($_POST);
+        if($result == 1) {
+            echo "
+            <script>
+                alert('저장하였습니다.');
+                window.location.replace('/TermsHistory/Lists');
+            </script>
+        ";
+        }else{
+            echo "
+            <script>
+                alert('실패했습니다.');
+                window.location.replace('/TermsHistory/Lists');
+            </script>
+        ";
+        }
+        die();
+    }
+
     public function UpdateSubmit()
     { //{{{
 

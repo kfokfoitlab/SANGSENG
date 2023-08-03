@@ -1,5 +1,14 @@
 <!-- 판매자 메뉴-->
-
+<?php
+if($_SESSION['login_info']['type'] != 'seller'|| $_SESSION['login'] != 'success'){
+echo "
+<script>
+alert('로그인을 해주세요.');
+location.href = '/Auth/SignIn';
+</script>
+";
+}
+?>
 <?php
 $total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCount"]['mild_disabled'];
 ?>
@@ -8,9 +17,19 @@ $total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCoun
 >
   <div class="text-center mb-3">
     <div class="d-flex justify-content-center align-items-center rounded-circle border mx-auto mb-3 overflow-hidden bg-white" style="width: 150px; height: 150px;">
-      <img src="/uploads/<?=$_SESSION['sellerinfo']['seller_logo']?>" alt="로고" />
+      <?php
+      if( ! empty($_SESSION['sellerinfo']['seller_logo']) ) {
+      ?>
+      <img src="/uploads/<?=$_SESSION['sellerinfo']['seller_logo']?>" alt="<?=$_SESSION['login_info']['company_name']?> 로고" />
+      <?php
+      } else {
+      ?>
+      <img class="mh-100" src="/assets/images/resource/logo_default.png" alt="기업로고를 등록해주세요">
+      <?php
+      }
+      ?>
     </div>
-    <h2 class="mb-4"><a class="h5 text-white" href="/Seller"><?=$_SESSION["login_info"]['company_name']?></a></h2>
+    <h2 class="mb-4"><a class="h5 text-white" href="/Seller"><?=$_SESSION["sellerinfo"]['company_name']?></a></h2>
   </div>
   <div class="mb-3">
     <h3 class="text-white">매출액</h3>
@@ -49,6 +68,9 @@ $total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCoun
               </li>
               <li>
                 <a href="/Seller/IMJOB/Manage">장애인 근로자 등록</a>
+              </li>
+              <li>
+                <a href="/Seller/IMJOB/IMJOBRegist">장애인 근로자 일괄 등록</a>
               </li>
               <li>
                 <a
@@ -115,7 +137,7 @@ $total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCoun
           <div class="accordion-body">
             <ul class="p-0 text-start">
               <li>
-                <a href="/Seller/Contract">계약현황 조회</a>
+                <a href="/Seller/Contract?p_n=1">계약현황 조회</a>
               </li>
               <li>
                 <a href="/Seller/DeliveryStatus">배송현황 조회</a>
@@ -176,9 +198,15 @@ $total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCoun
     } else {
       nav.classList.remove('on')
     }
-    if(window.location.pathname == '/Seller/Item/ItemUpdate') {
-      document.querySelector('a[href="/Seller/Item/ItemList"]').classList.add('on')
-    }
+		if(window.location.pathname.includes('/Seller/IMJOB/IMJOBView')) {
+			document.querySelector('a[href="/Seller/IMJOB/List?p_n=1"]').classList.add('on')
+		}
+		if(window.location.pathname.includes('/Seller/Item/ItemUpdate')) {
+			document.querySelector('a[href="/Seller/Item/ItemList?p_n=1"]').classList.add('on')
+		}
+		if(window.location.pathname.includes('/Seller/DeliveryStatus')) {
+			document.querySelector('a[href="/Seller/DeliveryStatus"]').classList.add('on')
+		}
   })
 
   switch (true) {
@@ -219,7 +247,7 @@ $total = $_SESSION["disabledCount"]['severely_disabled']+$_SESSION["disabledCoun
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+        Authorization: 'esignon hoycj/zS2iBKwO95SuCOPiuOIR5uB/CaEuigxeSQUgcuxtrKGc29pDeTM7iwtxfXx+2A1xXaJH2mjtReQZYfVjw1e654SY1oMsDmC/FEmrCK25FyaIIlRVcHzMrV3LQ4'
       }
     };
 

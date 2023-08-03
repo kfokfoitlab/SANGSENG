@@ -1,64 +1,68 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\Management\Company\ApplicationModel;
-use App\Models\CompanyModel;
-use App\Models\DatabaseModel;
+use App\Models\Seller\ItemModel;
 use App\Models\Buyer\BuyerModel;
-
+use App\Models\Seller\SellerModel;
 class Home extends BaseController
 {
-    private $model;
-    private $database_model;
+    private $item_model;
     private $buyer_model;
+    private $seller_model;
+
     public function __construct()
     { //{{{
         $this->buyer_model = new BuyerModel;
-        $this->application_model = new ApplicationModel;
-        $this->database_model = new DatabaseModel;
+        $this->item_model = new ItemModel;
+        $this->seller_model = new SellerModel;
+
     } //}}}
 
     public function index()
     {
-     /*   $job_category = $this->database_model->getJobAll();
-        $recommended_data = $this->application_model->getRecommendedList(5);
-
-        // 현재 페이지
-        $page = (@$_GET["page"])?$_GET["page"] : 1;
-        // 페이지당 노출 수
-        $this->item_per_page = (@$_GET["length"])?$_GET["length"]:12;
-        // 검색 설정
-        $data = $this->database_model->SearchList($_POST);
-       $search_query = array(
-             "title" => @$_GET["st"]
-            ,"address" => @$_GET["ad"]
-            ,"profession" => @$_GET["pf"]
-            ,"employment_type" => @$_GET["et"]
-            ,"career" => @$_GET["cr"]
-            ,"work_type" => @$_GET["wt"]
-            ,"business_type" => @$_GET["bt"]
-            ,"sort" => @$_GET["sort"]
-            ,"page" => $page
-            ,"length" => $this->item_per_page
-        );
-        $recent_company = $this->company_model->getAllList(0, $search_query);*/
         $value = $_GET["value"];
         $ranking = $this->buyer_model->RecommendationList($value);
+        $new_product = $this->buyer_model->NewProductList();
         $reduction =  $this->buyer_model->ReductionMoney();
-
+        $notice_list = $this->seller_model->getNoticeList();
+        $promotion_video = $this->seller_model->getPromotionVideo();
         $data = array(
             "data" => $ranking["data"],
-            "reduction" => $reduction
+            "reduction" => $reduction,
+            "new_product" => $new_product,
+            "promotion_video" => $promotion_video,
+            "notice_list" => $notice_list,
+
         );
 
-/*        $data = array(
-             "job_category" => $job_category
-            ,"recommended_data" => $recommended_data
-            ,"data" => $data["data"]
-        );*/
-        
         echo view("Common/Header.html");
         echo view('Home/Index.html', $data);
         echo view("Common/Footer.html");
+        echo view("Modal/ModalProductForm.html");
+    }
+    public function SessionCategory(){
+        $category = $this->item_model->SessionCategory();
+        $data = array(
+            "data" => $category
+        );
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function SessionCategory2(){
+        $category = $this->item_model->SessionCategory2($_POST);
+        $data = array(
+            "data" => $category
+        );
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function Consulting(){
+
+            $consulting = $this->item_model->ConsultingReg($_POST);
+            echo $consulting;
+            die();
+
     }
 }

@@ -311,7 +311,7 @@ $.extend({
                     $("#impairment-level" + level + " .list-group").append(obj);
                 });
             }
-            ,error: function(res){
+            ,error: function(res){``
                 console.log("error", res);
             }
         }); 

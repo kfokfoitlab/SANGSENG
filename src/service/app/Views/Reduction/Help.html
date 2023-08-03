@@ -123,13 +123,13 @@
                 <p class="text-small">※ 구매기업과 판매기업의 사용자등록증 자동 추가</p>
               </td>
               <td>
-                <button class="btn btn-outline-secondary btn-sm"onclick="downloadFileNew('<?=$seller_info["seller_business_license"]?>','<?=$seller_info["seller_business_license_ori"]?>');" >다운로드</button>
-                <input type="hidden" name="seller_business_license" value='<?=$data["seller_business_license"]?>'>
-                <input type="hidden" name="seller_business_license_ori" value='<?=$data["seller_business_license_ori"]?>'>
-                <br><br><br>
                 <button class="btn btn-outline-secondary btn-sm"onclick="downloadFileNew('<?=$buyer_info["buyer_documents"]?>','<?=$buyer_info["buyer_documents_ori"]?>');" >다운로드</button>
                 <input type="hidden" name="buyer_documents" value='<?=$data["buyer_documents"]?>'>
                 <input type="hidden" name="buyer_documents_ori" value='<?=$data["buyer_documents_ori"]?>'>
+                <br><br><br>
+                <button class="btn btn-outline-secondary btn-sm"onclick="downloadFileNew('<?=$seller_info["seller_business_license"]?>','<?=$seller_info["seller_business_license_ori"]?>');" >다운로드</button>
+                <input type="hidden" name="seller_business_license" value='<?=$data["seller_business_license"]?>'>
+                <input type="hidden" name="seller_business_license_ori" value='<?=$data["seller_business_license_ori"]?>'>
               </td>
               <td>
                 <p>2022.08.30</p>
@@ -139,7 +139,9 @@
           </table>
           <div class="d-flex justify-content-center mt-5">
             <a href="/assets/download/부담금감면신청서.hwp" download class="btn btn-dark me-3">부담금 감면 신청서 양식 다운로드</a>
+<!--
             <a class="btn btn-dark" onclick="zip('<?=$seller_info["sales_file"]?>','<?=$seller_info["workers_file"]?>','<?=$seller_info["seller_business_license"]?>');">제출문서 일괄 다운로드</a>
+-->
           </div>
         </section>
       </div>
@@ -180,7 +182,7 @@
        method: 'GET',
        headers: {
          accept: 'application/json',
-         Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='
+         Authorization: 'esignon hoycj/zS2iBKwO95SuCOPiuOIR5uB/CaEuigxeSQUgcuxtrKGc29pDeTM7iwtxfXx+2A1xXaJH2mjtReQZYfVjw1e654SY1oMsDmC/FEmrCK25FyaIIlRVcHzMrV3LQ4'
        }
      };
      fetch('https://docs.esignon.net/api/v3/workflows/' + workflow_id + '?offset=%2B09%3A00', options)

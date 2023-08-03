@@ -2,6 +2,20 @@
   // Left Menu
   require(__DIR__.'/Components/Left.html');
   ?>
+
+<script>
+	function replaceMoney(money){
+		var money = money.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		$('#product_price').val(money);
+		money = money.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		$('#product_price1').val(money);
+	}
+
+	$(function() {
+	  replaceMoney($('#product_price1').val());
+	})
+</script>
+
 <div class="flex-grow-1 bg-light">
   <section class="pt-5 layout-pb-120 item-update">
     <div class="auto-container">
@@ -9,30 +23,45 @@
         <h3 class="mb-4 px-3 pb-3 fw-bold border-bottom border-2">상품수정</h3>
         <?php
           if(is_array($data) && count($data) > 0){
-        foreach($data as $item){
-        $start_date = $item['product_start'];
+        $start_date = $data['product_start'];
         $timestamp = strtotime($start_date);
         $start_date = date("Y-m-d", $timestamp);
 
-        $end_date = $item['product_end'];
+        $end_date = $data['product_end'];
         $timestamp = strtotime($end_date);
         $end_date = date("Y-m-d", $timestamp);
         ?>
         <form name="myForm" method="post" action="/Seller/Item/ItemUpdateSubmit" enctype="multipart/form-data">
-        <input type="hidden"  value="<?=$item['product_no']?>" name = "product_no">
+        <input type="hidden"  value="<?=$data['product_no']?>" name = "product_no">
+        <input type="hidden" value ="<?=$data['product_price']?>" name="product_price" id="product_price">
           <div class="px-3">
             <div class="row mb-4 align-items-center">
               <div class="col-2">
-                <label for="product-category" class="form-label">카테고리</label>
+                <label for="product_category" class="form-label">카테고리</label>
               </div>
               <div class="col-10">
                 <select name="product_category" class="form-select d-inline-block w-50"
-                        aria-label="Default select example" id="product-category">
-                  <option value="1" <?php if($item['product_category']==1){echo "selected";}?>>사무용품</option>
-                  <option value="2" <?php if($item['product_category']==2){echo "selected";}?>>생활용품</option>
-                  <option value="3" <?php if($item['product_category']==3){echo "selected";}?>>전산용품</option>
-                  <option value="4" <?php if($item['product_category']==4){echo "selected";}?>>식음료</option>
-                  <option value="5" <?php if($item['product_category']==5){echo "selected";}?>>청소용품</option>
+                        aria-label="Default select example" id="product_category"  onchange="category_type();">
+                  <?php
+                  foreach($category_type1 as $item){
+                  ?>
+                  <option value="<?=$item['category_type1']?>" <?php if($data['product_category']== $item['category_type1']){echo "selected";}?>><?=$item['category_type1']?></option>
+                  <?php
+                  }
+                  ?>
+                </select>
+
+                <select name="product_category2" class="form-select d-inline-block w-50"
+                        aria-label="Default select example" id="product_category2">
+                  <?php
+
+                  foreach($category_type2 as $item){
+                  ?>
+                  <option value="<?=$item['category_type2']?>" <?php if($data['product_category2']== $item['category_type2']){echo "selected";}?>><?=$item['category_type2']?></option>
+                  <?php
+
+                  }
+                  ?>
                 </select>
               </div>
             </div>
@@ -42,7 +71,7 @@
                 <label for="productName" class="form-label">상품명</label>
               </div>
               <div class="col-10">
-                <input type="text" name="product_name" id="productName" value ="<?=$item['product_name']?>" class="form-control" required/>
+                <input type="text" name="product_name" id="productName" value ="<?=$data['product_name']?>" class="form-control" required/>
               </div>
             </div>
 
@@ -69,11 +98,11 @@
                 <div class="d-flex">
                   <div class="selector-item me-2">
                     <input type="radio" id="taxation" name="product_surtax" value="1" class="selector-item-radio"
-                    <?php if($item['product_surtax']==1){echo "checked";}?> />
+                    <?php if($data['product_surtax']==1){echo "checked";}?> />
                     <label for="taxation" class="selector-item-label px-3 py-1 border rounded">과세상품 <span class="tax10">(부가세 10%)</span></label>
                   </div>
                   <div class="selector-item">
-                    <input type="radio" id="taxFree" name="product_surtax" value="2" class="selector-item-radio" <?php if($item['product_surtax']==2){echo "checked";}?>/>
+                    <input type="radio" id="taxFree" name="product_surtax" value="2" class="selector-item-radio" <?php if($data['product_surtax']==2){echo "checked";}?>/>
                     <label for="taxFree" class="selector-item-label px-3 py-1 border rounded">면세상품</label>
                   </div>
                 </div>
@@ -88,25 +117,25 @@
                 <div class="d-flex">
                   <div class="selector-item me-2">
                     <input type="radio" id="deliverOnce" name="delivery_cycle" value="1" class="selector-item-radio"
-                    <?php if($item['delivery_cycle']==1){echo "checked";}?>/>
+                    <?php if($data['delivery_cycle']==1){echo 'checked';}?>/>
                     <label for="deliverOnce" class="selector-item-label px-3 py-1 border rounded" >1번</label>
                   </div>
                   <div class="selector-item me-2">
-                    <input type="radio" id="deliverAWeek" name="delivery_cycle" value="2" class="selector-item-radio" <?php if($item['delivery_cycle']==2){echo "checked";}?>/>
+                    <input type="radio" id="deliverAWeek" name="delivery_cycle" value="2" class="selector-item-radio" <?php if($data['delivery_cycle']==2){echo "checked";}?>/>
                     <label for="deliverAWeek" class="selector-item-label px-3 py-1 border rounded">1주일에 한 번</label>
                   </div>
                   <div class="selector-item me-2">
-                    <input type="radio" id="deliver1Month" name="delivery_cycle" value="3" class="selector-item-radio" <?php if($item['delivery_cycle']==3){echo "checked";}?>/>
+                    <input type="radio" id="deliver1Month" name="delivery_cycle" value="3" class="selector-item-radio" <?php if($data['delivery_cycle']==3){echo "checked";}?>/>
                     <label for="deliver1Month" class="selector-item-label px-3 py-1 border rounded">1달에 한 번</label>
                   </div>
                   <div class="selector-item me-2">
                     <input type="radio" id="deliver2Months" name="delivery_cycle" value="4"
-                    <?php if($item['delivery_cycle']==4){echo "checked";}?>   class="selector-item-radio"/>
+                    <?php if($data['delivery_cycle']==4){echo "checked";}?>   class="selector-item-radio"/>
                     <label for="deliver2Months" class="selector-item-label px-3 py-1 border rounded">2달에 한 번</label>
                   </div>
                   <div class="selector-item me-2">
                     <input type="radio" id="deliver6Months" name="delivery_cycle" value="5"
-                    <?php if($item['delivery_cycle']==5){echo "checked";}?>     class="selector-item-radio"/>
+                    <?php if($data['delivery_cycle']==5){echo "checked";}?>     class="selector-item-radio"/>
                     <label for="deliver6Months" class="selector-item-label px-3 py-1 border rounded">6달에 한 번</label>
                   </div>
                 </div>
@@ -121,11 +150,11 @@
                 <div class="row align-items-center">
                   <div class="col-6">
                     <input class="add-quantity form-control" type="text" name="product_quantity"
-                           value ="<?=$item['product_quantity']?>"    placeholder="100Box(250,000매)"/>
+                           value ="<?=$data['product_quantity']?>"    placeholder="100Box(250,000매)"/>
                   </div>
                   <div class="col-6">
-                    <input class="add-price form-control" type="text" name="product_price" placeholder="1200000(숫자만 입력)"
-                           value ="<?=$item['product_price']?>"   oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')"/>
+                    <input class="add-price form-control" type="text" name="product_price1" id="product_price1" placeholder="1200000(숫자만 입력)"
+                           value ="<?=$data['product_price']?>" oninput="replaceMoney(this.value)" maxlength="11"/>
                   </div>
                 </div>
               </div>
@@ -138,25 +167,25 @@
                   <!-- 대표이미지 -->
                   <li class="row mb-3">
                     <div class="col-2">
-                      <div class="preview-bg-img bg-light border rounded" style="background-size: contain;background-image: url('/uploads/<?=$item['representative_image']?>')">
+                      <div class="preview-bg-img bg-light border rounded" style="background-size: contain;background-image: url('/uploads/<?=$data['representative_image']?>')">
                         <!--<img src="/uploads/upload_files/<?=$item['representative_image']?>" alt="Product">--></div>
                     </div>
                     <div class="col-6 ms-4 px-4 py-3">
                       <label for="representative-img" class="form-label">대표 이미지</label>
                       <input id="representative-img" name="representative_image" class="form-control product-img-input mb-2"
-                           type="file" accept="image/*" />기존파일 : <?=$item['representative_image_ori']?>
-                      <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$item["representative_image"]?>','<?=$item["representative_image_ori"]?>');">기존파일
+                           type="file" accept="image/*" />기존파일 : <?=$data['representative_image_ori']?>
+                      <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["representative_image"]?>','<?=$data["representative_image_ori"]?>');">기존파일
                         다운로드
                       </button>
-                      <input type="hidden" name="representative_image" value='<?=$item["representative_image"]?>'>
-                      <input type="hidden" name="representative_image_ori" value='<?=$item["representative_image_ori"]?>'>
+                      <input type="hidden" name="representative_image" value='<?=$data["representative_image"]?>'>
+                      <input type="hidden" name="representative_image_ori" value='<?=$data["representative_image_ori"]?>'>
                     </div>
                   </li>
                   <!-- 추가이미지 -->
                   <li class="row mb-3">
                     <div class="col-2">
                       <?php
-                      if( ! empty($item['product_image1']) ) {
+                      if( ! empty($data['product_image1']) ) {
                       ?>
                       <div class="preview-bg-img border bg-light border rounded" style="background-size: contain;background-image: url('/uploads/<?=$item['product_image1']?>')"></div>
                       <?php
@@ -170,18 +199,18 @@
                     <div class="col-6 ms-4 px-4 py-3">
                       <label for="product-img1" class="form-label text-secondary">추가 이미지 01<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
                       <input id="product-img1"  name="product_image1" class="form-control product-img-input mb-2" type="file"
-                             accept="image/*"/>기존파일 : <?=$item['product_image1_ori']?>
-                      <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$item["product_image1"]?>','<?=$item["product_image1_ori"]?>');">기존파일
+                             accept="image/*"/>기존파일 : <?=$data['product_image1_ori']?>
+                      <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["product_image1"]?>','<?=$data["product_image1_ori"]?>');">기존파일
                         다운로드
                       </button>
-                      <input type="hidden" name="product_image1" value='<?=$item["product_image1"]?>'>
-                      <input type="hidden" name="product_image1_ori" value='<?=$item["product_image1"]?>'>
+                      <input type="hidden" name="product_image1" value='<?=$data["product_image1"]?>'>
+                      <input type="hidden" name="product_image1_ori" value='<?=$data["product_image1"]?>'>
                     </div>
                   </li>
                   <li class="row">
                     <div class="col-2">
                       <?php
-                      if( ! empty($item['product_image2']) ) {
+                      if( ! empty($data['product_image2']) ) {
                       ?>
                       <div class="preview-bg-img border bg-light border rounded" style="background-size: contain;background-image: url('/uploads/<?=$item['product_image2']?>')"></div>
                       <?php
@@ -195,8 +224,8 @@
                     <div class="col-6 ms-4 px-4 py-3">
                       <label for="product-img2" class="form-label text-secondary">추가 이미지 02<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
                       <input id="product-img2" name="product_image2" class="form-control product-img-input mb-2" type="file"
-                             accept="image/*"/>기존파일 : <?=$item['product_image2_ori']?>
-                      <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$item["product_image2"]?>','<?=$item["product_image2_ori"]?>');">기존파일
+                             accept="image/*"/>기존파일 : <?=$data['product_image2_ori']?>
+                      <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["product_image2"]?>','<?=$data["product_image2_ori"]?>');">기존파일
                       다운로드
                       </button>
                       <input type="hidden" name="product_image2" value='<?=$item["product_image2"]?>'>
@@ -210,13 +239,13 @@
             <div class="row mb-4 mt-5 align-items-center">
               <div class="col-12">
                 <label class="form-label mb-3">상품상세정보</label>
-                <textarea name="product_detail" class="form-control" placeholder="상품 상세정보를 입력해주세요."><?=$item['product_detail']?></textarea>
+                <textarea name="product_detail" class="form-control" placeholder="상품 상세정보를 입력해주세요."><?=$data['product_detail']?></textarea>
               </div>
             </div>
             <li class="row">
             <div class="col-2">
               <?php
-              if( ! empty($item['detail_img']) ) {
+              if( ! empty($data['detail_img']) ) {
               ?>
               <div class="preview-bg-img border bg-light border rounded" style="background-size: contain;background-image: url('/uploads/<?=$item['detail_img']?>')"></div>
               <?php
@@ -230,8 +259,8 @@
             <div class="col-6 ms-4 px-4 py-3">
               <label for="detail-img" class="form-label text-secondary">상품상세 이미지<span class="fw-normal" style="font-size: 0.8rem;">(선택사항)</span></label>
               <input id="detail-img" name="detail_img" class="form-control product-img-input mb-2" type="file"
-                     accept="image/*"/>기존파일 : <?=$item['detail_img_ori']?>
-              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$item["detail_img"]?>','<?=$item["detail_img_ori"]?>');">기존파일
+                     accept="image/*"/>기존파일 : <?=$data['detail_img_ori']?>
+              <button class="btn btn-outline-secondary btn-sm me-3 fw-normal" type="button"  onclick="downloadFileNew('<?=$data["detail_img"]?>','<?=$data["detail_img_ori"]?>');">기존파일
               다운로드
               </button>
               <input type="hidden" name="detail_img" value='<?=$item["detail_img"]?>'>
@@ -239,12 +268,12 @@
             </div>
             </li>
         <?php
-        }
+
         }
         ?>
             <div class="form-group mt-5">
               <div class="d-flex justify-content-between">
-                <button type="button" class="btn btn-danger px-4" tabindex=100 onclick="productDel(<?=$item['idx']?>);">삭제</button>
+                <button type="button" class="btn btn-danger px-4" tabindex=100 onclick="productDel(<?=$data['idx']?>);">삭제</button>
                 <div>
                   <button type="reset" onclick="history.back()" class="btn btn-outline-secondary px-4 me-3" tabindex=100>취소</button>
                   <button type="submit" class="btn btn-primary px-4" tabindex=100>수정</button>
@@ -293,6 +322,25 @@
       if(confirm("삭제하시겠습니까?")){
         location.href = "/Seller/Item/ItemDelete?idx=" + idx;
       }
-
     }
+  function category_type(){
+    if($("#product_category").val() != ""){
+      var category_type1 = $("#product_category").val();
+      $.ajax({
+        type: 'post',
+        url: "/"+_CONTROLLER+"/CategorySearch",
+        data: {
+          "category_type1": category_type1
+        },
+        success: function (result){
+          var result = JSON.parse(result);
+          $("#product_category2").empty();
+          for(var i = 0; i<result['data'].length; i++){
+            var data = "<option value='"+result['data'][i]['category_type2']+"'>"+result['data'][i]['category_type2']+"</option>";
+            $("#product_category2").append(data);
+          }
+        }
+      });
+    }
+  }
 </script>

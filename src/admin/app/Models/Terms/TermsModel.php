@@ -24,6 +24,21 @@ class TermsModel extends CommonModel
 
     } //}}}
 
+    public function Register($data){
+        $query = "
+            insert into
+                ".$this->table_name."
+            
+            set
+                  category = '".$data["category"]."'
+                ,contents = '".addslashes($data["contents"])."'
+                ,register_date = '".date("Y-m-d H:i:s")."'
+                ,terms_status = '1'
+        ";
+        $idx = $this->wrdb->insert($query);
+        return 1;
+    }
+
     public function Update($data)
     { //{{{
 
@@ -33,6 +48,7 @@ class TermsModel extends CommonModel
             set
                  category = '".$data["category"]."'
                 ,contents = '".addslashes($data["contents"])."'
+                ,update_date = '".date("Y-m-d H:i:s")."'
         ";
         $this->wrdb->insert($query);
 

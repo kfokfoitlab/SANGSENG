@@ -84,7 +84,8 @@
       var data = {
         "idx": idx,
         "reply_no": reply_no,
-        "reply_step": reply_step
+        "reply_step": reply_step,
+        "product_no": $('#product_no').val(),
       }
 
       $.ajax({
@@ -117,7 +118,8 @@
       if (confirm("수정하시겠습니까?")) {
         var data = {
           "idx": idx,
-          "reply_content": reply_content
+          "reply_content": reply_content,
+          "product_no": $('#product_no').val()
         }
 
         $.ajax({
@@ -170,6 +172,7 @@
         <p class="mb-3"><?=$data["product_detail"]?></p>
       </div>
       <form name="myForm" method="POST" action="">
+        <input type="hidden" id="login_type" value="<?=$_SESSION['login_info']['type']?>">
         <input type ="hidden" id="session" value="<?=$_SESSION['login']?>">
         <input type="hidden" name="product_no" id="product_no" value="<?=$data['product_no']?>">
         <input type="hidden" name="product_name" value="<?=$data['product_name']?>">
@@ -178,24 +181,27 @@
         <input type="hidden" name="product_price" id ="product_price" value= "<?=$data['product_price']?>">
         <input type="hidden" name="seller_company" id ="seller_company" value= "<?=$data['company_name']?>">
         <input type="hidden" name="idx" id ="idx" value= "<?=$data['idx']?>">
-        <input type="hidden" name="reduction_money" id ="reduction_money" value= "<?=$_GET['rm']?>">
-        <input type="hidden" name="product_quantity" id ="product_quantity" value= "<?=$item['product_quantity']?>">
+        <input type="hidden" name="reduction_money" id ="reduction_money" value= "<?=$data['reduction_money']?>">
+        <input type="hidden" name="ctype" id ="ctype" value= "detail">
+        <input type="hidden" name="product_quantity" id ="product_quantity" value= "<?=$data['product_quantity']?>">
+        <input type="hidden" name="product_category" id ="product_category" value= "<?=$data['product_category']?>">
+        <input type="hidden" name="representative_image" id ="representative_image" value= "<?=$data['representative_image']?>">
         <div class="d-flex pt-4 pb-5 mb-4">
           <div class="detail-left">
             <div>
               <div class="p-3 border w-100 d-flex align-items-center preview-img-big" style="height: 384px">
-                <img src="/uploads/<?=$data['representative_image']?>" alt="상품 이미지" class="mh-100">
+                <img src="/uploads/<?=$data['representative_image']?>" alt="<?=$data['product_name']?>" class="mh-100">
               </div>
               <ul class="d-flex mt-3 list-preview">
                 <li class="preview-img-small border p-2">
-                  <img class="mh-100" src="/uploads/<?=$data['representative_image']?>" alt="상품 상세이미지1">
+                  <img class="mh-100" src="/uploads/<?=$data['representative_image']?>" alt="<?=$data['product_name']?>">
                 </li>
 
                 <?php
               if( ! empty($data['product_image1']) ) {
               ?>
                 <li class="preview-img-small border p-2">
-                  <img class="mh-100" src="/uploads/<?=$data['product_image1']?>" alt="상품 상세이미지2">
+                  <img class="mh-100" src="/uploads/<?=$data['product_image1']?>" alt="<?=$data['product_name']?>-02">
                 </li>
                 <?php
               }
@@ -205,7 +211,7 @@
               if( ! empty($data['product_image2']) ) {
               ?>
                 <li class="preview-img-small border p-2">
-                  <img class="mh-100" src="/uploads/<?=$data['product_image2']?>" alt="상품 상세이미지3">
+                  <img class="mh-100" src="/uploads/<?=$data['product_image2']?>" alt="<?=$data['product_name']?>-03">
                 </li>
                 <?php
               }
@@ -237,35 +243,52 @@
                 <label for="delivery01" class="selector-item_label px-2 py-1 me-2"><?=$delivery_cycle?></label>
               </div>
             </div>
+            <?php
+            $reduction_per = ($data['reduction_money']/$data['product_price'])*100;
+            $reduction_per = round($reduction_per,1);
+            ?>
+            <div class="mt-5 pt-4 border-top text-end total-price">
+              <div class="w-100 row justify-content-end contract-price mb-2">
+                <p class="col-2 text-start">계약금액</p>
+                <p class="col-3 px-0 text-end"><?=number_format($data["product_price"])?> 원</p>
+              </div>
 
-            <div class="mt-5 pt-4 text-end border-top total-price">
-              <h2 class="mb-2"><span>계약금액&nbsp;</span><?=number_format($data["product_price"])?>원</h2>
-              <?php
-          if($_GET['rm'] != ""){
-          ?>
-              <h2><span>감면액&nbsp;</span><?=number_format($_GET['rm'])?>원</h2>
-              <?php
-            }
-            if($_GET['rm'] == ""){
-            ?>
-              <h2><span>감면액&nbsp;</span>0원</h2>
-              <?php
-            }
-            ?>
+              <div id="reduction_point" style="display: none">
+              <div class="w-100 row justify-content-end contract-price mb-0 align-items-center">
+                <p class="col-2 text-start">감면액</p>
+                <p class="col-3 px-0 text-end"><?=number_format($data['reduction_money'])?> 원</p>
+              </div>
+              <div class="w-100 row justify-content-end mb-2">
+                <p class="col-5 px-0 text-end text-danger contract-percentage fw-normal">
+                계약금액의 <span class="fw-bold">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
+                  </svg><?=$reduction_per?>%</span> 감면
+                </p>
+              </div>
+
+              <div class="w-100 row justify-content-end contract-point">
+                <p class="col-2 text-primary fw-bold text-start">적립포인트</p>
+                <p class="col-3 px-0 text-end text-primary fw-bold"><?=number_format($data['product_price']*0.01)?></p>
+              </div>
             </div>
+            </div>
+            <?php
+            if($_SESSION["login_info"]["type"] == "buyer"){
+            ?>
+            <div class="mt-5 text-end">
+              <button type="button" onclick='myCart()' class="btn btn-secondary btn-lg me-2">장바구니</button>
+              <button type="button" onclick='contract(<?=$data['product_no']?>)' class="btn btn-danger btn-lg">계약하기</button>
+            </div>
+            <?php
+            }
+            ?>
           </div>
+
         </div>
+
       </form>
-      <?php
-        if($_SESSION["login_info"]["type"] == "buyer" || $_SESSION["login"] != "success"){
-        ?>
-      <div class="mt-4 text-end">
-        <button onclick='myCart()' class="btn btn-secondary btn-lg">장바구니</button>
-        <button onclick='contract()' class="btn btn-danger btn-lg">계약하기</button>
-      </div>
-      <?php
-          }
-          ?>
+
       <div class="detail-info">
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -312,7 +335,7 @@
                 id="nav-tabContent"
         >
           <div
-                  class="tab-pane fade show active"
+                  class="tab-pane w-800 fade show active"
                   id="nav-detail"
                   role="tabpanel"
                   aria-labelledby="nav-detail-tab"
@@ -320,7 +343,7 @@
             <?php
             if( ! empty($data['detail_img']) ) {
             ?>
-            <img src="/uploads/<?=$data['detail_img']?>" alt="상품상세정보">
+            <img src="/uploads/<?=$data['detail_img']?>" alt="<?=$data['product_name']?> 상세정보">
             <?php
             } else {
             ?>
@@ -338,7 +361,7 @@
             <?php
             if( ! empty($data['seller_information']) ) {
             ?>
-            <img src="/uploads/<?=$data['seller_information']?>" alt="기업상세정보">
+            <img src="/uploads/<?=$data['seller_information']?>" alt="<?=$data['company_name']?> 기업상세정보">
             <?php
             } else {
             ?>
@@ -359,7 +382,7 @@
                 <button class="btn btn-dark btn-sm fw-normal flex-shrink-0 px-3" onclick="sellerReplySubmit(1);">등록</button>
               </div>
               <?php if(count($reply_data)){ ?>
-              <ul>
+              <ul class="comment-lists">
                 <?php foreach($reply_data as $item){ ?>
                 <li>
                   <?php if($item["reply_step"] == 1){
@@ -377,18 +400,23 @@
                       <span class="text-secondary"><?=substr($item["register_date"],0,16)?></span>
                       <?php if($item['user_uuid'] == $_SESSION['login_info']['uuid']){ ?>
                       <button class="btn-sm btn-danger" onclick="replyDelete('<?=$item['idx']?>','<?=$item['reply_no']?>',<?=$item['reply_step']?>)" style="float: right;">삭제</button>
-                      <button class="btn-sm btn-secondary" id="reply_ud_cancel_<?=$item['idx']?>" onclick="replyUpdateCancel('<?=$item['idx']?>','<?=$item['reply_content']?>')" style="float: right;margin-right: 1px;display: none">취소</button>
-                      <button class="btn-sm btn-warning" onclick="replyUpdate('<?=$item['idx']?>')" style="float: right;margin-right: 1px">수정</button>
+                      <button class="btn-sm btn-secondary me-1" id="reply_ud_cancel_<?=$item['idx']?>" onclick="replyUpdateCancel('<?=$item['idx']?>','<?=$item['reply_content']?>')" style="float: right;margin-right: 1px;display: none">취소</button>
+                      <button class="btn-sm btn-warning text-white me-1" onclick="replyUpdate('<?=$item['idx']?>')" style="float: right;margin-right: 1px">수정</button>
 
                       <?php } ?>
                     </div>
                     <div class="mb-2">
-                      <input style="background-color: white" value="<?=$item['reply_content']?>"
+                      <input class="bg-white w-100" value="<?=$item['reply_content']?>"
                              name="reply_content_ud_<?=$item['idx']?>" id="reply_content_ud_<?=$item["idx"]?>" disabled>
                     </div>
-                    <!--                    <div>
-                                          <button class="btn btn-dark btn-sm py-0 fw-normal">답글</button>
-                                        </div>-->
+
+                    <?php if(@$_SESSION["login"] == "success" && ($data["seller_uuid"] == $_SESSION['login_info']['uuid']
+                  || $item['user_uuid'] == $_SESSION['login_info']['uuid'])){ ?>
+                    <div class="mb-2">
+                      <button class="toggle-reply-btn badge bg-secondary fw-normal" data-target-id="reply_panel_<?=$item["reply_no"]?>">답글</button>
+                    </div>
+                    <?php } ?>
+
                   </div>
                   <?php  foreach($reply_data as $item_re) {?>
                   <?php if($item_re["reply_no"] == $item["reply_no"] && $item_re["reply_step"] != 1){
@@ -412,12 +440,12 @@
                         <span class="text-secondary"><?=substr($item_re["register_date"],0,16)?></span>
                         <?php if($item_re['user_uuid'] == $_SESSION['login_info']['uuid']){ ?>
                         <button class="btn-sm btn-danger" onclick="replyDelete('<?=$item_re['idx']?>','<?=$item_re['reply_no']?>',<?=$item_re['reply_step']?>)" style="float: right;">삭제</button>
-                        <button class="btn-sm btn-secondary" id="reply_ud_cancel_<?=$item_re['idx']?>" onclick="replyUpdateCancel('<?=$item_re['idx']?>','<?=$item_re['reply_content']?>')" style="float: right;margin-right: 1px;display: none" >취소</button>
-                        <button class="btn-sm btn-warning" onclick="replyUpdate('<?=$item_re['idx']?>')" style="float: right;margin-right: 1px">수정</button>
+                        <button class="btn-sm btn-secondary me-1" id="reply_ud_cancel_<?=$item_re['idx']?>" onclick="replyUpdateCancel('<?=$item_re['idx']?>','<?=$item_re['reply_content']?>')" style="float: right;margin-right: 1px;display: none" >취소</button>
+                        <button class="btn-sm btn-warning text-white me-1" onclick="replyUpdate('<?=$item_re['idx']?>')" style="float: right;margin-right: 1px">수정</button>
                         <?php } ?>
                       </div>
                       <div class="mb-2">
-                        <input style="background-color: white" value="<?=$item_re['reply_content']?>"
+                        <input class="bg-white w-100" value="<?=$item_re['reply_content']?>"
                                name="reply_content_ud_<?=$item_re['idx']?>" id="reply_content_ud_<?=$item_re["idx"]?>"disabled>
                       </div>
                       <!--                     <div>
@@ -429,28 +457,30 @@
                   <?php } ?>
                   <?php if(@$_SESSION["login"] == "success" && ($data["seller_uuid"] == $_SESSION['login_info']['uuid']
                   || $item['user_uuid'] == $_SESSION['login_info']['uuid'])){ ?>
-                  <div class="product-review-writing d-flex p-2 border-bottom bg-light">
-                    <div>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
-                      </svg>
-                    </div>
-                    <div class="ms-3 flex-grow-1">
-                      <div class="mb-2">
-                        <?php
-
-                          if($_SESSION['login_info']['type'] == "buyer" ){
-                            $user_type = "<span class='badge bg-warning fw-normal'>구매기업</span>";
-                        }elseif($_SESSION['login_info']['type'] == "seller" ){
-                        $user_type = "<span class='badge bg-danger fw-normal'>판매기업</span>";
-                        }
-                        ?>
-                        <?=$user_type?>
-                        <strong class="me-2"><?=$_SESSION['login_info']['company_name']?></strong>
+                  <div class="product-review-writing p-2 border-bottom bg-light" id="reply_panel_<?=$item["reply_no"]?>">
+                    <div class="d-flex">
+                      <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
+                        </svg>
                       </div>
-                      <div class="d-flex">
-                        <input type="text" name="reply_content_<?=$item['reply_no']?>" id="reply_content_<?=$item["reply_no"]?>" class="w-100 px-3 py-2 bg-light border rounded-3 me-2 bg-white" placeholder="답변을 등록해주세요.">
-                        <button class="btn btn-dark btn-sm fw-normal flex-shrink-0 px-3" onclick="sellerReplySubmit(2,'<?=$item["reply_no"]?>');">등록</button>
+                      <div class="ms-3 flex-grow-1">
+                        <div class="mb-2">
+                          <?php
+
+                            if($_SESSION['login_info']['type'] == "buyer" ){
+                              $user_type = "<span class='badge bg-warning fw-normal'>구매기업</span>";
+                          }elseif($_SESSION['login_info']['type'] == "seller" ){
+                          $user_type = "<span class='badge bg-danger fw-normal'>판매기업</span>";
+                          }
+                          ?>
+                          <?=$user_type?>
+                          <strong class="me-2"><?=$_SESSION['login_info']['company_name']?></strong>
+                        </div>
+                        <div class="d-flex">
+                          <input type="text" name="reply_content_<?=$item['reply_no']?>" id="reply_content_<?=$item["reply_no"]?>" class="w-100 px-3 py-2 bg-light border rounded-3 me-2 bg-white" placeholder="답변을 등록해주세요.">
+                          <button class="btn btn-dark btn-sm fw-normal flex-shrink-0 px-3" onclick="sellerReplySubmit(2,'<?=$item["reply_no"]?>');">등록</button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -470,6 +500,34 @@
   </div>
 </div>
 <script>
+  $(document).ready(function(){
+    if($("#login_type").val() == 'buyer'){
+      $("#reduction_point").css('display','block');
+    }else{
+      $("#reduction_point").css('display','none');
+    }
+
+		const commentReply = $('.toggle-reply-btn').attr('data-target-id');
+		$('#'+commentReply).hide();
+
+		$('.toggle-reply-btn').on('click', function() {
+			const btnTarget = $(this).attr('data-target-id');
+			$('#'+btnTarget).toggle();
+    })
+
+
+    const commentLists =  $('.comment-lists')
+		$('.toggle-reply-btn').on('click', function() {
+			const list = $(this).parent().parent();
+			const index = list.index();
+			let reviewWriting = $('.comment-lists li['+index+'] .product-review-writing');
+			reviewWriting.css({border: '1px solid red'});
+    })
+  });
+
+
+
+
   function myCart() {
     var session = $("#session").val();
     if(session === "success") {
@@ -479,63 +537,19 @@
       alert("로그인 후 이용해주세요");
     }
   }
-  function contract(){
+  function contract(product_no){
     var session = $("#session").val();
     if(session == "success") {
-      document.myForm.action='/Buyer/Contract';
-      document.myForm.submit();
+      var ctype = "detail"
+      location.href = "/Buyer/Contract?product_no="+product_no+"&ctype=" + ctype;
     }else{
       alert("로그인 후 이용해주세요");
     }
 
   }
 
-  function contractCheck(){
 
-    const options = {method: 'GET', headers: {Accept: 'application/json', Authorization: 'esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE='}};
 
-    fetch('https://docs.esignon.net/api/v3/workflows/search-with-value?offset=%2B09%3A00&template_id=6&field_name=테스트&field_value=테스트', options)
-            .then(response => response.json())
-            .then(response => console.log(response))
-            .catch(err => console.error(err));
-    /*var sign = {
-      "header": {
-        "request_code": "5008Q",
-        "api_name" : "start api",
-        "session_id" : "",
-        "version": "1.1.60",
-      },
-      "body": {
-        "comp_id": "naver0socialimpactork",
-        "field_list":[{
-          "doc_uid" :"6",
-          "field_name" :"field_name",
-          "field_value" :"field_value"
-        }]
-      }
-    };
-    $.ajax({
-      url: "https://docs.esignon.net/api/naver0socialimpactork/search",
-      dataType: 'JSON',
-      type: "post",
-      data: JSON.stringify(sign),
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-        /!*xhr.setRequestHeader("Seller-Agent", "esignonapi");*!/
-        xhr.setRequestHeader("Authorization", "esignon jlxfF8HAeRw1/8iUN5OVSH+060OTnZ+j7vRJdTHLFVSMzuM3n4MCaavEg6S0rFMpVNTkFsgGBWJ2usJ1j9T8uni3QARD+1L1cLc7W+PJ/M9dMoyAruRZ1C3NQusJ88gQ0utugU+hNRE=");
-      },
-      success: function (result) {
-        if (result) {
-          console.log(JSON.stringify(result));
-        } else {
-          alert("전송 실패했습니다.");
-        }
-      },
-      error: function (xhr, ajaxSettings, thrownError) {
-        alert(thrownError);
-      }
-    });*/
-  }
   let img = document.querySelector('.preview-img-big img');
   $('.preview-img-small').on('click', function(e){
     if(e.target.src) {

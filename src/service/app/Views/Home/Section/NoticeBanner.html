@@ -1,0 +1,35 @@
+<section class="main-notice-section border-top d-flex align-items-center">
+  <div class="auto-container">
+    <div class="row notice-content align-items-center">
+      <div class="col-2">
+        <h2 class="position-relative">공지사항</h2>
+      </div>
+      <div class="col-9">
+        <div class="notice-carousel owl-carousel owl-theme">
+          <?php
+          if(is_array($notice_list)&& count($notice_list) > 0){
+          foreach($notice_list as $item){
+          ?>
+          <div>
+            <a href="/CS/Notice/Detail?idx=<?=$item['idx']?>"><?=$item["title"]?></a>
+          </div>
+          <?php
+          }
+          ?>
+          <?php
+          }else{
+          ?>
+          <h2>등록된 공지사항이 없습니다.</h2>
+          <?php
+          }
+          ?>
+        </div>
+      </div>
+      <div class="col-1">
+        <a class="d-block" href="/CS/Notice">
+          <img style="width: 50px; margin-top: 5px;" src="/assets/images/icons/more_btn.png" alt="공지사항 더보기" title="공지사항 더보기"/>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

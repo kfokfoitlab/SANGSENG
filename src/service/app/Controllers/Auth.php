@@ -6,16 +6,16 @@ use App\Models\Auth\SignUpUserModel as UserModel;
 use App\Models\Auth\SignUpCompanyModel as CompanyModel;
 use App\Models\Auth\ForgotInfoModel as ForgotModel;
 use App\Models\DatabaseModel;
+use App\Models\Seller\ItemModel;
 
 class Auth extends BaseController
 {
-
     private $model;
     private $user_model;
     private $company_model;
 	private $forgotModel_model;
     private $database_model;
-	
+    private $item_model;
     public function __construct()
     { //{{{
         $this->model = new Model;
@@ -23,6 +23,7 @@ class Auth extends BaseController
         $this->company_model = new CompanyModel;
 	    $this->forgotModel_model = new ForgotModel;
         $this->database_model = new DatabaseModel;
+        $this->item_model = new ItemModel;
     } //}}}
 
     public function index()
@@ -93,7 +94,7 @@ class Auth extends BaseController
                             echo "
                          <script>
                             alert('새로운 계약서가 등록되었습니다.');
-                            window.location.replace('/Seller/Contract');
+                            window.location.replace('/Seller/Contract?p_n=1');
                         </script>
                       ";
                             break;
@@ -173,11 +174,12 @@ class Auth extends BaseController
 
     public function SignUpBuyer()
     { // {{{
+        $category = $this->item_model->Category();
 
         $data = array(
-             "sbs" => $_POST["sbs"]
-            ,"ads" => $_POST["ads"]
-        );
+             "sbs" => $_POST["sbs"],
+            "category" =>$category
+       );
 
         echo view("Common/Header.html");
         echo view('Auth/SignUpBuyer.html', $data);
@@ -189,19 +191,6 @@ class Auth extends BaseController
 
     public function SignUpUserStep2()
     { // {{{
-
-        $dup_check = $this->user_model->dupCheck($_POST["email"]);
-        if($dup_check){
-            echo "
-                <script>
-                    alert('이미 가입된 회원입니다.');
-                    window.location.replace('/Auth/SignUp');
-                </script>
-            ";
-
-            die();
-        }
-
         $impairments = $this->database_model->getImpairmentAll();
 
         $data = array(
@@ -232,21 +221,17 @@ class Auth extends BaseController
 
     public function SignUpBuyerSubmit()
     { //{{{
-
         $dup_check = $this->user_model->dupCheck($_POST["email"]);
-        if($dup_check){
+        if($dup_check != 3){
             echo "
                 <script>
                     alert('이미 가입된 기업입니다.');
                     window.location.replace('/Auth/SignUp');
                 </script>
             ";
-
             die();
         }
-
         $uuid = $this->user_model->Register($_FILES, $_POST);
-
         if($uuid){
             header("Location: /"._CONTROLLER."/SignUpBuyerComplete/".$uuid);
         }
@@ -318,10 +303,30 @@ class Auth extends BaseController
 
     } // }}}
 
+    public function BuyerEmailCheck(){
+        $buyer_check = $this->user_model->dupCheck($_POST["email"]);
+        if($buyer_check == 3){
+            echo 3;
+        }else{
+            echo 1;
+        }
+    }
+
+    public function SellerEmailCheck(){
+        $sellerCheck = $this->user_model->dupCheck($_POST["email"]);
+        if($sellerCheck == 3){
+            echo 3;
+        }else{
+            echo 1;
+        }
+    }
+
+
     public function SignUpSellerSubmit()
     { //{{{
+
         $dup_check = $this->user_model->dupCheck($_POST["email"]);
-        if($dup_check){
+        if($dup_check != 3){
             echo "
                 <script>
                     alert('이미 가입된 기업입니다.');

@@ -3,12 +3,16 @@
     <h2 class="content-title"> <?=$page_name?> </h2>
 	</div>
 
+<!--
   <form name="form-submit" method="POST" target="_self" action="/<?=_CONTROLLER?>/UpdateSubmit" onsubmit="return confirm('저장하시겠습니까?')">
-    <input type="hidden" name="category" value="<?=$category?>">
+-->
+  <form name="form-submit" method="POST" target="_self" action="/<?=_CONTROLLER?>/Register" onsubmit="return confirm('저장하시겠습니까?')">
+
+  <input type="hidden" name="category" value="<?=$category?>">
 
   <div class="card border rounded-lg">
     <div class="card-body">
-      <textarea class="editor w-50" name="contents" style="height: 200px"><?=@$data["contents"]?></textarea>
+      <textarea class="editor w-50" name="contents" style="height: 200px"  placeholder="약관 내용을 입력해주세요"></textarea>
     </div>
 
     <div class="card-footer border-top">

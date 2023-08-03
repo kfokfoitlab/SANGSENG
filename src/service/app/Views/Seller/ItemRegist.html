@@ -2,28 +2,51 @@
   // Left Menu
   require(__DIR__.'/Components/Left.html');
   ?>
+
+<script>
+  function replaceMoney(money){
+		var money = money.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		$('#product_price').val(money);
+		money = money.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		$('#product_price1').val(money);
+  }
+</script>
 <div class="flex-grow-1 bg-light">
   <section class="pt-5 layout-pb-120 item-update">
     <div class="auto-container">
       <div class="p-5 bg-white">
         <h3 class="mb-4 px-3 pb-3 fw-bold border-bottom border-2">상품등록</h3>
         <form name="form-submit" method="post" action="/<?=_CONTROLLER?>/ItemSubmit" enctype="multipart/form-data">
-          <input type="hidden" name = "seller_sales" value="<?=$data['seller_sales']?>">
-          <input type="hidden" name = "mild_disabled" value="<?=$data['mild_disabled']?>">
-          <input type="hidden" name = "severely_disabled" value="<?=$data['severely_disabled']?>">
+          <input type="hidden" name = "seller_sales" value="<?=$sellerInfo['seller_sales']?>">
+          <input type="hidden" name = "mild_disabled" value="<?=$sellerInfo['mild_disabled']?>">
+          <input type="hidden" name = "severely_disabled" value="<?=$sellerInfo['severely_disabled']?>">
+          <input type="hidden" name="product_price" id="product_price" value="">
           <div class="px-3">
             <div class="row mb-4 align-items-center">
               <div class="col-2">
-                <label for="product-category" class="form-label">카테고리</label>
+                <label for="product_category2" class="form-label">카테고리</label>
               </div>
               <div class="col-10">
-                <select name="product_category" class="form-select d-inline-block w-50"
-                        aria-label="Default select example" id="product-category">
-                  <option value="1" selected>사무용품</option>
-                  <option value="2">생활용품</option>
-                  <option value="3">전산용품</option>
-                  <option value="4">식음료</option>
-                  <option value="5">청소용품</option>
+<!--                <select name="product_category" id = "product_category"  class="form-select d-inline-block w-50"
+                        aria-label="Default select example" onchange="category_type();" >
+                  <option value="">대분류를 선택해주세요</option>
+              <?php
+                  foreach($category as $item){
+                ?>
+                  <option value="<?=$item['category_type1']?>" ><?=$item['category_type1']?></option>
+                  <?php
+                }
+                ?>
+                </select>-->
+                <select name="product_category2" id = "product_category2"  class="form-select d-inline-block w-50"
+                        aria-label="Default select example"  >
+                  <option value="">카테고리를 선택해주세요</option>
+                  <option value="식음료">식음료</option>
+                  <option value="생활/건강">생활/건강</option>
+                  <option value="사무/교육">사무/교육</option>
+                  <option value="가전/가구">가전/가구</option>
+                  <option value="컴퓨터/디지털">컴퓨터/디지털</option>
+                  <option value="용역/서비스">용역/서비스</option>
                 </select>
               </div>
             </div>
@@ -112,11 +135,11 @@
                 <div class="row align-items-center">
                   <div class="col-6">
                     <input class="add-quantity form-control" type="text" name="product_quantity"
-                           placeholder="100Box(250,000매)"/>
+                           placeholder="100Box(250,000매)" required/>
                   </div>
                   <div class="col-6">
-                    <input class="add-price form-control" type="text" name="product_price" placeholder="1200000(숫자만 입력)"
-                           oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1')"/>
+                    <input class="add-price form-control" type="text" name="product_price1" id="product_price1" placeholder="1200000(숫자만 입력)"
+                           oninput="replaceMoney(this.value)" maxlength="11" required/>
                   </div>
                 </div>
               </div>
@@ -189,6 +212,28 @@
   </section>
 </div>
 <script>
+
+/*  function category_type(){
+    if($("#product_category").val() != ""){
+      var category_type1 = $("#product_category").val();
+      $.ajax({
+        type: 'post',
+        url: "/"+_CONTROLLER+"/CategorySearch",
+        data: {
+          "category_type1": category_type1
+        },
+        success: function (result){
+          var result = JSON.parse(result);
+          $("#product_category2").empty();
+          for(var i = 0; i<result['data'].length; i++){
+            var rdata = "<option value='"+result['data'][i]['category_type2']+"'>"+result['data'][i]['category_type2']+"</option>";
+             $("#product_category2").append(rdata);
+          }
+        }
+      });
+    }
+  }*/
+
   /* 이미지 파일 타입 체크 & 미리보기 시작 */
   document.querySelectorAll('input[accept="image/*"]').forEach(item => {
     item.addEventListener("change", function () {

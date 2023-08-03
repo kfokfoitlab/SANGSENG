@@ -13,6 +13,8 @@ class SignUpUserModel extends CommonModel
                 ".$table_name."
             where
                 category = '".$category."'
+                and terms_status = 2
+            order by use_date desc
             limit 1
         ";
         $this->rodb->query($query);
@@ -24,18 +26,24 @@ class SignUpUserModel extends CommonModel
 
     public function Register($files, $data, $table_name = "buyer_company")
     { //{{{
-        $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG','JPG','PDF');
-        $buyer_documents_ori = $files["buyer_documents"]["name"];
+        $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG','JPG','PDF','BMP','bmp','GIF');
+
+        $buyer_documents_ori =  str_replace('&','＆', $files["buyer_documents"]["name"]);
         $upload_buyer_documents_ori = "buyer_documents";
         $upload_buyer_documents_image = uniqid().".".pathinfo($files["buyer_documents"]["name"], PATHINFO_EXTENSION);
         $this->uploadFileNew($files,$upload_buyer_documents_image,$allowed_ext,$upload_buyer_documents_ori);
-
+        $interest = "";
+        if($data['interest'] != ""){
+            for($i = 0; $i<count($data['interest']); $i++){
+                $interest = implode(',',$data['interest']);
+            }
+        }
         helper(["uuid_v4", "specialchars"]);
         $uuid = gen_uuid_v4();
         // status == 0:가입신청, 1:심사중, 5:승인,7:거절, 9: 탈퇴	
         $status = '1';
         $del_yn = 'N';
-        $receive_yn  = (@$data["ads"] == "y")? 'Y' : 'N';
+        $receive_yn  = (@$data["sbs"] == "Y")? 'Y' : 'N';
         if($data['tax_rate'] == null){
             $data['tax_rate'] = 10;
         }
@@ -59,11 +67,7 @@ class SignUpUserModel extends CommonModel
                 ,workers = '".$data['workers']."'
                 ,severely_disabled = '".$data['severely_disabled']."'
                 ,mild_disabled = '".$data['mild_disabled']."'
-                ,interest_office = '".$data["interest_office"]."'
-                ,interest_daily = '".$data["interest_daily"]."'
-                ,interest_computerized = '".$data["interest_computerized"]."'
-                ,interest_food = '".$data["interest_food"]."'       
-                ,interest_cleaning = '".$data["interest_cleaning"]."'            
+                ,interest = '".$interest."'
                 ,receive_yn = '".$receive_yn ."'
                 ,del_yn = '".$del_yn ."'
                 ,register_date = '".date("Y-m-d H:i:s")."'
@@ -81,18 +85,61 @@ class SignUpUserModel extends CommonModel
         }
 
     } //}}}
+    public function dupCheck($email)
+    {
+        $query = "
+			SELECT
+				count(*) 
+			FROM
+				seller_company
+			WHERE
+				email = '" . $email. "'
+				limit 1
+			";
+//			echo $query;
+        $seller = $this->rodb->simple_query($query);
+        if ($seller != 0) {
+            return 1;
+        }
+            $query = "
+			SELECT
+				count(*)
+			FROM
+				buyer_company
+			WHERE
+				email = '" . $email . "'
+				limit 1
+			";
+        $buyer = $this->rodb->simple_query($query);
+        if ($buyer != 0) {
+                return 2;
+            }
+        return 3;
+    }
 
-    public function dupCheck($email, $table_name = "buyer_company")
-    { //{{{
+
+    public function buyerCheck($email){
         $query = "
             select
                 count(*)
             from
-                ".$table_name."
+                buyer_company
             where
                 email = '".$email."'
             limit 1
         ";
         return $this->rodb->simple_query($query);
-    } //}}}
+    }
+    public function sellerCheck($email){
+        $query = "
+            select
+                count(*)
+            from
+                seller_company
+            where
+                email = '".$email."'
+            limit 1
+        ";
+        return $this->rodb->simple_query($query);
+    }
 }

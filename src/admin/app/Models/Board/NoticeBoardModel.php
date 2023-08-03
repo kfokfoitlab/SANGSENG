@@ -122,14 +122,19 @@
 				$upload_file = uniqid() . "." . pathinfo($files["upload_file"]["name"], PATHINFO_EXTENSION);
 				$this->uploadFileNew($files, $upload_file, $allowed_ext, $upload_face_ori);
 			}
-			$query = "
+            $title = addslashes($data['title']);
+            $content = addslashes($data['content']);
+            $content = str_replace("\r\n", "<br>", $content);
+            $title = str_replace("\r\n", "<br>", $title);
+
+            $query = "
             insert into
                 ".$table_name."
             set
                 board_status = '".$data["board_status"]."'
                 ,user_id = 'admin'
-                ,title = '".$data["title"]."'
-                ,content = '".$data["content"]."'
+                ,title = '".$title."'
+                ,content = '".$content."'
                 ,upload_file = '".$upload_file."'
                 ,upload_file_ori = '".$files["upload_file"]["name"]."'
                 ,register_date = '".date("Y-m-d H:i:s")."'
@@ -175,6 +180,7 @@
 			    delete_date = '".date("Y-m-d H:i:s")."'
                 ,delete_id = 'admin'
 				,del_yn = 'Y'
+				,board_status = '2'
 			WHERE
 				idx = ".$data["idx"]."
 			LIMIT 1
@@ -206,24 +212,27 @@
 		public function noticeUpdate($data,$files, $table_name = "notice_board"){
 			$allowed_ext = array();
 			$upload_file_ori = "upload_file";
-			$upload_file = $data["upload_file_ori_name"];
-			$upload_file_ori_new = $data["upload_face_ori"];
 			if($files["upload_file"]["name"] != "") {
 				$upload_file_ori_new = $files["upload_file"]["name"];
 				$upload_file = uniqid() . "." . pathinfo($files["upload_file"]["name"], PATHINFO_EXTENSION);
 				$this->uploadFileNew($files, $upload_file, $allowed_ext, $upload_file_ori);
-			}
-			
+			}else{
+                $upload_file = $data["upload_file_ori_name"];
+                $upload_file_ori_new = $data["upload_face_ori"];
+            }
+            $title = addslashes($data['title']);
+            $content = addslashes($data['content']);
+            $content = str_replace("\r\n", "<br>", $content);
+            $title = str_replace("\r\n", "<br>", $title);
 			$query = "
             update
                 ".$table_name."
             set
                 board_status = '".$data["board_status"]."'
                 ,user_id = 'admin'
-                ,title = '".$data["title"]."'
-                ,content = '".$data["content"]."'
+                ,title = '".$title."'
+                ,content = '".$content."'
                 ,upload_file = '".$upload_file."'
-                
                 ,upload_file_ori = '".$upload_file_ori_new."'
                 ,update_date = '".date("Y-m-d H:i:s")."'
                 ,update_id = 'admin'

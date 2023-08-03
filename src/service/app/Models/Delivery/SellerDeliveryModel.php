@@ -32,6 +32,7 @@ class SellerDeliveryModel extends CommonModel
     public function invoice($data){
         $contract_no = $data['contract_no'];
         $seller_uuid = $data['seller_uuid'];
+        $buyer_company = $data['buyer_company'];
         $buyer_uuid = $data['buyer_uuid'];
         $seller_company = $data['seller_company'];
         $product_no = $data['product_no'];
@@ -40,6 +41,7 @@ class SellerDeliveryModel extends CommonModel
         $delivery_status = '1';
         $delivery_no = date("YmdHis");
         $dcount = $data['count'];
+
         $delivery_predicted =$data['delivery_predicted'];
         $contract_date = $data['register_date'];
         $query = "
@@ -51,6 +53,8 @@ class SellerDeliveryModel extends CommonModel
               ,delivery_status = '".$delivery_status."'              
               ,seller_company = '".$seller_company."' 
               ,seller_uuid = '".$seller_uuid."'         
+              ,buyer_uuid = '".$buyer_uuid."'     
+              ,buyer_company = '".$buyer_company."'     
               ,product_no = '".$product_no."'
               ,product_name = '".$product_name."'
               ,product_price = '".$product_price."'

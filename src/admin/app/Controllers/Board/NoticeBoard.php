@@ -18,7 +18,8 @@
 		
 		public function Index()
 		{ //{{{
-			$data = array(
+
+            $data = array(
 				"page_name" => $this->page_name
 			);
 			
@@ -63,7 +64,7 @@
 		
 		public function noticeRegisterSubmit()
 		{ //{{{
-			
+
 			$result = $this->model->Register($_POST,$_FILES);
 			
 			if($result == 1){

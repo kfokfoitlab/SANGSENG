@@ -87,9 +87,9 @@ $(document).ready(function(){
 			,{title: "진행상황변경", data: "idx", visible: true, className: "text-nowrap",
 				"render": function( data, type, row, meta ){
 					let html = "";
-					html = "<input class='button btn-info btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",1)' value='대기'>";
-					html = html + "<input class='button btn-success btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",5)' value='승인'>";
-					html = html + "<input class='button btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",7)' value='반려'>";
+					html = "<input class='btn btn-info btn-sm m-1' style='font-size: 12px;color: white' type='button' onClick='statusUpdate("+data+",1)' value='대기'>";
+					html = html + "<input class='btn btn-success btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",5)' value='승인'>";
+					html = html + "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button' onClick='statusUpdate("+data+",7)' value='반려'>";
 					
 					return html;
 				}
@@ -106,8 +106,7 @@ $(document).ready(function(){
 				}
 			}
 			,{title: "등록일시", data: "register_date", visible: true}
-			, {
-				title: "삭제", data: "idx", visible: true,
+			, {title: "삭제", data: "idx", visible: true,
 				"render": function (data, type, row, meta, data1) {
 					let html = "";
 					html = "<button class='btn btn-outline-danger btn-sm m-1' onClick='deleteWorker("+data+")'>삭제</button>";
@@ -136,7 +135,7 @@ $(document).ready(function(){
 	};
 	
 	dt = $.dataTables($("#datatables"), dt_option);
-	
+	//console.log(dt_option);
 	/*
 	$("#datatables tbody").on("dblclick", "tr", function()
 	{ // {{{
@@ -146,10 +145,35 @@ $(document).ready(function(){
 	
 	
 	// }}}
-	
+
 });
 function statusUpdate(idx,status){
-	location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
+	var page_num_class = document.getElementsByClassName('paginate_button page-item active');
+	var page_num = page_num_class[0].firstChild.dataset.dtIdx;
+	alert(page_num);
+	var Data = {
+		"idx":idx,
+		"status":status
+	}
+	$.ajax({
+		method: 'POST',
+		url : "/" + _CONTROLLER + "/statusUpdate",
+		data: Data,
+		contentType: "json",
+		success: function (result) {
+			if (result != "") {
+
+				alert("변경되었습니다.");
+				//location.reload();
+			} else {
+				alert("변경불가");
+			}
+		},
+		error: function () {
+			alert("오류가 발생했습니다. 관리자에게 문의해주세요");
+		}
+	});
+	//location.href = "/"+_CONTROLLER+"/statusUpdate?idx="+idx+"&status="+status;
 }
 function deleteWorker(idx){
 	if(confirm("해당 근로자를 삭제하시겠습니까?")){

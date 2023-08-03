@@ -5,7 +5,8 @@
 <div class="flex-grow-1">
   <section class="pt-5 layout-pb-120 item-list">
     <form name="myForm" method="GET" action="" >
-    <div class="auto-container">
+      <input type="hidden" name="p_n" value="1">
+      <div class="auto-container">
       <ul class="d-flex border w-100 justify-content-around mb-4 py-4 text-center bg-light item-list-number">
         <li class="px-5 position-relative">
           <p class="h5 text-primary">전체</p>
@@ -24,192 +25,286 @@
           <p><strong class="h4 fw-bold"><?=$data_cnt['status9']?></strong>건</p>
         </li>
       </ul>
-
-
-        <table class="item-search-table w-100 bg-light border-top border-bottom">
-          <tbody>
-          <tr class="border-bottom">
-            <th>검색어</th>
-            <td>
-              <div class="d-flex">
-                <div class="d-flex align-items-center">
-                  <label class="form-label me-1 mb-0 col-form-label-sm flex-shrink-0" >상품명</label>
-                  <input type="text" name ="search_A" class="form-control form-control-sm"
-                  <?php if($_GET["search_A"] != ""){ echo "value='".$_GET["search_A"]."'";}?>/>
-                </div>
+      <table class="item-search-table w-100 bg-light border-top border-bottom">
+        <tbody>
+        <tr class="border-bottom">
+          <th>검색어</th>
+          <td>
+            <div class="d-flex">
+              <div class="d-flex align-items-center">
+                <label class="form-label me-1 mb-0 col-form-label-sm flex-shrink-0" >상품명</label>
+                <input type="text" name ="search_A" class="form-control form-control-sm"
+                <?php if($_GET["search_A"] != ""){ echo "value='".$_GET["search_A"]."'";}?>/>
               </div>
-            </td>
-          </tr>
-          <tr class="border-bottom">
-            <th>상품상태</th>
-            <td>
-              <label class="form-check-label me-3" for="flexCheck01">
-                <input class="form-check-input" type="radio" name="search_B" value="all" id="flexCheck01"
-                <?php if($_GET["search_B"] == "all" || $_GET["search_B"] == ""){ echo "checked";}?>/> 전체</label>
-              <label class="form-check-label me-3" for="flexCheck02">
-                <input class="form-check-input" type="radio" name="search_B" value="1" id="flexCheck02"
-                <?php if($_GET["search_B"] == "1"){ echo "checked";}?>/> 승인대기</label>
-              <label class="form-check-label me-3" for="flexCheck03">
-                <input class="form-check-input" type="radio" name="search_B" value="5" id="flexCheck03"
-                <?php if($_GET["search_B"] == "5"){ echo "checked";}?>/> 판매중</label>
-              <label class="form-check-label" for="flexCheck04">
-                <input class="form-check-input" type="radio" name="search_B" value="9" id="flexCheck04"
-                <?php if($_GET["search_B"] == "9"){ echo "checked";}?>/> 판매중지</label>
-            </td>
-          </tr>
-          <tr>
-            <th>카테고리</th>
-            <td>
-              <select name ="search_C" class="form-select form-select-sm w-25" aria-label="Default select">
-                <option value="all" <?php if($_GET["search_C"] == "all"){ echo "selected";}?>>전체</option>
-                <option value="1" <?php if($_GET["search_C"] == "1"){ echo "selected";}?>>사무용품</option>
-                <option value="2" <?php if($_GET["search_C"] == "2"){ echo "selected";}?>>생활용품</option>
-                <option value="3" <?php if($_GET["search_C"] == "3"){ echo "selected";}?>>전산용품</option>
-                <option value="4" <?php if($_GET["search_C"] == "4"){ echo "selected";}?>>식음료</option>
-                <option value="5" <?php if($_GET["search_C"] == "5"){ echo "selected";}?>>청소용품</option>
-              </select>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-
-
-        <div class="text-center mt-4">
-          <button class="btn btn-sm btn-outline-secondary me-3" type="reset">초기화</button>
-          <button class="btn btn-sm btn-primary px-3" onclick="Product_Search();">검색</button>
-        </div>
-        <div class="d-flex justify-content-between align-items-center mt-5 pt-3 border-top border-2">
-
-          <span>상품목록 (총 <strong><?=$data_page_total_cnt?></strong>개)</span>
-
-          <div class="d-flex">
-            <!-- <select class="form-select form-select-sm me-2" aria-label="Default select">
-               <option value="all" selected>전체</option>
-               <option value="recent">최근 등록일순</option>
-               <option value="low">낮은 가격순</option>
-               <option value="high">높은 가격순</option>
-             </select>-->
-            <select class="form-select form-select-sm me-2"
-                    aria-label="Default select" title="노출 갯수" name="length"
-                    tabindex=103 onchange="this.form.submit()">
-              <option value="20"<?=(@$_GET["length"] == "20")?"selected":""?>>20개씩</option>
-              <option value="50" <?=(@$_GET["length"] == "50")?"selected":""?>>50개씩</option>
-              <option value="100" <?=(@$_GET["length"] == "100")?"selected":""?>>100개씩</option>
-              <option value="200" <?=(@$_GET["length"] == "200")?"selected":""?>>200개씩</option>
+            </div>
+          </td>
+        </tr>
+        <tr class="border-bottom">
+          <th>상품상태</th>
+          <td>
+            <label class="form-check-label me-3" for="flexCheck01">
+              <input class="form-check-input" type="radio" name="search_B" value="all" id="flexCheck01"
+              <?php if($_GET["search_B"] == "all" || $_GET["search_B"] == ""){ echo "checked";}?>/> 전체</label>
+            <label class="form-check-label me-3" for="flexCheck02">
+              <input class="form-check-input" type="radio" name="search_B" value="1" id="flexCheck02"
+              <?php if($_GET["search_B"] == "1"){ echo "checked";}?>/> 승인대기</label>
+            <label class="form-check-label me-3" for="flexCheck03">
+              <input class="form-check-input" type="radio" name="search_B" value="5" id="flexCheck03"
+              <?php if($_GET["search_B"] == "5"){ echo "checked";}?>/> 판매중</label>
+            <label class="form-check-label" for="flexCheck04">
+              <input class="form-check-input" type="radio" name="search_B" value="9" id="flexCheck04"
+              <?php if($_GET["search_B"] == "9"){ echo "checked";}?>/> 판매중지</label>
+          </td>
+        </tr>
+        <tr>
+          <th>카테고리</th>
+          <td>
+            <select name ="search_C" class="form-select form-select-sm w-25" aria-label="Default select">
+              <option value="all" <?php if($_GET["search_C"] == "all"){ echo "selected";}?>>전체</option>
+              <option value="1" <?php if($_GET["search_C"] == "1"){ echo "selected";}?>>사무용품</option>
+              <option value="2" <?php if($_GET["search_C"] == "2"){ echo "selected";}?>>생활용품</option>
+              <option value="3" <?php if($_GET["search_C"] == "3"){ echo "selected";}?>>전산용품</option>
+              <option value="4" <?php if($_GET["search_C"] == "4"){ echo "selected";}?>>식음료</option>
+              <option value="5" <?php if($_GET["search_C"] == "5"){ echo "selected";}?>>청소용품</option>
             </select>
+          </td>
+        </tr>
+        </tbody>
+      </table>
 
-            <button type="button" class="btn btn-sm btn-success flex-shrink-0 fw-normal" onclick="excelFileExport();">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-              </svg>
-              엑셀다운
-            </button>
-          </div>
+      <div class="text-center mt-4">
+        <button class="btn btn-sm btn-outline-secondary me-3" type="reset">초기화</button>
+        <button class="btn btn-sm btn-primary px-3" onclick="Product_Search('<?=$_GET["p_n"]?>');">검색</button>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mt-5 pt-3 border-top border-2">
+        <span>상품목록 (총 <strong><?=$data_page_total_cnt?></strong>개)</span>
+        <div class="d-flex">
+          <!-- <select class="form-select form-select-sm me-2" aria-label="Default select">
+             <option value="all" selected>전체</option>
+             <option value="recent">최근 등록일순</option>
+             <option value="low">낮은 가격순</option>
+             <option value="high">높은 가격순</option>
+           </select>-->
+   <!--       <select class="form-select form-select-sm me-2"
+                  aria-label="Default select" title="노출 갯수" name="length"
+                  tabindex=103 onchange="this.form.submit()">
+            <option value="20"<?=(@$_GET["length"] == "20")?"selected":""?>>20개씩</option>
+            <option value="50" <?=(@$_GET["length"] == "50")?"selected":""?>>50개씩</option>
+            <option value="100" <?=(@$_GET["length"] == "100")?"selected":""?>>100개씩</option>
+            <option value="200" <?=(@$_GET["length"] == "200")?"selected":""?>>200개씩</option>
+          </select>-->
+          <button type="button" class="btn btn-sm btn-success flex-shrink-0 fw-normal" onclick="excelFileExport();">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+            </svg>
+            엑셀다운
+          </button>
         </div>
-        <table id = "productTbl" class="table table-striped text-center mt-5">
-          <thead>
-          <tr>
-            <th>No.</th>
-            <th>상품번호</th>
-            <th>상품명</th>
-            <th>금액</th>
-            <th>판매상태</th>
-            <th>카테고리</th>
-            <th>판매시작일</th>
-            <th>판매종료일</th>
-         <!--   <th>복사</th>-->
-          </tr>
-          </thead>
-          <tbody>
-          <?php
-          if(is_array($data) && count($data) > 0){
-          $i = 1;
-            foreach($data as $item){
-            $category = "";
-              if($item["product_category"] == 1){
-              $category = "사무용품";
-              }else if($item["product_category"] == 2){
-              $category = "생활용품";
-              }else if($item["product_category"] == 3){
-              $category = "전산용품";
-              }else if($item["product_category"] == 4){
-              $category = "식음료";
-              }else if($item["product_category"] == 5){
-              $category = "청소용품";
-              }
-          $status = "";
-          if($item["status"] == 1){
-          $status = "승인대기";
-          }else if($item["status"] == 3){
-          $status = "수정 요청 심사중";
-          }else if($item["status"] == 5){
-          $status = "판매중";
-          }else if($item["status"] == 7){
-          $status = "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button'
-                            onClick='window.open(\"/Seller/Item/StatusComment?idx=".$item["idx"]."&status_comment=".$item["status_comment"]."\", \"_blank\", \"width=500,height=330,toolbars=no,scrollbars=no\"); return false;'
-                            value='반려(상세보기)'>";
-          }else if($item["status"] == 8){
-          $status = "삭제 요청";
+      </div>
+      <table  class="table table-striped text-center mt-5">
+        <thead>
+        <tr>
+          <th>No.</th>
+          <th>상품번호</th>
+          <th>상품명</th>
+          <th>금액</th>
+          <th>판매상태</th>
+          <th>카테고리</th>
+          <th>판매시작일</th>
+          <th>판매종료일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        if(is_array($data) && count($data) > 0){
+        $i=1;
+        if($_GET["p_n"]!=""){
+        $i=($_GET["p_n"]-1)*10+1;
+        }
+          foreach($data as $item){
+        $status = "";
+        if($item["status"] == 1){
+        $status = "승인대기";
+        }else if($item["status"] == 3){
+        $status = "수정 요청 심사중";
+        }else if($item["status"] == 5){
+        $status = "판매중";
+        }else if($item["status"] == 7){
+        $status = "<input class='btn btn-danger btn-sm m-1' style='font-size: 12px;' type='button'
+                          onClick='window.open(\"/Seller/Item/StatusComment?idx=".$item["idx"]."&status_comment=".$item["status_comment"]."\", \"_blank\", \"width=500,height=330,toolbars=no,scrollbars=no\"); return false;'
+                          value='반려(상세보기)'>";
+        }else if($item["status"] == 8){
+        $status = "삭제 요청";
+        }
+        $product_price = number_format($item["product_price"]);
+        ?>
+        <tr>
+          <td><?=$i?></td>
+          <td><a class="fw-normal" href="/Seller/Item/ItemUpdate/<?=$item['product_no']?>"><?=$item["product_no"]?></a></td>
+          <td title="<?=$item['product_name']?>"><p><?=$item["product_name"]?></p></td>
+          <td><?=$product_price?>원</td>
+          <td><?=$status?></td>
+          <td><?=$item["product_category2"]?></td>
+          <td><?= substr($item["product_start"], 0, 10)?></td>
+          <td><?=substr($item["product_end"], 0, 10)?></td>
+        <!--  <td>
+            <button class="copy-btn btn btn-sm btn-secondary fw-normal">복사등록</button>
+          </td>-->
+        </tr>
+        <?php
+           $i++;
+            }
           }
-          $product_price = number_format($item["product_price"]);
-          ?>
-          <tr>
-            <td><?=$i?></td>
-            <td><a href="/Seller/Item/ItemUpdate/<?=$item['product_no']?>"><?=$item["product_no"]?></a></td>
-            <td title="친환경중질지70gA4용지"><p><?=$item["product_name"]?></p></td>
-            <td><?=$product_price?>원</td>
-            <td><?=$status?></td>
-            <td><?=$category?></td>
-            <td><?= substr($item["product_start"], 0, 10)?></td>
-            <td><?=substr($item["product_end"], 0, 10)?></td>
-          <!--  <td>
-              <button class="copy-btn btn btn-sm btn-secondary fw-normal">복사등록</button>
-            </td>-->
-          </tr>
-          <?php
-          $i++;
-                }
-              }
-            ?>
-          </tbody>
-        </table>
+        ?>
+        </tbody>
+      </table>
       <?php if($data_page_total_cnt == 0){ echo"<div class='text-center'><span>등록된 상품이 없습니다</span>"; }?>
 
-</div>
-<div class="float-start"><div class="dataTables_info" id="datatables_info" role="status" aria-live="polite"></div></div>
-<ul style="float: right" class="pagination">
-  <li class="paginate_button page-item previous disabled" id="datatables_previous">
-    <?php
-         $value = $_GET["value"];
-         $data_page_num = ($data_page_total_cnt/10) + 1;
-         for($i=1;$i<=$data_page_num;$i++){
+      <div class="float-start">
+        <div class="dataTables_info" id="datatables_info" role="status" aria-live="polite"></div>
+      </div>
+        <ul style="float: right" class="pagination">
+          <li class="paginate_button page-item previous disabled" id="datatables_previous">
+            <?php
+          if($data_page_total_cnt > 0){
+            $page = $_GET["p_n"];
+            $search_A = $_GET['search_A'];
+            $search_B = $_GET['search_B'];
+            $search_C = $_GET['search_C'];
+            $page_per_record = 10;
+            $block_ct = 5;
+            $list = 10;
+            $block_num = ceil($page/$block_ct); // 현재 페이지 블록 구하기
+            $block_start = (($block_num - 1) * $block_ct) + 1; // 블록의 시작번호
+            $block_end = $block_start + $block_ct - 1; //블록 마지막 번호
+            $total_page = ceil($data_page_total_cnt / $list); // 페이징한 페이지 수 구하기
+            if($block_end > $total_page){
+            $block_end = $total_page;
+            }
+            $total_block = ceil($total_page/$block_ct);
+            $start_num = ($page-1) * $list;
+            if($_GET["p_n"]>1){?>
+          <li class="paginate_button page-item"> <a href="javascript:nextPage(1,'<?=$search_A?>','<?=$search_B?>','<?=$search_C?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">처음으로</a></li>
+          <?php }?>
+          <?php
+        if($page <= 1){
+        ?>
+          <?php
+        }else{
+        $pre = $page-1;
+        ?>
+          <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$pre?>,'<?=$search_A?>','<?=$search_B?>','<?=$search_C?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">이전</a></li>
+          <?php
+        }
+        ?>
+          <?php
+         for($i= $block_start; $i<=$block_end;$i++){
               if($_GET["p_n"]==$i){?>
-  <li class="paginate_button page-item active">
-    <?php }else{ ?>
-  <li class="paginate_button page-item">
-    <?php } ?>
-    <a href="javascript:nextPage(<?=$i?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a></li>
-  <?php }?>
-</ul>
-</div>
+          <li class="paginate_button page-item active">
+            <?php }else{ ?>
+          <li class="paginate_button page-item">
+            <?php } ?>
+            <a href="javascript:nextPage(<?=$i?>,'<?=$search_A?>','<?=$search_B?>','<?=$search_C?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a>
+          </li>
+          <?php }?>
+          <?php
+        if($block_num >= $total_block){
+          }else{
+          $next_page = $page+1;
+          ?>
+          <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$next_page?>,'<?=$search_A?>','<?=$search_B?>','<?=$search_C?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">다음</a></li>
+          <?php
+        }
+        ?>
+          <?php
+        if($_GET["p_n"]>=1 && $_GET["p_n"] != $total_page){?>
+          <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$total_page?>,'<?=$search_A?>','<?=$search_B?>','<?=$search_C?>')" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">마지막</a></li>
+          <?php }}?>
+        </ul>
     </div>
     </form>
   </section>
 </div>
+<div style="display: none">
+  <table id = "excel_product" class="table table-striped text-center mt-5">
+    <thead>
+    <tr>
+      <th>No.</th>
+      <th>상품번호</th>
+      <th>상품명</th>
+      <th>금액</th>
+      <th>판매상태</th>
+      <th>카테고리</th>
+      <th>판매시작일</th>
+      <th>판매종료일</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+        if(is_array($excel) && count($excel) > 0){
+    $i = 1;
+    foreach($excel as $item){
+    $category = "";
+    if($item["product_category"] == 1){
+    $category = "사무용품";
+    }else if($item["product_category"] == 2){
+    $category = "생활용품";
+    }else if($item["product_category"] == 3){
+    $category = "전산용품";
+    }else if($item["product_category"] == 4){
+    $category = "식음료";
+    }else if($item["product_category"] == 5){
+    $category = "청소용품";
+    }
+    $status = "";
+    if($item["status"] == 1){
+    $status = "승인대기";
+    }else if($item["status"] == 3){
+    $status = "수정 요청 심사중";
+    }else if($item["status"] == 5){
+    $status = "판매중";
+    }else if($item["status"] == 7){
+    $status = "반려";
+    }else if($item["status"] == 8){
+    $status = "삭제 요청";
+    }
+    $product_price = number_format($item["product_price"]);
+    ?>
+    <tr>
+      <td><?=$i?></td>
+      <td><a href="/Seller/Item/ItemUpdate/<?=$item['product_no']?>"><?=$item["product_no"]?></a></td>
+      <td title="친환경중질지70gA4용지"><p><?=$item["product_name"]?></p></td>
+      <td><?=$product_price?>원</td>
+      <td><?=$status?></td>
+      <td><?=$category?></td>
+      <td><?= substr($item["product_start"], 0, 10)?></td>
+      <td><?=substr($item["product_end"], 0, 10)?></td>
+    </tr>
+    <?php
+        $i++;
+              }
+            }
+          ?>
+    </tbody>
+  </table>
+</div>
+
 
 <script>
-  function Product_Search(){
-    document.myForm.action='/Seller/Item/ItemList';
+
+
+  function Product_Search(p_n){
+    document.myForm.action='/Seller/Item/ItemList?p_n='+p_n;
     document.myForm.submit();
   }
 
 
-  function nextPage(p_n){
-    location.href = '/Seller/Item/ItemList?p_n='+p_n;
+  function nextPage(p_n,a,b,c){
+    location.href = '/Seller/Item/ItemList?p_n='+p_n+'&search_A='+a+'&search_B='+b+'&search_C='+c;
   }
   function excelFileExport() {
-    var wb = XLSX.utils.table_to_book(document.getElementById('productTbl'), {
+    var wb = XLSX.utils.table_to_book(document.getElementById('excel_product'), {
       sheet: "sheet1",
       raw: true
     });

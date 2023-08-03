@@ -1,12 +1,53 @@
-<div class="flex-grow-1">
+<div class="flex-grow-1 w-100">
   <?php
   // Banner Secction
-  require(__DIR__.'/Section/Banner.html');
+  // require(__DIR__.'/Section/Banner.html');
+  require(__DIR__.'/Section/MainBanner.html');
 
-  // 광고 Section
-  require(__DIR__.'/Section/Advertisement.html');
+  // Info Menu
+  require(__DIR__.'/Section/InfoMenu.html');
 
   // 추천 상품 Section
   require(__DIR__.'/Section/RecommendItemsList.html');
+
+  // 새로운 상품 Section
+  require(__DIR__.'/Section/NewItemList.html');
+
+  // 광고 배너 Section
+  require(__DIR__.'/Section/AdBanner.html');
+
+  // 광고 영상 Section
+  require(__DIR__.'/Section/Advertisement.html');
+
+  // 상품추천폼 Section
+  require(__DIR__.'/Section/ProductForm.html');
+
+  // 공지사항 Section
+  require(__DIR__.'/Section/NoticeBanner.html');
+
   ?>
+
+  <div class="qr-floating" onclick="qrBig()">
+    <img src="/uploads/qrcode_600.png" alt="">
+  </div>
+  <div class="qr-big-wrap">
+    <div class="qr-big-dim" onclick="qrClose()"></div>
+    <div class="qr-big-img">
+      <div class="qr-close" onclick="qrClose()">X</div>
+      <img src="/uploads/qrcode_600.png" alt="">
+    </div>
+  </div>
 </div>
+<script>
+  //qr코드
+  function qrBig() {
+    $(this).click(function () {
+      $(".qr-big-wrap").show();
+    });
+  }
+  function qrClose() {
+    $(this).click(function () {
+      $(".qr-big-wrap").hide();
+    });
+  }
+</script>

@@ -132,12 +132,9 @@
 		
 		public function searchId()
 		{
-			$data = array(
-				"user_phone" => $_GET["user_phone"],
-				"type" => $_GET["type"]
-			);
-			$data = $this->model->getCompanyEmail($data);
-			if($data['email'] != "") {
+
+			$data = $this->model->getCompanyEmail($_GET);
+			if($data['user_id'] != "") {
 				echo view(_CONTROLLER.'/result.html', $data);
 			}else{
 				$data['errorMsg'] = "등록된 아이디가 없습니다";

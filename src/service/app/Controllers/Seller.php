@@ -22,26 +22,31 @@ class Seller extends BaseController
     public function index()
     {
         $uuid = $_SESSION['login_info']["uuid"];
-        $totalSales = $this->seller_model->getTotalSales($uuid);
         $expectationSales = $this->seller_model->getexpectationSales($uuid);
         $completionContract = $this->seller_model->getCompletionContract($uuid);
         $contractList = $this->seller_model->getContract($uuid);
-        $disabledCount = $this->seller_model->getDisabledCount($uuid);
         $questions = $this->seller_model->getQuestionsList();
 	    $product_reply = $this->seller_model->getProductreplyList();
 	    $notice_list = $this->seller_model->getNoticeList();
-
+        $data = $this->seller_model->getContractList($uuid);
+        $seller_info = $this->seller_model->getSellerInfo($uuid);
+        $delivery =  $this->seller_model->getDelivery($uuid);
+        $_SESSION["totalSales"] = $this->sigin_model->getTotalSales($uuid);
+        $_SESSION["expectationSales"] = $this->sigin_model->getexpectationSales($uuid);
+        $_SESSION["completionContract"] = $this->sigin_model->getCompletionContract($uuid);
+        $_SESSION["disabledCount"] = $this->sigin_model->getWorkerCount();
+        $_SESSION["sellerinfo"] = $this->sigin_model->Sellerinfo();
         $data = array(
-            "totalSales" => $totalSales
-        ,"expectationSales" => $expectationSales
-       ,"completionContract" =>  $completionContract
-       ,"contractList" =>  $contractList
-       ,"disabledCount" =>  $disabledCount
-        ,"questions" =>  $questions
-	        ,"product_reply" => $product_reply
-	        ,"notice_list" => $notice_list
+            "expectationSales" => $expectationSales
+            ,"completionContract" =>  $completionContract
+            ,"contractList" =>  $contractList
+            ,"questions" =>  $questions
+            ,"product_reply" => $product_reply
+            ,"notice_list" => $notice_list
+            ,"data" => $data
+            ,"seller_info" => $seller_info
+            ,"delivery" => $delivery
         );
-	    $_SESSION["disabledCount"] = $this->sigin_model->getWorkerCount();
 
         echo view("Common/Header.html");
         echo view('Seller/Index.html', $data);
@@ -62,7 +67,9 @@ class Seller extends BaseController
         $data_cnt = $this->seller_model->getContractCount($uuid);
         $data = array(
             "data" => $data["data"],
-            "data_cnt" => $data_cnt
+            "data_cnt" => $data_cnt,
+            "data_page_total_cnt" => $data["count"]
+
     );
         echo view("Common/Header.html");
         echo view('Seller/Contract.html',$data);
@@ -71,15 +78,8 @@ class Seller extends BaseController
 
     public function ContractUpdate(){
         $uuid = $_SESSION['login_info']['uuid'];
-        $result = $this->mypage_model->ContractStatus($_POST);
+        $result = $this->mypage_model->sellerContractStatus($_POST);
         $_SESSION["totalSales"] = $this->sigin_model->getTotalSales($uuid);
-        echo "
-        <script>
-           alert('최신화되었습니다');
-          location.href = '/Seller/Contract';
-        </script>
-        ";
+
     }
-
-
 }

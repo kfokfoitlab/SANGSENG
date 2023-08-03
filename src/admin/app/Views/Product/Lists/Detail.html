@@ -3,18 +3,6 @@
     <h2 class="content-title"> <?=$page_name?> 상세보기</h2>
 	</div>
 <?php
-$category ="";
-if($data["product_category"] == 1){
-$category = "사무용품";
-}else if($data["product_category"] == 2){
-$category = "생활용품";
-}else if($data["product_category"] == 3){
-$category = "전산용품";
-}else if($data["product_category"] == 4){
-$category = "식음료";
-}else if($data["product_category"] == 5){
-$category = "청소용품";
-}
 $product_price = number_format($data["product_price"]);
  $delivery_cycle = "";
           if($data["delivery_cycle"] == 1){
@@ -51,81 +39,81 @@ $end_date = date("Y-m-d", $timestamp);
         <div class="col-8">
           <table class="table table-hover border detail-table">
       <!-- {{{ -->
-      <tbody>
-        <tr>
-          <td class="th">상품번호</td>
-          <td colspan="3"><?=$data["product_no"]?></td>
-        </tr>
-        <tr>
-          <td class="th">상태</td>
-          <td>        <?php
-                switch($data["status"]){
-                  case "0":
-                  case "1": echo "심사중"; break;
-                  case "5": echo "판매중"; break;
-                  case "7": echo "반려"; break;
-                }
-                ?></td>
+            <tbody>
+              <tr>
+                <td class="th">상품번호</td>
+                <td colspan="3"><?=$data["product_no"]?></td>
+              </tr>
+              <tr>
+                <td class="th">상태</td>
+                <td>        <?php
+                      switch($data["status"]){
+                        case "0":
+                        case "1": echo "심사중"; break;
+                        case "5": echo "판매중"; break;
+                        case "7": echo "반려"; break;
+                      }
+                      ?></td>
 
-          <td colspan="2">comment: <?=$data["status_comment"]?></td>
-        </tr>
-        <tr>
-          <td class="th">추천순위</td>
-          <td colspan="3"><?=$data["product_ranking"]?></td>
-        </tr>
-        <tr>
-          <td class="th">상품등록 회사</td>
-          <td colspan="3"><?=$data["company_name"]?></td>
-        </tr>
-        <tr>
-          <td class="th">카테고리</td>
-          <td colspan="3"><?=$category?></td>
-        </tr>
-        <tr>
-          <td class="th">상품명</td>
-          <td colspan="3"><?=$data["product_name"]?></td>
-        </tr>
-        <tr>
-          <td class="th">판매기간</td>
-          <td colspan="3"><?=$start_date?> ~ <?=$end_date?></td>
-        </tr>
-        <tr>
-          <td class="th">부가세</td>
-          <td colspan="3"><?=$product_surtax ?></td>
-        </tr>
-        <tr>
-          <td class="th">판매수량</td>
-          <td colspan="3"><?=$data["product_quantity"]?></td>
-        </tr>
-        <tr>
-          <td class="th">판매가격</td>
-          <td colspan="3"><?=$product_price?>원</td>
-        </tr>
-        <tr>
-          <td class="th">배송주기</td>
-          <td colspan="3"><?=$delivery_cycle?></td>
-        </tr>
-    <!--    <tr>
-          <td class="th">상품이미지</td>
-          <td>대표이미지 : </td>
-          <td>추가이미지1</td>
-          <td>추가이미지2</td>
-        </tr>-->
-        <tr>
-          <td class="th">상품 상세정보</td>
-          <td colspan="3"><?=$data["product_detail"]?></td>
-        </tr>
-        <tr>
-          <td class="th">등록일</td>
-          <td colspan="3"><?=$data["register_date"]?></td>
-        </tr>
-        <tr>
-          <td class="th">수정일</td>
-          <td colspan="3"><?=$data["update_date"]?></td>
-        </tr>
-      </tbody>
+                <td colspan="2">comment: <?=$data["status_comment"]?></td>
+              </tr>
+              <tr>
+                <td class="th">상품등록 회사</td>
+                <td colspan="3"><?=$data["company_name"]?></td>
+              </tr>
+              <tr>
+                <td class="th">카테고리(대분류)</td>
+                <td colspan="3"><?=$data["product_category"]?></td>
+              </tr>
+              <tr>
+                <td class="th">카테고리(중분류)</td>
+                <td colspan="3"><?=$data["product_category2"]?></td>
+              </tr>
+              <tr>
+                <td class="th">상품명</td>
+                <td colspan="3"><?=$data["product_name"]?></td>
+              </tr>
+              <tr>
+                <td class="th">판매기간</td>
+                <td colspan="3"><?=$start_date?> ~ <?=$end_date?></td>
+              </tr>
+              <tr>
+                <td class="th">부가세</td>
+                <td colspan="3"><?=$product_surtax ?></td>
+              </tr>
+              <tr>
+                <td class="th">판매수량</td>
+                <td colspan="3"><?=$data["product_quantity"]?></td>
+              </tr>
+              <tr>
+                <td class="th">판매가격</td>
+                <td colspan="3"><?=$product_price?>원</td>
+              </tr>
+              <tr>
+                <td class="th">배송주기</td>
+                <td colspan="3"><?=$delivery_cycle?></td>
+              </tr>
+          <!--    <tr>
+                <td class="th">상품이미지</td>
+                <td>대표이미지 : </td>
+                <td>추가이미지1</td>
+                <td>추가이미지2</td>
+              </tr>-->
+              <tr>
+                <td class="th">상품 상세정보</td>
+                <td colspan="3"><?=$data["product_detail"]?></td>
+              </tr>
+              <tr>
+                <td class="th">등록일</td>
+                <td colspan="3"><?=$data["register_date"]?></td>
+              </tr>
+              <tr>
+                <td class="th">수정일</td>
+                <td colspan="3"><?=$data["update_date"]?></td>
+              </tr>
+            </tbody>
       <!-- }}} -->
-      </table>
+          </table>
         </div>
 
         <div class="col-4">
@@ -139,9 +127,9 @@ $end_date = date("Y-m-d", $timestamp);
             </div>
             <div class="col-6">
               <?php
-                if($data['representative_image'] != ""){
-                ?>
-              <img style="width: 200px; height: 200px;"src="/uploads/<?=$data["representative_image"]?>" alt="">
+              if($data['representative_image'] != ""){
+              ?>
+              <img class="border" style="width: 200px; height: 200px;"src="/uploads/<?=$data["representative_image"]?>" alt="">
               <?php
               }
               ?>
@@ -157,9 +145,9 @@ $end_date = date("Y-m-d", $timestamp);
             </div>
             <div class="col-6">
               <?php
-                if($data['product_image1'] != ""){
-                ?>
-              <img style="width: 200px; height: 200px;"  alt=""src="/uploads/<?=$data["product_image1"]?>">
+              if($data['product_image1'] != ""){
+              ?>
+              <img class="border" style="width: 200px; height: 200px;"  alt=""src="/uploads/<?=$data["product_image1"]?>">
               <?php
               }
               ?>
@@ -175,9 +163,9 @@ $end_date = date("Y-m-d", $timestamp);
             </div>
             <div class="col-6">
               <?php
-                if($data['product_image2'] != ""){
-                ?>
-              <img style="width: 200px; height: 200px;" alt="" src="/uploads/<?=$data["product_image2"]?>">
+              if($data['product_image2'] != ""){
+              ?>
+              <img class="border" style="width: 200px; height: 200px;" alt="" src="/uploads/<?=$data["product_image2"]?>">
               <?php
               }
               ?>
@@ -193,12 +181,13 @@ $end_date = date("Y-m-d", $timestamp);
             </div>
             <div class="col-6">
               <?php
-                if($data['detail_img'] != ""){
-                ?>
-              <img style="width: 200px; height: 200px;" alt="" src="/uploads/<?=$data["detail_img"]?>">
+              if($data['detail_img'] != ""){
+              ?>
+              <img class="border" style="width: 200px; height: 200px;" alt="" src="/uploads/<?=$data["detail_img"]?>">
               <?php
               }
               ?>
+            </div>
           </div>
         </div>
       </div>

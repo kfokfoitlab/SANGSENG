@@ -26,14 +26,14 @@ class SignUpCompanyModel extends CommonModel
     { //{{{
         $allowed_ext = array('jpg','jpeg','png','gif','pdf','PNG','JPG','PDF');
         if($files["seller_business_license"]["name"] != ""){
-            $seller_business_license_ori = $files["seller_business_license"]["name"];
+            $seller_business_license_ori =  str_replace('&','＆', $files["seller_business_license"]["name"]);
             $upload_seller_business_license_ori = "seller_business_license";
             $upload_seller_business_license_image = uniqid().".".pathinfo($files["seller_business_license"]["name"], PATHINFO_EXTENSION);
             $this->uploadFileNew($files,$upload_seller_business_license_image,$allowed_ext,$upload_seller_business_license_ori);
         }
 
         if($files["seller_documents"]["name"] != ""){
-            $seller_documents_ori = $files["seller_documents"]["name"];
+            $seller_documents_ori =  str_replace('&','＆', $files["seller_documents"]["name"]);
             $upload_seller_documents_ori = "seller_documents";
             $upload_seller_documents_image = uniqid().".".pathinfo($files["seller_documents"]["name"], PATHINFO_EXTENSION);
             $this->uploadFileNew($files,$upload_seller_documents_image,$allowed_ext,$upload_seller_documents_ori);
@@ -45,7 +45,7 @@ class SignUpCompanyModel extends CommonModel
         // status == 0:가입신청, 1:심사중, 5:승인,7:거절, 9: 탈퇴
         $status = '1';
         $del_yn = 'N';
-        $receive_yn  = (@$data["ads"] == "y")? 'Y' : 'N';
+        $receive_yn  = (@$data["sbs"] == "Y")? 'Y' : 'N';
         $salt = $data["password"];
         $query = "
             insert into
@@ -62,9 +62,7 @@ class SignUpCompanyModel extends CommonModel
                 ,company_name = '".$data["company_name"]."'
                 ,company_code = '".$data["company_code"]."'
                 ,classification = '".$data["classification"]."'
-                ,seller_sales = '".$data['seller_sales']."'
-                ,severely_disabled = '".$data['severely_disabled']."'
-                ,mild_disabled = '".$data['mild_disabled']."'        
+                ,seller_sales = '".$data['seller_sales']."'       
                 ,receive_yn = '".$receive_yn ."'
                 ,register_date = '".date("Y-m-d H:i:s")."'
                 ,register_id = '".$uuid."'

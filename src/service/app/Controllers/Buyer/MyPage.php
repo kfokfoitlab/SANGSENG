@@ -18,8 +18,6 @@ class MyPage extends BaseController
     public function index()
     {
         $data = $this->buyer_model->getProductList();
-
-
         $data = array(
             "data" => $data["data"]
         );
@@ -29,10 +27,15 @@ class MyPage extends BaseController
     }
     public function Contract()
     { // {{{
-        $uuid = $_SESSION['login_info']['uuid'];
-            $data = $this->mypage_model->getContractList($uuid);
-            $data = array(
+         $uuid = $_SESSION['login_info']['uuid'];
+         $data = $this->mypage_model->getContractList($uuid);
+        $data = array(
                 "data" => $data["data"]
+                ,"playing" => $data["playing"]
+                ,"complete" => $data["complete"]
+                ,"price" => $data["price"]
+                ,"reduction" => $data["reduction"]
+                ,"data_page_total_cnt" => $data["count"]
             );
             echo view("Common/Header.html");
             echo view('MyPage/BuyerContract.html',$data);
@@ -41,24 +44,12 @@ class MyPage extends BaseController
     public function ContractUpdate()
     { // {{{
 
-        $result = $this->mypage_model->ContractStatus($_POST);
+        $result = $this->mypage_model->buyerContractStatus($_POST);
         if($result == 1 ){
             $_SESSION["Contract"]= $this->sigin_model->getContractList();
-            echo "
-        <script>
-        alert('최신화되었습니다');
-        location.href = '/Buyer/MyPage/Contract';
-</script>
-        ";
-        }else{
-            echo "
-        <script>
-        alert('최신상태 입니다.');
-        location.href = '/Buyer/MyPage/Contract';
-</script>
-        ";
-        }
-    } // }}}
+            $_SESSION["ReductionMoney"]= $this->sigin_model->BuyerReduction();
+            }
+        } // }}}
 
     public function Info()
     { // {{{
@@ -78,7 +69,7 @@ class MyPage extends BaseController
         $data = $this->mypage_model->getCartList($uuid);
 
         $data = array(
-            "data" => $data["data"]
+            "data" => $data
             ,"cnt" => $data["count"]
         );
         echo view("Common/Header.html");
@@ -90,7 +81,11 @@ class MyPage extends BaseController
         $pwdCheck =  $this->mypage_model->pwdCheck($password);
         if($pwdCheck == 1){
             $result = $this->mypage_model->updateMyInfo($_FILES,$_POST);
+
             if($result == "1") {
+                $_SESSION["buyer_info"] = $this->sigin_model->getBuyerinfo();
+                $_SESSION["Contract"]=  $this->sigin_model->getContractList();
+                $_SESSION["ReductionMoney"]= $this->sigin_model->BuyerReduction();
                 echo "
                 <script>
                     alert('회원님의 정보가 변경 되었습니다.');
@@ -109,7 +104,7 @@ class MyPage extends BaseController
             echo "
                 <script>
                     alert('비밀번호가 일치하지 않습니다.');
-					window.location.replace('/Buyer');
+					window.location.replace('/Buyer/MyPage/Info');
                 </script>
             ";
         }
@@ -117,13 +112,13 @@ class MyPage extends BaseController
     }
 
     public function CartDel(){
-        $idx = $_POST["idx"];
+        $idx = $_GET["idx"];
         $result =  $this->mypage_model->CartDel($idx);
         if($result == "1") {
             echo "
                 <script>
                     alert('삭제되었습니다.');
-					window.location.replace('/Buyer');
+					window.location.replace('/Buyer/MyPage/Cart');
                 </script>
             ";
         }else{
@@ -144,8 +139,8 @@ class MyPage extends BaseController
 
     public function ChangePassword()
     { // {{{
-        $uuid = $_SESSION["login_info"]["uuid"];
-        $result = $this->mypage_model->pwdCheck($uuid);
+        $password = $_POST["password"];
+        $result = $this->mypage_model->pwdCheck($password);
 
         if($result == 1){
             echo "

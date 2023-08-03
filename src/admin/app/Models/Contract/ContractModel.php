@@ -92,7 +92,7 @@ class ContractModel extends CommonModel
 
         // query
         $query = "
-            select
+              select
                  *,
                  (select email from buyer_company where uuid=".$this->table_name.".buyer_uuid) as buyer_email
                  ,(select email from seller_company where uuid=".$this->table_name.".seller_uuid) as seller_email
@@ -333,10 +333,10 @@ class ContractModel extends CommonModel
         if($result == 0){
             $query = "
             update
-                contract_condition
+                ".$this->table_name."
             set
               	 workflow_id = '".$data["workflow_id"]."',
-                 contract_status = ".$data["status"]."
+                 contract_status = '".$data["status"]."'
             where
                  idx = ".$data["idx"];
                   $this->wrdb->update($query);
@@ -376,24 +376,140 @@ class ContractModel extends CommonModel
     }
 	
 	public function ContractStatus($data){
-		$workflow_id = $data["workflow_id"];
-		$whereQuery = "";
-		if($workflow_id != ""){
-			$whereQuery = " AND workflow_id in (".$workflow_id.")";
-			$query = "
+        $jsonInput  = file_get_contents('php://input');
+        var_dump($jsonInput);
+        $workflow = json_decode($jsonInput);
+        $pworkflow_id =$workflow[0]->pworkflow_id;
+        $cworkflow_id =$workflow[0]->cworkflow_id;
+
+        if(count($pworkflow_id) > 0){
+            $where = "workflow_id in (";
+            $where = $where . @join(",", $pworkflow_id);
+            $where = $where . ")";
+            $playing_query = "
                 update
                     contract_condition
                 set
-                    contract_status = ".$data["contract_status"]."
-                where 1=1
-                  $whereQuery
+                    contract_status =2
+                where 
+                    $where
             ";
-			//     echo $query;
-			$this->wrdb->update($query);
-			return 1;
-		}else{
-			return null;
-		}
+            $this->wrdb->update($playing_query);
+        }
+        if(count($cworkflow_id) > 0){
+            $where = "workflow_id in (";
+            $where = $where . @join(",", $cworkflow_id);
+            $where = $where . ")";
+            $canceled_query = "
+                update
+                    contract_condition
+                set
+                    contract_status =9,
+                    del_yn = 'Y'
+                where 
+                   $where
+            ";
+            $this->wrdb->update($canceled_query);
+        }
+        if($workflow != ""){
+            for($i = 0; $i< count($workflow); $i++) {
+                $complete_reduction = $workflow[$i]->complete_reduction;
+                $product_quantity = $workflow[$i]->product_quantity;
+                $workflow_id = $workflow[$i]->workflow_id;
+                $query = "
+                select
+                    *
+                from                 
+                contract_condition 
+                where
+                        workflow_id ='" . $workflow_id . "'
+                limit 1
+            ";
+                $this->rodb->query($query);
+                $seller_uuid = $this->rodb->next_row();
+                if($seller_uuid != null) {
+
+
+                    $mild_disabled_query = "
+                select
+                    count(*) as mild_disabled
+                from                 
+                seller_company_worker 
+                where
+                        register_id = '" . $seller_uuid['seller_uuid'] . "'
+                       and disability_degree ='2'
+                       and status ='5'
+                       and del_yn !='Y'
+                limit 1
+            ";
+                    $this->rodb->query($mild_disabled_query);
+                    $seller_mild_disabled = $this->rodb->next_row();
+
+                    $severely_disabled_query = "
+                select
+                    count(*) as severely_disabled
+                from                 
+                seller_company_worker 
+                where
+                    register_id = '" . $seller_uuid['seller_uuid'] . "'
+                     and disability_degree ='1'
+                       and status ='5'
+                       and del_yn !='Y'
+                limit 1
+            ";
+                    $this->rodb->query($severely_disabled_query);
+                    $seller_severely_disabled = $this->rodb->next_row();
+
+                    $seller_info_query = "
+                select
+                    *
+                from                 
+                seller_company
+                where
+                uuid = '" . $seller_uuid['seller_uuid'] . "'         
+                limit 1
+            ";
+                    $this->rodb->query($seller_info_query);
+                    $seller_info = $this->rodb->next_row();
+
+                    $mild_disabled = $seller_mild_disabled["mild_disabled"];
+                    $severely_disabled = $seller_severely_disabled["severely_disabled"];
+                    $seller_sales = $seller_info["seller_sales"];
+                    $contribution = $complete_reduction / $seller_sales;
+                    $contribution = explode('.', $contribution);
+                    $contribution = substr($contribution[1], 0, 4);
+                    $supply = $contribution[0] . '.' . $contribution;
+                    $workers = $mild_disabled + ($severely_disabled * 2);
+
+                    $base = 1149000;   //기본금액
+                    $reduction_money = $supply * ($workers * 12) * $base;
+                    if ($reduction_money > $complete_reduction * 0.5) {
+                        $reduction_money = $complete_reduction * 0.5;
+                    }
+                    $reduction_money = (int)$reduction_money;
+                    $slice = substr($reduction_money, 0, -1);
+                    $reduction_money = $slice . '0';
+                    $point = $complete_reduction * 0.01;
+
+                    $reduction_query = "
+                update
+                    contract_condition
+                set
+                    product_price = $complete_reduction,
+                    contract_status =5,
+                    product_quantity = '" . $product_quantity . "',
+                    buyer_point = '" . $point . "',
+                    reduction_money = $reduction_money
+                where 
+                    workflow_id = '" . $workflow_id . "'
+            ";
+                    $this->wrdb->update($reduction_query);
+                }
+            }
+            return "1";
+        }else{
+            return "2";
+        }
 	}
 	
 	public function ContractDelete($data){

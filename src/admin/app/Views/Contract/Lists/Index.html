@@ -21,7 +21,7 @@
         </div>
         <div class="col-lg-2">
           <label>판매기업 사업체명 검색</label>
-          <input type="text" class="form-control form-control-sm search" id="search-seller_company" placeholder="기간 검색">
+          <input type="text" class="form-control form-control-sm search" id="search-seller_company">
         </div>
         <div class="col-lg-1">
           <label>계약상태</label>
@@ -40,8 +40,10 @@
     </div>
 
     <form name="statusForm" id="statusForm" method="post" action="/Contract/Lists/ContractUpdate">
-      <input type="hidden" name ="workflow_id" id="workflow_id" value="">
-      <input type="hidden" name ="contract_status" id="contract_status" value="">
+      <input type="hidden" name ="workflow_id" id="workflow_id" value="0">
+      <input type="hidden" name ="pworkflow_id" id="pworkflow_id" value="0">
+      <input type="hidden" name ="complete_reduction" id="complete_reduction" value="0">
+      <input type="hidden" name ="product_quantity" id="product_quantity" value="">
     </form>
 
     <div class="card-body">

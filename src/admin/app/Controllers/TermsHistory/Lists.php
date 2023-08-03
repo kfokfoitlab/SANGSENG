@@ -19,16 +19,8 @@ class Lists extends Base
 
     public function Index()
     { //{{{
-
-        $job_category = $this->database_model->getJobAll();
-        $impairments = $this->database_model->getImpairmentAll();
-
         $data = array(
              "page_name" => $this->page_name
-            ,"job_category" => $job_category
-            ,"impairments" => $impairments
-
-            //,"data" => $this->model->getList()
         );
 
         echo view('Common/Header.html');
@@ -65,31 +57,68 @@ class Lists extends Base
 
     public function Detail()
     { //{{{
+        $data = $this->model->Detail($_GET);
+
+        $data = array(
+            "page_name" => $this->page_name
+        ,"data" => $data
+        );
+
 
         echo view('Common/HeaderSub.html');
-        echo view(_CONTROLLER.'/Detail.html');
+        echo view(_CONTROLLER.'/Detail.html',$data);
         echo script_tag("assets/js/"._CONTROLLER."/Detail.js");
         echo view('Common/Footer.html');
 
 
     } //}}}
 
-    public function RecommendSubmit($type, $uuid)
-    { //{{{
-
-        $this->model->Recommend($type, $uuid);
-
-        echo 1;
-
-        die();
-
-    } //}}}
+    public function statusUpdate()
+    {
+        $data = array(
+            "idx" => $_GET["idx"]
+        ,"status" => $_GET["status"]
+        );
+        $this->model->statusUpdate($data);
+        echo "
+            <script>
+                history.back();
+            </script>
+        ";
+    }
 
     public function Update()
     { //{{{
+
+        $data =$this->model->ContentsUpdate($_GET);
+
+        $data = array(
+            "page_name" => $this->page_name
+        ,"data" => $data
+        );
         echo view('Common/HeaderSub.html');
-        echo view('TermsHistory/Lists/Update.html');
+        echo view('TermsHistory/Lists/Update.html',$data);
         echo view('Common/Footer.html');
     } //}}}
+
+    public function UpdateSubmit(){
+        $result = $this->model->Update($_POST);
+        if($result == 1) {
+            echo "
+            <script>
+                alert('수정되었습니다.');
+                window.location.replace('/" . _CONTROLLER . "');
+            </script>
+        ";
+        }else{
+            echo "
+            <script>
+                alert('실패했습니다.');
+                window.location.replace('/" . _CONTROLLER . "');
+            </script>
+        ";
+        }
+        die();
+    }
 
 }

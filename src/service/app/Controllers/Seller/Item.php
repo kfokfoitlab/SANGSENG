@@ -36,19 +36,21 @@ class Item extends BaseController
     { // {{{
 
         $page = (@$_GET["page"])?$_GET["page"] : 1;
-        $this->item_per_page = (@$_GET["length"])?$_GET["length"]:$this->item_per_page;
+        /*$this->item_per_page = (@$_GET["length"])?$_GET["length"]:$this->item_per_page;
 
         $page_query = array(
         "page" => $page
         ,"length" => $this->item_per_page
-        );
+        );*/
 
         $uuid = $_SESSION['login_info']['uuid'];
         $data = $this->seller_model->getProductList($uuid);
+        $excel = $this->seller_model->getExcelData($uuid);
         $data_cnt = $this->seller_model->getProductCount($uuid);
         $data_page_total_cnt = count($data);
         $data = array(
             "data" => $data["data"],
+            "excel" => $excel,
             "data_cnt" => $data_cnt,
             "data_page_total_cnt" => $data["count"]
         );
@@ -59,9 +61,11 @@ class Item extends BaseController
     public function ItemRegist()
     { // {{{
 
-        $data = $this->item_model->SellerInfo();
+        $sellerInfo = $this->item_model->SellerInfo();
+        $category = $this->item_model->RegCategory();
         $data = array(
-            "data" => $data
+            "sellerInfo" => $sellerInfo,
+            "category" =>$category
         );
         echo view("Common/Header.html");
         echo view('Seller/ItemRegist.html',$data);
@@ -70,7 +74,6 @@ class Item extends BaseController
 
     public function ItemSubmit()
     { // {{{
-        header("Content-Type:text/html;charset=UTF-8");
         $result = $this->item_model->Register($_FILES, $_POST);
 
         if($result == "1") {
@@ -95,9 +98,11 @@ class Item extends BaseController
     { // {{{
         $uuid = $_SESSION['login_info']['uuid'];
         $data = $this->seller_model->itemDetail($uuid,$product_no);
-
+        $category_type = $this->item_model->Category1($product_no);
         $data = array(
-            "data" => $data["data"]
+            "data" => $data,
+            "category_type1" => $category_type['category_type1'],
+            "category_type2" => $category_type['category_type2']
         );
         echo view("Common/Header.html");
         echo view('Seller/ItemUpdate.html',$data);
@@ -111,7 +116,7 @@ class Item extends BaseController
             echo "
                 <script>
                     alert('수정사항을 관리자가 검토중입니다.');
-					window.location.replace('/Seller/Item/ItemList');
+					window.location.replace('/Seller/Item/ItemList?p_n=1');
                 </script>
             ";
         }else{
@@ -130,7 +135,7 @@ class Item extends BaseController
         if ($result == "1") {
             echo "
                 <script>
-                    alert('관리자에게 삭제를 요청했습니다..');
+                    alert('관리자에게 삭제를 요청했습니다.');
 					window.location.replace('/Seller/Item/ItemList');
                 </script>
             ";
@@ -147,4 +152,14 @@ class Item extends BaseController
 	public function StatusComment(){
 		echo view('/Seller/StatusComment.html');
 	}
+
+    public function CategorySearch(){
+        $category_type = $this->item_model->CategorySearch($_POST);
+        $data = array(
+        "data" => $category_type
+        );
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+
+        die();
+    }
 }

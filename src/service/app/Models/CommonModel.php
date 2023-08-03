@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 use App\Models\dbClasses\dbModel;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+
 use function mkdir;
 class CommonModel extends dbModel
 {
@@ -303,7 +305,8 @@ class CommonModel extends dbModel
 
 
     } //}}}
-	
+
+
 	public function getSellerInfo($uuid)
 	{ //{{{
 		$data = [];
@@ -324,6 +327,7 @@ class CommonModel extends dbModel
 	} //}}}
 	
 	public function uploadFileNEW($files,$fileName,$allowed_ext,$fileName_ori){
+        ini_set('memory_limit','-1');
 		$error = $files["$fileName_ori"]['error'];
 		$name = $files["$fileName_ori"]['name'];
 		$exploded_file = explode(".",$name);
@@ -365,7 +369,8 @@ class CommonModel extends dbModel
 	}
 	
 	public function downloadFileNew(){
-		$target_Dir = ROOTPATH."/public/uploads/";
+        ini_set('memory_limit','-1');
+        $target_Dir = ROOTPATH."/public/uploads/";
 		$file = $_GET["fileName"];
 		$file_ori = $_GET["fileNameOri"];
 		$down = $target_Dir . $file;
@@ -398,30 +403,116 @@ class CommonModel extends dbModel
 		}
 	}
 
-    public function zip_downloadFileNew(){
-        $file_path = ROOTPATH."/public/uploads/";
-        $sales_file = $_GET["sales_file"];
-        $workers_file = $_GET["workers_file"];
-        $seller_business_license = $_GET["seller_business_license"];
-//압축할 파일명
-        $file_names = array($sales_file,$workers_file,$seller_business_license);
-//다운로드되는 파일명
-        $file_name = "test.zip";
-        $this->createZipArchive();
-/*        $zip = new ZipArchive();
-        if ($zip->open($file_name, ZipArchive::CREATE) !== true){
-            exit("cannot open [".$file_name."]");
+    public function getRegExcel(){
+        $excel = [];
+        $query = "
+            select
+                *
+            from
+                workers_excel
+         order by idx desc
+            limit 1
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()) {
+            $excel = $row;
         }
-        foreach($file_names as $files){
-            $zip->addFile($file_path.$files, $files);
-        }
-        $zip->close();*/
-        header("Content-type: application/zip");
-        header("Content-Disposition: attachment; filename=".$file_name);
-        header("Pragma: no-cache");
-        header("Expires: 0");
-        readfile($file_name);
-        unlink($file_name);
+        return $excel;
     }
 
-}
+
+    public function excelRead($files){
+        require_once('PhpOffice/Psr/autoloader.php');
+        require_once('PhpOffice/PhpSpreadsheet/autoloader.php');
+        $allowed_ext = array('Xlsx','xlsx');
+        if($files["excelupload"]["name"] != "") {
+            $excelupload_ori = $files["excelupload"]["name"];
+            $upload_excelupload_ori = "excelupload";
+            $upload_excelupload_image = uniqid() . "." . pathinfo($files["excelupload"]["name"], PATHINFO_EXTENSION);
+            $this->uploadFileNew($files, $upload_excelupload_image, $allowed_ext, $upload_excelupload_ori);
+        }
+        $inputFileName = ROOTPATH."/public/uploads/".$upload_excelupload_image;
+        $spreadsheet = IOFactory::load($inputFileName);
+        $Rows = $spreadsheet->getSheetByName('Sheet1')->toArray(null, true, true, true);
+        $test =[];
+        $data = [];
+        for($i =6; $i <=count($Rows); $i++){
+            $test[$i]["name"] = $Rows[$i]['A'];;
+            $test[$i]["sdate"] = $Rows[$i]['B'];
+            $test[$i]["edate"] = $Rows[$i]['C'];
+            $test[$i]["birth"] = $Rows[$i]['D'];
+            $test[$i]["status"] = $Rows[$i]['E'];
+            $test[$i]["dis"] = $Rows[$i]['F'];
+            $data[] = $test[$i];
+         }
+        $data[]['file'] = $upload_excelupload_image;
+        return $data;
+    }
+
+    public function WorkersReg($data)
+    {
+        require_once('PhpOffice/Psr/autoloader.php');
+        require_once('PhpOffice/PhpSpreadsheet/autoloader.php');
+
+            $register_file = $data['register_file'];
+
+        $inputFileName = ROOTPATH . "/public/uploads/" . $register_file;
+        $spreadsheet = IOFactory::load($inputFileName);
+        $Rows = $spreadsheet->getSheetByName('Sheet1')->toArray(null, true, true, true);
+        $seller_uuid = $_SESSION["login_info"]["uuid"];
+        $seller_data = $this->getSellerInfo($seller_uuid);
+        for ($i = 6; $i <= count($Rows); $i++) {
+            if($Rows[$i]['A'] == "" || $Rows[$i]['B'] == "" || $Rows[$i]['D'] == ""|| $Rows[$i]['E'] == ""|| $Rows[$i]['F'] == ""){
+                return 3;
+            }
+            $working_status = "";
+            if ($Rows[$i]['E'] == "근무") {
+                $working_status = '1';
+            }
+            if ($Rows[$i]['E'] == "퇴직") {
+                $working_status = '2';
+            }
+            if ($Rows[$i]['E'] == "휴직") {
+                $working_status = '3';
+            }
+            $disability_degree = "";
+            if ($Rows[$i]['F'] == "중증") {
+                $disability_degree = '1';
+            }if ($Rows[$i]['F'] == "경증") {
+                $disability_degree = '2';
+            }
+            $sdate= date("Y-m-d", strtotime($Rows[$i]['B']));
+           // $edate= date("Y-m-d", strtotime($Rows[$i]['C']));
+            if($Rows[$i]['C'] != ""){
+                $edate= date("Y-m-d", strtotime($Rows[$i]['C']));
+            }else{
+                $edate= "";
+            }
+
+            $query = "
+            insert into
+                seller_company_worker
+            set
+                 status = '5'
+                ,company_name = '".$seller_data["company_name"]."'
+				,company_code = '".$seller_data["company_code"]."'
+				,worker_name = '".$Rows[$i]['A']."'
+				,worker_term_start = '".$sdate."'
+				,worker_term_end = '".$edate."'
+				,worker_birth = '".$Rows[$i]['D']."'
+				,del_yn ='N'
+				,working_status = '".$working_status."'
+				,disability_degree = '".$disability_degree."'
+                ,register_date = '".date("Y-m-d H:i:s")."'
+                ,register_id = '".$seller_uuid."'
+        ";
+            $idx = $this->wrdb->insert($query);
+              }
+          if($idx){
+              return "1";
+          }
+          else {
+              return null;
+          }
+        }
+    }

@@ -4,57 +4,78 @@
   </div>
  <div class="card mb-4">
       <div class="card-header">
-        <form name="form-searchbar">
-
-        <div class="row gx-3">
-          <div class="col-lg-2">
-            <label>회사 검색</label>
-            <input type="text" class="form-control form-control-sm search" id="search-company-name" placeholder="">
-          </div>
-         <div class="col-lg-2">
-            <label>근로자 검색</label>
-            <input type="text" class="form-control form-control-sm search" id="search-worker-name" placeholder="">
-          </div>
-          <div class="col-lg-2">
-            <label>근무상태</label>
-            <select class="form-control form-control-sm filter" id="search-working_status">
-              <option value="">선택안함</option>
-              <option value="1">근무</option>
-              <option value="2">퇴직</option>
-              <option value="3">휴직</option>
-            </select>
-          </div>
-          <div class="col-lg-2">
-            <label>장애유형</label>
-            <select class="form-control form-control-sm filter" id="search-disability_degree">
-              <option value="">선택안함</option>
-              <option value="1">중증</option>
-              <option value="2">경증</option>
-            </select>
-          </div>
-          <div class="col-lg-2">
-            <label>진행상황</label>
-            <select class="form-control form-control-sm filter" id="search-status">
-              <option value="">선택안함</option>
-              <option value="1">대기</option>
-              <option value="5">승인</option>
-              <option value="7">반려</option>
-            </select>
-          </div>
+        <div class="row">
+          <form name="form-searchbar" class="col-lg-10">
+            <div class="row gx-3">
+              <div class="col-lg">
+                <input type="">
+                <label>회사 검색</label>
+                <input type="text" class="form-control form-control-sm search" id="search-company-name" placeholder="">
+              </div>
+              <div class="col-lg">
+                <label>근로자 검색</label>
+                <input type="text" class="form-control form-control-sm search" id="search-worker-name" placeholder="">
+              </div>
+              <div class="col-lg">
+                <label>근무상태</label>
+                <select class="form-control form-control-sm filter" id="search-working_status">
+                  <option value="">선택안함</option>
+                  <option value="1">근무</option>
+                  <option value="2">퇴직</option>
+                  <option value="3">휴직</option>
+                </select>
+              </div>
+              <div class="col-lg">
+                <label>장애유형</label>
+                <select class="form-control form-control-sm filter" id="search-disability_degree">
+                  <option value="">선택안함</option>
+                  <option value="1">중증</option>
+                  <option value="2">경증</option>
+                </select>
+              </div>
+              <div class="col-lg">
+                <label>진행상황</label>
+                <select class="form-control form-control-sm filter" id="search-status">
+                  <option value="">선택안함</option>
+                  <option value="1">대기</option>
+                  <option value="5">승인</option>
+                  <option value="7">반려</option>
+                </select>
+              </div>
+            </div>
+          </form>
+          <form class="col-lg-2" name="reg_form" id ="reg_form" method="POST" enctype="multipart/form-data" action="/<?=_CONTROLLER?>/Workersform">
+              <div>
+                  <p class="m-0">일괄등록 양식 업로드</p>
+                  <div class="position-relative">
+                    <label class="form-control form-control-sm" for="Workersform">파일선택</label>
+                    <input class="d-none" type="file" name="register_file" id ="Workersform">
+                    <button type="button" onclick="workers_reg();" class="btn btn-dark btn-sm fw-normal position-absolute top-0 end-0">등록</button>
+                  </div>
+              </div>
+          </form>
         </div>
-        </form>
       </div>
-
-
   <div class="card-body">
-
     <div class="">
       <table class="table table-hover small" id="datatables">
       </table>
     </div>
   </div>
-
   </div>
-
 </section>
+
+<script>
+  document.getElementById("Workersform").onchange = function () {
+    document.querySelector("label[for='Workersform']").textContent = this.value.replace("C:\\fakepath\\", "");
+  };
+  function workers_reg(){
+      if($("#Workersform").val() != ""){
+          $("#reg_form").submit();
+      }else{
+          alert("파일을 선택해주세요");
+      }
+  }
+
+</script>
 

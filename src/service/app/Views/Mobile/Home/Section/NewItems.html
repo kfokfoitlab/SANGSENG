@@ -1,0 +1,58 @@
+<section class="new-items">
+  <div class="title-box">
+    <p><span>상생몰 New</span></p>
+    <h2>새로 들어온 상품</h2>
+  </div>
+  <div class="new-items-wrapper">
+      <?php
+      if(is_array($new_product) && count($new_product) > 0){
+      $i = 1;
+      foreach($new_product as $item){
+       if($i == 1){
+      ?>
+  <div class="new-items-top row">
+      <?php
+        }
+      if($i == 5){
+      ?>
+      <div class="new-items-bottom row">
+          <?php } ?>
+      <div class="new-item-box col-6">
+        <a  href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>">
+          <img src="/uploads/<?=$item['representative_image']?>" alt="<?=$item['product_name']?>" title="<?=$item['product_name']?>" alt="">
+          <div>
+            <p class="new-item-company"><?=$item['company_name']?></p>
+            <p class="new-item-name"><?=$item['product_name']?></p>
+          </div>
+          <div>
+            <p class="new-item-contract-price d-flex justify-content-between align-items-center">
+              <span>계약금액</span>
+              <strong><?=number_format($item['product_price'])?>원</strong>
+            </p>
+            <?php
+              if($_SESSION['login_info']['type'] == 'buyer'){
+              ?>
+            <p class="new-item-reduction-price d-flex justify-content-between align-items-center">
+              <span>감면액</span>
+              <strong><?=number_format($item['reduction_money'])?>원</strong>
+            </p>
+              <?php } ?>
+          </div>
+        </a>
+      </div>
+
+      <?php if($i == 4 || $i == 8){ ?>
+    </div>
+      <?php
+       }
+       $i++;
+       }
+       }
+      ?>
+    <button class="new-items-more-btn">
+      더보기<span></span>
+    </button>
+
+  </div>
+
+</section>

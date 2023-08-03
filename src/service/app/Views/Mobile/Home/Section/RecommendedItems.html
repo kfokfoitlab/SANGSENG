@@ -1,0 +1,26 @@
+<section class="recommend-items">
+  <div class="title-box">
+    <p><span>상생몰 Pick</span></p>
+    <h2>상생몰 추천상품</h2>
+  </div>
+  <div class="swiper recommended-item-swiper">
+    <div class="swiper-wrapper">
+      <?php
+        if(is_array($data) && count($data) > 0){
+      foreach($data as $item){
+      ?>
+      <div class="swiper-slide">
+        <a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['reduction_money']?>">
+          <img src="/assets/images/index-12/images/1.png" alt="">
+          <p class="recommend-item-company"><?=$item['company_name']?></p>
+          <p class="recommend-item-name"><?=$item['product_name']?></p>
+        </a>
+      </div>
+      <?php
+          }
+        }
+      ?>
+    </div>
+    <div class="swiper-scrollbar"></div>
+  </div>
+</section>

@@ -56,6 +56,75 @@ class SellerModel extends CommonModel
             return null;
         }
     }
+
+    public function getDelivery($uuid){
+        $delivery = [];
+        $query = "
+            select 
+                count(*) as complete
+            from
+                delivery
+            where
+                seller_uuid = '".$uuid."'
+            and delivery_status = 5
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()) {
+            $delivery["complete"] = $row;
+        }
+
+        $query = "
+            select
+                count(*) as playing
+            from
+                delivery
+            where
+                seller_uuid = '".$uuid."'
+            and delivery_status = 3
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()) {
+            $delivery["playing"]= $row;
+        }
+        return $delivery;
+    }
+    public function getExcelData($uuid){
+        $excel = [];
+        $where_query = "";
+        if($_GET["search_A"] != ""){
+            $where_query = $where_query." and product_name like '%".$_GET["search_A"]."%'";
+        }
+        if($_GET["search_B"] != "all" && $_GET["search_B"] != ""){
+            if($_GET["search_B"] == "1"){
+                $where_query = $where_query." and status=1";
+            }elseif ($_GET["search_B"] == "5"){
+                $where_query = $where_query." and status=5";
+            }elseif ($_GET["search_B"] == "9"){
+                $where_query = $where_query." and status=9";
+            }
+        }
+        if($_GET["search_C"] != "all" && $_GET["search_C"] != ""){
+            $where_query = $where_query." and product_category = '".$_GET["search_C"]."'";
+        }else{
+            $where_query = $where_query." ";
+        }
+        $query = "
+            select
+                *
+            from
+              seller_product  
+            where del_yn != 'Y' and register_id ='".$uuid."'".$where_query." 
+        ";
+        $query = $query." order by register_date desc";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $excel[] = $row;
+        }
+        return $excel;
+    }
+
+
+
     public function getProductList($uuid){
         $where_query = "";
         if($_GET["search_A"] != ""){
@@ -102,6 +171,7 @@ class SellerModel extends CommonModel
         while($row = $this->rodb->next_row()){
             $data["data"][] = $row;
         }
+
         return $data;
     }
 
@@ -111,7 +181,7 @@ class SellerModel extends CommonModel
         $query = "
             select
                 count(*) as product_cnt,
-                count(case when status =1 then 1 end) as status1,
+                count(case when (status =1 or status =3) then 1 end) as status1,
                 count(case when status=5 then 1 end) as status5,
                 count(case when status=9 then 1 end) as status9
             from seller_product where 1=1
@@ -149,15 +219,7 @@ class SellerModel extends CommonModel
     public function getContractList($uuid){
         $data = [];
         // total
-        $query = "
-            select
-                count(*)
-            from
-                contract_condition
-            where (del_yn != 'Y' or del_yn is null) AND seller_uuid ='".$uuid."'
-        ";
-        $data["count"] = $this->rodb->simple_query($query);
-        $data["data"] = [];
+
         $where_query = "";
 
         if($_GET["search_A"] != ""){
@@ -171,21 +233,56 @@ class SellerModel extends CommonModel
             }elseif ($_GET["search_B"] == "5"){
                 $where_query = $where_query." and contract_status=5";
             }
+            elseif ($_GET["search_B"] == "9"){
+                $where_query = $where_query." and contract_status=9";
+            }
         }
         $query = "
             select
-               *,idx as 'cidx',product_price as contract_price
+                count(*)
+            from
+                contract_condition
+            where (del_yn != 'Y' or del_yn is null) AND seller_uuid ='".$uuid."'".$where_query."
+        ";
+        $data["count"] = $this->rodb->simple_query($query);
+        $data["data"] = [];
+        $query = "
+            select
+               *
             from
               contract_condition 
             where (del_yn != 'Y' or del_yn is null) AND seller_uuid ='".$uuid."'".$where_query."
+        ";
+        $page_start = 0;
+        if($_GET["p_n"] != ""){
+            $page_start = ($_GET["p_n"] - 1)*10;
+        }
+        $query = $query." order by idx desc";
+        $query = $query." limit ".$page_start.", 10";
+
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $data["data"][] = $row;
+
+        }
+
+        $query = "
+            select
+         *
+            from
+              contract_condition 
+            where contract_status =2 
+              and del_yn != 'Y'
+                AND seller_uuid ='".$uuid."'".$where_query."
            order by 
                idx desc
+               limit 4
            
            
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
-            $data["data"][] = $row;
+            $data["playing"][] = $row;
 
         }
         return $data;
@@ -204,7 +301,7 @@ class SellerModel extends CommonModel
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
-            $data["data"][] = $row;
+            $data= $row;
 
         }
         return $data;
@@ -235,7 +332,7 @@ class SellerModel extends CommonModel
             from
               contract_condition 
             where seller_uuid = '".$uuid."'
-              and (contract_status = 2 or contract_status = 5)
+              and  contract_status = 5
 
                      
         ";
@@ -269,7 +366,8 @@ class SellerModel extends CommonModel
             from
               contract_condition          
             where seller_uuid = '".$uuid."'
-              and  contract_status = 2             
+              and  contract_status = 2 
+              and del_yn !='Y'            
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
@@ -340,21 +438,41 @@ class SellerModel extends CommonModel
             from
              seller_product
             where register_id = '".$uuid."'
-            and del_yn='N'
-            order by update_date desc
+            and del_yn != 'Y'
+            and reply_date != ''
+            order by reply_date desc
             limit 4        
         ";
         $this->rodb->query($query);
         while($row = $this->rodb->next_row()){
 	        $product_reply["data"][] = $row;
         }
+        if(! empty($product_reply["data"])){
 	    foreach($product_reply["data"] as $item){
-		    $product_reply["replyCount"][] = $this->SellerReplyCount($item["product_no"]);
-	    }
-		
+		    $product_reply["replyCount"][]= $this->SellerReplyCount($item["product_no"]);
+	      }
+        }
         return $product_reply;
     }
-	
+
+    public function getPromotionVideo(){
+        $query = "
+            select
+            *
+            from
+             promotion_video
+            where video_status = 2
+            and del_yn !='Y'
+            order by register_date desc
+            limit 1
+        ";
+        $this->rodb->query($query);
+        while($row = $this->rodb->next_row()){
+            $promotion_video= $row;
+        }
+        return $promotion_video;
+    }
+
 	public function getNoticeList(){
 		$notice_list =[];
 		$query = "
@@ -370,22 +488,21 @@ class SellerModel extends CommonModel
 		while($row = $this->rodb->next_row()){
 			$notice_list[] = $row;
 		}
-		
 		return $notice_list;
 	}
 	
 	public function SellerReplyCount($data){
 		$product_no = $data;
-		
 		$query = "
             select
-                count(*)
+                count(*) as reply_cnt
             from
                 seller_product_reply
             where
                 product_no = '".$product_no."'
                 and reply_step = 1
-            limit 1
+                and del_yn ='n'
+           
         ";
 		
 		return $this->rodb->simple_query($query);

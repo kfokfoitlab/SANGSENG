@@ -100,8 +100,6 @@ class SellerInfoModel extends CommonModel
                 ,company_code = '".$data["company_code"]."'
                 ,classification = '".$data["classification"]."'
                 ,seller_sales = '".$data['seller_sales']."'
-                ,severely_disabled = '".$data['severely_disabled']."'
-                ,mild_disabled = '".$data['mild_disabled']."'
                 ,update_date = '".date("Y-m-d H:i:s")."'
                 ,update_id = '".$uuid."'
                 ,seller_documents = '".$upload_seller_documents_image."'
@@ -148,7 +146,6 @@ class SellerInfoModel extends CommonModel
         $severely_disabled_cnt = $this->rodb->next_row();
         $severely_disabled = $severely_disabled_cnt["severely_disabled_cnt"];
 
-        $product_info =[];
         $product_query = "
 			SELECT * FROM seller_product
 			WHERE register_id='".$uuid."'
@@ -156,16 +153,29 @@ class SellerInfoModel extends CommonModel
         $this->rodb->query($product_query);
         while($row = $this->rodb->next_row()){
             $product_info= $row;
+            $contribution = sprintf("%f",$data["product_price"]/$data["seller_sales"]);
+            $contribution = explode('.',$contribution);
+            $contribution = substr($contribution[1],0,4);
+            $supply = $contribution[0].'.'.$contribution; // 감면비율 소수점4째자리
+            $workers = $mild_disabled+($severely_disabled*2);  // 장애인근로자 수
 
-            $contribution = $product_info["product_price"]/$data["seller_sales"];
-            $workers = $mild_disabled+($severely_disabled*2);
-            $reduction = $contribution * $workers;
-            $reduction = round($reduction,4);
+            $base = 1149000;   //기본금액
+            $reduction_money = $supply*($workers*12)*$base; // (수급비율*근로자)*기본금*12개월
+            if($reduction_money > $product_info["product_price"]*0.5) {
+                $reduction_money = $product_info["product_price"] * 0.5;  // 감면액이 상품가격의 50%가 넘으면 50%로 표시
+            }
+            $reduction_money = (int)$reduction_money;
+            $slice = substr($reduction_money,0,-1);
+            $reduction_money = $slice.'0';
+            $reduction = $reduction_money/$product_info['product_price'];
             $query = "
             update
                seller_product
             set
-                reduction = $reduction
+                reduction = '".$reduction."'
+                ,supply = '".$supply."'
+                ,reduction_money = '".$reduction_money."'
+
             where product_no = '".$product_info["product_no"]."'
         ";
             $this->wrdb->update($query);

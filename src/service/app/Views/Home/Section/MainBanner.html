@@ -1,0 +1,75 @@
+<section>
+  <div class="position-relative main-banner-carousel" data-main-banner-autoplay-status="Y">
+    <div class="banner-carousel owl-carousel owl-theme default-nav">
+      <div class="slide-item bg-image item" style="background: 80% 93px url('/assets/images/main/main_banner_content04.png') no-repeat #148AFF;">
+        <div class="main-banner-box">
+          <p class="main-banner-sub-title">2022년 상생몰 예상 총 감면금액</p>
+          <?php
+            $reduction_money = "";
+            if($reduction['reduction_money'] != null){
+            $reduction_money = $reduction['reduction_money'];
+            }
+            else{
+            $reduction_money = 0;
+            }
+          ?>
+          <p class="main-banner-title text-end"><span class="main-banner-counter"><?=$reduction_money?></span>원</p>
+        </div>
+      </div>
+      <div class="slide-item bg-image item" style="background: 80% 93px url('/assets/images/main/main_banner_content01.png') no-repeat #0352AC;">
+        <div class="main-banner-box">
+          <p class="main-banner-sub-title">상생몰에서 계약을 진행하면</p>
+          <p class="main-banner-title">60%까지 부담금 감면</p>
+        </div>
+      </div>
+      <div class="slide-item bg-image item" style="background: 80% 93px url('/assets/images/main/main_banner_content02.png') no-repeat #FFAC07;">
+        <div class="main-banner-box">
+          <p class="main-banner-sub-title">특별한 의미를 지닌 좋은 물건을</p>
+          <p class="main-banner-title">상생몰에서 만나보세요</p>
+        </div>
+      </div>
+      <div class="slide-item bg-image item" style="background: 80% 93px  url('/assets/images/main/main_banner_content03.png') no-repeat #49C767;">
+        <div class="main-banner-box">
+          <p class="main-banner-sub-title">장애인 연계고용제도를 활용한</p>
+          <p class="main-banner-title">「상생」하는 플랫폼</p>
+        </div>
+      </div>
+    </div>
+    <div class="play main-banner-control">
+      <img src="/assets/images/icons/play.png" alt="재생">
+    </div>
+    <div class="stop main-banner-control">
+      <img src="/assets/images/icons/pause.png" alt="멈춤">
+    </div>
+    <!-- Job Search Form -->
+    <div class="job-search-box position-absolute">
+      <div class="job-search-form border border-white">
+        <form name="form-search" method="GET" action="/Buyer/Shop/List">
+          <input type="hidden" name="p_n" value="1">
+          <input type="hidden" name="search_type" value="s">
+          <div class="d-flex justify-content-between align-items-center" style="height: 60px;">
+            <!-- Form Group -->
+            <div class="form-group flex-grow-1">
+              <input class="bg-transparent w-100 text-white" type="text" name="search_v" placeholder="구매하실 상품을 검색해보세요" tabindex=101 title="구매하실 상품을 검색해보세요">
+            </div>
+            <!-- Form Group -->
+            <div class="form-group text-right">
+              <button type="submit" class="" tabindex=104>
+                <span class="icon flaticon-search-1 text-white" style="font-size: 23px;"></span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="mt-3 job-search-tags">
+        <ul class="d-flex align-items-center">
+          <li class="bg-white bg-opacity-25 rounded-pill text-white fw-bold me-2 px-2">#사무용품</li>
+          <li class="bg-white bg-opacity-25 rounded-pill text-white fw-bold me-2 px-2">#생활용품</li>
+          <li class="bg-white bg-opacity-25 rounded-pill text-white fw-bold me-2 px-2">#전산용품</li>
+          <li class="bg-white bg-opacity-25 rounded-pill text-white fw-bold me-2 px-2">#식음료</li>
+          <li class="bg-white bg-opacity-25 rounded-pill text-white fw-bold me-2 px-2">#청소용품</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

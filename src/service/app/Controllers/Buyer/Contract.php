@@ -46,28 +46,47 @@ class Contract extends BaseController
 
     public function Contract()
     { // {{{
-        $contract_Check = $this->buyer_model->contract_Check($_POST);
+        $contract_Check = $this->buyer_model->contract_Check($_GET);
         if($contract_Check){
-            echo "
+            if($_GET['ctype'] == 'detail') {
+                echo "
                 <script>
                     alert('이미 계약중인 상품입니다.');
-                    window.location.replace('/Buyer');
+                    window.location.replace('/Buyer/Shop/Detail/" . $_GET["product_no"] . "');
+                </script>
+                
+            ";
+            }
+            if($_GET['ctype'] == 'cart'){
+                echo "
+                <script>
+                    alert('이미 계약중인 상품입니다.');
+					window.location.replace('/Buyer/MyPage/Cart');
                 </script>
             ";
-
+            }
             die();
         }
-
-        $cart_del = $this->buyer_model->cartDel($_POST);
-        $result = $this->buyer_model->contract($_POST);
+        $cart_del = $this->buyer_model->cartDel($_GET);
+        $result = $this->buyer_model->contract($_GET);
         if($result == "1") {
             $_SESSION["Contract"]= $this->sigin_model->getContractList();
+            if($_GET['ctype'] == 'detail'){
             echo "
                 <script>
                     alert('관리자에게 검토요청을 보냈습니다.');
-					window.location.replace('/Buyer');
+					window.location.replace('/Buyer/Shop/Detail/".$_GET["product_no"]."');
                 </script>
             ";
+            }
+            if($_GET['ctype'] == 'cart'){
+                echo "
+                <script>
+                    alert('관리자에게 검토요청을 보냈습니다.');
+					window.location.replace('/Buyer/MyPage/Cart');
+                </script>
+            ";
+            }
         }else{
             echo "
                 <script>
@@ -77,5 +96,5 @@ class Contract extends BaseController
             ";
         }
         die();
-    } // }}}
+    }
 }

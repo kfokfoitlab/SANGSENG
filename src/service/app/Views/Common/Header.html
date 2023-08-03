@@ -9,17 +9,29 @@ echo doctype("html5");
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-  <meta name="keywords" content="">
-  <meta name="description" content="">
+  <meta name="keywords" content="상생몰">
+  <meta name="description" content="상생몰">
+  <meta name="naver-site-verification" content="ebae3acbe02396bfe6dc83d6c820c9e5163e3c31" />
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="상생몰">
+  <meta property="og:description" content="상생몰">
+  <meta property="og:image" content="http://sangseng.shop/assets/images/logo.png">
+  <meta property="og:url" content="http://sangseng.shop">
 
   <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
   <link href="/assets/dist/superio/css/bootstrap.css" rel="stylesheet">
   <link href="/assets/dist/superio/css/style.css" rel="stylesheet">
   <link href="/assets/dist/superio/css/responsive.css" rel="stylesheet">
   <link href="/assets/dist/dropify-0.2.2/css/dropify.min.css" rel="stylesheet">
+  <link href="/assets/dist/iziModal/css/iziModal.min.css" rel="stylesheet" />
   <link href="/assets/css/style.css" rel="stylesheet">
 
+  <!--  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>-->
   <script src="/assets/dist/superio/js/jquery.js"></script>
   <script src="/assets/dist/superio/js/popper.min.js"></script>
   <script src="/assets/dist/superio/js/chosen.min.js"></script>
@@ -28,8 +40,74 @@ echo doctype("html5");
   <script src="/assets/dist/superio/js/jquery.fancybox.js"></script>
   <script src="/assets/dist/superio/js/jquery.modal.min.js"></script>
   <script src="/assets/dist/dropify-0.2.2/js/dropify.min.js"></script>
+  <script defer src="/assets/dist/iziModal/js/iziModal.min.js"></script>
 
   <script>
+
+    $(function () {
+        $.ajax({
+          type: 'post',
+          url: "/SessionCategory",
+          data: {
+            //"category_type1": category_type1
+          },
+          success: function (result) {
+            var result = JSON.parse(result);
+            var nav_menu = "";
+            var category_v = "";
+            var category_v2 = "";
+            for (var i = 0; i < result['data'].length; i++) {
+              if(category_v != result['data'][i]['category_type1']) {
+                category_v = result['data'][i]['category_type1'];
+                nav_menu = nav_menu + "<li class='' >";
+                nav_menu = nav_menu + "<a href='#' tabindex=12>";
+                nav_menu = nav_menu + "<span>" + result['data'][i]['category_type1'] + "</span> </a>";
+                nav_menu = nav_menu + "<ul class='' >";
+                for (var j = 0; j < result['data'].length; j++) {
+                  if (category_v == result['data'][j]['category_type1']) {
+                     category_v2 = result['data'][j]['category_type2'];
+                    nav_menu = nav_menu + "<li class='' >";
+                    nav_menu = nav_menu + "<a href='/Buyer/Shop/List?value="+category_v2+"&p_n=1' tabindex=12>";
+                    nav_menu = nav_menu + "<span>" + result['data'][j]['category_type2'] + "</span> </a>";
+                    nav_menu = nav_menu + "</li>";
+                  }
+                }
+                nav_menu = nav_menu + "</ul>";
+                nav_menu = nav_menu + "</li>";
+              }
+            }
+            $('.depth1').html(nav_menu);
+          }
+        });
+    });
+
+    /*
+          $.ajax({
+            type: 'post',
+            url: "/SessionCategory",
+            data: {
+              //"category_type1": category_type1
+            },
+            success: function (result){
+              var result = JSON.parse(result);
+              var nav_menu = "";
+              for(var i=0; i<result['data'].length; i++){
+                nav_menu = nav_menu + "<li class=''>";
+                nav_menu = nav_menu + "<a href='/Buyer/Shop/List?value=" + result['data'][i]['category_type2'] + "&p_n=1' tabindex=12>";
+                nav_menu = nav_menu + "<span>" + result['data'][i]['category_type2'] + "</span> </a>";
+                nav_menu = nav_menu + "</li>";
+              }
+              $('#navbar').html(nav_menu);
+            }
+          });
+    */
+
+
+          $('.main-info-top').mouseenter(function (){
+            $('.all-dropdown, .depth1').removeClass('active')
+          })
+
+
     const _CONTROLLER = '<?=@_CONTROLLER?>';
     const _METHOD = '<?=@_METHOD?>';
 
@@ -43,18 +121,17 @@ echo doctype("html5");
 
   <!-- Preloader -->
   <div class="preloader"></div>
-
-  <div class="fixed-top py-2 bg-white">
+  <a href="/uploads/sitemap.xml" style="display: none">다운로드</a>
+  <div class="main-info-top fixed-top bg-white py-2" style="border-bottom: 1px solid #e9e9e9;">
     <div class="auto-container">
-      <div class="d-flex justify-content-between py-1">
-        <a href="/assets/download/연계고용안내.pdf" download class="btn py-0" tabindex=1>장애인 연계고용 제도</a>
+      <div class="d-flex justify-content-end py-1">
         <ul class="list-unstyled d-flex justify-content-center">
-          <!--            <li class=""><button class="btn py-0" tabindex=2>이용방법</button></li>-->
-          <li class=""><a href="/Reduction/Calculator" class="btn py-0" tabindex=3>고용부담금계산기</a></li>
-          <li class=""><a href="javascript:costCalMove()" class="btn py-0" tabindex=4>제조원가계산기</a></li>
-          <li class=""><a href="/Reduction/Help" class="btn py-0" tabindex=5>감면신청도우미</a></li>
-          <li class=""><a href="/CS/Notice" class="btn py-0" tabindex=6>고객센터</a></li>
-          <? echo <?=$_SESSION["login_info"]["type"]?>
+          <li><a href="/assets/download/연계고용안내.pdf" download class="btn py-0" tabindex=1>장애인 연계고용 제도란?</a></li>
+          <li><a href="/Reduction/Calculator" class="btn py-0" tabindex=3>고용부담금계산기</a></li>
+          <li><a href="javascript:costCalMove()" class="btn py-0" tabindex=4>제조원가계산기</a></li>
+          <li><a href="/Reduction/Help" class="btn py-0" tabindex=5>감면신청도우미</a></li>
+          <li><a href="/CS/Notice" class="btn py-0" tabindex=6>고객센터</a></li>
+          <? echo $_SESSION["login_info"]["type"]?>
         </ul>
       </div>
     </div>
@@ -69,50 +146,110 @@ echo doctype("html5");
         <div class="nav-outer">
 
           <div class="logo-box">
-            <!-- brand --> <?php
+            <!-- brand -->
+            <?php
             if(@$_SESSION["login"] != "success"){
             ?>
-            <h1 class="logo"><a href="/" tabindex=10><img src="/assets/images/logo.png" alt="상생몰로고" title="상생몰로고"></a></h1>
+            <h1 class="logo"><a href="/" tabindex=10><img src="/assets/images/logo.png" alt="상생몰로고"></a></h1>
             <?php
               } else {
               if($_SESSION["login_info"]["type"] == "buyer"){
               ?>
-            <h1 class="logo"><a href="/Buyer" tabindex=10><img src="/assets/images/logo.png" alt="상생몰로고" title="상생몰로고"></a></h1>
+            <h1 class="logo"><a href="/Buyer" tabindex=10><img src="/assets/images/logo.png" alt="상생몰로고"></a></h1>
             <?php
               }
              else if($_SESSION["login_info"]["type"] == "seller"){
               ?>
-            <h1 class="logo"><a href="/Seller" tabindex=10><img src="/assets/images/logo.png" alt="상생몰로고" title="상생몰로고"></a></h1>
+            <h1 class="logo"><a href="/Seller" tabindex=10><img src="/assets/images/logo.png" alt="상생몰로고"></a></h1>
             <?php
               }
             }
             ?>
           </div>
+          <div class="all-dropdow-outer">
+            <nav class="nav main-menu">
+              <ul class="navigation" id="navbar">
+                <li class="all-menu-outer">
+               <!--   <a href="#" class="all-menu"><span>전체</span></a>-->
 
-          <nav class="nav main-menu">
-            <ul class="navigation" id="navbar">
-              <li class="">
-                <a href="/Buyer/Shop/List?value=1&p_n=1" tabindex=12> <span>사무용품</span> </a>
-              </li>
+<!--                  <ul class ='depth1'>-->
 
-              <li class="">
-                <a href="/Buyer/Shop/List?value=2&p_n=1" tabindex=13> <span>생활용품</span> </a>
-              </li>
+<!--                  </ul>-->
+              <!--  </li>-->
+          <!--      <li class="">
+                  <a href="/Buyer/Shop/List?value=사무용품&p_n=1" tabindex=12> <span>사무용품</span> </a>
+                </li>
+                <li class="">
+                  <a href="/Buyer/Shop/List?value=생활용품&p_n=1" tabindex=13> <span>생활용품</span> </a>
+                </li>
 
-              <li class="">
-                <a href="/Buyer/Shop/List?value=3&p_n=1" tabindex=13> <span>전산용품</span> </a>
-              </li>
+                <li class="">
+                  <a href="/Buyer/Shop/List?value=전산용품&p_n=1" tabindex=13> <span>전산용품</span> </a>
+                </li>
 
-              <li class="">
-                <a href="/Buyer/Shop/List?value=4&p_n=1" tabindex=13> <span>식음료</span> </a>
-              </li>
+                <li class="">
+                  <a href="/Buyer/Shop/List?value=식음료&p_n=1" tabindex=13> <span>식음료</span> </a>
+                </li>
 
-              <li class="">
-                <a href="/Buyer/Shop/List?value=5&p_n=1" tabindex=13> <span>청소용품</span> </a>
-              </li>
+                <li class="">
+                  <a href="/Buyer/Shop/List?value=견적상품&p_n=1" tabindex=13> <span>견적상품</span> </a>
+                </li>-->
+                <li class="">
+                  <a href="/Buyer/Shop/List?value=식음료&p_n=1" tabindex=12> <span>식음료</span> </a>
+                </li>
+                <li class="">
+                  <a href="/Buyer/Shop/List?value=생활/건강&p_n=1" tabindex=13> <span>생활/건강</span> </a>
+                </li>
 
-            </ul>
-          </nav>
+                <li class="">
+                  <a href="/Buyer/Shop/List?value=사무/교육&p_n=1" tabindex=13> <span>사무/교육</span> </a>
+                </li>
+
+                <li class="">
+                  <a href="/Buyer/Shop/List?value=가전/가구&p_n=1" tabindex=13> <span>가전/가구</span> </a>
+                </li>
+
+                <li class="">
+                  <a href="/Buyer/Shop/List?value=컴퓨터/디지털&p_n=1" tabindex=13> <span>컴퓨터/디지털</span> </a>
+                </li>
+                <li class="">
+                  <a href="/Buyer/Shop/List?value=용역/서비스&p_n=1" tabindex=13> <span>용역/서비스</span> </a>
+                </li>
+              </ul>
+            </nav>
+            <div class="all-dropdown">
+              <ul class ='depth1'>
+              </ul>
+            </div>
+          </div>
+          <script>
+            const url = window.location.search;
+            const GNBLinks = document.querySelectorAll('#navbar li a');
+            GNBLinks.forEach((nav, i) => {
+              if(url.includes(`value=${i+1}`)) {
+                nav.classList.add('on')
+              } else {
+                nav.classList.remove('on')
+              }
+            })
+          </script>
+          <script>
+          // $('.all-menu-outer').mouseenter(function (){
+          //     $('.all-dropdown').addClass('active')
+          // })
+
+          $('.all-menu-outer').mouseenter(function (){
+            $('.all-dropdown, .depth1').addClass('active')
+          })
+
+          $('.all-dropdown').mouseleave(function (){
+            $(this).removeClass('active')
+          })
+          $('.main-info-top').mouseenter(function (){
+            $('.all-dropdown, .depth1').removeClass('active')
+          })
+
+          </script>
           <!-- Main Menu End-->
         </div>
 
@@ -122,31 +259,33 @@ echo doctype("html5");
             <?php
             if(@$_SESSION["login"] != "success"){
             ?>
-            <a href="/Auth/SignIn" class="theme-btn btn-style-six" tabindex=15>로그인 / 회원가입</a>
+            <a href="/Auth/SignIn" class="" tabindex="15"><span class="login-split">로그인</span></a>
+            <a href="/Auth/SignUp" class="" tabindex="15">회원가입</a>
             <?php
             } else {
               if($_SESSION["login_info"]["type"] == "buyer"){
             ?>
             <div class="dropdown dashboard-option">
               <a class="dropdown-toggle" role="button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="name text-white"><?=$_SESSION["login_info"]["company_name"]?></span> <span class='small text-white-50'>님</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person" style="margin-top: 2px;" viewBox="0 0 16 16">
+                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                </svg>
+                <span class="name text-black"><span class="fw-bold"><?=$_SESSION["login_info"]["company_name"]?></span>님</span>
               </a>
 
-              <ul class="dropdown-menu p-2 ps-0" style="">
+              <ul class="dropdown-menu p-2" style="">
                 <li>
                   <a href="/Buyer/MyPage/Info">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill me-2" viewBox="0 0 16 16">
-                      <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                    </svg>
                     마이페이지
                   </a>
                 </li>
                 <li>
+                  <a href="/Buyer/MyPage/Cart">
+                    장바구니
+                  </a>
+                </li>
+                <li>
                   <a href="/Auth/SignOut">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right me-2" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-                      <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                    </svg>
                     로그아웃
                   </a>
                 </li>
@@ -158,23 +297,19 @@ echo doctype("html5");
               ?>
             <div class="dropdown dashboard-option">
               <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="name text-white"><?=$_SESSION["login_info"]["company_name"]?></span> <span class='small text-white-50'>님</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person" style="margin-top: 2px;" viewBox="0 0 16 16">
+                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                </svg>
+                <span class="name text-black"><span class="fw-bold"><?=$_SESSION["login_info"]["company_name"]?></span>님</span>
               </a>
               <ul class="dropdown-menu p-2 ps-0" style="">
                 <li>
                   <a href="/Seller">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill me-2" viewBox="0 0 16 16">
-                      <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                    </svg>
                     마이페이지
                   </a>
                 </li>
                 <li>
                   <a href="/Auth/SignOut">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right me-2" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-                      <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                    </svg>
                     로그아웃
                   </a>
                 </li>
@@ -213,4 +348,4 @@ echo doctype("html5");
   <!--End Main Header -->
 
   <!-- Left/Right Main Wrapper -->
-  <div class="d-flex">
+  <div class="d-flex flex-wrap">

@@ -183,7 +183,7 @@
 		}
 		
 		public function replySubmit($data, $table_name = "questions_board_reply"){
-
+            $reply_content = addslashes($data['reply_content']);
 			$query = "
             insert into
                 ".$table_name."
@@ -194,7 +194,7 @@
 				,user_email = '".$data["user_email"]."'
 				,user_phone = '".$data["user_phone"]."'
 				,manager_name = '".$data["manager_name"]."'
-				,reply_content = '".$data["reply_content"]."'
+				,reply_content = '".$reply_content."'
 				,register_date = '".date("Y-m-d H:i:s")."'
                 ,register_id = 'admin'
 
@@ -225,11 +225,13 @@
 		
 		public function replyUpdateSubmit($data, $table_name = "questions_board_reply")
 		{
-			$query = "
+            $reply_content = addslashes($data['reply_content']);
+
+            $query = "
 			UPDATE
 				".$table_name."
 			SET
-				reply_content = '".$data["reply_content"]."'
+				reply_content = '".$reply_content."'
                 ,update_date = '".date("Y-m-d H:i:s")."'
                 ,update_id = 'admin'
 			WHERE 1=1
@@ -237,9 +239,7 @@
 				AND user_uuid = '".$data["user_uuid"]."'
 			LIMIT 1
 			";
-			
-			//echo $query;
-			$this->wrdb->update($query);
+            $this->wrdb->update($query);
 			
 			return 1;
 		}

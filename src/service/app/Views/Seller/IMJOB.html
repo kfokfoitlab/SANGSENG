@@ -3,7 +3,7 @@
   require(__DIR__.'/Components/Left.html');
 ?>
 <div class="flex-grow-1">
-  <section class="py-5 imjob-list">
+  <section class="pt-5 layout-pb-120 imjob-list">
     <div class="auto-container">
       <ul class="d-flex border w-100 justify-content-around mb-4 py-4 text-center bg-light employee-number">
         <li class="px-5 position-relative">
@@ -51,7 +51,7 @@
           </div>
 
           <div class="input-group input-group-sm me-3">
-            <input type="text" class="form-control search-employee" name="search_v" placeholder="아이디 or 생년월일" aria-label="" aria-describedby="search-employee"
+            <input type="text" class="form-control search-employee" name="search_v" placeholder="이름 or 생년월일" aria-label="" aria-describedby="search-employee"
             <?php if($_GET["search_v"] != ""){ echo "value='".$_GET['search_v']."'";}?>>
             <button class="btn btn-primary" type="button" id="search-employee" onclick="search()">검색</button>
           </div>
@@ -67,8 +67,7 @@
           </div>
         </div>
       </form>
-
-      <table class="table table-striped text-center mt-5 imjob-list-table" id ="imjobTbl">
+      <table class="table table-striped text-center mt-5 mb-4 imjob-list-table" id ="imjobTbl">
         <thead>
         <tr>
           <th>No.</th>
@@ -138,22 +137,126 @@
       <?php if($data_page_total_cnt == 0){ echo"<div class='text-center'><span>등록된 근로자가 없습니다</span></div>"; }?>
 
       <div class="float-start"><div class="dataTables_info" id="datatables_info" role="status" aria-live="polite">(총 <?=$data_page_total_cnt?> 개의 데이터)</div></div>
-      <ul style="float: right" class="pagination">
-        <li class="paginate_button page-item previous disabled" id="datatables_previous">
+    <ul style="float: right" class="pagination">
+      <li class="paginate_button page-item previous disabled" id="datatables_previous">
         <?php
-         $data_page_num = ($data_page_total_cnt/10) + 1;
-         for($i=1;$i<=$data_page_num;$i++){
+          if($data_page_total_cnt > 0){
+          $page = $_GET["p_n"];
+          $page_per_record = 10;
+          $block_ct = 5;
+          $list = 10;
+          $block_num = ceil($page/$block_ct); // 현재 페이지 블록 구하기
+          $block_start = (($block_num - 1) * $block_ct) + 1; // 블록의 시작번호
+          $block_end = $block_start + $block_ct - 1; //블록 마지막 번호
+          $total_page = ceil($data_page_total_cnt / $list); // 페이징한 페이지 수 구하기
+          if($block_end > $total_page){
+          $block_end = $total_page;
+          }
+        $total_block = ceil($total_page/$block_ct);
+        $start_num = ($page-1) * $list;
+        if($_GET["p_n"]>1){?>
+      <li class="paginate_button page-item"> <a href="javascript:nextPage(1)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">처음으로</a></li>
+      <?php }?>
+      <?php
+        if($page <= 1){
+        ?>
+      <?php
+        }else{
+        $pre = $page-1;
+        ?>
+      <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$pre?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">이전</a></li>
+      <?php
+        }
+        ?>
+      <?php
+         for($i= $block_start; $i<=$block_end;$i++){
               if($_GET["p_n"]==$i){?>
-                <li class="paginate_button page-item active">
+      <li class="paginate_button page-item active">
         <?php }else{ ?>
-                <li class="paginate_button page-item">
+      <li class="paginate_button page-item">
         <?php } ?>
-          <a href="javascript:nextPage(<?=$i?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a></li>
-        <?php }?>
-      </ul>
+        <a href="javascript:nextPage(<?=$i?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link"><?=$i?></a>
+      </li>
+      <?php }?>
+      <?php
+        if($block_num >= $total_block){
+      }else{
+      $next_page = $page+1;
+      ?>
+      <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$next_page?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">다음</a></li>
+      <?php
+        }
+        ?>
+      <?php
+        if($_GET["p_n"]>=1 && $_GET["p_n"] != $total_page){?>
+      <li class="paginate_button page-item"> <a href="javascript:nextPage(<?=$total_page?>)" aria-controls="datatables" data-dt-idx="1" tabindex="0" class="page-link">마지막</a></li>
+      <?php }}?>
+    </ul>
     </div>
   </section>
 </div>
+<div style="display:none;">
+<table class="table table-striped text-center mt-5 imjob-list-table" id ="excel_imjob">
+  <thead>
+  <tr>
+    <th>No.</th>
+    <th>이름</th>
+    <th>생년월일</th>
+    <th>계약 시작일</th>
+    <th>계약 종료일</th>
+    <th>근무상태</th>
+    <th style="width: auto">장애유형</th>
+    <th>복지카드</th>
+    <th>진행상황</th>
+  </tr>
+  </thead>
+  <tbody>
+  <?php
+        $i=1;
+        foreach($excel as $item){
+        $working_status="";
+        if($item["working_status"] == 1){
+          $working_status="근무";
+        }else if($item["working_status"] == 2){
+          $working_status="퇴직";
+        }else if($item["working_status"] == 3){
+          $working_status="휴직";
+        }
+        $disability_degree="";
+        if($item["disability_degree"] == 1){
+          $disability_degree="중증";
+        }else if($item["disability_degree"] == 2){
+          $disability_degree="경증";
+        }
+        $upload_card="없음";
+        if($item["upload_card"] != ""){
+          $upload_card="있음";
+        }
+        ?>
+  <tr>
+    <td><?=$i?></td>
+    <td><?=$item["worker_name"]?></td>
+    <td><?=$item["worker_birth"]?></td>
+    <td><?=$item["worker_term_start"]?></td>
+    <td><?=$item["worker_term_end"]?></td>
+    <td><?=$working_status?></td>
+    <td><?=$disability_degree?></td>
+    <td><?=$upload_card?></td>
+    <?php if($item["status"] == 5){?>
+    <td><span class="text-success">승인완료</span></td>
+    <?php }elseif($item["status"] == 1){ ?>
+    <td><span class="text-primary">승인대기</span></td>
+    <?php }elseif($item["status"] == 7){ ?>
+    <td><span class="text-danger">반려</span></td>
+    <?php } ?>
+  <?php
+          $i++;
+          }
+        ?>
+  </tbody>
+</table>
+</div>
+
 <script>
   function deleteWorker(idx){
 		location.href = '/Seller/IMJOB/deleteWorker?idx='+idx
@@ -171,7 +274,7 @@
 
 
   function excelFileExport() {
-    var wb = XLSX.utils.table_to_book(document.getElementById('imjobTbl'), {
+    var wb = XLSX.utils.table_to_book(document.getElementById('excel_imjob'), {
       sheet: "sheet1",
       raw: true
     });

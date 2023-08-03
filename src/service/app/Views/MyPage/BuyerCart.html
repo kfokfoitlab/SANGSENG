@@ -21,22 +21,7 @@
           }
           ?>
           <p>상품목록 (총 <span><?=$count?></span>개)</p>
-      <!--    <div class="d-flex">
-            <select class="form-select form-select-sm me-3" aria-label="Default select example">
-              <option selected>최근등록일순</option>
-              <option value="1">낮은가격순</option>
-              <option value="2">높은가격순</option>
-              <option value="3">전체</option>
-            </select>
-            <select class="form-select form-select-sm" aria-label="Default select example">
-              <option selected>20개씩</option>
-              <option value="1">50개씩</option>
-              <option value="2">100개씩</option>
-              <option value="3">200개씩</option>
-            </select>
-          </div>-->
         </div>
-
         <table class="table">
           <thead>
           <tr>
@@ -47,7 +32,7 @@
               회사명/상품명
             </th>
             <th>
-              상품구분
+              상품수량
             </th>
             <th>
               계약금액
@@ -60,30 +45,19 @@
             </th>
           </tr>
           </thead>
-          <form name="myForm" method="post" action="/Buyer/Contract">
           <tbody>
           <?php
           if(is_array($data)){
         foreach($data as $item){
-         $product_price = number_format($item["product_price"]);
+         $product_price = number_format($item['cart_product_price']);
          $cart_reduction_money = number_format($item["cart_reduction_money"]);
         ?>
-          <input type="hidden" name="product_no" id ="product_no" value="<?=$item['product_no']?>">
-          <input type="hidden" name="seller_uuid" id ="seller_uuid" value= "<?=$item['seller_uuid']?>">
-          <input type="hidden" name="company_name" id ="company_name" value="<?=$item['company_name']?>">
-          <input type="hidden" name="reduction_money" id ="reduction_money" value="<?=$item['cart_reduction_money']?>">
-          <input type="hidden" name="product_price" id ="product_price" value= "<?=$item['product_price']?>">
-          <input type="hidden" name="product_name" id ="product_name" value= "<?=$item['product_name']?>">
-          <input type="hidden" name="buyer_company" id ="buyer_company"  value="<?=$_SESSION['login_info']['company_name']?>">
-          <input type="hidden" name="seller_company" id ="seller_company" value= "<?=$item['company_name']?>">
-          <input type="hidden" name="idx" id ="idx" value= "<?=$item['idx']?>">
-          <input type="hidden" name="product_quantity" id ="product_quantity" value= "<?=$item['product_quantity']?>">
           <tr>
               <td>
-                <img src="/uploads/<?=$item['representative_image']?>" alt="기업로고" style="width: 100px;">
+                <img src="/uploads/<?=$item['representative_image']?>" alt="<?=$item['cart_product_name']?>">
               </td>
               <td>
-                <h4><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['cart_reduction_money']?>"><span class="text-primary"><?=$item['company_name']?></span> / <?=$item['product_name']?></a></h4>
+                <h4><a href="/Buyer/Shop/Detail/<?=$item['product_no']?>?rm=<?=$item['cart_reduction_money']?>"><span class="text-primary"><?=$item['seller_company']?></span> / <?=$item['cart_product_name']?></a></h4>
               </td>
               <td>
                 <p><?=$item['product_quantity']?></p>
@@ -95,8 +69,8 @@
                 <p><?=$cart_reduction_money?>원</p>
               </td>
               <td>
-                <button onclick="cart_del(<?=$item['productidx']?>);" class="btn btn-sm btn-danger">삭제</button>
-                <button onclick="contract();" class="btn btn-sm btn-success">계약하기</button>
+                <button onclick="cart_del(<?=$item['idx']?>);" class="btn btn-sm btn-danger">삭제</button>
+                <button onclick="contract(<?=$item['product_no']?>);" class="btn btn-sm btn-success">계약하기</button>
               </td>
             </tr>
             <?php
@@ -104,33 +78,40 @@
               }
             ?>
           </tbody>
-          </form>
         </table>
       </div>
     </div>
   </section>
 </div>
 <script>
-  function contract(){
-    document.myForm.submit();
+  function contract(product_no){
+   // document.contractForm.action='/Buyer/Contract';
+      var ctype = "cart"
+      location.href = "/Buyer/Contract?product_no="+product_no+"&ctype=" + ctype;
   };
-
   function cart_del(idx){
-    $.ajax({
-      type:"post",
-      url:"/Buyer/MyPage/CartDel",
-      data:{"idx":idx},
-      success:function(result){
-        if(result){
-          alert("제거되었습니다.");
-          location.reload();
-        }else{
-          alert("실패");
-        }
-      },error:function(e){
-        alert("전송 실패");
-      }
-    })
+    var ctype = "cart"
+    location.href = "/Buyer/MyPage/CartDel?idx="+idx +"&ctype=" + ctype;
+
+    /*
+        document.contractForm.action='/Buyer/MyPage/CartDel';
+        document.contractForm.submit();
+    */
+    /* $.ajax({
+       type:"post",
+       url:"/Buyer/MyPage/CartDel",
+       data:{"idx":idx},
+       success:function(result){
+         if(result){
+           alert("제거되었습니다.");
+           location.reload();
+         }else{
+           alert("실패");
+         }
+       },error:function(e){
+         alert("전송 실패");
+       }
+     })*/
   }
 
 </script>
