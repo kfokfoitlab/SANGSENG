@@ -386,6 +386,59 @@ public function CategorySearch($data){
         return $category;
     }
 
+    public function dupCheck($data){
+        $query = "
+			SELECT
+				count(*) 
+			FROM
+				 company_consulting
+			WHERE
+				user_phone = '" . $data['u_tel'] . "'
+				and del_yn ='N'
+				limit 1
+			";
+        $consulting_dup = $this->rodb->simple_query($query);
+        if ($consulting_dup != 0) {
+            return 1;
+        }
+    }
+
+    public function ConsultingReg($data){
+        $dup_query = "
+			SELECT
+				count(*) 
+			FROM
+				 company_consulting
+			WHERE
+				user_phone = '" . $data['user_phone'] . "'
+				and status in ('1','2') 
+			";
+        $consulting_dup = $this->rodb->simple_query($dup_query);
+        if ($consulting_dup != 0) {
+            return "2";
+        }
+
+        $query = "
+          insert into
+              company_consulting
+          set
+               company_name_department = '".$data['company_name_department']."',
+               user_name = '".$data['user_name']."',
+               user_phone = '".$data['user_phone']."',
+               user_email = '".$data['user_email']."',
+               status = '1',
+              register_date = '".date("Y-m-d H:i:s")."'
+      ";
+        $idx = $this->wrdb->insert($query);
+        if($idx){
+            return" 1";
+        }
+        else {
+            return null;
+        }
+    }
+
+
     public function SessionCategory2($data){
         $category= [];
         $category_type = $data['category_type1'];

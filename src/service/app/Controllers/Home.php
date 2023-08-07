@@ -57,4 +57,12 @@ class Home extends BaseController
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
+
+    public function Consulting(){
+
+            $consulting = $this->item_model->ConsultingReg($_POST);
+            echo $consulting;
+            die();
+
+    }
 }

@@ -1,0 +1,57 @@
+<section class="content-main">
+  <div class="content-header">
+    <h2 class="content-title"> <?=$page_name?> 수정하기</h2>
+  </div>
+
+  <form name="form-update" method="POST" action="/<?=_CONTROLLER?>/UpdateSubmit">
+    <input type="hidden" name="idx" value="<?=$data['idx']?>">
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5>기본 정보</h5>
+        <div class="row">
+          <div class="col-8">
+            <table class="table table-hover border detail-table">
+              <!-- {{{ -->
+              <tbody>
+              <tr>
+                <td class="th">기업/부서명</td>
+                <td><input type="email" class="form-control form-control-sm" name="email" value="<?=$data['company_name_department']?>" readonly></td>
+              </tr>
+              <tr>
+                <td class="th">담당자 성함</td>
+                <td><input type="text" class="form-control form-control-sm" name="buyer_name" value="<?=$data['user_name']?>" readonly></td>
+              </tr>
+              <tr>
+                <td class="th">당당자 연락처</td>
+                <td><input type="text" class="form-control form-control-sm" name="phone" value="<?=$data['user_phone']?>" readonly></td>
+              </tr>
+              <tr>
+                <td class="th">이메일</td>
+                <td><input type="text" class="form-control form-control-sm" name="company_name" value="<?=$data['user_email']?>" readonly></td>
+              </tr>
+              </tbody>
+
+              <!-- }}} -->
+            </table>
+            <div class="row mb-3 align-items-center">
+              <span class="col-2 fw-bold">상담내용</span>
+              <div class="col-10">
+                <label class="visually-hidden" for="comment">공지내용</label>
+                <textarea class="form-control" style="height: 300px;resize: none;" id="comment" name="comment"
+                          value=""></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <button class="btn btn-dark float-end" onclick="window.close();">닫기</button>
+      <button type="submit" class="btn btn-success">수정하기</button>
+    </div>
+
+  </form>
+
+</section>

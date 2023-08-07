@@ -11,22 +11,22 @@
             <div class="form-content-field">
                 <label>
                     기업명 / 담당부서 <em>*</em>
-                    <input type="text" name="u_company" id="u_company" placeholder="기업명/담당부서를 입력해주세요">
+                    <input type="text" name="company_name_department" id="company_name_department" placeholder="기업명/담당부서를 입력해주세요">
                 </label>
                 <label>
                     담당자 성함 <em>*</em>
-                    <input type="text" name="u_name" id="u_name" placeholder="담당자 성함을 입력해주세요">
+                    <input type="text" name="user_name" id="user_name" placeholder="담당자 성함을 입력해주세요">
                 </label>
             </div>
             <div class="form-content-field">
                 <label>
                     담당자 연락처 <em>*</em>
-                    <input type="text" name="u_tel" id="u_tel" placeholder="담당자 연락처를 입력해주세요" maxlength="13"
+                    <input type="text" name="user_phone" id="user_phone" placeholder="담당자 연락처를 입력해주세요" maxlength="13"
                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1').replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);">
                 </label>
                 <label>
                     이메일 <em>*</em>
-                    <input type="email" name="email" id="email" placeholder="이메일을 입력해주세요">
+                    <input type="email" name="user_email" id="user_email" placeholder="이메일을 입력해주세요">
                 </label>
             </div>
             <div class="form-content-chk">
@@ -39,3 +39,79 @@
     </div>
     <button type="button" class="free-advice" onclick="consulting_regi()">무료 상담신청 ></button>
 </section>
+<script>
+    function info_agree_btn(){
+        $("input:checkbox[id='info_agree']").prop("checked", true);
+        $('#modal_product_form').iziModal('close');
+    }
+
+    function consulting_validation(){
+        var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+        var reg_phone = /^[0-9\b -]{0,13}$/;
+        if($('#user_name').val() == ""){
+            alert("이름을 입력해주세요");
+            return false;
+        }else if(!reg_phone.test($('#user_phone').val())){
+            alert("전화번호를 정확히 입력해 주세요");
+            return false;
+        }else  if(!reg_email.test($("#user_email").val())){
+            alert("이메일을 입력해 주세요");
+            return false;
+        }else if(!$('#info_agree').is(':checked')){
+            alert("개인정보 수집 및 이용에 동의해주세요");
+            return false;
+        }
+        return true;
+    }
+
+    function consulting_regi(){
+        if(consulting_validation()) {
+            var user_name = $('#user_name').val();
+            var user_phone = $('#user_phone').val();
+            var user_email = $('#user_email').val();
+            var company_name_department = $('#company_name_department').val();
+            $.ajax({
+                method: "POST",
+                url: "/"+_CONTROLLER+"/Consulting",
+                dataType: "json",
+                async: false,
+                data: {
+                    "user_name": user_name,
+                    "user_phone": user_phone,
+                    "user_email": user_email,
+                    "company_name_department": company_name_department
+                },
+                //성공시 수행
+                success: function (result) {
+                    //alert(parseInt(result));
+                    if (parseInt(result) == "1") {
+                        alert('상담신청이 완료되었습니다.');
+                        $("#user_email").val('');
+                        $("#user_name").val('');
+                        $("#company_name_department").val('');
+                        $("#user_phone").val('');
+                    }else if(parseInt(result) == "2"){
+                        alert('이미 상담신청이 완료되었습니다.');
+                        $("#user_email").val('');
+                        $("#user_name").val('');
+                        $("#company_name_department").val('');
+                        $("#user_phone").val('');
+                    } else {
+                        alert('오류가 발생하였습니다\n다시 시도해주세요');
+                        $("#user_email").val('');
+                        $("#user_name").val('');
+                        $("#company_name_department").val('');
+                        $("#user_phone").val('');
+                    }
+
+                },
+                error: function (request, status, error) {
+                    alert("msg : " + request.responseText);
+                }
+            });
+        }else {
+            return false;
+        }
+    }
+
+</script>

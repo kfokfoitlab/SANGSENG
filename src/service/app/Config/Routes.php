@@ -74,6 +74,7 @@ $routes->set404Override();*/
 $routes->get ('/',                          'Home::index');
 $routes->post ('/SessionCategory',           'Home::SessionCategory');
 $routes->post ('/SessionCategory2',           'Home::SessionCategory2');
+
 $routes->get ('/Image/(:any)',              'Image::getImage/$1');
 $routes->get ('/Image/(:any)/(:any)',       'Image::getImage/$1');
 
@@ -82,6 +83,11 @@ $routes->group('Chat', function($routes){
     $routes->get ('Room/(:any)',                            'Chat::Room/$1');
     $routes->post('Send',                                   'Chat::Send');
     $routes->get ('CreateChannel/(:any)/(:any)',          'Chat::CreateChannel/$1/$2');
+});
+
+$routes->group('Home', function($routes){
+    $routes->post('Consulting', 'Home::Consulting');
+
 });
 
 

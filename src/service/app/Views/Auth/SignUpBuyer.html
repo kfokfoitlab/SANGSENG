@@ -76,10 +76,17 @@
               <label class="my-2"><sup class="text-danger">*</sup><a title="사업체명 필수입력">사업체명</a></label>
               <input type="text" name="company_name" placeholder="사업체명을 입력해주세요" title="사업체명 입력" tabindex=100 required>
             </div>
-
+          <!--  <input type="text" id="sample6_postcode" placeholder="우편번호">
+            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+            <input type="text" id="sample6_address" placeholder="주소"><br>
+            <input type="text" id="sample6_detailAddress" placeholder="상세주소">
+            <input type="hidden" id="sample6_extraAddress" placeholder="참고항목">-->
             <div class="form-group">
               <label class="my-2"><sup class="text-danger">*</sup><a title="사업자등록번호 필수입력">사업자등록번호</a></small></label>
               <input type="text" name="company_code" class="mask-business-number" placeholder="숫자만 입력해 주세요." title="사업자등록번호 입력" tabindex=100 required>
+<!--
+              <button type="button"class="btn btn-primary btn-sm fw-normal" style="min-width: 100px;" name="idCheck" id="company_check" onclick="companyCheck();">사업자등록번호 인증</button>
+-->
             </div>
             <div class="form-group">
               <p class="my-2"><sup class="text-danger">*</sup><a title="기업형태 필수입력">기업형태</a></p>
@@ -180,5 +187,31 @@
       $("#email").val('')
     }
   };
+  /*
+    function companyCheck(){
+      var data = {
+        "b_no": ["6078188373"] // 사업자번호 "xxxxxxx" 로 조회 시,
+      };
 
+      $.ajax({
+        url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=vyRyKEaHR6tNnf4wYYGIUuCYUs9SlKnrBrdV52JjDlMGjeBlG1P17oxmqH8pfbi16Nij3O5q5LWOm2SMSGclhw%3D%3D",  // serviceKey 값을 vyRyKEaHR6tNnf4wYYGIUuCYUs9SlKnrBrdV52JjDlMGjeBlG1P17oxmqH8pfbi16Nij3O5q5LWOm2SMSGclhw%3D%3D에 입력
+        type: "POST",
+        data: JSON.stringify(data), // json 을 string으로 변환하여 전송
+        dataType: "JSON",
+        contentType: "application/json",
+        accept: "application/json",
+        success: function(result) {
+          if(result.data[0]['b_stt_cd'] == ""){
+            alert("존재하지 않은 사업자");
+          }else{
+            alert("존재하는 사업자");
+          }
+         console.log(result.data[0]['b_stt_cd']);
+        },
+        error: function(result) {
+          alert(result.responseText); //responseText의 에러메세지 확인
+        }
+      });
+    }
+  */
 </script>
